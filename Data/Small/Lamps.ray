@@ -1,0 +1,219 @@
+Viewpoint(0,3,-19,   ' Viewpoint ' 
+	  0, 0, 0,  ' View Angle ' 
+	  90)	     ' FOV '	
+
+OutputSize(200,200)
+
+RenderSettings
+(
+	3, 'Recursion Depth'
+	true, 'Trace Shadows'
+	true, 'Trace Reflections'
+	true, 'Trace Refractions'
+)
+
+AmbientLight(40, 40, 40)
+LightSource(-30, 40, -40, 155, 155, 155)
+
+ColourMaterial("red",
+  0.7, 0.1, 0.1,    ' Ambient. '
+  0.7, 0.1, 0.1,    ' Diffuse. '
+  20, 0.9,          ' Specular. '
+  0.0, 0.0, 0.0,    ' Reflected. '
+  0,         ' TransN, n1, n2. '
+  0, 0, 0 
+)
+
+ColourMaterial("blue",
+  0.0, 0.9, 0.0,    ' Ambient. '
+  0.0, 0.9, 0.0,    ' Diffuse. '
+  20, 0.9,          ' Specular. '
+  0.0, 0.0, 0.0,    ' Reflected. '
+  0,         ' TransN, n1, n2. '
+  0, 0, 0 
+)
+
+Mesh
+(  
+"Lamp",
+"Lamp.obj"
+)
+
+MeshInstance
+(  
+0,0,0,
+0,0,0,
+"Lamp"
+)
+
+MeshInstance
+(  
+-10,0,0,
+0,0,0,
+"Lamp"
+)
+
+MeshInstance
+(  
+10,0,0,
+0,0,0,
+"Lamp"
+)
+
+MeshInstance
+(  
+0,0,10,
+0,0,0,
+"Lamp"
+)
+
+MeshInstance
+(  
+-10,0,10,
+0,0,0,
+"Lamp"
+)
+
+MeshInstance
+(  
+10,0,10,
+0,0,0,
+"Lamp"
+)
+
+MeshInstance
+(  
+0,14,0,
+0,0,0,
+"Lamp"
+)
+
+MeshInstance
+(  
+-10,14,0,
+0,0,0,
+"Lamp"
+)
+
+MeshInstance
+(  
+10,14,0,
+0,0,0,
+"Lamp"
+)
+
+MeshInstance
+(  
+0,14,10,
+0,0,0,
+"Lamp"
+)
+
+MeshInstance
+(  
+-10,14,10,
+0,0,0,
+"Lamp"
+)
+
+MeshInstance
+(  
+10,14,10,
+0,0,0,
+"Lamp"
+)
+
+''''
+
+MeshInstance
+(  
+0,0,20,
+0,0,0,
+"Lamp"
+)
+
+MeshInstance
+(  
+-10,0,20,
+0,0,0,
+"Lamp"
+)
+
+MeshInstance
+(  
+10,0,20,
+0,0,0,
+"Lamp"
+)
+
+MeshInstance
+(  
+0,0,30,
+0,0,0,
+"Lamp"
+)
+
+MeshInstance
+(  
+-10,0,30,
+0,0,0,
+"Lamp"
+)
+
+MeshInstance
+(  
+10,0,30,
+0,0,0,
+"Lamp"
+)
+
+MeshInstance
+(  
+0,14,20,
+0,0,0
+,"Lamp"
+)
+
+MeshInstance
+(  
+-10,14,20,
+0,0,0,
+"Lamp"
+)
+
+MeshInstance
+(  
+10,14,20,
+0,0,0,
+"Lamp"
+)
+
+MeshInstance
+(  
+0,14,30,
+0,0,0,
+"Lamp"
+)
+
+MeshInstance
+(  
+-10,14,30,
+0,0,0,
+"Lamp"
+)
+
+MeshInstance
+(  
+10,14,30,
+0,0,0,
+"Lamp"
+)
+
+CheckMaterial("check",
+  "red", "blue", 4,4,4
+)
+
+Plane(0, -10, 0,   ' Point on plane '
+  0, 1, 0,        ' Normal vector '
+  "check"
+)

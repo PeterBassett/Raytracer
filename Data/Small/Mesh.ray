@@ -1,0 +1,105 @@
+Viewpoint(2,3,-5,   ' Viewpoint ' 
+	  20, 0, 0,  ' View Angle ' 
+	  75)	     ' FOV '	
+
+OutputSize(200,200)
+
+RenderSettings
+(
+	1, 'Recursion Depth'
+	false, 'Trace Shadows'
+	false, 'Trace Reflections'
+	false, 'Trace Refractions'
+)
+AmbientLight(40, 40, 40)
+
+LightSource(-10, 20, -10, 80, 80, 80)
+
+ColourMaterial("red",
+  0.7, 0.1, 0.1,    ' Ambient. '
+  0.7, 0.1, 0.1,    ' Diffuse. '
+  20, 0.9,          ' Specular. '
+  0.0, 0.0, 0.0,    ' Reflected. '
+  0,         ' TransN, n1, n2. '
+  0, 0, 0 
+)
+
+ColourMaterial("blue",
+  0.0, 0.9, 0.0,    ' Ambient. '
+  0.0, 0.9, 0.0,    ' Diffuse. '
+  20, 0.9,          ' Specular. '
+  0.0, 0.0, 0.0,    ' Reflected. '
+  0,         ' TransN, n1, n2. '
+  0, 0, 0 
+)
+
+Mesh
+(  
+"Dodechahedron",
+"Dodechahedron.obj"
+)
+
+MeshInstance
+(  
+0, 0, 4,
+0, 0, 0,
+"Dodechahedron"
+)
+
+MeshInstance
+(  
+4, 0, 0,
+0, 0, 0,
+"Dodechahedron"
+)
+
+MeshInstance
+(  
+0, 0, 0,
+0, 0, 32,
+"Dodechahedron"
+)
+
+MeshInstance
+(  
+4, 4, 4,
+0, 0, 0,
+"Dodechahedron"
+)
+
+MeshInstance
+(  
+0, 4, 4,
+0, 0, 0,
+"Dodechahedron"
+)
+
+MeshInstance
+(  
+4, 4, 0,
+0, 0, 0,
+"Dodechahedron"
+)
+
+MeshInstance
+(  
+0, 4, 0,
+0, 0, 0,
+"Dodechahedron"
+)
+
+MeshInstance
+(  
+4, 0, 4,
+0, 0, 0,
+"Dodechahedron"
+)
+
+CheckMaterial("check",
+  "red", "blue", 4,4,4
+)
+
+Plane(0, -4, 0,   ' Point on plane '
+  0, 1, 0,        ' Normal vector '
+  "check"
+)

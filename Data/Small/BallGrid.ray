@@ -1,0 +1,10752 @@
+Viewpoint
+(
+	-4.5, 7.3, -9, 'View Position'
+	45, 30, 0, 'View Angle'
+	90 'Field Of View'
+)
+
+OutputSize(359, 263)
+
+RenderSettings
+(
+	5, 'Recursion Depth'
+	true, 'Trace Shadows'
+	true, 'Trace Reflections'
+	true, 'Trace Refractions'
+)
+
+LightSource(20, 20, 20,50, 50, 50)
+LightSource(-20, 20, -20,50, 50, 50)
+AmbientLight(50, 0, 0)
+
+ColourMaterial
+(
+	"Transparent",
+	0,0,0, 'Ambient'
+	1,1,1, 'Diffuse'
+	52, 'Specularity'
+	0.8978043, 'Specular Exponent'
+	1,1,1, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"AliceBlue",
+	0,0,0, 'Ambient'
+	0.9411765,0.972549,1, 'Diffuse'
+	4, 'Specularity'
+	0.06705528, 'Specular Exponent'
+	0.9411765,0.972549,1, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"AntiqueWhite",
+	0,0,0, 'Ambient'
+	0.9803922,0.9215686,0.8431373, 'Diffuse'
+	5, 'Specularity'
+	0.8935239, 'Specular Exponent'
+	0.9803922,0.9215686,0.8431373, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Aqua",
+	0,0,0, 'Ambient'
+	0,1,1, 'Diffuse'
+	15, 'Specularity'
+	0.7984244, 'Specular Exponent'
+	0,1,1, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Aquamarine",
+	0,0,0, 'Ambient'
+	0.4980392,1,0.8313726, 'Diffuse'
+	29, 'Specularity'
+	0.5315689, 'Specular Exponent'
+	0.4980392,1,0.8313726, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Azure",
+	0,0,0, 'Ambient'
+	0.9411765,1,1, 'Diffuse'
+	14, 'Specularity'
+	0.8570375, 'Specular Exponent'
+	0.9411765,1,1, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Beige",
+	0,0,0, 'Ambient'
+	0.9607843,0.9607843,0.8627451, 'Diffuse'
+	57, 'Specularity'
+	0.2577653, 'Specular Exponent'
+	0.9607843,0.9607843,0.8627451, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Bisque",
+	0,0,0, 'Ambient'
+	1,0.8941177,0.7686275, 'Diffuse'
+	29, 'Specularity'
+	0.1453532, 'Specular Exponent'
+	1,0.8941177,0.7686275, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Black",
+	0,0,0, 'Ambient'
+	0,0,0, 'Diffuse'
+	47, 'Specularity'
+	0.7474257, 'Specular Exponent'
+	0,0,0, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"BlanchedAlmond",
+	0,0,0, 'Ambient'
+	1,0.9215686,0.8039216, 'Diffuse'
+	2, 'Specularity'
+	0.7954157, 'Specular Exponent'
+	1,0.9215686,0.8039216, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Blue",
+	0,0,0, 'Ambient'
+	0,0,1, 'Diffuse'
+	14, 'Specularity'
+	0.918037, 'Specular Exponent'
+	0,0,1, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"BlueViolet",
+	0,0,0, 'Ambient'
+	0.5411765,0.1686275,0.8862745, 'Diffuse'
+	33, 'Specularity'
+	0.4216795, 'Specular Exponent'
+	0.5411765,0.1686275,0.8862745, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Brown",
+	0,0,0, 'Ambient'
+	0.6470588,0.1647059,0.1647059, 'Diffuse'
+	22, 'Specularity'
+	0.8378024, 'Specular Exponent'
+	0.6470588,0.1647059,0.1647059, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"BurlyWood",
+	0,0,0, 'Ambient'
+	0.8705882,0.7215686,0.5294118, 'Diffuse'
+	12, 'Specularity'
+	0.9277099, 'Specular Exponent'
+	0.8705882,0.7215686,0.5294118, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"CadetBlue",
+	0,0,0, 'Ambient'
+	0.372549,0.6196079,0.627451, 'Diffuse'
+	7, 'Specularity'
+	0.3225507, 'Specular Exponent'
+	0.372549,0.6196079,0.627451, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Chartreuse",
+	0,0,0, 'Ambient'
+	0.4980392,1,0, 'Diffuse'
+	49, 'Specularity'
+	0.7394068, 'Specular Exponent'
+	0.4980392,1,0, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Chocolate",
+	0,0,0, 'Ambient'
+	0.8235294,0.4117647,0.1176471, 'Diffuse'
+	36, 'Specularity'
+	0.8280808, 'Specular Exponent'
+	0.8235294,0.4117647,0.1176471, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Coral",
+	0,0,0, 'Ambient'
+	1,0.4980392,0.3137255, 'Diffuse'
+	41, 'Specularity'
+	0.02399456, 'Specular Exponent'
+	1,0.4980392,0.3137255, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"CornflowerBlue",
+	0,0,0, 'Ambient'
+	0.3921569,0.5843138,0.9294118, 'Diffuse'
+	52, 'Specularity'
+	0.5945829, 'Specular Exponent'
+	0.3921569,0.5843138,0.9294118, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Cornsilk",
+	0,0,0, 'Ambient'
+	1,0.972549,0.8627451, 'Diffuse'
+	45, 'Specularity'
+	0.389944, 'Specular Exponent'
+	1,0.972549,0.8627451, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Crimson",
+	0,0,0, 'Ambient'
+	0.8627451,0.07843138,0.2352941, 'Diffuse'
+	2, 'Specularity'
+	0.5973896, 'Specular Exponent'
+	0.8627451,0.07843138,0.2352941, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Cyan",
+	0,0,0, 'Ambient'
+	0,1,1, 'Diffuse'
+	20, 'Specularity'
+	0.808452, 'Specular Exponent'
+	0,1,1, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"DarkBlue",
+	0,0,0, 'Ambient'
+	0,0,0.5450981, 'Diffuse'
+	44, 'Specularity'
+	0.5992213, 'Specular Exponent'
+	0,0,0.5450981, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"DarkCyan",
+	0,0,0, 'Ambient'
+	0,0.5450981,0.5450981, 'Diffuse'
+	7, 'Specularity'
+	0.2395497, 'Specular Exponent'
+	0,0.5450981,0.5450981, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"DarkGoldenrod",
+	0,0,0, 'Ambient'
+	0.7215686,0.5254902,0.04313726, 'Diffuse'
+	53, 'Specularity'
+	0.2480101, 'Specular Exponent'
+	0.7215686,0.5254902,0.04313726, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"DarkGray",
+	0,0,0, 'Ambient'
+	0.6627451,0.6627451,0.6627451, 'Diffuse'
+	22, 'Specularity'
+	0.4502769, 'Specular Exponent'
+	0.6627451,0.6627451,0.6627451, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"DarkGreen",
+	0,0,0, 'Ambient'
+	0,0.3921569,0, 'Diffuse'
+	5, 'Specularity'
+	0.9850646, 'Specular Exponent'
+	0,0.3921569,0, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"DarkKhaki",
+	0,0,0, 'Ambient'
+	0.7411765,0.7176471,0.4196078, 'Diffuse'
+	46, 'Specularity'
+	0.8005727, 'Specular Exponent'
+	0.7411765,0.7176471,0.4196078, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"DarkMagenta",
+	0,0,0, 'Ambient'
+	0.5450981,0,0.5450981, 'Diffuse'
+	3, 'Specularity'
+	0.6942866, 'Specular Exponent'
+	0.5450981,0,0.5450981, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"DarkOliveGreen",
+	0,0,0, 'Ambient'
+	0.3333333,0.4196078,0.1843137, 'Diffuse'
+	41, 'Specularity'
+	0.8587705, 'Specular Exponent'
+	0.3333333,0.4196078,0.1843137, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"DarkOrange",
+	0,0,0, 'Ambient'
+	1,0.5490196,0, 'Diffuse'
+	21, 'Specularity'
+	0.2784771, 'Specular Exponent'
+	1,0.5490196,0, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"DarkOrchid",
+	0,0,0, 'Ambient'
+	0.6,0.1960784,0.8, 'Diffuse'
+	35, 'Specularity'
+	0.7143385, 'Specular Exponent'
+	0.6,0.1960784,0.8, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"DarkRed",
+	0,0,0, 'Ambient'
+	0.5450981,0,0, 'Diffuse'
+	44, 'Specularity'
+	0.4433844, 'Specular Exponent'
+	0.5450981,0,0, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"DarkSalmon",
+	0,0,0, 'Ambient'
+	0.9137255,0.5882353,0.4784314, 'Diffuse'
+	51, 'Specularity'
+	0.5284641, 'Specular Exponent'
+	0.9137255,0.5882353,0.4784314, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"DarkSeaGreen",
+	0,0,0, 'Ambient'
+	0.5607843,0.7372549,0.5450981, 'Diffuse'
+	57, 'Specularity'
+	0.4752833, 'Specular Exponent'
+	0.5607843,0.7372549,0.5450981, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"DarkSlateBlue",
+	0,0,0, 'Ambient'
+	0.282353,0.2392157,0.5450981, 'Diffuse'
+	38, 'Specularity'
+	0.2037107, 'Specular Exponent'
+	0.282353,0.2392157,0.5450981, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"DarkSlateGray",
+	0,0,0, 'Ambient'
+	0.1843137,0.3098039,0.3098039, 'Diffuse'
+	21, 'Specularity'
+	0.7690153, 'Specular Exponent'
+	0.1843137,0.3098039,0.3098039, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"DarkTurquoise",
+	0,0,0, 'Ambient'
+	0,0.8078431,0.8196079, 'Diffuse'
+	9, 'Specularity'
+	0.6305466, 'Specular Exponent'
+	0,0.8078431,0.8196079, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"DarkViolet",
+	0,0,0, 'Ambient'
+	0.5803922,0,0.827451, 'Diffuse'
+	45, 'Specularity'
+	0.2189362, 'Specular Exponent'
+	0.5803922,0,0.827451, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"DeepPink",
+	0,0,0, 'Ambient'
+	1,0.07843138,0.5764706, 'Diffuse'
+	50, 'Specularity'
+	0.9569049, 'Specular Exponent'
+	1,0.07843138,0.5764706, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"DeepSkyBlue",
+	0,0,0, 'Ambient'
+	0,0.7490196,1, 'Diffuse'
+	10, 'Specularity'
+	0.9952215, 'Specular Exponent'
+	0,0.7490196,1, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"DimGray",
+	0,0,0, 'Ambient'
+	0.4117647,0.4117647,0.4117647, 'Diffuse'
+	41, 'Specularity'
+	0.3143913, 'Specular Exponent'
+	0.4117647,0.4117647,0.4117647, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"DodgerBlue",
+	0,0,0, 'Ambient'
+	0.1176471,0.5647059,1, 'Diffuse'
+	35, 'Specularity'
+	0.0829116, 'Specular Exponent'
+	0.1176471,0.5647059,1, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Firebrick",
+	0,0,0, 'Ambient'
+	0.6980392,0.1333333,0.1333333, 'Diffuse'
+	18, 'Specularity'
+	0.09982529, 'Specular Exponent'
+	0.6980392,0.1333333,0.1333333, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"FloralWhite",
+	0,0,0, 'Ambient'
+	1,0.9803922,0.9411765, 'Diffuse'
+	24, 'Specularity'
+	0.3794857, 'Specular Exponent'
+	1,0.9803922,0.9411765, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"ForestGreen",
+	0,0,0, 'Ambient'
+	0.1333333,0.5450981,0.1333333, 'Diffuse'
+	10, 'Specularity'
+	0.7175954, 'Specular Exponent'
+	0.1333333,0.5450981,0.1333333, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Fuchsia",
+	0,0,0, 'Ambient'
+	1,0,1, 'Diffuse'
+	20, 'Specularity'
+	0.3583503, 'Specular Exponent'
+	1,0,1, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Gainsboro",
+	0,0,0, 'Ambient'
+	0.8627451,0.8627451,0.8627451, 'Diffuse'
+	58, 'Specularity'
+	0.6116847, 'Specular Exponent'
+	0.8627451,0.8627451,0.8627451, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"GhostWhite",
+	0,0,0, 'Ambient'
+	0.972549,0.972549,1, 'Diffuse'
+	47, 'Specularity'
+	0.9436243, 'Specular Exponent'
+	0.972549,0.972549,1, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Gold",
+	0,0,0, 'Ambient'
+	1,0.8431373,0, 'Diffuse'
+	13, 'Specularity'
+	0.6312892, 'Specular Exponent'
+	1,0.8431373,0, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Goldenrod",
+	0,0,0, 'Ambient'
+	0.854902,0.6470588,0.1254902, 'Diffuse'
+	7, 'Specularity'
+	0.6679574, 'Specular Exponent'
+	0.854902,0.6470588,0.1254902, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Gray",
+	0,0,0, 'Ambient'
+	0.5019608,0.5019608,0.5019608, 'Diffuse'
+	48, 'Specularity'
+	0.6045485, 'Specular Exponent'
+	0.5019608,0.5019608,0.5019608, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Green",
+	0,0,0, 'Ambient'
+	0,0.5019608,0, 'Diffuse'
+	18, 'Specularity'
+	0.1569494, 'Specular Exponent'
+	0,0.5019608,0, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"GreenYellow",
+	0,0,0, 'Ambient'
+	0.6784314,1,0.1843137, 'Diffuse'
+	55, 'Specularity'
+	0.7469112, 'Specular Exponent'
+	0.6784314,1,0.1843137, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Honeydew",
+	0,0,0, 'Ambient'
+	0.9411765,1,0.9411765, 'Diffuse'
+	37, 'Specularity'
+	0.1330237, 'Specular Exponent'
+	0.9411765,1,0.9411765, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"HotPink",
+	0,0,0, 'Ambient'
+	1,0.4117647,0.7058824, 'Diffuse'
+	28, 'Specularity'
+	0.5859556, 'Specular Exponent'
+	1,0.4117647,0.7058824, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"IndianRed",
+	0,0,0, 'Ambient'
+	0.8039216,0.3607843,0.3607843, 'Diffuse'
+	47, 'Specularity'
+	0.5094624, 'Specular Exponent'
+	0.8039216,0.3607843,0.3607843, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Indigo",
+	0,0,0, 'Ambient'
+	0.2941177,0,0.509804, 'Diffuse'
+	10, 'Specularity'
+	0.2501702, 'Specular Exponent'
+	0.2941177,0,0.509804, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Ivory",
+	0,0,0, 'Ambient'
+	1,1,0.9411765, 'Diffuse'
+	52, 'Specularity'
+	0.8087007, 'Specular Exponent'
+	1,1,0.9411765, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Khaki",
+	0,0,0, 'Ambient'
+	0.9411765,0.9019608,0.5490196, 'Diffuse'
+	11, 'Specularity'
+	0.6475599, 'Specular Exponent'
+	0.9411765,0.9019608,0.5490196, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Lavender",
+	0,0,0, 'Ambient'
+	0.9019608,0.9019608,0.9803922, 'Diffuse'
+	17, 'Specularity'
+	0.70438, 'Specular Exponent'
+	0.9019608,0.9019608,0.9803922, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"LavenderBlush",
+	0,0,0, 'Ambient'
+	1,0.9411765,0.9607843, 'Diffuse'
+	20, 'Specularity'
+	0.05082368, 'Specular Exponent'
+	1,0.9411765,0.9607843, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"LawnGreen",
+	0,0,0, 'Ambient'
+	0.4862745,0.9882353,0, 'Diffuse'
+	20, 'Specularity'
+	0.1363856, 'Specular Exponent'
+	0.4862745,0.9882353,0, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"LemonChiffon",
+	0,0,0, 'Ambient'
+	1,0.9803922,0.8039216, 'Diffuse'
+	30, 'Specularity'
+	0.3645396, 'Specular Exponent'
+	1,0.9803922,0.8039216, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"LightBlue",
+	0,0,0, 'Ambient'
+	0.6784314,0.8470588,0.9019608, 'Diffuse'
+	7, 'Specularity'
+	0.5788163, 'Specular Exponent'
+	0.6784314,0.8470588,0.9019608, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"LightCoral",
+	0,0,0, 'Ambient'
+	0.9411765,0.5019608,0.5019608, 'Diffuse'
+	34, 'Specularity'
+	0.2621483, 'Specular Exponent'
+	0.9411765,0.5019608,0.5019608, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"LightCyan",
+	0,0,0, 'Ambient'
+	0.8784314,1,1, 'Diffuse'
+	13, 'Specularity'
+	0.4017502, 'Specular Exponent'
+	0.8784314,1,1, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"LightGoldenrodYellow",
+	0,0,0, 'Ambient'
+	0.9803922,0.9803922,0.8235294, 'Diffuse'
+	57, 'Specularity'
+	0.2357815, 'Specular Exponent'
+	0.9803922,0.9803922,0.8235294, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"LightGreen",
+	0,0,0, 'Ambient'
+	0.5647059,0.9333333,0.5647059, 'Diffuse'
+	37, 'Specularity'
+	0.9168313, 'Specular Exponent'
+	0.5647059,0.9333333,0.5647059, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"LightGray",
+	0,0,0, 'Ambient'
+	0.827451,0.827451,0.827451, 'Diffuse'
+	46, 'Specularity'
+	0.4842649, 'Specular Exponent'
+	0.827451,0.827451,0.827451, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"LightPink",
+	0,0,0, 'Ambient'
+	1,0.7137255,0.7568628, 'Diffuse'
+	36, 'Specularity'
+	0.1520904, 'Specular Exponent'
+	1,0.7137255,0.7568628, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"LightSalmon",
+	0,0,0, 'Ambient'
+	1,0.627451,0.4784314, 'Diffuse'
+	30, 'Specularity'
+	0.5930402, 'Specular Exponent'
+	1,0.627451,0.4784314, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"LightSeaGreen",
+	0,0,0, 'Ambient'
+	0.1254902,0.6980392,0.6666667, 'Diffuse'
+	44, 'Specularity'
+	0.477219, 'Specular Exponent'
+	0.1254902,0.6980392,0.6666667, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"LightSkyBlue",
+	0,0,0, 'Ambient'
+	0.5294118,0.8078431,0.9803922, 'Diffuse'
+	47, 'Specularity'
+	0.9324828, 'Specular Exponent'
+	0.5294118,0.8078431,0.9803922, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"LightSlateGray",
+	0,0,0, 'Ambient'
+	0.4666667,0.5333334,0.6, 'Diffuse'
+	13, 'Specularity'
+	0.3994542, 'Specular Exponent'
+	0.4666667,0.5333334,0.6, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"LightSteelBlue",
+	0,0,0, 'Ambient'
+	0.6901961,0.7686275,0.8705882, 'Diffuse'
+	36, 'Specularity'
+	0.9653911, 'Specular Exponent'
+	0.6901961,0.7686275,0.8705882, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"LightYellow",
+	0,0,0, 'Ambient'
+	1,1,0.8784314, 'Diffuse'
+	38, 'Specularity'
+	0.4873757, 'Specular Exponent'
+	1,1,0.8784314, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Lime",
+	0,0,0, 'Ambient'
+	0,1,0, 'Diffuse'
+	23, 'Specularity'
+	0.8011278, 'Specular Exponent'
+	0,1,0, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"LimeGreen",
+	0,0,0, 'Ambient'
+	0.1960784,0.8039216,0.1960784, 'Diffuse'
+	23, 'Specularity'
+	0.7438844, 'Specular Exponent'
+	0.1960784,0.8039216,0.1960784, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Linen",
+	0,0,0, 'Ambient'
+	0.9803922,0.9411765,0.9019608, 'Diffuse'
+	19, 'Specularity'
+	0.1778184, 'Specular Exponent'
+	0.9803922,0.9411765,0.9019608, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Magenta",
+	0,0,0, 'Ambient'
+	1,0,1, 'Diffuse'
+	9, 'Specularity'
+	0.6980143, 'Specular Exponent'
+	1,0,1, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Maroon",
+	0,0,0, 'Ambient'
+	0.5019608,0,0, 'Diffuse'
+	27, 'Specularity'
+	0.9417436, 'Specular Exponent'
+	0.5019608,0,0, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"MediumAquamarine",
+	0,0,0, 'Ambient'
+	0.4,0.8039216,0.6666667, 'Diffuse'
+	59, 'Specularity'
+	0.9965612, 'Specular Exponent'
+	0.4,0.8039216,0.6666667, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"MediumBlue",
+	0,0,0, 'Ambient'
+	0,0,0.8039216, 'Diffuse'
+	4, 'Specularity'
+	0.8359051, 'Specular Exponent'
+	0,0,0.8039216, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"MediumOrchid",
+	0,0,0, 'Ambient'
+	0.7294118,0.3333333,0.827451, 'Diffuse'
+	30, 'Specularity'
+	0.5587487, 'Specular Exponent'
+	0.7294118,0.3333333,0.827451, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"MediumPurple",
+	0,0,0, 'Ambient'
+	0.5764706,0.4392157,0.8588235, 'Diffuse'
+	11, 'Specularity'
+	0.02334138, 'Specular Exponent'
+	0.5764706,0.4392157,0.8588235, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"MediumSeaGreen",
+	0,0,0, 'Ambient'
+	0.2352941,0.7019608,0.4431373, 'Diffuse'
+	29, 'Specularity'
+	0.6507354, 'Specular Exponent'
+	0.2352941,0.7019608,0.4431373, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"MediumSlateBlue",
+	0,0,0, 'Ambient'
+	0.4823529,0.4078431,0.9333333, 'Diffuse'
+	1, 'Specularity'
+	0.3429795, 'Specular Exponent'
+	0.4823529,0.4078431,0.9333333, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"MediumSpringGreen",
+	0,0,0, 'Ambient'
+	0,0.9803922,0.6039216, 'Diffuse'
+	48, 'Specularity'
+	0.3457046, 'Specular Exponent'
+	0,0.9803922,0.6039216, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"MediumTurquoise",
+	0,0,0, 'Ambient'
+	0.282353,0.8196079,0.8, 'Diffuse'
+	51, 'Specularity'
+	0.7575823, 'Specular Exponent'
+	0.282353,0.8196079,0.8, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"MediumVioletRed",
+	0,0,0, 'Ambient'
+	0.7803922,0.08235294,0.5215687, 'Diffuse'
+	17, 'Specularity'
+	0.1249783, 'Specular Exponent'
+	0.7803922,0.08235294,0.5215687, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"MidnightBlue",
+	0,0,0, 'Ambient'
+	0.09803922,0.09803922,0.4392157, 'Diffuse'
+	2, 'Specularity'
+	0.1948516, 'Specular Exponent'
+	0.09803922,0.09803922,0.4392157, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"MintCream",
+	0,0,0, 'Ambient'
+	0.9607843,1,0.9803922, 'Diffuse'
+	25, 'Specularity'
+	0.7671368, 'Specular Exponent'
+	0.9607843,1,0.9803922, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"MistyRose",
+	0,0,0, 'Ambient'
+	1,0.8941177,0.8823529, 'Diffuse'
+	17, 'Specularity'
+	0.5111335, 'Specular Exponent'
+	1,0.8941177,0.8823529, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Moccasin",
+	0,0,0, 'Ambient'
+	1,0.8941177,0.7098039, 'Diffuse'
+	15, 'Specularity'
+	0.82831, 'Specular Exponent'
+	1,0.8941177,0.7098039, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"NavajoWhite",
+	0,0,0, 'Ambient'
+	1,0.8705882,0.6784314, 'Diffuse'
+	42, 'Specularity'
+	0.7544271, 'Specular Exponent'
+	1,0.8705882,0.6784314, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Navy",
+	0,0,0, 'Ambient'
+	0,0,0.5019608, 'Diffuse'
+	36, 'Specularity'
+	0.1608191, 'Specular Exponent'
+	0,0,0.5019608, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"OldLace",
+	0,0,0, 'Ambient'
+	0.9921569,0.9607843,0.9019608, 'Diffuse'
+	2, 'Specularity'
+	0.3717453, 'Specular Exponent'
+	0.9921569,0.9607843,0.9019608, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Olive",
+	0,0,0, 'Ambient'
+	0.5019608,0.5019608,0, 'Diffuse'
+	27, 'Specularity'
+	0.3185134, 'Specular Exponent'
+	0.5019608,0.5019608,0, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"OliveDrab",
+	0,0,0, 'Ambient'
+	0.4196078,0.5568628,0.1372549, 'Diffuse'
+	48, 'Specularity'
+	0.922307, 'Specular Exponent'
+	0.4196078,0.5568628,0.1372549, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Orange",
+	0,0,0, 'Ambient'
+	1,0.6470588,0, 'Diffuse'
+	12, 'Specularity'
+	0.4754153, 'Specular Exponent'
+	1,0.6470588,0, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"OrangeRed",
+	0,0,0, 'Ambient'
+	1,0.2705882,0, 'Diffuse'
+	54, 'Specularity'
+	0.8867375, 'Specular Exponent'
+	1,0.2705882,0, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Orchid",
+	0,0,0, 'Ambient'
+	0.854902,0.4392157,0.8392157, 'Diffuse'
+	26, 'Specularity'
+	0.4881136, 'Specular Exponent'
+	0.854902,0.4392157,0.8392157, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"PaleGoldenrod",
+	0,0,0, 'Ambient'
+	0.9333333,0.9098039,0.6666667, 'Diffuse'
+	40, 'Specularity'
+	0.1607117, 'Specular Exponent'
+	0.9333333,0.9098039,0.6666667, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"PaleGreen",
+	0,0,0, 'Ambient'
+	0.5960785,0.9843137,0.5960785, 'Diffuse'
+	42, 'Specularity'
+	0.4777568, 'Specular Exponent'
+	0.5960785,0.9843137,0.5960785, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"PaleTurquoise",
+	0,0,0, 'Ambient'
+	0.6862745,0.9333333,0.9333333, 'Diffuse'
+	1, 'Specularity'
+	0.3754879, 'Specular Exponent'
+	0.6862745,0.9333333,0.9333333, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"PaleVioletRed",
+	0,0,0, 'Ambient'
+	0.8588235,0.4392157,0.5764706, 'Diffuse'
+	48, 'Specularity'
+	0.9548776, 'Specular Exponent'
+	0.8588235,0.4392157,0.5764706, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"PapayaWhip",
+	0,0,0, 'Ambient'
+	1,0.9372549,0.8352941, 'Diffuse'
+	25, 'Specularity'
+	0.9669924, 'Specular Exponent'
+	1,0.9372549,0.8352941, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"PeachPuff",
+	0,0,0, 'Ambient'
+	1,0.854902,0.7254902, 'Diffuse'
+	26, 'Specularity'
+	0.4586588, 'Specular Exponent'
+	1,0.854902,0.7254902, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Peru",
+	0,0,0, 'Ambient'
+	0.8039216,0.5215687,0.2470588, 'Diffuse'
+	45, 'Specularity'
+	0.8934208, 'Specular Exponent'
+	0.8039216,0.5215687,0.2470588, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Pink",
+	0,0,0, 'Ambient'
+	1,0.7529412,0.7960784, 'Diffuse'
+	30, 'Specularity'
+	0.2555951, 'Specular Exponent'
+	1,0.7529412,0.7960784, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Plum",
+	0,0,0, 'Ambient'
+	0.8666667,0.627451,0.8666667, 'Diffuse'
+	42, 'Specularity'
+	0.7695248, 'Specular Exponent'
+	0.8666667,0.627451,0.8666667, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"PowderBlue",
+	0,0,0, 'Ambient'
+	0.6901961,0.8784314,0.9019608, 'Diffuse'
+	39, 'Specularity'
+	0.8842188, 'Specular Exponent'
+	0.6901961,0.8784314,0.9019608, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Purple",
+	0,0,0, 'Ambient'
+	0.5019608,0,0.5019608, 'Diffuse'
+	1, 'Specularity'
+	0.6817529, 'Specular Exponent'
+	0.5019608,0,0.5019608, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Red",
+	0,0,0, 'Ambient'
+	1,0,0, 'Diffuse'
+	41, 'Specularity'
+	0.738721, 'Specular Exponent'
+	1,0,0, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"RosyBrown",
+	0,0,0, 'Ambient'
+	0.7372549,0.5607843,0.5607843, 'Diffuse'
+	55, 'Specularity'
+	0.04049608, 'Specular Exponent'
+	0.7372549,0.5607843,0.5607843, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"RoyalBlue",
+	0,0,0, 'Ambient'
+	0.254902,0.4117647,0.8823529, 'Diffuse'
+	48, 'Specularity'
+	0.6215581, 'Specular Exponent'
+	0.254902,0.4117647,0.8823529, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"SaddleBrown",
+	0,0,0, 'Ambient'
+	0.5450981,0.2705882,0.07450981, 'Diffuse'
+	20, 'Specularity'
+	0.4556706, 'Specular Exponent'
+	0.5450981,0.2705882,0.07450981, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Salmon",
+	0,0,0, 'Ambient'
+	0.9803922,0.5019608,0.4470588, 'Diffuse'
+	44, 'Specularity'
+	0.2687048, 'Specular Exponent'
+	0.9803922,0.5019608,0.4470588, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"SandyBrown",
+	0,0,0, 'Ambient'
+	0.9568627,0.6431373,0.3764706, 'Diffuse'
+	40, 'Specularity'
+	0.8117144, 'Specular Exponent'
+	0.9568627,0.6431373,0.3764706, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"SeaGreen",
+	0,0,0, 'Ambient'
+	0.1803922,0.5450981,0.3411765, 'Diffuse'
+	12, 'Specularity'
+	0.8862989, 'Specular Exponent'
+	0.1803922,0.5450981,0.3411765, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"SeaShell",
+	0,0,0, 'Ambient'
+	1,0.9607843,0.9333333, 'Diffuse'
+	52, 'Specularity'
+	0.565084, 'Specular Exponent'
+	1,0.9607843,0.9333333, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Sienna",
+	0,0,0, 'Ambient'
+	0.627451,0.3215686,0.1764706, 'Diffuse'
+	28, 'Specularity'
+	0.8399487, 'Specular Exponent'
+	0.627451,0.3215686,0.1764706, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Silver",
+	0,0,0, 'Ambient'
+	0.7529412,0.7529412,0.7529412, 'Diffuse'
+	5, 'Specularity'
+	0.07365791, 'Specular Exponent'
+	0.7529412,0.7529412,0.7529412, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"SkyBlue",
+	0,0,0, 'Ambient'
+	0.5294118,0.8078431,0.9215686, 'Diffuse'
+	48, 'Specularity'
+	0.3453596, 'Specular Exponent'
+	0.5294118,0.8078431,0.9215686, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"SlateBlue",
+	0,0,0, 'Ambient'
+	0.4156863,0.3529412,0.8039216, 'Diffuse'
+	19, 'Specularity'
+	0.006375791, 'Specular Exponent'
+	0.4156863,0.3529412,0.8039216, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"SlateGray",
+	0,0,0, 'Ambient'
+	0.4392157,0.5019608,0.5647059, 'Diffuse'
+	33, 'Specularity'
+	0.3793451, 'Specular Exponent'
+	0.4392157,0.5019608,0.5647059, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Snow",
+	0,0,0, 'Ambient'
+	1,0.9803922,0.9803922, 'Diffuse'
+	36, 'Specularity'
+	0.4225713, 'Specular Exponent'
+	1,0.9803922,0.9803922, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"SpringGreen",
+	0,0,0, 'Ambient'
+	0,1,0.4980392, 'Diffuse'
+	43, 'Specularity'
+	0.5842777, 'Specular Exponent'
+	0,1,0.4980392, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"SteelBlue",
+	0,0,0, 'Ambient'
+	0.2745098,0.509804,0.7058824, 'Diffuse'
+	9, 'Specularity'
+	0.8101113, 'Specular Exponent'
+	0.2745098,0.509804,0.7058824, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Tan",
+	0,0,0, 'Ambient'
+	0.8235294,0.7058824,0.5490196, 'Diffuse'
+	49, 'Specularity'
+	0.7403324, 'Specular Exponent'
+	0.8235294,0.7058824,0.5490196, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Teal",
+	0,0,0, 'Ambient'
+	0,0.5019608,0.5019608, 'Diffuse'
+	33, 'Specularity'
+	0.08315357, 'Specular Exponent'
+	0,0.5019608,0.5019608, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Thistle",
+	0,0,0, 'Ambient'
+	0.8470588,0.7490196,0.8470588, 'Diffuse'
+	16, 'Specularity'
+	0.2466298, 'Specular Exponent'
+	0.8470588,0.7490196,0.8470588, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Tomato",
+	0,0,0, 'Ambient'
+	1,0.3882353,0.2784314, 'Diffuse'
+	31, 'Specularity'
+	0.2923146, 'Specular Exponent'
+	1,0.3882353,0.2784314, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Turquoise",
+	0,0,0, 'Ambient'
+	0.2509804,0.8784314,0.8156863, 'Diffuse'
+	44, 'Specularity'
+	0.4709893, 'Specular Exponent'
+	0.2509804,0.8784314,0.8156863, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Violet",
+	0,0,0, 'Ambient'
+	0.9333333,0.509804,0.9333333, 'Diffuse'
+	18, 'Specularity'
+	0.6274238, 'Specular Exponent'
+	0.9333333,0.509804,0.9333333, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Wheat",
+	0,0,0, 'Ambient'
+	0.9607843,0.8705882,0.7019608, 'Diffuse'
+	16, 'Specularity'
+	0.8697325, 'Specular Exponent'
+	0.9607843,0.8705882,0.7019608, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"White",
+	0,0,0, 'Ambient'
+	1,1,1, 'Diffuse'
+	25, 'Specularity'
+	0.5495147, 'Specular Exponent'
+	1,1,1, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"WhiteSmoke",
+	0,0,0, 'Ambient'
+	0.9607843,0.9607843,0.9607843, 'Diffuse'
+	6, 'Specularity'
+	0.8687528, 'Specular Exponent'
+	0.9607843,0.9607843,0.9607843, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"Yellow",
+	0,0,0, 'Ambient'
+	1,1,0, 'Diffuse'
+	16, 'Specularity'
+	0.3245835, 'Specular Exponent'
+	1,1,0, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"YellowGreen",
+	0,0,0, 'Ambient'
+	0.6039216,0.8039216,0.1960784, 'Diffuse'
+	55, 'Specularity'
+	0.2978004, 'Specular Exponent'
+	0.6039216,0.8039216,0.1960784, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"lightgray",
+	0,0,0, 'Ambient'
+	0.9,0.9,0.9, 'Diffuse'
+	20, 'Specularity'
+	0.3, 'Specular Exponent'
+	0,0,0, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+ColourMaterial
+(
+	"darkgray",
+	0,0,0, 'Ambient'
+	0.4,0.4,0.4, 'Diffuse'
+	20, 'Specularity'
+	0.3, 'Specular Exponent'
+	0,0,0, 'Reflected'
+	1, 'Refraction'
+	0,0,0, 'Transmitted'
+)
+
+CheckMaterial
+(
+	check,
+	"lightgray", 'Submaterial 1'
+	"darkgray", 'Submaterial 2'
+	1, 1, 1 'Size'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-10, 'Y'
+	-10, 'Z'
+	"Coral" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-10, 'Y'
+	-8, 'Z'
+	"Green" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-10, 'Y'
+	-6, 'Z'
+	"Cyan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-10, 'Y'
+	-4, 'Z'
+	"YellowGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-10, 'Y'
+	-2, 'Z'
+	"Purple" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-10, 'Y'
+	0, 'Z'
+	"LightGoldenrodYellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-10, 'Y'
+	2, 'Z'
+	"SeaShell" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-10, 'Y'
+	4, 'Z'
+	"PaleTurquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-10, 'Y'
+	6, 'Z'
+	"Peru" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-10, 'Y'
+	8, 'Z'
+	"MediumSpringGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-8, 'Y'
+	-10, 'Z'
+	"DarkViolet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-8, 'Y'
+	-8, 'Z'
+	"Orange" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-8, 'Y'
+	-6, 'Z'
+	"DarkSlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-8, 'Y'
+	-4, 'Z'
+	"WhiteSmoke" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-8, 'Y'
+	-2, 'Z'
+	"MediumSpringGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-8, 'Y'
+	0, 'Z'
+	"Tan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-8, 'Y'
+	2, 'Z'
+	"Bisque" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-8, 'Y'
+	4, 'Z'
+	"DarkTurquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-8, 'Y'
+	6, 'Z'
+	"SkyBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-8, 'Y'
+	8, 'Z'
+	"Gold" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-6, 'Y'
+	-10, 'Z'
+	"DarkOrange" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-6, 'Y'
+	-8, 'Z'
+	"MediumSeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-6, 'Y'
+	-6, 'Z'
+	"PaleGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-6, 'Y'
+	-4, 'Z'
+	"GreenYellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-6, 'Y'
+	-2, 'Z'
+	"LightGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-6, 'Y'
+	0, 'Z'
+	"GhostWhite" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-6, 'Y'
+	2, 'Z'
+	"ForestGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-6, 'Y'
+	4, 'Z'
+	"MediumOrchid" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-6, 'Y'
+	6, 'Z'
+	"Green" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-6, 'Y'
+	8, 'Z'
+	"Red" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-4, 'Y'
+	-10, 'Z'
+	"Aqua" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-4, 'Y'
+	-8, 'Z'
+	"Brown" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-4, 'Y'
+	-6, 'Z'
+	"BlanchedAlmond" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-4, 'Y'
+	-4, 'Z'
+	"Turquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-4, 'Y'
+	-2, 'Z'
+	"Cornsilk" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-4, 'Y'
+	0, 'Z'
+	"DarkSlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-4, 'Y'
+	2, 'Z'
+	"Honeydew" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-4, 'Y'
+	4, 'Z'
+	"Violet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-4, 'Y'
+	6, 'Z'
+	"PaleGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-4, 'Y'
+	8, 'Z'
+	"Teal" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-2, 'Y'
+	-10, 'Z'
+	"DimGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-2, 'Y'
+	-8, 'Z'
+	"DarkSlateBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-2, 'Y'
+	-6, 'Z'
+	"LightSteelBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-2, 'Y'
+	-4, 'Z'
+	"DarkSeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-2, 'Y'
+	-2, 'Z'
+	"RosyBrown" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-2, 'Y'
+	0, 'Z'
+	"LightYellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-2, 'Y'
+	2, 'Z'
+	"Ivory" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-2, 'Y'
+	4, 'Z'
+	"Goldenrod" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-2, 'Y'
+	6, 'Z'
+	"Olive" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	-2, 'Y'
+	8, 'Z'
+	"Fuchsia" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	0, 'Y'
+	-10, 'Z'
+	"LavenderBlush" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	0, 'Y'
+	-8, 'Z'
+	"MediumTurquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	0, 'Y'
+	-6, 'Z'
+	"DarkViolet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	0, 'Y'
+	-4, 'Z'
+	"Tomato" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	0, 'Y'
+	-2, 'Z'
+	"Olive" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	0, 'Y'
+	0, 'Z'
+	"LightSeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	0, 'Y'
+	2, 'Z'
+	"MediumSpringGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	0, 'Y'
+	4, 'Z'
+	"PeachPuff" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	0, 'Y'
+	6, 'Z'
+	"LightSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	0, 'Y'
+	8, 'Z'
+	"LightCoral" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	2, 'Y'
+	-10, 'Z'
+	"DarkBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	2, 'Y'
+	-8, 'Z'
+	"DarkTurquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	2, 'Y'
+	-6, 'Z'
+	"Green" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	2, 'Y'
+	-4, 'Z'
+	"Wheat" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	2, 'Y'
+	-2, 'Z'
+	"MediumOrchid" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	2, 'Y'
+	0, 'Z'
+	"DarkGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	2, 'Y'
+	2, 'Z'
+	"MidnightBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	2, 'Y'
+	4, 'Z'
+	"Firebrick" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	2, 'Y'
+	6, 'Z'
+	"Salmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	2, 'Y'
+	8, 'Z'
+	"Gray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	4, 'Y'
+	-10, 'Z'
+	"LightYellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	4, 'Y'
+	-8, 'Z'
+	"Brown" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	4, 'Y'
+	-6, 'Z'
+	"LightSkyBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	4, 'Y'
+	-4, 'Z'
+	"Tomato" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	4, 'Y'
+	-2, 'Z'
+	"Black" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	4, 'Y'
+	0, 'Z'
+	"Wheat" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	4, 'Y'
+	2, 'Z'
+	"Blue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	4, 'Y'
+	4, 'Z'
+	"LightPink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	4, 'Y'
+	6, 'Z'
+	"Linen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	4, 'Y'
+	8, 'Z'
+	"Turquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	6, 'Y'
+	-10, 'Z'
+	"Tan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	6, 'Y'
+	-8, 'Z'
+	"Violet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	6, 'Y'
+	-6, 'Z'
+	"Snow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	6, 'Y'
+	-4, 'Z'
+	"Azure" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	6, 'Y'
+	-2, 'Z'
+	"Green" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	6, 'Y'
+	0, 'Z'
+	"HotPink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	6, 'Y'
+	2, 'Z'
+	"Red" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	6, 'Y'
+	4, 'Z'
+	"Chocolate" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	6, 'Y'
+	6, 'Z'
+	"DarkSlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	6, 'Y'
+	8, 'Z'
+	"MediumSpringGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	8, 'Y'
+	-10, 'Z'
+	"MediumTurquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	8, 'Y'
+	-8, 'Z'
+	"MediumSlateBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	8, 'Y'
+	-6, 'Z'
+	"LightBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	8, 'Y'
+	-4, 'Z'
+	"DeepPink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	8, 'Y'
+	-2, 'Z'
+	"Peru" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	8, 'Y'
+	0, 'Z'
+	"Aquamarine" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	8, 'Y'
+	2, 'Z'
+	"SkyBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	8, 'Y'
+	4, 'Z'
+	"Magenta" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	8, 'Y'
+	6, 'Z'
+	"MidnightBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-10, 'X'
+	8, 'Y'
+	8, 'Z'
+	"MediumTurquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-10, 'Y'
+	-10, 'Z'
+	"SlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-10, 'Y'
+	-8, 'Z'
+	"Chartreuse" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-10, 'Y'
+	-6, 'Z'
+	"LightSkyBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-10, 'Y'
+	-4, 'Z'
+	"Fuchsia" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-10, 'Y'
+	-2, 'Z'
+	"Plum" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-10, 'Y'
+	0, 'Z'
+	"Gold" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-10, 'Y'
+	2, 'Z'
+	"Chocolate" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-10, 'Y'
+	4, 'Z'
+	"ForestGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-10, 'Y'
+	6, 'Z'
+	"SlateBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-10, 'Y'
+	8, 'Z'
+	"PaleGoldenrod" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-8, 'Y'
+	-10, 'Z'
+	"LavenderBlush" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-8, 'Y'
+	-8, 'Z'
+	"Coral" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-8, 'Y'
+	-6, 'Z'
+	"DarkMagenta" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-8, 'Y'
+	-4, 'Z'
+	"Lime" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-8, 'Y'
+	-2, 'Z'
+	"LightSteelBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-8, 'Y'
+	0, 'Z'
+	"DarkKhaki" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-8, 'Y'
+	2, 'Z'
+	"Gray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-8, 'Y'
+	4, 'Z'
+	"Gainsboro" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-8, 'Y'
+	6, 'Z'
+	"MediumBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-8, 'Y'
+	8, 'Z'
+	"DarkOliveGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-6, 'Y'
+	-10, 'Z'
+	"Green" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-6, 'Y'
+	-8, 'Z'
+	"LightSlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-6, 'Y'
+	-6, 'Z'
+	"Beige" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-6, 'Y'
+	-4, 'Z'
+	"DarkOliveGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-6, 'Y'
+	-2, 'Z'
+	"PaleGoldenrod" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-6, 'Y'
+	0, 'Z'
+	"Tan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-6, 'Y'
+	2, 'Z'
+	"MediumTurquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-6, 'Y'
+	4, 'Z'
+	"DarkSeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-6, 'Y'
+	6, 'Z'
+	"DarkGoldenrod" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-6, 'Y'
+	8, 'Z'
+	"Aqua" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-4, 'Y'
+	-10, 'Z'
+	"Brown" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-4, 'Y'
+	-8, 'Z'
+	"LightSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-4, 'Y'
+	-6, 'Z'
+	"SeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-4, 'Y'
+	-4, 'Z'
+	"Teal" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-4, 'Y'
+	-2, 'Z'
+	"Bisque" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-4, 'Y'
+	0, 'Z'
+	"RosyBrown" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-4, 'Y'
+	2, 'Z'
+	"LawnGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-4, 'Y'
+	4, 'Z'
+	"Maroon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-4, 'Y'
+	6, 'Z'
+	"DarkSlateBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-4, 'Y'
+	8, 'Z'
+	"Aqua" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-2, 'Y'
+	-10, 'Z'
+	"DarkViolet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-2, 'Y'
+	-8, 'Z'
+	"LightGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-2, 'Y'
+	-6, 'Z'
+	"DarkRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-2, 'Y'
+	-4, 'Z'
+	"LightSlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-2, 'Y'
+	-2, 'Z'
+	"DarkGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-2, 'Y'
+	0, 'Z'
+	"LightSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-2, 'Y'
+	2, 'Z'
+	"Ivory" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-2, 'Y'
+	4, 'Z'
+	"Snow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-2, 'Y'
+	6, 'Z'
+	"PaleTurquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	-2, 'Y'
+	8, 'Z'
+	"Maroon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	0, 'Y'
+	-10, 'Z'
+	"MistyRose" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	0, 'Y'
+	-8, 'Z'
+	"LightYellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	0, 'Y'
+	-6, 'Z'
+	"WhiteSmoke" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	0, 'Y'
+	-4, 'Z'
+	"LavenderBlush" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	0, 'Y'
+	-2, 'Z'
+	"DarkSlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	0, 'Y'
+	0, 'Z'
+	"Green" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	0, 'Y'
+	2, 'Z'
+	"Black" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	0, 'Y'
+	4, 'Z'
+	"Firebrick" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	0, 'Y'
+	6, 'Z'
+	"MediumOrchid" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	0, 'Y'
+	8, 'Z'
+	"Sienna" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	2, 'Y'
+	-10, 'Z'
+	"Orange" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	2, 'Y'
+	-8, 'Z'
+	"Silver" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	2, 'Y'
+	-6, 'Z'
+	"Cyan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	2, 'Y'
+	-4, 'Z'
+	"SeaShell" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	2, 'Y'
+	-2, 'Z'
+	"MidnightBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	2, 'Y'
+	0, 'Z'
+	"Teal" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	2, 'Y'
+	2, 'Z'
+	"DarkViolet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	2, 'Y'
+	4, 'Z'
+	"DarkViolet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	2, 'Y'
+	6, 'Z'
+	"LightPink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	2, 'Y'
+	8, 'Z'
+	"OrangeRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	4, 'Y'
+	-10, 'Z'
+	"PaleVioletRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	4, 'Y'
+	-8, 'Z'
+	"Plum" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	4, 'Y'
+	-6, 'Z'
+	"BlueViolet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	4, 'Y'
+	-4, 'Z'
+	"Linen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	4, 'Y'
+	-2, 'Z'
+	"Teal" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	4, 'Y'
+	0, 'Z'
+	"SlateBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	4, 'Y'
+	2, 'Z'
+	"DimGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	4, 'Y'
+	4, 'Z'
+	"LightSkyBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	4, 'Y'
+	6, 'Z'
+	"Aqua" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	4, 'Y'
+	8, 'Z'
+	"DarkOrchid" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	6, 'Y'
+	-10, 'Z'
+	"LightSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	6, 'Y'
+	-8, 'Z'
+	"PaleGoldenrod" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	6, 'Y'
+	-6, 'Z'
+	"LightGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	6, 'Y'
+	-4, 'Z'
+	"MediumBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	6, 'Y'
+	-2, 'Z'
+	"Gray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	6, 'Y'
+	0, 'Z'
+	"LightYellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	6, 'Y'
+	2, 'Z'
+	"LightSlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	6, 'Y'
+	4, 'Z'
+	"Ivory" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	6, 'Y'
+	6, 'Z'
+	"Moccasin" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	6, 'Y'
+	8, 'Z'
+	"Navy" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	8, 'Y'
+	-10, 'Z'
+	"PaleVioletRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	8, 'Y'
+	-8, 'Z'
+	"CornflowerBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	8, 'Y'
+	-6, 'Z'
+	"WhiteSmoke" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	8, 'Y'
+	-4, 'Z'
+	"GreenYellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	8, 'Y'
+	-2, 'Z'
+	"FloralWhite" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	8, 'Y'
+	0, 'Z'
+	"IndianRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	8, 'Y'
+	2, 'Z'
+	"Gainsboro" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	8, 'Y'
+	4, 'Z'
+	"Green" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	8, 'Y'
+	6, 'Z'
+	"SkyBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-8, 'X'
+	8, 'Y'
+	8, 'Z'
+	"DarkSlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-10, 'Y'
+	-10, 'Z'
+	"DarkSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-10, 'Y'
+	-8, 'Z'
+	"Cornsilk" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-10, 'Y'
+	-6, 'Z'
+	"Indigo" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-10, 'Y'
+	-4, 'Z'
+	"Aqua" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-10, 'Y'
+	-2, 'Z'
+	"RoyalBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-10, 'Y'
+	0, 'Z'
+	"Silver" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-10, 'Y'
+	2, 'Z'
+	"LightBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-10, 'Y'
+	4, 'Z'
+	"Ivory" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-10, 'Y'
+	6, 'Z'
+	"LightSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-10, 'Y'
+	8, 'Z'
+	"Green" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-8, 'Y'
+	-10, 'Z'
+	"Blue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-8, 'Y'
+	-8, 'Z'
+	"LightYellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-8, 'Y'
+	-6, 'Z'
+	"DeepSkyBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-8, 'Y'
+	-4, 'Z'
+	"Green" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-8, 'Y'
+	-2, 'Z'
+	"Goldenrod" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-8, 'Y'
+	0, 'Z'
+	"WhiteSmoke" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-8, 'Y'
+	2, 'Z'
+	"GreenYellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-8, 'Y'
+	4, 'Z'
+	"LimeGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-8, 'Y'
+	6, 'Z'
+	"LightPink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-8, 'Y'
+	8, 'Z'
+	"CadetBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-6, 'Y'
+	-10, 'Z'
+	"Indigo" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-6, 'Y'
+	-8, 'Z'
+	"SeaShell" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-6, 'Y'
+	-6, 'Z'
+	"MediumOrchid" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-6, 'Y'
+	-4, 'Z'
+	"Red" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-6, 'Y'
+	-2, 'Z'
+	"Wheat" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-6, 'Y'
+	0, 'Z'
+	"MediumSpringGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-6, 'Y'
+	2, 'Z'
+	"Red" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-6, 'Y'
+	4, 'Z'
+	"OliveDrab" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-6, 'Y'
+	6, 'Z'
+	"DarkSlateBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-6, 'Y'
+	8, 'Z'
+	"LightSlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-4, 'Y'
+	-10, 'Z'
+	"LimeGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-4, 'Y'
+	-8, 'Z'
+	"SteelBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-4, 'Y'
+	-6, 'Z'
+	"MediumVioletRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-4, 'Y'
+	-4, 'Z'
+	"PeachPuff" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-4, 'Y'
+	-2, 'Z'
+	"WhiteSmoke" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-4, 'Y'
+	0, 'Z'
+	"Gray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-4, 'Y'
+	2, 'Z'
+	"ForestGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-4, 'Y'
+	4, 'Z'
+	"LightCyan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-4, 'Y'
+	6, 'Z'
+	"PeachPuff" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-4, 'Y'
+	8, 'Z'
+	"LightGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-2, 'Y'
+	-10, 'Z'
+	"BlueViolet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-2, 'Y'
+	-8, 'Z'
+	"Chartreuse" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-2, 'Y'
+	-6, 'Z'
+	"Snow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-2, 'Y'
+	-4, 'Z'
+	"DodgerBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-2, 'Y'
+	-2, 'Z'
+	"MediumSeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-2, 'Y'
+	0, 'Z'
+	"DarkOliveGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-2, 'Y'
+	2, 'Z'
+	"Salmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-2, 'Y'
+	4, 'Z'
+	"MediumPurple" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-2, 'Y'
+	6, 'Z'
+	"AntiqueWhite" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	-2, 'Y'
+	8, 'Z'
+	"Fuchsia" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	0, 'Y'
+	-10, 'Z'
+	"Aqua" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	0, 'Y'
+	-8, 'Z'
+	"Peru" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	0, 'Y'
+	-6, 'Z'
+	"Silver" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	0, 'Y'
+	-4, 'Z'
+	"Peru" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	0, 'Y'
+	-2, 'Z'
+	"SandyBrown" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	0, 'Y'
+	0, 'Z'
+	"GreenYellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	0, 'Y'
+	2, 'Z'
+	"LightSteelBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	0, 'Y'
+	4, 'Z'
+	"MediumOrchid" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	0, 'Y'
+	6, 'Z'
+	"Black" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	0, 'Y'
+	8, 'Z'
+	"DarkMagenta" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	2, 'Y'
+	-10, 'Z'
+	"BlanchedAlmond" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	2, 'Y'
+	-8, 'Z'
+	"PaleVioletRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	2, 'Y'
+	-6, 'Z'
+	"DarkCyan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	2, 'Y'
+	-4, 'Z'
+	"White" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	2, 'Y'
+	-2, 'Z'
+	"Red" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	2, 'Y'
+	0, 'Z'
+	"Cyan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	2, 'Y'
+	2, 'Z'
+	"SlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	2, 'Y'
+	4, 'Z'
+	"LightSkyBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	2, 'Y'
+	6, 'Z'
+	"Honeydew" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	2, 'Y'
+	8, 'Z'
+	"YellowGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	4, 'Y'
+	-10, 'Z'
+	"MintCream" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	4, 'Y'
+	-8, 'Z'
+	"SpringGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	4, 'Y'
+	-6, 'Z'
+	"Pink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	4, 'Y'
+	-4, 'Z'
+	"AliceBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	4, 'Y'
+	-2, 'Z'
+	"Aqua" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	4, 'Y'
+	0, 'Z'
+	"DimGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	4, 'Y'
+	2, 'Z'
+	"Turquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	4, 'Y'
+	4, 'Z'
+	"DodgerBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	4, 'Y'
+	6, 'Z'
+	"DarkKhaki" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	4, 'Y'
+	8, 'Z'
+	"PaleVioletRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	6, 'Y'
+	-10, 'Z'
+	"Pink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	6, 'Y'
+	-8, 'Z'
+	"DarkMagenta" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	6, 'Y'
+	-6, 'Z'
+	"Navy" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	6, 'Y'
+	-4, 'Z'
+	"SteelBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	6, 'Y'
+	-2, 'Z'
+	"LightSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	6, 'Y'
+	0, 'Z'
+	"Peru" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	6, 'Y'
+	2, 'Z'
+	"Beige" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	6, 'Y'
+	4, 'Z'
+	"Sienna" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	6, 'Y'
+	6, 'Z'
+	"SteelBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	6, 'Y'
+	8, 'Z'
+	"MediumPurple" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	8, 'Y'
+	-10, 'Z'
+	"RoyalBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	8, 'Y'
+	-8, 'Z'
+	"Orchid" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	8, 'Y'
+	-6, 'Z'
+	"Indigo" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	8, 'Y'
+	-4, 'Z'
+	"Magenta" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	8, 'Y'
+	-2, 'Z'
+	"Ivory" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	8, 'Y'
+	0, 'Z'
+	"ForestGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	8, 'Y'
+	2, 'Z'
+	"Thistle" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	8, 'Y'
+	4, 'Z'
+	"Tan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	8, 'Y'
+	6, 'Z'
+	"LightGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-6, 'X'
+	8, 'Y'
+	8, 'Z'
+	"LightBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-10, 'Y'
+	-10, 'Z'
+	"Firebrick" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-10, 'Y'
+	-8, 'Z'
+	"ForestGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-10, 'Y'
+	-6, 'Z'
+	"DarkOrange" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-10, 'Y'
+	-4, 'Z'
+	"Aqua" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-10, 'Y'
+	-2, 'Z'
+	"Moccasin" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-10, 'Y'
+	0, 'Z'
+	"Chocolate" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-10, 'Y'
+	2, 'Z'
+	"YellowGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-10, 'Y'
+	4, 'Z'
+	"SeaShell" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-10, 'Y'
+	6, 'Z'
+	"PaleTurquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-10, 'Y'
+	8, 'Z'
+	"LimeGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-8, 'Y'
+	-10, 'Z'
+	"Khaki" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-8, 'Y'
+	-8, 'Z'
+	"DarkSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-8, 'Y'
+	-6, 'Z'
+	"IndianRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-8, 'Y'
+	-4, 'Z'
+	"Firebrick" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-8, 'Y'
+	-2, 'Z'
+	"Khaki" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-8, 'Y'
+	0, 'Z'
+	"SeaShell" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-8, 'Y'
+	2, 'Z'
+	"Blue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-8, 'Y'
+	4, 'Z'
+	"DarkSeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-8, 'Y'
+	6, 'Z'
+	"LightCyan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-8, 'Y'
+	8, 'Z'
+	"Azure" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-6, 'Y'
+	-10, 'Z'
+	"Chartreuse" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-6, 'Y'
+	-8, 'Z'
+	"Aquamarine" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-6, 'Y'
+	-6, 'Z'
+	"MediumOrchid" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-6, 'Y'
+	-4, 'Z'
+	"Pink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-6, 'Y'
+	-2, 'Z'
+	"DarkCyan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-6, 'Y'
+	0, 'Z'
+	"Teal" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-6, 'Y'
+	2, 'Z'
+	"LightPink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-6, 'Y'
+	4, 'Z'
+	"DarkOrange" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-6, 'Y'
+	6, 'Z'
+	"MediumBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-6, 'Y'
+	8, 'Z'
+	"OliveDrab" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-4, 'Y'
+	-10, 'Z'
+	"Gold" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-4, 'Y'
+	-8, 'Z'
+	"Aqua" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-4, 'Y'
+	-6, 'Z'
+	"Red" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-4, 'Y'
+	-4, 'Z'
+	"PaleGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-4, 'Y'
+	-2, 'Z'
+	"LawnGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-4, 'Y'
+	0, 'Z'
+	"LightBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-4, 'Y'
+	2, 'Z'
+	"Yellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-4, 'Y'
+	4, 'Z'
+	"MintCream" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-4, 'Y'
+	6, 'Z'
+	"DarkSeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-4, 'Y'
+	8, 'Z'
+	"HotPink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-2, 'Y'
+	-10, 'Z'
+	"Pink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-2, 'Y'
+	-8, 'Z'
+	"DarkGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-2, 'Y'
+	-6, 'Z'
+	"Chocolate" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-2, 'Y'
+	-4, 'Z'
+	"Gray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-2, 'Y'
+	-2, 'Z'
+	"DarkGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-2, 'Y'
+	0, 'Z'
+	"MediumBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-2, 'Y'
+	2, 'Z'
+	"Fuchsia" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-2, 'Y'
+	4, 'Z'
+	"CadetBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-2, 'Y'
+	6, 'Z'
+	"Cyan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	-2, 'Y'
+	8, 'Z'
+	"LimeGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	0, 'Y'
+	-10, 'Z'
+	"DarkSeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	0, 'Y'
+	-8, 'Z'
+	"Olive" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	0, 'Y'
+	-6, 'Z'
+	"LightBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	0, 'Y'
+	-4, 'Z'
+	"LemonChiffon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	0, 'Y'
+	-2, 'Z'
+	"GhostWhite" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	0, 'Y'
+	0, 'Z'
+	"DeepPink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	0, 'Y'
+	2, 'Z'
+	"Orchid" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	0, 'Y'
+	4, 'Z'
+	"LavenderBlush" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	0, 'Y'
+	6, 'Z'
+	"SeaShell" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	0, 'Y'
+	8, 'Z'
+	"PaleGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	2, 'Y'
+	-10, 'Z'
+	"MediumSeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	2, 'Y'
+	-8, 'Z'
+	"Peru" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	2, 'Y'
+	-6, 'Z'
+	"DarkTurquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	2, 'Y'
+	-4, 'Z'
+	"Beige" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	2, 'Y'
+	-2, 'Z'
+	"DarkMagenta" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	2, 'Y'
+	0, 'Z'
+	"HotPink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	2, 'Y'
+	2, 'Z'
+	"Khaki" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	2, 'Y'
+	4, 'Z'
+	"MintCream" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	2, 'Y'
+	6, 'Z'
+	"SeaShell" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	2, 'Y'
+	8, 'Z'
+	"Violet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	4, 'Y'
+	-10, 'Z'
+	"Silver" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	4, 'Y'
+	-8, 'Z'
+	"Khaki" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	4, 'Y'
+	-6, 'Z'
+	"Transparent" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	4, 'Y'
+	-4, 'Z'
+	"BlueViolet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	4, 'Y'
+	-2, 'Z'
+	"DarkSlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	4, 'Y'
+	0, 'Z'
+	"Tan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	4, 'Y'
+	2, 'Z'
+	"SteelBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	4, 'Y'
+	4, 'Z'
+	"DarkSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	4, 'Y'
+	6, 'Z'
+	"MediumOrchid" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	4, 'Y'
+	8, 'Z'
+	"Magenta" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	6, 'Y'
+	-10, 'Z'
+	"MediumPurple" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	6, 'Y'
+	-8, 'Z'
+	"IndianRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	6, 'Y'
+	-6, 'Z'
+	"BlanchedAlmond" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	6, 'Y'
+	-4, 'Z'
+	"Azure" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	6, 'Y'
+	-2, 'Z'
+	"LightBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	6, 'Y'
+	0, 'Z'
+	"MintCream" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	6, 'Y'
+	2, 'Z'
+	"Magenta" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	6, 'Y'
+	4, 'Z'
+	"Gray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	6, 'Y'
+	6, 'Z'
+	"IndianRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	6, 'Y'
+	8, 'Z'
+	"DarkCyan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	8, 'Y'
+	-10, 'Z'
+	"PaleGoldenrod" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	8, 'Y'
+	-8, 'Z'
+	"LimeGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	8, 'Y'
+	-6, 'Z'
+	"Plum" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	8, 'Y'
+	-4, 'Z'
+	"LightSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	8, 'Y'
+	-2, 'Z'
+	"Peru" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	8, 'Y'
+	0, 'Z'
+	"Transparent" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	8, 'Y'
+	2, 'Z'
+	"SpringGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	8, 'Y'
+	4, 'Z'
+	"Blue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	8, 'Y'
+	6, 'Z'
+	"DarkBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-4, 'X'
+	8, 'Y'
+	8, 'Z'
+	"Pink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-10, 'Y'
+	-10, 'Z'
+	"DarkCyan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-10, 'Y'
+	-8, 'Z'
+	"Moccasin" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-10, 'Y'
+	-6, 'Z'
+	"DarkSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-10, 'Y'
+	-4, 'Z'
+	"DarkGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-10, 'Y'
+	-2, 'Z'
+	"NavajoWhite" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-10, 'Y'
+	0, 'Z'
+	"RoyalBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-10, 'Y'
+	2, 'Z'
+	"Olive" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-10, 'Y'
+	4, 'Z'
+	"Green" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-10, 'Y'
+	6, 'Z'
+	"DarkKhaki" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-10, 'Y'
+	8, 'Z'
+	"Ivory" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-8, 'Y'
+	-10, 'Z'
+	"Goldenrod" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-8, 'Y'
+	-8, 'Z'
+	"LightGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-8, 'Y'
+	-6, 'Z'
+	"SaddleBrown" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-8, 'Y'
+	-4, 'Z'
+	"DeepSkyBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-8, 'Y'
+	-2, 'Z'
+	"Cornsilk" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-8, 'Y'
+	0, 'Z'
+	"DarkOrange" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-8, 'Y'
+	2, 'Z'
+	"Orange" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-8, 'Y'
+	4, 'Z'
+	"DarkRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-8, 'Y'
+	6, 'Z'
+	"MediumAquamarine" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-8, 'Y'
+	8, 'Z'
+	"LightYellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-6, 'Y'
+	-10, 'Z'
+	"RoyalBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-6, 'Y'
+	-8, 'Z'
+	"Black" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-6, 'Y'
+	-6, 'Z'
+	"DarkSlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-6, 'Y'
+	-4, 'Z'
+	"Olive" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-6, 'Y'
+	-2, 'Z'
+	"DarkRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-6, 'Y'
+	0, 'Z'
+	"ForestGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-6, 'Y'
+	2, 'Z'
+	"MediumSpringGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-6, 'Y'
+	4, 'Z'
+	"LightGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-6, 'Y'
+	6, 'Z'
+	"Firebrick" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-6, 'Y'
+	8, 'Z'
+	"DarkSlateBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-4, 'Y'
+	-10, 'Z'
+	"AntiqueWhite" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-4, 'Y'
+	-8, 'Z'
+	"SandyBrown" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-4, 'Y'
+	-6, 'Z'
+	"Blue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-4, 'Y'
+	-4, 'Z'
+	"Red" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-4, 'Y'
+	-2, 'Z'
+	"Indigo" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-4, 'Y'
+	0, 'Z'
+	"Teal" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-4, 'Y'
+	2, 'Z'
+	"DarkBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-4, 'Y'
+	4, 'Z'
+	"Silver" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-4, 'Y'
+	6, 'Z'
+	"Goldenrod" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-4, 'Y'
+	8, 'Z'
+	"MediumTurquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-2, 'Y'
+	-10, 'Z'
+	"Violet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-2, 'Y'
+	-8, 'Z'
+	"DarkMagenta" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-2, 'Y'
+	-6, 'Z'
+	"DarkGoldenrod" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-2, 'Y'
+	-4, 'Z'
+	"WhiteSmoke" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-2, 'Y'
+	-2, 'Z'
+	"Purple" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-2, 'Y'
+	0, 'Z'
+	"DarkSeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-2, 'Y'
+	2, 'Z'
+	"OrangeRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-2, 'Y'
+	4, 'Z'
+	"LightSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-2, 'Y'
+	6, 'Z'
+	"Green" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	-2, 'Y'
+	8, 'Z'
+	"Linen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	0, 'Y'
+	-10, 'Z'
+	"DeepSkyBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	0, 'Y'
+	-8, 'Z'
+	"Navy" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	0, 'Y'
+	-6, 'Z'
+	"LightGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	0, 'Y'
+	-4, 'Z'
+	"MediumSeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	0, 'Y'
+	-2, 'Z'
+	"Violet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	0, 'Y'
+	0, 'Z'
+	"Chartreuse" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	0, 'Y'
+	2, 'Z'
+	"Ivory" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	0, 'Y'
+	4, 'Z'
+	"LightSteelBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	0, 'Y'
+	6, 'Z'
+	"Turquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	0, 'Y'
+	8, 'Z'
+	"Goldenrod" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	2, 'Y'
+	-10, 'Z'
+	"DarkKhaki" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	2, 'Y'
+	-8, 'Z'
+	"DarkMagenta" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	2, 'Y'
+	-6, 'Z'
+	"BlanchedAlmond" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	2, 'Y'
+	-4, 'Z'
+	"Thistle" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	2, 'Y'
+	-2, 'Z'
+	"IndianRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	2, 'Y'
+	0, 'Z'
+	"LightSeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	2, 'Y'
+	2, 'Z'
+	"Ivory" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	2, 'Y'
+	4, 'Z'
+	"Aqua" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	2, 'Y'
+	6, 'Z'
+	"SkyBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	2, 'Y'
+	8, 'Z'
+	"DarkMagenta" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	4, 'Y'
+	-10, 'Z'
+	"Bisque" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	4, 'Y'
+	-8, 'Z'
+	"SaddleBrown" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	4, 'Y'
+	-6, 'Z'
+	"Sienna" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	4, 'Y'
+	-4, 'Z'
+	"Tomato" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	4, 'Y'
+	-2, 'Z'
+	"MediumAquamarine" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	4, 'Y'
+	0, 'Z'
+	"MediumSlateBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	4, 'Y'
+	2, 'Z'
+	"SkyBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	4, 'Y'
+	4, 'Z'
+	"DarkViolet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	4, 'Y'
+	6, 'Z'
+	"SlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	4, 'Y'
+	8, 'Z'
+	"Yellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	6, 'Y'
+	-10, 'Z'
+	"MediumOrchid" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	6, 'Y'
+	-8, 'Z'
+	"Coral" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	6, 'Y'
+	-6, 'Z'
+	"Coral" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	6, 'Y'
+	-4, 'Z'
+	"PaleGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	6, 'Y'
+	-2, 'Z'
+	"Violet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	6, 'Y'
+	0, 'Z'
+	"Gainsboro" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	6, 'Y'
+	2, 'Z'
+	"Goldenrod" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	6, 'Y'
+	4, 'Z'
+	"LightBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	6, 'Y'
+	6, 'Z'
+	"SandyBrown" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	6, 'Y'
+	8, 'Z'
+	"DimGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	8, 'Y'
+	-10, 'Z'
+	"LightSeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	8, 'Y'
+	-8, 'Z'
+	"MediumSlateBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	8, 'Y'
+	-6, 'Z'
+	"Tan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	8, 'Y'
+	-4, 'Z'
+	"YellowGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	8, 'Y'
+	-2, 'Z'
+	"LawnGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	8, 'Y'
+	0, 'Z'
+	"PapayaWhip" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	8, 'Y'
+	2, 'Z'
+	"CornflowerBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	8, 'Y'
+	4, 'Z'
+	"DarkSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	8, 'Y'
+	6, 'Z'
+	"MediumAquamarine" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	-2, 'X'
+	8, 'Y'
+	8, 'Z'
+	"DimGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-10, 'Y'
+	-10, 'Z'
+	"RoyalBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-10, 'Y'
+	-8, 'Z'
+	"Olive" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-10, 'Y'
+	-6, 'Z'
+	"MediumSlateBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-10, 'Y'
+	-4, 'Z'
+	"DarkCyan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-10, 'Y'
+	-2, 'Z'
+	"LightSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-10, 'Y'
+	0, 'Z'
+	"LightBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-10, 'Y'
+	2, 'Z'
+	"Red" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-10, 'Y'
+	4, 'Z'
+	"LightSteelBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-10, 'Y'
+	6, 'Z'
+	"Aquamarine" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-10, 'Y'
+	8, 'Z'
+	"Gainsboro" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-8, 'Y'
+	-10, 'Z'
+	"DarkOrchid" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-8, 'Y'
+	-8, 'Z'
+	"Crimson" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-8, 'Y'
+	-6, 'Z'
+	"MediumVioletRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-8, 'Y'
+	-4, 'Z'
+	"Wheat" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-8, 'Y'
+	-2, 'Z'
+	"PapayaWhip" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-8, 'Y'
+	0, 'Z'
+	"BlanchedAlmond" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-8, 'Y'
+	2, 'Z'
+	"Blue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-8, 'Y'
+	4, 'Z'
+	"ForestGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-8, 'Y'
+	6, 'Z'
+	"White" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-8, 'Y'
+	8, 'Z'
+	"BlanchedAlmond" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-6, 'Y'
+	-10, 'Z'
+	"Cyan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-6, 'Y'
+	-8, 'Z'
+	"Violet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-6, 'Y'
+	-6, 'Z'
+	"DarkGoldenrod" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-6, 'Y'
+	-4, 'Z'
+	"MediumAquamarine" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-6, 'Y'
+	-2, 'Z'
+	"Navy" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-6, 'Y'
+	0, 'Z'
+	"Lavender" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-6, 'Y'
+	2, 'Z'
+	"SpringGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-6, 'Y'
+	4, 'Z'
+	"Sienna" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-6, 'Y'
+	6, 'Z'
+	"LightSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-6, 'Y'
+	8, 'Z'
+	"RoyalBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-4, 'Y'
+	-10, 'Z'
+	"LightGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-4, 'Y'
+	-8, 'Z'
+	"MidnightBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-4, 'Y'
+	-6, 'Z'
+	"OldLace" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-4, 'Y'
+	-4, 'Z'
+	"MediumOrchid" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-4, 'Y'
+	-2, 'Z'
+	"DarkBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-4, 'Y'
+	0, 'Z'
+	"SlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-4, 'Y'
+	2, 'Z'
+	"LightPink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-4, 'Y'
+	4, 'Z'
+	"Violet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-4, 'Y'
+	6, 'Z'
+	"DarkRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-4, 'Y'
+	8, 'Z'
+	"LightSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-2, 'Y'
+	-10, 'Z'
+	"LightSkyBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-2, 'Y'
+	-8, 'Z'
+	"RosyBrown" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-2, 'Y'
+	-6, 'Z'
+	"Khaki" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-2, 'Y'
+	-4, 'Z'
+	"LightSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-2, 'Y'
+	-2, 'Z'
+	"BlanchedAlmond" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-2, 'Y'
+	0, 'Z'
+	"Green" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-2, 'Y'
+	2, 'Z'
+	"WhiteSmoke" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-2, 'Y'
+	4, 'Z'
+	"Turquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-2, 'Y'
+	6, 'Z'
+	"DarkSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	-2, 'Y'
+	8, 'Z'
+	"Green" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	0, 'Y'
+	-10, 'Z'
+	"Navy" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	0, 'Y'
+	-8, 'Z'
+	"Red" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	0, 'Y'
+	-6, 'Z'
+	"DarkSlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	0, 'Y'
+	-4, 'Z'
+	"LightSkyBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	0, 'Y'
+	-2, 'Z'
+	"Cornsilk" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	0, 'Y'
+	0, 'Z'
+	"Sienna" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	0, 'Y'
+	2, 'Z'
+	"LightSlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	0, 'Y'
+	4, 'Z'
+	"Azure" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	0, 'Y'
+	6, 'Z'
+	"LightGoldenrodYellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	0, 'Y'
+	8, 'Z'
+	"BlueViolet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	2, 'Y'
+	-10, 'Z'
+	"LightYellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	2, 'Y'
+	-8, 'Z'
+	"Thistle" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	2, 'Y'
+	-6, 'Z'
+	"Aquamarine" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	2, 'Y'
+	-4, 'Z'
+	"DarkOliveGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	2, 'Y'
+	-2, 'Z'
+	"SeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	2, 'Y'
+	0, 'Z'
+	"Maroon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	2, 'Y'
+	2, 'Z'
+	"LemonChiffon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	2, 'Y'
+	4, 'Z'
+	"Azure" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	2, 'Y'
+	6, 'Z'
+	"Purple" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	2, 'Y'
+	8, 'Z'
+	"SeaShell" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	4, 'Y'
+	-10, 'Z'
+	"Magenta" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	4, 'Y'
+	-8, 'Z'
+	"Chocolate" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	4, 'Y'
+	-6, 'Z'
+	"BurlyWood" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	4, 'Y'
+	-4, 'Z'
+	"LightCyan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	4, 'Y'
+	-2, 'Z'
+	"LightYellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	4, 'Y'
+	0, 'Z'
+	"Fuchsia" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	4, 'Y'
+	2, 'Z'
+	"LightSteelBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	4, 'Y'
+	4, 'Z'
+	"MistyRose" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	4, 'Y'
+	6, 'Z'
+	"LightSeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	4, 'Y'
+	8, 'Z'
+	"Firebrick" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	6, 'Y'
+	-10, 'Z'
+	"LemonChiffon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	6, 'Y'
+	-8, 'Z'
+	"Turquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	6, 'Y'
+	-6, 'Z'
+	"MediumTurquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	6, 'Y'
+	-4, 'Z'
+	"CornflowerBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	6, 'Y'
+	-2, 'Z'
+	"Cornsilk" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	6, 'Y'
+	0, 'Z'
+	"NavajoWhite" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	6, 'Y'
+	2, 'Z'
+	"Honeydew" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	6, 'Y'
+	4, 'Z'
+	"DarkCyan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	6, 'Y'
+	6, 'Z'
+	"LightCoral" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	6, 'Y'
+	8, 'Z'
+	"DimGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	8, 'Y'
+	-10, 'Z'
+	"Green" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	8, 'Y'
+	-8, 'Z'
+	"LightCoral" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	8, 'Y'
+	-6, 'Z'
+	"LightGoldenrodYellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	8, 'Y'
+	-4, 'Z'
+	"Cyan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	8, 'Y'
+	-2, 'Z'
+	"Violet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	8, 'Y'
+	0, 'Z'
+	"MediumAquamarine" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	8, 'Y'
+	2, 'Z'
+	"Plum" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	8, 'Y'
+	4, 'Z'
+	"DarkOrange" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	8, 'Y'
+	6, 'Z'
+	"MintCream" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	0, 'X'
+	8, 'Y'
+	8, 'Z'
+	"LightGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-10, 'Y'
+	-10, 'Z'
+	"Tan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-10, 'Y'
+	-8, 'Z'
+	"Thistle" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-10, 'Y'
+	-6, 'Z'
+	"Cyan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-10, 'Y'
+	-4, 'Z'
+	"Green" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-10, 'Y'
+	-2, 'Z'
+	"Purple" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-10, 'Y'
+	0, 'Z'
+	"Linen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-10, 'Y'
+	2, 'Z'
+	"OrangeRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-10, 'Y'
+	4, 'Z'
+	"Plum" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-10, 'Y'
+	6, 'Z'
+	"White" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-10, 'Y'
+	8, 'Z'
+	"Purple" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-8, 'Y'
+	-10, 'Z'
+	"Gainsboro" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-8, 'Y'
+	-8, 'Z'
+	"Sienna" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-8, 'Y'
+	-6, 'Z'
+	"LightSkyBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-8, 'Y'
+	-4, 'Z'
+	"DarkCyan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-8, 'Y'
+	-2, 'Z'
+	"MediumTurquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-8, 'Y'
+	0, 'Z'
+	"MediumBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-8, 'Y'
+	2, 'Z'
+	"Firebrick" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-8, 'Y'
+	4, 'Z'
+	"Snow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-8, 'Y'
+	6, 'Z'
+	"BlanchedAlmond" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-8, 'Y'
+	8, 'Z'
+	"DarkGoldenrod" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-6, 'Y'
+	-10, 'Z'
+	"DarkGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-6, 'Y'
+	-8, 'Z'
+	"DeepPink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-6, 'Y'
+	-6, 'Z'
+	"Maroon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-6, 'Y'
+	-4, 'Z'
+	"LightSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-6, 'Y'
+	-2, 'Z'
+	"LightGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-6, 'Y'
+	0, 'Z'
+	"CadetBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-6, 'Y'
+	2, 'Z'
+	"MediumVioletRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-6, 'Y'
+	4, 'Z'
+	"Thistle" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-6, 'Y'
+	6, 'Z'
+	"LightSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-6, 'Y'
+	8, 'Z'
+	"Violet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-4, 'Y'
+	-10, 'Z'
+	"LightYellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-4, 'Y'
+	-8, 'Z'
+	"FloralWhite" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-4, 'Y'
+	-6, 'Z'
+	"Transparent" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-4, 'Y'
+	-4, 'Z'
+	"AntiqueWhite" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-4, 'Y'
+	-2, 'Z'
+	"Honeydew" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-4, 'Y'
+	0, 'Z'
+	"LightSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-4, 'Y'
+	2, 'Z'
+	"Purple" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-4, 'Y'
+	4, 'Z'
+	"DarkSlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-4, 'Y'
+	6, 'Z'
+	"Fuchsia" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-4, 'Y'
+	8, 'Z'
+	"Maroon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-2, 'Y'
+	-10, 'Z'
+	"Violet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-2, 'Y'
+	-8, 'Z'
+	"MediumOrchid" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-2, 'Y'
+	-6, 'Z'
+	"DarkKhaki" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-2, 'Y'
+	-4, 'Z'
+	"MintCream" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-2, 'Y'
+	-2, 'Z'
+	"Violet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-2, 'Y'
+	0, 'Z'
+	"LightSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-2, 'Y'
+	2, 'Z'
+	"Tomato" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-2, 'Y'
+	4, 'Z'
+	"Firebrick" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-2, 'Y'
+	6, 'Z'
+	"LightSkyBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	-2, 'Y'
+	8, 'Z'
+	"Green" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	0, 'Y'
+	-10, 'Z'
+	"DeepPink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	0, 'Y'
+	-8, 'Z'
+	"SlateBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	0, 'Y'
+	-6, 'Z'
+	"Cyan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	0, 'Y'
+	-4, 'Z'
+	"LightGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	0, 'Y'
+	-2, 'Z'
+	"Firebrick" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	0, 'Y'
+	0, 'Z'
+	"MediumVioletRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	0, 'Y'
+	2, 'Z'
+	"Gray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	0, 'Y'
+	4, 'Z'
+	"MediumVioletRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	0, 'Y'
+	6, 'Z'
+	"SkyBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	0, 'Y'
+	8, 'Z'
+	"Olive" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	2, 'Y'
+	-10, 'Z'
+	"Tan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	2, 'Y'
+	-8, 'Z'
+	"Peru" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	2, 'Y'
+	-6, 'Z'
+	"DeepPink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	2, 'Y'
+	-4, 'Z'
+	"AntiqueWhite" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	2, 'Y'
+	-2, 'Z'
+	"DarkTurquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	2, 'Y'
+	0, 'Z'
+	"AntiqueWhite" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	2, 'Y'
+	2, 'Z'
+	"SeaShell" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	2, 'Y'
+	4, 'Z'
+	"LightPink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	2, 'Y'
+	6, 'Z'
+	"Pink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	2, 'Y'
+	8, 'Z'
+	"Coral" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	4, 'Y'
+	-10, 'Z'
+	"Pink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	4, 'Y'
+	-8, 'Z'
+	"Beige" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	4, 'Y'
+	-6, 'Z'
+	"Maroon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	4, 'Y'
+	-4, 'Z'
+	"LightGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	4, 'Y'
+	-2, 'Z'
+	"DarkOliveGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	4, 'Y'
+	0, 'Z'
+	"MediumAquamarine" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	4, 'Y'
+	2, 'Z'
+	"Brown" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	4, 'Y'
+	4, 'Z'
+	"SteelBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	4, 'Y'
+	6, 'Z'
+	"Lime" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	4, 'Y'
+	8, 'Z'
+	"Yellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	6, 'Y'
+	-10, 'Z'
+	"DarkBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	6, 'Y'
+	-8, 'Z'
+	"Gainsboro" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	6, 'Y'
+	-6, 'Z'
+	"Khaki" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	6, 'Y'
+	-4, 'Z'
+	"Cornsilk" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	6, 'Y'
+	-2, 'Z'
+	"NavajoWhite" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	6, 'Y'
+	0, 'Z'
+	"MintCream" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	6, 'Y'
+	2, 'Z'
+	"DarkCyan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	6, 'Y'
+	4, 'Z'
+	"LightSkyBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	6, 'Y'
+	6, 'Z'
+	"Orange" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	6, 'Y'
+	8, 'Z'
+	"PaleTurquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	8, 'Y'
+	-10, 'Z'
+	"Crimson" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	8, 'Y'
+	-8, 'Z'
+	"DarkBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	8, 'Y'
+	-6, 'Z'
+	"GreenYellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	8, 'Y'
+	-4, 'Z'
+	"MediumSpringGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	8, 'Y'
+	-2, 'Z'
+	"MintCream" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	8, 'Y'
+	0, 'Z'
+	"DarkGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	8, 'Y'
+	2, 'Z'
+	"FloralWhite" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	8, 'Y'
+	4, 'Z'
+	"DarkGoldenrod" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	8, 'Y'
+	6, 'Z'
+	"HotPink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	2, 'X'
+	8, 'Y'
+	8, 'Z'
+	"Thistle" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-10, 'Y'
+	-10, 'Z'
+	"MediumVioletRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-10, 'Y'
+	-8, 'Z'
+	"LawnGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-10, 'Y'
+	-6, 'Z'
+	"LightSlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-10, 'Y'
+	-4, 'Z'
+	"HotPink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-10, 'Y'
+	-2, 'Z'
+	"MediumAquamarine" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-10, 'Y'
+	0, 'Z'
+	"DarkRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-10, 'Y'
+	2, 'Z'
+	"Firebrick" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-10, 'Y'
+	4, 'Z'
+	"MistyRose" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-10, 'Y'
+	6, 'Z'
+	"DarkViolet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-10, 'Y'
+	8, 'Z'
+	"OrangeRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-8, 'Y'
+	-10, 'Z'
+	"Lime" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-8, 'Y'
+	-8, 'Z'
+	"LawnGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-8, 'Y'
+	-6, 'Z'
+	"BurlyWood" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-8, 'Y'
+	-4, 'Z'
+	"SlateBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-8, 'Y'
+	-2, 'Z'
+	"LightYellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-8, 'Y'
+	0, 'Z'
+	"MediumAquamarine" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-8, 'Y'
+	2, 'Z'
+	"Gold" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-8, 'Y'
+	4, 'Z'
+	"Crimson" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-8, 'Y'
+	6, 'Z'
+	"Gainsboro" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-8, 'Y'
+	8, 'Z'
+	"MediumPurple" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-6, 'Y'
+	-10, 'Z'
+	"SeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-6, 'Y'
+	-8, 'Z'
+	"GhostWhite" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-6, 'Y'
+	-6, 'Z'
+	"Plum" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-6, 'Y'
+	-4, 'Z'
+	"Aquamarine" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-6, 'Y'
+	-2, 'Z'
+	"White" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-6, 'Y'
+	0, 'Z'
+	"MediumSpringGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-6, 'Y'
+	2, 'Z'
+	"Moccasin" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-6, 'Y'
+	4, 'Z'
+	"Tomato" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-6, 'Y'
+	6, 'Z'
+	"SaddleBrown" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-6, 'Y'
+	8, 'Z'
+	"Aqua" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-4, 'Y'
+	-10, 'Z'
+	"DarkViolet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-4, 'Y'
+	-8, 'Z'
+	"SteelBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-4, 'Y'
+	-6, 'Z'
+	"LightSlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-4, 'Y'
+	-4, 'Z'
+	"MediumPurple" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-4, 'Y'
+	-2, 'Z'
+	"GhostWhite" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-4, 'Y'
+	0, 'Z'
+	"Orange" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-4, 'Y'
+	2, 'Z'
+	"Purple" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-4, 'Y'
+	4, 'Z'
+	"Aquamarine" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-4, 'Y'
+	6, 'Z'
+	"Lime" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-4, 'Y'
+	8, 'Z'
+	"LemonChiffon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-2, 'Y'
+	-10, 'Z'
+	"GhostWhite" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-2, 'Y'
+	-8, 'Z'
+	"LightPink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-2, 'Y'
+	-6, 'Z'
+	"DarkSeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-2, 'Y'
+	-4, 'Z'
+	"Yellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-2, 'Y'
+	-2, 'Z'
+	"DarkMagenta" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-2, 'Y'
+	0, 'Z'
+	"OliveDrab" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-2, 'Y'
+	2, 'Z'
+	"Black" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-2, 'Y'
+	4, 'Z'
+	"LightGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-2, 'Y'
+	6, 'Z'
+	"BlueViolet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	-2, 'Y'
+	8, 'Z'
+	"BlanchedAlmond" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	0, 'Y'
+	-10, 'Z'
+	"SaddleBrown" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	0, 'Y'
+	-8, 'Z'
+	"DarkCyan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	0, 'Y'
+	-6, 'Z'
+	"SaddleBrown" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	0, 'Y'
+	-4, 'Z'
+	"Plum" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	0, 'Y'
+	-2, 'Z'
+	"Brown" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	0, 'Y'
+	0, 'Z'
+	"DodgerBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	0, 'Y'
+	2, 'Z'
+	"MintCream" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	0, 'Y'
+	4, 'Z'
+	"LightGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	0, 'Y'
+	6, 'Z'
+	"Ivory" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	0, 'Y'
+	8, 'Z'
+	"Turquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	2, 'Y'
+	-10, 'Z'
+	"Linen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	2, 'Y'
+	-8, 'Z'
+	"Gray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	2, 'Y'
+	-6, 'Z'
+	"RoyalBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	2, 'Y'
+	-4, 'Z'
+	"DarkSlateBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	2, 'Y'
+	-2, 'Z'
+	"LemonChiffon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	2, 'Y'
+	0, 'Z'
+	"MediumSpringGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	2, 'Y'
+	2, 'Z'
+	"SteelBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	2, 'Y'
+	4, 'Z'
+	"LightGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	2, 'Y'
+	6, 'Z'
+	"Lime" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	2, 'Y'
+	8, 'Z'
+	"RoyalBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	4, 'Y'
+	-10, 'Z'
+	"Pink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	4, 'Y'
+	-8, 'Z'
+	"ForestGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	4, 'Y'
+	-6, 'Z'
+	"MediumOrchid" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	4, 'Y'
+	-4, 'Z'
+	"SlateBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	4, 'Y'
+	-2, 'Z'
+	"DarkSlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	4, 'Y'
+	0, 'Z'
+	"Gold" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	4, 'Y'
+	2, 'Z'
+	"BurlyWood" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	4, 'Y'
+	4, 'Z'
+	"Purple" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	4, 'Y'
+	6, 'Z'
+	"SaddleBrown" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	4, 'Y'
+	8, 'Z'
+	"DarkViolet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	6, 'Y'
+	-10, 'Z'
+	"Linen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	6, 'Y'
+	-8, 'Z'
+	"DarkGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	6, 'Y'
+	-6, 'Z'
+	"Sienna" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	6, 'Y'
+	-4, 'Z'
+	"PeachPuff" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	6, 'Y'
+	-2, 'Z'
+	"DarkGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	6, 'Y'
+	0, 'Z'
+	"CadetBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	6, 'Y'
+	2, 'Z'
+	"BlueViolet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	6, 'Y'
+	4, 'Z'
+	"PaleGoldenrod" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	6, 'Y'
+	6, 'Z'
+	"LightSkyBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	6, 'Y'
+	8, 'Z'
+	"Beige" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	8, 'Y'
+	-10, 'Z'
+	"Black" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	8, 'Y'
+	-8, 'Z'
+	"FloralWhite" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	8, 'Y'
+	-6, 'Z'
+	"MediumSeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	8, 'Y'
+	-4, 'Z'
+	"MediumBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	8, 'Y'
+	-2, 'Z'
+	"SkyBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	8, 'Y'
+	0, 'Z'
+	"WhiteSmoke" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	8, 'Y'
+	2, 'Z'
+	"NavajoWhite" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	8, 'Y'
+	4, 'Z'
+	"Yellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	8, 'Y'
+	6, 'Z'
+	"LightSteelBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	4, 'X'
+	8, 'Y'
+	8, 'Z'
+	"Magenta" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-10, 'Y'
+	-10, 'Z'
+	"Plum" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-10, 'Y'
+	-8, 'Z'
+	"Maroon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-10, 'Y'
+	-6, 'Z'
+	"Thistle" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-10, 'Y'
+	-4, 'Z'
+	"DarkSlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-10, 'Y'
+	-2, 'Z'
+	"DeepSkyBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-10, 'Y'
+	0, 'Z'
+	"LightSeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-10, 'Y'
+	2, 'Z'
+	"Magenta" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-10, 'Y'
+	4, 'Z'
+	"Tomato" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-10, 'Y'
+	6, 'Z'
+	"LightSlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-10, 'Y'
+	8, 'Z'
+	"PaleGoldenrod" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-8, 'Y'
+	-10, 'Z'
+	"DarkMagenta" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-8, 'Y'
+	-8, 'Z'
+	"SeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-8, 'Y'
+	-6, 'Z'
+	"MistyRose" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-8, 'Y'
+	-4, 'Z'
+	"Crimson" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-8, 'Y'
+	-2, 'Z'
+	"HotPink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-8, 'Y'
+	0, 'Z'
+	"GreenYellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-8, 'Y'
+	2, 'Z'
+	"LightGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-8, 'Y'
+	4, 'Z'
+	"Black" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-8, 'Y'
+	6, 'Z'
+	"BlanchedAlmond" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-8, 'Y'
+	8, 'Z'
+	"Gold" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-6, 'Y'
+	-10, 'Z'
+	"Lime" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-6, 'Y'
+	-8, 'Z'
+	"DarkGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-6, 'Y'
+	-6, 'Z'
+	"Wheat" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-6, 'Y'
+	-4, 'Z'
+	"LightSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-6, 'Y'
+	-2, 'Z'
+	"PapayaWhip" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-6, 'Y'
+	0, 'Z'
+	"LightCoral" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-6, 'Y'
+	2, 'Z'
+	"OliveDrab" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-6, 'Y'
+	4, 'Z'
+	"Transparent" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-6, 'Y'
+	6, 'Z'
+	"Transparent" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-6, 'Y'
+	8, 'Z'
+	"DarkViolet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-4, 'Y'
+	-10, 'Z'
+	"NavajoWhite" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-4, 'Y'
+	-8, 'Z'
+	"CadetBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-4, 'Y'
+	-6, 'Z'
+	"DarkTurquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-4, 'Y'
+	-4, 'Z'
+	"DarkSlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-4, 'Y'
+	-2, 'Z'
+	"LightGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-4, 'Y'
+	0, 'Z'
+	"Yellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-4, 'Y'
+	2, 'Z'
+	"DarkSeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-4, 'Y'
+	4, 'Z'
+	"MediumPurple" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-4, 'Y'
+	6, 'Z'
+	"LightGoldenrodYellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-4, 'Y'
+	8, 'Z'
+	"Moccasin" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-2, 'Y'
+	-10, 'Z'
+	"LightSteelBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-2, 'Y'
+	-8, 'Z'
+	"Cornsilk" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-2, 'Y'
+	-6, 'Z'
+	"DarkOliveGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-2, 'Y'
+	-4, 'Z'
+	"Pink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-2, 'Y'
+	-2, 'Z'
+	"Salmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-2, 'Y'
+	0, 'Z'
+	"DarkOliveGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-2, 'Y'
+	2, 'Z'
+	"MidnightBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-2, 'Y'
+	4, 'Z'
+	"LightCoral" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-2, 'Y'
+	6, 'Z'
+	"DarkMagenta" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	-2, 'Y'
+	8, 'Z'
+	"LightSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	0, 'Y'
+	-10, 'Z'
+	"LightGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	0, 'Y'
+	-8, 'Z'
+	"MediumSeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	0, 'Y'
+	-6, 'Z'
+	"Tan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	0, 'Y'
+	-4, 'Z'
+	"DarkGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	0, 'Y'
+	-2, 'Z'
+	"Aqua" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	0, 'Y'
+	0, 'Z'
+	"MediumPurple" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	0, 'Y'
+	2, 'Z'
+	"MediumSeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	0, 'Y'
+	4, 'Z'
+	"Lavender" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	0, 'Y'
+	6, 'Z'
+	"LightGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	0, 'Y'
+	8, 'Z'
+	"RosyBrown" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	2, 'Y'
+	-10, 'Z'
+	"Purple" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	2, 'Y'
+	-8, 'Z'
+	"Magenta" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	2, 'Y'
+	-6, 'Z'
+	"Thistle" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	2, 'Y'
+	-4, 'Z'
+	"DarkSlateBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	2, 'Y'
+	-2, 'Z'
+	"Black" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	2, 'Y'
+	0, 'Z'
+	"CadetBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	2, 'Y'
+	2, 'Z'
+	"MediumAquamarine" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	2, 'Y'
+	4, 'Z'
+	"IndianRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	2, 'Y'
+	6, 'Z'
+	"MistyRose" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	2, 'Y'
+	8, 'Z'
+	"IndianRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	4, 'Y'
+	-10, 'Z'
+	"Cornsilk" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	4, 'Y'
+	-8, 'Z'
+	"SkyBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	4, 'Y'
+	-6, 'Z'
+	"MediumAquamarine" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	4, 'Y'
+	-4, 'Z'
+	"HotPink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	4, 'Y'
+	-2, 'Z'
+	"RosyBrown" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	4, 'Y'
+	0, 'Z'
+	"Indigo" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	4, 'Y'
+	2, 'Z'
+	"White" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	4, 'Y'
+	4, 'Z'
+	"DarkGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	4, 'Y'
+	6, 'Z'
+	"Moccasin" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	4, 'Y'
+	8, 'Z'
+	"LimeGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	6, 'Y'
+	-10, 'Z'
+	"Red" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	6, 'Y'
+	-8, 'Z'
+	"DarkSeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	6, 'Y'
+	-6, 'Z'
+	"PowderBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	6, 'Y'
+	-4, 'Z'
+	"LightPink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	6, 'Y'
+	-2, 'Z'
+	"Pink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	6, 'Y'
+	0, 'Z'
+	"Black" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	6, 'Y'
+	2, 'Z'
+	"DarkGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	6, 'Y'
+	4, 'Z'
+	"BlueViolet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	6, 'Y'
+	6, 'Z'
+	"DarkSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	6, 'Y'
+	8, 'Z'
+	"Silver" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	8, 'Y'
+	-10, 'Z'
+	"GreenYellow" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	8, 'Y'
+	-8, 'Z'
+	"Red" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	8, 'Y'
+	-6, 'Z'
+	"Chocolate" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	8, 'Y'
+	-4, 'Z'
+	"MintCream" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	8, 'Y'
+	-2, 'Z'
+	"SeaShell" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	8, 'Y'
+	0, 'Z'
+	"Wheat" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	8, 'Y'
+	2, 'Z'
+	"DarkKhaki" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	8, 'Y'
+	4, 'Z'
+	"Turquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	8, 'Y'
+	6, 'Z'
+	"Orchid" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	6, 'X'
+	8, 'Y'
+	8, 'Z'
+	"PaleGoldenrod" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-10, 'Y'
+	-10, 'Z'
+	"MediumSlateBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-10, 'Y'
+	-8, 'Z'
+	"DarkSlateBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-10, 'Y'
+	-6, 'Z'
+	"Purple" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-10, 'Y'
+	-4, 'Z'
+	"PowderBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-10, 'Y'
+	-2, 'Z'
+	"Green" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-10, 'Y'
+	0, 'Z'
+	"MediumPurple" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-10, 'Y'
+	2, 'Z'
+	"Aquamarine" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-10, 'Y'
+	4, 'Z'
+	"LightSlateGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-10, 'Y'
+	6, 'Z'
+	"Green" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-10, 'Y'
+	8, 'Z'
+	"MediumSeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-8, 'Y'
+	-10, 'Z'
+	"MediumTurquoise" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-8, 'Y'
+	-8, 'Z'
+	"Lavender" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-8, 'Y'
+	-6, 'Z'
+	"PapayaWhip" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-8, 'Y'
+	-4, 'Z'
+	"Teal" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-8, 'Y'
+	-2, 'Z'
+	"Transparent" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-8, 'Y'
+	0, 'Z'
+	"Linen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-8, 'Y'
+	2, 'Z'
+	"PeachPuff" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-8, 'Y'
+	4, 'Z'
+	"LawnGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-8, 'Y'
+	6, 'Z'
+	"LightCoral" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-8, 'Y'
+	8, 'Z'
+	"YellowGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-6, 'Y'
+	-10, 'Z'
+	"Tan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-6, 'Y'
+	-8, 'Z'
+	"LightSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-6, 'Y'
+	-6, 'Z'
+	"DarkBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-6, 'Y'
+	-4, 'Z'
+	"Pink" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-6, 'Y'
+	-2, 'Z'
+	"Aqua" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-6, 'Y'
+	0, 'Z'
+	"ForestGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-6, 'Y'
+	2, 'Z'
+	"PeachPuff" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-6, 'Y'
+	4, 'Z'
+	"Tan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-6, 'Y'
+	6, 'Z'
+	"LightSteelBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-6, 'Y'
+	8, 'Z'
+	"SeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-4, 'Y'
+	-10, 'Z'
+	"DarkOliveGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-4, 'Y'
+	-8, 'Z'
+	"Aqua" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-4, 'Y'
+	-6, 'Z'
+	"LightBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-4, 'Y'
+	-4, 'Z'
+	"Teal" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-4, 'Y'
+	-2, 'Z'
+	"Teal" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-4, 'Y'
+	0, 'Z'
+	"Linen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-4, 'Y'
+	2, 'Z'
+	"LavenderBlush" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-4, 'Y'
+	4, 'Z'
+	"Transparent" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-4, 'Y'
+	6, 'Z'
+	"CornflowerBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-4, 'Y'
+	8, 'Z'
+	"DarkGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-2, 'Y'
+	-10, 'Z'
+	"Aquamarine" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-2, 'Y'
+	-8, 'Z'
+	"MidnightBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-2, 'Y'
+	-6, 'Z'
+	"OliveDrab" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-2, 'Y'
+	-4, 'Z'
+	"MediumSpringGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-2, 'Y'
+	-2, 'Z'
+	"DarkSeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-2, 'Y'
+	0, 'Z'
+	"Tomato" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-2, 'Y'
+	2, 'Z'
+	"Beige" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-2, 'Y'
+	4, 'Z'
+	"DarkGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-2, 'Y'
+	6, 'Z'
+	"MintCream" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	-2, 'Y'
+	8, 'Z'
+	"DimGray" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	0, 'Y'
+	-10, 'Z'
+	"DarkKhaki" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	0, 'Y'
+	-8, 'Z'
+	"PaleVioletRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	0, 'Y'
+	-6, 'Z'
+	"LightGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	0, 'Y'
+	-4, 'Z'
+	"Orchid" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	0, 'Y'
+	-2, 'Z'
+	"Red" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	0, 'Y'
+	0, 'Z'
+	"Chartreuse" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	0, 'Y'
+	2, 'Z'
+	"Brown" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	0, 'Y'
+	4, 'Z'
+	"Aqua" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	0, 'Y'
+	6, 'Z'
+	"PeachPuff" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	0, 'Y'
+	8, 'Z'
+	"Beige" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	2, 'Y'
+	-10, 'Z'
+	"SaddleBrown" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	2, 'Y'
+	-8, 'Z'
+	"CadetBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	2, 'Y'
+	-6, 'Z'
+	"YellowGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	2, 'Y'
+	-4, 'Z'
+	"LightSkyBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	2, 'Y'
+	-2, 'Z'
+	"IndianRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	2, 'Y'
+	0, 'Z'
+	"MediumSeaGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	2, 'Y'
+	2, 'Z'
+	"White" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	2, 'Y'
+	4, 'Z'
+	"SaddleBrown" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	2, 'Y'
+	6, 'Z'
+	"YellowGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	2, 'Y'
+	8, 'Z'
+	"LawnGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	4, 'Y'
+	-10, 'Z'
+	"CornflowerBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	4, 'Y'
+	-8, 'Z'
+	"PapayaWhip" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	4, 'Y'
+	-6, 'Z'
+	"Firebrick" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	4, 'Y'
+	-4, 'Z'
+	"DeepSkyBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	4, 'Y'
+	-2, 'Z'
+	"Violet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	4, 'Y'
+	0, 'Z'
+	"DarkViolet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	4, 'Y'
+	2, 'Z'
+	"Purple" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	4, 'Y'
+	4, 'Z'
+	"LightSteelBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	4, 'Y'
+	6, 'Z'
+	"LightSteelBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	4, 'Y'
+	8, 'Z'
+	"BlueViolet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	6, 'Y'
+	-10, 'Z'
+	"DarkViolet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	6, 'Y'
+	-8, 'Z'
+	"MediumAquamarine" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	6, 'Y'
+	-6, 'Z'
+	"DarkViolet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	6, 'Y'
+	-4, 'Z'
+	"DarkSalmon" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	6, 'Y'
+	-2, 'Z'
+	"MintCream" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	6, 'Y'
+	0, 'Z'
+	"LightBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	6, 'Y'
+	2, 'Z'
+	"LightSteelBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	6, 'Y'
+	4, 'Z'
+	"Orchid" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	6, 'Y'
+	6, 'Z'
+	"Chocolate" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	6, 'Y'
+	8, 'Z'
+	"RoyalBlue" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	8, 'Y'
+	-10, 'Z'
+	"LightCyan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	8, 'Y'
+	-8, 'Z'
+	"Ivory" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	8, 'Y'
+	-6, 'Z'
+	"DarkRed" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	8, 'Y'
+	-4, 'Z'
+	"BlueViolet" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	8, 'Y'
+	-2, 'Z'
+	"Gold" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	8, 'Y'
+	0, 'Z'
+	"Tan" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	8, 'Y'
+	2, 'Z'
+	"MintCream" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	8, 'Y'
+	4, 'Z'
+	"DarkGreen" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	8, 'Y'
+	6, 'Z'
+	"DarkOrchid" 'Material'
+)
+
+Sphere
+(
+	0.5, 'Radius'
+	8, 'X'
+	8, 'Y'
+	8, 'Z'
+	"MediumTurquoise" 'Material'
+)
+
+Plane
+(
+	0, -0.1, 0, 'Point on plane'
+	0, 1, 0, 'Normal Vector'
+	"check" 'Material'
+)
+

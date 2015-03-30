@@ -1,0 +1,56 @@
+Viewpoint(0.3,0.2,0.3,   ' Viewpoint ' 
+	  28, -130, 0,  ' View Angle ' 
+	  45)	     ' FOV '	
+
+OutputSize(200,200)
+
+RenderSettings
+(
+	2, 'Recursion Depth'
+	true, 'Trace Shadows'
+	true, 'Trace Reflections'
+	true, 'Trace Refractions'
+)
+AmbientLight(40, 40, 40)
+
+LightSource(0, 20, -10, 100, 100, 100)
+
+Mesh
+(  
+"Lego",
+"LegoCar.obj"
+)
+
+MeshInstance
+(  
+0, 0, 0,
+0, 0, 0,
+"Lego"
+)
+
+ColourMaterial("darkgrey",
+  0.3,0.3,0.3, 
+  0.3,0.3,0.3,
+  20, 0.35,       ' Specular '
+  0.9,0.9,0.9,  ' Reflected '
+  1,        ' TransN, n1, n2 '
+  0, 0, 0        ' Transmitted. '
+)
+
+ColourMaterial("lightgrey",
+  0.7,0.7,0.7, 
+  0.7,0.7,0.7,
+  20, 0.35,       ' Specular '
+  0.9,0.9,0.9,  ' Reflected '
+  1,       ' TransN, n1, n2 '
+  0, 0, 0        ' Transmitted. '
+)
+
+CheckMaterial("check",
+  "lightgrey", "darkgrey", 4,4,4
+)
+
+Plane(0, -6, 0,   ' Point on plane '
+  0, 1, 0,        ' Normal vector '
+  "check"
+)

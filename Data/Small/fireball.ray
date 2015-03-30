@@ -1,0 +1,89 @@
+Viewpoint(5,5,-5, 	 ' Viewpoint ' 
+	  40.0, -45, 0.0, ' View Angle ' 
+	  90)		 ' FOV '	
+
+OutputSize(1680, 1050)
+
+AmbientLight(50, 50, 50)
+
+LightSource(60, 80, 100, 255, 255, 255)
+LightSource(60, 80, -100, 255, 255, 255)
+
+ColourMaterial("darkgrey",
+  0.3,0.3,0.3, 
+  0.3,0.3,0.3,
+  20, 0.35,       ' Specular '
+  0.9,0.9,0.9,  ' Reflected '
+  1,        ' TransN, n1, n2 '
+  0, 0, 0        ' Transmitted. '
+)
+
+ColourMaterial("lightgrey",
+  0.7,0.7,0.7, 
+  0.7,0.7,0.7,
+  20, 0.35,       ' Specular '
+  0.9,0.9,0.9,  ' Reflected '
+  1,       ' TransN, n1, n2 '
+  0, 0, 0        ' Transmitted. '
+)
+
+ColourMaterial( "blackmatt",
+	0, 0, 0,
+	0,0,0,
+ 	20, 0.3,
+	0.05, 0.05, 0.05,
+	1,
+	0,0,0
+)
+
+ColourMaterial( "yellow",
+	1, 1, 0,
+	1, 1, 0,
+        40, 0.3, 
+	0.05,0.05,0.05,
+	1,
+	0,0,0
+)
+
+ColourMaterial("red",
+  0.8, 0.2,0.2,  ' Ambient '
+  0.8, 0.2,0.2,  ' Diffuse '
+  20, 0.35,       ' Specular '
+  0.2,0.2,0.2,  ' Reflected '
+  1.4,        ' TransN, n1, n2 '
+  0, 0, 0        ' Transmitted. '
+)
+
+NoiseMaterial("noise",
+	"red", "yellow", 	' submaterials '
+	153,			' seed ' 
+	0.6,			' persistence ' 
+	5,			' octaves '
+	1, 			' scale ' 
+	0,			' offset ' 
+	2,2,2			' size ' 
+)
+
+NoiseMaterial( "noise2",
+	"blackmatt", "noise",
+	3155,
+	0.3,
+	5,
+	3,
+	0.2,
+	2,2,2
+)
+
+CheckMaterial("check",
+  "lightgrey", "darkgrey", 4,4,4
+)
+
+Sphere( 5, 
+  0, 0, 0,
+  "noise2"
+)
+
+Plane(0, -6, 0,   ' Point on plane '
+  0, 1, 0,        ' Normal vector '
+  "check"
+)

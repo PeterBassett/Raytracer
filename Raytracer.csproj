@@ -1,0 +1,401 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{90274FA1-F6A9-49D2-A48A-313F5593F86D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Raytracer</RootNamespace>
+    <AssemblyName>Raytracer</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Pex.Framework, Version=0.94.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Extensions\UIExtensions.cs" />
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MathTypes\Algebra.cs" />
+    <Compile Include="MathTypes\Barycentric.cs" />
+    <Compile Include="MathTypes\Polynomial.cs" />
+    <Compile Include="MathTypes\Vector2D.cs" />
+    <Compile Include="Rendering\FileTypes\ObjFile\StreamReader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\TorusLoader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\TextureMaterialLoader.cs" />
+    <Compile Include="Rendering\HitResult.cs" />
+    <Compile Include="Rendering\Materials\MaterialTexture.cs" />
+    <Compile Include="Rendering\Materials\MaterialDispatcher.cs" />
+    <Compile Include="Rendering\Primitives\Torus.cs" />
+    <Compile Include="Rendering\TriangleHelper.cs" />
+    <Compile Include="MathTypes\MathLib.cs" />
+    <Compile Include="MathTypes\Vector3D.cs" />
+    <Compile Include="MathTypes\Vector3F.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rendering\FileTypes\ObjFile\MtlFileLoader.cs" />
+    <Compile Include="Rendering\FileTypes\ObjFile\ObjFileLoader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\IVBRaySceneItemSaver.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\MeshInstanceLoader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\MeshLoader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\TriangleLoader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Savers\CheckerMaterialSaver.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Savers\ColourMaterialSaver.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Savers\NoiseMaterialSaver.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Savers\PlaneSaver.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Savers\SphereSaver.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Savers\AmbientLightSaver.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Savers\PointLightSaver.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Savers\RenderSettingsSaver.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Savers\OutputSaver.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Savers\ViewpointSaver.cs" />
+    <Compile Include="Rendering\PictureBmp.cs" />
+    <Compile Include="Rendering\FileTypes\Bmp.cs" />
+    <Compile Include="Rendering\FileTypes\Colour.cs" />
+    <Compile Include="Rendering\FileTypes\ISceneLoader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\IVBRaySceneItemLoader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\AmbientLightLoader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\CheckerMaterialLoader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\ColourMaterialLoader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\NoiseMaterialLoader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\PlaneLoader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\OutputLoader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\RenderSettingsLoader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\SphereLoader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\PointLightLoader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\ViewpointLoader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Tokeniser.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\VBRaySceneLoader.cs" />
+    <Compile Include="Rendering\IBmp.cs" />
+    <Compile Include="Rendering\AABB.cs" />
+    <Compile Include="Rendering\Accellerators\Octree.cs" />
+    <Compile Include="Rendering\Accellerators\KDTree.cs" />
+    <Compile Include="Rendering\Light.cs" />
+    <Compile Include="Rendering\IntersectionInfo.cs" />
+    <Compile Include="Rendering\ITraceable.cs" />
+    <Compile Include="Rendering\Materials\Material.cs" />
+    <Compile Include="Rendering\Materials\MaterialCheckerboard.cs" />
+    <Compile Include="Rendering\Materials\MaterialNoise.cs" />
+    <Compile Include="Rendering\Materials\MaterialWithSubMaterials.cs" />
+    <Compile Include="Rendering\Primitives\CSG.cs" />
+    <Compile Include="Rendering\Primitives\IntersectionCode2.cs" />
+    <Compile Include="Rendering\Primitives\IntersectionCode3.cs" />
+    <Compile Include="Rendering\Primitives\Mesh.cs" />
+    <Compile Include="Rendering\Primitives\MeshInstance.cs" />
+    <Compile Include="Rendering\Primitives\Plane.cs" />
+    <Compile Include="Rendering\Primitives\Triangle.cs" />
+    <Compile Include="Rendering\Ray.cs" />
+    <Compile Include="Rendering\Scene.cs" />
+    <Compile Include="Rendering\Primitives\Sphere.cs" />
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Data\Large\dragon.mtl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Large\dragon.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Large\Dragon.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Large\Dragon2.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Large\Sponza\sponza.max">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Large\Sponza\sponza.mtl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Large\Sponza\sponza.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Large\Sponza\Sponza.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\4Sph.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\BallGrid.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\BurningEarth.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\Cube.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\Cube.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\CubeMesh.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\Cubes_textured.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\cube_textured.mtl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\cube_textured.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\Cube_textured.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\Diamond.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\Dodechahedron.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\fireball.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\Lamp.mtl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\Lamp.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\Lamp.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\Lamps.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\legocar.mtl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\legocar.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\LegoCar.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\Mesh.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\NoisyGlassBall.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\RedBall.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\RedBallOnReflectiveCheck.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\ReflectiveBall.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\RefractiveBall.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\RefractiveBall_Close.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\Room.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\TexturedBall.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\TexturedPlane.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\Torus.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\Triangle.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\Twomirrors.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\Large\Sponza\00_skap.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Large\Sponza\01_STUB-bump.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Large\Sponza\01_STUB.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Large\Sponza\01_St_kp-bump.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Large\Sponza\01_St_kp.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Large\Sponza\01_S_ba.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Large\Sponza\01_S_kap-bump.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Large\Sponza\01_S_kap.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Large\Sponza\copyright.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Large\Sponza\KAMEN-bump.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Large\Sponza\KAMEN-stup.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Large\Sponza\KAMEN.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Large\Sponza\prozor1.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Large\Sponza\reljef-bump.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Large\Sponza\reljef.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Large\Sponza\sp_luk-bump.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Large\Sponza\sp_luk.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Large\Sponza\vrata_ko.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Large\Sponza\vrata_kr.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Large\Sponza\x01_st-bump.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Large\Sponza\x01_st.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Small\cube_textured.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Small\earth_daymap.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Small\LEGOSHLD.tga">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Small\LEGO_logo_1972.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

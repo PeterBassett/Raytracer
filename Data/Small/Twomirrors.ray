@@ -1,0 +1,42 @@
+Viewpoint(0,15,-3, 	 ' Viewpoint ' 
+	  40.0, 0, 0.0, ' View Angle ' 
+	  90)		 ' FOV '	
+
+OutputSize(300,300)
+
+AmbientLight(50, 50, 50)
+
+LightSource(120,12,12, 255, 255, 255)
+LightSource(-120,-12,-12, 255, 255, 255)
+
+ColourMaterial("grey",
+  0.9,0.9,0.9,
+  0.9,0.9,0.9,
+  20, 0.35,       ' Specular '
+  0,0,0,  ' Reflected '
+  1,        ' TransN, n1, n2 '
+  0, 0, 0        ' Transmitted. '
+)
+
+ColourMaterial("red",
+  0.7,0.3,0.3,  ' Ambient '
+  1,0.1,0.1,  ' Diffuse '
+  20, 0.35,       ' Specular '
+  1,1,1,  ' Reflected '
+  1,        ' TransN, n1, n2 '
+  0, 0, 0        ' Transmitted. '
+)
+
+Sphere( 3, 
+  0, 0, 0,
+  "grey"
+)
+
+Plane(0, 0, 4,   ' Point on plane '
+  0, 0, 1,        ' Normal vector '
+  "red"
+)
+Plane(0, 0, -4,   ' Point on plane '
+  0, 0, -1,        ' Normal vector '
+  "red"
+)
