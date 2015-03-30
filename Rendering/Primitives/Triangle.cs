@@ -6,14 +6,14 @@ using Raytracer.MathTypes;
 
 namespace Raytracer.Rendering.Primitives
 {
-    using Vector = Vector3D;
+    using Vector = Vector3;
     using Real = System.Double;
 
     class Triangle : Traceable
     {
         public Vector[] Vertex = new Vector[3];
         private AABB bounds = AABB.Empty;
-        public Vector2D[] Texture = new Vector2D[3];
+        public Vector2[] Texture = new Vector2[3];
         public Vector[] Normal = new Vector[3];        
 
         private bool InternalSide(Vector p1,
@@ -50,32 +50,6 @@ namespace Raytracer.Rendering.Primitives
                 return false;
         }
 
-        /*
-         *         public override HitResult Intersect(Ray ray, ref Real distance, ref Traceable prim)
-        {
-            Vector v1 = Vertex[2] - ray.Pos;
-            Vector v2 = ray.Dir;
-
-            Vector normal = GetNormalFromVertexes();
-
-            Real dot1 = Vector.DotProduct(normal, v1);
-            Real dot2 = Vector.DotProduct(normal, v2);
-
-            if (Math.Abs(dot2) < 1.0E-6)
-                return HitResult.MISS; // division by 0 means parallel
-
-            Real u = dot1 / dot2;
-            // point in triangle?
-            
-            if (!PointInTriangle(
-                ray.Pos + (ray.Dir * u)))
-                return HitResult.MISS;
-            
-            distance = u;
-            prim = this;
-            return HitResult.HIT;
-        }
-         * */
         public override IntersectionInfo Intersect(Ray ray)
         {                        
             Vector v1 = Vertex[2] - ray.Pos;
@@ -111,7 +85,7 @@ namespace Raytracer.Rendering.Primitives
             return GetNormalFromVertexes();
         }
 
-        public Vector InterpolateNormal(Vector3D pointOfIntersection)
+        public Vector InterpolateNormal(Vector3 pointOfIntersection)
         {
             var a = Barycentric.CalculateBarycentricInterpolationVector(pointOfIntersection, this.Vertex);
 

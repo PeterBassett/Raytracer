@@ -6,7 +6,7 @@ using Raytracer.MathTypes;
 
 namespace Raytracer.Rendering.Primitives
 {
-    using Vector = Vector3D;
+    using Vector = Vector3;
     using Real = System.Double;
 
     class Plane : Traceable
@@ -35,27 +35,7 @@ namespace Raytracer.Rendering.Primitives
 
             return new IntersectionInfo(HitResult.HIT, this, distance, hitPoint, hitPoint, GetNormal(hitPoint));
         }
-        /*
-        public override HitResult Intersect(Ray ray, ref Real distance, ref Traceable prim)
-        {
-            prim = null;
-            
-            Real t = 0.0f;
-            Real nd = Vector.DotProduct(Normal, ray.Dir);
-
-            if (nd >= 0.0f)
-            //if (nd == 0.0f)
-                return HitResult.MISS;
-
-            t = -(Vector.DotProduct(Normal, ray.Pos) + D) / nd;
-            if (t <= 0.0f)
-                return HitResult.MISS;
-
-            distance = t;
-            prim = this;
-            return HitResult.HIT;
-        }*/
-
+        
         public override Vector GetNormal(Vector vPoint)
         {
             return Normal;

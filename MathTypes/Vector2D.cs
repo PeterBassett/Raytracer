@@ -31,13 +31,8 @@ using System.Runtime.InteropServices;
 
 namespace Raytracer.MathTypes
 {
-	/// <summary>
-	/// Represents 2-Dimentional vector of double-precision floating point numbers.
-	/// </summary>
-	[Serializable]
-	[TypeConverter(typeof(ExpandableObjectConverter))]
 	[StructLayout(LayoutKind.Sequential)]
-	public struct Vector2D : ISerializable, ICloneable
+	public struct Vector2
 	{
 		#region Private fields
 		private double _x;
@@ -45,46 +40,16 @@ namespace Raytracer.MathTypes
 		#endregion
 
 		#region Constructors
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Vector2D"/> class with the specified coordinates.
-		/// </summary>
-		/// <param name="x">The vector's X coordinate.</param>
-		/// <param name="y">The vector's Y coordinate.</param>
-		public Vector2D(double x, double y)
+		public Vector2(double x, double y)
 		{
 			_x = x;
 			_y = y;
 		}
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Vector2D"/> class with the specified coordinates.
-		/// </summary>
-		/// <param name="coordinates">An array containing the coordinate parameters.</param>
-		public Vector2D(double[] coordinates)
-		{
-			Debug.Assert(coordinates != null);
-			Debug.Assert(coordinates.Length >= 2);
 
-			_x = coordinates[0];
-			_y = coordinates[1];
-		}
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Vector2D"/> class using coordinates from a given <see cref="Vector2D"/> instance.
-		/// </summary>
-		/// <param name="vector">A <see cref="Vector2D"/> to get the coordinates from.</param>
-		public Vector2D(Vector2D vector)
+		public Vector2(Vector2 vector)
 		{
 			_x = vector.X;
 			_y = vector.Y;
-		}
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Vector2D"/> class with serialized data.
-		/// </summary>
-		/// <param name="info">The object that holds the serialized object data.</param>
-		/// <param name="context">The contextual information about the source or destination.</param>
-		private Vector2D(SerializationInfo info, StreamingContext context)
-		{
-			_x = info.GetSingle("X");
-			_y = info.GetSingle("Y");
 		}
 		#endregion
 
@@ -92,15 +57,15 @@ namespace Raytracer.MathTypes
 		/// <summary>
 		/// 2-Dimentional double-precision floating point zero vector.
 		/// </summary>
-		public static readonly Vector2D Zero	= new Vector2D(0.0f, 0.0f);
+		public static readonly Vector2 Zero	= new Vector2(0.0f, 0.0f);
 		/// <summary>
 		/// 2-Dimentional double-precision floating point X-Axis vector.
 		/// </summary>
-		public static readonly Vector2D XAxis	= new Vector2D(1.0f, 0.0f);
+		public static readonly Vector2 XAxis = new Vector2(1.0f, 0.0f);
 		/// <summary>
 		/// 2-Dimentional double-precision floating point Y-Axis vector.
 		/// </summary>
-		public static readonly Vector2D YAxis	= new Vector2D(0.0f, 1.0f);
+		public static readonly Vector2 YAxis = new Vector2(0.0f, 1.0f);
 		#endregion
 
 		#region Public properties
@@ -124,91 +89,34 @@ namespace Raytracer.MathTypes
 		}
 		#endregion
 
-		#region ICloneable Members
-		/// <summary>
-		/// Creates an exact copy of this <see cref="Vector2D"/> object.
-		/// </summary>
-		/// <returns>The <see cref="Vector2D"/> object this method creates, cast as an object.</returns>
-		object ICloneable.Clone()
-		{
-			return new Vector2D(this);
-		}
-		/// <summary>
-		/// Creates an exact copy of this <see cref="Vector2D"/> object.
-		/// </summary>
-		/// <returns>The <see cref="Vector2D"/> object this method creates.</returns>
-		public Vector2D Clone()
-		{
-			return new Vector2D(this);
-		}
-		#endregion
-
-		#region ISerializable Members
-		/// <summary>
-		/// Populates a <see cref="SerializationInfo"/> with the data needed to serialize this object.
-		/// </summary>
-		/// <param name="info">The <see cref="SerializationInfo"/> to populate with data. </param>
-		/// <param name="context">The destination (see <see cref="StreamingContext"/>) for this serialization.</param>
-		[SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter=true)]
-		public void GetObjectData(SerializationInfo info, StreamingContext context)
-		{
-			info.AddValue("X", _x);
-			info.AddValue("Y", _y);
-		}
-		#endregion
-
-		#region Public Static Parse Methods
-		/// <summary>
-		/// Converts the specified string to its <see cref="Vector2D"/> equivalent.
-		/// </summary>
-		/// <param name="s">A string representation of a <see cref="Vector2D"/></param>
-		/// <returns>A <see cref="Vector2D"/> that represents the vector specified by the <paramref name="s"/> parameter.</returns>
-		public static Vector2D Parse(string s)
-		{
-			Regex r = new Regex(@"\((?<x>.*),(?<y>.*)\)", RegexOptions.None);
-			Match m = r.Match(s);
-			if (m.Success)
-			{
-				return new Vector2D(
-					double.Parse(m.Result("${x}")),
-					double.Parse(m.Result("${y}"))
-					);
-			}
-			else
-			{
-				throw new FormatException("Unsuccessful Match.");
-			}
-		}
-		#endregion
-
 		#region Public Static Vector Arithmetics
 		/// <summary>
 		/// Adds two vectors.
 		/// </summary>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
-		/// <param name="w">A <see cref="Vector2D"/> instance.</param>
-		/// <returns>A new <see cref="Vector2D"/> instance containing the sum.</returns>
-		public static Vector2D Add(Vector2D v, Vector2D w)
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
+		/// <param name="w">A <see cref="Vector2"/> instance.</param>
+		/// <returns>A new <see cref="Vector2"/> instance containing the sum.</returns>
+		public static Vector2 Add(Vector2 v, Vector2 w)
 		{
-			return new Vector2D(v.X + w.X, v.Y + w.Y);
+			return new Vector2(v.X + w.X, v.Y + w.Y);
 		}
 		/// <summary>
 		/// Adds a vector and a scalar.
 		/// </summary>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
 		/// <param name="s">A scalar.</param>
-		/// <returns>A new <see cref="Vector2D"/> instance containing the sum.</returns>
-		public static Vector2D Add(Vector2D v, double s)
+		/// <returns>A new <see cref="Vector2"/> instance containing the sum.</returns>
+		public static Vector2 Add(Vector2 v, double s)
 		{
-			return new Vector2D(v.X + s, v.Y + s);
+			return new Vector2(v.X + s, v.Y + s);
 		}
 		/// <summary>
 		/// Adds two vectors and put the result in the third vector.
 		/// </summary>
-		/// <param name="u">A <see cref="Vector2D"/> instance.</param>
-		/// <param name="v">A <see cref="Vector2D"/> instance</param>
-		/// <param name="w">A <see cref="Vector2D"/> instance to hold the result.</param>
-		public static void Add(Vector2D u, Vector2D v, Vector2D w)
+		/// <param name="u">A <see cref="Vector2"/> instance.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance</param>
+		/// <param name="w">A <see cref="Vector2"/> instance to hold the result.</param>
+		public static void Add(Vector2 u, Vector2 v, Vector2 w)
 		{
 			w.X = u.X + v.X;
 			w.Y = u.Y + v.Y;
@@ -216,10 +124,10 @@ namespace Raytracer.MathTypes
 		/// <summary>
 		/// Adds a vector and a scalar and put the result into another vector.
 		/// </summary>
-		/// <param name="u">A <see cref="Vector2D"/> instance.</param>
+		/// <param name="u">A <see cref="Vector2"/> instance.</param>
 		/// <param name="s">A scalar.</param>
-		/// <param name="v">A <see cref="Vector2D"/> instance to hold the result.</param>
-		public static void Add(Vector2D u, double s, Vector2D v)
+		/// <param name="v">A <see cref="Vector2"/> instance to hold the result.</param>
+		public static void Add(Vector2 u, double s, Vector2 v)
 		{
 			v.X = u.X + s;
 			v.Y = u.Y + s;
@@ -227,52 +135,52 @@ namespace Raytracer.MathTypes
 		/// <summary>
 		/// Subtracts a vector from a vector.
 		/// </summary>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
-		/// <param name="w">A <see cref="Vector2D"/> instance.</param>
-		/// <returns>A new <see cref="Vector2D"/> instance containing the difference.</returns>
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
+		/// <param name="w">A <see cref="Vector2"/> instance.</param>
+		/// <returns>A new <see cref="Vector2"/> instance containing the difference.</returns>
 		/// <remarks>
 		///	result[i] = v[i] - w[i].
 		/// </remarks>
-		public static Vector2D Subtract(Vector2D v, Vector2D w)
+		public static Vector2 Subtract(Vector2 v, Vector2 w)
 		{
-			return new Vector2D(v.X - w.X, v.Y - w.Y);
+			return new Vector2(v.X - w.X, v.Y - w.Y);
 		}
 		/// <summary>
 		/// Subtracts a scalar from a vector.
 		/// </summary>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
 		/// <param name="s">A scalar.</param>
-		/// <returns>A new <see cref="Vector2D"/> instance containing the difference.</returns>
+		/// <returns>A new <see cref="Vector2"/> instance containing the difference.</returns>
 		/// <remarks>
 		/// result[i] = v[i] - s
 		/// </remarks>
-		public static Vector2D Subtract(Vector2D v, double s)
+		public static Vector2 Subtract(Vector2 v, double s)
 		{
-			return new Vector2D(v.X - s, v.Y - s);
+			return new Vector2(v.X - s, v.Y - s);
 		}
 		/// <summary>
 		/// Subtracts a vector from a scalar.
 		/// </summary>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
 		/// <param name="s">A scalar.</param>
-		/// <returns>A new <see cref="Vector2D"/> instance containing the difference.</returns>
+		/// <returns>A new <see cref="Vector2"/> instance containing the difference.</returns>
 		/// <remarks>
 		/// result[i] = s - v[i]
 		/// </remarks>
-		public static Vector2D Subtract(double s, Vector2D v)
+		public static Vector2 Subtract(double s, Vector2 v)
 		{
-			return new Vector2D(s - v.X, s - v.Y);
+			return new Vector2(s - v.X, s - v.Y);
 		}
 		/// <summary>
 		/// Subtracts a vector from a second vector and puts the result into a third vector.
 		/// </summary>
-		/// <param name="u">A <see cref="Vector2D"/> instance.</param>
-		/// <param name="v">A <see cref="Vector2D"/> instance</param>
-		/// <param name="w">A <see cref="Vector2D"/> instance to hold the result.</param>
+		/// <param name="u">A <see cref="Vector2"/> instance.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance</param>
+		/// <param name="w">A <see cref="Vector2"/> instance to hold the result.</param>
 		/// <remarks>
 		///	w[i] = v[i] - w[i].
 		/// </remarks>
-		public static void Subtract(Vector2D u, Vector2D v, Vector2D w)
+		public static void Subtract(Vector2 u, Vector2 v, Vector2 w)
 		{
 			w.X = u.X - v.X;
 			w.Y = u.Y - v.Y;
@@ -280,13 +188,13 @@ namespace Raytracer.MathTypes
 		/// <summary>
 		/// Subtracts a vector from a scalar and put the result into another vector.
 		/// </summary>
-		/// <param name="u">A <see cref="Vector2D"/> instance.</param>
+		/// <param name="u">A <see cref="Vector2"/> instance.</param>
 		/// <param name="s">A scalar.</param>
-		/// <param name="v">A <see cref="Vector2D"/> instance to hold the result.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance to hold the result.</param>
 		/// <remarks>
 		/// v[i] = u[i] - s
 		/// </remarks>
-		public static void Subtract(Vector2D u, double s, Vector2D v)
+		public static void Subtract(Vector2 u, double s, Vector2 v)
 		{
 			v.X = u.X - s;
 			v.Y = u.Y - s;
@@ -294,13 +202,13 @@ namespace Raytracer.MathTypes
 		/// <summary>
 		/// Subtracts a scalar from a vector and put the result into another vector.
 		/// </summary>
-		/// <param name="u">A <see cref="Vector2D"/> instance.</param>
+		/// <param name="u">A <see cref="Vector2"/> instance.</param>
 		/// <param name="s">A scalar.</param>
-		/// <param name="v">A <see cref="Vector2D"/> instance to hold the result.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance to hold the result.</param>
 		/// <remarks>
 		/// v[i] = s - u[i]
 		/// </remarks>
-		public static void Subtract(double s, Vector2D u, Vector2D v)
+		public static void Subtract(double s, Vector2 u, Vector2 v)
 		{
 			v.X = s - u.X;
 			v.Y = s - u.Y;
@@ -308,52 +216,52 @@ namespace Raytracer.MathTypes
 		/// <summary>
 		/// Divides a vector by another vector.
 		/// </summary>
-		/// <param name="u">A <see cref="Vector2D"/> instance.</param>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
-		/// <returns>A new <see cref="Vector2D"/> containing the quotient.</returns>
+		/// <param name="u">A <see cref="Vector2"/> instance.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
+		/// <returns>A new <see cref="Vector2"/> containing the quotient.</returns>
 		/// <remarks>
 		///	result[i] = u[i] / v[i].
 		/// </remarks>
-		public static Vector2D Divide(Vector2D u, Vector2D v)
+		public static Vector2 Divide(Vector2 u, Vector2 v)
 		{
-			return new Vector2D(u.X / v.X, u.Y / v.Y);
+			return new Vector2(u.X / v.X, u.Y / v.Y);
 		}
 		/// <summary>
 		/// Divides a vector by a scalar.
 		/// </summary>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
 		/// <param name="s">A scalar</param>
-		/// <returns>A new <see cref="Vector2D"/> containing the quotient.</returns>
+		/// <returns>A new <see cref="Vector2"/> containing the quotient.</returns>
 		/// <remarks>
 		/// result[i] = v[i] / s;
 		/// </remarks>
-		public static Vector2D Divide(Vector2D v, double s)
+		public static Vector2 Divide(Vector2 v, double s)
 		{
-			return new Vector2D(v.X / s, v.Y / s);
+			return new Vector2(v.X / s, v.Y / s);
 		}
 		/// <summary>
 		/// Divides a scalar by a vector.
 		/// </summary>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
 		/// <param name="s">A scalar</param>
-		/// <returns>A new <see cref="Vector2D"/> containing the quotient.</returns>
+		/// <returns>A new <see cref="Vector2"/> containing the quotient.</returns>
 		/// <remarks>
 		/// result[i] = s / v[i]
 		/// </remarks>
-		public static Vector2D Divide(double s, Vector2D v)
+		public static Vector2 Divide(double s, Vector2 v)
 		{
-			return new Vector2D(s / v.X, s/ v.Y);
+			return new Vector2(s / v.X, s/ v.Y);
 		}
 		/// <summary>
 		/// Divides a vector by another vector.
 		/// </summary>
-		/// <param name="u">A <see cref="Vector2D"/> instance.</param>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
-		/// <param name="w">A <see cref="Vector2D"/> instance to hold the result.</param>
+		/// <param name="u">A <see cref="Vector2"/> instance.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
+		/// <param name="w">A <see cref="Vector2"/> instance to hold the result.</param>
 		/// <remarks>
 		/// w[i] = u[i] / v[i]
 		/// </remarks>
-		public static void Divide(Vector2D u, Vector2D v, Vector2D w)
+		public static void Divide(Vector2 u, Vector2 v, Vector2 w)
 		{
 			w.X = u.X / v.X;
 			w.Y = u.Y / v.Y;
@@ -361,13 +269,13 @@ namespace Raytracer.MathTypes
 		/// <summary>
 		/// Divides a vector by a scalar.
 		/// </summary>
-		/// <param name="u">A <see cref="Vector2D"/> instance.</param>
+		/// <param name="u">A <see cref="Vector2"/> instance.</param>
 		/// <param name="s">A scalar</param>
-		/// <param name="v">A <see cref="Vector2D"/> instance to hold the result.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance to hold the result.</param>
 		/// <remarks>
 		/// v[i] = u[i] / s
 		/// </remarks>
-		public static void Divide(Vector2D u, double s, Vector2D v)
+		public static void Divide(Vector2 u, double s, Vector2 v)
 		{
 			v.X = u.X / s;
 			v.Y = u.Y / s;
@@ -375,13 +283,13 @@ namespace Raytracer.MathTypes
 		/// <summary>
 		/// Divides a scalar by a vector.
 		/// </summary>
-		/// <param name="u">A <see cref="Vector2D"/> instance.</param>
+		/// <param name="u">A <see cref="Vector2"/> instance.</param>
 		/// <param name="s">A scalar</param>
-		/// <param name="v">A <see cref="Vector2D"/> instance to hold the result.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance to hold the result.</param>
 		/// <remarks>
 		/// v[i] = s / u[i]
 		/// </remarks>
-		public static void Divide(double s, Vector2D u, Vector2D v)
+		public static void Divide(double s, Vector2 u, Vector2 v)
 		{
 			v.X = s / u.X;
 			v.Y = s / u.Y;
@@ -389,20 +297,20 @@ namespace Raytracer.MathTypes
 		/// <summary>
 		/// Multiplies a vector by a scalar.
 		/// </summary>
-		/// <param name="u">A <see cref="Vector2D"/> instance.</param>
+		/// <param name="u">A <see cref="Vector2"/> instance.</param>
 		/// <param name="s">A scalar.</param>
-		/// <returns>A new <see cref="Vector2D"/> containing the result.</returns>
-		public static Vector2D Multiply(Vector2D u, double s)
+		/// <returns>A new <see cref="Vector2"/> containing the result.</returns>
+		public static Vector2 Multiply(Vector2 u, double s)
 		{
-			return new Vector2D(u.X * s, u.Y * s);
+			return new Vector2(u.X * s, u.Y * s);
 		}
 		/// <summary>
 		/// Multiplies a vector by a scalar and put the result in another vector.
 		/// </summary>
-		/// <param name="u">A <see cref="Vector2D"/> instance.</param>
+		/// <param name="u">A <see cref="Vector2"/> instance.</param>
 		/// <param name="s">A scalar.</param>
-		/// <param name="v">A <see cref="Vector2D"/> instance to hold the result.</param>
-		public static void Multiply(Vector2D u, double s, Vector2D v)
+		/// <param name="v">A <see cref="Vector2"/> instance to hold the result.</param>
+		public static void Multiply(Vector2 u, double s, Vector2 v)
 		{
 			v.X = u.X * s;
 			v.Y = u.Y * s;
@@ -410,40 +318,40 @@ namespace Raytracer.MathTypes
 		/// <summary>
 		/// Calculates the dot product of two vectors.
 		/// </summary>
-		/// <param name="u">A <see cref="Vector2D"/> instance.</param>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
+		/// <param name="u">A <see cref="Vector2"/> instance.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
 		/// <returns>The dot product value.</returns>
-		public static double DotProduct(Vector2D u, Vector2D v)
+		public static double DotProduct(Vector2 u, Vector2 v)
 		{
 			return (u.X * v.X) + (u.Y * v.Y);
 		}
 		/// <summary>
 		/// Negates a vector.
 		/// </summary>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
-		/// <returns>A new <see cref="Vector2D"/> instance containing the negated values.</returns>
-		public static Vector2D Negate(Vector2D v)
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
+		/// <returns>A new <see cref="Vector2"/> instance containing the negated values.</returns>
+		public static Vector2 Negate(Vector2 v)
 		{
-			return new Vector2D(-v.X, -v.Y);
+			return new Vector2(-v.X, -v.Y);
 		}
 		/// <summary>
 		/// Tests whether two vectors are approximately equal using default tolerance value.
 		/// </summary>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
-		/// <param name="u">A <see cref="Vector2D"/> instance.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
+		/// <param name="u">A <see cref="Vector2"/> instance.</param>
 		/// <returns>True if the two vectors are approximately equal; otherwise, False.</returns>
-		public static bool ApproxEqual(Vector2D v, Vector2D u)
+		public static bool ApproxEqual(Vector2 v, Vector2 u)
 		{
             return ApproxEqual(v, u, MathLib.Epsilon);
 		}
 		/// <summary>
 		/// Tests whether two vectors are approximately equal given a tolerance value.
 		/// </summary>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
-		/// <param name="u">A <see cref="Vector2D"/> instance.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
+		/// <param name="u">A <see cref="Vector2"/> instance.</param>
 		/// <param name="tolerance">The tolerance value used to test approximate equality.</param>
 		/// <returns>True if the two vectors are approximately equal; otherwise, False.</returns>
-		public static bool ApproxEqual(Vector2D v, Vector2D u, double tolerance)
+		public static bool ApproxEqual(Vector2 v, Vector2 u, double tolerance)
 		{
 			return
 				(
@@ -501,12 +409,12 @@ namespace Raytracer.MathTypes
 		/// the specified object.
 		/// </summary>
 		/// <param name="obj">An object to compare to this instance.</param>
-		/// <returns>True if <paramref name="obj"/> is a <see cref="Vector2D"/> and has the same values as this instance; otherwise, False.</returns>
+		/// <returns>True if <paramref name="obj"/> is a <see cref="Vector2"/> and has the same values as this instance; otherwise, False.</returns>
 		public override bool Equals(object obj)
 		{
-			if (obj is Vector2D)
+			if (obj is Vector2)
 			{
-				Vector2D v = (Vector2D)obj;
+				Vector2 v = (Vector2)obj;
 				return (_x == v.X) && (_y == v.Y);
 			}
 			return false;
@@ -529,7 +437,7 @@ namespace Raytracer.MathTypes
 		/// <param name="u">The left-hand vector.</param>
 		/// <param name="v">The right-hand vector.</param>
 		/// <returns>True if the two vectors are equal; otherwise, False.</returns>
-		public static bool operator==(Vector2D u, Vector2D v)
+		public static bool operator==(Vector2 u, Vector2 v)
 		{
 			if (Object.Equals(u, null))
 			{
@@ -549,7 +457,7 @@ namespace Raytracer.MathTypes
 		/// <param name="u">The left-hand vector.</param>
 		/// <param name="v">The right-hand vector.</param>
 		/// <returns>True if the two vectors are not equal; otherwise, False.</returns>
-		public static bool operator!=(Vector2D u, Vector2D v)
+		public static bool operator!=(Vector2 u, Vector2 v)
 		{
 			if (Object.Equals(u, null))
 			{
@@ -570,7 +478,7 @@ namespace Raytracer.MathTypes
 		/// <param name="u">The left-hand vector.</param>
 		/// <param name="v">The right-hand vector.</param>
 		/// <returns>True if the left-hand vector's components are greater than the right-hand vector's component; otherwise, False.</returns>
-		public static bool operator>(Vector2D u, Vector2D v)
+		public static bool operator>(Vector2 u, Vector2 v)
 		{
 			return (
 				(u._x > v._x) && 
@@ -582,7 +490,7 @@ namespace Raytracer.MathTypes
 		/// <param name="u">The left-hand vector.</param>
 		/// <param name="v">The right-hand vector.</param>
 		/// <returns>True if the left-hand vector's components are smaller than the right-hand vector's component; otherwise, False.</returns>
-		public static bool operator<(Vector2D u, Vector2D v)
+		public static bool operator<(Vector2 u, Vector2 v)
 		{
 			return (
 				(u._x < v._x) && 
@@ -594,7 +502,7 @@ namespace Raytracer.MathTypes
 		/// <param name="u">The left-hand vector.</param>
 		/// <param name="v">The right-hand vector.</param>
 		/// <returns>True if the left-hand vector's components are greater or equal than the right-hand vector's component; otherwise, False.</returns>
-		public static bool operator>=(Vector2D u, Vector2D v)
+		public static bool operator>=(Vector2 u, Vector2 v)
 		{
 			return (
 				(u._x >= v._x) && 
@@ -606,7 +514,7 @@ namespace Raytracer.MathTypes
 		/// <param name="u">The left-hand vector.</param>
 		/// <param name="v">The right-hand vector.</param>
 		/// <returns>True if the left-hand vector's components are smaller or equal than the right-hand vector's component; otherwise, False.</returns>
-		public static bool operator<=(Vector2D u, Vector2D v)
+		public static bool operator<=(Vector2 u, Vector2 v)
 		{
 			return (
 				(u._x <= v._x) && 
@@ -618,11 +526,11 @@ namespace Raytracer.MathTypes
 		/// <summary>
 		/// Negates the values of the vector.
 		/// </summary>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
-		/// <returns>A new <see cref="Vector2D"/> instance containing the negated values.</returns>
-		public static Vector2D operator-(Vector2D v)
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
+		/// <returns>A new <see cref="Vector2"/> instance containing the negated values.</returns>
+		public static Vector2 operator-(Vector2 v)
 		{
-			return Vector2D.Negate(v);
+			return Vector2.Negate(v);
 		}
 		#endregion
 
@@ -630,118 +538,118 @@ namespace Raytracer.MathTypes
 		/// <summary>
 		/// Adds two vectors.
 		/// </summary>
-		/// <param name="u">A <see cref="Vector2D"/> instance.</param>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
-		/// <returns>A new <see cref="Vector2D"/> instance containing the sum.</returns>
-		public static Vector2D operator+(Vector2D u, Vector2D v)
+		/// <param name="u">A <see cref="Vector2"/> instance.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
+		/// <returns>A new <see cref="Vector2"/> instance containing the sum.</returns>
+		public static Vector2 operator+(Vector2 u, Vector2 v)
 		{
-			return Vector2D.Add(u,v);
+			return Vector2.Add(u,v);
 		}
 		/// <summary>
 		/// Adds a vector and a scalar.
 		/// </summary>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
 		/// <param name="s">A scalar.</param>
-		/// <returns>A new <see cref="Vector2D"/> instance containing the sum.</returns>
-		public static Vector2D operator+(Vector2D v, double s)
+		/// <returns>A new <see cref="Vector2"/> instance containing the sum.</returns>
+		public static Vector2 operator+(Vector2 v, double s)
 		{
-			return Vector2D.Add(v,s);
+			return Vector2.Add(v,s);
 		}
 		/// <summary>
 		/// Adds a vector and a scalar.
 		/// </summary>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
 		/// <param name="s">A scalar.</param>
-		/// <returns>A new <see cref="Vector2D"/> instance containing the sum.</returns>
-		public static Vector2D operator+(double s, Vector2D v)
+		/// <returns>A new <see cref="Vector2"/> instance containing the sum.</returns>
+		public static Vector2 operator+(double s, Vector2 v)
 		{
-			return Vector2D.Add(v,s);
+			return Vector2.Add(v,s);
 		}
 		/// <summary>
 		/// Subtracts a vector from a vector.
 		/// </summary>
-		/// <param name="u">A <see cref="Vector2D"/> instance.</param>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
-		/// <returns>A new <see cref="Vector2D"/> instance containing the difference.</returns>
+		/// <param name="u">A <see cref="Vector2"/> instance.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
+		/// <returns>A new <see cref="Vector2"/> instance containing the difference.</returns>
 		/// <remarks>
 		///	result[i] = v[i] - w[i].
 		/// </remarks>
-		public static Vector2D operator-(Vector2D u, Vector2D v)
+		public static Vector2 operator-(Vector2 u, Vector2 v)
 		{
-			return Vector2D.Subtract(u,v);
+			return Vector2.Subtract(u,v);
 		}
 		/// <summary>
 		/// Subtracts a scalar from a vector.
 		/// </summary>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
 		/// <param name="s">A scalar.</param>
-		/// <returns>A new <see cref="Vector2D"/> instance containing the difference.</returns>
+		/// <returns>A new <see cref="Vector2"/> instance containing the difference.</returns>
 		/// <remarks>
 		/// result[i] = v[i] - s
 		/// </remarks>
-		public static Vector2D operator-(Vector2D v, double s)
+		public static Vector2 operator-(Vector2 v, double s)
 		{
-			return Vector2D.Subtract(v, s);
+			return Vector2.Subtract(v, s);
 		}
 		/// <summary>
 		/// Subtracts a vector from a scalar.
 		/// </summary>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
 		/// <param name="s">A scalar.</param>
-		/// <returns>A new <see cref="Vector2D"/> instance containing the difference.</returns>
+		/// <returns>A new <see cref="Vector2"/> instance containing the difference.</returns>
 		/// <remarks>
 		/// result[i] = s - v[i]
 		/// </remarks>
-		public static Vector2D operator-(double s, Vector2D v)
+		public static Vector2 operator-(double s, Vector2 v)
 		{
-			return Vector2D.Subtract(s, v);
+			return Vector2.Subtract(s, v);
 		}
 
 		/// <summary>
 		/// Multiplies a vector by a scalar.
 		/// </summary>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
 		/// <param name="s">A scalar.</param>
-		/// <returns>A new <see cref="Vector2D"/> containing the result.</returns>
-		public static Vector2D operator*(Vector2D v, double s)
+		/// <returns>A new <see cref="Vector2"/> containing the result.</returns>
+		public static Vector2 operator*(Vector2 v, double s)
 		{
-			return Vector2D.Multiply(v,s);
+			return Vector2.Multiply(v,s);
 		}
 		/// <summary>
 		/// Multiplies a vector by a scalar.
 		/// </summary>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
 		/// <param name="s">A scalar.</param>
-		/// <returns>A new <see cref="Vector2D"/> containing the result.</returns>
-		public static Vector2D operator*(double s, Vector2D v)
+		/// <returns>A new <see cref="Vector2"/> containing the result.</returns>
+		public static Vector2 operator*(double s, Vector2 v)
 		{
-			return Vector2D.Multiply(v,s);
+			return Vector2.Multiply(v,s);
 		}
 		/// <summary>
 		/// Divides a vector by a scalar.
 		/// </summary>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
 		/// <param name="s">A scalar</param>
-		/// <returns>A new <see cref="Vector2D"/> containing the quotient.</returns>
+		/// <returns>A new <see cref="Vector2"/> containing the quotient.</returns>
 		/// <remarks>
 		/// result[i] = v[i] / s;
 		/// </remarks>
-		public static Vector2D operator/(Vector2D v, double s)
+		public static Vector2 operator/(Vector2 v, double s)
 		{
-			return Vector2D.Divide(v,s);
+			return Vector2.Divide(v,s);
 		}
 		/// <summary>
 		/// Divides a scalar by a vector.
 		/// </summary>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
 		/// <param name="s">A scalar</param>
-		/// <returns>A new <see cref="Vector2D"/> containing the quotient.</returns>
+		/// <returns>A new <see cref="Vector2"/> containing the quotient.</returns>
 		/// <remarks>
 		/// result[i] = s / v[i]
 		/// </remarks>
-		public static Vector2D operator/(double s, Vector2D v)
+		public static Vector2 operator/(double s, Vector2 v)
 		{
-			return Vector2D.Divide(s,v);
+			return Vector2.Divide(s,v);
 		}
 		#endregion
 
@@ -786,9 +694,9 @@ namespace Raytracer.MathTypes
 		/// <summary>
 		/// Converts the vector to an array of double-precision floating point values.
 		/// </summary>
-		/// <param name="v">A <see cref="Vector2D"/> instance.</param>
+		/// <param name="v">A <see cref="Vector2"/> instance.</param>
 		/// <returns>An array of double-precision floating point values.</returns>
-		public static explicit operator double[](Vector2D v)
+		public static explicit operator double[](Vector2 v)
 		{
 			double[] array = new double[2];
 			array[0] = v.X;

@@ -7,7 +7,7 @@ using Raytracer.Rendering.Accellerators;
 
 namespace Raytracer.Rendering.Primitives
 {
-    using Vector = Vector3D;
+    using Vector = Vector3;
     using Real = System.Double;
 
     class Mesh : Traceable
@@ -104,32 +104,6 @@ namespace Raytracer.Rendering.Primitives
 
             return minimumIntersection;           
         }
-        /*
-        public override HitResult Intersect(Ray ray, ref Real distance, ref Traceable prim)
-        {
-            prim = null;
-            distance = MathLib.INVALID_INTERSECTION;
-            
-            if (!this.GetAABB().Intersect(ray))
-                return HitResult.MISS;
-           
-            HitResult overallResult = HitResult.MISS;
-            Traceable minObj = null;
-            foreach (var tri in GetCandidates(ray))
-            {
-                Real dist = MathLib.INVALID_INTERSECTION;
-                var result = tri.Intersect(ray, ref dist, ref minObj);
-
-                if (dist < distance && result != HitResult.MISS)
-                {
-                    distance = dist;
-                    overallResult = result;
-                    prim = minObj;
-                }
-            }
-
-            return overallResult;            
-        }*/
 
         private IEnumerable<Traceable> GetCandidates(Ray ray)
         {           

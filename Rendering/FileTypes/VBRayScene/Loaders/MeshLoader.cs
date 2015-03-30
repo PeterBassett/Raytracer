@@ -11,7 +11,7 @@ using Raytracer.Rendering.FileTypes.ObjFile;
 
 namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 {
-    using Vector = Vector3D;
+    using Vector = Vector3;
     using Real = System.Double;
     using Raytracer.Rendering.Materials;
 

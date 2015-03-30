@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Raytracer.Rendering.Primitives
 {
-    using Vector = Raytracer.MathTypes.Vector3D;
+    using Vector = Raytracer.MathTypes.Vector3;
     using Real = System.Double;
 
     // # class CSG
@@ -548,7 +548,9 @@ namespace Raytracer.Rendering.Primitives
                         c.Z + r * (2 * ((i & 4) > 0 ? 1 : 0) - 1)
                       );
 
-                      return new CSG.Vertex(pos, new Vector(info[1].Select(ind => (Real)ind).ToArray()));
+                      var verts = info[1].Select(ind => (Real)ind).ToArray();
+
+                      return new CSG.Vertex(pos, new Vector(verts[0], verts[1], verts[2]));
                     }).ToList());
                 }).ToList()
             );

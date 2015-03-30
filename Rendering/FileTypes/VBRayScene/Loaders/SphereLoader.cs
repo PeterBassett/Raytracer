@@ -10,7 +10,7 @@ using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 {
-    using Vector = Vector3D;
+    using Vector = Vector3;
 
     [Export(typeof(IVBRaySceneItemLoader))]
     class SphereLoader : IVBRaySceneItemLoader

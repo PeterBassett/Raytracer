@@ -21,7 +21,7 @@ using Raytracer.MathTypes;
 
 namespace Raytracer
 {
-    using Vector = Vector3D;
+    using Vector = Vector3;
     public partial class Main : Form
     {
         private Scene m_scene = null;

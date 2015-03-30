@@ -7,7 +7,7 @@ using Raytracer.MathTypes;
 
 namespace Raytracer.Rendering
 {
-    using Vector = Vector3D;
+    using Vector = Vector3;
     class Light
     {
         public Light()

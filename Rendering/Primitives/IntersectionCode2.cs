@@ -6,7 +6,7 @@ using Raytracer.MathTypes;
 
 namespace Raytracer.Rendering.Primitives
 {
-    using Vector = Vector3D;
+    using Vector = Vector3;
     using Real = System.Double;
 
     static class IntersectionCode2

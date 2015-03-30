@@ -9,7 +9,7 @@ using Raytracer.MathTypes;
 
 namespace Raytracer.Rendering.FileTypes.ObjFile
 {
-    using Vector = Vector3D;
+    using Vector = Vector3;
     using Raytracer.Rendering.Materials;
 
     class ObjFileLoader
@@ -27,7 +27,7 @@ namespace Raytracer.Rendering.FileTypes.ObjFile
         public void LoadFile(string strObjfile, List<Triangle> triangles, List<Material> materials)
         {
             List<Vector> verticies = new List<Vector>();
-            List<Vector2D> textureCoordinates = new List<Vector2D>();
+            List<Vector2> textureCoordinates = new List<Vector2>();
             List<Vector> vertexNormals = new List<Vector>();
             Material currentMaterial = null;
             //var sr = new BufferedStreamReader(strObjfile);
@@ -56,7 +56,7 @@ namespace Raytracer.Rendering.FileTypes.ObjFile
                             verticies.Add(new Vector(float.Parse(ParseCache[1]), float.Parse(ParseCache[2]), float.Parse(ParseCache[3])));
                             break;
                         case "vt":
-                            textureCoordinates.Add(new Vector2D(float.Parse(ParseCache[1]), float.Parse(ParseCache[2])));
+                            textureCoordinates.Add(new Vector2(float.Parse(ParseCache[1]), float.Parse(ParseCache[2])));
                             break;
                         case "vn":
                             vertexNormals.Add(new Vector(float.Parse(ParseCache[1]), float.Parse(ParseCache[2]), float.Parse(ParseCache[3])));
@@ -147,7 +147,7 @@ namespace Raytracer.Rendering.FileTypes.ObjFile
                 return null;
         }
                 
-        private void CreateTriangles(int itemsInParseCache, List<Vector> verticies, List<Triangle> triangles, Material currentMaterial, List<Vector2D> textureCoordinates, List<Vector> vertexNormals)
+        private void CreateTriangles(int itemsInParseCache, List<Vector> verticies, List<Triangle> triangles, Material currentMaterial, List<Vector2> textureCoordinates, List<Vector> vertexNormals)
         {
             if (VertexIndexCacheLength <= itemsInParseCache)
             {
@@ -175,7 +175,7 @@ namespace Raytracer.Rendering.FileTypes.ObjFile
             }
 
             Vector v1, v2, v3;
-            Vector2D t1 = Vector2D.Zero, t2 = Vector2D.Zero, t3 = Vector2D.Zero;
+            Vector2 t1 = Vector2.Zero, t2 = Vector2.Zero, t3 = Vector2.Zero;
             Vector n1 = Vector.Zero, n2 = Vector.Zero, n3 = Vector.Zero;
 
             const int Vertex = 0;

@@ -6,7 +6,7 @@ using Raytracer.MathTypes;
 
 namespace Raytracer.Rendering.Materials
 {
-    using Vector = Vector3D;
+    using Vector = Vector3;
 
     class MaterialCheckerboard : MaterialWithSubMaterials
     {        

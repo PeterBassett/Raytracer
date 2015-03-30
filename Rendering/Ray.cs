@@ -9,7 +9,7 @@ using System.Runtime.Serialization;
 
 namespace Raytracer.Rendering
 {
-    using Vector = Vector3D;
+    using Vector = Vector3;
     using Real = System.Double;
 	public struct Ray
 	{

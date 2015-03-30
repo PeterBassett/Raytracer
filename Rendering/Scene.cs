@@ -12,7 +12,7 @@ using Raytracer.Rendering.Materials;
 
 namespace Raytracer.Rendering
 {
-    using Vector = Vector3D;
+    using Vector = Vector3;
     using Real = System.Double;
 
     class Scene

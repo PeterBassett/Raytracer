@@ -7,7 +7,7 @@ using Raytracer.Rendering;
 
 namespace Raytracer.Rendering
 {
-    using Vector = Raytracer.MathTypes.Vector3D;
+    using Vector = Raytracer.MathTypes.Vector3;
     using Raytracer.Rendering.Materials;
 
     class TriangleHelper

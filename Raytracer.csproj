@@ -89,7 +89,6 @@
     <Compile Include="Rendering\TriangleHelper.cs" />
     <Compile Include="MathTypes\MathLib.cs" />
     <Compile Include="MathTypes\Vector3D.cs" />
-    <Compile Include="MathTypes\Vector3F.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\FileTypes\ObjFile\MtlFileLoader.cs" />
@@ -128,7 +127,7 @@
     <Compile Include="Rendering\IBmp.cs" />
     <Compile Include="Rendering\AABB.cs" />
     <Compile Include="Rendering\Accellerators\Octree.cs" />
-    <Compile Include="Rendering\Accellerators\KDTree.cs" />
+    <Compile Include="Rendering\Accellerators\BVH.cs" />
     <Compile Include="Rendering\Light.cs" />
     <Compile Include="Rendering\IntersectionInfo.cs" />
     <Compile Include="Rendering\ITraceable.cs" />

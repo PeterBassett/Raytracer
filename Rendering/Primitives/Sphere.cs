@@ -6,7 +6,7 @@ using Raytracer.MathTypes;
 
 namespace Raytracer.Rendering.Primitives
 {
-    using Vector = Vector3D;
+    using Vector = Vector3;
     using Real = System.Double;
 
     class Sphere : Traceable
@@ -21,75 +21,9 @@ namespace Raytracer.Rendering.Primitives
             set
             {
                 m_Radius = value;
-                SquaredRadius = m_Radius * m_Radius;
             }
         }
-        public Real SquaredRadius { get; private set; }
-        /*
-        public override HitResult Intersect(Ray ray, ref Real distance, ref Traceable prim)
-        {
-            prim = null;
-            distance = 0.0f;
-            HitResult retval = HitResult.MISS;
-
-            Real fA = 0.0f;
-            Real fB = 0.0f;
-            Real fC = 0.0f;
-            Real fD = 0.0f;
-            Real fDist1 = 0.0f;
-            Real fDist2 = 0.0f;
-            Real fRoot = 0.0f;
-            Real fDistance = 0.0f;
-            Vector cTmp, cStart, cDir;
-
-            cStart = ray.Pos;
-            cDir = ray.Dir;
-
-            cTmp = cStart - Pos;
-            fB = 2.0f * (Vector.DotProduct(cDir, cTmp));
-            fC = Vector.DotProduct(cTmp, cTmp) - (Radius * Radius);
-            fA = 1.0f;
-
-            fD = (fB * fB) - 4.0f * fA * fC;
-
-            if (fD < 0.0f)
-                return HitResult.MISS;
-
-            if (fD >= 0.0f)
-            {
-                fRoot = (Real)Math.Sqrt(fD);
-
-                fDist1 = (-fB - fRoot) * (0.5f * fA);
-                fDist2 = (-fB + fRoot) * (0.5f * fA);
-
-                if ((fDist1 > 1.0f) || (fDist2 > 1.0f))
-                {
-                    if (fDist1 > 1.0f)
-                    {
-                        fDistance = fDist1;
-                        prim = this;
-                        retval = HitResult.HIT;
-                    }
-
-                    if (fDist2 > 1.0f)
-                    {
-                        if (fDist2 < fDist1 || fDist1 < 1.0f)
-                        {
-                            fDistance = fDist2;
-                            prim = this;
-                            retval = HitResult.INPRIM;
-                        }
-                    }
-
-                    distance = fDistance;
-                    return retval;
-                }
-            }
-
-            return HitResult.MISS;
-        }
-
-        */
+        
         public override IntersectionInfo Intersect(Ray ray)
         {
             Real distance = 0.0f;
