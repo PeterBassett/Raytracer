@@ -106,7 +106,7 @@
     <Compile Include="Rendering\FileTypes\VBRayScene\Savers\RenderSettingsSaver.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Savers\OutputSaver.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Savers\ViewpointSaver.cs" />
-    <Compile Include="PictureBmp.cs" />
+    <Compile Include="PictureBoxBmp.cs" />
     <Compile Include="Rendering\FileTypes\Bmp.cs" />
     <Compile Include="Rendering\FileTypes\Colour.cs" />
     <Compile Include="Rendering\FileTypes\ISceneLoader.cs" />

@@ -201,10 +201,10 @@ namespace Raytracer.Rendering
             if (!this.MultiThreaded)
                 options.MaxDegreeOfParallelism = 1;
 
-            Parallel.For<long>(0, Width, options, () => 0, (lX, loop, TotalTraceRayCalls) =>
+            Parallel.For<int>(0, Width, options, () => 0, (lX, loop, TotalTraceRayCalls) =>
             {
                 Colour col = new Colour(1.0f);
-                for (long lY = 0; lY < Height; lY++)
+                for (int lY = 0; lY < Height; lY++)
                 {
                     try
                     {
@@ -220,9 +220,7 @@ namespace Raytracer.Rendering
 
                         Ray cRay = new Ray(Pos, dir);
 
-                        Real distance = 0.0f;
-                        bmp.SetPixel((int)lX, (int)lY, TraceRay(cRay, col, 1.0f, 1, cRay.Dir, ref TotalTraceRayCalls, ref distance));
-
+                        bmp.SetPixel((int)lX, (int)lY, TraceRay(cRay, col, 1.0f, 1, cRay.Dir, ref TotalTraceRayCalls));
                     }
                     catch (Exception ex)
                     {
@@ -258,39 +256,14 @@ namespace Raytracer.Rendering
         private IEnumerable<Traceable> GetCandiates(Ray ray)
         {
             foreach (var prim in _primitives)
-            {
                 yield return prim;
-            }
 
             if (m_SceneGraph != null)
-            {
                 foreach (var item in m_SceneGraph.Intersect(ray))
-                {
                     yield return item;
-                }
-            }
         }
-        /*
-        void FindPointIntersection(Ray cRay, ref Traceable pObj, ref Real fMinT)
-        {
-            Real fT = MathLib.INVALID_INTERSECTION;
-            fMinT = fT;
-            Vector vDir = cRay.Dir;
-            cRay.Dir.Clear();
 
-            foreach (var obj in m_vObjects)
-            {
-                var result = obj.Intersect(cRay, ref fT);
-
-                if (fT < fMinT && result != HitResult.MISS)
-                {
-                    fMinT = fT;
-                    pObj = obj;
-                }
-            }
-        }*/
-
-        Colour TraceRay(Ray cRay, Colour contribution, Real curRefractionIndex, long depth, Vector eyeDirection, ref long TotalCalls, ref Real minT)
+        Colour TraceRay(Ray cRay, Colour contribution, Real curRefractionIndex, long depth, Vector eyeDirection, ref int TotalCalls)
         {
             const Real EPSILON = 0.001f;
 
@@ -302,20 +275,6 @@ namespace Raytracer.Rendering
 
             if (info.Result != HitResult.MISS)
             {
-                minT = info.T;
-                /*info.Primitive = primitive;
-
-                // the point of intersection
-                Vector hitPoint = cRay.Dir * minT;
-
-                // add the start position to the coord
-                hitPoint = hitPoint + cRay.Pos;
-                
-                // set the intersection information into the object
-                info.HitPoint = hitPoint;
-                info.NormalAtHitPoint = primitive.GetNormal(hitPoint); ;
-                info.T = minT;*/
-
                 // set the 
                 Material material = new Material();
                 Material objectMaterial = info.Primitive.Material != null ? info.Primitive.Material : this._defaultMaterial;
@@ -344,9 +303,8 @@ namespace Raytracer.Rendering
                         // calculate the new reflected direction
                         Ray reflectedRay = new Ray(info.HitPoint, CalculateReflectedRay(cRay.Dir, info.NormalAtHitPoint));
 
-                        Real dist = 0.0f;
                         // recursivly call trace ray
-                        colour += TraceRay(reflectedRay, colReflectAmount, curRefractionIndex, depth + 1, eyeDirection, ref TotalCalls, ref dist);
+                        colour += TraceRay(reflectedRay, colReflectAmount, curRefractionIndex, depth + 1, eyeDirection, ref TotalCalls);
                     }
                 }
 
@@ -368,9 +326,8 @@ namespace Raytracer.Rendering
                         if (cosT2 > 0.0f)
                         {
                             Vector T = -((n * cRay.Dir) + (Real)(n * cosI - Math.Sqrt(cosT2)) * N);
-                            Real dist = 0.0f;
-
-                            Colour rcol = TraceRay(new Ray(info.HitPoint + T * EPSILON, T), colRefractiveAmount, rindex, depth + 1, eyeDirection, ref TotalCalls, ref dist);
+                            
+                            Colour rcol = TraceRay(new Ray(info.HitPoint + T * EPSILON, T), colRefractiveAmount, rindex, depth + 1, eyeDirection, ref TotalCalls);
 
                             //Raytrace( Ray( pi + T * EPSILON, T ), rcol, a_Depth + 1, rindex, dist );
                             // apply Beer's law
