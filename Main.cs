@@ -989,5 +989,20 @@ namespace Raytracer
         {
             m_isSceneDefinitionDirty = true;
         }
+
+        private void mnuSuperSampling_Click(object sender, EventArgs e)
+        {
+            if (m_scene == null)
+                return;
+
+            var menu = (ToolStripMenuItem)sender;
+
+            foreach (ToolStripMenuItem item in menu.GetCurrentParent().Items)
+                item.Checked = false;
+
+            menu.Checked = true;
+         
+            m_scene.SuperSamplingLevel = uint.Parse(((ToolStripMenuItem)sender).Tag.ToString());
+        }
     }
 }

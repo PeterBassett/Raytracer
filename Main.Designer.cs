@@ -39,6 +39,11 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.renderOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.multiThreadedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSuperSampling = new System.Windows.Forms.ToolStripMenuItem();
+            this.xToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.xToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.xToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuShadows = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuReflections = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRefractions = new System.Windows.Forms.ToolStripMenuItem();
@@ -156,6 +161,7 @@
             // 
             this.renderOptionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.multiThreadedToolStripMenuItem,
+            this.mnuSuperSampling,
             this.mnuShadows,
             this.mnuReflections,
             this.mnuRefractions,
@@ -173,6 +179,51 @@
             this.multiThreadedToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.multiThreadedToolStripMenuItem.Text = "Multi-Threaded?";
             this.multiThreadedToolStripMenuItem.Click += new System.EventHandler(this.multiThreadedToolStripMenuItem_Click);
+            // 
+            // mnuSuperSampling
+            // 
+            this.mnuSuperSampling.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.xToolStripMenuItem,
+            this.xToolStripMenuItem1,
+            this.xToolStripMenuItem2,
+            this.xToolStripMenuItem3});
+            this.mnuSuperSampling.Name = "mnuSuperSampling";
+            this.mnuSuperSampling.Size = new System.Drawing.Size(162, 22);
+            this.mnuSuperSampling.Text = "Super Sampling?";
+            // 
+            // xToolStripMenuItem
+            // 
+            this.xToolStripMenuItem.Checked = true;
+            this.xToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.xToolStripMenuItem.Name = "xToolStripMenuItem";
+            this.xToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.xToolStripMenuItem.Tag = "1";
+            this.xToolStripMenuItem.Text = "1x";
+            this.xToolStripMenuItem.Click += new System.EventHandler(this.mnuSuperSampling_Click);
+            // 
+            // xToolStripMenuItem1
+            // 
+            this.xToolStripMenuItem1.Name = "xToolStripMenuItem1";
+            this.xToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.xToolStripMenuItem1.Tag = "2";
+            this.xToolStripMenuItem1.Text = "2x";
+            this.xToolStripMenuItem1.Click += new System.EventHandler(this.mnuSuperSampling_Click);
+            // 
+            // xToolStripMenuItem2
+            // 
+            this.xToolStripMenuItem2.Name = "xToolStripMenuItem2";
+            this.xToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.xToolStripMenuItem2.Tag = "4";
+            this.xToolStripMenuItem2.Text = "4x";
+            this.xToolStripMenuItem2.Click += new System.EventHandler(this.mnuSuperSampling_Click);
+            // 
+            // xToolStripMenuItem3
+            // 
+            this.xToolStripMenuItem3.Name = "xToolStripMenuItem3";
+            this.xToolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.xToolStripMenuItem3.Tag = "8";
+            this.xToolStripMenuItem3.Text = "8x";
+            this.xToolStripMenuItem3.Click += new System.EventHandler(this.mnuSuperSampling_Click);
             // 
             // mnuShadows
             // 
@@ -411,7 +462,7 @@
             // 
             this.dlgSaveRay.Filter = "\"Scene files (*.ray)|*.ray|All files (*.*)|*.*\"  ;";
             // 
-            // Form1
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -419,7 +470,7 @@
             this.Controls.Add(this.mainMenu);
             this.Controls.Add(this.splitContainer1);
             this.MainMenuStrip = this.mainMenu;
-            this.Name = "Form1";
+            this.Name = "Main";
             this.Text = "Petes Ray Tracer";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -480,6 +531,11 @@
         private System.Windows.Forms.ToolStripMenuItem saveSceneToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog dlgSaveRay;
         private System.Windows.Forms.ToolStripMenuItem saveSceneToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem mnuSuperSampling;
+        private System.Windows.Forms.ToolStripMenuItem xToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem xToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem xToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem xToolStripMenuItem3;
     }
 }
 
