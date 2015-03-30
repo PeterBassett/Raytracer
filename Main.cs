@@ -66,11 +66,11 @@ namespace Raytracer
             //this.WindowState = FormWindowState.Maximized;            
         }
 
-        PictureBmp bmpCache = null;
+        PictureBoxBmp bmpCache = null;
 
         private void Go()
         {
-            bmpCache = new PictureBmp(pictureBox1);
+            bmpCache = new PictureBoxBmp(pictureBox1);
             var strScene = "RedBallOnReflectiveCheck.ray";
             VBRaySceneLoader loader = new VBRaySceneLoader();
 
@@ -501,7 +501,7 @@ namespace Raytracer
             using (var sw = new StreamWriter("Vista.ray"))
                 loader.SaveScene(sw, scene);
 
-            PictureBmp bmp = new PictureBmp(pictureBox1);
+            PictureBoxBmp bmp = new PictureBoxBmp(pictureBox1);
             scene.TraceScene(bmp);
             bmp.Render();
 
@@ -613,7 +613,7 @@ namespace Raytracer
             using (var sw = new StreamWriter("BallGrid.ray"))
                 loader.SaveScene(sw, scene);
 
-            PictureBmp bmp = new PictureBmp(pictureBox1);
+            PictureBoxBmp bmp = new PictureBoxBmp(pictureBox1);
             scene.TraceScene(bmp);
             bmp.Render();
 
@@ -686,7 +686,7 @@ namespace Raytracer
             {
                 Stopwatch watch = new Stopwatch();
                 watch.Start();
-                PictureBmp bmp = new PictureBmp(pictureBox1);
+                PictureBoxBmp bmp = new PictureBoxBmp(pictureBox1);
                 
                 TotalRays = Render(width, height, bmp, blnMultiThreaded, UpdateScreenRenderOptions);
 
@@ -848,7 +848,7 @@ namespace Raytracer
             var polygons = a.subtract(b).union(c).union(d).union(e).intersect(f).toPolygons();
             
             var triangles = from poly in polygons
-                            from tri in TriangleHelper.CreateTriangles(poly.vertices.Select( v => v.pos).ToList(), null)
+                            from tri in CreateTriangles(poly.vertices.Select( v => v.pos).ToList(), null)
                             select tri;
 
             Mesh mesh = new Mesh(triangles.ToList());
@@ -861,11 +861,39 @@ namespace Raytracer
             
             scene.AddObject(inst);
 
-            PictureBmp bmp = new PictureBmp(pictureBox1);
+            PictureBoxBmp bmp = new PictureBoxBmp(pictureBox1);
             scene.TraceScene(bmp);
             bmp.Render();
 
            // pictureBox1.Image.Save("CSG.bmp", ImageFormat.Bmp);
+        }
+
+        private static List<Triangle> CreateTriangles(List<Vector> verticies, Material currentMaterial)
+        {
+            List<Triangle> triangles = new List<Triangle>();
+
+            Vector v1, v2, v3;
+
+            v1 = verticies[0];
+
+            for (int i = 0; i < verticies.Count - 2; ++i)
+            {
+                v2 = verticies[i + 1];
+                v3 = verticies[i + 2];
+
+                if (v1 == v2 || v1 == v3 || v2 == v3)
+                    continue;
+
+                Triangle tri = new Triangle();
+                tri.Vertex[0] = v1;
+                tri.Vertex[1] = v2;
+                tri.Vertex[2] = v3;
+
+                tri.Material = currentMaterial;
+                triangles.Add(tri);
+            }
+
+            return triangles;
         }
 
         private void multiThreadedToolStripMenuItem_Click(object sender, EventArgs e)

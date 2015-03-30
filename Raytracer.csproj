@@ -86,7 +86,6 @@
     <Compile Include="Rendering\Materials\MaterialTexture.cs" />
     <Compile Include="Rendering\Materials\MaterialDispatcher.cs" />
     <Compile Include="Rendering\Primitives\Torus.cs" />
-    <Compile Include="Rendering\TriangleHelper.cs" />
     <Compile Include="MathTypes\MathLib.cs" />
     <Compile Include="MathTypes\Vector3D.cs" />
     <Compile Include="Program.cs" />
@@ -107,7 +106,7 @@
     <Compile Include="Rendering\FileTypes\VBRayScene\Savers\RenderSettingsSaver.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Savers\OutputSaver.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Savers\ViewpointSaver.cs" />
-    <Compile Include="Rendering\PictureBmp.cs" />
+    <Compile Include="PictureBmp.cs" />
     <Compile Include="Rendering\FileTypes\Bmp.cs" />
     <Compile Include="Rendering\FileTypes\Colour.cs" />
     <Compile Include="Rendering\FileTypes\ISceneLoader.cs" />
@@ -289,6 +288,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">

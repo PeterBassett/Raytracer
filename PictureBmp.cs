@@ -6,16 +6,17 @@ using Raytracer.Rendering.FileTypes;
 using System.Windows.Forms;
 using System.Drawing;
 using Raytracer.Extensions;
+using Raytracer.Rendering;
 
-namespace Raytracer.Rendering
+namespace Raytracer
 {
-    class PictureBmp : IBmp, IDisposable
+    class PictureBoxBmp : IBmp, IDisposable
     {
         Bitmap bitmap = null;
         PictureBox pictureBox = null;
         System.Drawing.Imaging.BitmapData bmpdata = null;
 
-        public PictureBmp(PictureBox box)
+        public PictureBoxBmp(PictureBox box)
         {
             if (box == null)
                 throw new ArgumentNullException();
