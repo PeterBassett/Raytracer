@@ -9,22 +9,21 @@ using System.Threading;
 using Raytracer.Rendering.Accellerators;
 using Raytracer.Rendering.Primitives;
 using Raytracer.Rendering.Materials;
+using Raytracer.Rendering.Antialiasing;
 
 namespace Raytracer.Rendering
 {
     using Vector = Vector3;
     using Real = System.Double;
-
+    
     class Scene
     {
         List<Light> _lights = new List<Light>();
         List<Traceable> _primitives = new List<Traceable>();
         Dictionary<string, Mesh> _meshes = new Dictionary<string, Mesh>();
-
         Dictionary<string, Material> _materials = new Dictionary<string, Material>();
-
-        BVH m_SceneGraph = null;
-
+        IAccelerator m_SceneGraph = null;        
+        
         Real _nearWidth;
         Real _nearHeight;
 
@@ -34,11 +33,13 @@ namespace Raytracer.Rendering
         bool _traceShadows;
         Material _defaultMaterial;
 
+        public IAntialiaser Antialiaser { get; set; }
+
         public bool MultiThreaded { get; set; }
 
-        public Vector Pos { get; set; }
+        public Vector EyePosition { get; set; }
 
-        public Vector Dir { get; set; }
+        public Vector ViewPointRotation { get; set; }
 
         public Real FieldOfView { get; set; }
 
@@ -58,7 +59,7 @@ namespace Raytracer.Rendering
                 Diffuse = new Colour(1f),
                 Specularity = 20,
                 SpecularExponent = 0.35f
-            };
+            };            
         }
 
         public int RecursionDepth
@@ -116,12 +117,19 @@ namespace Raytracer.Rendering
 
         public void BuildAccellerationStructures()
         {
-            //return;
-
             if (_primitives.Count < 10)
                 return;
 
-            List<Traceable> elements = new List<Traceable>();
+            var elements = FilterUnboundedPrimitives();
+
+            m_SceneGraph = new AABBHierarchy();
+            m_SceneGraph.Build(elements);
+        }
+
+        private List<Traceable> FilterUnboundedPrimitives()
+        {
+            var elements = new List<Traceable>();
+
             int iIndex = _primitives.Count - 1;
 
             while (iIndex >= 0)
@@ -136,24 +144,8 @@ namespace Raytracer.Rendering
 
                 iIndex--;
             }
-            /*
-            var firstElement = elements.First();
-            var firstElementAABB = firstElement.GetAABB();
-            AABB bounds = new AABB(firstElementAABB);
 
-            foreach (var item in elements)
-            {
-                bounds.InflateToEncapsulate(item.GetAABB());
-            }
-            */
-            m_SceneGraph = new BVH(elements);
-            /*
-            foreach (var item in elements)
-            {
-                m_SceneGraph.Add(item);
-            }
-
-            m_SceneGraph.PruneEmptyNodes();*/
+            return elements;
         }
 
         public IEnumerable<Light> Lights
@@ -188,52 +180,94 @@ namespace Raytracer.Rendering
                 return null;
         }
 
-        public long TraceScene(IBmp bmp)
+        public void TraceScene(IBmp bmp)
         {
+            r = new Random();
             _nearWidth = 2.0f * (Real)Math.Tan(MathLib.Deg2Rad(FieldOfView) / 2.0f);
             _nearHeight = _nearWidth * ((Real)Height) / ((Real)Width);
 
             bmp.Init(Width, Height);
-
-            long TotalRays = 0;
-            ParallelOptions options = new ParallelOptions();
-
+          
+            var options = new ParallelOptions();
             if (!this.MultiThreaded)
                 options.MaxDegreeOfParallelism = 1;
 
-            Parallel.For<int>(0, Width, options, () => 0, (lX, loop, TotalTraceRayCalls) =>
-            {
-                Colour col = new Colour(1.0f);
+            Parallel.For(0, Width, options, (lX) =>
+            {                
                 for (int lY = 0; lY < Height; lY++)
                 {
-                    try
+                    TracePixel(bmp, lX, lY, 1);
+                }
+            });
+            
+            if(this.Antialiaser != null)
+                this.Antialiaser.Anitalias(this, bmp);
+        }
+
+        public void TracePixel(IBmp bmp, int lX, int lY, uint samplingLevel)
+        {
+            Vector dir;
+            Ray ray;
+            Colour colour = new Colour();
+            Colour contribution = new Colour(1.0f);
+
+            try
+            {
+                for (int u = 0; u < samplingLevel; u++)
+                {
+                    for (int v = 0; v < samplingLevel; v++)
                     {
-                        var dir = new Vector();
-                        dir.X = ((Real)lX - Width / 2) * _nearWidth / (Real)Width;
-                        dir.Y = ((Real)lY - Height / 2) * _nearHeight / (Real)Height;
-                        dir.Z = 1;
+                        dir = DirectionForPixel(lX, lY, v, u, samplingLevel);
+                        ray = new Ray(this.EyePosition, dir);
 
-                        dir.RotateX(Dir.X, ref dir);
-                        dir.RotateY(Dir.Y, ref dir);
-                        dir.RotateZ(Dir.Z, ref dir);
-                        dir.Normalize();
-
-                        Ray cRay = new Ray(Pos, dir);
-
-                        bmp.SetPixel((int)lX, (int)lY, TraceRay(cRay, col, 1.0f, 1, cRay.Dir, ref TotalTraceRayCalls));
-                    }
-                    catch (Exception ex)
-                    {
-                        bmp.SetPixel((int)lX, (int)lY, new Colour(1, 0, 0));
-                        Console.WriteLine(ex);
+                        colour += TraceRay(ray, contribution, 1.0f, 1, ray.Dir);
                     }
                 }
 
-                return TotalTraceRayCalls;
+                bmp.SetPixel((int)lX, (int)lY, colour / (float)(samplingLevel * samplingLevel));
+            }
+            catch (Exception)
+            {
+                bmp.SetPixel((int)lX, (int)lY, new Colour(1, 0, 0));
+            }
+        }
 
-            }, (x) => Interlocked.Add(ref TotalRays, x));
+        Random r = new Random();
+        private Vector DirectionForPixel(long lX, int lY, int u, int v, uint _subSampling)
+        {
+            double x = (double)lX + SampleOffset(u, _subSampling);
+            double y = (double)lY + SampleOffset(v, _subSampling);
 
-            return TotalRays;
+            x -= Width / 2.0;
+            y -= Height / 2.0;
+
+            double scaleFactor = _nearWidth / (Real)Width;
+
+            x *= scaleFactor;
+            y *= scaleFactor;
+
+            var dir = new Vector();
+            dir.X = x;
+            dir.Y = y;
+            dir.Z = 1;
+
+            dir.RotateX(ViewPointRotation.X, ref dir);
+            dir.RotateY(ViewPointRotation.Y, ref dir);
+            dir.RotateZ(ViewPointRotation.Z, ref dir);
+            dir.Normalize();
+
+            return dir;
+        }
+
+        private double SampleOffset(int u, uint _subSampling)
+        {
+            double subSamplingOffset1 = (1.0 / _subSampling) * u;
+            double subSamplingOffset2 = (1.0 / _subSampling) * (u + 1);
+
+            double subSamplingOffset = subSamplingOffset1 + (r.NextDouble() * (subSamplingOffset2 - subSamplingOffset1));
+            if (_subSampling <= 1)
+                subSamplingOffset = 0.0;
+            return subSamplingOffset;
         }
 
         IntersectionInfo FindClosestIntersection(Ray ray)
@@ -263,11 +297,9 @@ namespace Raytracer.Rendering
                     yield return item;
         }
 
-        Colour TraceRay(Ray cRay, Colour contribution, Real curRefractionIndex, long depth, Vector eyeDirection, ref int TotalCalls)
+        Colour TraceRay(Ray cRay, Colour contribution, Real curRefractionIndex, long depth, Vector eyeDirection)
         {
             const Real EPSILON = 0.001f;
-
-            TotalCalls++;
 
             Colour colour = new Colour(0.0f);
 
@@ -281,9 +313,7 @@ namespace Raytracer.Rendering
 
                 var materialDispatcher = new MaterialDispatcher();
                 materialDispatcher.Solidify((dynamic)info.Primitive, (dynamic)objectMaterial, info, material);
-
-                //objectMaterial.SolidifyMaterial(cInfo, material);
-
+                
                 // get the shading due to lighting at this point
                 colour = Shade(info.HitPoint, info.NormalAtHitPoint, material, eyeDirection) * contribution;
 
@@ -304,7 +334,7 @@ namespace Raytracer.Rendering
                         Ray reflectedRay = new Ray(info.HitPoint, CalculateReflectedRay(cRay.Dir, info.NormalAtHitPoint));
 
                         // recursivly call trace ray
-                        colour += TraceRay(reflectedRay, colReflectAmount, curRefractionIndex, depth + 1, eyeDirection, ref TotalCalls);
+                        colour += TraceRay(reflectedRay, colReflectAmount, curRefractionIndex, depth + 1, eyeDirection);
                     }
                 }
 
@@ -326,8 +356,8 @@ namespace Raytracer.Rendering
                         if (cosT2 > 0.0f)
                         {
                             Vector T = -((n * cRay.Dir) + (Real)(n * cosI - Math.Sqrt(cosT2)) * N);
-                            
-                            Colour rcol = TraceRay(new Ray(info.HitPoint + T * EPSILON, T), colRefractiveAmount, rindex, depth + 1, eyeDirection, ref TotalCalls);
+
+                            Colour rcol = TraceRay(new Ray(info.HitPoint + T * EPSILON, T), colRefractiveAmount, rindex, depth + 1, eyeDirection);
 
                             //Raytrace( Ray( pi + T * EPSILON, T ), rcol, a_Depth + 1, rindex, dist );
                             // apply Beer's law
@@ -345,7 +375,6 @@ namespace Raytracer.Rendering
 
         Colour Shade(Vector hitPoint, Vector normal, Material material, Vector eyeDirection)
         {
-
             Colour colour;
             //= pObj.Material;
             Material lightMaterial = null;
@@ -432,7 +461,6 @@ namespace Raytracer.Rendering
             return false;
         }
 
-
         Vector CalculateReflectedRay(Vector dir, Vector normal)
         {
             Vector tmp = new Vector();
@@ -454,7 +482,6 @@ namespace Raytracer.Rendering
             Real n = n1 / n2;
             return (n * dir) + (Real)(n * c - Math.Sqrt(1 - n * n * (1 - c * c))) * normal;
         }
-
 
         internal void LoadComplete()
         {
