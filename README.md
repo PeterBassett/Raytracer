@@ -11,10 +11,10 @@ Primitives
 * Meshes loaded from wavefront obj files. Supports mtl files.
 
 Various Materials
-* Plane RGB Materials defined with Ambient, Diffuse etc etc etc.
-* Checkerboard of two submaterials.
-* Perlin noise of two submaterials.
-* Texture material. UV coordinate calculations specific to each primitive. All common image file formats are supported via the .net framework.
+* Plain RGB materials defined with Ambient, Diffuse etc etc etc.
+* Checker Board of two submaterials.
+* Perlin Noise mix of two submaterials.
+* Texture material. UV coordinate calculations are specific to each primitive type. All common image file formats are supported via the .net framework.
 
 File Types
 * Home made human readable "ray" files.
