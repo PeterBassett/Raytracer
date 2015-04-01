@@ -1021,11 +1021,7 @@ using Raytracer.Rendering.Antialiasing;
         private void renderAntialiasingSamplesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             renderAntialiasingSamplesToolStripMenuItem.Checked = !renderAntialiasingSamplesToolStripMenuItem.Checked;
-        }
-
-        private void stochasticSampleToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            stochasticSampleToolStripMenuItem.Checked = !stochasticSampleToolStripMenuItem.Checked;
+            m_scene.Antialiaser = GetAntialiaser();
         }
     }
 }

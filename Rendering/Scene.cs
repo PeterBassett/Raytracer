@@ -32,6 +32,7 @@ namespace Raytracer.Rendering
         bool _traceRefractions;
         bool _traceShadows;
         Material _defaultMaterial;
+        Random _sampler = new Random();
 
         public IAntialiaser Antialiaser { get; set; }
 
@@ -182,7 +183,7 @@ namespace Raytracer.Rendering
 
         public void TraceScene(IBmp bmp)
         {
-            r = new Random();
+            _sampler = new Random();
             _nearWidth = 2.0f * (Real)Math.Tan(MathLib.Deg2Rad(FieldOfView) / 2.0f);
             _nearHeight = _nearWidth * ((Real)Height) / ((Real)Width);
 
@@ -231,8 +232,7 @@ namespace Raytracer.Rendering
                 bmp.SetPixel((int)lX, (int)lY, new Colour(1, 0, 0));
             }
         }
-
-        Random r = new Random();
+     
         private Vector DirectionForPixel(long lX, int lY, int u, int v, uint _subSampling)
         {
             double x = (double)lX + SampleOffset(u, _subSampling);
@@ -261,10 +261,12 @@ namespace Raytracer.Rendering
 
         private double SampleOffset(int u, uint _subSampling)
         {
-            double subSamplingOffset1 = (1.0 / _subSampling) * u;
-            double subSamplingOffset2 = (1.0 / _subSampling) * (u + 1);
+            double sampReciprical = (1.0 / _subSampling);
+            double subSamplingOffset1 = sampReciprical * u;
+            double subSamplingOffset2 = sampReciprical * (u + 1);
 
-            double subSamplingOffset = subSamplingOffset1 + (r.NextDouble() * (subSamplingOffset2 - subSamplingOffset1));
+            double subSamplingOffset = subSamplingOffset1 + (_sampler.NextDouble() * (subSamplingOffset2 - subSamplingOffset1));
+
             if (_subSampling <= 1)
                 subSamplingOffset = 0.0;
             return subSamplingOffset;
