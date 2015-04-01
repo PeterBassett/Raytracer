@@ -21,13 +21,13 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
             pos.X = float.Parse(oText.GetToken(file));
             pos.Y = float.Parse(oText.GetToken(file));
             pos.Z = float.Parse(oText.GetToken(file));
-            scene.Pos = pos;
+            scene.EyePosition = pos;
 
             Vector dir = new Vector();
             dir.X = float.Parse(oText.GetToken(file));
             dir.Y = float.Parse(oText.GetToken(file));
             dir.Z = float.Parse(oText.GetToken(file));
-            scene.Dir = dir;
+            scene.ViewPointRotation = dir;
             
             scene.FieldOfView = float.Parse(oText.GetToken(file));
         }

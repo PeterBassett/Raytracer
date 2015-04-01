@@ -11,5 +11,7 @@ namespace Raytracer.Rendering
         void Init(int width, int height);
         Colour GetPixel(int lX, int lY);
         void SetPixel(int lX, int lY, Colour colour);
+        int Width { get; }
+        int Height { get; }
     }
 }

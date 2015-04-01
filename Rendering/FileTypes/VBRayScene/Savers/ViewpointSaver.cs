@@ -17,8 +17,8 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Savers
 
             file.WriteLine("Viewpoint");
             file.WriteLine("(");
-            file.WriteLine("\t{0}, {1}, {2}, 'View Position'", scene.Pos.X, scene.Pos.Y, scene.Pos.Z);
-            file.WriteLine("\t{0}, {1}, {2}, 'View Angle'", scene.Dir.X, scene.Dir.Y, scene.Dir.Z);
+            file.WriteLine("\t{0}, {1}, {2}, 'View Position'", scene.EyePosition.X, scene.EyePosition.Y, scene.EyePosition.Z);
+            file.WriteLine("\t{0}, {1}, {2}, 'View Angle'", scene.ViewPointRotation.X, scene.ViewPointRotation.Y, scene.ViewPointRotation.Z);
             file.WriteLine("\t{0} 'Field Of View'", scene.FieldOfView);
             file.WriteLine(")");
             file.WriteLine();

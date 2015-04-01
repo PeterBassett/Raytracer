@@ -79,10 +79,13 @@
     <Compile Include="MathTypes\Barycentric.cs" />
     <Compile Include="MathTypes\Polynomial.cs" />
     <Compile Include="MathTypes\Vector2D.cs" />
+    <Compile Include="Rendering\Accellerators\IAccellerator.cs" />
+    <Compile Include="Rendering\Antialiasing\EdgeDetectionResampling.cs" />
     <Compile Include="Rendering\FileTypes\ObjFile\StreamReader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\TorusLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\TextureMaterialLoader.cs" />
     <Compile Include="Rendering\HitResult.cs" />
+    <Compile Include="Rendering\Antialiasing\IAntialiaser.cs" />
     <Compile Include="Rendering\Materials\MaterialTexture.cs" />
     <Compile Include="Rendering\Materials\MaterialDispatcher.cs" />
     <Compile Include="Rendering\Primitives\Torus.cs" />
@@ -126,7 +129,7 @@
     <Compile Include="Rendering\IBmp.cs" />
     <Compile Include="Rendering\AABB.cs" />
     <Compile Include="Rendering\Accellerators\Octree.cs" />
-    <Compile Include="Rendering\Accellerators\BVH.cs" />
+    <Compile Include="Rendering\Accellerators\AABBHierarchy.cs" />
     <Compile Include="Rendering\Light.cs" />
     <Compile Include="Rendering\IntersectionInfo.cs" />
     <Compile Include="Rendering\ITraceable.cs" />

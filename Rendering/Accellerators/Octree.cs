@@ -8,7 +8,7 @@ namespace Raytracer.Rendering.Accellerators
 {
     using Vector = Vector3;
 
-    class Octree
+    class Octree : IAccelerator
     {
         public class Node
         {
@@ -77,7 +77,6 @@ namespace Raytracer.Rendering.Accellerators
 
                 return new AABB(min, max);
             }
-
 
             public void Add(Traceable obj)
             {
@@ -191,30 +190,30 @@ namespace Raytracer.Rendering.Accellerators
             }
         }
 
-        private Node root = null;
-
-        public Octree(AABB aabb) : this(aabb, 8, 0.01)
-        {            
-        }
-
-        public Octree(AABB aabb, double maxItems, double minDimension)
+        private Node _root = null;
+        private const double _minNodeWidth = 0.05;
+        private const int _maxItemsPerNode = 8;
+        
+        public void Build(IEnumerable<Traceable> primitives)
         {
-            root = new Node(aabb, maxItems, minDimension);
-        }
+            AABB bounds = AABB.Empty;
 
-        public void Add(Traceable obj)
-        {
-            this.root.Add(obj);
+            foreach (var item in primitives)
+	        {
+		        bounds.InflateToEncapsulate(item.GetAABB());
+	        }
+            
+            _root = new Node(bounds, _maxItemsPerNode, _minNodeWidth);
         }
 
         public IEnumerable<Traceable> Intersect(Ray ray)
         {
-            return this.root.Intersect(ray);
+            return this._root.Intersect(ray);
         }
 
         public void PruneEmptyNodes()
         {
-            this.root.PruneEmptyNodes();
-        }
+            this._root.PruneEmptyNodes();
+        }        
     }
 }

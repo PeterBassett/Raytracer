@@ -16,8 +16,8 @@ namespace Raytracer.Rendering.Primitives
 
         List<Triangle> Triangles = null;
         AABB bounds;
-        //Octree bvh = null;
-        BVH bvh = null;
+        
+        IAccelerator bvh = null;
 
         public Mesh(List<Triangle> triangles)
         {
@@ -28,7 +28,8 @@ namespace Raytracer.Rendering.Primitives
             if(TransformToOrigin())
                 BuildAABB();
 
-            bvh = new BVH(triangles);
+            bvh = new AABBHierarchy();
+            bvh.Build(triangles);
         }
 
         private bool TransformToOrigin()

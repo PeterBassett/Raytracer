@@ -22,6 +22,7 @@ using Raytracer.MathTypes;
 namespace Raytracer
 {
     using Vector = Vector3;
+using Raytracer.Rendering.Antialiasing;
     public partial class Main : Form
     {
         private Scene m_scene = null;
@@ -82,7 +83,7 @@ namespace Raytracer
             m_scene.Height = pictureBox1.Height;
 
             var centerPoint = m_scene.Primitives.First().Pos;
-            var distance = m_scene.Pos.Z;
+            var distance = m_scene.EyePosition.Z;
             double angle = 0;
 
             Stopwatch watch = new Stopwatch();
@@ -92,12 +93,12 @@ namespace Raytracer
             {
                 m_scene.TraceScene(bmpCache);
                 bmpCache.Render();
-                Vector dir = m_scene.Dir;
-                m_scene.Dir = new Vector(0,- angle, 0);
+                Vector dir = m_scene.ViewPointRotation;
+                m_scene.ViewPointRotation = new Vector(0,- angle, 0);
 
                 double rads = (angle - 90) * (Math.PI / 180.0);
                 //m_scene.Pos = m_scene.Pos + (m_scene.Dir * 0.1);
-                m_scene.Pos = centerPoint - new Vector(
+                m_scene.EyePosition = centerPoint - new Vector(
                     distance * Math.Cos(rads),
                     0,
                     distance * Math.Sin(rads)); 
@@ -134,9 +135,9 @@ namespace Raytracer
             scene.Height = pictureBox1.Height;
             scene.FieldOfView = 90;
 
-            scene.Pos = new Vector(50, 200, -1500);
+            scene.EyePosition = new Vector(50, 200, -1500);
             //scene.Dir = new MathTypes.Vector(0, -0.042612f, -1);
-            scene.Dir = new Vector(0,0, 0);
+            scene.ViewPointRotation = new Vector(0,0, 0);
 
             scene.RecursionDepth = 5;
             scene.TraceReflections = true;
@@ -516,8 +517,8 @@ namespace Raytracer
             scene.Width = pictureBox1.Width;
             scene.Height = pictureBox1.Height;
             scene.FieldOfView = 90;
-            scene.Pos = new Vector(-4.5f, 7.3f, -9);
-            scene.Dir = new Vector(45, 30, 0);
+            scene.EyePosition = new Vector(-4.5f, 7.3f, -9);
+            scene.ViewPointRotation = new Vector(45, 30, 0);
 
             scene.RecursionDepth = 5;
             scene.TraceReflections = true;
@@ -664,8 +665,7 @@ namespace Raytracer
             LoadSceneFromEditor();
             
             this.txtMessages.Text += "Rendering\r\n";
-            long TotalRays = 0;
-
+            
             int width = pictureBox1.Width;
             int height = pictureBox1.Height;
             bool blnMultiThreaded = multiThreadedToolStripMenuItem.Checked;
@@ -688,9 +688,10 @@ namespace Raytracer
                 watch.Start();
                 PictureBoxBmp bmp = new PictureBoxBmp(pictureBox1);
                 
-                TotalRays = Render(width, height, bmp, blnMultiThreaded, UpdateScreenRenderOptions);
+                Render(width, height, bmp, blnMultiThreaded, UpdateScreenRenderOptions);
 
                 bmp.Render();
+
                 watch.Stop();
                 return watch.ElapsedMilliseconds;
             });
@@ -699,7 +700,7 @@ namespace Raytracer
             {
                 this.UIThread(() =>
                 {
-                    this.txtMessages.Text += string.Format("Done:{0}ms total, Rays:{1}, Rays/s:{2:f}\r\n", time.Result, TotalRays, TotalRays / (time.Result / 1000.0));
+                    this.txtMessages.Text += string.Format("Done:{0}ms total\r\n", time.Result);
                 });
             });
 
@@ -714,7 +715,7 @@ namespace Raytracer
             }
         }
 
-        private long Render(int width, int height, IBmp bmp, bool blnMultiThreaded, Action<bool, bool, bool, int> UpdateScreenRenderOptions)
+        private void Render(int width, int height, IBmp bmp, bool blnMultiThreaded, Action<bool, bool, bool, int> UpdateScreenRenderOptions)
         {
             VBRaySceneLoader loader = new VBRaySceneLoader();
 
@@ -727,14 +728,12 @@ namespace Raytracer
             m_scene.Height = height;
 
             watch.Start();
-            var TotalRays = m_scene.TraceScene(bmp);
+            m_scene.TraceScene(bmp);
             watch.Stop();
             this.UIThread(() =>
             {
                 this.txtMessages.Text += string.Format("Rendered :{0}ms\r\n", watch.ElapsedMilliseconds);
-            });
-
-            return TotalRays;
+            });            
         }
 
         private void SceneFileMenuItem_Click(object sender, EventArgs e)
@@ -796,8 +795,8 @@ namespace Raytracer
             scene.Height = pictureBox1.Height;
             scene.FieldOfView = 90;
 
-            scene.Pos = new Vector(2.2, 1.2, -1.4);
-            scene.Dir = new Vector(30, -55, 0);
+            scene.EyePosition = new Vector(2.2, 1.2, -1.4);
+            scene.ViewPointRotation = new Vector(30, -55, 0);
             
             scene.RecursionDepth = 1;
             scene.TraceReflections = false;
@@ -997,12 +996,36 @@ namespace Raytracer
 
             var menu = (ToolStripMenuItem)sender;
 
-            foreach (ToolStripMenuItem item in menu.GetCurrentParent().Items)
+            foreach (ToolStripMenuItem item in menu.GetCurrentParent().Items.Cast<ToolStripMenuItem>().Take(4))
                 item.Checked = false;
 
             menu.Checked = true;
-         
-            m_scene.SuperSamplingLevel = uint.Parse(((ToolStripMenuItem)sender).Tag.ToString());
+
+            m_scene.Antialiaser = GetAntialiaser();
+        }
+
+        private uint GetAnitaliasingLevel()
+        {
+            return (from item in mnuSuperSampling.DropDownItems.Cast<ToolStripMenuItem>().Take(4)
+                    where item.Checked
+                    select uint.Parse(item.Tag.ToString())).First();
+        }
+
+        private IAntialiaser GetAntialiaser()
+        {
+             //uint.Parse(((ToolStripMenuItem)sender).Tag.ToString());
+            return new EdgeDetectionResampling(GetAnitaliasingLevel(), 
+                                               renderAntialiasingSamplesToolStripMenuItem.Checked);
+        }
+
+        private void renderAntialiasingSamplesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            renderAntialiasingSamplesToolStripMenuItem.Checked = !renderAntialiasingSamplesToolStripMenuItem.Checked;
+        }
+
+        private void stochasticSampleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            stochasticSampleToolStripMenuItem.Checked = !stochasticSampleToolStripMenuItem.Checked;
         }
     }
 }

@@ -8,8 +8,8 @@ namespace Raytracer.Rendering.FileTypes
     class Bmp : IBmp
     {
         Colour[] m_pColours = null;
-        public int Width = 0;
-        public int Height = 0;
+        private int _width = 0;
+        private int _height = 0;
 
         public Bmp(int lWidth, int lHeight)
         {
@@ -20,9 +20,9 @@ namespace Raytracer.Rendering.FileTypes
         {            
             Init(other.Width, other.Height);
 
-            for (int x = 0; x < Width; x++)
+            for (int x = 0; x < _width; x++)
             {
-                for (int y = 0; y < Height; y++)
+                for (int y = 0; y < _height; y++)
                 {
                     var col = other.GetPixel(x, y);
                     SetPixel(x, y, 
@@ -33,30 +33,41 @@ namespace Raytracer.Rendering.FileTypes
             }
         }
 
-        public void Init(int lWidth, int lHeight)
+        public void Init(int width, int height)
         {
             Destroy();
 
-            Width = lWidth;
-            Height = lHeight;
-            m_pColours = new Colour[lWidth * lHeight];
+            _width = width;
+            _height = height;
+
+            m_pColours = new Colour[width * height];
         }
 
         private void Destroy()
         {
-            Width = 0;
-            Height = 0;
+            _width = 0;
+            _height = 0;
             m_pColours = null;            
         }
 
         public void SetPixel(int lX, int lY, Colour colour)
         {
-            m_pColours[(lY * Width) + lX] = colour;
+            m_pColours[(lY * _width) + lX] = colour;
         }
 
         public Colour GetPixel(int lX, int lY)
         {
-            return m_pColours[(lY * Width) + lX];
+            return m_pColours[(lY * _width) + lX];
+        }
+
+        public int Width
+        {
+            get { return _width; }
+        }
+
+        public int Height
+        {
+            get { return _height; }
         }
     }
 }

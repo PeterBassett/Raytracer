@@ -86,6 +86,14 @@ namespace Raytracer.Rendering.FileTypes
                 m_Blue = value;
             }
         }
+
+        public float Brightness 
+        {
+            get 
+            {
+                return Red + Green + Blue;
+            }    
+        }
                
         public static Colour operator +(Colour a, Colour b)
         {

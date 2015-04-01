@@ -8,19 +8,18 @@ namespace Raytracer.Rendering.Accellerators
 {
     using Vector = Raytracer.MathTypes.Vector3;
 
-    class BVH
+    class AABBHierarchy : IAccelerator
     {
-
-        class BVHNode
+        class AABBHierarchyNode
         {
             bool isLeaf;
-            BVHNode left;
-            BVHNode right;
+            AABBHierarchyNode left;
+            AABBHierarchyNode right;
             AABB bounds;
             Traceable[] primitives;
             int depth;
            
-            public BVHNode(Traceable[] primitives, int depth)
+            public AABBHierarchyNode(Traceable[] primitives, int depth)
             {
                 this.depth = depth;
                 isLeaf = false;
@@ -110,16 +109,16 @@ namespace Raytracer.Rendering.Accellerators
                     return;
                 }
 
-                this.left = new BVHNode(left_tris.ToArray(), depth + 1);
-                this.right = new BVHNode(right_tris.ToArray(), depth + 1);
+                this.left = new AABBHierarchyNode(left_tris.ToArray(), depth + 1);
+                this.right = new AABBHierarchyNode(right_tris.ToArray(), depth + 1);
             }
 
-            public BVHNode Left
+            public AABBHierarchyNode Left
             {
                 get { return left; }
             }
 
-            public BVHNode Right
+            public AABBHierarchyNode Right
             {
                 get { return right; }
             }
@@ -144,11 +143,11 @@ namespace Raytracer.Rendering.Accellerators
             }            
         };
 
-        private BVHNode root;
+        private AABBHierarchyNode root;
 
-        public BVH(IEnumerable<Traceable> primitives)
+        public void Build(IEnumerable<Traceable> primitives)
         {
-            root = new BVHNode(primitives.ToArray(), 0);
+            root = new AABBHierarchyNode(primitives.ToArray(), 0);
         }
 
         public IEnumerable<Traceable> Intersect(Ray ray)

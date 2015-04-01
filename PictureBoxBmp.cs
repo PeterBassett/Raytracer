@@ -39,8 +39,13 @@ namespace Raytracer
         }
 
         public Colour GetPixel(int lX, int lY)
-        {
-            throw new NotImplementedException();
+        {            
+            unsafe
+            {
+                byte* row = (byte*)bmpdata.Scan0 + ((bmpdata.Height - lY - 1) * bmpdata.Stride);
+
+                return new Colour(row[(lX * 4) + 2] / 255.0, row[(lX * 4) + 1] / 255.0, row[lX * 4] / 255.0);
+            }
         }
 
         public void SetPixel(int lX, int lY, Colour colour)
@@ -76,6 +81,16 @@ namespace Raytracer
                 bitmap.Dispose();
                 bitmap = null;
             }
+        }
+
+        public int Width
+        {
+            get { return bitmap.Width; }
+        }
+
+        public int Height
+        {
+            get { return bitmap.Height; }
         }
     }
 }

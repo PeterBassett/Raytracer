@@ -44,6 +44,8 @@
             this.xToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.xToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.xToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.stochasticSampleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renderAntialiasingSamplesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuShadows = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuReflections = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRefractions = new System.Windows.Forms.ToolStripMenuItem();
@@ -186,17 +188,19 @@
             this.xToolStripMenuItem,
             this.xToolStripMenuItem1,
             this.xToolStripMenuItem2,
-            this.xToolStripMenuItem3});
+            this.xToolStripMenuItem3,
+            this.stochasticSampleToolStripMenuItem,
+            this.renderAntialiasingSamplesToolStripMenuItem});
             this.mnuSuperSampling.Name = "mnuSuperSampling";
             this.mnuSuperSampling.Size = new System.Drawing.Size(162, 22);
-            this.mnuSuperSampling.Text = "Super Sampling?";
+            this.mnuSuperSampling.Text = "Anti-Aliasing?";
             // 
             // xToolStripMenuItem
             // 
             this.xToolStripMenuItem.Checked = true;
             this.xToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.xToolStripMenuItem.Name = "xToolStripMenuItem";
-            this.xToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.xToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.xToolStripMenuItem.Tag = "1";
             this.xToolStripMenuItem.Text = "1x";
             this.xToolStripMenuItem.Click += new System.EventHandler(this.mnuSuperSampling_Click);
@@ -204,7 +208,7 @@
             // xToolStripMenuItem1
             // 
             this.xToolStripMenuItem1.Name = "xToolStripMenuItem1";
-            this.xToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.xToolStripMenuItem1.Size = new System.Drawing.Size(228, 22);
             this.xToolStripMenuItem1.Tag = "2";
             this.xToolStripMenuItem1.Text = "2x";
             this.xToolStripMenuItem1.Click += new System.EventHandler(this.mnuSuperSampling_Click);
@@ -212,7 +216,7 @@
             // xToolStripMenuItem2
             // 
             this.xToolStripMenuItem2.Name = "xToolStripMenuItem2";
-            this.xToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.xToolStripMenuItem2.Size = new System.Drawing.Size(228, 22);
             this.xToolStripMenuItem2.Tag = "4";
             this.xToolStripMenuItem2.Text = "4x";
             this.xToolStripMenuItem2.Click += new System.EventHandler(this.mnuSuperSampling_Click);
@@ -220,10 +224,24 @@
             // xToolStripMenuItem3
             // 
             this.xToolStripMenuItem3.Name = "xToolStripMenuItem3";
-            this.xToolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.xToolStripMenuItem3.Size = new System.Drawing.Size(228, 22);
             this.xToolStripMenuItem3.Tag = "8";
             this.xToolStripMenuItem3.Text = "8x";
             this.xToolStripMenuItem3.Click += new System.EventHandler(this.mnuSuperSampling_Click);
+            // 
+            // stochasticSampleToolStripMenuItem
+            // 
+            this.stochasticSampleToolStripMenuItem.Name = "stochasticSampleToolStripMenuItem";
+            this.stochasticSampleToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.stochasticSampleToolStripMenuItem.Text = "Stochastic Sampling?";
+            this.stochasticSampleToolStripMenuItem.Click += new System.EventHandler(this.stochasticSampleToolStripMenuItem_Click);
+            // 
+            // renderAntialiasingSamplesToolStripMenuItem
+            // 
+            this.renderAntialiasingSamplesToolStripMenuItem.Name = "renderAntialiasingSamplesToolStripMenuItem";
+            this.renderAntialiasingSamplesToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.renderAntialiasingSamplesToolStripMenuItem.Text = "Render Antialiasing Samples?";
+            this.renderAntialiasingSamplesToolStripMenuItem.Click += new System.EventHandler(this.renderAntialiasingSamplesToolStripMenuItem_Click);
             // 
             // mnuShadows
             // 
@@ -536,6 +554,8 @@
         private System.Windows.Forms.ToolStripMenuItem xToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem xToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem xToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem stochasticSampleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem renderAntialiasingSamplesToolStripMenuItem;
     }
 }
 
