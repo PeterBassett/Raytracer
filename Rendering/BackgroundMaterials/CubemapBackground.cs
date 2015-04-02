@@ -31,8 +31,10 @@ namespace Raytracer.Rendering.BackgroundMaterials
 	
         public Colour Shade(Ray ray)
         {
-	        Vector3 r = ray.Dir;
-	
+            Vector3 r = ray.Dir;
+
+            r.Normalize();
+
 	        int imax = 0;
 	        var rmax = Math.Abs(r.X);
 
@@ -120,7 +122,7 @@ namespace Raytracer.Rendering.BackgroundMaterials
         Colour GetPixelFromFace(int face, int px, int py)
         {
             int x_offset = 0, y_offset = 0;
-
+            int i;
             switch (face)
             {
                 case 0:
@@ -129,14 +131,26 @@ namespace Raytracer.Rendering.BackgroundMaterials
                     break;
                 case 1:
                     x_offset = 0;
-                    y_offset = _tileSize * 2;
+                    y_offset = _tileSize;
+
+                    i = px;
+                    px = py;
+                    py = i;
+                    px = _tileSize - px;
+
                     break;
                 case 2:
                     x_offset = _tileSize;
                     y_offset = _tileSize * 2;
                     break;
                 case 3:
-                    x_offset = y_offset = _tileSize * 2;
+                    x_offset = _tileSize * 2;
+                    y_offset = _tileSize ;
+                    
+                    i = px;
+                    px = py;
+                    py = i;
+                    py = _tileSize - py;
                     break;
                 case 4:
                     x_offset = y_offset = _tileSize;

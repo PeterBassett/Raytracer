@@ -20,26 +20,21 @@ namespace Raytracer.Rendering.FileTypes
         { 
         }
 
-        public Colour(float fRed, float fGreen, float fBlue) 
-        { 
-            m_Red = fRed;
-            m_Green = fGreen;
-            m_Blue = fBlue; 
+        public Colour(Colour col) : this(col.Red, col.Green, col.Blue) 
+        {
         }
 
         public Colour(double fRed, double fGreen, double fBlue)
+            : this((float)fRed, (float)fGreen, (float)fBlue)
         {
-            m_Red = (float)fRed;
-            m_Green = (float)fGreen;
-            m_Blue = (float)fBlue;
         }
 
-        public Colour(Colour col)
-	    {
-            m_Red = col.Red;
-            m_Green = col.Green;
-            m_Blue = col.Blue;
-	    }
+        public Colour(float fRed, float fGreen, float fBlue)
+        {
+            m_Red = fRed;
+            m_Green = fGreen;
+            m_Blue = fBlue;
+        }        
 
 	    public float Sum() 
         { 
@@ -136,9 +131,14 @@ namespace Raytracer.Rendering.FileTypes
 
         internal void Clamp()
         {
-            this.Red = Math.Min(this.Red, 1.0f);
-            this.Green = Math.Min(this.Green, 1.0f);
-            this.Blue = Math.Min(this.Blue, 1.0f);
+            this.Red = Clamp(this.Red);
+            this.Green = Clamp(this.Green);
+            this.Blue = Clamp(this.Blue);
+        }
+
+        internal float Clamp(float component)
+        {
+            return Math.Min(Math.Max(component, 0.0f), 1.0f);
         }
 
         public System.Drawing.Color ToColor()

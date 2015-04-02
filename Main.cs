@@ -725,8 +725,9 @@ using Raytracer.Rendering.Antialiasing;
             UpdateScreenRenderOptions(m_scene.TraceShadows, m_scene.TraceReflections, m_scene.TraceRefractions, m_scene.RecursionDepth);
 
             m_scene.BackgroundMaterial = new SolidBackground(new Colour());
-            m_scene.BackgroundMaterial = new CubemapBackground(@"skybox_texture.jpg");
-            //m_scene.BackgroundMaterial = new CubemapBackground(@"uffizi_cube.jpg");            
+            //m_scene.BackgroundMaterial = new CubemapBackground(@"skybox_texture.jpg");
+            m_scene.BackgroundMaterial = new CubemapBackground(@"uffizi_cube.jpg");
+            //m_scene.BackgroundMaterial = new CubemapBackground2(@"uffizi_cube.jpg"); 
             
             m_scene.MultiThreaded = blnMultiThreaded;
             m_scene.Width = width;

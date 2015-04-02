@@ -1,21 +1,4 @@
-Viewpoint(0,0, 0, 	 ' Viewpoint ' 
-	  0, 0, 0, ' View Angle ' 
+Viewpoint(0, 0, 0, 	 ' Viewpoint ' 
+	  0, 45, 0, ' View Angle ' 
 	  90)		 ' FOV '	
 
-OutputSize(800,800)
-
-LightSource(60, 80, -100, 255, 255, 255)
-
-ColourMaterial("red",
-  0.7,0.1,0.1, 
-  0.7,0.1,0.1,
-  20, 0.35,       ' Specular '
-  0,0,0,  ' Reflected '
-  1,       ' TransN, n1, n2 '
-  0, 0, 0        ' Transmitted. '
-)
-
-Sphere( 5, 
-  0, 0, 12,
-  "red"
-)
