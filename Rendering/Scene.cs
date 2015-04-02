@@ -35,6 +35,7 @@ namespace Raytracer.Rendering
         Random _sampler = new Random();
 
         public IAntialiaser Antialiaser { get; set; }
+        public IBackgroundMaterial BackgroundMaterial { get; set; }
 
         public bool MultiThreaded { get; set; }
 
@@ -299,77 +300,82 @@ namespace Raytracer.Rendering
                     yield return item;
         }
 
-        Colour TraceRay(Ray cRay, Colour contribution, Real curRefractionIndex, long depth, Vector eyeDirection)
+        Colour TraceRay(Ray ray, Colour contribution, Real curRefractionIndex, long depth, Vector eyeDirection)
         {
             const Real EPSILON = 0.001f;
 
             Colour colour = new Colour(0.0f);
 
-            IntersectionInfo info = FindClosestIntersection(cRay);
+            IntersectionInfo info = FindClosestIntersection(ray);
 
-            if (info.Result != HitResult.MISS)
+            if (info.Result == HitResult.MISS)
             {
-                // set the 
-                Material material = new Material();
-                Material objectMaterial = info.Primitive.Material != null ? info.Primitive.Material : this._defaultMaterial;
+                if (this.BackgroundMaterial != null)
+                    colour = this.BackgroundMaterial.Shade(ray);
 
-                var materialDispatcher = new MaterialDispatcher();
-                materialDispatcher.Solidify((dynamic)info.Primitive, (dynamic)objectMaterial, info, material);
+                return colour;
+            }
+            
+            // set the 
+            Material material = new Material();
+            Material objectMaterial = info.Primitive.Material != null ? info.Primitive.Material : this._defaultMaterial;
+
+            var materialDispatcher = new MaterialDispatcher();
+            materialDispatcher.Solidify((dynamic)info.Primitive, (dynamic)objectMaterial, info, material);
                 
-                // get the shading due to lighting at this point
-                colour = Shade(info.HitPoint, info.NormalAtHitPoint, material, eyeDirection) * contribution;
+            // get the shading due to lighting at this point
+            colour = Shade(info.HitPoint, info.NormalAtHitPoint, material, eyeDirection) * contribution;
 
-                if (depth == _maxDepth)
+            if (depth == _maxDepth)
+            {
+                colour.Clamp();
+                return colour;
+            }
+
+            // if we are dealing with a reflective material
+            if (material.Reflective.Sum() > 0.0f && TraceReflections)
+            {
+                Colour colReflectAmount = material.Reflective * contribution;
+
+                if (colReflectAmount.Sum() > 0.01f)
                 {
-                    colour.Clamp();
-                    return colour;
-                }
+                    // calculate the new reflected direction
+                    Ray reflectedRay = new Ray(info.HitPoint, CalculateReflectedRay(ray.Dir, info.NormalAtHitPoint));
 
-                // if we are dealing with a reflective material
-                if (material.Reflective.Sum() > 0.0f && TraceReflections)
-                {
-                    Colour colReflectAmount = material.Reflective * contribution;
-
-                    if (colReflectAmount.Sum() > 0.01f)
-                    {
-                        // calculate the new reflected direction
-                        Ray reflectedRay = new Ray(info.HitPoint, CalculateReflectedRay(cRay.Dir, info.NormalAtHitPoint));
-
-                        // recursivly call trace ray
-                        colour += TraceRay(reflectedRay, colReflectAmount, curRefractionIndex, depth + 1, eyeDirection);
-                    }
-                }
-
-                // if we are dealing with a refractive material
-                if (material.Transmitted.Sum() > 0.0f && TraceRefractions)
-                {
-                    Colour colRefractiveAmount = material.Transmitted * contribution;
-
-                    if (colRefractiveAmount.Sum() > 0.01f)
-                    {
-                        // calculate refraction
-                        Real rindex = material.Refraction;
-                        Real n = curRefractionIndex / rindex;
-                        //Vector N = primitive.GetNormal(info.HitPoint) * (Real)info.Result;
-
-                        Vector N = info.NormalAtHitPoint * (Real)info.Result;
-                        Real cosI = -Vector.DotProduct(N, cRay.Dir);
-                        Real cosT2 = 1.0f - n * n * (1.0f - cosI * cosI);
-                        if (cosT2 > 0.0f)
-                        {
-                            Vector T = -((n * cRay.Dir) + (Real)(n * cosI - Math.Sqrt(cosT2)) * N);
-
-                            Colour rcol = TraceRay(new Ray(info.HitPoint + T * EPSILON, T), colRefractiveAmount, rindex, depth + 1, eyeDirection);
-
-                            //Raytrace( Ray( pi + T * EPSILON, T ), rcol, a_Depth + 1, rindex, dist );
-                            // apply Beer's law
-                            //Colour absorbance = material.Transmitted * -dist;
-                            //Colour transparency = new Colour((Real)Math.Exp(absorbance.Red), (Real)Math.Exp(absorbance.Green), (Real)Math.Exp(absorbance.Blue));
-                            colour += rcol;// *transparency;
-                        }
-                    }
+                    // recursivly call trace ray
+                    colour += TraceRay(reflectedRay, colReflectAmount, curRefractionIndex, depth + 1, eyeDirection);
                 }
             }
+
+            // if we are dealing with a refractive material
+            if (material.Transmitted.Sum() > 0.0f && TraceRefractions)
+            {
+                Colour colRefractiveAmount = material.Transmitted * contribution;
+
+                if (colRefractiveAmount.Sum() > 0.01f)
+                {
+                    // calculate refraction
+                    Real rindex = material.Refraction;
+                    Real n = curRefractionIndex / rindex;
+                    //Vector N = primitive.GetNormal(info.HitPoint) * (Real)info.Result;
+
+                    Vector N = info.NormalAtHitPoint * (Real)info.Result;
+                    Real cosI = -Vector.DotProduct(N, ray.Dir);
+                    Real cosT2 = 1.0f - n * n * (1.0f - cosI * cosI);
+                    if (cosT2 > 0.0f)
+                    {
+                        Vector T = -((n * ray.Dir) + (Real)(n * cosI - Math.Sqrt(cosT2)) * N);
+
+                        Colour rcol = TraceRay(new Ray(info.HitPoint + T * EPSILON, T), colRefractiveAmount, rindex, depth + 1, eyeDirection);
+
+                        //Raytrace( Ray( pi + T * EPSILON, T ), rcol, a_Depth + 1, rindex, dist );
+                        // apply Beer's law
+                        //Colour absorbance = material.Transmitted * -dist;
+                        //Colour transparency = new Colour((Real)Math.Exp(absorbance.Red), (Real)Math.Exp(absorbance.Green), (Real)Math.Exp(absorbance.Blue));
+                        colour += rcol;// *transparency;
+                    }
+                }
+            }            
 
             colour.Clamp();
             return colour;

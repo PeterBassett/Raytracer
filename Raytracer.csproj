@@ -81,11 +81,14 @@
     <Compile Include="MathTypes\Vector2D.cs" />
     <Compile Include="Rendering\Accellerators\IAccellerator.cs" />
     <Compile Include="Rendering\Antialiasing\EdgeDetectionResampling.cs" />
+    <Compile Include="Rendering\BackgroundMaterials\CubemapBackground.cs" />
+    <Compile Include="Rendering\BackgroundMaterials\SolidBackground.cs" />
     <Compile Include="Rendering\FileTypes\ObjFile\StreamReader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\TorusLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\TextureMaterialLoader.cs" />
     <Compile Include="Rendering\HitResult.cs" />
     <Compile Include="Rendering\Antialiasing\IAntialiaser.cs" />
+    <Compile Include="Rendering\IBackgroundMaterial.cs" />
     <Compile Include="Rendering\Materials\MaterialTexture.cs" />
     <Compile Include="Rendering\Materials\MaterialDispatcher.cs" />
     <Compile Include="Rendering\Primitives\Torus.cs" />
@@ -168,6 +171,7 @@
     <None Include="Data\Small\BurningEarth.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Small\Cube.obj" />
     <None Include="Data\Small\Cube.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -180,15 +184,19 @@
     <None Include="Data\Small\cube_textured.mtl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Small\cube_textured.obj" />
     <None Include="Data\Small\Cube_textured.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Small\Diamond.obj" />
+    <None Include="Data\Small\Dodechahedron.obj" />
     <None Include="Data\Small\fireball.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\Small\Lamp.mtl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Small\Lamp.obj" />
     <None Include="Data\Small\Lamp.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -198,6 +206,7 @@
     <None Include="Data\Small\legocar.mtl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Small\legocar.obj" />
     <None Include="Data\Small\LegoCar.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -205,6 +214,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\Small\NoisyGlassBall.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\Ball.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\Small\RedBall.ray">
@@ -284,6 +296,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Small\LEGO_logo_1972.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Small\skybox_texture.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Small\uffizi_cube.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
