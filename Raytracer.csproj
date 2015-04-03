@@ -81,12 +81,17 @@
     <Compile Include="MathTypes\Vector2D.cs" />
     <Compile Include="Rendering\Accellerators\IAccellerator.cs" />
     <Compile Include="Rendering\Antialiasing\EdgeDetectionResampling.cs" />
-    <Compile Include="Rendering\BackgroundMaterials\CubemapBackground2.cs" />
+    <Compile Include="Rendering\BackgroundMaterials\HorizontalCubemapBackground.cs" />
+    <Compile Include="Rendering\BackgroundMaterials\VerticalCubemapBackground.cs" />
     <Compile Include="Rendering\BackgroundMaterials\CubemapBackground.cs" />
-    <Compile Include="Rendering\BackgroundMaterials\SolidBackground.cs" />
+    <Compile Include="Rendering\BackgroundMaterials\SolidColourBackground.cs" />
     <Compile Include="Rendering\FileTypes\ObjFile\StreamReader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\VerticalCubemapBackgroundLoader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\SolidColourBackgroundLoader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\HorizontalCubemapBackgroundLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\TorusLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\TextureMaterialLoader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Savers\BackgroundSaver.cs" />
     <Compile Include="Rendering\HitResult.cs" />
     <Compile Include="Rendering\Antialiasing\IAntialiaser.cs" />
     <Compile Include="Rendering\IBackgroundMaterial.cs" />
@@ -172,7 +177,13 @@
     <None Include="Data\Small\BurningEarth.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Data\Small\Ball.ray">
+    <None Include="Data\Small\CubemappedBall.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\CubemapHorizonatalBackground.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\CubemapVerticalBackground.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\Small\Cube.obj">
@@ -305,6 +316,9 @@
     <Content Include="Data\Small\cube_textured.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\Small\Cyber Light Environment_2 Cube.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\Small\earth_daymap.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -318,9 +332,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Small\uffizi_cube.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\Small\uffizi_cube2.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -1,0 +1,19 @@
+Viewpoint(0, 0, -9, 	 ' Viewpoint ' 
+	  0, 45, 0, ' View Angle ' 
+	  90)		 ' FOV '	
+
+HorizontalCubemapBackground("skybox_texture.jpg")
+
+ColourMaterial("mirror",
+  0.1,0.1,0.1, 
+  0.1,0.1,0.1,
+  20, 0.35,       ' Specular '
+  1,1,1,  ' Reflected '
+  1,       ' TransN, n1, n2 '
+  0, 0, 0        ' Transmitted. '
+)
+
+Sphere( 5, 
+  0, 0, 0,
+  "mirror"
+)

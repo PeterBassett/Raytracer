@@ -2,3 +2,4 @@ Viewpoint(0, 0, 0, 	 ' Viewpoint '
 	  0, 45, 0, ' View Angle ' 
 	  90)		 ' FOV '	
 
+VerticalCubemapBackground("uffizi_cube.jpg")

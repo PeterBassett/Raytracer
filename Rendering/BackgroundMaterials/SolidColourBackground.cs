@@ -6,10 +6,10 @@ using Raytracer.Rendering.FileTypes;
 
 namespace Raytracer.Rendering.BackgroundMaterials
 {
-    class SolidBackground : IBackgroundMaterial
+    class SolidColourBackground : IBackgroundMaterial
     {
         private Colour _colour;
-        public SolidBackground(Colour colour)
+        public SolidColourBackground(Colour colour)
         {
             _colour = colour;
         }
