@@ -57,7 +57,12 @@ namespace Raytracer.Rendering.FileTypes
 
         public Colour GetPixel(int lX, int lY)
         {
-            return m_pColours[(lY * _width) + lX];
+            var c = m_pColours[(lY * _width) + lX];
+            float r;
+            if (c == new Colour(31f / 255, 34f / 255, 43f / 255))
+                r = c.Red;
+
+            return c;
         }
 
         public int Width

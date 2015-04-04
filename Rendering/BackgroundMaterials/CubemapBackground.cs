@@ -85,7 +85,12 @@ namespace Raytracer.Rendering.BackgroundMaterials
 	        s = 0.5f * (s / rmax + 1.0f);
 	        t = 0.5f * (t / rmax + 1.0f);
 	
-	        return SampleFace(face, s, t);
+	        var c = SampleFace(face, s, t);
+
+            //if(c == new Colour(31f / 255, 34f / 255, 43f / 255))
+                //Console.WriteLine();
+
+            return c;
         }
 
         protected Colour SampleFace(Face face, double s, double t)

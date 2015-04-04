@@ -1,6 +1,7 @@
 Viewpoint(0, 0, 0, 	 ' Viewpoint ' 
-	  0, 45, 0, ' View Angle ' 
-	  90)		 ' FOV '	
+	  39.18
+, 55, 0, ' View Angle ' 
+	  1)		 ' FOV '	
 
 ' Cubemap by Jockum Skoglund '
 ' http://www.zfight.com/misc/images/textures/envmaps/miramar_large.jpg '

@@ -129,6 +129,36 @@ namespace Raytracer.Rendering.FileTypes
             return new Colour(a.Red / f, a.Green / f, a.Blue / f);
         }
 
+        /// <summary>
+        /// Tests whether two specified colours are equal.
+        /// </summary>
+        public static bool operator == (Colour a, Colour b)
+        {
+            if (Object.Equals(a, null))
+            {
+                return Object.Equals(b, null);
+            }
+
+            if (Object.Equals(b, null))
+            {
+                return Object.Equals(a, null);
+            }
+
+            float epsilon = 0.00001f;
+
+            return Math.Abs(a.Red - b.Red) < epsilon &&
+                    Math.Abs(a.Green - b.Green) < epsilon &&
+                    Math.Abs(a.Blue - b.Blue) < epsilon;
+        }
+
+        /// <summary>
+        /// Tests whether two specified colours are not equal.
+        /// </summary>
+        public static bool operator !=(Colour a, Colour b)
+        {
+            return !(a == b);
+        }
+
         internal void Clamp()
         {
             this.Red = Clamp(this.Red);
