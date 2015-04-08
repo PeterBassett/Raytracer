@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Raytracer.MathTypes;
 
-namespace Raytracer.Rendering
+namespace Raytracer.Rendering.Primitives
 {
     using Vector = Vector3;
     using Real = System.Double;

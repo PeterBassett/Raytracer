@@ -1,22 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Raytracer.MathTypes;
-using Raytracer.Rendering.FileTypes;
-using System.Threading.Tasks;
-using System.Threading;
 using Raytracer.Rendering.Accellerators;
-using Raytracer.Rendering.Primitives;
+using Raytracer.Rendering.FileTypes;
 using Raytracer.Rendering.Materials;
-using Raytracer.Rendering.Antialiasing;
+using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.Rendering
 {
-    using Vector = Vector3;
     using Real = System.Double;
+    using Vector = Vector3;
+    using Raytracer.Rendering.BackgroundMaterials;
     
-    class Scene
+    class Scene : IScene
     {
         List<Light> _lights = new List<Light>();
         List<Traceable> _primitives = new List<Traceable>();
@@ -34,7 +30,6 @@ namespace Raytracer.Rendering
         Material _defaultMaterial;
         Random _sampler = new Random();
 
-        public IAntialiaser Antialiaser { get; set; }
         public IBackgroundMaterial BackgroundMaterial { get; set; }
 
         public bool MultiThreaded { get; set; }
@@ -45,8 +40,8 @@ namespace Raytracer.Rendering
 
         public Real FieldOfView { get; set; }
 
-        public int Width { get; set; }
-        public int Height { get; set; }
+        private int _width;
+        private int _height;
 
         public Scene()
         {
@@ -182,97 +177,11 @@ namespace Raytracer.Rendering
                 return null;
         }
 
-        public void TraceScene(IBmp bmp)
+        public Colour Trace(Ray ray)
         {
-            _sampler = new Random();
-            _nearWidth = 2.0f * (Real)Math.Tan(MathLib.Deg2Rad(FieldOfView) / 2.0f);
-            _nearHeight = _nearWidth * ((Real)Height) / ((Real)Width);
-
-            bmp.Init(Width, Height);
-          
-            var options = new ParallelOptions();
-            if (!this.MultiThreaded)
-                options.MaxDegreeOfParallelism = 1;
-
-            Parallel.For(0, Width, options, (lX) =>
-            {                
-                for (int lY = 0; lY < Height; lY++)
-                {
-                    TracePixel(bmp, lX, lY, 1);
-                }
-            });
-            
-            if(this.Antialiaser != null)
-                this.Antialiaser.Anitalias(this, bmp);
+            return TraceRay(ray, new Colour(1.0f), 1.0f, 1, ray.Dir);
         }
-
-        public void TracePixel(IBmp bmp, int lX, int lY, uint samplingLevel)
-        {
-            Vector dir;
-            Ray ray;
-            Colour colour = new Colour();
-            Colour contribution = new Colour(1.0f);
-
-            try
-            {
-                for (int u = 0; u < samplingLevel; u++)
-                {
-                    for (int v = 0; v < samplingLevel; v++)
-                    {
-                        dir = DirectionForPixel(lX, lY, v, u, samplingLevel);
-                        ray = new Ray(this.EyePosition, dir);
-
-                        colour += TraceRay(ray, contribution, 1.0f, 1, ray.Dir);
-                    }
-                }
-
-                bmp.SetPixel((int)lX, (int)lY, colour / (float)(samplingLevel * samplingLevel));
-            }
-            catch (Exception)
-            {
-                bmp.SetPixel((int)lX, (int)lY, new Colour(1, 0, 0));
-            }
-        }
-     
-        private Vector DirectionForPixel(long lX, int lY, int u, int v, uint _subSampling)
-        {
-            double x = (double)lX + SampleOffset(u, _subSampling);
-            double y = (double)lY + SampleOffset(v, _subSampling);
-
-            x -= Width / 2.0;
-            y -= Height / 2.0;
-
-            double scaleFactor = _nearWidth / (Real)Width;
-
-            x *= scaleFactor;
-            y *= scaleFactor;
-
-            var dir = new Vector();
-            dir.X = x;
-            dir.Y = y;
-            dir.Z = 1;
-
-            dir.RotateX(ViewPointRotation.X, ref dir);
-            dir.RotateY(ViewPointRotation.Y, ref dir);
-            dir.RotateZ(ViewPointRotation.Z, ref dir);
-            dir.Normalize();
-
-            return dir;
-        }
-
-        private double SampleOffset(int u, uint _subSampling)
-        {
-            double sampReciprical = (1.0 / _subSampling);
-            double subSamplingOffset1 = sampReciprical * u;
-            double subSamplingOffset2 = sampReciprical * (u + 1);
-
-            double subSamplingOffset = subSamplingOffset1 + (_sampler.NextDouble() * (subSamplingOffset2 - subSamplingOffset1));
-
-            if (_subSampling <= 1)
-                subSamplingOffset = 0.0;
-            return subSamplingOffset;
-        }
-
+        
         IntersectionInfo FindClosestIntersection(Ray ray)
         {
             IntersectionInfo minimumIntersection = new IntersectionInfo(HitResult.MISS);

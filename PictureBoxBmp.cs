@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using Raytracer.Rendering.FileTypes;
 using System.Windows.Forms;
-using System.Drawing;
 using Raytracer.Extensions;
 using Raytracer.Rendering;
+using System.Drawing;
 
 namespace Raytracer
 {
@@ -15,6 +15,7 @@ namespace Raytracer
         Bitmap bitmap = null;
         PictureBox pictureBox = null;
         System.Drawing.Imaging.BitmapData bmpdata = null;
+        Raytracer.MathTypes.Size _size;
 
         public PictureBoxBmp(PictureBox box)
         {
@@ -22,14 +23,16 @@ namespace Raytracer
                 throw new ArgumentNullException();
 
             pictureBox = box;           
-        }
+       // }
 
-        public void Init(int width, int height)
-        {
+            _size = new Raytracer.MathTypes.Size(box.Width, box.Height);
+
+        //public void Init(int width, int height)
+        //{
             pictureBox.UIThread(() =>
             {
-                pictureBox.Width = width;
-                pictureBox.Height = height;
+          //      pictureBox.Width = width;
+            //    pictureBox.Height = height;
                 bitmap = new Bitmap(pictureBox.Width, pictureBox.Height);
             });
             
@@ -83,14 +86,9 @@ namespace Raytracer
             }
         }
 
-        public int Width
+        public Raytracer.MathTypes.Size Size
         {
-            get { return bitmap.Width; }
-        }
-
-        public int Height
-        {
-            get { return bitmap.Height; }
+            get { return _size; }
         }
     }
 }

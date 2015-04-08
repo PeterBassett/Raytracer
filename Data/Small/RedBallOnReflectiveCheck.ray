@@ -2,7 +2,6 @@ Viewpoint(0, 3, -12, 	 ' Viewpoint '
 	  45, 45, 0.0, ' View Angle ' 
 	  90)		 ' FOV '	
 
-OutputSize(800,800)
 
 AmbientLight(50, 50, 50)
 

@@ -50,9 +50,9 @@ namespace Raytracer.Rendering.Materials
         internal Colour Sample(double u, double v)
         {
             try
-            {    
-                u = u * _diffuseMap.Width - 0.5;
-                v = v * _diffuseMap.Height - 0.5;
+            {
+                u = u * _diffuseMap.Size.Width - 0.5;
+                v = v * _diffuseMap.Size.Height - 0.5;
 
                 int x = (int)Math.Floor(u);
                 int y = (int)Math.Floor(v);
@@ -75,8 +75,8 @@ namespace Raytracer.Rendering.Materials
 
         public Colour GetPixelSafe(int x, int y)
         {
-            int maxX = _diffuseMap.Width - 1;
-            int maxY = _diffuseMap.Height - 1;
+            int maxX = _diffuseMap.Size.Width - 1;
+            int maxY = _diffuseMap.Size.Height - 1;
 
             x = Math.Min(maxX, Math.Max(0, x));
             y = Math.Min(maxY, Math.Max(0, y));
@@ -84,8 +84,8 @@ namespace Raytracer.Rendering.Materials
             return _diffuseMap.GetPixel(x, y);
         }
 
-        public double Width { get { return _diffuseMap.Width; } }
+        public double Width { get { return _diffuseMap.Size.Width; } }
 
-        public double Height { get { return _diffuseMap.Height; } }
+        public double Height { get { return _diffuseMap.Size.Height; } }
     }
 }

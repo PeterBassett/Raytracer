@@ -78,9 +78,13 @@
     <Compile Include="MathTypes\Algebra.cs" />
     <Compile Include="MathTypes\Barycentric.cs" />
     <Compile Include="MathTypes\Polynomial.cs" />
+    <Compile Include="MathTypes\Size.cs" />
     <Compile Include="MathTypes\Vector2D.cs" />
+    <Compile Include="Rendering\AABB.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Rendering\Accellerators\IAccellerator.cs" />
-    <Compile Include="Rendering\Antialiasing\EdgeDetectionResampling.cs" />
+    <Compile Include="Rendering\PixelSampler\EdgeDetectionSampler.cs" />
     <Compile Include="Rendering\BackgroundMaterials\HorizontalCubemapBackground.cs" />
     <Compile Include="Rendering\BackgroundMaterials\VerticalCubemapBackground.cs" />
     <Compile Include="Rendering\BackgroundMaterials\CubemapBackground.cs" />
@@ -92,11 +96,32 @@
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\TorusLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\TextureMaterialLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Savers\BackgroundSaver.cs" />
-    <Compile Include="Rendering\HitResult.cs" />
-    <Compile Include="Rendering\Antialiasing\IAntialiaser.cs" />
-    <Compile Include="Rendering\IBackgroundMaterial.cs" />
+    <Compile Include="Rendering\HitResult.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rendering\BackgroundMaterials\IBackgroundMaterial.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rendering\IBmp.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rendering\Cameras\ICamera.cs" />
+    <Compile Include="Rendering\IntersectionInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rendering\PixelSampler\IPixelSampler.cs" />
+    <Compile Include="Rendering\IScene.cs" />
+    <Compile Include="Rendering\Primitives\ITraceable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rendering\Light.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Rendering\Materials\MaterialTexture.cs" />
     <Compile Include="Rendering\Materials\MaterialDispatcher.cs" />
+    <Compile Include="Rendering\Cameras\PinholeCamera.cs" />
+    <Compile Include="Rendering\PixelSampler\JitteredPixelSampler.cs" />
+    <Compile Include="Rendering\PixelSampler\StandardPixelSampler.cs" />
     <Compile Include="Rendering\Primitives\Torus.cs" />
     <Compile Include="MathTypes\MathLib.cs" />
     <Compile Include="MathTypes\Vector3D.cs" />
@@ -116,7 +141,6 @@
     <Compile Include="Rendering\FileTypes\VBRayScene\Savers\AmbientLightSaver.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Savers\PointLightSaver.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Savers\RenderSettingsSaver.cs" />
-    <Compile Include="Rendering\FileTypes\VBRayScene\Savers\OutputSaver.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Savers\ViewpointSaver.cs" />
     <Compile Include="PictureBoxBmp.cs" />
     <Compile Include="Rendering\FileTypes\Bmp.cs" />
@@ -128,20 +152,14 @@
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\ColourMaterialLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\NoiseMaterialLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\PlaneLoader.cs" />
-    <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\OutputLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\RenderSettingsLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\SphereLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\PointLightLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\ViewpointLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Tokeniser.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\VBRaySceneLoader.cs" />
-    <Compile Include="Rendering\IBmp.cs" />
-    <Compile Include="Rendering\AABB.cs" />
     <Compile Include="Rendering\Accellerators\Octree.cs" />
     <Compile Include="Rendering\Accellerators\AABBHierarchy.cs" />
-    <Compile Include="Rendering\Light.cs" />
-    <Compile Include="Rendering\IntersectionInfo.cs" />
-    <Compile Include="Rendering\ITraceable.cs" />
     <Compile Include="Rendering\Materials\Material.cs" />
     <Compile Include="Rendering\Materials\MaterialCheckerboard.cs" />
     <Compile Include="Rendering\Materials\MaterialNoise.cs" />
@@ -153,7 +171,10 @@
     <Compile Include="Rendering\Primitives\MeshInstance.cs" />
     <Compile Include="Rendering\Primitives\Plane.cs" />
     <Compile Include="Rendering\Primitives\Triangle.cs" />
-    <Compile Include="Rendering\Ray.cs" />
+    <Compile Include="Rendering\Ray.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rendering\Renderer.cs" />
     <Compile Include="Rendering\Scene.cs" />
     <Compile Include="Rendering\Primitives\Sphere.cs" />
     <EmbeddedResource Include="Main.resx">
@@ -341,6 +362,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

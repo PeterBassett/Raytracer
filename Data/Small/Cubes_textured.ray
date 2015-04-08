@@ -2,7 +2,6 @@ Viewpoint(-2,2,-1,   ' Viewpoint '
 	  30, 45, 0,  ' View Angle ' 
 	  75)	     ' FOV '	
 
-OutputSize(200,200)
 
 RenderSettings
 (

@@ -7,6 +7,7 @@ using Raytracer.MathTypes;
 namespace Raytracer.Rendering.Accellerators
 {
     using Vector = Vector3;
+    using Raytracer.Rendering.Primitives;
 
     class Octree : IAccelerator
     {

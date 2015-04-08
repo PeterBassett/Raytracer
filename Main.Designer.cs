@@ -481,7 +481,6 @@
             this.MainMenuStrip = this.mainMenu;
             this.Name = "Main";
             this.Text = "Petes Ray Tracer";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();

@@ -5,8 +5,6 @@ Viewpoint
 	90 'Field Of View'
 )
 
-OutputSize(359, 263)
-
 RenderSettings
 (
 	5, 'Recursion Depth'

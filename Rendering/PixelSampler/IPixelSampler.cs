@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using Raytracer.Rendering.FileTypes;
 
-namespace Raytracer.Rendering
+namespace Raytracer.Rendering.PixelSamplers
 {
-    interface IBackgroundMaterial
+    interface IPixelSampler
     {
-        Colour Shade(Ray ray);
+        Colour SamplePixel(Renderer renderer, int x, int y);
     }
 }

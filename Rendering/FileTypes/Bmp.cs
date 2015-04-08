@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Raytracer.MathTypes;
 
 namespace Raytracer.Rendering.FileTypes
 {
     class Bmp : IBmp
     {
         Colour[] m_pColours = null;
-        private int _width = 0;
-        private int _height = 0;
+        private Size _size;
 
         public Bmp(int lWidth, int lHeight)
         {
@@ -20,9 +20,9 @@ namespace Raytracer.Rendering.FileTypes
         {            
             Init(other.Width, other.Height);
 
-            for (int x = 0; x < _width; x++)
+            for (int x = 0; x < _size.Width; x++)
             {
-                for (int y = 0; y < _height; y++)
+                for (int y = 0; y < _size.Height; y++)
                 {
                     var col = other.GetPixel(x, y);
                     SetPixel(x, y, 
@@ -33,46 +33,34 @@ namespace Raytracer.Rendering.FileTypes
             }
         }
 
-        public void Init(int width, int height)
+        private void Init(int width, int height)
         {
             Destroy();
 
-            _width = width;
-            _height = height;
+            _size = new Size(width, height);
 
-            m_pColours = new Colour[width * height];
+            m_pColours = new Colour[_size.Width * _size.Height];
         }
 
         private void Destroy()
         {
-            _width = 0;
-            _height = 0;
-            m_pColours = null;            
+            _size = new Size(0, 0);
+            m_pColours = null;
         }
 
         public void SetPixel(int lX, int lY, Colour colour)
         {
-            m_pColours[(lY * _width) + lX] = colour;
+            m_pColours[(lY * _size.Width) + lX] = colour;
         }
 
         public Colour GetPixel(int lX, int lY)
         {
-            var c = m_pColours[(lY * _width) + lX];
-            float r;
-            if (c == new Colour(31f / 255, 34f / 255, 43f / 255))
-                r = c.Red;
-
-            return c;
+            return m_pColours[(lY * _size.Width) + lX];
         }
 
-        public int Width
+        public Size Size
         {
-            get { return _width; }
-        }
-
-        public int Height
-        {
-            get { return _height; }
+            get { return _size; }
         }
     }
 }

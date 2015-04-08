@@ -8,6 +8,7 @@ namespace Raytracer.Rendering
 {
     using Vector = Vector3;
     using Real = System.Double;
+    using Raytracer.Rendering.Primitives;
 
     struct IntersectionInfo
     {

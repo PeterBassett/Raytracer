@@ -129,6 +129,20 @@ namespace Raytracer.Rendering.FileTypes
             return new Colour(a.Red / f, a.Green / f, a.Blue / f);
         }
 
+        public override bool Equals(Object obj)
+        {
+            Colour colourObj = obj as Colour;
+            if (colourObj == null)
+                return false;
+            else
+                return this == colourObj;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Red.GetHashCode() ^ this.Green.GetHashCode() ^ this.Blue.GetHashCode();
+        }
+
         /// <summary>
         /// Tests whether two specified colours are equal.
         /// </summary>

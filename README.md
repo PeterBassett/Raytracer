@@ -15,6 +15,7 @@ Various Materials
 * Checker Board of two submaterials.
 * Perlin Noise mix of two submaterials.
 * Texture material. UV coordinate calculations are specific to each primitive type. All common image file formats are supported via the .net framework.
+* Cubemaps, both vertical and horizontal crosses, are supported for scene backgrounds. When a ray misses all objects inthe scene we render from the cubemap.
 
 File Types
 * Home made human readable "ray" files.

@@ -16,9 +16,9 @@ namespace Raytracer.Rendering.BackgroundMaterials
 
         protected override void VerifyCubemapDimensions()
         {
-            _tileSize = _image.Width / 3;
+            _tileSize = _image.Size.Width / 3;
 
-            if (_image.Height != _tileSize * 4)
+            if (_image.Size.Height != _tileSize * 4)
                 throw new ArgumentOutOfRangeException("Cubemap file must be vertically oriented.");
         }
 
