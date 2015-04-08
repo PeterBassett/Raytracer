@@ -23,8 +23,10 @@ File Types
 * Wavefront mtl files.
 
 Antialiasing
-* After image generation you can run an edge detection routine. The edges are then retraced with a specified subsampling level. 
-* By default the subsampling is randomly jittered within each subpixel.
+* Multiple antialiasing algorithms possible. Currently implemented are :  
+* Non anti aliased 
+* NxN jittered samples per pixel 
+* Edge Detection jittered are implemented.
 
 Accelleration Structures
 * Octree
