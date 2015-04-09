@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IO;
 using Raytracer.MathTypes;
-using Raytracer.Rendering.Primitives;
-using Raytracer.Rendering;
+using Raytracer.Rendering.Core;
 using Raytracer.Rendering.FileTypes.ObjFile;
+using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 {
-    using Vector = Vector3;
-    using Real = System.Double;
     using Raytracer.Rendering.Materials;
+    using Vector = Vector3;
 
     [Export(typeof(IVBRaySceneItemLoader))]
     class MeshLoader : IVBRaySceneItemLoader

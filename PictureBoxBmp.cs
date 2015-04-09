@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Raytracer.Rendering.FileTypes;
+using System.Drawing;
 using System.Windows.Forms;
 using Raytracer.Extensions;
-using Raytracer.Rendering;
-using System.Drawing;
+using Raytracer.Rendering.Core;
+using Raytracer.Rendering.FileTypes;
 
 namespace Raytracer
 {

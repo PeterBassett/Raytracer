@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Raytracer.MathTypes;
 
-namespace Raytracer.Rendering
+namespace Raytracer.Rendering.Core
 {
     public enum HitResult
     {

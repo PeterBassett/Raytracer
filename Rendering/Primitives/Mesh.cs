@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Accellerators;
+using Raytracer.Rendering.Core;
 
 namespace Raytracer.Rendering.Primitives
 {

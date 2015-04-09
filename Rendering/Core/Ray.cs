@@ -7,7 +7,7 @@ using Raytracer.MathTypes;
 using System.Security.Permissions;
 using System.Runtime.Serialization;
 
-namespace Raytracer.Rendering
+namespace Raytracer.Rendering.Core
 {
     using Vector = Vector3;
     using Real = System.Double;

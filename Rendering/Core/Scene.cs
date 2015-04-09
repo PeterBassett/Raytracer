@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Accellerators;
+using Raytracer.Rendering.BackgroundMaterials;
 using Raytracer.Rendering.FileTypes;
 using Raytracer.Rendering.Materials;
 using Raytracer.Rendering.Primitives;
-
-namespace Raytracer.Rendering
+    
+namespace Raytracer.Rendering.Core
 {
     using Real = System.Double;
     using Vector = Vector3;
-    using Raytracer.Rendering.BackgroundMaterials;
     
-    class Scene // : IScene
+    class Scene
     {
         List<Light> _lights = new List<Light>();
         List<Traceable> _primitives = new List<Traceable>();

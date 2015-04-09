@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Raytracer.Rendering.Primitives;
+using Raytracer.Rendering.Core;
 
 namespace Raytracer.Rendering.Accellerators
 {

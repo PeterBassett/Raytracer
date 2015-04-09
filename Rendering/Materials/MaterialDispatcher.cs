@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Raytracer.MathTypes;
-using Raytracer.Rendering.FileTypes;
+using Raytracer.Rendering.Core;
 using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.Rendering.Materials

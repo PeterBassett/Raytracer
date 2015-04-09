@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Raytracer.MathTypes;
+using Raytracer.Rendering.Core;
 
 namespace Raytracer.Rendering.Primitives
 {
     using Vector = Vector3;
-    using Real = System.Double;
 
     class MeshInstance : Traceable
     {

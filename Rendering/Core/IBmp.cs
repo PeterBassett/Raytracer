@@ -5,7 +5,7 @@ using System.Text;
 using Raytracer.Rendering.FileTypes;
 using Raytracer.MathTypes;
 
-namespace Raytracer.Rendering
+namespace Raytracer.Rendering.Core
 {
     interface IBmp
     {        

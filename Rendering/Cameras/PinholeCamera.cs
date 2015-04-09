@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Raytracer.MathTypes;
+using Raytracer.Rendering.Core;
 
 namespace Raytracer.Rendering.Cameras
 {

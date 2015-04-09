@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel.Composition;
+using Raytracer.Rendering.Core;
 
 namespace Raytracer.Rendering.FileTypes.VBRayScene.Saver
 {
@@ -11,7 +9,7 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Saver
     {
         public Type SaverForType
         {
-            get { return typeof(Raytracer.Rendering.Scene); }
+            get { return typeof(Scene); }
         }
 
         public void SaveObject(System.IO.StreamWriter file, object ObjectToSave)

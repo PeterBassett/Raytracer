@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Raytracer.Rendering;
-using System.IO;
 using System.ComponentModel.Composition;
+using System.IO;
 using Raytracer.MathTypes;
+using Raytracer.Rendering.Core;
 using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders

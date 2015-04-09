@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Raytracer.Rendering;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using Raytracer.MathTypes;
-using Raytracer.Rendering.Materials;
+using Raytracer.Rendering.Core;
 
 namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 {
-    using Vector = Vector3;
     using Raytracer.Rendering.BackgroundMaterials;
 
     [Export(typeof(IVBRaySceneItemLoader))]

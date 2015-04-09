@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Cameras;
+using Raytracer.Rendering.Core;
 using Raytracer.Rendering.FileTypes;
 using Raytracer.Rendering.Materials;
 using Raytracer.Rendering.PixelSamplers;

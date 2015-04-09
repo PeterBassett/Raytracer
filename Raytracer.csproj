@@ -80,7 +80,7 @@
     <Compile Include="MathTypes\Polynomial.cs" />
     <Compile Include="MathTypes\Size.cs" />
     <Compile Include="MathTypes\Vector2D.cs" />
-    <Compile Include="Rendering\AABB.cs">
+    <Compile Include="Rendering\Core\AABB.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Rendering\Accellerators\IAccellerator.cs" />
@@ -97,21 +97,20 @@
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\TorusLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\TextureMaterialLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Savers\BackgroundSaver.cs" />
-    <Compile Include="Rendering\HitResult.cs">
+    <Compile Include="Rendering\Core\HitResult.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Rendering\BackgroundMaterials\IBackgroundMaterial.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Rendering\IBmp.cs">
+    <Compile Include="Rendering\Core\IBmp.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Rendering\Cameras\ICamera.cs" />
-    <Compile Include="Rendering\IntersectionInfo.cs">
+    <Compile Include="Rendering\Core\IntersectionInfo.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Rendering\PixelSampler\IPixelSampler.cs" />
-    <Compile Include="Rendering\IScene.cs" />
     <Compile Include="Rendering\Primitives\ITraceable.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -172,11 +171,11 @@
     <Compile Include="Rendering\Primitives\MeshInstance.cs" />
     <Compile Include="Rendering\Primitives\Plane.cs" />
     <Compile Include="Rendering\Primitives\Triangle.cs" />
-    <Compile Include="Rendering\Ray.cs">
+    <Compile Include="Rendering\Core\Ray.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Rendering\Renderers\RayTracingRenderer.cs" />
-    <Compile Include="Rendering\Scene.cs" />
+    <Compile Include="Rendering\Core\Scene.cs" />
     <Compile Include="Rendering\Primitives\Sphere.cs" />
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
