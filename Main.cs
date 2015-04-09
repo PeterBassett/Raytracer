@@ -9,6 +9,7 @@ using Raytracer.Rendering;
 using Raytracer.Rendering.Cameras;
 using Raytracer.Rendering.FileTypes.VBRayScene;
 using Raytracer.Rendering.PixelSamplers;
+using Raytracer.Rendering.Renderers;
 
 namespace Raytracer
 {
@@ -84,6 +85,9 @@ namespace Raytracer
             int width = pictureBox1.Width;
             int height = pictureBox1.Height;
             bool blnMultiThreaded = multiThreadedToolStripMenuItem.Checked;
+            bool traceShadows = mnuShadows.Checked;
+            bool traceReflections = mnuReflections.Checked;
+            bool traceRefractions = mnuRefractions.Checked;
 
             Action<bool,bool,bool,int> UpdateScreenRenderOptions = (shadows, reflections, refractions, renderDepth) =>
                 {
@@ -103,7 +107,7 @@ namespace Raytracer
                 watch.Start();
                 PictureBoxBmp bmp = new PictureBoxBmp(pictureBox1);
                 
-                Render(width, height, bmp, blnMultiThreaded, UpdateScreenRenderOptions);
+                Render(width, height, bmp, blnMultiThreaded, traceShadows, traceReflections, traceRefractions, UpdateScreenRenderOptions);
 
                 bmp.Render();
 
@@ -130,7 +134,9 @@ namespace Raytracer
             }
         }
 
-        private void Render(int width, int height, IBmp bmp, bool blnMultiThreaded, Action<bool, bool, bool, int> UpdateScreenRenderOptions)
+        private void Render(int width, int height, IBmp bmp, 
+            bool blnMultiThreaded, bool traceShadows, bool traceReflections, bool traceRefractions,
+            Action<bool, bool, bool, int> UpdateScreenRenderOptions)
         {
             VBRaySceneLoader loader = new VBRaySceneLoader();
 
@@ -138,8 +144,6 @@ namespace Raytracer
 
             UpdateScreenRenderOptions(m_scene.TraceShadows, m_scene.TraceReflections, m_scene.TraceRefractions, m_scene.RecursionDepth);
                         
-            m_scene.MultiThreaded = blnMultiThreaded;
-
             watch.Start();
             
             var camera = new PinholeCamera(m_scene.EyePosition, 
@@ -153,8 +157,8 @@ namespace Raytracer
             else
                 pixelSampler = new StandardPixelSampler();
 
-            var renderer = new Renderer(m_scene, camera, bmp, pixelSampler, multiThreadedToolStripMenuItem.Checked);
-            renderer.RenderScene();
+            var renderer = new RayTracingRenderer(m_scene, camera, pixelSampler, (uint)m_scene.RecursionDepth, blnMultiThreaded, traceShadows, traceReflections, traceRefractions);
+            renderer.RenderScene(bmp);
             
             watch.Stop();
             this.UIThread(() =>
@@ -237,29 +241,17 @@ namespace Raytracer
 
         private void mnuShadows_Click(object sender, EventArgs e)
         {
-            if (m_scene == null)
-                return;
-
             ((ToolStripMenuItem)sender).Checked = !((ToolStripMenuItem)sender).Checked;
-            m_scene.TraceShadows = ((ToolStripMenuItem)sender).Checked;
         }
 
         private void mnuReflections_Click(object sender, EventArgs e)
         {
-            if (m_scene == null)
-                return;
-
             ((ToolStripMenuItem)sender).Checked = !((ToolStripMenuItem)sender).Checked;
-            m_scene.TraceReflections = ((ToolStripMenuItem)sender).Checked;
         }
 
         private void mnuRefractions_Click(object sender, EventArgs e)
         {
-            if (m_scene == null)
-                return;
-
             ((ToolStripMenuItem)sender).Checked = !((ToolStripMenuItem)sender).Checked;
-            m_scene.TraceRefractions = ((ToolStripMenuItem)sender).Checked;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -319,6 +311,13 @@ namespace Raytracer
                     select uint.Parse(item.Tag.ToString())).First();
         }
 
+        private uint GetRenderDepth()
+        {
+            return (from item in mnuRenderDepth.DropDownItems.Cast<ToolStripMenuItem>()
+                    where item.Checked
+                    select uint.Parse(item.Tag.ToString())).First();
+        }
+        
         private bool GetRenderAntialiasingSamples()
         {
             return renderAntialiasingSamplesToolStripMenuItem.Checked;

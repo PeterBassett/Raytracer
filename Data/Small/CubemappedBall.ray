@@ -1,8 +1,21 @@
 Viewpoint(0, 0, -9, 	 ' Viewpoint ' 
-	  0, 45, 0, ' View Angle ' 
+	  0, 0, 0, ' View Angle ' 
 	  90)		 ' FOV '	
 
-HorizontalCubemapBackground("skybox_texture.jpg")
+RenderSettings
+(
+	3, 'Recursion Depth'
+	false, 'Trace Shadows'
+	true, 'Trace Reflections'
+	false, 'Trace Refractions'
+)
+
+'AmbientLight(150, 150,150)'
+'LightSource(60, 80, 100, 255, 255, 255)'
+
+' Cubemap by Jockum Skoglund '
+' http://www.zfight.com/misc/images/textures/envmaps/miramar_large.jpg '
+HorizontalCubemapBackground("miramar_large.jpg")
 
 ColourMaterial("mirror",
   0.1,0.1,0.1, 
@@ -13,7 +26,12 @@ ColourMaterial("mirror",
   0, 0, 0        ' Transmitted. '
 )
 
-Sphere( 5, 
-  0, 0, 0,
+Sphere( 6, 
+  -6.5, 0, 0,
+  "mirror"
+)
+
+Sphere( 6, 
+  6.5, 0, 0,
   "mirror"
 )

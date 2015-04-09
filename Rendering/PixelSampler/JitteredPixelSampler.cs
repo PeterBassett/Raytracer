@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Raytracer.Rendering.FileTypes;
 using Raytracer.MathTypes;
+using Raytracer.Rendering.Renderers;
 
 namespace Raytracer.Rendering.PixelSamplers
 {
@@ -20,7 +18,7 @@ namespace Raytracer.Rendering.PixelSamplers
             _random = new Random();
         }
 
-        public virtual Colour SamplePixel(Renderer renderer, int x, int y)
+        public virtual Colour SamplePixel(IRenderer renderer, int x, int y)
         {
             Colour colour = new Colour();
 

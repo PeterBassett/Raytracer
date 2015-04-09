@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Raytracer.Rendering.FileTypes;
-using Raytracer.MathTypes;
 using System.Collections.Concurrent;
+using Raytracer.MathTypes;
+using Raytracer.Rendering.FileTypes;
+using Raytracer.Rendering.Renderers;
 
 namespace Raytracer.Rendering.PixelSamplers
 {
@@ -21,7 +19,7 @@ namespace Raytracer.Rendering.PixelSamplers
             _bmp = new ConcurrentDictionary<Tuple<int, int>, Colour>();
         }
 
-        public override Colour SamplePixel(Renderer renderer, int x, int y)
+        public override Colour SamplePixel(IRenderer renderer, int x, int y)
         {
             if (_samples == 1)
                 return renderer.ComputeSample(new Vector2(x, y));
@@ -42,7 +40,7 @@ namespace Raytracer.Rendering.PixelSamplers
             }
         }
 
-        private float SobelOperator(Renderer renderer, int x, int y)
+        private float SobelOperator(IRenderer renderer, int x, int y)
         {
             var p1 = GetPixel(renderer, x - 1,  y - 1   ).Brightness;
             var p2 = GetPixel(renderer, x,      y - 1   ).Brightness;
@@ -58,7 +56,7 @@ namespace Raytracer.Rendering.PixelSamplers
                  + Math.Abs((p3 + 2 * p6 + p9) - (p1 + 2 * p4 + p7));
         }
 
-        private Colour GetPixel(Renderer renderer, int x, int y)
+        private Colour GetPixel(IRenderer renderer, int x, int y)
         {
             ClampCoordinatesInBounds(ref x, ref y);
 

@@ -12,7 +12,7 @@ namespace Raytracer.Rendering
     using Vector = Vector3;
     using Raytracer.Rendering.BackgroundMaterials;
     
-    class Scene : IScene
+    class Scene // : IScene
     {
         List<Light> _lights = new List<Light>();
         List<Traceable> _primitives = new List<Traceable>();
@@ -23,34 +23,19 @@ namespace Raytracer.Rendering
         Real _nearWidth;
         Real _nearHeight;
 
-        int _maxDepth;
-        bool _traceReflections;
-        bool _traceRefractions;
-        bool _traceShadows;
-        Material _defaultMaterial;
-        Random _sampler = new Random();
-
         public IBackgroundMaterial BackgroundMaterial { get; set; }
-
-        public bool MultiThreaded { get; set; }
-
+        public Material DefaultMaterial { get; set; }
+        
         public Vector EyePosition { get; set; }
-
         public Vector ViewPointRotation { get; set; }
-
         public Real FieldOfView { get; set; }
 
         private int _width;
         private int _height;
-
+        
         public Scene()
         {
-            MultiThreaded = true;
-            _maxDepth = 5;
-            _traceReflections = true;
-            _traceRefractions = true;
-            _traceShadows = true;
-            _defaultMaterial = new Material()
+            DefaultMaterial = new Material()
             {
                 Ambient = new Colour(1f),
                 Diffuse = new Colour(1f),
@@ -61,26 +46,26 @@ namespace Raytracer.Rendering
 
         public int RecursionDepth
         {
-            get { return _maxDepth; }
-            set { _maxDepth = value; }
+            get;
+            set;
         }
 
         public bool TraceShadows
         {
-            get { return _traceShadows; }
-            set { _traceShadows = value; }
+            get;
+            set;
         }
 
         public bool TraceReflections
         {
-            get { return _traceReflections; }
-            set { _traceReflections = value; }
+            get;
+            set;
         }
 
         public bool TraceRefractions
         {
-            get { return _traceRefractions; }
-            set { _traceRefractions = value; }
+            get;
+            set;
         }
 
         public void AddLight(Light pLight)
@@ -91,7 +76,7 @@ namespace Raytracer.Rendering
         public void AddObject(Traceable pObject)
         {
             if (pObject.Material == null)
-                pObject.Material = this._defaultMaterial;
+                pObject.Material = this.DefaultMaterial;
 
             _primitives.Add(pObject);
         }
@@ -177,6 +162,17 @@ namespace Raytracer.Rendering
                 return null;
         }
 
+        public IEnumerable<Traceable> GetCandiates(Ray ray)
+        {
+            foreach (var prim in this._primitives)
+                yield return prim;
+
+            if (m_SceneGraph != null)
+                foreach (var item in m_SceneGraph.Intersect(ray))
+                    yield return item;
+        }
+
+        /*
         public Colour Trace(Ray ray)
         {
             return TraceRay(ray, new Colour(1.0f), 1.0f, 1, ray.Dir);
@@ -399,7 +395,7 @@ namespace Raytracer.Rendering
             Real n = n1 / n2;
             return (n * dir) + (Real)(n * c - Math.Sqrt(1 - n * n * (1 - c * c))) * normal;
         }
-
+        */
         internal void LoadComplete()
         {
             BuildAccellerationStructures();
