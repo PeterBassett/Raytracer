@@ -11,6 +11,8 @@ namespace Raytracer.MathTypes
     {
         public const Real Epsilon = 4.76837158203125E-7f;
 
+        public const Real IntersectionEpsilon = 0.0001;
+
         public  const Real INVALID_INTERSECTION = 1.0E10f;
         
         private const double PI = 3.14159265358979323846264338327950288419716939937510f;        

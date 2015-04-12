@@ -40,11 +40,6 @@ namespace Raytracer.Rendering.Primitives
             return GetAABB().Intersect(aabb);
         }
 
-        public override Vector GetNormal(Vector vPoint)
-        {
-            throw new NotImplementedException();
-        }
-
         public override AABB GetAABB()
         {
             if (bounds.IsEmpty)
@@ -59,6 +54,11 @@ namespace Raytracer.Rendering.Primitives
             }
 
             return bounds;
+        }
+
+        public override bool Contains(Vector point)
+        {
+            return false;
         }
     }
 }

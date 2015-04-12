@@ -221,6 +221,15 @@ namespace Raytracer.Rendering.Core
                    Math.Abs(T.Z) <= (this.Depth + b.Depth)); 
         }
 
+        public bool Contains(Vector3 point)
+        {
+            Vector T = point - Center;
+
+            return (Math.Abs(T.X) <= this.Width &&
+                   Math.Abs(T.Y) <= this.Height &&
+                   Math.Abs(T.Z) <= this.Depth);
+        }
+
         public bool IsEmpty { get { return isEmpty; } }
     }
 }

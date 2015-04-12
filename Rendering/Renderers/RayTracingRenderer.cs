@@ -6,6 +6,7 @@ using Raytracer.Rendering.Core;
 using Raytracer.Rendering.FileTypes;
 using Raytracer.Rendering.Materials;
 using Raytracer.Rendering.PixelSamplers;
+using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.Rendering.Renderers
 {
@@ -74,6 +75,11 @@ namespace Raytracer.Rendering.Renderers
             return minimumIntersection;
         }
 
+        private Traceable FindObjectContainingPoint(Vector3 point)
+        {
+            return _scene.GetCandiates(point);
+        }
+
         private Colour TraceRay(Ray ray, Colour contribution, double curRefractionIndex, long depth, Vector3 eyeDirection)
         {
             const double EPSILON = 0.001f;
@@ -128,31 +134,238 @@ namespace Raytracer.Rendering.Renderers
 
                 if (colRefractiveAmount.Sum() > 0.01f)
                 {
-                    // calculate refraction
-                    double rindex = material.Refraction;
-                    double n = curRefractionIndex / rindex;
-                    //Vector N = primitive.GetNormal(info.HitPoint) * (double)info.Result;
 
-                    Vector3 N = info.NormalAtHitPoint * (double)info.Result;
-                    double cosI = -Vector3.DotProduct(N, ray.Dir);
-                    double cosT2 = 1.0f - n * n * (1.0f - cosI * cosI);
-                    if (cosT2 > 0.0f)
-                    {
-                        Vector3 T = -((n * ray.Dir) + (double)(n * cosI - Math.Sqrt(cosT2)) * N);
+                    double outReflectionFactor = 0;
+                    Colour rcol = CalculateRefraction(
+                        info,
+                        ray.Dir,
+                        curRefractionIndex,
+                        colRefractiveAmount,
+                        depth,
+                        out outReflectionFactor);
 
-                        Colour rcol = TraceRay(new Ray(info.HitPoint + T * EPSILON, T), colRefractiveAmount, rindex, depth + 1, eyeDirection);
-
-                        //Raytrace( Ray( pi + T * EPSILON, T ), rcol, a_Depth + 1, rindex, dist );
-                        // apply Beer's law
-                        //Colour absorbance = material.Transmitted * -dist;
-                        //Colour transparency = new Colour((double)Math.Exp(absorbance.Red), (double)Math.Exp(absorbance.Green), (double)Math.Exp(absorbance.Blue));
-                        colour += rcol;// *transparency;
-                    }
+                    colour += rcol;                    
                 }
             }            
 
             colour.Clamp();
             return colour;
+        }
+
+
+        Colour CalculateRefraction(
+            IntersectionInfo intersection, 
+            Vector3 direction, 
+            double sourceRefractiveIndex,
+            Colour rayIntensity,
+            long recursionDepth,
+            out double outReflectionFactor)
+        {
+            // Convert direction to a unit vector so that
+            // relation between angle and dot product is simpler.
+            Vector3 dirUnit = direction;
+            dirUnit.Normalize();
+
+            double cos_a1 = Vector3.DotProduct(dirUnit, intersection.NormalAtHitPoint);
+            double sin_a1;
+            if (cos_a1 <= -1.0)
+            {
+                if (cos_a1 < -1.0001)
+                {
+                    throw new Exception("Dot product too small.");
+                }
+                // The incident ray points in exactly the opposite
+                // direction as the normal vector, so the ray
+                // is entering the solid exactly perpendicular
+                // to the surface at the intersection point.
+                cos_a1 = -1.0;  // clamp to lower limit
+                sin_a1 =  0.0;
+            }
+            else if (cos_a1 >= +1.0)
+            {
+                if (cos_a1 > +1.0001)
+                {
+                    throw new Exception("Dot product too large.");
+                }
+                // The incident ray points in exactly the same
+                // direction as the normal vector, so the ray
+                // is exiting the solid exactly perpendicular
+                // to the surface at the intersection point.
+                cos_a1 = +1.0;  // clamp to upper limit
+                sin_a1 =  0.0;
+            }
+            else
+            {
+                // The ray is entering/exiting the solid at some
+                // positive angle with respect to the normal vector.
+                // We need to calculate the sine of that angle
+                // using the trig identity cos^2 + sin^2 = 1.
+                // The angle between any two vectors is always between
+                // 0 and PI, so the sine of such an angle is never negative.
+                sin_a1 = Math.Sqrt(1.0 - cos_a1*cos_a1);
+            }
+
+            // The parameter sourceRefractiveIndex passed to this function
+            // tells us the refractive index of the medium the light ray
+            // was passing through before striking this intersection.
+            // We need to figure out what the target refractive index is,
+            // i.e., the refractive index of whatever substance the ray 
+            // is about to pass into.  We determine this by pretending that
+            // the ray continues traveling in the same direction a tiny
+            // amount beyond the intersection point, then asking which
+            // solid object (if any) contains that test point.
+            // Ties are broken by insertion order: whichever solid was
+            // inserted into the scene first that contains a point is 
+            // considered the winner.  If a solid is found, its refractive
+            // index is used as the target refractive index; otherwise,
+            // we use the scene's ambient refraction, which defaults to 
+            // vacuum (but that can be overridden by a call to 
+            // Scene::SetAmbientRefraction).
+            Vector3 testPoint = intersection.HitPoint + MathLib.IntersectionEpsilon * dirUnit;
+
+            // HERE! GET SOLIDIFIED MATERIAL NOT THE ONE ON THE OBJECT.
+            var container = FindObjectContainingPoint(testPoint);
+
+            Material material = new Material();
+            double targetRefractiveIndex = this._scene.DefaultMaterial.Refraction;
+
+            if (container != null)
+            {
+                Material objectMaterial = container.Material != null ? container.Material : _scene.DefaultMaterial;
+
+                var materialDispatcher = new MaterialDispatcher();
+                
+                materialDispatcher.Solidify((dynamic)container, (dynamic)objectMaterial, intersection, material);
+
+                targetRefractiveIndex = material.Refraction; 
+            }
+
+            double ratio = sourceRefractiveIndex / targetRefractiveIndex;
+
+            // Snell's Law: the sine of the refracted ray's angle
+            // with the normal is obtained by multiplying the
+            // ratio of refractive indices by the sine of the
+            // incident ray's angle with the normal.
+            double sin_a2 = ratio * sin_a1;
+
+            if (sin_a2 <= -1.0 || sin_a2 >= +1.0)
+            {
+                // Since sin_a2 is outside the bounds -1..+1, then
+                // there is no such real angle a2, which in turn
+                // means that the ray experiences total internal reflection,
+                // so that no refracted ray exists.
+                outReflectionFactor = 1.0;      // complete reflection
+                return new Colour(0.0, 0.0, 0.0);    // no refraction at all
+            }
+
+            // Getting here means there is at least a little bit of
+            // refracted light in addition to reflected light.
+            // Determine the direction of the refracted light.
+            // We solve a quadratic equation to help us calculate
+            // the vector direction of the refracted ray.
+
+            var k = new double[2];
+            int numSolutions = Algebra.SolveQuadraticEquation(
+                1.0,
+                2.0 * cos_a1,
+                1.0 - 1.0/(ratio*ratio),
+                k);
+
+            // There are generally 2 solutions for k, but only 
+            // one of them is correct.  The right answer is the
+            // value of k that causes the light ray to bend the
+            // smallest angle when comparing the direction of the
+            // refracted ray to the incident ray.  This is the 
+            // same as finding the hypothetical refracted ray 
+            // with the largest positive dot product.
+            // In real refraction, the ray is always bent by less
+            // than 90 degrees, so all valid dot products are 
+            // positive numbers.
+            double maxAlignment = -0.0001;  // any negative number works as a flag
+            Vector3 refractDir = new Vector3();
+            for (int i=0; i < numSolutions; ++i)
+            {
+                Vector3 refractAttempt = dirUnit + k[i]*intersection.NormalAtHitPoint;
+                double alignment = Vector3.DotProduct(dirUnit, refractAttempt);
+                if (alignment > maxAlignment)
+                {
+                    maxAlignment = alignment;
+                    refractDir = refractAttempt;
+                }
+            }
+
+            if (maxAlignment <= 0.0)
+            {
+                // Getting here means there is something wrong with the math.
+                // Either there were no solutions to the quadratic equation,
+                // or all solutions caused the refracted ray to bend 90 degrees
+                // or more, which is not possible.
+                throw new Exception("Refraction failure.");
+            }
+
+            // Determine the cosine of the exit angle.
+            double cos_a2 = Math.Sqrt(1.0 - sin_a2*sin_a2);
+            if (cos_a1 < 0.0)
+            {
+                // Tricky bit: the polarity of cos_a2 must
+                // match that of cos_a1.
+                cos_a2 = -cos_a2;
+            }
+
+            // Determine what fraction of the light is
+            // reflected at the interface.  The caller
+            // needs to know this for calculating total
+            // reflection, so it is saved in an output parameter.
+
+            // We assume uniform polarization of light,
+            // and therefore average the contributions of s-polarized
+            // and p-polarized light.
+            double Rs = PolarizedReflection(
+                sourceRefractiveIndex,
+                targetRefractiveIndex,
+                cos_a1,
+                cos_a2);
+
+            double Rp = PolarizedReflection(
+                sourceRefractiveIndex,
+                targetRefractiveIndex,
+                cos_a2,
+                cos_a1);
+
+            outReflectionFactor = (Rs + Rp) / 2.0;
+
+            // Whatever fraction of the light is NOT reflected
+            // goes into refraction.  The incoming ray intensity
+            // is thus diminished by this fraction.
+            Colour nextRayIntensity = (1.0 - outReflectionFactor) * rayIntensity;
+
+            var ray = new Ray(intersection.HitPoint, refractDir);
+            return TraceRay(ray, nextRayIntensity, targetRefractiveIndex, recursionDepth + 1, ray.Dir);
+        }
+
+        double PolarizedReflection(
+            double n1,              // source material's index of refraction
+            double n2,              // target material's index of refraction
+            double cos_a1,          // incident or outgoing ray angle cosine
+            double cos_a2)          // outgoing or incident ray angle cosine
+        {
+            double left  = n1 * cos_a1;
+            double right = n2 * cos_a2;
+            double numer = left - right;
+            double denom = left + right;
+            denom *= denom;     // square the denominator
+            if (denom < MathLib.Epsilon)
+            {
+                // Assume complete reflection.
+                return 1.0;
+            }
+            double reflection = (numer*numer) / denom;
+            if (reflection > 1.0)
+            {
+                // Clamp to actual upper limit.
+                return 1.0;
+            }
+            return reflection;
         }
 
         private Colour Shade(Vector3 hitPoint, Vector3 normal, Material material, Vector3 eyeDirection)

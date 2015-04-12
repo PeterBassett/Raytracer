@@ -167,8 +167,28 @@ namespace Raytracer.Rendering.Core
                 yield return prim;
 
             if (m_SceneGraph != null)
-                foreach (var item in m_SceneGraph.Intersect(ray))
-                    yield return item;
+                foreach (var prim in m_SceneGraph.Intersect(ray))
+                    yield return prim;
+        }
+
+        public Traceable GetCandiates(Vector3 point)
+        {
+            foreach (var prim in this._primitives)
+            {
+                if (prim.Contains(point))
+                    return prim;
+            }
+
+            if (m_SceneGraph != null)
+            {
+                foreach (var prim in m_SceneGraph.Intersect(point))
+                {
+                    if (prim.Contains(point))
+                        return prim;
+                }
+            }
+
+            return null;
         }
 
         /*

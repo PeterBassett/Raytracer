@@ -198,6 +198,12 @@
     <None Include="Data\Small\BurningEarth.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Small\Copy of CubemappedRefractiveBall.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\CubemappedRefractiveBall.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Small\CubemappedBall.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

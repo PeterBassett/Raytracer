@@ -117,7 +117,7 @@ namespace Raytracer.Rendering.Primitives
             return n;
         }
 
-        public override Vector GetNormal(Vector p)
+        public Vector GetNormal(Vector p)
         {
             return SurfaceNormal(p);
             /*double nx, ny, nz;
@@ -143,6 +143,11 @@ namespace Raytracer.Rendering.Primitives
                 Min = new Vector(this.Pos.X - OuterRadius, this.Pos.Y - OuterRadius, this.Pos.Z - OuterRadius),
                 Max = new Vector(this.Pos.X + OuterRadius, this.Pos.Y + OuterRadius, this.Pos.Z + OuterRadius)
             };
+        }
+
+        public override bool Contains(Vector point)
+        {
+            return false;
         }
     }
 }

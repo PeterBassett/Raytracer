@@ -28,20 +28,15 @@ namespace Raytracer.Rendering.Primitives
                 return new IntersectionInfo(HitResult.MISS);
 
             Real distance = -(Vector.DotProduct(Normal, ray.Pos) + D) / nd;
-
+            
             if (distance <= 0.0f)
                 return new IntersectionInfo(HitResult.MISS);
             
             var hitPoint = ray.Pos + (ray.Dir * distance);
 
-            return new IntersectionInfo(HitResult.HIT, this, distance, hitPoint, hitPoint, GetNormal(hitPoint));
+            return new IntersectionInfo(HitResult.HIT, this, distance, hitPoint, hitPoint, Normal);
         }
         
-        public override Vector GetNormal(Vector vPoint)
-        {
-            return Normal;
-        }
-
         public override bool Intersect(AABB aabb)
         {
             throw new NotImplementedException();
@@ -50,6 +45,26 @@ namespace Raytracer.Rendering.Primitives
         public override AABB GetAABB()
         {
             return AABB.Empty;
+        }
+
+        public override bool Contains(Vector point)
+        {
+            /*
+            Real nd = Vector.DotProduct(Normal, ray.Dir);
+
+            if (nd >= 0.0f)
+                return new IntersectionInfo(HitResult.MISS);
+
+            Real distance = -(Vector.DotProduct(Normal, ray.Pos) + D) / nd;
+            
+            if (distance <= 0.0f)
+                return new IntersectionInfo(HitResult.MISS);
+
+            Real distance = -(Vector.DotProduct(Normal, ray.Pos) + D) / nd;
+            */
+            var dist = Vector.DotProduct(Normal, (point - this.Pos));
+
+            return (Math.Abs(dist) < MathLib.IntersectionEpsilon);
         }
     }
 }

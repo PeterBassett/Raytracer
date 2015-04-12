@@ -8,12 +8,20 @@ namespace Raytracer.MathTypes
 {
     class Algebra
     {
+        public static int SolveQuadraticEquation(double a, double b, double c, double[] roots)
+        {
+            return SolveQuadraticEquation(new Complex(a, 0),
+                                            new Complex(b, 0),
+                                            new Complex(c, 0), 
+                                            roots);
+        }
+
         // Returns n=0..2, the number of distinct real roots found for the equation
         //
         //     ax^2 + bx + c = 0
         //
         // Stores the roots in the first n slots of the array 'roots'.
-        static int SolveQuadraticEquation(Complex a, Complex b, Complex c, double [] roots)
+        public static int SolveQuadraticEquation(Complex a, Complex b, Complex c, double [] roots)
         {
             if (roots.Length != 2)
                 throw new ArgumentException("roots");
@@ -79,7 +87,7 @@ namespace Raytracer.MathTypes
         //     ax^3 + bx^2 + cx + d = 0
         //
         // Stores the roots in the first n slots of the array 'roots'.
-        static int SolveCubicEquation(Complex a, Complex b, Complex c, Complex d, double[] roots)
+        public static int SolveCubicEquation(Complex a, Complex b, Complex c, Complex d, double[] roots)
         {
             if (roots.Length != 3)
                 throw new ArgumentException("roots");

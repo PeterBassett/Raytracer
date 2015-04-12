@@ -141,7 +141,21 @@ namespace Raytracer.Rendering.Accellerators
                 traceableObjects.AddRange(this.left.Intersect(ray));
                 traceableObjects.AddRange(this.right.Intersect(ray));
                 return traceableObjects;                 
-            }            
+            }
+
+            internal IEnumerable<Traceable> Intersect(Vector point)
+            {
+                if (!this.bounds.Contains(point))
+                    return Enumerable.Empty<Traceable>();
+
+                if (isLeaf)
+                    return this.primitives;
+
+                List<Traceable> traceableObjects = new List<Traceable>();
+                traceableObjects.AddRange(this.left.Intersect(point));
+                traceableObjects.AddRange(this.right.Intersect(point));
+                return traceableObjects;  
+            }
         };
 
         private AABBHierarchyNode root;
@@ -154,6 +168,11 @@ namespace Raytracer.Rendering.Accellerators
         public IEnumerable<Traceable> Intersect(Ray ray)
         {
             return this.root.Intersect(ray);
+        }
+
+        public IEnumerable<Traceable> Intersect(Vector point)
+        {
+            return this.root.Intersect(point);
         }
     }
 }

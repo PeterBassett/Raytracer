@@ -86,7 +86,12 @@ namespace Raytracer.Rendering.Primitives
                     if(retval != HitResult.MISS)
                     {
                         var hitPoint = ray.Pos + (ray.Dir * distance);
-                        return new IntersectionInfo(retval, this, fDistance, hitPoint, hitPoint, GetNormal(hitPoint));
+                        var normal = GetNormal(hitPoint);
+                        // Normal needs to be flipped if this is a refractive ray.
+                        //if (Vector3.DotProduct(ray.Dir, normal) > 0)
+                         //   normal = -normal;
+
+                        return new IntersectionInfo(retval, this, fDistance, hitPoint, hitPoint, normal);
                     }
                     else
 			            return new IntersectionInfo(HitResult.MISS);
@@ -96,7 +101,7 @@ namespace Raytracer.Rendering.Primitives
             return new IntersectionInfo(HitResult.MISS);       
         }
 
-        public override Vector GetNormal(Vector vPoint)
+        private Vector GetNormal(Vector vPoint)
         {
             Vector vNorm;
 	        vNorm = vPoint - Pos;
@@ -157,6 +162,12 @@ namespace Raytracer.Rendering.Primitives
                 Min = new Vector(this.Pos.X - Radius, this.Pos.Y - Radius, this.Pos.Z - Radius),
                 Max = new Vector(this.Pos.X + Radius, this.Pos.Y + Radius, this.Pos.Z + Radius)
             };
+        }
+
+        public override bool Contains(Vector point)
+        {
+            double radius = this.Radius + MathLib.Epsilon;
+            return (point - this.Pos).GetLengthSquared() <= (radius * radius);
         }
     }
 }

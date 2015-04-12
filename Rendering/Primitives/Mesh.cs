@@ -115,11 +115,6 @@ namespace Raytracer.Rendering.Primitives
                 return Triangles;
         }
 
-        public override Vector GetNormal(Vector vPoint)
-        {
-            throw new NotImplementedException();
-        }
-
         public override AABB GetAABB()
         {
             return bounds;
@@ -128,6 +123,11 @@ namespace Raytracer.Rendering.Primitives
         public override bool Intersect(AABB aabb)
         {
             return bounds.Intersect(aabb);
+        }
+
+        public override bool Contains(Vector point)
+        {
+            return false;
         }
     }
 }

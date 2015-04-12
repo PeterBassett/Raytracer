@@ -78,7 +78,7 @@ namespace Raytracer.Rendering.Primitives
             return IntersectionCode2.triBoxOverlap(aabb.Center, aabb.HalfSize, Vertex);
         }
 
-        public override Vector GetNormal(Vector vPoint)
+        public Vector GetNormal(Vector vPoint)
         {
             if(this.Normal != null)
                 return InterpolateNormal(vPoint);
@@ -134,6 +134,11 @@ namespace Raytracer.Rendering.Primitives
             this.bounds = new AABB(min, max);
 
             return this.bounds;
+        }
+
+        public override bool Contains(Vector point)
+        {
+            return false;
         }
     }
 }

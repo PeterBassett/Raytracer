@@ -155,6 +155,25 @@ namespace Raytracer.Rendering.Accellerators
                 return new List<Traceable>();
             }
 
+            internal IEnumerable<Traceable> Intersect(Vector point)
+            {
+                if (!this.Bounds.Contains(point))
+                    return new List<Traceable>();
+
+                if (this.children == null)
+                    return this.objects;
+
+                List<Traceable> traceableObjects = new List<Traceable>();
+
+                foreach (var childNode in this.children)
+                {
+                    if (childNode != null)
+                        traceableObjects.AddRange(childNode.Intersect(point));
+                }
+
+                return traceableObjects;              
+            }
+
             public int GetContainedObjects()
             {                
                 if (this.children != null)
@@ -216,6 +235,11 @@ namespace Raytracer.Rendering.Accellerators
         public void PruneEmptyNodes()
         {
             this._root.PruneEmptyNodes();
-        }        
+        }
+
+        public IEnumerable<Traceable> Intersect(Vector point)
+        {
+            return this._root.Intersect(point);
+        }
     }
 }

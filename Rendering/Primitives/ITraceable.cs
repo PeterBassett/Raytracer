@@ -20,7 +20,7 @@ namespace Raytracer.Rendering.Primitives
         }
         public abstract IntersectionInfo Intersect(Ray ray);
         public abstract bool Intersect(AABB aabb);
-        public abstract Vector GetNormal(Vector vPoint);
+        public abstract bool Contains(Vector3 point);
         public abstract AABB GetAABB();
 
         public Vector Pos { get; set; }
