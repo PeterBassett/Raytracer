@@ -84,6 +84,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Rendering\Accellerators\IAccellerator.cs" />
+    <Compile Include="Rendering\RenderingStrategies\BasicRenderingStrategy.cs" />
+    <Compile Include="Rendering\RenderingStrategies\ProgressiveRenderingStrategy.cs" />
+    <Compile Include="Rendering\RenderingStrategies\IRenderingStrategy.cs" />
     <Compile Include="Rendering\Renderers\IRenderer.cs" />
     <Compile Include="Rendering\PixelSampler\EdgeDetectionSampler.cs" />
     <Compile Include="Rendering\BackgroundMaterials\HorizontalCubemapBackground.cs" />

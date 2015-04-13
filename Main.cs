@@ -10,6 +10,8 @@ using Raytracer.Rendering.Core;
 using Raytracer.Rendering.FileTypes.VBRayScene;
 using Raytracer.Rendering.PixelSamplers;
 using Raytracer.Rendering.Renderers;
+using Raytracer.Rendering.RenderingStrategies;
+using System.Threading;
 
 namespace Raytracer
 {
@@ -18,6 +20,7 @@ namespace Raytracer
         private Scene m_scene = null;
         private string m_sceneFile;
         private bool m_isSceneDefinitionDirty = true;
+        private CancellationTokenSource _cancellationTokenSource;
 
         public Main()
         {
@@ -55,6 +58,20 @@ namespace Raytracer
             
             LoadScene(txtSceneFile.Text);
             m_isSceneDefinitionDirty = false;
+
+            UpdateScreenRenderOptions();
+        }
+
+        private void UpdateScreenRenderOptions()
+        {
+            this.UIThread(() =>
+            {
+                this.mnuShadows.Checked = m_scene.TraceShadows;
+                this.mnuReflections.Checked = m_scene.TraceReflections;
+                this.mnuRefractions.Checked = m_scene.TraceRefractions;
+
+                SetSelectedRenderDepthMenuItem(m_scene.RecursionDepth);
+            });
         }
 
         public void LoadScene(string strScene)
@@ -76,6 +93,9 @@ namespace Raytracer
 
         public void RenderScene()
         {
+            btnCancelRendering.Enabled = true;
+            btnRender.Enabled = false;
+
             this.txtMessages.Clear();
 
             LoadSceneFromEditor();
@@ -85,31 +105,18 @@ namespace Raytracer
             int width = pictureBox1.Width;
             int height = pictureBox1.Height;
             bool blnMultiThreaded = multiThreadedToolStripMenuItem.Checked;
+            _cancellationTokenSource = new CancellationTokenSource();
             bool traceShadows = mnuShadows.Checked;
             bool traceReflections = mnuReflections.Checked;
             bool traceRefractions = mnuRefractions.Checked;
-
-            Action<bool,bool,bool,int> UpdateScreenRenderOptions = (shadows, reflections, refractions, renderDepth) =>
-                {
-                    this.UIThread(() =>
-                    {
-                        this.mnuShadows.Checked = shadows;
-                        this.mnuReflections.Checked = reflections;
-                        this.mnuRefractions.Checked = refractions;
-
-                        SetSelectedRenderDepthMenuItem(renderDepth);
-                    });
-                };            
-
+            
             var task = new Task<long>(() =>
             {
                 Stopwatch watch = new Stopwatch();
                 watch.Start();
-                PictureBoxBmp bmp = new PictureBoxBmp(pictureBox1);
-                
-                Render(width, height, bmp, blnMultiThreaded, traceShadows, traceReflections, traceRefractions, UpdateScreenRenderOptions);
+                var bmp = new PictureBoxBmp(pictureBox1);
 
-                bmp.Render();
+                Render(width, height, bmp, blnMultiThreaded, traceShadows, traceReflections, traceRefractions, _cancellationTokenSource.Token);
 
                 watch.Stop();
                 return watch.ElapsedMilliseconds;
@@ -120,6 +127,8 @@ namespace Raytracer
                 this.UIThread(() =>
                 {
                     this.txtMessages.Text += string.Format("Done:{0}ms total\r\n", time.Result);
+                    btnRender.Enabled = true;
+                    btnCancelRendering.Enabled = false;
                 });
             });
 
@@ -135,15 +144,12 @@ namespace Raytracer
         }
 
         private void Render(int width, int height, IBmp bmp, 
-            bool blnMultiThreaded, bool traceShadows, bool traceReflections, bool traceRefractions,
-            Action<bool, bool, bool, int> UpdateScreenRenderOptions)
+            bool blnMultiThreaded, bool traceShadows, bool traceReflections, bool traceRefractions, CancellationToken token)
         {
             VBRaySceneLoader loader = new VBRaySceneLoader();
 
             Stopwatch watch = new Stopwatch();
-
-            UpdateScreenRenderOptions(m_scene.TraceShadows, m_scene.TraceReflections, m_scene.TraceRefractions, m_scene.RecursionDepth);
-                        
+            
             watch.Start();
             
             var camera = new PinholeCamera(m_scene.EyePosition, 
@@ -151,15 +157,23 @@ namespace Raytracer
                 bmp.Size,
                 m_scene.FieldOfView);
 
-            IPixelSampler pixelSampler = null;
-            if (GetAnitaliasingLevel() > 1)
-                pixelSampler = new EdgeDetectionSampler(GetAnitaliasingLevel(), GetRenderAntialiasingSamples(), bmp.Size);
-            else
-                pixelSampler = new StandardPixelSampler();
+            IPixelSampler pixelSampler = new StandardPixelSampler();            
+            IRenderingStrategy renderingStrategy;
 
-            var renderer = new RayTracingRenderer(m_scene, camera, pixelSampler, (uint)m_scene.RecursionDepth, blnMultiThreaded, traceShadows, traceReflections, traceRefractions);
+            if (GetRenderingStrategy() == "Progressive")
+            {
+                renderingStrategy = new ProgressiveRenderingStrategy(pixelSampler, 64, blnMultiThreaded, token);
+            }
+            else
+            {
+                if (GetAnitaliasingLevel() > 1)
+                    pixelSampler = new EdgeDetectionSampler(GetAnitaliasingLevel(), GetRenderAntialiasingSamples(), bmp.Size);
+                renderingStrategy = new BasicRenderingStrategy(pixelSampler, blnMultiThreaded);
+            }
+
+            var renderer = new RayTracingRenderer(m_scene, camera, renderingStrategy, (uint)m_scene.RecursionDepth, blnMultiThreaded, traceShadows, traceReflections, traceRefractions);
             renderer.RenderScene(bmp);
-            
+
             watch.Stop();
             this.UIThread(() =>
             {
@@ -326,6 +340,32 @@ namespace Raytracer
         private void renderAntialiasingSamplesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             renderAntialiasingSamplesToolStripMenuItem.Checked = !renderAntialiasingSamplesToolStripMenuItem.Checked;            
+        }
+
+        private void btnCancelRendering_Click(object sender, EventArgs e)
+        {
+            if (_cancellationTokenSource != null)
+                _cancellationTokenSource.Cancel();
+
+            btnCancelRendering.Enabled = false;
+            btnRender.Enabled = true;
+        }
+
+        private void progressiveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var menu = (ToolStripMenuItem)sender;
+
+            foreach (ToolStripMenuItem item in menu.GetCurrentParent().Items.Cast<ToolStripMenuItem>())
+                item.Checked = false;
+
+            menu.Checked = true;
+        }
+
+        private string GetRenderingStrategy()
+        {
+            return (from item in mnuRenderingMode.DropDownItems.Cast<ToolStripMenuItem>()
+                    where item.Checked
+                    select item.Text).First();
         }
     }
 }

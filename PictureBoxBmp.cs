@@ -19,27 +19,13 @@ namespace Raytracer
             if (box == null)
                 throw new ArgumentNullException();
 
-            pictureBox = box;           
-       // }
+            pictureBox = box;
 
             _size = new Raytracer.MathTypes.Size(box.Width, box.Height);
-
-        //public void Init(int width, int height)
-        //{
-            pictureBox.UIThread(() =>
-            {
-          //      pictureBox.Width = width;
-            //    pictureBox.Height = height;
-                bitmap = new Bitmap(pictureBox.Width, pictureBox.Height);
-            });
-            
-
-            bmpdata = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                System.Drawing.Imaging.ImageLockMode.ReadWrite, bitmap.PixelFormat);
         }
 
         public Colour GetPixel(int lX, int lY)
-        {            
+        {
             unsafe
             {
                 byte* row = (byte*)bmpdata.Scan0 + ((bmpdata.Height - lY - 1) * bmpdata.Stride);
@@ -55,29 +41,47 @@ namespace Raytracer
             {
                 byte* row = (byte*)bmpdata.Scan0 + ((bmpdata.Height - lY - 1) * bmpdata.Stride);
 
-                row[lX * 4] =       col.B;  // B
+                row[lX * 4] = col.B;  // B
                 row[(lX * 4) + 1] = col.G;  // G
                 row[(lX * 4) + 2] = col.R;  // R
                 row[(lX * 4) + 3] = 255;    // A
             }
         }
 
-        public void Render()
+        public void BeginWriting()
         {
+            pictureBox.UIThread(() =>
+            {
+                bitmap = new Bitmap(pictureBox.Width, pictureBox.Height);
+            });
+
+            bmpdata = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                System.Drawing.Imaging.ImageLockMode.ReadWrite, bitmap.PixelFormat);
+        }
+
+        public void EndWriting()
+        {
+            if (bitmap == null || bmpdata == null)
+                return;
+
             bitmap.UnlockBits(bmpdata);
 
             pictureBox.UIThread(() =>
             {
                 pictureBox.Image = bitmap;
             });
+
+            bitmap = null;
+            bmpdata = null;
         }
 
         public void Dispose()
         {
+            if (bmpdata != null)
+                EndWriting();
+
             if (bitmap != null)
             {
-                bitmap.UnlockBits(bmpdata);
-
                 bitmap.Dispose();
                 bitmap = null;
             }

@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Cameras;
 using Raytracer.Rendering.Core;
 using Raytracer.Rendering.FileTypes;
 using Raytracer.Rendering.Materials;
-using Raytracer.Rendering.PixelSamplers;
 using Raytracer.Rendering.Primitives;
+using Raytracer.Rendering.RenderingStrategies;
 
 namespace Raytracer.Rendering.Renderers
 {
     class RayTracingRenderer : IRenderer
     {
         private Scene _scene;
-        private IPixelSampler _pixelSampler;
+        private IRenderingStrategy _renderingStrategy;
         private ICamera _camera;
         private bool _multiThreaded;
         private uint _maxDepth;
@@ -21,13 +20,13 @@ namespace Raytracer.Rendering.Renderers
         private bool _traceRefractions;
         private bool _traceShadows;
 
-        public RayTracingRenderer(Scene scene, ICamera camera, IPixelSampler pixelSampler,
+        public RayTracingRenderer(Scene scene, ICamera camera, IRenderingStrategy renderingStrategy,
             uint maxDepth, bool multiThreaded, 
             bool traceShadows, bool traceReflections, bool traceRefractions)
         {
             _scene = scene;
             _camera = camera;
-            _pixelSampler = pixelSampler;
+            _renderingStrategy = renderingStrategy;
             _multiThreaded = multiThreaded;
             _maxDepth = maxDepth;
             _traceShadows = traceShadows;
@@ -37,15 +36,7 @@ namespace Raytracer.Rendering.Renderers
 
         public void RenderScene(IBmp frameBuffer)
         {
-            var options = new ParallelOptions();
-            if (!_multiThreaded)
-                options.MaxDegreeOfParallelism = 1;
-
-            Parallel.For(0, frameBuffer.Size.Width, options, (x) =>
-            {
-                for (int y = 0; y < frameBuffer.Size.Height; y++)                    
-                    frameBuffer.SetPixel(x, y, _pixelSampler.SamplePixel(this, x, y));
-            });
+            _renderingStrategy.RenderScene(this, frameBuffer);
         }
 
         public Colour ComputeSample(Vector2 pixelCoordinates)

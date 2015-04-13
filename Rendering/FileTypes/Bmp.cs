@@ -59,5 +59,13 @@ namespace Raytracer.Rendering.FileTypes
         {
             get { return _size; }
         }
+
+        public void BeginWriting()
+        {
+        }
+
+        public void EndWriting()
+        {
+        }
     }
 }

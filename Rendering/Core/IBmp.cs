@@ -12,5 +12,7 @@ namespace Raytracer.Rendering.Core
         Colour GetPixel(int lX, int lY);
         void SetPixel(int lX, int lY, Colour colour);
         Size Size { get; }
+        void BeginWriting();
+        void EndWriting();
     }
 }

@@ -72,8 +72,12 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.txtSceneFile = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnCancelRendering = new System.Windows.Forms.Button();
             this.btnRender = new System.Windows.Forms.Button();
             this.dlgSaveRay = new System.Windows.Forms.SaveFileDialog();
+            this.mnuRenderingMode = new System.Windows.Forms.ToolStripMenuItem();
+            this.progressiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.highQualityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.mainMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -162,6 +166,7 @@
             // 
             this.renderOptionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.multiThreadedToolStripMenuItem,
+            this.mnuRenderingMode,
             this.mnuSuperSampling,
             this.mnuShadows,
             this.mnuReflections,
@@ -448,6 +453,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnCancelRendering);
             this.groupBox2.Controls.Add(this.btnRender);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox2.Location = new System.Drawing.Point(0, 184);
@@ -456,6 +462,17 @@
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "groupBox2";
+            // 
+            // btnCancelRendering
+            // 
+            this.btnCancelRendering.Enabled = false;
+            this.btnCancelRendering.Location = new System.Drawing.Point(7, 43);
+            this.btnCancelRendering.Name = "btnCancelRendering";
+            this.btnCancelRendering.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelRendering.TabIndex = 1;
+            this.btnCancelRendering.Text = "Cancel";
+            this.btnCancelRendering.UseVisualStyleBackColor = true;
+            this.btnCancelRendering.Click += new System.EventHandler(this.btnCancelRendering_Click);
             // 
             // btnRender
             // 
@@ -470,6 +487,31 @@
             // dlgSaveRay
             // 
             this.dlgSaveRay.Filter = "\"Scene files (*.ray)|*.ray|All files (*.*)|*.*\"  ;";
+            // 
+            // mnuRenderingMode
+            // 
+            this.mnuRenderingMode.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.progressiveToolStripMenuItem,
+            this.highQualityToolStripMenuItem});
+            this.mnuRenderingMode.Name = "mnuRenderingMode";
+            this.mnuRenderingMode.Size = new System.Drawing.Size(162, 22);
+            this.mnuRenderingMode.Text = "Rendering Mode";
+            // 
+            // progressiveToolStripMenuItem
+            // 
+            this.progressiveToolStripMenuItem.Checked = true;
+            this.progressiveToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.progressiveToolStripMenuItem.Name = "progressiveToolStripMenuItem";
+            this.progressiveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.progressiveToolStripMenuItem.Text = "Progressive";
+            this.progressiveToolStripMenuItem.Click += new System.EventHandler(this.progressiveToolStripMenuItem_Click);
+            // 
+            // highQualityToolStripMenuItem
+            // 
+            this.highQualityToolStripMenuItem.Name = "highQualityToolStripMenuItem";
+            this.highQualityToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.highQualityToolStripMenuItem.Text = "High Quality";
+            this.highQualityToolStripMenuItem.Click += new System.EventHandler(this.progressiveToolStripMenuItem_Click);
             // 
             // Main
             // 
@@ -545,6 +587,10 @@
         private System.Windows.Forms.ToolStripMenuItem xToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem xToolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem renderAntialiasingSamplesToolStripMenuItem;
+        private System.Windows.Forms.Button btnCancelRendering;
+        private System.Windows.Forms.ToolStripMenuItem mnuRenderingMode;
+        private System.Windows.Forms.ToolStripMenuItem progressiveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem highQualityToolStripMenuItem;
     }
 }
 
