@@ -201,7 +201,7 @@
     <None Include="Data\Small\BurningEarth.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Data\Small\Copy of CubemappedRefractiveBall.ray">
+    <None Include="Data\Small\RefractiveBall2.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\Small\CubemappedRefractiveBall.ray">

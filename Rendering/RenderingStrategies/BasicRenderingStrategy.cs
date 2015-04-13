@@ -23,7 +23,7 @@ namespace Raytracer.Rendering.RenderingStrategies
                 options.MaxDegreeOfParallelism = 1;
             
             frameBuffer.BeginWriting();
-            Parallel.For(0, frameBuffer.Size.Width, options, (x) =>
+            Parallel.For(0, frameBuffer.Size.Width, options, (x, state) =>
             {
                 for (int y = 0; y < frameBuffer.Size.Height; y++)
                     frameBuffer.SetPixel(x, y, _pixelSampler.SamplePixel(renderer, x, y));

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Raytracer.Rendering.Primitives;
 using Raytracer.Rendering.Core;
+using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.Rendering.Accellerators
 {

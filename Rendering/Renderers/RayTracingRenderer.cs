@@ -214,7 +214,6 @@ namespace Raytracer.Rendering.Renderers
             // Scene::SetAmbientRefraction).
             Vector3 testPoint = intersection.HitPoint + MathLib.IntersectionEpsilon * dirUnit;
 
-            // HERE! GET SOLIDIFIED MATERIAL NOT THE ONE ON THE OBJECT.
             var container = FindObjectContainingPoint(testPoint);
 
             Material material = new Material();
