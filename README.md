@@ -37,3 +37,7 @@ Improvements To Come.
 I need to get mesh instancing working correctly. At the moment rotation throws off various things, e.g. shadowing.
 Change the Traceable interface. The main intersection routine should return all intersections with the object, not just the first.
 With this we can implement CSG against arbitrary traceable implementations.
+
+Examples
+* Refraction needs some work in this one
+![Flawed refraction](/OutputImages/RefractiveSphere.bmp?raw=true "Flawed Refraction")
