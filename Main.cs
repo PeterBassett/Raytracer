@@ -168,7 +168,7 @@ namespace Raytracer
             {
                 if (GetAnitaliasingLevel() > 1)
                     pixelSampler = new EdgeDetectionSampler(GetAnitaliasingLevel(), GetRenderAntialiasingSamples(), bmp.Size);
-                renderingStrategy = new BasicRenderingStrategy(pixelSampler, blnMultiThreaded);
+                renderingStrategy = new BasicRenderingStrategy(pixelSampler, blnMultiThreaded, token);
             }
 
             var renderer = new RayTracingRenderer(m_scene, camera, renderingStrategy, (uint)m_scene.RecursionDepth, blnMultiThreaded, traceShadows, traceReflections, traceRefractions);

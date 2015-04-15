@@ -85,6 +85,7 @@
     </Compile>
     <Compile Include="Rendering\Accellerators\IAccellerator.cs" />
     <Compile Include="Rendering\RenderingStrategies\BasicRenderingStrategy.cs" />
+    <Compile Include="Rendering\RenderingStrategies\ParallelOptionsBase.cs" />
     <Compile Include="Rendering\RenderingStrategies\ProgressiveRenderingStrategy.cs" />
     <Compile Include="Rendering\RenderingStrategies\IRenderingStrategy.cs" />
     <Compile Include="Rendering\Renderers\IRenderer.cs" />

@@ -283,7 +283,7 @@ namespace Raytracer.Rendering.Renderers
                     refractDir = refractAttempt;
                 }
             }
-
+            refractDir.Normalize();
             if (maxAlignment <= 0.0)
             {
                 // Getting here means there is something wrong with the math.

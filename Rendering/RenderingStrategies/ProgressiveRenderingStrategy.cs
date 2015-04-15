@@ -8,26 +8,20 @@ using System.Threading;
 
 namespace Raytracer.Rendering.RenderingStrategies
 {
-    class ProgressiveRenderingStrategy : IRenderingStrategy
+    class ProgressiveRenderingStrategy : ParallelOptionsBase, IRenderingStrategy
     {
         private IPixelSampler _pixelSampler;
-        private bool _multiThreaded;
         private int _skip;
-        private CancellationToken _cancellationToken;
 
-        public ProgressiveRenderingStrategy(IPixelSampler pixelSampler, int initialSkip, bool multiThreaded, CancellationToken cancellationToken)
+        public ProgressiveRenderingStrategy(IPixelSampler pixelSampler, int initialSkip, bool multiThreaded, CancellationToken cancellationToken) : base(multiThreaded, cancellationToken)
         {
             _pixelSampler = pixelSampler;
-            _multiThreaded = multiThreaded;
-            _skip = initialSkip;
-            _cancellationToken = cancellationToken;
+            _skip = initialSkip;            
         }
 
         public void RenderScene(IRenderer renderer, IBmp frameBuffer)
         {
-            var options = new ParallelOptions();
-            if (!_multiThreaded)
-                options.MaxDegreeOfParallelism = 1;           
+            var options = GetThreadingOptions();         
 
             int skip = _skip;
            

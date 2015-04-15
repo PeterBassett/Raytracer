@@ -2,31 +2,40 @@
 using Raytracer.Rendering.Core;
 using Raytracer.Rendering.PixelSamplers;
 using Raytracer.Rendering.Renderers;
+using System.Threading;
 
 namespace Raytracer.Rendering.RenderingStrategies
 {
-    class BasicRenderingStrategy : IRenderingStrategy
+    class BasicRenderingStrategy : ParallelOptionsBase, IRenderingStrategy
     {
         private IPixelSampler _pixelSampler;
-        private bool _multiThreaded;
-        
-        public BasicRenderingStrategy(IPixelSampler pixelSampler, bool multiThreaded)
+
+        public BasicRenderingStrategy(IPixelSampler pixelSampler, bool multiThreaded, CancellationToken cancellationToken)
+            : base(multiThreaded, cancellationToken)
         {
             _pixelSampler = pixelSampler;
-            _multiThreaded = multiThreaded;
         }
 
         public void RenderScene(IRenderer renderer, IBmp frameBuffer)
         {
-            var options = new ParallelOptions();
-            if (!_multiThreaded)
-                options.MaxDegreeOfParallelism = 1;
+            var options = GetThreadingOptions();
             
             frameBuffer.BeginWriting();
             Parallel.For(0, frameBuffer.Size.Width, options, (x, state) =>
             {
                 for (int y = 0; y < frameBuffer.Size.Height; y++)
+                {
+                    if (_cancellationToken.IsCancellationRequested)
+                    {
+                        state.Break();
+                        return;
+                    }
+
+                    if(x == 156 && y == 136)
+                        System.Console.WriteLine();
+
                     frameBuffer.SetPixel(x, y, _pixelSampler.SamplePixel(renderer, x, y));
+                }
             });
             frameBuffer.EndWriting();
         }
