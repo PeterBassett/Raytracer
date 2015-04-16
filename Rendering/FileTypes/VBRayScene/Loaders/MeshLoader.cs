@@ -9,7 +9,7 @@ using Raytracer.Rendering.Primitives;
 namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 {
     using Raytracer.Rendering.Materials;
-    using Vector = Vector3;
+    
 
     [Export(typeof(IVBRaySceneItemLoader))]
     class MeshLoader : IVBRaySceneItemLoader
@@ -18,21 +18,21 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 
         public void LoadObject(StreamReader file, Scene scene)
         {
-            Tokeniser oText = new Tokeniser();
+            var oText = new Tokeniser();
 
             var meshName = oText.GetToken(file);
             var meshfile = oText.GetToken(file);
 
-            Vector scale = new Vector(1,1,1);
+            var scale = new Vector3(1,1,1);
 
             ReadObjMesh(meshName, meshfile, scale, scene);            
         }
 
-        private void ReadObjMesh(string meshName, string meshfile, Vector scale, Scene scene)
+        private void ReadObjMesh(string meshName, string meshfile, Vector3 scale, Scene scene)
         {            
-            List<Vector> verticies = new List<Vector>();
-            List<Triangle> triangles = new List<Triangle>();
-            List<Material> materials = new List<Material>();
+            var verticies = new List<Vector3>();
+            var triangles = new List<Triangle>();
+            var materials = new List<Material>();
             
             ObjFileLoader fileLoader = new ObjFileLoader();
             fileLoader.LoadFile( meshfile, triangles, materials);

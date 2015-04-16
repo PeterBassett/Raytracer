@@ -3,13 +3,13 @@ using Raytracer.Rendering.Core;
 
 namespace Raytracer.Rendering.Materials
 {
-    using Vector = Vector3;
+    
 
     class MaterialCheckerboard : MaterialWithSubMaterials
     {        
         public MaterialCheckerboard ()
 	    {
-            Size = new Vector(1.0f, 1.0f, 1.0f);
+            Size = new Vector3(1.0f, 1.0f, 1.0f);
         	SubMaterial1 = null;
 	        SubMaterial2 = null;
 	    }

@@ -6,22 +6,22 @@ using Raytracer.Rendering.Core;
 
 namespace Raytracer.Rendering.Primitives
 {
-    using Real = System.Double;    
+        
     static class IntersectionCode3
     {
 
-        public static bool smits_div(Ray r, AABB b, ref Real t)
+        public static bool smits_div(Ray r, AABB b, ref double t)
         {
-            Real tnear = -1e8f;
-            Real tfar = 1e8f;
+            double tnear = -1e8f;
+            double tfar = 1e8f;
 
             {
-                Real t1 = (b.Min.X - r.x) / r.i;
-                Real t2 = (b.Max.X - r.x) / r.i;
+                double t1 = (b.Min.X - r.x) / r.i;
+                double t2 = (b.Max.X - r.x) / r.i;
 
                 if (t1 > t2)
                 {
-                    Real temp = t1;
+                    double temp = t1;
                     t1 = t2;
                     t2 = temp;
                 }
@@ -36,12 +36,12 @@ namespace Raytracer.Rendering.Primitives
                     return false;
             }
             {
-                Real t1 = (b.Min.Y - r.y) / r.j;
-                Real t2 = (b.Max.Y - r.y) / r.j;
+                double t1 = (b.Min.Y - r.y) / r.j;
+                double t2 = (b.Max.Y - r.y) / r.j;
 
                 if (t1 > t2)
                 {
-                    Real temp = t1;
+                    double temp = t1;
                     t1 = t2;
                     t2 = temp;
                 }
@@ -56,12 +56,12 @@ namespace Raytracer.Rendering.Primitives
                     return false;
             }
             {
-                Real t1 = (b.Min.Z - r.z) / r.k;
-                Real t2 = (b.Max.Z - r.z) / r.k;
+                double t1 = (b.Min.Z - r.z) / r.k;
+                double t2 = (b.Max.Z - r.z) / r.k;
 
                 if (t1 > t2)
                 {
-                    Real temp = t1;
+                    double temp = t1;
                     t1 = t2;
                     t2 = temp;
                 }

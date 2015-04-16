@@ -8,7 +8,6 @@ namespace Raytracer.MathTypes
 {
     class Polynomial
     {
-        int n;
         double[] coef = new double[16];
 
         private const double COEFF_LIMIT = 1.0e-16;
@@ -19,7 +18,6 @@ namespace Raytracer.MathTypes
 
         public Polynomial()
         {
-            n = 0;
             coef[0] = 0.0;
         }
 
@@ -31,8 +29,6 @@ namespace Raytracer.MathTypes
             coef[2] = c;
             coef[3] = b;
             coef[4] = a;
-
-            n = 4;
         }
 
         Polynomial(double a, double b, double c, double d)
@@ -42,7 +38,6 @@ namespace Raytracer.MathTypes
             coef[1] = c;
             coef[2] = b;
             coef[3] = a;
-            n = 3;
         }
 
         public double this[int index]
@@ -105,7 +100,6 @@ namespace Raytracer.MathTypes
             cubic[2] = -0.5 * p;
             cubic[1] = -r;
             cubic[0] = 0.5 * r * p - 0.125 * q * q;
-            cubic.n = 3;
 
             i = cubic.SolveCubic(roots);
             if (i > 0)

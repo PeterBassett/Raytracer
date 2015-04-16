@@ -5,7 +5,7 @@ using Raytracer.Rendering.Core;
 
 namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 {
-    using Vector = Vector3;
+    
 
     [Export(typeof(IVBRaySceneItemLoader))]
     class DiffuseLightLoader : IVBRaySceneItemLoader
@@ -16,7 +16,7 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
             Tokeniser oText = new Tokeniser();
             Light light = new Light();
 
-            Vector pos = new Vector();
+            Vector3 pos = new Vector3();
             pos.X = float.Parse(oText.GetToken(file));
             pos.Y = float.Parse(oText.GetToken(file));
 	        pos.Z = float.Parse(oText.GetToken(file));

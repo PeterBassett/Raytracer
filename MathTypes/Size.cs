@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Raytracer.MathTypes
 {
     public struct Size
     {
-        public Size(uint width, uint height)
-            : this((int)width, (int)height)
-        {
-        }
-
         public Size(int width, int height) : this()
         {
             if (width < 0)

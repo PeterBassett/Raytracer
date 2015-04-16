@@ -7,7 +7,7 @@ using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 {
-    using Vector = Vector3;
+    
 
     [Export(typeof(IVBRaySceneItemLoader))]
     class TriangleLoader : IVBRaySceneItemLoader
@@ -20,7 +20,7 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 
             for (int i = 0; i < 3; i++)
             {
-                Vector pos = new Vector();
+                Vector3 pos = new Vector3();
                 pos.X = float.Parse(oText.GetToken(file));
                 pos.Y = float.Parse(oText.GetToken(file));
                 pos.Z = float.Parse(oText.GetToken(file));
@@ -28,8 +28,10 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
             }             
 
             obj.Pos = (obj.Vertex[0] + obj.Vertex[1] + obj.Vertex[2]) / 3.0;
+            
+            obj.Normal = null;
 
-            string strMaterial = oText.GetToken(file);
+            var strMaterial = oText.GetToken(file);
 
 	        var mat = scene.FindMaterial(strMaterial);
 

@@ -174,7 +174,7 @@ namespace Raytracer
                 renderingStrategy = new BasicRenderingStrategy(pixelSampler, blnMultiThreaded, token);
             }
 
-            var renderer = new RayTracingRenderer(m_scene, camera, renderingStrategy, (uint)m_scene.RecursionDepth, blnMultiThreaded, traceShadows, traceReflections, traceRefractions);
+            IRenderer renderer = new RayTracingRenderer(m_scene, camera, renderingStrategy, (uint)m_scene.RecursionDepth, blnMultiThreaded, traceShadows, traceReflections, traceRefractions);
             renderer.RenderScene(bmp);
 
             watch.Stop();

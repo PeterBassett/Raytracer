@@ -6,7 +6,7 @@ using Raytracer.Rendering.Materials;
 
 namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 {
-    using Vector = Vector3;
+    
 
     [Export(typeof(IVBRaySceneItemLoader))]
     class NoiseMaterialLoader : IVBRaySceneItemLoader
@@ -65,7 +65,7 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
             for (i = 0; i < mat.Octaves; i++)
                 mat.Max += (float)Math.Pow(mat.Persistence, i);
 
-            Vector size = new Vector();
+            Vector3 size = new Vector3();
             size.X = float.Parse(oText.GetToken(file));
             size.Y = float.Parse(oText.GetToken(file));
             size.Z = float.Parse(oText.GetToken(file));

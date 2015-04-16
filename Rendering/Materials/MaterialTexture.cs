@@ -63,7 +63,7 @@ namespace Raytracer.Rendering.Materials
                 return (GetPixelSafe(x, y)      * u_opposite + GetPixelSafe(x + 1, y)        * u_ratio) * v_opposite +
                        (GetPixelSafe(x, y + 1)  * u_opposite + GetPixelSafe(x + 1, y + 1)    * u_ratio) * v_ratio;
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 Console.WriteLine();
             }

@@ -26,9 +26,9 @@ namespace Raytracer.Rendering.BackgroundMaterials
         }
 
 	    protected int _tileSize;
-        protected Bmp _image;
+        protected IBmp _image;
 
-        public CubemapBackground(string filename)
+        protected CubemapBackground(string filename)
         {
             LoadCubeMapImage(filename);
 
@@ -68,17 +68,16 @@ namespace Raytracer.Rendering.BackgroundMaterials
 
         public Colour Shade(Ray ray)
         {
-            Vector3 r = ray.Dir;
+            var r = ray.Dir;
 
             r.Normalize();
 
 	        double rmax = 0;
             Axis imax = GetDominantAxis(r, ref rmax);
-	
-	        Face face = Face.Front;
-	        double s = 0.0f, t = 0.0f;
 
-            GetFaceCoordinates(ref r, imax, ref face, ref s, ref t);
+            Face face;
+	        double s, t;
+            GetFaceCoordinates(r, imax, out face, out s, out t);
 	
 	        s = 0.5f * (s / rmax + 1.0f);
 	        t = 0.5f * (t / rmax + 1.0f);
@@ -96,13 +95,13 @@ namespace Raytracer.Rendering.BackgroundMaterials
             s *= _tileSize;
             t *= _tileSize;
 
-            int pxl = (int)Math.Floor(s - 0.5f);
-            int pxh = (int)Math.Floor(s + 0.5f);
-            int pyl = (int)Math.Floor(t - 0.5f);
-            int pyh = (int)Math.Floor(t + 0.5f);
+            var pxl = (int)Math.Floor(s - 0.5f);
+            var pxh = (int)Math.Floor(s + 0.5f);
+            var pyl = (int)Math.Floor(t - 0.5f);
+            var pyh = (int)Math.Floor(t + 0.5f);
 
-            double xs = s - 0.5f - pxl;
-            double ys = t - 0.5f - pyl;
+            var xs = s - 0.5f - pxl;
+            var ys = t - 0.5f - pyl;
 
             var cll = GetPixelFromFace(face, pxl, pyl);
             var chl = GetPixelFromFace(face, pxh, pyl);
@@ -114,9 +113,9 @@ namespace Raytracer.Rendering.BackgroundMaterials
 
         Colour GetPixelFromFace(Face face, int px, int py)
         {
-            int x_offset = 0, y_offset = 0;
+            int x_offset, y_offset;
 
-            GetFaceOffsets(face, ref x_offset, ref y_offset);
+            GetFaceOffsets(face, out x_offset, out y_offset);
 
             px = x_offset + Math.Max(0, Math.Min(_tileSize - 1, px));
             py = y_offset + Math.Max(0, Math.Min(_tileSize - 1, py));
@@ -124,8 +123,8 @@ namespace Raytracer.Rendering.BackgroundMaterials
             return _image.GetPixel(px, py);
         }
 
-        protected abstract void GetFaceCoordinates(ref Vector3 r, Axis imax, ref Face face, ref double s, ref double t);
+        protected abstract void GetFaceCoordinates(Vector3 r, Axis imax, out Face face, out double s, out double t);
 
-        protected abstract void GetFaceOffsets(Face face, ref int x_offset, ref int y_offset);
+        protected abstract void GetFaceOffsets(Face face, out int x_offset, out int y_offset);
     }
 }

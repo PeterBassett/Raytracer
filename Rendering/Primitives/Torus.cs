@@ -7,14 +7,14 @@ using Raytracer.Rendering.Core;
 
 namespace Raytracer.Rendering.Primitives
 {
-    using Vector = Vector3;
-    using Real = System.Double;
+    
+    
     using System.Numerics;
 
     class Torus : Traceable
     {
-        public Real InnerRadius { get; set; }
-        public Real OuterRadius { get; set; }
+        public double InnerRadius { get; set; }
+        public double OuterRadius { get; set; }
        
         public override IntersectionInfo Intersect(Ray ray)
         {
@@ -23,10 +23,10 @@ namespace Raytracer.Rendering.Primitives
             double R = InnerRadius;    // distance from center of hole to center of tube
             double S= OuterRadius;    // distance from center of tube to outside of tube
 
-            Vector direction = r.Dir;
-            Vector vantage = r.Pos;
+            var direction = r.Dir;
+            var vantage = r.Pos;
 
-            Real[] uArray = new Real[4];
+            var uArray = new double[4];
             // Set up the coefficients of a quartic equation for the intersection
             // of the parametric equation P = vantage + u*direction and the 
             // surface of the torus.
@@ -38,7 +38,7 @@ namespace Raytracer.Rendering.Primitives
             double H = 2.0 * T * (vantage.X*direction.X + vantage.Y*direction.Y);
             double I = T * (vantage.X*vantage.X + vantage.Y*vantage.Y);
             double J = direction.GetLengthSquared();
-            double K = 2.0 * Vector.DotProduct(vantage, direction);
+            double K = 2.0 * Vector3.DotProduct(vantage, direction);
             double L = vantage.GetLengthSquared() + R*R - S*S;
 
             int numRealRoots = Algebra.SolveQuarticEquation(
@@ -86,7 +86,7 @@ namespace Raytracer.Rendering.Primitives
 
         private Ray CreateTransformedRay(Ray ray)
         {
-            Vector dir = ray.Pos + -this.Pos;
+            var dir = ray.Pos + -this.Pos;
             ray.Dir.RotateX(-this.Ori.X, ref dir);
             dir.RotateY(-this.Ori.Y, ref dir);
             dir.RotateZ(-this.Ori.Z, ref dir);
@@ -95,7 +95,7 @@ namespace Raytracer.Rendering.Primitives
             return new Ray(ray.Pos + -this.Pos, dir);
         }
 
-        Vector SurfaceNormal(Vector point)
+        Vector3 SurfaceNormal(Vector3 point)
         {
             // Thanks to the fixed orientation of the torus in object space,
             // it always lies on the xy plane, and centered at <0,0,0>.
@@ -111,24 +111,24 @@ namespace Raytracer.Rendering.Primitives
             double S = OuterRadius;    // distance from center of tube to outside of tube
 
             double a = 1.0 - (R / Math.Sqrt(point.X*point.X + point.Y*point.Y));
-            var n = new Vector(a*point.X, a*point.Y, point.Z);
+            var n = new Vector3(a*point.X, a*point.Y, point.Z);
             n.Normalize();
 
             return n;
         }
 
-        public Vector GetNormal(Vector p)
+        public Vector3 GetNormal(Vector3 p)
         {
             return SurfaceNormal(p);
             /*double nx, ny, nz;
             nx = 4 * p.X * (Math.Pow(p.X, 2) + Math.Pow(p.Y, 2) + Math.Pow(p.Y, 2) + Math.Pow(OuterRadius, 2) - Math.Pow(InnerRadius, 2)) - 8 * Math.Pow(OuterRadius, 2) * p.X;
             ny = 4 * p.Y * (Math.Pow(p.X, 2) + Math.Pow(p.Y, 2) + Math.Pow(p.Y, 2) + Math.Pow(OuterRadius, 2) - Math.Pow(InnerRadius, 2)) - 8 * Math.Pow(OuterRadius, 2) * p.Y;
             nz = 4 * p.Z * (Math.Pow(p.X, 2) + Math.Pow(p.Y, 2) + Math.Pow(p.Y, 2) + Math.Pow(OuterRadius, 2) - Math.Pow(InnerRadius, 2)) - 8 * Math.Pow(OuterRadius, 2) * p.Z;
-            Vector res = new Vector(nx, ny, nz);
+            Vector3 res = new Vector3(nx, ny, nz);
             res.Normalize();
             return res;*/
 
-            //return new Vector(0, 1, 0);
+            //return new Vector3(0, 1, 0);
         }
 
         public override bool Intersect(AABB aabb)
@@ -140,12 +140,12 @@ namespace Raytracer.Rendering.Primitives
         {
             return new AABB()
             {
-                Min = new Vector(this.Pos.X - OuterRadius, this.Pos.Y - OuterRadius, this.Pos.Z - OuterRadius),
-                Max = new Vector(this.Pos.X + OuterRadius, this.Pos.Y + OuterRadius, this.Pos.Z + OuterRadius)
+                Min = new Vector3(this.Pos.X - OuterRadius, this.Pos.Y - OuterRadius, this.Pos.Z - OuterRadius),
+                Max = new Vector3(this.Pos.X + OuterRadius, this.Pos.Y + OuterRadius, this.Pos.Z + OuterRadius)
             };
         }
 
-        public override bool Contains(Vector point)
+        public override bool Contains(Vector3 point)
         {
             return false;
         }

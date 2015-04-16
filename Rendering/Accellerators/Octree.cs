@@ -7,7 +7,7 @@ using Raytracer.Rendering.Core;
 
 namespace Raytracer.Rendering.Accellerators
 {
-    using Vector = Vector3;
+    
     using Raytracer.Rendering.Primitives;
 
     class Octree : IAccelerator
@@ -55,8 +55,8 @@ namespace Raytracer.Rendering.Accellerators
             
             internal AABB GetAABBSubQuadrant(AABB parent, bool Up, bool Left, bool Forward)
             {
-                var min = new Vector();
-                var max = new Vector();
+                var min = new Vector3();
+                var max = new Vector3();
 
                 if (Up)
                     min.X = parent.Min.X;
@@ -155,7 +155,7 @@ namespace Raytracer.Rendering.Accellerators
                 return new List<Traceable>();
             }
 
-            internal IEnumerable<Traceable> Intersect(Vector point)
+            internal IEnumerable<Traceable> Intersect(Vector3 point)
             {
                 if (!this.Bounds.Contains(point))
                     return new List<Traceable>();
@@ -237,7 +237,7 @@ namespace Raytracer.Rendering.Accellerators
             this._root.PruneEmptyNodes();
         }
 
-        public IEnumerable<Traceable> Intersect(Vector point)
+        public IEnumerable<Traceable> Intersect(Vector3 point)
         {
             return this._root.Intersect(point);
         }

@@ -1,11 +1,11 @@
-Viewpoint(0,0,-7, 	 ' Viewpoint ' 
+Viewpoint(0,0,-8, 	 ' Viewpoint ' 
 	  0.0, 0.0, 0.0, ' View Angle ' 
 	  90)		 ' FOV '	
 
 AmbientLight(50, 50, 50)
 
-LightSource(9, 9, -9, 20, 5, 5)
-LightSource(-9, 9, -9, 5, 5, 40)
+LightSource(9, 9, -2, 20, 5, 5)
+LightSource(-9, 9, 3, 5, 5, 40)
 LightSource(0, 7, 9.5, 5, 30, 5)
 LightSource(9.5, 0, 9.5, 35, 30, 5)
 
@@ -148,12 +148,12 @@ Sphere( 4.5,
 )
 
 Sphere( 2.5, 
-  -2, 3, 8,
+  -2, 3, 5,
   "yellow"
 )
 
-Sphere( 2, 
-  -1, 2, 0,
+Sphere( 1.2, 
+  -1, 3.3, -1,
   "glass"
 )
 

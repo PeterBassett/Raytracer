@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using System.Threading.Tasks;
 using Raytracer.Rendering.Core;
 using Raytracer.Rendering.PixelSamplers;
 using Raytracer.Rendering.Renderers;
@@ -10,11 +11,12 @@ namespace Raytracer.Rendering.RenderingStrategies
 {
     class ProgressiveRenderingStrategy : ParallelOptionsBase, IRenderingStrategy
     {
-        private IPixelSampler _pixelSampler;
-        private int _skip;
+        private readonly IPixelSampler _pixelSampler;
+        private readonly int _skip;
 
         public ProgressiveRenderingStrategy(IPixelSampler pixelSampler, int initialSkip, bool multiThreaded, CancellationToken cancellationToken) : base(multiThreaded, cancellationToken)
         {
+            Debug.Assert(pixelSampler != null, "pixelSampler != null");
             _pixelSampler = pixelSampler;
             _skip = initialSkip;            
         }
@@ -43,6 +45,7 @@ namespace Raytracer.Rendering.RenderingStrategies
 
                         var colour = _pixelSampler.SamplePixel(renderer, x, y);
 
+                        // ReSharper disable once AccessToModifiedClosure
                         SetColourBlock(frameBuffer, skip, x, y, colour);
                     }
                 });
@@ -60,7 +63,7 @@ namespace Raytracer.Rendering.RenderingStrategies
             }
         }
 
-        private void SetColourBlock(IBmp frameBuffer, int skip, int x, int y, Colour colour)
+        private static void SetColourBlock(IBmp frameBuffer, int skip, int x, int y, Colour colour)
         {
             for (int xs = x; xs < x + skip && xs < frameBuffer.Size.Width; xs++)
                 for (int ys = y; ys < y + skip && ys < frameBuffer.Size.Height; ys++)

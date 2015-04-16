@@ -1,32 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Raytracer.MathTypes;
+﻿using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
+using Raytracer.Rendering.Materials;
 
 namespace Raytracer.Rendering.Primitives
 {
-    using Vector = Vector3;
-    using Real = System.Double;
-    using Raytracer.Rendering.Materials;
-
     abstract class Traceable
     {
-        public Traceable()
+        protected Traceable()
         {
-            Pos = new Vector(0.0f, 0.0f, 0.0f);
-            Ori = new Vector(0.0f, 0.0f, 0.0f);
+            Pos = new Vector3(0.0f, 0.0f, 0.0f);
+            Ori = new Vector3(0.0f, 0.0f, 0.0f);
         }
         public abstract IntersectionInfo Intersect(Ray ray);
         public abstract bool Intersect(AABB aabb);
         public abstract bool Contains(Vector3 point);
+        // ReSharper disable once InconsistentNaming
         public abstract AABB GetAABB();
 
-        public Vector Pos { get; set; }
-        public Vector Ori { get; set; }
-        public Material Material { get; set; }
-        
+        public Vector3 Pos { get; set; }
+        public Vector3 Ori { get; set; }
+        public Material Material { get; set; }        
     }
-
 }

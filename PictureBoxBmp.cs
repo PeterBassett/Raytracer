@@ -9,26 +9,26 @@ namespace Raytracer
 {
     class PictureBoxBmp : IBmp, IDisposable
     {
-        Bitmap bitmap = null;
-        PictureBox pictureBox = null;
-        System.Drawing.Imaging.BitmapData bmpdata = null;
-        Raytracer.MathTypes.Size _size;
+        Bitmap _bitmap = null;
+        readonly PictureBox _pictureBox = null;
+        System.Drawing.Imaging.BitmapData _bmpdata = null;
+        readonly Raytracer.MathTypes.Size _size;
 
         public PictureBoxBmp(PictureBox box)
         {
             if (box == null)
                 throw new ArgumentNullException();
 
-            pictureBox = box;
+            _pictureBox = box;
 
-            _size = new Raytracer.MathTypes.Size(box.Width, box.Height);
+            _size = new MathTypes.Size(box.Width, box.Height);
         }
 
         public Colour GetPixel(int lX, int lY)
         {
             unsafe
             {
-                byte* row = (byte*)bmpdata.Scan0 + ((bmpdata.Height - lY - 1) * bmpdata.Stride);
+                byte* row = (byte*)_bmpdata.Scan0 + ((_bmpdata.Height - lY - 1) * _bmpdata.Stride);
 
                 return new Colour(row[(lX * 4) + 2] / 255.0, row[(lX * 4) + 1] / 255.0, row[lX * 4] / 255.0);
             }
@@ -39,7 +39,7 @@ namespace Raytracer
             var col = colour.ToColor();
             unsafe
             {
-                byte* row = (byte*)bmpdata.Scan0 + ((bmpdata.Height - lY - 1) * bmpdata.Stride);
+                byte* row = (byte*)_bmpdata.Scan0 + ((_bmpdata.Height - lY - 1) * _bmpdata.Stride);
 
                 row[lX * 4] = col.B;  // B
                 row[(lX * 4) + 1] = col.G;  // G
@@ -50,44 +50,44 @@ namespace Raytracer
 
         public void BeginWriting()
         {
-            pictureBox.UIThread(() =>
+            _pictureBox.UIThread(() =>
             {
-                bitmap = new Bitmap(pictureBox.Width, pictureBox.Height);
+                _bitmap = new Bitmap(_pictureBox.Width, _pictureBox.Height);
             });
 
-            bmpdata = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                System.Drawing.Imaging.ImageLockMode.ReadWrite, bitmap.PixelFormat);
+            _bmpdata = _bitmap.LockBits(new Rectangle(0, 0, _bitmap.Width, _bitmap.Height),
+                System.Drawing.Imaging.ImageLockMode.ReadWrite, _bitmap.PixelFormat);
         }
 
         public void EndWriting()
         {
-            if (bitmap == null || bmpdata == null)
+            if (_bitmap == null || _bmpdata == null)
                 return;
 
-            bitmap.UnlockBits(bmpdata);
+            _bitmap.UnlockBits(_bmpdata);
 
-            pictureBox.UIThread(() =>
+            _pictureBox.UIThread(() =>
             {
-                pictureBox.Image = bitmap;
+                _pictureBox.Image = _bitmap;
             });
 
-            bitmap = null;
-            bmpdata = null;
+            _bitmap = null;
+            _bmpdata = null;
         }
 
         public void Dispose()
         {
-            if (bmpdata != null)
+            if (_bmpdata != null)
                 EndWriting();
 
-            if (bitmap != null)
+            if (_bitmap != null)
             {
-                bitmap.Dispose();
-                bitmap = null;
+                _bitmap.Dispose();
+                _bitmap = null;
             }
         }
 
-        public Raytracer.MathTypes.Size Size
+        public MathTypes.Size Size
         {
             get { return _size; }
         }

@@ -44,14 +44,14 @@ namespace Raytracer.Rendering.Renderers
             return Trace(_camera.GenerateRayForPixel(pixelCoordinates));
         }
 
-        public Colour Trace(Ray ray)
+        private Colour Trace(Ray ray)
         {
             return TraceRay(ray, new Colour(1.0f), 1.0f, 1, ray.Dir);
         }
         
         private IntersectionInfo FindClosestIntersection(Ray ray)
         {
-            IntersectionInfo minimumIntersection = new IntersectionInfo(HitResult.MISS);
+            var minimumIntersection = new IntersectionInfo(HitResult.MISS);
 
             foreach (var obj in _scene.GetCandiates(ray))
             {
@@ -68,16 +68,14 @@ namespace Raytracer.Rendering.Renderers
 
         private Traceable FindObjectContainingPoint(Vector3 point)
         {
-            return _scene.GetCandiates(point);
+            return _scene.FindObjectContainingPoint(point);
         }
 
         private Colour TraceRay(Ray ray, Colour contribution, double curRefractionIndex, long depth, Vector3 eyeDirection)
         {
-            const double EPSILON = 0.001f;
+            var colour = new Colour(0.0f);
 
-            Colour colour = new Colour(0.0f);
-
-            IntersectionInfo info = FindClosestIntersection(ray);
+            var info = FindClosestIntersection(ray);
 
             if (info.Result == HitResult.MISS)
             {
@@ -88,8 +86,8 @@ namespace Raytracer.Rendering.Renderers
             }
             
             // set the 
-            Material material = new Material();
-            Material objectMaterial = info.Primitive.Material != null ? info.Primitive.Material : _scene.DefaultMaterial;
+            var material = new Material();
+            var objectMaterial = info.Primitive.Material ?? _scene.DefaultMaterial;
 
             var materialDispatcher = new MaterialDispatcher();
             materialDispatcher.Solidify((dynamic)info.Primitive, (dynamic)objectMaterial, info, material);
@@ -104,14 +102,14 @@ namespace Raytracer.Rendering.Renderers
             }
 
             // if we are dealing with a reflective material
-            if (material.Reflective.Sum() > 0.0f && this._traceReflections)
+            if (material.Reflective.Sum() > 0.0f && _traceReflections)
             {
                 Colour colReflectAmount = material.Reflective * contribution;
 
                 if (colReflectAmount.Sum() > 0.01f)
                 {
                     // calculate the new reflected direction
-                    Ray reflectedRay = new Ray(info.HitPoint, CalculateReflectedRay(ray.Dir, info.NormalAtHitPoint));
+                    var reflectedRay = new Ray(info.HitPoint, CalculateReflectedRay(ray.Dir, info.NormalAtHitPoint));
 
                     // recursivly call trace ray
                     colour += TraceRay(reflectedRay, colReflectAmount, curRefractionIndex, depth + 1, eyeDirection);
@@ -119,14 +117,14 @@ namespace Raytracer.Rendering.Renderers
             }
 
             // if we are dealing with a refractive material
-            if (material.Transmitted.Sum() > 0.0f && this._traceRefractions)
+            if (material.Transmitted.Sum() > 0.0f && _traceRefractions)
             {
                 Colour colRefractiveAmount = material.Transmitted * contribution;
 
                 if (colRefractiveAmount.Sum() > 0.01f)
                 {
 
-                    double outReflectionFactor = 0;
+                    double outReflectionFactor;
                     Colour rcol = CalculateRefraction(
                         info,
                         ray.Dir,
@@ -157,11 +155,11 @@ namespace Raytracer.Rendering.Renderers
             Vector3 dirUnit = direction;
             dirUnit.Normalize();
 
-            double cos_a1 = Vector3.DotProduct(dirUnit, intersection.NormalAtHitPoint);
+            var cosA1 = Vector3.DotProduct(dirUnit, intersection.NormalAtHitPoint);
             double sin_a1;
-            if (cos_a1 <= -1.0)
+            if (cosA1 <= -1.0)
             {
-                if (cos_a1 < -1.0001)
+                if (cosA1 < -1.0001)
                 {
                     throw new Exception("Dot product too small.");
                 }
@@ -169,12 +167,12 @@ namespace Raytracer.Rendering.Renderers
                 // direction as the normal vector, so the ray
                 // is entering the solid exactly perpendicular
                 // to the surface at the intersection point.
-                cos_a1 = -1.0;  // clamp to lower limit
+                cosA1 = -1.0;  // clamp to lower limit
                 sin_a1 =  0.0;
             }
-            else if (cos_a1 >= +1.0)
+            else if (cosA1 >= +1.0)
             {
-                if (cos_a1 > +1.0001)
+                if (cosA1 > +1.0001)
                 {
                     throw new Exception("Dot product too large.");
                 }
@@ -182,7 +180,7 @@ namespace Raytracer.Rendering.Renderers
                 // direction as the normal vector, so the ray
                 // is exiting the solid exactly perpendicular
                 // to the surface at the intersection point.
-                cos_a1 = +1.0;  // clamp to upper limit
+                cosA1 = +1.0;  // clamp to upper limit
                 sin_a1 =  0.0;
             }
             else
@@ -193,7 +191,7 @@ namespace Raytracer.Rendering.Renderers
                 // using the trig identity cos^2 + sin^2 = 1.
                 // The angle between any two vectors is always between
                 // 0 and PI, so the sine of such an angle is never negative.
-                sin_a1 = Math.Sqrt(1.0 - cos_a1*cos_a1);
+                sin_a1 = Math.Sqrt(1.0 - cosA1*cosA1);
             }
 
             // The parameter sourceRefractiveIndex passed to this function
@@ -212,16 +210,16 @@ namespace Raytracer.Rendering.Renderers
             // we use the scene's ambient refraction, which defaults to 
             // vacuum (but that can be overridden by a call to 
             // Scene::SetAmbientRefraction).
-            Vector3 testPoint = intersection.HitPoint + MathLib.IntersectionEpsilon * dirUnit;
+            var testPoint = intersection.HitPoint + MathLib.IntersectionEpsilon * dirUnit;
 
             var container = FindObjectContainingPoint(testPoint);
 
-            Material material = new Material();
+            var material = new Material();
             double targetRefractiveIndex = this._scene.DefaultMaterial.Refraction;
 
             if (container != null)
             {
-                Material objectMaterial = container.Material != null ? container.Material : _scene.DefaultMaterial;
+                var objectMaterial = container.Material ?? _scene.DefaultMaterial;
 
                 var materialDispatcher = new MaterialDispatcher();
                 
@@ -257,7 +255,7 @@ namespace Raytracer.Rendering.Renderers
             var k = new double[2];
             int numSolutions = Algebra.SolveQuadraticEquation(
                 1.0,
-                2.0 * cos_a1,
+                2.0 * cosA1,
                 1.0 - 1.0/(ratio*ratio),
                 k);
 
@@ -272,7 +270,7 @@ namespace Raytracer.Rendering.Renderers
             // than 90 degrees, so all valid dot products are 
             // positive numbers.
             double maxAlignment = -0.0001;  // any negative number works as a flag
-            Vector3 refractDir = new Vector3();
+            var refractDir = new Vector3();
             for (int i=0; i < numSolutions; ++i)
             {
                 Vector3 refractAttempt = dirUnit + k[i]*intersection.NormalAtHitPoint;
@@ -295,7 +293,7 @@ namespace Raytracer.Rendering.Renderers
 
             // Determine the cosine of the exit angle.
             double cos_a2 = Math.Sqrt(1.0 - sin_a2*sin_a2);
-            if (cos_a1 < 0.0)
+            if (cosA1 < 0.0)
             {
                 // Tricky bit: the polarity of cos_a2 must
                 // match that of cos_a1.
@@ -313,14 +311,14 @@ namespace Raytracer.Rendering.Renderers
             double Rs = PolarizedReflection(
                 sourceRefractiveIndex,
                 targetRefractiveIndex,
-                cos_a1,
+                cosA1,
                 cos_a2);
 
             double Rp = PolarizedReflection(
                 sourceRefractiveIndex,
                 targetRefractiveIndex,
                 cos_a2,
-                cos_a1);
+                cosA1);
 
             outReflectionFactor = (Rs + Rp) / 2.0;
 
@@ -339,33 +337,27 @@ namespace Raytracer.Rendering.Renderers
             double cos_a1,          // incident or outgoing ray angle cosine
             double cos_a2)          // outgoing or incident ray angle cosine
         {
-            double left  = n1 * cos_a1;
-            double right = n2 * cos_a2;
-            double numer = left - right;
-            double denom = left + right;
+            var left  = n1 * cos_a1;
+            var right = n2 * cos_a2;
+            var numer = left - right;
+            var denom = left + right;
             denom *= denom;     // square the denominator
+
             if (denom < MathLib.Epsilon)
             {
                 // Assume complete reflection.
                 return 1.0;
             }
-            double reflection = (numer*numer) / denom;
-            if (reflection > 1.0)
-            {
-                // Clamp to actual upper limit.
-                return 1.0;
-            }
-            return reflection;
+
+            var reflection = (numer*numer) / denom;
+            
+            return reflection > 1.0 ? 1.0 : reflection;
         }
 
         private Colour Shade(Vector3 hitPoint, Vector3 normal, Material material, Vector3 eyeDirection)
         {
-            Colour colour;
-            //= pObj.Material;
-            Material lightMaterial = null;
-
             // first assign the emmissive part of the color as the base color
-            colour = material.Emissive;
+            Colour colour = material.Emissive;
 
             // iterate through all the lights in the scene
             foreach (var light in _scene.Lights)
@@ -378,9 +370,8 @@ namespace Raytracer.Rendering.Renderers
                 colour += (material.Ambient * lightAmbient);
 
                 // construct a vector from the point to the light
-                Vector3 pointToLight;
                 double lightVecLen = 0.0f;
-                pointToLight = light.Pos - hitPoint;
+                var pointToLight = light.Pos - hitPoint;
 
                 // save the lenght of the vector.
                 lightVecLen = pointToLight.GetLength();
@@ -389,10 +380,10 @@ namespace Raytracer.Rendering.Renderers
                 pointToLight.Normalize();
 
                 // get the angle between the light vector ad the surface normal
-                double lightCos = Vector3.DotProduct(pointToLight, normal);
+                var lightCos = Vector3.DotProduct(pointToLight, normal);
 
                 // is this point shadowed
-                bool shadowed = false;
+                var shadowed = false;
 
                 // if we are tracing shadows
                 if (this._traceShadows && lightDiffuse.Sum() > 0)
@@ -408,17 +399,16 @@ namespace Raytracer.Rendering.Renderers
                     if (material.Specularity > 0.0f)
                     {
                         // calculate specular highlights
-                        Vector3 vReflect = CalculateReflectedRay(pointToLight, normal);
+                        var vReflect = CalculateReflectedRay(pointToLight, normal);
 
                         // normalise the vector
                         vReflect.Normalize();
 
-                        double fSpecular = Vector3.DotProduct(vReflect, eyeDirection);
+                        var fSpecular = Vector3.DotProduct(vReflect, eyeDirection);
 
                         if (fSpecular > 0.0f)
                         {
-                            double power;
-                            power = (double)Math.Pow(fSpecular, material.Specularity);
+                            var power = (double)Math.Pow(fSpecular, material.Specularity);
                             colour += lightDiffuse * material.SpecularExponent * power;
                         }
                     }
@@ -430,10 +420,10 @@ namespace Raytracer.Rendering.Renderers
 
         private bool ShadowTrace(Vector3 hitPoint, Vector3 lightPosition, Vector3 surfaceNormal, double lightDistance)
         {
-            Vector3 dir = lightPosition - hitPoint;
+            var dir = lightPosition - hitPoint;
             dir.Normalize();
 
-            Ray ray = new Ray(hitPoint + (surfaceNormal * 0.00001f), dir);
+            var ray = new Ray(hitPoint + (surfaceNormal * 0.00001f), dir);
 
             foreach (var obj in _scene.GetCandiates(ray))
             {
@@ -448,23 +438,22 @@ namespace Raytracer.Rendering.Renderers
 
         private Vector3 CalculateReflectedRay(Vector3 dir, Vector3 normal)
         {
-            Vector3 tmp = new Vector3();
-
             dir = -dir;
             dir.Normalize();
             normal.Normalize();
 
-            tmp = (normal * (2.0f * Vector3.DotProduct(normal, dir))) - dir;
+            var tmp = (normal * (2.0f * Vector3.DotProduct(normal, dir))) - dir;
             tmp.Normalize();
             return tmp;
         }
 
         private Vector3 CalculateRefractedRay(Vector3 dir, Vector3 normal, double n_Out, double n_In)
         {
-            double c = -Vector3.DotProduct(normal, dir);
-            double n1 = n_Out;
-            double n2 = n_In;
-            double n = n1 / n2;
+            var c = -Vector3.DotProduct(normal, dir);
+            var n1 = n_Out;
+            var n2 = n_In;
+            var n = n1 / n2;
+
             return (n * dir) + (double)(n * c - Math.Sqrt(1 - n * n * (1 - c * c))) * normal;
         }        
     }

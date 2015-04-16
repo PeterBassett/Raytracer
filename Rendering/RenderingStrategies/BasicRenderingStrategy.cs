@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using System.Threading.Tasks;
 using Raytracer.Rendering.Core;
 using Raytracer.Rendering.PixelSamplers;
 using Raytracer.Rendering.Renderers;
@@ -8,11 +9,12 @@ namespace Raytracer.Rendering.RenderingStrategies
 {
     class BasicRenderingStrategy : ParallelOptionsBase, IRenderingStrategy
     {
-        private IPixelSampler _pixelSampler;
+        private readonly IPixelSampler _pixelSampler;
 
         public BasicRenderingStrategy(IPixelSampler pixelSampler, bool multiThreaded, CancellationToken cancellationToken)
             : base(multiThreaded, cancellationToken)
         {
+            Debug.Assert(pixelSampler != null, "pixelSampler != null");
             _pixelSampler = pixelSampler;
         }
 

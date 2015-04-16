@@ -8,8 +8,8 @@ using Raytracer.Rendering.Core;
 
 namespace Raytracer.Rendering.Primitives
 {
-    using Vector = Vector3;
-    using Real = System.Double;
+    
+    
 
     class Mesh : Traceable
     {
@@ -57,8 +57,8 @@ namespace Raytracer.Rendering.Primitives
         
         private void BuildAABB()
         {
-            Vector min = new Vector(int.MaxValue, int.MaxValue, int.MaxValue);
-            Vector max = new Vector(int.MinValue, int.MinValue, int.MinValue);
+            Vector3 min = new Vector3(int.MaxValue, int.MaxValue, int.MaxValue);
+            Vector3 max = new Vector3(int.MinValue, int.MinValue, int.MinValue);
 
             foreach (var tri in Triangles)
             {
@@ -125,7 +125,7 @@ namespace Raytracer.Rendering.Primitives
             return bounds.Intersect(aabb);
         }
 
-        public override bool Contains(Vector point)
+        public override bool Contains(Vector3 point)
         {
             return false;
         }

@@ -1,37 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Raytracer.Extensions;
 using Raytracer.MathTypes;
 
 namespace Raytracer.Rendering.Core
-{
-    using Vector = Vector3;
-    using Real = System.Double;
+{       
     struct AABB
     {
-        public Vector Min;
-        public Vector Max;        
+        public Vector3 Min;
+        public Vector3 Max;        
         public static readonly AABB Empty = new AABB(true);
-        private bool isEmpty;
+        private readonly bool _isEmpty;
 
         private AABB(bool isEmpty)
         {
-            Min = new Vector();
-            Max = new Vector();
-            this.isEmpty = isEmpty;
+            Min = new Vector3();
+            Max = new Vector3();
+            _isEmpty = isEmpty;
         }
 
-        public AABB(AABB other) : this(other.Min, other.Max)
+        public AABB(Vector3 min, Vector3 max)
         {
-            
-        }
-
-        public AABB(Vector min, Vector max)
-        {
-            isEmpty = false;
-            Real temp = 0;
+            _isEmpty = false;
+            double temp;
             if (min.X > max.X)
             { 
                 temp = min.X;
@@ -55,22 +44,9 @@ namespace Raytracer.Rendering.Core
 
             Min = min;
             Max = max;
-            
-           /* center = new MathTypes.Vector3F()
-            {
-                X = Min.X + ((Max.X - Min.X) / 2),
-                Y = Min.Y + ((Max.Y - Min.Y) / 2),
-                Z = Min.Z + ((Max.Z - Min.Z) / 2)
-            };
-            halfsize = new MathTypes.Vector3F()
-            {
-                X = Width / 2.0f,
-                Y = Height / 2.0f,
-                Z = Depth / 2.0f
-            };*/
         }
 
-        public Real Width
+        public double Width
         {
             get
             {
@@ -78,7 +54,7 @@ namespace Raytracer.Rendering.Core
             }
         }
 
-        public Real Height
+        public double Height
         {
             get
             {
@@ -86,7 +62,7 @@ namespace Raytracer.Rendering.Core
             }
         }
 
-        public Real Depth
+        public double Depth
         {
             get
             {
@@ -94,11 +70,11 @@ namespace Raytracer.Rendering.Core
             }
         }
 
-        public Vector Center
+        public Vector3 Center
         {
             get
             {
-                return new Vector()
+                return new Vector3
                 {
                     X = Min.X + ((Max.X - Min.X) / 2),
                     Y = Min.Y + ((Max.Y - Min.Y) / 2),
@@ -107,11 +83,11 @@ namespace Raytracer.Rendering.Core
             }
         }
 
-        public Vector HalfSize
+        public Vector3 HalfSize
         {
             get
             {
-                return new Vector()
+                return new Vector3
                 {
                     X = Width / 2.0f,
                     Y = Height / 2.0f,
@@ -120,31 +96,8 @@ namespace Raytracer.Rendering.Core
             }
         }
 
-        public int GetLongestAxis()
-        {
-            Vector diff = Max - Min;
-
-            if (diff.X >= diff.Y && diff.X >= diff.Z) 
-                return 0;
-
-            if (diff.Y >= diff.X && diff.Y >= diff.Z) 
-                return 1;
-
-            return 2;
-        }
-
         public void InflateToEncapsulate(AABB other)
-        {
-            /*
-            Min.X = Math.Min(Min.X, other.Min.X);
-            Min.Y = Math.Min(Min.Y, other.Min.Y);
-            Min.Z = Math.Min(Min.Z, other.Min.Z);
-
-            Max.X = Math.Max(Max.X, other.Min.X);
-            Max.Y = Math.Max(Max.Y, other.Min.Y);
-            Max.Z = Math.Max(Max.Z, other.Min.Z);
-            */                      
-
+        {               
             if (other.Min.X < Min.X)
                 Min.X = other.Min.X;
 
@@ -164,6 +117,16 @@ namespace Raytracer.Rendering.Core
                 Max.Z = other.Max.Z;
         }
 
+        public override bool Equals(object obj)
+        {
+            return obj is AABB && this == (AABB) obj;
+        }
+
+        public override int GetHashCode()
+        {
+            return Min.GetHashCode() ^ Max.GetHashCode() ^ _isEmpty.GetHashCode();
+        }
+
         /// <summary>
         /// Tests whether two specified vectors are equal.
         /// </summary>
@@ -172,17 +135,12 @@ namespace Raytracer.Rendering.Core
         /// <returns>True if the two vectors are equal; otherwise, False.</returns>
         public static bool operator ==(AABB u, AABB v)
         {
-            if (Object.Equals(u, null))
-            {
-                return Object.Equals(v, null);
-            }
-
-            if (Object.Equals(v, null))
-            {
-                return Object.Equals(u, null);
-            }
-
-            return (u.Min.X == v.Min.X) && (u.Min.Y == v.Min.Y) && (u.Min.Z == v.Min.Z) && (u.Max.X == v.Max.X) && (u.Max.Y == v.Max.Y) && (u.Max.Z == v.Max.Z);
+            return  (Math.Abs(u.Min.X - v.Min.X) < MathLib.Epsilon) && 
+                    (Math.Abs(u.Min.Y - v.Min.Y) < MathLib.Epsilon) &&
+                    (Math.Abs(u.Min.Z - v.Min.Z) < MathLib.Epsilon) &&
+                    (Math.Abs(u.Max.X - v.Max.X) < MathLib.Epsilon) &&
+                    (Math.Abs(u.Max.Y - v.Max.Y) < MathLib.Epsilon) &&
+                    (Math.Abs(u.Max.Z - v.Max.Z) < MathLib.Epsilon);
         }
 
         /// <summary>
@@ -193,43 +151,32 @@ namespace Raytracer.Rendering.Core
         /// <returns>True if the two vectors are not equal; otherwise, False.</returns>
         public static bool operator !=(AABB u, AABB v)
         {
-            if (Object.Equals(u, null))
-            {
-                return !Object.Equals(v, null);
-            }
-
-            if (Object.Equals(v, null))
-            {
-                return !Object.Equals(u, null);
-            }
-
-            return !(u.Min.X == v.Min.X) && (u.Min.Y == v.Min.Y) && (u.Min.Z == v.Min.Z) && (u.Max.X == v.Max.X) && (u.Max.Y == v.Max.Y) && (u.Max.Z == v.Max.Z);
+            return !(u == v);
         }
 
         public bool Intersect(Ray ray)
         {
-            Real t = 0;
-            return Raytracer.Rendering.Primitives.IntersectionCode3.pluecker_cls_cff(ray, this);//, ref t);	        
+            return Primitives.IntersectionCode3.pluecker_cls_cff(ray, this);//, ref t);	        
         }
 
         public bool Intersect(AABB b)
         {
-            Vector T = b.Center - Center;//vector from A to B
+            var T = b.Center - Center;//vector from A to B
 
-            return (Math.Abs(T.X) <= (this.Width + b.Width) &&
-                   Math.Abs(T.Y) <= (this.Height + b.Height) &&
-                   Math.Abs(T.Z) <= (this.Depth + b.Depth)); 
+            return (Math.Abs(T.X) <= (Width + b.Width) &&
+                   Math.Abs(T.Y) <=  (Height + b.Height) &&
+                   Math.Abs(T.Z) <=  (Depth + b.Depth)); 
         }
 
         public bool Contains(Vector3 point)
         {
-            Vector T = point - Center;
+            var T = point - Center;
 
-            return (Math.Abs(T.X) <= this.Width &&
-                   Math.Abs(T.Y) <= this.Height &&
-                   Math.Abs(T.Z) <= this.Depth);
+            return (Math.Abs(T.X) <= Width &&
+                   Math.Abs(T.Y) <=  Height &&
+                   Math.Abs(T.Z) <=  Depth);
         }
 
-        public bool IsEmpty { get { return isEmpty; } }
+        public bool IsEmpty { get { return _isEmpty; } }
     }
 }

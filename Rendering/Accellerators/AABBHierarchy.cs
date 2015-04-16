@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
 using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.Rendering.Accellerators
 {
-    using Vector = Raytracer.MathTypes.Vector3;
-
     class AABBHierarchy : IAccelerator
     {
         class AABBHierarchyNode
@@ -43,7 +42,7 @@ namespace Raytracer.Rendering.Accellerators
                     return;
                 }
 
-                Vector midpt = new Vector();
+                Vector3 midpt = new Vector3();
 
                 double tris_recp = 1.0 / primitives.Count();
 
@@ -142,7 +141,7 @@ namespace Raytracer.Rendering.Accellerators
                 return traceableObjects;                 
             }
 
-            internal IEnumerable<Traceable> Intersect(Vector point)
+            internal IEnumerable<Traceable> Intersect(Vector3 point)
             {
                 if (!this.bounds.Contains(point))
                     return Enumerable.Empty<Traceable>();
@@ -169,7 +168,7 @@ namespace Raytracer.Rendering.Accellerators
             return this.root.Intersect(ray);
         }
 
-        public IEnumerable<Traceable> Intersect(Vector point)
+        public IEnumerable<Traceable> Intersect(Vector3 point)
         {
             return this.root.Intersect(point);
         }

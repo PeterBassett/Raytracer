@@ -8,10 +8,10 @@ namespace Raytracer.Rendering.RenderingStrategies
 {
     class ParallelOptionsBase
     {
-        protected bool _multiThreaded;
+        private readonly bool _multiThreaded;
         protected CancellationToken _cancellationToken;
 
-        public ParallelOptionsBase(bool multiThreaded, CancellationToken cancellationToken)
+        protected ParallelOptionsBase(bool multiThreaded, CancellationToken cancellationToken)
         {
             _multiThreaded = multiThreaded;
             _cancellationToken = cancellationToken;
@@ -19,7 +19,7 @@ namespace Raytracer.Rendering.RenderingStrategies
 
         protected ParallelOptions GetThreadingOptions()
         {
-            var options = new ParallelOptions()
+            var options = new ParallelOptions
             {
                 MaxDegreeOfParallelism = 1
             };            

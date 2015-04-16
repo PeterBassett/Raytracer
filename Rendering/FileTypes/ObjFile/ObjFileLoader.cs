@@ -9,7 +9,7 @@ using Raytracer.MathTypes;
 
 namespace Raytracer.Rendering.FileTypes.ObjFile
 {
-    using Vector = Vector3;
+    
     using Raytracer.Rendering.Materials;
 
     class ObjFileLoader
@@ -26,9 +26,9 @@ namespace Raytracer.Rendering.FileTypes.ObjFile
         
         public void LoadFile(string strObjfile, List<Triangle> triangles, List<Material> materials)
         {
-            List<Vector> verticies = new List<Vector>();
-            List<Vector2> textureCoordinates = new List<Vector2>();
-            List<Vector> vertexNormals = new List<Vector>();
+            var verticies = new List<Vector3>();
+            var textureCoordinates = new List<Vector2>();
+            var vertexNormals = new List<Vector3>();
             Material currentMaterial = null;
             //var sr = new BufferedStreamReader(strObjfile);
 
@@ -53,13 +53,13 @@ namespace Raytracer.Rendering.FileTypes.ObjFile
                             currentMaterial = FindMaterial(ParseCache[1]);
                             break;
                         case "v":
-                            verticies.Add(new Vector(float.Parse(ParseCache[1]), float.Parse(ParseCache[2]), float.Parse(ParseCache[3])));
+                            verticies.Add(new Vector3(float.Parse(ParseCache[1]), float.Parse(ParseCache[2]), float.Parse(ParseCache[3])));
                             break;
                         case "vt":
                             textureCoordinates.Add(new Vector2(float.Parse(ParseCache[1]), float.Parse(ParseCache[2])));
                             break;
                         case "vn":
-                            vertexNormals.Add(new Vector(float.Parse(ParseCache[1]), float.Parse(ParseCache[2]), float.Parse(ParseCache[3])));
+                            vertexNormals.Add(new Vector3(float.Parse(ParseCache[1]), float.Parse(ParseCache[2]), float.Parse(ParseCache[3])));
                             break;
                         case "f":
                             {
@@ -147,7 +147,7 @@ namespace Raytracer.Rendering.FileTypes.ObjFile
                 return null;
         }
                 
-        private void CreateTriangles(int itemsInParseCache, List<Vector> verticies, List<Triangle> triangles, Material currentMaterial, List<Vector2> textureCoordinates, List<Vector> vertexNormals)
+        private void CreateTriangles(int itemsInParseCache, List<Vector3> verticies, List<Triangle> triangles, Material currentMaterial, List<Vector2> textureCoordinates, List<Vector3> vertexNormals)
         {
             if (VertexIndexCacheLength <= itemsInParseCache)
             {
@@ -174,9 +174,9 @@ namespace Raytracer.Rendering.FileTypes.ObjFile
                 index++;
             }
 
-            Vector v1, v2, v3;
+            Vector3 v1, v2, v3;
             Vector2 t1 = Vector2.Zero, t2 = Vector2.Zero, t3 = Vector2.Zero;
-            Vector n1 = Vector.Zero, n2 = Vector.Zero, n3 = Vector.Zero;
+            Vector3 n1 = Vector3.Zero, n2 = Vector3.Zero, n3 = Vector3.Zero;
 
             const int Vertex = 0;
             const int Texture = 1;

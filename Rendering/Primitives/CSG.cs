@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Raytracer.MathTypes;
 
 namespace Raytracer.Rendering.Primitives
 {
-    using Vector = Raytracer.MathTypes.Vector3;
-    using Real = System.Double;
-
     // # class CSG
 
     // Holds a binary space partition tree representing a 3D solid. Two solids can
@@ -108,10 +106,10 @@ namespace Raytracer.Rendering.Primitives
         // is not used anywhere else.
         public struct Vertex
         {
-            public Vector pos;
-            public Vector normal;
+            public Vector3 pos;
+            public Vector3 normal;
 
-            public Vertex(Vector pos, Vector normal) 
+            public Vertex(Vector3 pos, Vector3 normal) 
             {
                 this.pos = pos;
                 this.normal = normal;
@@ -130,7 +128,7 @@ namespace Raytracer.Rendering.Primitives
             // Create a new vertex between this vertex and `other` by linearly
             // interpolating all properties using a parameter of `t`. Subclasses should
             // override this to interpolate additional properties.
-            public Vertex interpolate(Vertex other, Real t)
+            public Vertex interpolate(Vertex other, double t)
             {
                 return new CSG.Vertex(
                     this.pos.Lerp(other.pos, t),
@@ -141,11 +139,11 @@ namespace Raytracer.Rendering.Primitives
 
         public class Plane
         {
-            Vector normal;
-            Real w;
+            Vector3 normal;
+            double w;
 
             // Represents a plane in 3D space.
-            public Plane(Vector normal, Real w)
+            public Plane(Vector3 normal, double w)
             {
               this.normal = normal;
               this.w = w;
@@ -153,13 +151,13 @@ namespace Raytracer.Rendering.Primitives
 
             // `CSG.Plane.EPSILON` is the tolerance used by `splitPolygon()` to decide if a
             // point is on the plane.
-            public static Real EPSILON = (Real)1e-5;
+            public static double EPSILON = (double)1e-5;
 
-            public static Plane fromPoints(Vector a, Vector b, Vector c) 
+            public static Plane fromPoints(Vector3 a, Vector3 b, Vector3 c) 
             {
-              var n = Vector.CrossProduct(b - a, c - a);
+              var n = Vector3.CrossProduct(b - a, c - a);
               n.Normalize();
-              return new Plane(n, Vector.DotProduct(n, a));
+              return new Plane(n, Vector3.DotProduct(n, a));
             }
 
         
@@ -192,7 +190,7 @@ namespace Raytracer.Rendering.Primitives
 
             for (var i = 0; i < polygon.vertices.Count; i++) 
             {
-                var t = Vector.DotProduct(this.normal, polygon.vertices[i].pos) - this.w;
+                var t = Vector3.DotProduct(this.normal, polygon.vertices[i].pos) - this.w;
                 var type = (t < -Plane.EPSILON) ? BACK : (t > Plane.EPSILON) ? FRONT : COPLANAR;
                 polygonType |= type;
                 types[i] = type;                
@@ -202,7 +200,7 @@ namespace Raytracer.Rendering.Primitives
             switch (polygonType) 
             {
               case COPLANAR:
-                (Vector.DotProduct(this.normal, polygon.plane.normal) > 0 ? coplanarFront : coplanarBack).Add(polygon);
+                (Vector3.DotProduct(this.normal, polygon.plane.normal) > 0 ? coplanarFront : coplanarBack).Add(polygon);
                 break;
               case FRONT:
                 front.Add(polygon);
@@ -230,7 +228,7 @@ namespace Raytracer.Rendering.Primitives
 
                     if ((ti | tj) == SPANNING) 
                     {                        
-                        var t = (this.w - Vector.DotProduct(this.normal, vi.pos)) / Vector.DotProduct(this.normal, vj.pos - vi.pos);
+                        var t = (this.w - Vector3.DotProduct(this.normal, vi.pos)) / Vector3.DotProduct(this.normal, vj.pos - vi.pos);
                         var v = vi.interpolate(vj, t);
                         f.Add(v);
                         b.Add(v.clone());
@@ -524,11 +522,11 @@ namespace Raytracer.Rendering.Primitives
         //     });
         public static CSG cube()
         {
-            return cube(new Vector(), 1);
+            return cube(new Vector3(), 1);
         }
-        public static CSG cube(Vector center, Real radius) 
+        public static CSG cube(Vector3 center, double radius) 
         {          
-          var c = new Vector(center);
+          var c = new Vector3(center);
           var r = radius;  
 
           return fromPolygons(
@@ -542,15 +540,15 @@ namespace Raytracer.Rendering.Primitives
                 }.Select((info) => 
                 {
                     return new Polygon(info[0].Select((i) => {
-                      var pos = new Vector(
+                      var pos = new Vector3(
                         c.X + r * (2 * ((i & 1) > 0 ? 1 : 0) - 1),
                         c.Y + r * (2 * ((i & 2) > 0 ? 1 : 0) - 1),
                         c.Z + r * (2 * ((i & 4) > 0 ? 1 : 0) - 1)
                       );
 
-                      var verts = info[1].Select(ind => (Real)ind).ToArray();
+                      var verts = info[1].Select(ind => (double)ind).ToArray();
 
-                      return new CSG.Vertex(pos, new Vector(verts[0], verts[1], verts[2]));
+                      return new CSG.Vertex(pos, new Vector3(verts[0], verts[1], verts[2]));
                     }).ToList());
                 }).ToList()
             );
@@ -572,17 +570,17 @@ namespace Raytracer.Rendering.Primitives
         //     });
         public static CSG sphere() 
         {
-            return sphere(new Vector(), 1);
+            return sphere(new Vector3(), 1);
         }
 
-        public static CSG sphere(Vector center, Real radius)
+        public static CSG sphere(Vector3 center, double radius)
         {
             return sphere(center, radius, 16, 8);
         }
 
-        public static CSG sphere(Vector center, Real radius, int slices, int stacks) 
+        public static CSG sphere(Vector3 center, double radius, int slices, int stacks) 
         {          
-            var c = new Vector(center);
+            var c = new Vector3(center);
             var r = radius;
 
             double dSlices = slices;
@@ -590,12 +588,12 @@ namespace Raytracer.Rendering.Primitives
 
             var polygons = new List<Polygon>();
             
-            var vertex = new Func<Real, Real, Vertex>( (theta, phi) =>
+            var vertex = new Func<double, double, Vertex>( (theta, phi) =>
             {
                 theta *= Math.PI * 2;
                 phi *= Math.PI;
 
-                var dir = new Vector(
+                var dir = new Vector3(
                     Math.Cos(theta) * Math.Sin(phi),
                     Math.Cos(phi),
                     Math.Sin(theta) * Math.Sin(phi)
@@ -640,15 +638,15 @@ namespace Raytracer.Rendering.Primitives
         //     });
         public static CSG cylinder()
         {
-            return cylinder(new Vector(0, -1, 0), new Vector(0, 1, 0), 1);
+            return cylinder(new Vector3(0, -1, 0), new Vector3(0, 1, 0), 1);
         }
 
-        public static CSG cylinder(Vector s, Vector e, Real radius)
+        public static CSG cylinder(Vector3 s, Vector3 e, double radius)
         {
             return cylinder(s, e, radius, 16);
         }
 
-        public static CSG cylinder(Vector s, Vector e, Real radius, int slices)
+        public static CSG cylinder(Vector3 s, Vector3 e, double radius, int slices)
         {    
             var ray = e - s;
             var r = radius;
@@ -659,17 +657,17 @@ namespace Raytracer.Rendering.Primitives
             
             var isY = (Math.Abs(axisZ.Y) > 0.5);
 
-            var axisX = Vector.CrossProduct(new Vector(isY ? 1 : 0, !isY ? 1 : 0, 0), axisZ);
+            var axisX = Vector3.CrossProduct(new Vector3(isY ? 1 : 0, !isY ? 1 : 0, 0), axisZ);
             axisX.Normalize();
 
-            var axisY = Vector.CrossProduct(axisX, axisZ);
+            var axisY = Vector3.CrossProduct(axisX, axisZ);
             axisY.Normalize();
             
             var start = new Vertex(s, axisZ.Negated());
             var end = new Vertex(e, axisZ);
 
             var polygons = new List<Polygon>();
-            var point = new Func<Real, Real, Real, Vertex>( (stack, slice, normalBlend) =>
+            var point = new Func<double, double, double, Vertex>((stack, slice, normalBlend) =>
             {
                 var angle = slice * Math.PI * 2;
                 //var outVec = axisX.times(Math.Cos(angle)).plus(axisY.times(Math.Sin(angle)));

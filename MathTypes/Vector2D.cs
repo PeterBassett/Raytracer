@@ -89,7 +89,7 @@ namespace Raytracer.MathTypes
 		}
 		#endregion
 
-		#region Public Static Vector Arithmetics
+		#region Public Static Vector3 Arithmetics
 		/// <summary>
 		/// Adds two vectors.
 		/// </summary>

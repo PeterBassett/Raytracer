@@ -4,7 +4,7 @@ using Raytracer.Rendering.Core;
 
 namespace Raytracer.Rendering.Primitives
 {
-    using Vector = Vector3;
+    
 
     class MeshInstance : Traceable
     {
@@ -26,7 +26,7 @@ namespace Raytracer.Rendering.Primitives
 
         private Ray CreateTransformedRay(Ray ray)
         {
-            Vector dir = ray.Pos + -this.Pos;
+            Vector3 dir = ray.Pos + -this.Pos;
             ray.Dir.RotateX(-this.Ori.X, ref dir);
             dir.RotateY(-this.Ori.Y, ref dir);
             dir.RotateZ(-this.Ori.Z, ref dir);
@@ -56,7 +56,7 @@ namespace Raytracer.Rendering.Primitives
             return bounds;
         }
 
-        public override bool Contains(Vector point)
+        public override bool Contains(Vector3 point)
         {
             return false;
         }

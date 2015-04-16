@@ -6,7 +6,7 @@ using Raytracer.Rendering.Materials;
 
 namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 {
-    using Vector = Vector3;
+    
 
     [Export(typeof(IVBRaySceneItemLoader))]
     class CheckerMaterialLoader : IVBRaySceneItemLoader
@@ -41,7 +41,7 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
             mat.SubMaterial1 = mat1;
             mat.SubMaterial2 = mat2;
 
-            Vector size = new Vector();
+            Vector3 size = new Vector3();
             size.X = float.Parse(oText.GetToken(file));
             size.Y = float.Parse(oText.GetToken(file));
             size.Z = float.Parse(oText.GetToken(file));

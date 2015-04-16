@@ -1,60 +1,48 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Raytracer.MathTypes;
+using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.Rendering.Core
 {
-    using Vector = Vector3;
-    using Real = System.Double;
-    using Raytracer.Rendering.Primitives;
-
     struct IntersectionInfo
     {
 
-        private HitResult _Result;
-        private Real _T;
-        private Vector _HitPoint;
-        private Vector _ObjectLocalHitPoint ;
-        private Vector _NormalAtHitPoint;
-        private Traceable _Primitive;
+        private HitResult _result;
+        private double _t;
+        private Vector3 _hitPoint;
+        private Vector3 _objectLocalHitPoint ;
+        private Vector3 _normalAtHitPoint;
+        private Traceable _primitive;
 
         public IntersectionInfo(HitResult miss)
-            : this(miss, null, MathLib.INVALID_INTERSECTION, Vector.Zero, Vector.Zero, Vector.Zero)
+            : this(miss, null, MathLib.INVALID_INTERSECTION, Vector3.Zero, Vector3.Zero, Vector3.Zero)
         {
-            _Result = miss;
-            _Primitive = null;
-            _T = MathLib.INVALID_INTERSECTION;
-            _HitPoint = Vector.Zero;
-            _ObjectLocalHitPoint = Vector.Zero;
-            _NormalAtHitPoint = Vector.Zero;
+            _result = miss;
+            _primitive = null;
+            _t = MathLib.INVALID_INTERSECTION;
+            _hitPoint = Vector3.Zero;
+            _objectLocalHitPoint = Vector3.Zero;
+            _normalAtHitPoint = Vector3.Zero;
 
             if (HitResult.MISS != miss)
                 throw new ArgumentNullException("If the result was not a miss you should provide all parameters");
         }
 
-        public IntersectionInfo(HitResult result, Traceable primitive, Real distance, Vector hitPoint, Vector localHitpoint, Vector normalAthitPoint) : this()
+        public IntersectionInfo(HitResult result, Traceable primitive, double distance, Vector3 hitPoint, Vector3 localHitpoint, Vector3 normalAthitPoint) : this()
         {
-            _Result = result;
-            _Primitive = primitive;
-            _T = distance;
-            _HitPoint = hitPoint;
-            _ObjectLocalHitPoint = localHitpoint;
-            _NormalAtHitPoint = normalAthitPoint;
+            _result = result;
+            _primitive = primitive;
+            _t = distance;
+            _hitPoint = hitPoint;
+            _objectLocalHitPoint = localHitpoint;
+            _normalAtHitPoint = normalAthitPoint;
         }
 
-        public HitResult Result { get { return _Result; } set { _Result = value; } }
-        public Real T { get{ return _T; } set{_T = value;} }
-        public Vector HitPoint { get{ return _HitPoint; } set{_HitPoint = value;} }
-        public Vector ObjectLocalHitPoint { get{ return _ObjectLocalHitPoint; } set{_ObjectLocalHitPoint = value;} }
-        public Vector NormalAtHitPoint { get{ return _NormalAtHitPoint; } set{_NormalAtHitPoint = value;} }
-        public Traceable Primitive { get{ return _Primitive; } set{_Primitive = value;} }
-
-        /*
-        public IntersectionInfo()
-        {
-            T = 0.0f;
-        }*/
+        public HitResult Result { get { return _result; } set { _result = value; } }
+        public double T { get{ return _t; } set{_t = value;} }
+        public Vector3 HitPoint { get{ return _hitPoint; } set{_hitPoint = value;} }
+        public Vector3 ObjectLocalHitPoint { get{ return _objectLocalHitPoint; } set{_objectLocalHitPoint = value;} }
+        public Vector3 NormalAtHitPoint { get{ return _normalAtHitPoint; } set{_normalAtHitPoint = value;} }
+        public Traceable Primitive { get{ return _primitive; } set{_primitive = value;} }
     }
 }

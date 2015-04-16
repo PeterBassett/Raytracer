@@ -4,7 +4,7 @@ using Raytracer.Rendering.Core;
 
 namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 {
-    using Vector = Vector3;
+    
 
     [Export(typeof(IVBRaySceneItemLoader))]
     class ViewpointLoader : IVBRaySceneItemLoader
@@ -14,13 +14,13 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
         {
 	        Tokeniser oText = new Tokeniser();
 
-            Vector pos = new Vector();
+            Vector3 pos = new Vector3();
             pos.X = float.Parse(oText.GetToken(file));
             pos.Y = float.Parse(oText.GetToken(file));
             pos.Z = float.Parse(oText.GetToken(file));
             scene.EyePosition = pos;
 
-            Vector dir = new Vector();
+            Vector3 dir = new Vector3();
             dir.X = float.Parse(oText.GetToken(file));
             dir.Y = float.Parse(oText.GetToken(file));
             dir.Z = float.Parse(oText.GetToken(file));

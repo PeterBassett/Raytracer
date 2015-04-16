@@ -7,7 +7,7 @@ using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 {
-    using Vector = Vector3;
+    
 
     [Export(typeof(IVBRaySceneItemLoader))]
     class PlaneLoader : IVBRaySceneItemLoader
@@ -19,14 +19,14 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
             
             Plane plane = new Plane();
 
-            Vector vec = new Vector();
+            Vector3 vec = new Vector3();
 	        vec.X = float.Parse(oText.GetToken(file));
 	        vec.Y = float.Parse(oText.GetToken(file));
 	        vec.Z = float.Parse(oText.GetToken(file));
             plane.Pos = vec;
             plane.D = vec.GetLength();
 
-            Vector normal = new Vector();
+            Vector3 normal = new Vector3();
             normal.X = float.Parse(oText.GetToken(file));
             normal.Y = float.Parse(oText.GetToken(file));
             normal.Z = float.Parse(oText.GetToken(file));

@@ -8,30 +8,24 @@ using Raytracer.Rendering.Primitives;
     
 namespace Raytracer.Rendering.Core
 {
-    using Real = System.Double;
-    using Vector = Vector3;
+    
+    
     
     class Scene
     {
-        List<Light> _lights = new List<Light>();
-        List<Traceable> _primitives = new List<Traceable>();
-        Dictionary<string, Mesh> _meshes = new Dictionary<string, Mesh>();
-        Dictionary<string, Material> _materials = new Dictionary<string, Material>();
-        IAccelerator m_SceneGraph = null;        
-        
-        Real _nearWidth;
-        Real _nearHeight;
+        private readonly List<Light> _lights = new List<Light>();
+        private readonly List<Traceable> _primitives = new List<Traceable>();
+        private readonly Dictionary<string, Mesh> _meshes = new Dictionary<string, Mesh>();
+        private readonly Dictionary<string, Material> _materials = new Dictionary<string, Material>();
+        private IAccelerator _sceneGraph;
 
         public IBackgroundMaterial BackgroundMaterial { get; set; }
         public Material DefaultMaterial { get; set; }
         
-        public Vector EyePosition { get; set; }
-        public Vector ViewPointRotation { get; set; }
-        public Real FieldOfView { get; set; }
+        public Vector3 EyePosition { get; set; }
+        public Vector3 ViewPointRotation { get; set; }
+        public double FieldOfView { get; set; }
 
-        private int _width;
-        private int _height;
-        
         public Scene()
         {
             DefaultMaterial = new Material()
@@ -103,8 +97,8 @@ namespace Raytracer.Rendering.Core
 
             var elements = FilterUnboundedPrimitives();
 
-            m_SceneGraph = new AABBHierarchy();
-            m_SceneGraph.Build(elements);
+            _sceneGraph = new AABBHierarchy();
+            _sceneGraph.Build(elements);
         }
 
         private List<Traceable> FilterUnboundedPrimitives()
@@ -166,12 +160,14 @@ namespace Raytracer.Rendering.Core
             foreach (var prim in this._primitives)
                 yield return prim;
 
-            if (m_SceneGraph != null)
-                foreach (var prim in m_SceneGraph.Intersect(ray))
-                    yield return prim;
+            if (_sceneGraph == null) 
+                yield break;
+
+            foreach (var prim in _sceneGraph.Intersect(ray))
+                yield return prim;
         }
 
-        public Traceable GetCandiates(Vector3 point)
+        public Traceable FindObjectContainingPoint(Vector3 point)
         {
             foreach (var prim in this._primitives)
             {
@@ -179,13 +175,13 @@ namespace Raytracer.Rendering.Core
                     return prim;
             }
 
-            if (m_SceneGraph != null)
+            if (_sceneGraph == null) 
+                return null;
+
+            foreach (var prim in _sceneGraph.Intersect(point))
             {
-                foreach (var prim in m_SceneGraph.Intersect(point))
-                {
-                    if (prim.Contains(point))
-                        return prim;
-                }
+                if (prim.Contains(point))
+                    return prim;
             }
 
             return null;
@@ -224,9 +220,9 @@ namespace Raytracer.Rendering.Core
                     yield return item;
         }
 
-        Colour TraceRay(Ray ray, Colour contribution, Real curRefractionIndex, long depth, Vector eyeDirection)
+        Colour TraceRay(Ray ray, Colour contribution, double curRefractionIndex, long depth, Vector3 eyeDirection)
         {
-            const Real EPSILON = 0.001f;
+            const double EPSILON = 0.001f;
 
             Colour colour = new Colour(0.0f);
 
@@ -279,23 +275,23 @@ namespace Raytracer.Rendering.Core
                 if (colRefractiveAmount.Sum() > 0.01f)
                 {
                     // calculate refraction
-                    Real rindex = material.Refraction;
-                    Real n = curRefractionIndex / rindex;
-                    //Vector N = primitive.GetNormal(info.HitPoint) * (Real)info.Result;
+                    double rindex = material.Refraction;
+                    double n = curRefractionIndex / rindex;
+                    //Vector3 N = primitive.GetNormal(info.HitPoint) * (double)info.Result;
 
-                    Vector N = info.NormalAtHitPoint * (Real)info.Result;
-                    Real cosI = -Vector.DotProduct(N, ray.Dir);
-                    Real cosT2 = 1.0f - n * n * (1.0f - cosI * cosI);
+                    Vector3 N = info.NormalAtHitPoint * (double)info.Result;
+                    double cosI = -Vector3.DotProduct(N, ray.Dir);
+                    double cosT2 = 1.0f - n * n * (1.0f - cosI * cosI);
                     if (cosT2 > 0.0f)
                     {
-                        Vector T = -((n * ray.Dir) + (Real)(n * cosI - Math.Sqrt(cosT2)) * N);
+                        Vector3 T = -((n * ray.Dir) + (double)(n * cosI - Math.Sqrt(cosT2)) * N);
 
                         Colour rcol = TraceRay(new Ray(info.HitPoint + T * EPSILON, T), colRefractiveAmount, rindex, depth + 1, eyeDirection);
 
                         //Raytrace( Ray( pi + T * EPSILON, T ), rcol, a_Depth + 1, rindex, dist );
                         // apply Beer's law
                         //Colour absorbance = material.Transmitted * -dist;
-                        //Colour transparency = new Colour((Real)Math.Exp(absorbance.Red), (Real)Math.Exp(absorbance.Green), (Real)Math.Exp(absorbance.Blue));
+                        //Colour transparency = new Colour((double)Math.Exp(absorbance.Red), (double)Math.Exp(absorbance.Green), (double)Math.Exp(absorbance.Blue));
                         colour += rcol;// *transparency;
                     }
                 }
@@ -305,7 +301,7 @@ namespace Raytracer.Rendering.Core
             return colour;
         }
 
-        Colour Shade(Vector hitPoint, Vector normal, Material material, Vector eyeDirection)
+        Colour Shade(Vector3 hitPoint, Vector3 normal, Material material, Vector3 eyeDirection)
         {
             Colour colour;
             //= pObj.Material;
@@ -325,8 +321,8 @@ namespace Raytracer.Rendering.Core
                 colour += (material.Ambient * lightAmbient);
 
                 // construct a vector from the point to the light
-                Vector pointToLight;
-                Real lightVecLen = 0.0f;
+                Vector3 pointToLight;
+                double lightVecLen = 0.0f;
                 pointToLight = light.Pos - hitPoint;
 
                 // save the lenght of the vector.
@@ -336,7 +332,7 @@ namespace Raytracer.Rendering.Core
                 pointToLight.Normalize();
 
                 // get the angle between the light vector ad the surface normal
-                Real lightCos = Vector.DotProduct(pointToLight, normal);
+                double lightCos = Vector3.DotProduct(pointToLight, normal);
 
                 // is this point shadowed
                 bool shadowed = false;
@@ -355,17 +351,17 @@ namespace Raytracer.Rendering.Core
                     if (material.Specularity > 0.0f)
                     {
                         // calculate specular highlights
-                        Vector vReflect = CalculateReflectedRay(pointToLight, normal);
+                        Vector3 vReflect = CalculateReflectedRay(pointToLight, normal);
 
                         // normalise the vector
                         vReflect.Normalize();
 
-                        Real fSpecular = Vector.DotProduct(vReflect, eyeDirection);
+                        double fSpecular = Vector3.DotProduct(vReflect, eyeDirection);
 
                         if (fSpecular > 0.0f)
                         {
-                            Real power;
-                            power = (Real)Math.Pow(fSpecular, material.Specularity);
+                            double power;
+                            power = (double)Math.Pow(fSpecular, material.Specularity);
                             colour += lightDiffuse * material.SpecularExponent * power;
                         }
                     }
@@ -375,9 +371,9 @@ namespace Raytracer.Rendering.Core
             return colour;
         }
 
-        bool ShadowTrace(Vector hitPoint, Vector lightPosition, Vector surfaceNormal, Real lightDistance)
+        bool ShadowTrace(Vector3 hitPoint, Vector3 lightPosition, Vector3 surfaceNormal, double lightDistance)
         {
-            Vector dir = lightPosition - hitPoint;
+            Vector3 dir = lightPosition - hitPoint;
             dir.Normalize();
 
             Ray ray = new Ray(hitPoint + (surfaceNormal * 0.00001f), dir);
@@ -393,26 +389,26 @@ namespace Raytracer.Rendering.Core
             return false;
         }
 
-        Vector CalculateReflectedRay(Vector dir, Vector normal)
+        Vector3 CalculateReflectedRay(Vector3 dir, Vector3 normal)
         {
-            Vector tmp = new Vector();
+            Vector3 tmp = new Vector3();
 
             dir = -dir;
             dir.Normalize();
             normal.Normalize();
 
-            tmp = (normal * (2.0f * Vector.DotProduct(normal, dir))) - dir;
+            tmp = (normal * (2.0f * Vector3.DotProduct(normal, dir))) - dir;
             tmp.Normalize();
             return tmp;
         }
 
-        Vector CalculateRefractedRay(Vector dir, Vector normal, Real n_Out, Real n_In)
+        Vector3 CalculateRefractedRay(Vector3 dir, Vector3 normal, double n_Out, double n_In)
         {
-            Real c = -Vector.DotProduct(normal, dir);
-            Real n1 = n_Out;
-            Real n2 = n_In;
-            Real n = n1 / n2;
-            return (n * dir) + (Real)(n * c - Math.Sqrt(1 - n * n * (1 - c * c))) * normal;
+            double c = -Vector3.DotProduct(normal, dir);
+            double n1 = n_Out;
+            double n2 = n_In;
+            double n = n1 / n2;
+            return (n * dir) + (double)(n * c - Math.Sqrt(1 - n * n * (1 - c * c))) * normal;
         }
         */
         internal void LoadComplete()
@@ -422,10 +418,7 @@ namespace Raytracer.Rendering.Core
 
         internal Mesh FindMesh(string meshName)
         {
-            if (_meshes.ContainsKey(meshName))
-                return _meshes[meshName];
-            else
-                return null;
+            return _meshes.ContainsKey(meshName) ? _meshes[meshName] : null;
         }
     }
 }

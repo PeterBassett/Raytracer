@@ -6,7 +6,7 @@ using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 {
-    using Vector = Vector3;
+    
 
     [Export(typeof(IVBRaySceneItemLoader))]
     class MeshInstanceLoader : IVBRaySceneItemLoader
@@ -17,13 +17,13 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
         {
             Tokeniser oText = new Tokeniser();
 
-            Vector offset = new Vector(
+            Vector3 offset = new Vector3(
                  float.Parse(oText.GetToken(file)),
                  float.Parse(oText.GetToken(file)),
                  float.Parse(oText.GetToken(file))
             );
 
-            Vector rotation = new Vector(
+            Vector3 rotation = new Vector3(
                 float.Parse(oText.GetToken(file)),
                 float.Parse(oText.GetToken(file)),
                 float.Parse(oText.GetToken(file))

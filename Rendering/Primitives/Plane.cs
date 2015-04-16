@@ -7,27 +7,24 @@ using Raytracer.Rendering.Core;
 
 namespace Raytracer.Rendering.Primitives
 {
-    using Vector = Vector3;
-    using Real = System.Double;
-
     class Plane : Traceable
     {
         public Plane()
         {
-            Normal = new Vector(0.0f, 0.0f, 0.0f);
+            Normal = new Vector3(0.0f, 0.0f, 0.0f);
         }
 
-        public Real D { get; set; }
-        public Vector Normal { get; set; }
+        public double D { get; set; }
+        public Vector3 Normal { get; set; }
 
         public override IntersectionInfo Intersect(Ray ray)
         {
-            Real nd = Vector.DotProduct(Normal, ray.Dir);
+            var nd = Vector3.DotProduct(Normal, ray.Dir);
 
             if (nd >= 0.0f)
                 return new IntersectionInfo(HitResult.MISS);
 
-            Real distance = -(Vector.DotProduct(Normal, ray.Pos) + D) / nd;
+            var distance = -(Vector3.DotProduct(Normal, ray.Pos) + D) / nd;
             
             if (distance <= 0.0f)
                 return new IntersectionInfo(HitResult.MISS);
@@ -47,22 +44,9 @@ namespace Raytracer.Rendering.Primitives
             return AABB.Empty;
         }
 
-        public override bool Contains(Vector point)
+        public override bool Contains(Vector3 point)
         {
-            /*
-            Real nd = Vector.DotProduct(Normal, ray.Dir);
-
-            if (nd >= 0.0f)
-                return new IntersectionInfo(HitResult.MISS);
-
-            Real distance = -(Vector.DotProduct(Normal, ray.Pos) + D) / nd;
-            
-            if (distance <= 0.0f)
-                return new IntersectionInfo(HitResult.MISS);
-
-            Real distance = -(Vector.DotProduct(Normal, ray.Pos) + D) / nd;
-            */
-            var dist = Vector.DotProduct(Normal, (point - this.Pos));
+            var dist = Vector3.DotProduct(Normal, (point - this.Pos));
 
             return (Math.Abs(dist) < MathLib.IntersectionEpsilon);
         }

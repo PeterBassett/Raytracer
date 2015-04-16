@@ -6,8 +6,8 @@ using Raytracer.MathTypes;
 
 namespace Raytracer.Rendering.Primitives
 {
-    using Vector = Vector3;
-    using Real = System.Double;
+    
+    
 
     static class IntersectionCode2
     {
@@ -15,7 +15,7 @@ namespace Raytracer.Rendering.Primitives
         const int Y = 1;
         const int Z = 2;
 
-        static void FINDMINMAX(Real x0, Real x1, Real x2, ref Real min, ref Real max)
+        static void FINDMINMAX(double x0, double x1, double x2, ref double min, ref double max)
         {
 
             min = max = x0;
@@ -30,14 +30,14 @@ namespace Raytracer.Rendering.Primitives
 
         }
 
-        static bool planeBoxOverlap(Vector normal, Vector vert, Vector maxbox)	// -NJMP-
+        static bool planeBoxOverlap(Vector3 normal, Vector3 vert, Vector3 maxbox)	// -NJMP-
         {
 
             int q;
 
-            Vector vmin = new Vector();
-            Vector vmax = new Vector();
-            Real v;
+            Vector3 vmin = new Vector3();
+            Vector3 vmax = new Vector3();
+            double v;
 
             for (q = X; q <= Z; q++)
             {
@@ -64,9 +64,9 @@ namespace Raytracer.Rendering.Primitives
 
             }
 
-            if (Vector.DotProduct(normal, vmin) > 0.0f) return false;	// -NJMP-
+            if (Vector3.DotProduct(normal, vmin) > 0.0f) return false;	// -NJMP-
 
-            if (Vector.DotProduct(normal, vmax) >= 0.0f) return true;	// -NJMP-
+            if (Vector3.DotProduct(normal, vmax) >= 0.0f) return true;	// -NJMP-
 
 
 
@@ -74,15 +74,15 @@ namespace Raytracer.Rendering.Primitives
 
         }
 
-        static bool AXISTEST_X01(Vector v0, Vector v2, Real a, Real b, Real fa, Real fb, Vector boxhalfsize)
+        static bool AXISTEST_X01(Vector3 v0, Vector3 v2, double a, double b, double fa, double fb, Vector3 boxhalfsize)
         {
-            Real p0 = a * v0[Y] - b * v0[Z];
-            Real p2 = a * v2[Y] - b * v2[Z];
-            Real min, max;
+            double p0 = a * v0[Y] - b * v0[Z];
+            double p2 = a * v2[Y] - b * v2[Z];
+            double min, max;
 
             if (p0 < p2) { min = p0; max = p2; } else { min = p2; max = p0; }
 
-            Real rad = fa * boxhalfsize[Y] + fb * boxhalfsize[Z];
+            double rad = fa * boxhalfsize[Y] + fb * boxhalfsize[Z];
 
             if (min > rad || max < -rad)
                 return false;
@@ -90,31 +90,31 @@ namespace Raytracer.Rendering.Primitives
             return true;
         }
 
-        static bool AXISTEST_X2(Vector v0, Vector v1, Real a, Real b, Real fa, Real fb, Vector boxhalfsize)
+        static bool AXISTEST_X2(Vector3 v0, Vector3 v1, double a, double b, double fa, double fb, Vector3 boxhalfsize)
         {
-            Real min, max;
-            Real p0 = a * v0[Y] - b * v0[Z];
+            double min, max;
+            double p0 = a * v0[Y] - b * v0[Z];
 
-            Real p1 = a * v1[Y] - b * v1[Z];
+            double p1 = a * v1[Y] - b * v1[Z];
 
             if (p0 < p1) { min = p0; max = p1; } else { min = p1; max = p0; }
 
-            Real rad = fa * boxhalfsize[Y] + fb * boxhalfsize[Z];
+            double rad = fa * boxhalfsize[Y] + fb * boxhalfsize[Z];
 
             if (min > rad || max < -rad) return false;
 
             return true;
         }
 
-        static bool AXISTEST_Y02(Vector v0, Vector v2, Real a, Real b, Real fa, Real fb, Vector boxhalfsize)
+        static bool AXISTEST_Y02(Vector3 v0, Vector3 v2, double a, double b, double fa, double fb, Vector3 boxhalfsize)
         {
-            Real min, max;
-            Real p0 = -a * v0[X] + b * v0[Z];
-            Real p2 = -a * v2[X] + b * v2[Z];
+            double min, max;
+            double p0 = -a * v0[X] + b * v0[Z];
+            double p2 = -a * v2[X] + b * v2[Z];
 
             if (p0 < p2) { min = p0; max = p2; } else { min = p2; max = p0; }
 
-            Real rad = fa * boxhalfsize[X] + fb * boxhalfsize[Z];
+            double rad = fa * boxhalfsize[X] + fb * boxhalfsize[Z];
 
             if (min > rad || max < -rad) return false;
 
@@ -122,16 +122,16 @@ namespace Raytracer.Rendering.Primitives
         }
 
 
-        static bool AXISTEST_Y1(Vector v0, Vector v1, Real a, Real b, Real fa, Real fb, Vector boxhalfsize)
+        static bool AXISTEST_Y1(Vector3 v0, Vector3 v1, double a, double b, double fa, double fb, Vector3 boxhalfsize)
         {
-            Real min, max;
-            Real p0 = -a * v0[X] + b * v0[Z];
+            double min, max;
+            double p0 = -a * v0[X] + b * v0[Z];
 
-            Real p1 = -a * v1[X] + b * v1[Z];
+            double p1 = -a * v1[X] + b * v1[Z];
 
             if (p0 < p1) { min = p0; max = p1; } else { min = p1; max = p0; }
 
-            Real rad = fa * boxhalfsize[X] + fb * boxhalfsize[Z];
+            double rad = fa * boxhalfsize[X] + fb * boxhalfsize[Z];
 
             if (min > rad || max < -rad) return false;
 
@@ -141,39 +141,39 @@ namespace Raytracer.Rendering.Primitives
 
 
 
-        static bool AXISTEST_Z12(Vector v1, Vector v2, Real a, Real b, Real fa, Real fb, Vector boxhalfsize)
+        static bool AXISTEST_Z12(Vector3 v1, Vector3 v2, double a, double b, double fa, double fb, Vector3 boxhalfsize)
         {
-            Real min, max;
-            Real p1 = a * v1[X] - b * v1[Y];
+            double min, max;
+            double p1 = a * v1[X] - b * v1[Y];
 
-            Real p2 = a * v2[X] - b * v2[Y];
+            double p2 = a * v2[X] - b * v2[Y];
 
             if (p2 < p1) { min = p2; max = p1; } else { min = p1; max = p2; }
 
-            Real rad = fa * boxhalfsize[X] + fb * boxhalfsize[Y];
+            double rad = fa * boxhalfsize[X] + fb * boxhalfsize[Y];
 
             if (min > rad || max < -rad) return false;
             return true;
         }
 
 
-        static bool AXISTEST_Z0(Vector v0, Vector v1, Real a, Real b, Real fa, Real fb, Vector boxhalfsize)
+        static bool AXISTEST_Z0(Vector3 v0, Vector3 v1, double a, double b, double fa, double fb, Vector3 boxhalfsize)
         {
-            Real min, max;
-            Real p0 = a * v0[X] - b * v0[Y];
+            double min, max;
+            double p0 = a * v0[X] - b * v0[Y];
 
-            Real p1 = a * v1[X] - b * v1[Y];
+            double p1 = a * v1[X] - b * v1[Y];
 
             if (p0 < p1) { min = p0; max = p1; } else { min = p1; max = p0; }
 
-            Real rad = fa * boxhalfsize[X] + fb * boxhalfsize[Y];
+            double rad = fa * boxhalfsize[X] + fb * boxhalfsize[Y];
 
             if (min > rad || max < -rad) return false;
             return true;
 
         }
 
-        public static bool triBoxOverlap(Vector boxcenter, Vector boxhalfsize, Vector[] triverts)
+        public static bool triBoxOverlap(Vector3 boxcenter, Vector3 boxhalfsize, Vector3[] triverts)
         {
 
 
@@ -192,18 +192,18 @@ namespace Raytracer.Rendering.Primitives
 
             /*       this gives 3x3=9 more tests */
 
-            Vector v0;
-            Vector v1;
-            Vector v2;
+            Vector3 v0;
+            Vector3 v1;
+            Vector3 v2;
 
-            //   Real axis[3];
+            //   double axis[3];
 
-            Real fex, fey, fez;		// -NJMP- "d" local variable removed
+            double fex, fey, fez;		// -NJMP- "d" local variable removed
 
-            Vector normal;
-            Vector e0;
-            Vector e1;
-            Vector e2;
+            Vector3 normal;
+            Vector3 e0;
+            Vector3 e1;
+            Vector3 e2;
 
             /* This is the fastest branch on Sun */
 
@@ -262,8 +262,8 @@ namespace Raytracer.Rendering.Primitives
 
             /* test in X-direction */
 
-            Real min = 0;
-            Real max = 0;
+            double min = 0;
+            double max = 0;
             FINDMINMAX(v0[X], v1[X], v2[X], ref min, ref max);
 
             if (min > boxhalfsize[X] || max < -boxhalfsize[X]) return false;
@@ -294,7 +294,7 @@ namespace Raytracer.Rendering.Primitives
 
             /*  compute plane equation of triangle: normal*x+d=0 */
 
-            normal = Vector.CrossProduct(e0, e1);
+            normal = Vector3.CrossProduct(e0, e1);
 
             // -NJMP- (line removed here)
 

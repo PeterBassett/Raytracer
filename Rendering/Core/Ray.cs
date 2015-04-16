@@ -9,26 +9,26 @@ using System.Runtime.Serialization;
 
 namespace Raytracer.Rendering.Core
 {
-    using Vector = Vector3;
-    using Real = System.Double;
+    
+    
 	public struct Ray
 	{
         public enum CLASSIFICATION
         { MMM, MMP, MPM, MPP, PMM, PMP, PPM, PPP };
 
-        Vector m_dir;
-        Vector n_invDir;
-        Vector m_pos;
-        public Real R0;			// Pluecker coefficient R0
-        public Real R1;			// Pluecker coefficient R1
-        public Real R3;			// Pluecker coefficient R3
+        Vector3 m_dir;
+        Vector3 n_invDir;
+        Vector3 m_pos;
+        public double R0;			// Pluecker coefficient R0
+        public double R1;			// Pluecker coefficient R1
+        public double R3;			// Pluecker coefficient R3
         public CLASSIFICATION classification;
 
-		public Ray(Vector pos, Vector dir)
+		public Ray(Vector3 pos, Vector3 dir)
         {
             m_pos = pos;
             m_dir = dir;
-            n_invDir = new Vector(1.0f / m_dir.X, 1.0f / m_dir.Y, 1.0f / m_dir.Z);
+            n_invDir = new Vector3(1.0f / m_dir.X, 1.0f / m_dir.Y, 1.0f / m_dir.Z);
 
             R0 = pos.X * dir.Y - dir.X * pos.Y;
             R1 = pos.X * dir.Z - dir.X * pos.Z;
@@ -71,27 +71,27 @@ namespace Raytracer.Rendering.Core
 
 		}
 
-        public Real x { get { return Pos.X; } }
-        public Real y { get { return Pos.Y; } }
-        public Real z { get { return Pos.Z; } }
+        public double x { get { return Pos.X; } }
+        public double y { get { return Pos.Y; } }
+        public double z { get { return Pos.Z; } }
 
-        public Real i { get { return Dir.X; } }
-        public Real j { get { return Dir.Y; } }
-        public Real k { get { return Dir.Z; } }
+        public double i { get { return Dir.X; } }
+        public double j { get { return Dir.Y; } }
+        public double k { get { return Dir.Z; } }
 
-        public Real ii { get { return n_invDir.X; } }
-        public Real ij { get { return n_invDir.Y; } }
-        public Real ik { get { return n_invDir.Z; } }
+        public double ii { get { return n_invDir.X; } }
+        public double ij { get { return n_invDir.Y; } }
+        public double ik { get { return n_invDir.Z; } }
 
         private void BuildInverseDir()
         {
-            n_invDir = new Vector(1.0f / m_dir.X, 1.0f / m_dir.Y, 1.0f / m_dir.Z);
+            n_invDir = new Vector3(1.0f / m_dir.X, 1.0f / m_dir.Y, 1.0f / m_dir.Z);
         }
 
         /// <summary>
         /// Gets the ray's inverse.
         /// </summary>
-        public Vector InverseDir
+        public Vector3 InverseDir
         {
             get
             {
@@ -102,7 +102,7 @@ namespace Raytracer.Rendering.Core
 		/// <summary>
 		/// Gets or sets the ray's origin.
 		/// </summary>
-        public Vector Pos 
+        public Vector3 Pos 
         {
             get
             {
@@ -116,7 +116,7 @@ namespace Raytracer.Rendering.Core
 		/// <summary>
 		/// Gets or sets the ray's direction vector.
 		/// </summary>
-        public Vector Dir
+        public Vector3 Dir
         {
             get
             {

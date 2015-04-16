@@ -7,7 +7,7 @@ using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 {
-    using Vector = Vector3;
+    
 
     [Export(typeof(IVBRaySceneItemLoader))]
     class SphereLoader : IVBRaySceneItemLoader
@@ -20,13 +20,13 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
             
             obj.Radius = float.Parse(oText.GetToken(file));
 
-            Vector pos = new Vector();
+            Vector3 pos = new Vector3();
             pos.X = float.Parse(oText.GetToken(file));
             pos.Y = float.Parse(oText.GetToken(file));
 	        pos.Z = float.Parse(oText.GetToken(file));
             obj.Pos = pos;
 
-            Vector ori = new Vector();
+            Vector3 ori = new Vector3();
 
             string strMaterial = null;
 

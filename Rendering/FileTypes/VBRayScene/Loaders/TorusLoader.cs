@@ -7,7 +7,7 @@ using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 {
-    using Vector = Vector3;
+    
 
     [Export(typeof(IVBRaySceneItemLoader))]
     class TorusLoader : IVBRaySceneItemLoader
@@ -21,7 +21,7 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
             obj.OuterRadius = float.Parse(oText.GetToken(file));
             obj.InnerRadius = float.Parse(oText.GetToken(file));
 
-            Vector pos = new Vector();
+            Vector3 pos = new Vector3();
             pos.X = float.Parse(oText.GetToken(file));
             pos.Y = float.Parse(oText.GetToken(file));
 	        pos.Z = float.Parse(oText.GetToken(file));

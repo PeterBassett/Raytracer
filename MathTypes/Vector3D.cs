@@ -20,13 +20,6 @@
 //	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #endregion
 using System;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Collections;
-using System.IO;
-using System.Text.RegularExpressions;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
 using System.Runtime.InteropServices;
 
 namespace Raytracer.MathTypes
@@ -96,7 +89,7 @@ namespace Raytracer.MathTypes
 		}
 		#endregion
 
-		#region Public Static Vector Arithmetics
+		#region Public Static Vector3 Arithmetics
 		/// <summary>
 		/// Adds two vectors.
 		/// </summary>
