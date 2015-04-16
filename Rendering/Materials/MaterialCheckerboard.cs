@@ -3,8 +3,6 @@ using Raytracer.Rendering.Core;
 
 namespace Raytracer.Rendering.Materials
 {
-    
-
     class MaterialCheckerboard : MaterialWithSubMaterials
     {        
         public MaterialCheckerboard ()

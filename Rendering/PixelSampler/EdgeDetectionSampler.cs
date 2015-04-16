@@ -42,15 +42,15 @@ namespace Raytracer.Rendering.PixelSamplers
 
         private float SobelOperator(IRenderer renderer, int x, int y)
         {
-            var p1 = GetPixel(renderer, x - 1,  y - 1   ).Brightness;
-            var p2 = GetPixel(renderer, x,      y - 1   ).Brightness;
-            var p3 = GetPixel(renderer, x + 1,  y - 1   ).Brightness;
-            var p4 = GetPixel(renderer, x - 1,  y       ).Brightness;
-            var p5 = GetPixel(renderer, x,      y       ).Brightness;
-            var p6 = GetPixel(renderer, x + 1,  y       ).Brightness;
-            var p7 = GetPixel(renderer, x - 1,  y + 1   ).Brightness;
-            var p8 = GetPixel(renderer, x,      y + 1   ).Brightness;
-            var p9 = GetPixel(renderer, x + 1,  y + 1   ).Brightness;
+            var p1 = GetPixel(renderer, x - 1,  y - 1).Brightness;
+            var p2 = GetPixel(renderer, x,      y - 1).Brightness;
+            var p3 = GetPixel(renderer, x + 1,  y - 1).Brightness;
+            var p4 = GetPixel(renderer, x - 1,  y    ).Brightness;
+            var p5 = GetPixel(renderer, x,      y    ).Brightness;
+            var p6 = GetPixel(renderer, x + 1,  y    ).Brightness;
+            var p7 = GetPixel(renderer, x - 1,  y + 1).Brightness;
+            var p8 = GetPixel(renderer, x,      y + 1).Brightness;
+            var p9 = GetPixel(renderer, x + 1,  y + 1).Brightness;
 
             return Math.Abs((p1 + 2 * p2 + p3) - (p7 + 2 * p8 + p9))
                  + Math.Abs((p3 + 2 * p6 + p9) - (p1 + 2 * p4 + p7));
