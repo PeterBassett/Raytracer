@@ -88,8 +88,8 @@ namespace Raytracer.Rendering.Primitives
                         var hitPoint = ray.Pos + (ray.Dir * distance);
                         var normal = GetNormal(hitPoint);
                         // Normal needs to be flipped if this is a refractive ray.
-                        //if (Vector3.DotProduct(ray.Dir, normal) > 0)
-                         //   normal = -normal;
+                        if (Vector3.DotProduct(ray.Dir, normal) > 0)
+                            normal = -normal;
 
                         return new IntersectionInfo(retval, this, fDistance, hitPoint, hitPoint, normal);
                     }

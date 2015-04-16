@@ -98,7 +98,7 @@ namespace Raytracer.Rendering.Core
 
         public void BuildAccellerationStructures()
         {
-            if (_primitives.Count < 20)
+            if (_primitives.Count < 10)
                 return;
 
             var elements = FilterUnboundedPrimitives();
@@ -110,7 +110,7 @@ namespace Raytracer.Rendering.Core
         private List<Traceable> FilterUnboundedPrimitives()
         {
             var elements = new List<Traceable>();
-            /*
+            
             int iIndex = _primitives.Count - 1;
 
             while (iIndex >= 0)
@@ -125,7 +125,7 @@ namespace Raytracer.Rendering.Core
 
                 iIndex--;
             }
-            */
+            
             return elements;
         }
 

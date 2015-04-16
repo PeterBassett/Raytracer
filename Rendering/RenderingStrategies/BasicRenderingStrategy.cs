@@ -31,9 +31,6 @@ namespace Raytracer.Rendering.RenderingStrategies
                         return;
                     }
 
-                    if(x == 156 && y == 136)
-                        System.Console.WriteLine();
-
                     frameBuffer.SetPixel(x, y, _pixelSampler.SamplePixel(renderer, x, y));
                 }
             });

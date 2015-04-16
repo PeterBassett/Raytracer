@@ -80,6 +80,12 @@
     <Compile Include="MathTypes\Polynomial.cs" />
     <Compile Include="MathTypes\Size.cs" />
     <Compile Include="MathTypes\Vector2D.cs" />
+    <Compile Include="PixelCoordinates.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PixelCoordinates.Designer.cs">
+      <DependentUpon>PixelCoordinates.cs</DependentUpon>
+    </Compile>
     <Compile Include="Rendering\Core\AABB.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -183,6 +189,9 @@
     <Compile Include="Rendering\Primitives\Sphere.cs" />
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PixelCoordinates.resx">
+      <DependentUpon>PixelCoordinates.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

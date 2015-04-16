@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.renderedImage = new System.Windows.Forms.PictureBox();
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.mnuFiles = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOpen = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,6 +39,9 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.renderOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.multiThreadedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRenderingMode = new System.Windows.Forms.ToolStripMenuItem();
+            this.progressiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.highQualityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSuperSampling = new System.Windows.Forms.ToolStripMenuItem();
             this.xToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,10 +78,8 @@
             this.btnCancelRendering = new System.Windows.Forms.Button();
             this.btnRender = new System.Windows.Forms.Button();
             this.dlgSaveRay = new System.Windows.Forms.SaveFileDialog();
-            this.mnuRenderingMode = new System.Windows.Forms.ToolStripMenuItem();
-            this.progressiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.highQualityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pixelPosition = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.renderedImage)).BeginInit();
             this.mainMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -88,16 +89,19 @@
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // renderedImage
             // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(197, 184);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.renderedImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.renderedImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.renderedImage.Location = new System.Drawing.Point(0, 0);
+            this.renderedImage.Name = "renderedImage";
+            this.renderedImage.Size = new System.Drawing.Size(365, 407);
+            this.renderedImage.TabIndex = 1;
+            this.renderedImage.TabStop = false;
+            this.renderedImage.Click += new System.EventHandler(this.renderedImage_Click);
+            this.renderedImage.DoubleClick += new System.EventHandler(this.renderedImage_DoubleClick);
+            this.renderedImage.MouseLeave += new System.EventHandler(this.renderedImage_MouseLeave);
+            this.renderedImage.MouseMove += new System.Windows.Forms.MouseEventHandler(this.renderedImage_MouseMove);
             // 
             // mainMenu
             // 
@@ -106,7 +110,7 @@
             this.renderOptionsToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(307, 24);
+            this.mainMenu.Size = new System.Drawing.Size(569, 24);
             this.mainMenu.TabIndex = 2;
             this.mainMenu.Text = "menuStrip1";
             // 
@@ -185,6 +189,31 @@
             this.multiThreadedToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.multiThreadedToolStripMenuItem.Text = "Multi-Threaded?";
             this.multiThreadedToolStripMenuItem.Click += new System.EventHandler(this.multiThreadedToolStripMenuItem_Click);
+            // 
+            // mnuRenderingMode
+            // 
+            this.mnuRenderingMode.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.progressiveToolStripMenuItem,
+            this.highQualityToolStripMenuItem});
+            this.mnuRenderingMode.Name = "mnuRenderingMode";
+            this.mnuRenderingMode.Size = new System.Drawing.Size(162, 22);
+            this.mnuRenderingMode.Text = "Rendering Mode";
+            // 
+            // progressiveToolStripMenuItem
+            // 
+            this.progressiveToolStripMenuItem.Checked = true;
+            this.progressiveToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.progressiveToolStripMenuItem.Name = "progressiveToolStripMenuItem";
+            this.progressiveToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.progressiveToolStripMenuItem.Text = "Progressive";
+            this.progressiveToolStripMenuItem.Click += new System.EventHandler(this.progressiveToolStripMenuItem_Click);
+            // 
+            // highQualityToolStripMenuItem
+            // 
+            this.highQualityToolStripMenuItem.Name = "highQualityToolStripMenuItem";
+            this.highQualityToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.highQualityToolStripMenuItem.Text = "High Quality";
+            this.highQualityToolStripMenuItem.Click += new System.EventHandler(this.progressiveToolStripMenuItem_Click);
             // 
             // mnuSuperSampling
             // 
@@ -393,9 +422,9 @@
             // 
             this.groupBox1.Controls.Add(this.txtMessages);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox1.Location = new System.Drawing.Point(0, 184);
+            this.groupBox1.Location = new System.Drawing.Point(0, 407);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(197, 78);
+            this.groupBox1.Size = new System.Drawing.Size(365, 78);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Rendering Messages";
@@ -407,7 +436,7 @@
             this.txtMessages.Multiline = true;
             this.txtMessages.Name = "txtMessages";
             this.txtMessages.ReadOnly = true;
-            this.txtMessages.Size = new System.Drawing.Size(191, 59);
+            this.txtMessages.Size = new System.Drawing.Size(359, 59);
             this.txtMessages.TabIndex = 0;
             // 
             // dlgOpen
@@ -429,15 +458,15 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.pictureBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.renderedImage);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.txtSceneFile);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainer1.Size = new System.Drawing.Size(307, 262);
-            this.splitContainer1.SplitterDistance = 197;
+            this.splitContainer1.Size = new System.Drawing.Size(569, 485);
+            this.splitContainer1.SplitterDistance = 365;
             this.splitContainer1.TabIndex = 4;
             // 
             // txtSceneFile
@@ -447,7 +476,7 @@
             this.txtSceneFile.Multiline = true;
             this.txtSceneFile.Name = "txtSceneFile";
             this.txtSceneFile.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtSceneFile.Size = new System.Drawing.Size(106, 184);
+            this.txtSceneFile.Size = new System.Drawing.Size(200, 407);
             this.txtSceneFile.TabIndex = 1;
             this.txtSceneFile.TextChanged += new System.EventHandler(this.txtSceneFile_TextChanged);
             // 
@@ -456,9 +485,9 @@
             this.groupBox2.Controls.Add(this.btnCancelRendering);
             this.groupBox2.Controls.Add(this.btnRender);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox2.Location = new System.Drawing.Point(0, 184);
+            this.groupBox2.Location = new System.Drawing.Point(0, 407);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(106, 78);
+            this.groupBox2.Size = new System.Drawing.Size(200, 78);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "groupBox2";
@@ -488,42 +517,28 @@
             // 
             this.dlgSaveRay.Filter = "\"Scene files (*.ray)|*.ray|All files (*.*)|*.*\"  ;";
             // 
-            // mnuRenderingMode
+            // pixelPosition
             // 
-            this.mnuRenderingMode.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.progressiveToolStripMenuItem,
-            this.highQualityToolStripMenuItem});
-            this.mnuRenderingMode.Name = "mnuRenderingMode";
-            this.mnuRenderingMode.Size = new System.Drawing.Size(162, 22);
-            this.mnuRenderingMode.Text = "Rendering Mode";
-            // 
-            // progressiveToolStripMenuItem
-            // 
-            this.progressiveToolStripMenuItem.Checked = true;
-            this.progressiveToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.progressiveToolStripMenuItem.Name = "progressiveToolStripMenuItem";
-            this.progressiveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.progressiveToolStripMenuItem.Text = "Progressive";
-            this.progressiveToolStripMenuItem.Click += new System.EventHandler(this.progressiveToolStripMenuItem_Click);
-            // 
-            // highQualityToolStripMenuItem
-            // 
-            this.highQualityToolStripMenuItem.Name = "highQualityToolStripMenuItem";
-            this.highQualityToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.highQualityToolStripMenuItem.Text = "High Quality";
-            this.highQualityToolStripMenuItem.Click += new System.EventHandler(this.progressiveToolStripMenuItem_Click);
+            this.pixelPosition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pixelPosition.Location = new System.Drawing.Point(466, 1);
+            this.pixelPosition.Name = "pixelPosition";
+            this.pixelPosition.Size = new System.Drawing.Size(100, 23);
+            this.pixelPosition.TabIndex = 5;
+            this.pixelPosition.Text = "X:Y";
+            this.pixelPosition.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(307, 289);
+            this.ClientSize = new System.Drawing.Size(569, 512);
+            this.Controls.Add(this.pixelPosition);
             this.Controls.Add(this.mainMenu);
             this.Controls.Add(this.splitContainer1);
             this.MainMenuStrip = this.mainMenu;
             this.Name = "Main";
             this.Text = "Petes Ray Tracer";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.renderedImage)).EndInit();
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -541,7 +556,7 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox renderedImage;
         private System.Windows.Forms.MenuStrip mainMenu;
         private System.Windows.Forms.ToolStripMenuItem mnuFiles;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -591,6 +606,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuRenderingMode;
         private System.Windows.Forms.ToolStripMenuItem progressiveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem highQualityToolStripMenuItem;
+        private System.Windows.Forms.Label pixelPosition;
     }
 }
 

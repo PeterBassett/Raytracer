@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Raytracer.Extensions;
+using Raytracer.MathTypes;
 using Raytracer.Rendering.Cameras;
 using Raytracer.Rendering.Core;
 using Raytracer.Rendering.FileTypes.VBRayScene;
@@ -25,6 +27,7 @@ namespace Raytracer
         public Main()
         {
             InitializeComponent();
+            pixelPosition.Text = "";
 
             var scenes = Directory.GetFiles(".", "*.ray", SearchOption.AllDirectories).ToList();
 
@@ -102,8 +105,8 @@ namespace Raytracer
             
             this.txtMessages.Text += "Rendering\r\n";
             
-            int width = pictureBox1.Width;
-            int height = pictureBox1.Height;
+            int width = renderedImage.Width;
+            int height = renderedImage.Height;
             bool blnMultiThreaded = multiThreadedToolStripMenuItem.Checked;
             _cancellationTokenSource = new CancellationTokenSource();
             bool traceShadows = mnuShadows.Checked;
@@ -114,7 +117,7 @@ namespace Raytracer
             {
                 Stopwatch watch = new Stopwatch();
                 watch.Start();
-                var bmp = new PictureBoxBmp(pictureBox1);
+                var bmp = new PictureBoxBmp(renderedImage);
 
                 Render(width, height, bmp, blnMultiThreaded, traceShadows, traceReflections, traceRefractions, _cancellationTokenSource.Token);
 
@@ -211,7 +214,7 @@ namespace Raytracer
 
         private void mnuSave_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image == null)
+            if (renderedImage.Image == null)
                 return;
 
             dlgSaveBmp.InitialDirectory = Path.GetDirectoryName(Application.ExecutablePath);
@@ -223,7 +226,7 @@ namespace Raytracer
 
         private void SaveCurrentImage(string strImageName)
         {
-            pictureBox1.Image.Save(strImageName);
+            renderedImage.Image.Save(strImageName);
         }
 
         private void multiThreadedToolStripMenuItem_Click(object sender, EventArgs e)
@@ -268,7 +271,7 @@ namespace Raytracer
             ((ToolStripMenuItem)sender).Checked = !((ToolStripMenuItem)sender).Checked;
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void renderedImage_Click(object sender, EventArgs e)
         {
             //Go();
         }
@@ -366,6 +369,24 @@ namespace Raytracer
             return (from item in mnuRenderingMode.DropDownItems.Cast<ToolStripMenuItem>()
                     where item.Checked
                     select item.Text).First();
+        }
+
+        private Point _mouseCoordinatesOverImage;
+        private void renderedImage_MouseMove(object sender, MouseEventArgs e)
+        {
+            _mouseCoordinatesOverImage = e.Location;
+            pixelPosition.Text = string.Format("{0}:{1}", e.X, e.Y);
+        }
+
+        private void renderedImage_MouseLeave(object sender, EventArgs e)
+        {
+            pixelPosition.Text = "";
+        }
+
+        private void renderedImage_DoubleClick(object sender, EventArgs e)
+        {
+            var coordinateDisplay = new PixelCoordinates();
+            coordinateDisplay.Display(_mouseCoordinatesOverImage.X, _mouseCoordinatesOverImage.Y);
         }
     }
 }
