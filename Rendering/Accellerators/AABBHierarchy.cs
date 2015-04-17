@@ -7,71 +7,71 @@ using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.Rendering.Accellerators
 {
+    // ReSharper disable InconsistentNaming
+
     class AABBHierarchy : IAccelerator
     {
         class AABBHierarchyNode
         {
-            bool isLeaf;
-            AABBHierarchyNode left;
-            AABBHierarchyNode right;
-            AABB bounds;
-            Traceable[] primitives;
-            int depth;
-           
-            public AABBHierarchyNode(Traceable[] primitives, int depth)
-            {
-                this.depth = depth;
-                isLeaf = false;
+            readonly bool _isLeaf;
+            readonly AABBHierarchyNode _left;
+            readonly AABBHierarchyNode _right;
+            readonly AABB _bounds;
+            readonly Traceable[] _primitives;
 
-                bounds = primitives.First().GetAABB();
+            public AABBHierarchyNode(IList<Traceable> primitives, int depth)
+            {
+                _isLeaf = false;
+
+                _bounds = primitives.First().GetAABB();
 
                 if (!primitives.Any())
                     return;
 
                 if (depth > 25 || primitives.Count() <= 6)
                 {
-                    this.primitives = primitives.ToArray();
+                    _primitives = primitives.ToArray();
 
-                    isLeaf = true;
+                    _isLeaf = true;
 
-                    for (long i = 1; i < this.primitives.Length; i++)
+                    for (long i = 1; i < _primitives.Length; i++)
                     {
-                        bounds.InflateToEncapsulate(this.primitives[i].GetAABB());
+                        _bounds = _primitives[i].GetAABB().InflateToEncapsulate(_bounds);
                     }
 
                     return;
                 }
 
-                Vector3 midpt = new Vector3();
+                var midpt = new Vector3();
 
-                double tris_recp = 1.0 / primitives.Count();
+                var trisRecp = 1.0 / primitives.Count();
 
-                for (long i = 1; i < primitives.Length; i++)
+                for (var i = 1; i < primitives.Count; i++)
                 {
-                    bounds.InflateToEncapsulate(primitives[i].GetAABB());
-                    midpt = midpt + (primitives[i].Pos * tris_recp);
+                    _bounds = primitives[i].GetAABB().InflateToEncapsulate(_bounds);
+                    midpt = midpt + (primitives[i].Pos * trisRecp);
                 }
 
-                int bestAxis = 0;
-                int bestRemainder = int.MaxValue;
-                var partition = new bool[primitives.Length * 3];
+                var bestAxis = 0;
+                var bestRemainder = int.MaxValue;
+                var partition = new bool[primitives.Count * 3];
 
-                for (int axis = 0; axis < 3; axis++)
+                for (var axis = 0; axis < 3; axis++)
                 {
-                    int rightCount = 0;
+                    var rightCount = 0;
 
-                    for (long i = 0; i < primitives.Length; i++)
+                    for (var i = 0; i < primitives.Count; i++)
                     {                        
                         if (midpt[axis] >= primitives[i].Pos[axis])
                         {
                             rightCount++;
-                            partition[axis * primitives.Length + i] = true;
+                            partition[axis * primitives.Count + i] = true;
                         }
                     }
 
                     rightCount = Math.Max(rightCount, 1);
 
-                    var remainder = Math.Abs((primitives.Length / 2) - rightCount);
+                    var remainder = Math.Abs((primitives.Count / 2) - rightCount);
 
                     if (remainder < bestRemainder)
                     {
@@ -83,94 +83,79 @@ namespace Raytracer.Rendering.Accellerators
                         break;
                 }
 
-                var left_tris = new List<Traceable>(primitives.Length / 2);
-                var right_tris = new List<Traceable>(primitives.Length / 2);
+                var leftTris = new List<Traceable>(primitives.Count / 2);
+                var rightTris = new List<Traceable>(primitives.Count / 2);
 
-                for (long i = 0; i < primitives.Length; i++)
+                for (var i = 0; i < primitives.Count; i++)
                 {
-                    if (partition[bestAxis * primitives.Length + i])
-                        right_tris.Add(primitives[i]);
+                    if (partition[bestAxis * primitives.Count + i])
+                        rightTris.Add(primitives[i]);
                     else
-                        left_tris.Add(primitives[i]);
+                        leftTris.Add(primitives[i]);
                 }
 
-                if (primitives.Length == left_tris.Count || primitives.Length == right_tris.Count)
+                if (primitives.Count == leftTris.Count || primitives.Count == rightTris.Count)
                 {
-                    this.primitives = primitives.ToArray();
+                    _primitives = primitives.ToArray();
 
-                    isLeaf = true;
+                    _isLeaf = true;
 
-                    for (long i = 1; i < this.primitives.Length; i++)
+                    for (var i = 1; i < _primitives.Length; i++)
                     {
-                        bounds.InflateToEncapsulate(this.primitives[i].GetAABB());
+                        _bounds = _primitives[i].GetAABB().InflateToEncapsulate(_bounds);
                     }
 
                     return;
                 }
 
-                this.left = new AABBHierarchyNode(left_tris.ToArray(), depth + 1);
-                this.right = new AABBHierarchyNode(right_tris.ToArray(), depth + 1);
-            }
-
-            public AABBHierarchyNode Left
-            {
-                get { return left; }
-            }
-
-            public AABBHierarchyNode Right
-            {
-                get { return right; }
-            }
-
-            public bool IsLeaf()
-            {
-                return isLeaf;
+                _left = new AABBHierarchyNode(leftTris.ToArray(), depth + 1);
+                _right = new AABBHierarchyNode(rightTris.ToArray(), depth + 1);
             }
 
             internal IEnumerable<Traceable> Intersect(Ray ray)
             {
-                if (!this.bounds.Intersect(ray))
+                if (!_bounds.Intersect(ray))
                     return Enumerable.Empty<Traceable>();                    
 
-                if(isLeaf)
-                   return this.primitives;
+                if(_isLeaf)
+                   return _primitives;
                 
-                List<Traceable> traceableObjects = new List<Traceable>();
-                traceableObjects.AddRange(this.left.Intersect(ray));
-                traceableObjects.AddRange(this.right.Intersect(ray));
+                var traceableObjects = new List<Traceable>();
+                traceableObjects.AddRange(_left.Intersect(ray));
+                traceableObjects.AddRange(_right.Intersect(ray));
                 return traceableObjects;                 
             }
 
             internal IEnumerable<Traceable> Intersect(Vector3 point)
             {
-                if (!this.bounds.Contains(point))
+                if (!_bounds.Contains(point))
                     return Enumerable.Empty<Traceable>();
 
-                if (isLeaf)
-                    return this.primitives;
+                if (_isLeaf)
+                    return _primitives;
 
-                List<Traceable> traceableObjects = new List<Traceable>();
-                traceableObjects.AddRange(this.left.Intersect(point));
-                traceableObjects.AddRange(this.right.Intersect(point));
+                var traceableObjects = new List<Traceable>();
+                traceableObjects.AddRange(_left.Intersect(point));
+                traceableObjects.AddRange(_right.Intersect(point));
                 return traceableObjects;  
             }
         };
 
-        private AABBHierarchyNode root;
+        private AABBHierarchyNode _root;
 
         public void Build(IEnumerable<Traceable> primitives)
         {
-            root = new AABBHierarchyNode(primitives.ToArray(), 0);
+            _root = new AABBHierarchyNode(primitives.ToArray(), 0);
         }
 
         public IEnumerable<Traceable> Intersect(Ray ray)
         {
-            return this.root.Intersect(ray);
+            return _root.Intersect(ray);
         }
 
         public IEnumerable<Traceable> Intersect(Vector3 point)
         {
-            return this.root.Intersect(point);
+            return _root.Intersect(point);
         }
     }
 }

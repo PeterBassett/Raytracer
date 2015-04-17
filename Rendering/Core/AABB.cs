@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using Raytracer.MathTypes;
 
 namespace Raytracer.Rendering.Core
@@ -96,27 +97,39 @@ namespace Raytracer.Rendering.Core
             }
         }
 
-        public void InflateToEncapsulate(AABB other)
-        {               
-            if (other.Min.X < Min.X)
-                Min.X = other.Min.X;
+        public AABB InflateToEncapsulate(AABB other)
+        {
+            var min = new Vector3(Min);
+            var max = new Vector3(Max);
 
-            if (other.Min.Y < Min.Y)
-                Min.Y = other.Min.Y;
+            if (other.Min.X < min.X)
+                min.X = other.Min.X;
 
-            if (other.Min.Z < Min.Z)
-                Min.Z = other.Min.Z;
+            if (other.Min.Y < min.Y)
+                min.Y = other.Min.Y;
 
-            if (other.Max.X > Max.X)
-                Max.X = other.Max.X;
+            if (other.Min.Z < min.Z)
+                min.Z = other.Min.Z;
 
-            if (other.Max.Y > Max.Y)
-                Max.Y = other.Max.Y;
+            if (other.Max.X > max.X)
+                max.X = other.Max.X;
 
-            if (other.Max.Z > Max.Z)
-                Max.Z = other.Max.Z;
+            if (other.Max.Y > max.Y)
+                max.Y = other.Max.Y;
+
+            if (other.Max.Z > max.Z)
+                max.Z = other.Max.Z;
+
+            return new AABB(min, max);
         }
 
+        /// <summary>
+        /// Indicates whether this instance and a specified object are equal.
+        /// </summary>
+        /// <returns>
+        /// true if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, false.
+        /// </returns>
+        /// <param name="obj">Another object to compare to. </param><filterpriority>2</filterpriority>
         public override bool Equals(object obj)
         {
             return obj is AABB && this == (AABB) obj;

@@ -217,29 +217,31 @@ namespace Raytracer.Rendering.Accellerators
         
         public void Build(IEnumerable<Traceable> primitives)
         {
-            AABB bounds = AABB.Empty;
+            var bounds = AABB.Empty;
 
             foreach (var item in primitives)
 	        {
-		        bounds.InflateToEncapsulate(item.GetAABB());
+                bounds = bounds.InflateToEncapsulate(item.GetAABB());
 	        }
             
             _root = new Node(bounds, _maxItemsPerNode, _minNodeWidth);
-        }
 
+            foreach (var primitive in primitives)
+            {
+                _root.Add(primitive);
+            }
+
+            _root.PruneEmptyNodes();
+        }
+        
         public IEnumerable<Traceable> Intersect(Ray ray)
         {
-            return this._root.Intersect(ray);
-        }
-
-        public void PruneEmptyNodes()
-        {
-            this._root.PruneEmptyNodes();
+            return _root.Intersect(ray);
         }
 
         public IEnumerable<Traceable> Intersect(Vector3 point)
         {
-            return this._root.Intersect(point);
+            return _root.Intersect(point);
         }
     }
 }

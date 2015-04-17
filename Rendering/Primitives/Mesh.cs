@@ -8,9 +8,6 @@ using Raytracer.Rendering.Core;
 
 namespace Raytracer.Rendering.Primitives
 {
-    
-    
-
     class Mesh : Traceable
     {
         public string Name { get; set; }

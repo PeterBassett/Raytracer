@@ -8,7 +8,7 @@ namespace Raytracer.MathTypes
 {
     class Polynomial
     {
-        double[] coef = new double[16];
+        readonly double[] coef = new double[16];
 
         private const double COEFF_LIMIT = 1.0e-16;
         private const double EPSILON = 1.0e-10;

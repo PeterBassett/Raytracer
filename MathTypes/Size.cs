@@ -12,8 +12,8 @@ namespace Raytracer.MathTypes
             if (height < 0)
                 throw new ArgumentOutOfRangeException("height", "height must be positive");
 
-            this.Width = width;
-            this.Height = height;
+            Width = width;
+            Height = height;
         }        
 
         public int Width { get; private set; }
