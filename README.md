@@ -41,3 +41,17 @@ With this we can implement CSG against arbitrary traceable implementations.
 Examples
 * Refraction needs some work in this one
 ![Flawed refraction](/OutputImages/RefractiveSphere.bmp?raw=true "Flawed Refraction")
+* Reflective sphere and cubemap
+![Flawed refraction](/OutputImages/ReflectiveCubemappedSphere.bmp?raw=true "Reflection of cubemap")
+* Refractive sphere and cubemap
+![Flawed refraction](/OutputImages/RefractiveCubemappedSphere.bmp?raw=true "Refraction of cubemap")
+* Colourful room
+![Flawed refraction](/OutputImages/room.bmp?raw=true "Spangly")
+* Mesh instances
+![Flawed refraction](/OutputImages/lamps.bmp?raw=true "Mesh instances")
+* Texture mapped triangles
+![Flawed refraction](/OutputImages/legocar.bmp?raw=true "Texture mapping on triangles")
+* Texture mapped sphere
+![Flawed refraction](/OutputImages/earth.bmp?raw=true "Texture mapping on sphere")
+* Perlin noise mixing base materials, red, yellow and texture.
+![Flawed refraction](/OutputImages/BurningEarth.bmp?raw=true "Perlin noise mixing base materials")
