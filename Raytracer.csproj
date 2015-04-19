@@ -89,6 +89,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Rendering\Accellerators\IAccellerator.cs" />
+    <Compile Include="Rendering\FileTypes\ImageReader.cs" />
     <Compile Include="Rendering\RenderingStrategies\BasicRenderingStrategy.cs" />
     <Compile Include="Rendering\RenderingStrategies\ParallelOptionsBase.cs" />
     <Compile Include="Rendering\RenderingStrategies\ProgressiveRenderingStrategy.cs" />
