@@ -46,12 +46,12 @@ Examples
 * Refractive sphere and cubemap
 ![Flawed refraction](/OutputImages/RefractiveCubemappedSphere.bmp?raw=true "Refraction of cubemap")
 * Colourful room
-![Flawed refraction](/OutputImages/room.bmp?raw=true "Spangly")
+![Flawed refraction](/OutputImages/Room.bmp?raw=true "Spangly")
 * Mesh instances
-![Flawed refraction](/OutputImages/lamps.bmp?raw=true "Mesh instances")
+![Flawed refraction](/OutputImages/Lamps.bmp?raw=true "Mesh instances")
 * Texture mapped triangles
-![Flawed refraction](/OutputImages/legocar.bmp?raw=true "Texture mapping on triangles")
+![Flawed refraction](/OutputImages/LegoCar.bmp?raw=true "Texture mapping on triangles")
 * Texture mapped sphere
-![Flawed refraction](/OutputImages/earth.bmp?raw=true "Texture mapping on sphere")
+![Flawed refraction](/OutputImages/Earth.bmp?raw=true "Texture mapping on sphere")
 * Perlin noise mixing base materials, red, yellow and texture.
 ![Flawed refraction](/OutputImages/BurningEarth.bmp?raw=true "Perlin noise mixing base materials")
