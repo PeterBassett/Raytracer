@@ -8,6 +8,7 @@ namespace Raytracer.Rendering.FileTypes
 {
     static class ImageReader
     {
+        private delegate Colour ReadPixel(BitmapData bmpData, int components, int x, int y);
         public static Bmp Read(Bitmap other)
         {            
             var bmp = new Bmp(other.Width, other.Height);
@@ -22,12 +23,12 @@ namespace Raytracer.Rendering.FileTypes
             var reader = GetPixelReader(other);
 
             if (reader != null)
-                ReadImageFast(bmp, other);
+                ReadImageFast(reader, bmp, other);
             else
                 ReadSlowFallback(bmp, other);
         }
 
-        private static void ReadImageFast(Bmp bmp, Bitmap other)
+        private static void ReadImageFast(ReadPixel getPixel, Bmp bmp, Bitmap other)
         {
             var depth = Image.GetPixelFormatSize(other.PixelFormat);
             var components = depth / 8;
@@ -36,8 +37,6 @@ namespace Raytracer.Rendering.FileTypes
 
             try
             {
-                var getPixel = GetPixelReader(other);
-
                 Parallel.For(0, data.Height, y =>
                 {
                     for (var x = 0; x < data.Width; x++)
@@ -66,7 +65,7 @@ namespace Raytracer.Rendering.FileTypes
             }
         }
 
-        private static Func<BitmapData, int, int, int, Colour> GetPixelReader(Bitmap data)
+        private static ReadPixel GetPixelReader(Bitmap data)
         {            
             switch (data.PixelFormat)
             {
@@ -80,12 +79,11 @@ namespace Raytracer.Rendering.FileTypes
                     var palette = data.Palette.Entries.ToArray();
 
                     // ReSharper disable once RedundantLambdaParameterType
-                    return
-                        (BitmapData bmpData, int components, int x, int y) =>
-                            GetPixel8BppIndexed(bmpData, components, x, y, palette);
+                    return (BitmapData bmpData, int components, int x, int y) =>
+                                GetPixel8BppIndexed(bmpData, components, x, y, palette);
                 }
                 default:
-                    throw new ArgumentOutOfRangeException("data");
+                    return null; // We do not support the specified PixelFormat.
             }
         }
 
