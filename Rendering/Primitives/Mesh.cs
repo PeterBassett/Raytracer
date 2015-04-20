@@ -97,7 +97,7 @@ namespace Raytracer.Rendering.Primitives
             {                
                 var result = tri.Intersect(ray);
 
-                if (result.T < minimumIntersection.T && result.Result != HitResult.MISS)
+                if (result.T > 0f && result.T < minimumIntersection.T && result.Result != HitResult.MISS)
                     minimumIntersection = result;
             }
 

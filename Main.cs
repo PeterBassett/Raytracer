@@ -94,7 +94,12 @@ namespace Raytracer
             this.txtMessages.Text += string.Format("Loaded: {0}ms\r\n", watch.ElapsedMilliseconds);                
         }
 
-        public void RenderScene()
+        public void RenderPixel(int x, int y)
+        {
+            RenderScene(new Vector2(x, y));
+        }
+
+        public void RenderScene(Vector2? renderAt = null)
         {
             btnCancelRendering.Enabled = true;
             btnRender.Enabled = false;
@@ -119,7 +124,7 @@ namespace Raytracer
                 watch.Start();
                 var bmp = new PictureBoxBmp(renderedImage);
 
-                Render(width, height, bmp, blnMultiThreaded, traceShadows, traceReflections, traceRefractions, _cancellationTokenSource.Token);
+                Render(width, height, bmp, blnMultiThreaded, traceShadows, traceReflections, traceRefractions, _cancellationTokenSource.Token, renderAt);
 
                 watch.Stop();
                 return watch.ElapsedMilliseconds;
@@ -147,7 +152,7 @@ namespace Raytracer
         }
 
         private void Render(int width, int height, IBmp bmp, 
-            bool blnMultiThreaded, bool traceShadows, bool traceReflections, bool traceRefractions, CancellationToken token)
+            bool blnMultiThreaded, bool traceShadows, bool traceReflections, bool traceRefractions, CancellationToken token, Vector2? renderAt)
         {
             VBRaySceneLoader loader = new VBRaySceneLoader();
 
@@ -175,8 +180,12 @@ namespace Raytracer
             }
 
             IRenderer renderer = new RayTracingRenderer(m_scene, camera, renderingStrategy, (uint)m_scene.RecursionDepth, blnMultiThreaded, traceShadows, traceReflections, traceRefractions);
-            renderer.RenderScene(bmp);
 
+            if (renderAt.HasValue)
+                renderer.ComputeSample(renderAt.Value);
+            else
+                renderer.RenderScene(bmp);
+            
             watch.Stop();
             this.UIThread(() =>
             {
@@ -386,7 +395,13 @@ namespace Raytracer
         private void renderedImage_DoubleClick(object sender, EventArgs e)
         {
             var coordinateDisplay = new PixelCoordinates();
+            coordinateDisplay.OnRenderRequested += coordinateDisplay_OnRenderRequested;
             coordinateDisplay.Display(_mouseCoordinatesOverImage.X, _mouseCoordinatesOverImage.Y);
+        }
+
+        void coordinateDisplay_OnRenderRequested(int x, int y)
+        {
+            RenderPixel(x, renderedImage.Height - y);
         }
     }
 }

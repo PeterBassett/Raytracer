@@ -31,13 +31,14 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.btnRenderAtPixel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnClose
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(287, 67);
+            this.btnClose.Location = new System.Drawing.Point(287, 65);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 0;
@@ -65,6 +66,18 @@
             this.textBox2.TabIndex = 2;
             this.textBox2.Tag = "x == {0} && y == {1}";
             // 
+            // btnRenderAtPixel
+            // 
+            this.btnRenderAtPixel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRenderAtPixel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnRenderAtPixel.Location = new System.Drawing.Point(12, 65);
+            this.btnRenderAtPixel.Name = "btnRenderAtPixel";
+            this.btnRenderAtPixel.Size = new System.Drawing.Size(75, 23);
+            this.btnRenderAtPixel.TabIndex = 3;
+            this.btnRenderAtPixel.Text = "Trace";
+            this.btnRenderAtPixel.UseVisualStyleBackColor = true;
+            this.btnRenderAtPixel.Click += new System.EventHandler(this.btnRenderAtPixel_Click);
+            // 
             // PixelCoordinates
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -72,6 +85,7 @@
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(374, 102);
             this.ControlBox = false;
+            this.Controls.Add(this.btnRenderAtPixel);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btnClose);
@@ -79,7 +93,6 @@
             this.MinimumSize = new System.Drawing.Size(390, 140);
             this.Name = "PixelCoordinates";
             this.Text = "PixelCoordinates";
-            this.Load += new System.EventHandler(this.PixelCoordinates_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -90,5 +103,6 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button btnRenderAtPixel;
     }
 }

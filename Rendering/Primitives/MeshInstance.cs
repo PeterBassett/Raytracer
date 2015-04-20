@@ -4,8 +4,6 @@ using Raytracer.Rendering.Core;
 
 namespace Raytracer.Rendering.Primitives
 {
-    
-
     class MeshInstance : Traceable
     {
         private AABB bounds = AABB.Empty;

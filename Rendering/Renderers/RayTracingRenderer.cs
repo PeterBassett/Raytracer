@@ -428,7 +428,8 @@ namespace Raytracer.Rendering.Renderers
             foreach (var obj in _scene.GetCandiates(ray))
             {
                 var result = obj.Intersect(ray);
-
+                //if (result.T < 0.01) // kludge to be removed.
+                //    continue;
                 if (result.T > 0f && result.T <= lightDistance && result.Result == HitResult.HIT)
                     return true;
             }
