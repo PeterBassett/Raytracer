@@ -8,12 +8,40 @@ namespace Raytracer.MathTypes
 {
     class Algebra
     {
-        public static int SolveQuadraticEquation(double a, double b, double c, double[] roots)
+        const double TOLERANCE = 1.0e-8;
+
+        // Returns n=0..numComplexValues, and fills in outArray with the n values from
+        // inArray that are real-valued (i.e., whose imaginary parts are within TOLERANCE of 0.)
+        // outArray must be large enough to receive numComplexValues values.
+        private static int FilterRealNumbers(int numComplexValues, Complex[] inArray, double [] outArray)
         {
-            return SolveQuadraticEquation(new Complex(a, 0),
+            int numRealValues = 0;
+
+            for (int i=0; i < numComplexValues; ++i)
+            {
+                if (Math.Abs(inArray[i].Imaginary) < TOLERANCE)
+                {
+                    outArray[numRealValues++] = inArray[i].Real;
+                }
+            }
+            return numRealValues;
+        }
+
+        public static int SolveQuadraticEquation(
+                        double a,
+                        double b,
+                        double c,
+                        double[] roots)
+        {
+            Complex[] croots = new Complex[2];
+
+            int numComplexRoots = SolveQuadraticEquation(
+                                            new Complex(a, 0),
                                             new Complex(b, 0),
-                                            new Complex(c, 0), 
-                                            roots);
+                                            new Complex(c, 0),
+                                            croots);
+
+            return FilterRealNumbers(numComplexRoots, croots, roots);
         }
 
         // Returns n=0..2, the number of distinct real roots found for the equation
@@ -21,7 +49,7 @@ namespace Raytracer.MathTypes
         //     ax^2 + bx + c = 0
         //
         // Stores the roots in the first n slots of the array 'roots'.
-        public static int SolveQuadraticEquation(Complex a, Complex b, Complex c, double [] roots)
+        private static int SolveQuadraticEquation(Complex a, Complex b, Complex c, Complex [] roots)
         {
             if (roots.Length != 2)
                 throw new ArgumentException("roots");
@@ -36,7 +64,7 @@ namespace Raytracer.MathTypes
                 else
                 {
                     // Simple linear equation: bx + c = 0, so x = -c/b.
-                    roots[0] = (-c / b).Real;
+                    roots[0] = (-c / b);
                     return 1;   // there is a single solution.
                 }
             }
@@ -46,7 +74,7 @@ namespace Raytracer.MathTypes
                 if (IsZero(radicand))
                 {
                     // Both roots have the same value: -b / 2a.
-                    roots[0] = (-b / (2.0 * a)).Real;
+                    roots[0] = (-b / (2.0 * a));
                     return 1;
                 }
                 else
@@ -55,8 +83,8 @@ namespace Raytracer.MathTypes
                     Complex r = Complex.Sqrt(radicand);
                     Complex d = 2.0 * a;
 
-                    roots[0] = ((-b + r) / d).Real;
-                    roots[1] = ((-b - r) / d).Real;
+                    roots[0] = ((-b + r) / d);
+                    roots[1] = ((-b - r) / d);
                     return 2;
                 }
             }
@@ -64,7 +92,6 @@ namespace Raytracer.MathTypes
 
         static bool IsZero(Complex x)
         {
-            const double TOLERANCE = 1.0e-8;
             return (Math.Abs(x.Real) < TOLERANCE) && (Math.Abs(x.Imaginary) < TOLERANCE);
         }
 
@@ -82,12 +109,31 @@ namespace Raytracer.MathTypes
             return new Complex (rho * Math.Cos(theta), rho * Math.Sin(theta));
         }
 
+        public static int SolveCubicEquation(
+                        double a, 
+                        double b, 
+                        double c, 
+                        double d, 
+                        double [] roots)
+        {
+                Complex [] croots = new Complex[4];
+
+            int numComplexRoots = SolveCubicEquation(
+                                            new Complex(a, 0),
+                                            new Complex(b, 0),
+                                            new Complex(c, 0),
+                                            new Complex(d, 0),
+                                            croots);
+
+            return FilterRealNumbers(numComplexRoots, croots, roots);
+        }
+
         // Returns n=0..3, the number of distinct real roots found for the equation
         //
         //     ax^3 + bx^2 + cx + d = 0
         //
         // Stores the roots in the first n slots of the array 'roots'.
-        public static int SolveCubicEquation(Complex a, Complex b, Complex c, Complex d, double[] roots)
+        private static int SolveCubicEquation(Complex a, Complex b, Complex c, Complex d, Complex[] roots)
         {
             if (roots.Length != 3)
                 throw new ArgumentException("roots");
@@ -115,19 +161,33 @@ namespace Raytracer.MathTypes
             for (int i=0; i < 3; ++i) 
             {
                 Complex G = cbrt(F,i);
-                roots[i] = (G - D/G - S).Real;
+                roots[i] = (G - D/G - S);
             }
 
             return 3;
-        }   
+        }
 
-        
+        public static int SolveQuarticEquation(double a, double b, double c, double d, double e, double[] roots)
+        {
+            Complex [] croots = new Complex[4];
+
+            int numComplexRoots = SolveQuarticEquation(
+                                            new Complex(a, 0),
+                                            new Complex(b, 0),
+                                            new Complex(c, 0),
+                                            new Complex(d, 0),
+                                            new Complex(e, 0),
+                                            croots);
+
+            return FilterRealNumbers(numComplexRoots, croots, roots);
+        }
+
         // Returns n=0..4, the number of distinct real roots found for the equation
         //
         //     ax^4 + bx^3 + cx^2 + dx + e = 0
         //
         // Stores the roots in the first n slots of the array 'roots'.
-        public static int SolveQuarticEquation(Complex a, Complex b, Complex c, Complex d, Complex e, double[] roots)
+        private static int SolveQuarticEquation(Complex a, Complex b, Complex c, Complex d, Complex e, Complex[] roots)
         {
             if (roots.Length != 4)
                 throw new ArgumentException("roots");
@@ -163,10 +223,10 @@ namespace Raytracer.MathTypes
                 Complex r1 = Complex.Sqrt((-alpha + rad) / 2.0);
                 Complex r2 = Complex.Sqrt((-alpha - rad) / 2.0);
 
-                roots[0] = (t + r1).Real;
-                roots[1] = (t - r1).Real;
-                roots[2] = (t + r2).Real;
-                roots[3] = (t - r2).Real;
+                roots[0] = (t + r1);
+                roots[1] = (t - r1);
+                roots[2] = (t + r2);
+                roots[3] = (t - r2);
             }
             else
             {
@@ -189,10 +249,10 @@ namespace Raytracer.MathTypes
                 Complex r1 = Complex.Sqrt(-(3.0 * alpha + 2.0 * y + 2.0 * beta / W));
                 Complex r2 = Complex.Sqrt(-(3.0 * alpha + 2.0 * y - 2.0 * beta / W));
 
-                roots[0] = (t + ( W - r1)/2.0).Real;
-                roots[1] = (t + ( W + r1)/2.0).Real;
-                roots[2] = (t + (-W - r2)/2.0).Real;
-                roots[3] = (t + (-W + r2)/2.0).Real;
+                roots[0] = (t + (W - r1) / 2.0);
+                roots[1] = (t + (W + r1) / 2.0);
+                roots[2] = (t + (-W - r2) / 2.0);
+                roots[3] = (t + (-W + r2) / 2.0);
             }
 
             return 4;

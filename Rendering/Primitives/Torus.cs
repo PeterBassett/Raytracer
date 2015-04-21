@@ -42,11 +42,11 @@ namespace Raytracer.Rendering.Primitives
             double L = vantage.GetLengthSquared() + R*R - S*S;
 
             int numRealRoots = Algebra.SolveQuarticEquation(
-                new Complex(J*J, 0),                    // coefficient of u^4
-                new Complex(2.0*J*K, 0),                // coefficient of u^3
-                new Complex(2.0*J*L + K*K - G, 0),      // coefficient of u^2
-                new Complex(2.0*K*L - H, 0),            // coefficient of u^1 = u
-                new Complex(L * L - I, 0),              // coefficient of u^0 = constant term
+                J*J,                    // coefficient of u^4
+                2.0*J*K,                // coefficient of u^3
+                2.0*J*L + K*K - G,      // coefficient of u^2
+                2.0*K*L - H,            // coefficient of u^1 = u
+                L * L - I,              // coefficient of u^0 = constant term
                 uArray                                  // receives 0..4 real solutions
             );
 
@@ -65,16 +65,19 @@ namespace Raytracer.Rendering.Primitives
             }
 
             var distance = double.MaxValue;
-
+            bool found = false;
             for (int j = 0; j < numPositiveRoots; j++)
             {
                 if (uArray[j] > 0.001 && uArray[j] < distance)
+                {
+                    found = true;
                     distance = uArray[j];
+                }
             }
 
-            uArray = null;
+            //uArray = null;
 
-            if (distance != double.MaxValue)
+            if (found)
             {
                 var hitPoint = r.Pos + (r.Dir * distance);
 

@@ -76,7 +76,6 @@
     </Compile>
     <Compile Include="MathTypes\Algebra.cs" />
     <Compile Include="MathTypes\Barycentric.cs" />
-    <Compile Include="MathTypes\Polynomial.cs" />
     <Compile Include="MathTypes\Size.cs" />
     <Compile Include="MathTypes\Vector2D.cs" />
     <Compile Include="PixelCoordinates.cs">
@@ -90,6 +89,7 @@
     </Compile>
     <Compile Include="Rendering\Accellerators\IAccellerator.cs" />
     <Compile Include="Rendering\FileTypes\ImageReader.cs" />
+    <Compile Include="Rendering\PixelSampler\EdgeDetectionPerComponentSampler.cs" />
     <Compile Include="Rendering\RenderingStrategies\BasicRenderingStrategy.cs" />
     <Compile Include="Rendering\RenderingStrategies\ParallelOptionsBase.cs" />
     <Compile Include="Rendering\RenderingStrategies\ProgressiveRenderingStrategy.cs" />
