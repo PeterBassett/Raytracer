@@ -9,7 +9,8 @@ namespace Raytracer.Rendering.Primitives
         public Vector3[] Vertex = new Vector3[3];
         private AABB bounds = AABB.Empty;
         public Vector2[] Texture = new Vector2[3];
-        public Vector3[] Normal = new Vector3[3];        
+        public Vector3[] Normal = new Vector3[3];
+        private Vector3 _cachedFaceNormal = Vector3.Zero;
 
         private bool InternalSide(Vector3 p1,
                                 Vector3 p2,
@@ -93,19 +94,25 @@ namespace Raytracer.Rendering.Primitives
 
             return n;
         }
-
+        
         private Vector3 GetNormalFromVertexes()
         {
+            if (_cachedFaceNormal != Vector3.Zero)
+                return _cachedFaceNormal;
+         
             var u = Vertex[2] - Vertex[0];
             var w = Vertex[1] - Vertex[0];
 
-            var c = Vector3.CrossProduct(w, u);
+            var norm = Vector3.CrossProduct(w, u);
 
-            if (c.GetLengthSquared() == 0)
-                return c;
+            if (norm.GetLengthSquared() == 0)
+                return norm;
 
-            c.Normalize();
-            return c;
+            norm.Normalize();
+
+            _cachedFaceNormal = norm;
+
+            return norm;
         }
 
         public override AABB GetAABB()

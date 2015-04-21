@@ -79,6 +79,9 @@
             this.btnRender = new System.Windows.Forms.Button();
             this.dlgSaveRay = new System.Windows.Forms.SaveFileDialog();
             this.pixelPosition = new System.Windows.Forms.Label();
+            this.jitteredSamplerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.greyscaleEdgeDetectionSamplerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.componentEdgeDetectionSamplerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.renderedImage)).BeginInit();
             this.mainMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -204,14 +207,18 @@
             this.progressiveToolStripMenuItem.Checked = true;
             this.progressiveToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.progressiveToolStripMenuItem.Name = "progressiveToolStripMenuItem";
-            this.progressiveToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.progressiveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.progressiveToolStripMenuItem.Text = "Progressive";
             this.progressiveToolStripMenuItem.Click += new System.EventHandler(this.progressiveToolStripMenuItem_Click);
             // 
             // highQualityToolStripMenuItem
             // 
+            this.highQualityToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.jitteredSamplerToolStripMenuItem,
+            this.greyscaleEdgeDetectionSamplerToolStripMenuItem,
+            this.componentEdgeDetectionSamplerToolStripMenuItem});
             this.highQualityToolStripMenuItem.Name = "highQualityToolStripMenuItem";
-            this.highQualityToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.highQualityToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.highQualityToolStripMenuItem.Text = "High Quality";
             this.highQualityToolStripMenuItem.Click += new System.EventHandler(this.progressiveToolStripMenuItem_Click);
             // 
@@ -527,6 +534,30 @@
             this.pixelPosition.Text = "X:Y";
             this.pixelPosition.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // jitteredSamplerToolStripMenuItem
+            // 
+            this.jitteredSamplerToolStripMenuItem.Name = "jitteredSamplerToolStripMenuItem";
+            this.jitteredSamplerToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
+            this.jitteredSamplerToolStripMenuItem.Tag = "Jittered";
+            this.jitteredSamplerToolStripMenuItem.Text = "Jittered Sampler";
+            this.jitteredSamplerToolStripMenuItem.Click += new System.EventHandler(this.jitteredSamplerToolStripMenuItem_Click);
+            // 
+            // greyscaleEdgeDetectionSamplerToolStripMenuItem
+            // 
+            this.greyscaleEdgeDetectionSamplerToolStripMenuItem.Name = "greyscaleEdgeDetectionSamplerToolStripMenuItem";
+            this.greyscaleEdgeDetectionSamplerToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
+            this.greyscaleEdgeDetectionSamplerToolStripMenuItem.Tag = "GreyscaleEdgeDetection";
+            this.greyscaleEdgeDetectionSamplerToolStripMenuItem.Text = "Greyscale Edge Detection Sampler";
+            this.greyscaleEdgeDetectionSamplerToolStripMenuItem.Click += new System.EventHandler(this.jitteredSamplerToolStripMenuItem_Click);
+            // 
+            // componentEdgeDetectionSamplerToolStripMenuItem
+            // 
+            this.componentEdgeDetectionSamplerToolStripMenuItem.Name = "componentEdgeDetectionSamplerToolStripMenuItem";
+            this.componentEdgeDetectionSamplerToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
+            this.componentEdgeDetectionSamplerToolStripMenuItem.Tag = "ComponentEdgeDetection";
+            this.componentEdgeDetectionSamplerToolStripMenuItem.Text = "Component Edge Detection Sampler";
+            this.componentEdgeDetectionSamplerToolStripMenuItem.Click += new System.EventHandler(this.jitteredSamplerToolStripMenuItem_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -607,6 +638,9 @@
         private System.Windows.Forms.ToolStripMenuItem progressiveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem highQualityToolStripMenuItem;
         private System.Windows.Forms.Label pixelPosition;
+        private System.Windows.Forms.ToolStripMenuItem jitteredSamplerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem greyscaleEdgeDetectionSamplerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem componentEdgeDetectionSamplerToolStripMenuItem;
     }
 }
 

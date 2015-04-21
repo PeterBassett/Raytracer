@@ -40,7 +40,7 @@ namespace Raytracer.Rendering.PixelSamplers
             }
         }
 
-        private float SobelOperator(IRenderer renderer, int x, int y)
+        protected virtual float SobelOperator(IRenderer renderer, int x, int y)
         {
             var p1 = GetPixel(renderer, x - 1,  y - 1).Brightness;
             var p2 = GetPixel(renderer, x,      y - 1).Brightness;
@@ -52,11 +52,16 @@ namespace Raytracer.Rendering.PixelSamplers
             var p8 = GetPixel(renderer, x,      y + 1).Brightness;
             var p9 = GetPixel(renderer, x + 1,  y + 1).Brightness;
 
+            return SobolOperator(p1, p2, p3, p4, p6, p7, p8, p9);
+        }
+
+        protected virtual float SobolOperator(float p1, float p2, float p3, float p4, float p6, float p7, float p8, float p9)
+        {
             return Math.Abs((p1 + 2 * p2 + p3) - (p7 + 2 * p8 + p9))
                  + Math.Abs((p3 + 2 * p6 + p9) - (p1 + 2 * p4 + p7));
         }
 
-        private Colour GetPixel(IRenderer renderer, int x, int y)
+        protected Colour GetPixel(IRenderer renderer, int x, int y)
         {
             ClampCoordinatesInBounds(ref x, ref y);
 

@@ -174,8 +174,21 @@ namespace Raytracer
             }
             else
             {
-                if (GetAnitaliasingLevel() > 1)
-                    pixelSampler = new EdgeDetectionSampler(GetAnitaliasingLevel(), GetRenderAntialiasingSamples(), bmp.Size);
+                switch (GetSampler())
+                {
+                    case "Jittered":
+                        pixelSampler = new JitteredPixelSampler(GetAnitaliasingLevel());
+                        break;
+                    case "GreyscaleEdgeDetection":
+                        pixelSampler = new EdgeDetectionSampler(GetAnitaliasingLevel(), GetRenderAntialiasingSamples(), bmp.Size);
+                        break;
+                    case "ComponentEdgeDetection":
+                        pixelSampler = new EdgeDetectionPerComponentSampler(GetAnitaliasingLevel(), GetRenderAntialiasingSamples(), bmp.Size);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException("Sampler");
+                }
+
                 renderingStrategy = new BasicRenderingStrategy(pixelSampler, blnMultiThreaded, token);
             }
 
@@ -402,6 +415,23 @@ namespace Raytracer
         void coordinateDisplay_OnRenderRequested(int x, int y)
         {
             RenderPixel(x, renderedImage.Height - y);
+        }
+
+        private void jitteredSamplerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var menu = (ToolStripMenuItem)sender;
+
+            foreach (ToolStripMenuItem item in menu.GetCurrentParent().Items.Cast<ToolStripMenuItem>())
+                item.Checked = false;
+
+            menu.Checked = true;
+        }
+
+        private string GetSampler()
+        {
+            return (from item in jitteredSamplerToolStripMenuItem.GetCurrentParent().Items.Cast<ToolStripMenuItem>()
+                    where item.Checked
+                    select item.Tag.ToString()).First();
         }
     }
 }

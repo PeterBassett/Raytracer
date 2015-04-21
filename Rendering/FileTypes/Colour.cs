@@ -191,5 +191,23 @@ namespace Raytracer.Rendering.FileTypes
                                                  (int)(255.0 * this.Green),
                                                  (int)(255.0 * this.Blue));
         }
+        
+        public float this[int index]
+	    {
+		    get 
+            {
+                switch (index)
+                {
+                    case 0:
+                        return m_Red;
+                    case 1:
+                        return m_Green;
+                    case 2:
+                        return m_Blue;
+                    default:
+                        throw new ArgumentOutOfRangeException("index");
+                }
+            }
+	    }
     }
 }

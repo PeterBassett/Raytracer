@@ -3,7 +3,6 @@ using Raytracer.MathTypes;
 
 namespace Raytracer.Rendering
 {
-    
     class Light
     {
         public Light()
