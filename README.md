@@ -50,8 +50,10 @@ Examples
 * Mesh instances
 ![Flawed refraction](/OutputImages/Lamps.bmp?raw=true "Mesh instances")
 * Texture mapped triangles
-![Flawed refraction](/OutputImages/LegoCar.bmp?raw=true "Texture mapping on triangles")
+![Texture mapped triangles](/OutputImages/LegoCar.bmp?raw=true "Texture mapping on triangles")
 * Texture mapped sphere
 ![Flawed refraction](/OutputImages/Earth.bmp?raw=true "Texture mapping on sphere")
 * Perlin noise mixing base materials, red, yellow and texture.
 ![Flawed refraction](/OutputImages/BurningEarth.bmp?raw=true "Perlin noise mixing base materials")
+* Mesh self shadowing.
+![Flawed refraction](/OutputImages/LegoCarSelfShadowed.bmp?raw=true "Mesh self shadowing.")
