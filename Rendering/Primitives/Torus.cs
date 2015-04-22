@@ -21,7 +21,7 @@ namespace Raytracer.Rendering.Primitives
             Ray r = CreateTransformedRay(ray);
 
             double R = InnerRadius;    // distance from center of hole to center of tube
-            double S= OuterRadius;    // distance from center of tube to outside of tube
+            double S = OuterRadius;    // distance from center of tube to outside of tube
 
             var direction = r.Dir;
             var vantage = r.Pos;
@@ -93,7 +93,7 @@ namespace Raytracer.Rendering.Primitives
             ray.Dir.RotateX(-this.Ori.X, ref dir);
             dir.RotateY(-this.Ori.Y, ref dir);
             dir.RotateZ(-this.Ori.Z, ref dir);
-            //dir.Normalize();
+            dir.Normalize();
 
             return new Ray(ray.Pos + -this.Pos, dir);
         }

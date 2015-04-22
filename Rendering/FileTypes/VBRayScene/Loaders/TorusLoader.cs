@@ -27,6 +27,12 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 	        pos.Z = float.Parse(oText.GetToken(file));
             obj.Pos = pos;
 
+            Vector3 ori = new Vector3();
+            ori.X = float.Parse(oText.GetToken(file));
+            ori.Y = float.Parse(oText.GetToken(file));
+            ori.Z = float.Parse(oText.GetToken(file));
+            obj.Ori = ori;
+
             string strMaterial = oText.GetToken(file);
             
 	        var mat = scene.FindMaterial(strMaterial);

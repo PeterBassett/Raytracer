@@ -42,6 +42,9 @@
             this.mnuRenderingMode = new System.Windows.Forms.ToolStripMenuItem();
             this.progressiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.highQualityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.jitteredSamplerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.greyscaleEdgeDetectionSamplerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.componentEdgeDetectionSamplerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSuperSampling = new System.Windows.Forms.ToolStripMenuItem();
             this.xToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,9 +82,6 @@
             this.btnRender = new System.Windows.Forms.Button();
             this.dlgSaveRay = new System.Windows.Forms.SaveFileDialog();
             this.pixelPosition = new System.Windows.Forms.Label();
-            this.jitteredSamplerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.greyscaleEdgeDetectionSamplerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.componentEdgeDetectionSamplerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.renderedImage)).BeginInit();
             this.mainMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -221,6 +221,32 @@
             this.highQualityToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.highQualityToolStripMenuItem.Text = "High Quality";
             this.highQualityToolStripMenuItem.Click += new System.EventHandler(this.progressiveToolStripMenuItem_Click);
+            // 
+            // jitteredSamplerToolStripMenuItem
+            // 
+            this.jitteredSamplerToolStripMenuItem.Name = "jitteredSamplerToolStripMenuItem";
+            this.jitteredSamplerToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
+            this.jitteredSamplerToolStripMenuItem.Tag = "Jittered";
+            this.jitteredSamplerToolStripMenuItem.Text = "Jittered Sampler";
+            this.jitteredSamplerToolStripMenuItem.Click += new System.EventHandler(this.jitteredSamplerToolStripMenuItem_Click);
+            // 
+            // greyscaleEdgeDetectionSamplerToolStripMenuItem
+            // 
+            this.greyscaleEdgeDetectionSamplerToolStripMenuItem.Checked = true;
+            this.greyscaleEdgeDetectionSamplerToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.greyscaleEdgeDetectionSamplerToolStripMenuItem.Name = "greyscaleEdgeDetectionSamplerToolStripMenuItem";
+            this.greyscaleEdgeDetectionSamplerToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
+            this.greyscaleEdgeDetectionSamplerToolStripMenuItem.Tag = "GreyscaleEdgeDetection";
+            this.greyscaleEdgeDetectionSamplerToolStripMenuItem.Text = "Greyscale Edge Detection Sampler";
+            this.greyscaleEdgeDetectionSamplerToolStripMenuItem.Click += new System.EventHandler(this.jitteredSamplerToolStripMenuItem_Click);
+            // 
+            // componentEdgeDetectionSamplerToolStripMenuItem
+            // 
+            this.componentEdgeDetectionSamplerToolStripMenuItem.Name = "componentEdgeDetectionSamplerToolStripMenuItem";
+            this.componentEdgeDetectionSamplerToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
+            this.componentEdgeDetectionSamplerToolStripMenuItem.Tag = "ComponentEdgeDetection";
+            this.componentEdgeDetectionSamplerToolStripMenuItem.Text = "Component Edge Detection Sampler";
+            this.componentEdgeDetectionSamplerToolStripMenuItem.Click += new System.EventHandler(this.jitteredSamplerToolStripMenuItem_Click);
             // 
             // mnuSuperSampling
             // 
@@ -533,30 +559,6 @@
             this.pixelPosition.TabIndex = 5;
             this.pixelPosition.Text = "X:Y";
             this.pixelPosition.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // jitteredSamplerToolStripMenuItem
-            // 
-            this.jitteredSamplerToolStripMenuItem.Name = "jitteredSamplerToolStripMenuItem";
-            this.jitteredSamplerToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
-            this.jitteredSamplerToolStripMenuItem.Tag = "Jittered";
-            this.jitteredSamplerToolStripMenuItem.Text = "Jittered Sampler";
-            this.jitteredSamplerToolStripMenuItem.Click += new System.EventHandler(this.jitteredSamplerToolStripMenuItem_Click);
-            // 
-            // greyscaleEdgeDetectionSamplerToolStripMenuItem
-            // 
-            this.greyscaleEdgeDetectionSamplerToolStripMenuItem.Name = "greyscaleEdgeDetectionSamplerToolStripMenuItem";
-            this.greyscaleEdgeDetectionSamplerToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
-            this.greyscaleEdgeDetectionSamplerToolStripMenuItem.Tag = "GreyscaleEdgeDetection";
-            this.greyscaleEdgeDetectionSamplerToolStripMenuItem.Text = "Greyscale Edge Detection Sampler";
-            this.greyscaleEdgeDetectionSamplerToolStripMenuItem.Click += new System.EventHandler(this.jitteredSamplerToolStripMenuItem_Click);
-            // 
-            // componentEdgeDetectionSamplerToolStripMenuItem
-            // 
-            this.componentEdgeDetectionSamplerToolStripMenuItem.Name = "componentEdgeDetectionSamplerToolStripMenuItem";
-            this.componentEdgeDetectionSamplerToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
-            this.componentEdgeDetectionSamplerToolStripMenuItem.Tag = "ComponentEdgeDetection";
-            this.componentEdgeDetectionSamplerToolStripMenuItem.Text = "Component Edge Detection Sampler";
-            this.componentEdgeDetectionSamplerToolStripMenuItem.Click += new System.EventHandler(this.jitteredSamplerToolStripMenuItem_Click);
             // 
             // Main
             // 
