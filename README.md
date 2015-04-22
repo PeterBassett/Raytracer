@@ -9,6 +9,11 @@ Primitives
 * Triangles
 * Planes
 * Meshes loaded from wavefront obj files. Supports mtl files.
+* Tori (Toruses, Donuts....Mmm Donuts!)
+
+Effects
+* Reflections
+* Refractions
 
 Various Materials
 * Plain RGB materials defined with Ambient, Diffuse etc etc etc.
@@ -26,7 +31,8 @@ Antialiasing
 * Multiple antialiasing algorithms possible. Currently implemented are :  
 * Non anti aliased 
 * NxN jittered samples per pixel 
-* Edge Detection jittered are implemented.
+* Greyscale Edge Detection Jittered Resampling.
+* Per Component (RGB) Edge Detection Jittered Resampling.
 
 Accelleration Structures
 * Octree
@@ -57,3 +63,5 @@ Examples
 ![Flawed refraction](/OutputImages/BurningEarth.bmp?raw=true "Perlin noise mixing base materials")
 * Mesh self shadowing.
 ![Flawed refraction](/OutputImages/LegoCarSelfShadowed.bmp?raw=true "Mesh self shadowing.")
+* Torus.
+![Mmm.Donuts](/OutputImages/Torus.jpeg?raw=true "Torus Primitive.")
