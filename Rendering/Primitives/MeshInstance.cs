@@ -24,7 +24,7 @@ namespace Raytracer.Rendering.Primitives
 
         private Ray CreateTransformedRay(Ray ray)
         {
-            var dir = (Vector3)(ray.Pos + -this.Pos);
+            var dir = (Vector)(ray.Pos + -this.Pos);
 
             ray.Dir.RotateX(-this.Ori.X, ref dir);
             dir.RotateY(-this.Ori.Y, ref dir);
@@ -55,7 +55,7 @@ namespace Raytracer.Rendering.Primitives
             return bounds;
         }
 
-        public override bool Contains(Point3 point)
+        public override bool Contains(Point point)
         {
             return false;
         }

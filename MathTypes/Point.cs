@@ -4,105 +4,105 @@ using System.Runtime.InteropServices;
 namespace Raytracer.MathTypes
 {
 	[StructLayout(LayoutKind.Sequential)]
-    public struct Point3
+    public struct Point
 	{
         public double X;
         public double Y;
         public double Z;
 
-        public Point3(Point3 point) : this(point.X, point.Y, point.Z) 
+        public Point(Point point) : this(point.X, point.Y, point.Z) 
         {
         }
 		
-		public Point3(double x, double y, double z)
+		public Point(double x, double y, double z)
 		{
 			X = x;
 			Y = y;
 			Z = z;
 		}
 
-        private static Point3 _Zero = new Point3();
-        public static Point3 Zero { get { return _Zero; } }
+        private static Point _Zero = new Point();
+        public static Point Zero { get { return _Zero; } }
 		
-        public static double Distance(Point3 p1, Point3 p2)
+        public static double Distance(Point p1, Point p2)
 		{
 			return (p1 - p2).GetLength();
 		}
 
-		public static double DistanceSquared(Point3 p1, Point3 p2)
+		public static double DistanceSquared(Point p1, Point p2)
 		{
 			return (p1 - p2).GetLengthSquared();
 		}
 
-        public static Point3 operator +(Point3 value1, Point3 value2)
+        public static Point operator +(Point value1, Point value2)
 		{
-			Point3 vector;
+			Point vector;
 			vector.X = value1.X + value2.X;
 			vector.Y = value1.Y + value2.Y;
 			vector.Z = value1.Z + value2.Z;
 			return vector;
 		}
 
-		public static Point3 operator+(Point3 point, Vector3 vector)
+		public static Point operator+(Point point, Vector vector)
 		{
-			return new Point3(point.X + vector.X, point.Y + vector.Y, point.Z + vector.Z);
+			return new Point(point.X + vector.X, point.Y + vector.Y, point.Z + vector.Z);
 		}
 
-        public static Point3 operator +(Point3 point, Normal3 normal)
+        public static Point operator +(Point point, Normal normal)
         {
-            return new Point3(point.X + normal.X, point.Y + normal.Y, point.Z + normal.Z);
+            return new Point(point.X + normal.X, point.Y + normal.Y, point.Z + normal.Z);
         }
 
-        public static Point3 operator +(Point3 point, double offset)
+        public static Point operator +(Point point, double offset)
         {
-            return new Point3(point.X + offset, point.Y + offset, point.Z + offset);
+            return new Point(point.X + offset, point.Y + offset, point.Z + offset);
         }
 
-		public static Vector3 operator -(Point3 point1, Point3 point2)
+		public static Vector operator -(Point point1, Point point2)
 		{
-			return new Vector3(point1.X - point2.X, point1.Y - point2.Y, point1.Z - point2.Z);
+			return new Vector(point1.X - point2.X, point1.Y - point2.Y, point1.Z - point2.Z);
 		}
 
-		public static Point3 operator -(Point3 point, Vector3 vector)
+		public static Point operator -(Point point, Vector vector)
 		{
-			return new Point3(point.X - vector.X, point.Y - vector.Y, point.Z - vector.Z);
+			return new Point(point.X - vector.X, point.Y - vector.Y, point.Z - vector.Z);
 		}
 
-        public static Point3 operator -(Point3 point, double offset)
+        public static Point operator -(Point point, double offset)
         {
-            return new Point3(point.X - offset, point.Y - offset, point.Z - offset);
+            return new Point(point.X - offset, point.Y - offset, point.Z - offset);
         }
 
-		public static Point3 operator *(Point3 value, double scaleFactor)
+		public static Point operator *(Point value, double scaleFactor)
 		{
-			Point3 vector;
+			Point vector;
 			vector.X = value.X * scaleFactor;
 			vector.Y = value.Y * scaleFactor;
 			vector.Z = value.Z * scaleFactor;
 			return vector;
 		}
 
-		public static Point3 operator *(Point3 value, Vector3 scaleFactors)
+		public static Point operator *(Point value, Vector scaleFactors)
 		{
-			Point3 vector;
+			Point vector;
 			vector.X = value.X * scaleFactors.X;
 			vector.Y = value.Y * scaleFactors.Y;
 			vector.Z = value.Z * scaleFactors.Z;
 			return vector;
 		}
 
-		public static Point3 operator *(double scaleFactor, Point3 value)
+		public static Point operator *(double scaleFactor, Point value)
 		{
-			Point3 vector;
+			Point vector;
 			vector.X = value.X * scaleFactor;
 			vector.Y = value.Y * scaleFactor;
 			vector.Z = value.Z * scaleFactor;
 			return vector;
 		}
 
-		public static Point3 operator /(Point3 value, double divider)
+		public static Point operator /(Point value, double divider)
 		{
-			Point3 vector;
+			Point vector;
 			var num = 1.0 / divider;
 			vector.X = value.X * num;
 			vector.Y = value.Y * num;
@@ -110,17 +110,17 @@ namespace Raytracer.MathTypes
 			return vector;
 		}
 
-        public static Point3 operator -(Point3 v)
+        public static Point operator -(Point v)
         {
-            return new Point3(-v.X, -v.Y, -v.Z);
+            return new Point(-v.X, -v.Y, -v.Z);
         }
 		
-        public static bool ApproxEqual(Point3 v, Point3 u)
+        public static bool ApproxEqual(Point v, Point u)
 		{
 			return ApproxEqual(v,u, MathLib.Epsilon);
 		}
 
-		public static bool ApproxEqual(Point3 v, Point3 u, double tolerance)
+		public static bool ApproxEqual(Point v, Point u, double tolerance)
 		{
 			return
 				(
@@ -130,7 +130,7 @@ namespace Raytracer.MathTypes
 				);
 		}
 
-        public void RotateX(double amnt, ref Point3 dest)
+        public void RotateX(double amnt, ref Point dest)
         {
             double s = MathLib.mLibSin(amnt);
             double c = MathLib.mLibCos(amnt);
@@ -142,7 +142,7 @@ namespace Raytracer.MathTypes
             dest.Z = (y * s) + (z * c);
         }
 
-        public void RotateY(double amnt, ref Point3 dest)
+        public void RotateY(double amnt, ref Point dest)
         {
             double s = MathLib.mLibSin(amnt);
             double c = MathLib.mLibCos(amnt);
@@ -154,7 +154,7 @@ namespace Raytracer.MathTypes
             dest.Z = (z * c) - (x * s);
         }
 
-        public void RotateZ(double amnt, ref Point3 dest)
+        public void RotateZ(double amnt, ref Point dest)
         {
             double s = MathLib.mLibSin(amnt);
             double c = MathLib.mLibCos(amnt);
@@ -166,7 +166,7 @@ namespace Raytracer.MathTypes
             dest.Z = this.Z;
         }
 
-		public Point3 Normalize(Point3 n)
+		public Point Normalize(Point n)
 		{
 			double length = n.Length;
 
@@ -199,9 +199,9 @@ namespace Raytracer.MathTypes
 
         public override bool Equals(object obj)
 		{
-			if (obj is Point3)
+			if (obj is Point)
 			{
-				Point3 v = (Point3)obj;
+				Point v = (Point)obj;
 				return (X == v.X) && (Y == v.Y) && (Z == v.Z);
 			}
 			return false;
@@ -212,7 +212,7 @@ namespace Raytracer.MathTypes
             return string.Format("({0}, {1}, {2})", X, Y, Z);
         }
 		
-		public static bool operator==(Point3 u, Point3 v)
+		public static bool operator==(Point u, Point v)
 		{
 			if (Object.Equals(u, null))
 			{
@@ -227,7 +227,7 @@ namespace Raytracer.MathTypes
 			return (u.X == v.X) && (u.Y == v.Y) && (u.Z == v.Z);
 		}
         
-        public static bool operator!=(Point3 u, Point3 v)
+        public static bool operator!=(Point u, Point v)
 		{
 			return !(u == v);
 		}
@@ -268,14 +268,14 @@ namespace Raytracer.MathTypes
 
 		}
 
-        public static explicit operator Point3(Vector3 vector)
+        public static explicit operator Point(Vector vector)
 		{
-			return new Point3(vector.X, vector.Y, vector.Z);
+			return new Point(vector.X, vector.Y, vector.Z);
 		}
 
-		public static explicit operator Vector3(Point3 normal)
+		public static explicit operator Vector(Point normal)
 		{
-			return new Vector3(normal.X, normal.Y, normal.Z);
+			return new Vector(normal.X, normal.Y, normal.Z);
 		}        
     }
 }

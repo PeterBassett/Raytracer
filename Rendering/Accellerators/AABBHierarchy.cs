@@ -42,7 +42,7 @@ namespace Raytracer.Rendering.Accellerators
                     return;
                 }
 
-                var midpt = new Point3();
+                var midpt = new Point();
 
                 var trisRecp = 1.0 / primitives.Count();
 
@@ -126,7 +126,7 @@ namespace Raytracer.Rendering.Accellerators
                 return traceableObjects;                 
             }
 
-            internal IEnumerable<Traceable> Intersect(Point3 point)
+            internal IEnumerable<Traceable> Intersect(Point point)
             {
                 if (!_bounds.Contains(point))
                     return Enumerable.Empty<Traceable>();
@@ -153,7 +153,7 @@ namespace Raytracer.Rendering.Accellerators
             return _root.Intersect(ray);
         }
 
-        public IEnumerable<Traceable> Intersect(Point3 point)
+        public IEnumerable<Traceable> Intersect(Point point)
         {
             return _root.Intersect(point);
         }

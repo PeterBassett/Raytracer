@@ -16,13 +16,13 @@ namespace Raytracer.Rendering.Materials
         {
             Material.CloneElements(output, material);
 
-            var uv = InterpolateTextureUV(info.ObjectLocalHitPoint, triangle.Vertex, triangle.Texture);
+            var uv = InterpolateTextureUV(info.ObjectLocalHitPoint, triangle.Vertices, triangle.TextureUVs);
 
             output.Diffuse = material.Sample(uv.X, uv.Y);
             output.Ambient = output.Diffuse;
         }
         
-        public Vector2 InterpolateTextureUV(Point3 pointOfIntersection, Point3[] vertexes, Vector2[] textureUVs)
+        public Vector2 InterpolateTextureUV(Point pointOfIntersection, Point[] vertexes, Vector2[] textureUVs)
         {
             var a = Barycentric.CalculateBarycentricInterpolationVector(pointOfIntersection, vertexes);
 
@@ -52,13 +52,13 @@ namespace Raytracer.Rendering.Materials
 
         public void Solidify(Plane plane, MaterialTexture material, IntersectionInfo info, Material output)
         {
-            var uAxis = new Vector3(plane.Normal.Y, plane.Normal.Z, -plane.Normal.X);
-            var vAxis = Vector3.CrossProduct(uAxis, plane.Normal);
+            var uAxis = new Vector(plane.Normal.Y, plane.Normal.Z, -plane.Normal.X);
+            var vAxis = Vector.CrossProduct(uAxis, plane.Normal);
 
             Material.CloneElements(output, material);
 
-            var u = Vector3.DotProduct(info.HitPoint, uAxis) * material.UScale;
-            var v = Vector3.DotProduct(info.HitPoint, vAxis) * material.VScale;
+            var u = Vector.DotProduct(info.HitPoint, uAxis) * material.UScale;
+            var v = Vector.DotProduct(info.HitPoint, vAxis) * material.VScale;
 
             if (u < 0)
                 u = 1.0 - u;

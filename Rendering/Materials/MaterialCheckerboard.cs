@@ -7,7 +7,7 @@ namespace Raytracer.Rendering.Materials
     {        
         public MaterialCheckerboard ()
 	    {
-            Size = new Vector3(1.0f, 1.0f, 1.0f);
+            Size = new Vector(1.0f, 1.0f, 1.0f);
         	SubMaterial1 = null;
 	        SubMaterial2 = null;
 	    }

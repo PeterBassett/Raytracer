@@ -55,8 +55,8 @@ namespace Raytracer.Rendering.Accellerators
             
             internal AABB GetAABBSubQuadrant(AABB parent, bool Up, bool Left, bool Forward)
             {
-                var min = new Point3();
-                var max = new Point3();
+                var min = new Point();
+                var max = new Point();
 
                 if (Up)
                     min.X = parent.Min.X;
@@ -155,7 +155,7 @@ namespace Raytracer.Rendering.Accellerators
                 return new List<Traceable>();
             }
 
-            internal IEnumerable<Traceable> Intersect(Point3 point)
+            internal IEnumerable<Traceable> Intersect(Point point)
             {
                 if (!this.Bounds.Contains(point))
                     return new List<Traceable>();
@@ -239,7 +239,7 @@ namespace Raytracer.Rendering.Accellerators
             return _root.Intersect(ray);
         }
 
-        public IEnumerable<Traceable> Intersect(Point3 point)
+        public IEnumerable<Traceable> Intersect(Point point)
         {
             return _root.Intersect(point);
         }

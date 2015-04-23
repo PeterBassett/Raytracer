@@ -19,14 +19,14 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
             
             Plane plane = new Plane();
 
-            var vec = new Point3();
+            var vec = new Point();
 	        vec.X = float.Parse(oText.GetToken(file));
 	        vec.Y = float.Parse(oText.GetToken(file));
 	        vec.Z = float.Parse(oText.GetToken(file));
             plane.Pos = vec;
             plane.D = vec.Length;
 
-            var normal = new Normal3();
+            var normal = new Normal();
             normal.X = float.Parse(oText.GetToken(file));
             normal.Y = float.Parse(oText.GetToken(file));
             normal.Z = float.Parse(oText.GetToken(file));

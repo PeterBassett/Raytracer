@@ -26,9 +26,9 @@ namespace Raytracer.Rendering.FileTypes.ObjFile
         
         public void LoadFile(string strObjfile, List<Triangle> triangles, List<Material> materials)
         {
-            var verticies = new List<Point3>();
+            var verticies = new List<Point>();
             var textureCoordinates = new List<Vector2>();
-            var vertexNormals = new List<Normal3>();
+            var vertexNormals = new List<Normal>();
             Material currentMaterial = null;
             //var sr = new BufferedStreamReader(strObjfile);
 
@@ -53,13 +53,13 @@ namespace Raytracer.Rendering.FileTypes.ObjFile
                             currentMaterial = FindMaterial(ParseCache[1]);
                             break;
                         case "v":
-                            verticies.Add(new Point3(float.Parse(ParseCache[1]), float.Parse(ParseCache[2]), float.Parse(ParseCache[3])));
+                            verticies.Add(new Point(float.Parse(ParseCache[1]), float.Parse(ParseCache[2]), float.Parse(ParseCache[3])));
                             break;
                         case "vt":
                             textureCoordinates.Add(new Vector2(float.Parse(ParseCache[1]), float.Parse(ParseCache[2])));
                             break;
                         case "vn":
-                            vertexNormals.Add(new Normal3(float.Parse(ParseCache[1]), float.Parse(ParseCache[2]), float.Parse(ParseCache[3])));
+                            vertexNormals.Add(new Normal(float.Parse(ParseCache[1]), float.Parse(ParseCache[2]), float.Parse(ParseCache[3])));
                             break;
                         case "f":
                             {
@@ -147,7 +147,7 @@ namespace Raytracer.Rendering.FileTypes.ObjFile
                 return null;
         }
                 
-        private void CreateTriangles(int itemsInParseCache, List<Point3> verticies, List<Triangle> triangles, Material currentMaterial, List<Vector2> textureCoordinates, List<Normal3> vertexNormals)
+        private void CreateTriangles(int itemsInParseCache, List<Point> verticies, List<Triangle> triangles, Material currentMaterial, List<Vector2> textureCoordinates, List<Normal> vertexNormals)
         {
             if (VertexIndexCacheLength <= itemsInParseCache)
             {
@@ -174,58 +174,58 @@ namespace Raytracer.Rendering.FileTypes.ObjFile
                 index++;
             }
 
-            Point3 v1, v2, v3;
+            Point v1, v2, v3;
             Vector2 t1 = Vector2.Zero, t2 = Vector2.Zero, t3 = Vector2.Zero;
-            Normal3 n1 = Normal3.Invalid, n2 = Normal3.Invalid, n3 = Normal3.Invalid;
+            Normal n1 = Normal.Invalid, n2 = Normal.Invalid, n3 = Normal.Invalid;
 
-            const int Vertex = 0;
-            const int Texture = 1;
-            const int Normal = 2;
+            const int Vertices = 0;
+            const int Textures = 1;
+            const int Normals = 2;
 
-            v1 = verticies[VertexIndexCache[0, Vertex]];
+            v1 = verticies[VertexIndexCache[0, Vertices]];
 
-            if (VertexIndexCache[0, Texture] != -1)
-                t1 = textureCoordinates[VertexIndexCache[0, Texture]];
+            if (VertexIndexCache[0, Textures] != -1)
+                t1 = textureCoordinates[VertexIndexCache[0, Textures]];
 
-            if (VertexIndexCache[0, Normal] != -1)
-                n1 = vertexNormals[VertexIndexCache[0, Normal]];
+            if (VertexIndexCache[0, Normals] != -1)
+                n1 = vertexNormals[VertexIndexCache[0, Normals]];
 
             for (int i = 0; i < index - 2; ++i)
             {
-                v2 = verticies[VertexIndexCache[i + 1, Vertex]];
-                v3 = verticies[VertexIndexCache[i + 2, Vertex]];
+                v2 = verticies[VertexIndexCache[i + 1, Vertices]];
+                v3 = verticies[VertexIndexCache[i + 2, Vertices]];
 
                 if (v1 == v2 || v1 == v3 || v2 == v3)
                     continue;
 
                 Triangle tri = new Triangle();
-                tri.Vertex[0] = v1;
-                tri.Vertex[1] = v2;
-                tri.Vertex[2] = v3;
+                tri.Vertices[0] = v1;
+                tri.Vertices[1] = v2;
+                tri.Vertices[2] = v3;
 
-                if (VertexIndexCache[i + 1, Texture] != -1 && VertexIndexCache[i + 2, Texture] != -1)
+                if (VertexIndexCache[i + 1, Textures] != -1 && VertexIndexCache[i + 2, Textures] != -1)
                 {
-                    t2 = textureCoordinates[VertexIndexCache[i + 1, Texture]];
-                    t3 = textureCoordinates[VertexIndexCache[i + 2, Texture]];
+                    t2 = textureCoordinates[VertexIndexCache[i + 1, Textures]];
+                    t3 = textureCoordinates[VertexIndexCache[i + 2, Textures]];
 
-                    tri.Texture[0] = t1;
-                    tri.Texture[1] = t2;
-                    tri.Texture[2] = t3;
+                    tri.TextureUVs[0] = t1;
+                    tri.TextureUVs[1] = t2;
+                    tri.TextureUVs[2] = t3;
                 }
                 else
-                    tri.Texture = null;
+                    tri.TextureUVs = null;
 
-                if (VertexIndexCache[i + 1, Normal] != -1 && VertexIndexCache[i + 2, Normal] != -1)
+                if (VertexIndexCache[i + 1, Normals] != -1 && VertexIndexCache[i + 2, Normals] != -1)
                 {
-                    n2 = vertexNormals[VertexIndexCache[i + 1, Normal]];
-                    n3 = vertexNormals[VertexIndexCache[i + 2, Normal]];
+                    n2 = vertexNormals[VertexIndexCache[i + 1, Normals]];
+                    n3 = vertexNormals[VertexIndexCache[i + 2, Normals]];
 
-                    tri.Normal[0] = n1;
-                    tri.Normal[1] = n2;
-                    tri.Normal[2] = n3;
+                    tri.Normals[0] = n1;
+                    tri.Normals[1] = n2;
+                    tri.Normals[2] = n3;
                 }
                 else
-                    tri.Normal = null;
+                    tri.Normals = null;
 
                 tri.Pos = (v1 + v2 + v3) / 3.0;
 

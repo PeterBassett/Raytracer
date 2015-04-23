@@ -65,7 +65,7 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
             for (i = 0; i < mat.Octaves; i++)
                 mat.Max += (float)Math.Pow(mat.Persistence, i);
 
-            Vector3 size = new Vector3();
+            Vector size = new Vector();
             size.X = float.Parse(oText.GetToken(file));
             size.Y = float.Parse(oText.GetToken(file));
             size.Z = float.Parse(oText.GetToken(file));

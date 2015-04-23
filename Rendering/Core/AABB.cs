@@ -6,19 +6,19 @@ namespace Raytracer.Rendering.Core
 {       
     struct AABB
     {
-        public Point3 Min;
-        public Point3 Max;        
+        public Point Min;
+        public Point Max;        
         public static readonly AABB Empty = new AABB(true);
         private readonly bool _isEmpty;
 
         private AABB(bool isEmpty)
         {
-            Min = new Point3();
-            Max = new Point3();
+            Min = new Point();
+            Max = new Point();
             _isEmpty = isEmpty;
         }
 
-        public AABB(Point3 min, Point3 max)
+        public AABB(Point min, Point max)
         {
             _isEmpty = false;
             double temp;
@@ -71,11 +71,11 @@ namespace Raytracer.Rendering.Core
             }
         }
 
-        public Point3 Center
+        public Point Center
         {
             get
             {
-                return new Point3
+                return new Point
                 {
                     X = Min.X + ((Max.X - Min.X) / 2),
                     Y = Min.Y + ((Max.Y - Min.Y) / 2),
@@ -84,11 +84,11 @@ namespace Raytracer.Rendering.Core
             }
         }
 
-        public Vector3 HalfSize
+        public Vector HalfSize
         {
             get
             {
-                return new Vector3
+                return new Vector
                 {
                     X = Width / 2.0f,
                     Y = Height / 2.0f,
@@ -99,8 +99,8 @@ namespace Raytracer.Rendering.Core
 
         public AABB InflateToEncapsulate(AABB other)
         {
-            var min = new Point3(Min);
-            var max = new Point3(Max);
+            var min = new Point(Min);
+            var max = new Point(Max);
 
             if (other.Min.X < min.X)
                 min.X = other.Min.X;
@@ -181,7 +181,7 @@ namespace Raytracer.Rendering.Core
                    Math.Abs(T.Z) <=  (Depth + b.Depth)); 
         }
 
-        public bool Contains(Point3 point)
+        public bool Contains(Point point)
         {
             var T = point - Center;
 

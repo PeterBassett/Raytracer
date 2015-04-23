@@ -6,41 +6,41 @@ namespace Raytracer.Rendering.Primitives
 {   
     class Triangle : Traceable
     {
-        public Point3[] Vertex = new Point3[3];
+        public Point[] Vertices = new Point[3];
         private AABB bounds = AABB.Empty;
-        public Vector2[] Texture = new Vector2[3];
-        public Normal3[] Normal = new Normal3[3];
-        private Normal3 _cachedFaceNormal = Normal3.Invalid;
+        public Vector2[] TextureUVs = new Vector2[3];
+        public Normal[] Normals = new Normal[3];
+        private Normal _cachedFaceNormal = Normal.Invalid;
 
-        private bool InternalSide(Point3 p1,
-                                Point3 p2,
-                                Point3 a,
-                                Point3 b)
+        private bool InternalSide(Point p1,
+                                Point p2,
+                                Point a,
+                                Point b)
         {
-            var cp1 = Vector3.CrossProduct(b - a, p1 - a);
+            var cp1 = Vector.CrossProduct(b - a, p1 - a);
 
-            var cp2 = Vector3.CrossProduct(b - a, p2 - a);
+            var cp2 = Vector.CrossProduct(b - a, p2 - a);
 
-            if (Vector3.DotProduct(cp1, cp2) >= 0)
+            if (Vector.DotProduct(cp1, cp2) >= 0)
                 return true;
             else
                 return false;
         }
 
-        private bool PointInTriangle(Point3 p)
+        private bool PointInTriangle(Point p)
         {
             if (InternalSide(p,
-                Vertex[0],
-                Vertex[1],
-                Vertex[2]) &&
+                Vertices[0],
+                Vertices[1],
+                Vertices[2]) &&
             InternalSide(p,
-                Vertex[1],
-                Vertex[0],
-                Vertex[2]) &&
+                Vertices[1],
+                Vertices[0],
+                Vertices[2]) &&
             InternalSide(p,
-                Vertex[2],
-                Vertex[0],
-                Vertex[1]))
+                Vertices[2],
+                Vertices[0],
+                Vertices[1]))
                 return true;
             else
                 return false;
@@ -48,13 +48,13 @@ namespace Raytracer.Rendering.Primitives
 
         public override IntersectionInfo Intersect(Ray ray)
         {                        
-            var v1 = Vertex[2] - ray.Pos;
+            var v1 = Vertices[2] - ray.Pos;
             var v2 = ray.Dir;
 
             var normal = GetNormalFromVertexes();
 
-            var dot1 = Vector3.DotProduct(normal, v1);
-            var dot2 = Vector3.DotProduct(normal, v2);
+            var dot1 = Vector.DotProduct(normal, v1);
+            var dot2 = Vector.DotProduct(normal, v2);
 
             if (Math.Abs(dot2) < 1.0E-6)
                 return new IntersectionInfo(HitResult.MISS); // division by 0 means parallel
@@ -70,38 +70,38 @@ namespace Raytracer.Rendering.Primitives
 
         public override bool Intersect(AABB aabb)
         {
-            return IntersectionCode2.triBoxOverlap(aabb.Center, aabb.HalfSize, Vertex);
+            return IntersectionCode2.triBoxOverlap(aabb.Center, aabb.HalfSize, Vertices);
         }
 
-        public Normal3 GetNormal(Point3 vPoint)
+        public Normal GetNormal(Point vPoint)
         {
-            if(this.Normal != null)
+            if(this.Normals != null)
                 return InterpolateNormal(vPoint);
 
             return GetNormalFromVertexes();
         }
 
-        public Normal3 InterpolateNormal(Point3 pointOfIntersection)
+        public Normal InterpolateNormal(Point pointOfIntersection)
         {
-            var a = Barycentric.CalculateBarycentricInterpolationVector(pointOfIntersection, this.Vertex);
+            var a = Barycentric.CalculateBarycentricInterpolationVector(pointOfIntersection, this.Vertices);
 
             // find the uv corresponding to point f (uv1/uv2/uv3 are associated to p1/p2/p3):
-            var n = this.Normal[0] * a.X +
-                    this.Normal[1] * a.Y +
-                    this.Normal[2] * a.Z;
+            var n = this.Normals[0] * a.X +
+                    this.Normals[1] * a.Y +
+                    this.Normals[2] * a.Z;
 
             return n.Normalize();
         }
         
-        private Normal3 GetNormalFromVertexes()
+        private Normal GetNormalFromVertexes()
         {
-            if (_cachedFaceNormal != Normal3.Invalid)
+            if (_cachedFaceNormal != Normal.Invalid)
                 return _cachedFaceNormal;
          
-            var u = Vertex[2] - Vertex[0];
-            var w = Vertex[1] - Vertex[0];
+            var u = Vertices[2] - Vertices[0];
+            var w = Vertices[1] - Vertices[0];
 
-            var norm = (Normal3)Vector3.CrossProduct(w, u);
+            var norm = (Normal)Vector.CrossProduct(w, u);
 
             if (norm.LengthSquared == 0)
                 return norm;
@@ -116,16 +116,16 @@ namespace Raytracer.Rendering.Primitives
             if (!this.bounds.IsEmpty)
                 return this.bounds;
 
-            var min = new Point3(
-                    Math.Min(Math.Min(Vertex[0].X, Vertex[1].X), Vertex[2].X),
-                    Math.Min(Math.Min(Vertex[0].Y, Vertex[1].Y), Vertex[2].Y ) ,
-                    Math.Min(Math.Min(Vertex[0].Z, Vertex[1].Z), Vertex[2].Z )
+            var min = new Point(
+                    Math.Min(Math.Min(Vertices[0].X, Vertices[1].X), Vertices[2].X),
+                    Math.Min(Math.Min(Vertices[0].Y, Vertices[1].Y), Vertices[2].Y ) ,
+                    Math.Min(Math.Min(Vertices[0].Z, Vertices[1].Z), Vertices[2].Z )
             );
 
-            var max = new Point3(
-                    Math.Max (Math.Max(Vertex[0].X, Vertex[1].X), Vertex[2].X ) ,
-                    Math.Max (Math.Max(Vertex[0].Y, Vertex[1].Y), Vertex[2].Y ) ,
-                    Math.Max (Math.Max(Vertex[0].Z, Vertex[1].Z), Vertex[2].Z )
+            var max = new Point(
+                    Math.Max (Math.Max(Vertices[0].X, Vertices[1].X), Vertices[2].X ) ,
+                    Math.Max (Math.Max(Vertices[0].Y, Vertices[1].Y), Vertices[2].Y ) ,
+                    Math.Max (Math.Max(Vertices[0].Z, Vertices[1].Z), Vertices[2].Z )
             );
 
             this.bounds = new AABB(min, max);
@@ -133,7 +133,7 @@ namespace Raytracer.Rendering.Primitives
             return this.bounds;
         }
 
-        public override bool Contains(Point3 point)
+        public override bool Contains(Point point)
         {
             return false;
         }

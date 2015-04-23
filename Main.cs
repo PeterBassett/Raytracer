@@ -393,7 +393,7 @@ namespace Raytracer
                     select item.Text).First();
         }
 
-        private Point _mouseCoordinatesOverImage;
+        private System.Drawing.Point _mouseCoordinatesOverImage;
         private void renderedImage_MouseMove(object sender, MouseEventArgs e)
         {
             _mouseCoordinatesOverImage = e.Location;

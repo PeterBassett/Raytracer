@@ -23,14 +23,14 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
             var meshName = oText.GetToken(file);
             var meshfile = oText.GetToken(file);
 
-            var scale = new Vector3(1,1,1);
+            var scale = new Vector(1,1,1);
 
             ReadObjMesh(meshName, meshfile, scale, scene);            
         }
 
-        private void ReadObjMesh(string meshName, string meshfile, Vector3 scale, Scene scene)
+        private void ReadObjMesh(string meshName, string meshfile, Vector scale, Scene scene)
         {            
-            var verticies = new List<Vector3>();
+            var verticies = new List<Vector>();
             var triangles = new List<Triangle>();
             var materials = new List<Material>();
             

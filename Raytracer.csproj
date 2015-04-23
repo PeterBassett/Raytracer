@@ -76,8 +76,8 @@
     </Compile>
     <Compile Include="MathTypes\Algebra.cs" />
     <Compile Include="MathTypes\Barycentric.cs" />
-    <Compile Include="MathTypes\Point3D.cs" />
-    <Compile Include="MathTypes\Normal3D.cs" />
+    <Compile Include="MathTypes\Point.cs" />
+    <Compile Include="MathTypes\Normal.cs" />
     <Compile Include="MathTypes\Size.cs" />
     <Compile Include="MathTypes\Vector2D.cs" />
     <Compile Include="PixelCoordinates.cs">

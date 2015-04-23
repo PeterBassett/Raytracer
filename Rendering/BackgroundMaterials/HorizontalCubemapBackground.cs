@@ -17,7 +17,7 @@ namespace Raytracer.Rendering.BackgroundMaterials
                 throw new ArgumentOutOfRangeException("Cubemap file must be horizontally oriented.");
         }
 
-        protected override void GetFaceCoordinates(Vector3 r, Axis imax, out Face face, out double s, out double t)
+        protected override void GetFaceCoordinates(Vector r, Axis imax, out Face face, out double s, out double t)
         {
             face = Face.Front;
             s = 0;

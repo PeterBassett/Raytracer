@@ -4,51 +4,51 @@ using System.Runtime.InteropServices;
 namespace Raytracer.MathTypes
 {
 	[StructLayout(LayoutKind.Sequential)]
-    public struct Normal3
+    public struct Normal
 	{
         public double X;
         public double Y;
         public double Z;
 				
-		public Normal3(double x, double y, double z)
+		public Normal(double x, double y, double z)
 		{
 			X = x;
 			Y = y;
 			Z = z;
 		}
 
-        private static Normal3 _Invalid = new Normal3();
-        public static Normal3 Invalid { get { return _Invalid; } }
+        private static Normal _Invalid = new Normal();
+        public static Normal Invalid { get { return _Invalid; } }
 		
-        public static double DotProduct(Normal3 u, Normal3 v)
+        public static double DotProduct(Normal u, Normal v)
 		{
 			return (u.X * v.X) + (u.Y * v.Y) + (u.Z * v.Z);
 		}
 
-        public static double AbsDotProduct(Normal3 u, Normal3 v)
+        public static double AbsDotProduct(Normal u, Normal v)
 		{
 			return Math.Abs(DotProduct(u, v));
 		}
 		
-        public static Normal3 CrossProduct(Normal3 u, Normal3 v)
+        public static Normal CrossProduct(Normal u, Normal v)
 		{
-			return new Normal3( 
+			return new Normal( 
 				u.Y*v.Z - u.Z*v.Y, 
 				u.Z*v.X - u.X*v.Z, 
 				u.X*v.Y - u.Y*v.X );
 		}
 		
-        public static Normal3 Negate(Normal3 v)
+        public static Normal Negate(Normal v)
 		{
-			return new Normal3(-v.X, -v.Y, -v.Z);
+			return new Normal(-v.X, -v.Y, -v.Z);
 		}
 		
-        public static bool ApproxEqual(Normal3 v, Normal3 u)
+        public static bool ApproxEqual(Normal v, Normal u)
 		{
 			return ApproxEqual(v,u, MathLib.Epsilon);
 		}
 
-		public static bool ApproxEqual(Normal3 v, Normal3 u, double tolerance)
+		public static bool ApproxEqual(Normal v, Normal u, double tolerance)
 		{
 			return
 				(
@@ -58,7 +58,7 @@ namespace Raytracer.MathTypes
 				);
 		}
 
-        public void RotateX(double amnt, ref Normal3 dest)
+        public void RotateX(double amnt, ref Normal dest)
         {
             double s = MathLib.mLibSin(amnt);
             double c = MathLib.mLibCos(amnt);
@@ -70,7 +70,7 @@ namespace Raytracer.MathTypes
             dest.Z = (y * s) + (z * c);
         }
 
-        public void RotateY(double amnt, ref Normal3 dest)
+        public void RotateY(double amnt, ref Normal dest)
         {
             double s = MathLib.mLibSin(amnt);
             double c = MathLib.mLibCos(amnt);
@@ -82,7 +82,7 @@ namespace Raytracer.MathTypes
             dest.Z = (z * c) - (x * s);
         }
 
-        public void RotateZ(double amnt, ref Normal3 dest)
+        public void RotateZ(double amnt, ref Normal dest)
         {
             double s = MathLib.mLibSin(amnt);
             double c = MathLib.mLibCos(amnt);
@@ -94,7 +94,7 @@ namespace Raytracer.MathTypes
             dest.Z = this.Z;
         }
 
-		public Normal3 Normalize()
+		public Normal Normalize()
 		{
 			double length = this.Length;
 
@@ -127,9 +127,9 @@ namespace Raytracer.MathTypes
 
         public override bool Equals(object obj)
 		{
-			if (obj is Normal3)
+			if (obj is Normal)
 			{
-				Normal3 v = (Normal3)obj;
+				Normal v = (Normal)obj;
 				return (X == v.X) && (Y == v.Y) && (Z == v.Z);
 			}
 			return false;
@@ -140,7 +140,7 @@ namespace Raytracer.MathTypes
             return string.Format("({0}, {1}, {2})", X, Y, Z);
         }
 		
-		public static bool operator==(Normal3 u, Normal3 v)
+		public static bool operator==(Normal u, Normal v)
 		{
 			if (Object.Equals(u, null))
 			{
@@ -155,74 +155,74 @@ namespace Raytracer.MathTypes
 			return (u.X == v.X) && (u.Y == v.Y) && (u.Z == v.Z);
 		}
         
-        public static bool operator!=(Normal3 u, Normal3 v)
+        public static bool operator!=(Normal u, Normal v)
 		{
 			return !(u == v);
 		}
 		
-		public static Normal3 operator-(Normal3 v)
+		public static Normal operator-(Normal v)
 		{
-			return new Normal3(-v.X, -v.Y, -v.Z);
+			return new Normal(-v.X, -v.Y, -v.Z);
 		}
 
-		public static Normal3 operator+(Normal3 v, Normal3 w)
+		public static Normal operator+(Normal v, Normal w)
 		{
-            return new Normal3(v.X + w.X, v.Y + w.Y, v.Z + w.Z);
+            return new Normal(v.X + w.X, v.Y + w.Y, v.Z + w.Z);
 		}
 
-		public static Normal3 operator+(Normal3 v, double s)
+		public static Normal operator+(Normal v, double s)
 		{
-			return new Normal3(v.X + s, v.Y + s, v.Z + s);
+			return new Normal(v.X + s, v.Y + s, v.Z + s);
 		}
 		
-        public static Normal3 operator-(Normal3 v, Normal3 w)
+        public static Normal operator-(Normal v, Normal w)
 		{
-            return new Normal3(v.X - w.X, v.Y - w.Y, v.Z - w.Z);
+            return new Normal(v.X - w.X, v.Y - w.Y, v.Z - w.Z);
 		}
 
-        public static Normal3 operator-(Normal3 v, double s)
+        public static Normal operator-(Normal v, double s)
 		{
-			return new Normal3(v.X - s, v.Y - s, v.Z - s);
+			return new Normal(v.X - s, v.Y - s, v.Z - s);
 		}
 
-        public static Normal3 operator-(double s, Normal3 v)
+        public static Normal operator-(double s, Normal v)
 		{
-			return new Normal3(v.X - s, v.Y - s, v.Z - s);
+			return new Normal(v.X - s, v.Y - s, v.Z - s);
 		}
 
-        public static Normal3 operator -(Normal3 v, Vector3 w)
+        public static Normal operator -(Normal v, Vector w)
         {
-            return new Normal3(v.X - w.X, v.Y - w.Y, v.Z - w.Z);
+            return new Normal(v.X - w.X, v.Y - w.Y, v.Z - w.Z);
         }
 
-        public static Normal3 operator -(Normal3 v, Point3 w)
+        public static Normal operator -(Normal v, Point w)
         {
-            return new Normal3(v.X - w.X, v.Y - w.Y, v.Z - w.Z);
+            return new Normal(v.X - w.X, v.Y - w.Y, v.Z - w.Z);
         }
 
-        public static Normal3 operator -(Vector3 v, Normal3 w)
+        public static Normal operator -(Vector v, Normal w)
         {
-            return new Normal3(v.X - w.X, v.Y - w.Y, v.Z - w.Z);
+            return new Normal(v.X - w.X, v.Y - w.Y, v.Z - w.Z);
         }
 
-        public static Normal3 operator*(Normal3 v, double s)
+        public static Normal operator*(Normal v, double s)
 		{
-		    return new Normal3(v.X * s, v.Y * s, v.Z * s);
+		    return new Normal(v.X * s, v.Y * s, v.Z * s);
 		}
 
-        public static Normal3 operator*(double s, Normal3 v)
+        public static Normal operator*(double s, Normal v)
 		{
-		    return new Normal3(v.X * s, v.Y * s, v.Z * s);
+		    return new Normal(v.X * s, v.Y * s, v.Z * s);
 		}
 
-        public static Normal3 operator/(Normal3 v, double s)
+        public static Normal operator/(Normal v, double s)
 		{
-			return new Normal3(v.X / s, v.Y / s, v.Z / s);
+			return new Normal(v.X / s, v.Y / s, v.Z / s);
 		}
         
-        public static Normal3 operator/(double s, Normal3 v)
+        public static Normal operator/(double s, Normal v)
 		{
-			return new Normal3(s / v.X, s / v.Y, s / v.Z);
+			return new Normal(s / v.X, s / v.Y, s / v.Z);
 		}
         
         public double this[int index]
@@ -261,19 +261,19 @@ namespace Raytracer.MathTypes
 
 		}
 
-        public static explicit operator Normal3(Point3 point)
+        public static explicit operator Normal(Point point)
         {
-            return new Normal3(point.X, point.Y, point.Z);
+            return new Normal(point.X, point.Y, point.Z);
         }
 
-        public static explicit operator Normal3(Vector3 vector)
+        public static explicit operator Normal(Vector vector)
 		{
-			return new Normal3(vector.X, vector.Y, vector.Z);
+			return new Normal(vector.X, vector.Y, vector.Z);
 		}
 
-		public static explicit operator Vector3(Normal3 normal)
+		public static explicit operator Vector(Normal normal)
 		{
-			return new Vector3(normal.X, normal.Y, normal.Z);
+			return new Vector(normal.X, normal.Y, normal.Z);
 		}     
     }
 }

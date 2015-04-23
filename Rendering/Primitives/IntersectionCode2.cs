@@ -30,13 +30,13 @@ namespace Raytracer.Rendering.Primitives
 
         }
 
-        static bool planeBoxOverlap(Vector3 normal, Vector3 vert, Vector3 maxbox)	// -NJMP-
+        static bool planeBoxOverlap(Vector normal, Vector vert, Vector maxbox)	// -NJMP-
         {
 
             int q;
 
-            Vector3 vmin = new Vector3();
-            Vector3 vmax = new Vector3();
+            Vector vmin = new Vector();
+            Vector vmax = new Vector();
             double v;
 
             for (q = X; q <= Z; q++)
@@ -64,9 +64,9 @@ namespace Raytracer.Rendering.Primitives
 
             }
 
-            if (Vector3.DotProduct(normal, vmin) > 0.0f) return false;	// -NJMP-
+            if (Vector.DotProduct(normal, vmin) > 0.0f) return false;	// -NJMP-
 
-            if (Vector3.DotProduct(normal, vmax) >= 0.0f) return true;	// -NJMP-
+            if (Vector.DotProduct(normal, vmax) >= 0.0f) return true;	// -NJMP-
 
 
 
@@ -74,7 +74,7 @@ namespace Raytracer.Rendering.Primitives
 
         }
 
-        static bool AXISTEST_X01(Vector3 v0, Vector3 v2, double a, double b, double fa, double fb, Vector3 boxhalfsize)
+        static bool AXISTEST_X01(Vector v0, Vector v2, double a, double b, double fa, double fb, Vector boxhalfsize)
         {
             double p0 = a * v0[Y] - b * v0[Z];
             double p2 = a * v2[Y] - b * v2[Z];
@@ -90,7 +90,7 @@ namespace Raytracer.Rendering.Primitives
             return true;
         }
 
-        static bool AXISTEST_X2(Vector3 v0, Vector3 v1, double a, double b, double fa, double fb, Vector3 boxhalfsize)
+        static bool AXISTEST_X2(Vector v0, Vector v1, double a, double b, double fa, double fb, Vector boxhalfsize)
         {
             double min, max;
             double p0 = a * v0[Y] - b * v0[Z];
@@ -106,7 +106,7 @@ namespace Raytracer.Rendering.Primitives
             return true;
         }
 
-        static bool AXISTEST_Y02(Vector3 v0, Vector3 v2, double a, double b, double fa, double fb, Vector3 boxhalfsize)
+        static bool AXISTEST_Y02(Vector v0, Vector v2, double a, double b, double fa, double fb, Vector boxhalfsize)
         {
             double min, max;
             double p0 = -a * v0[X] + b * v0[Z];
@@ -122,7 +122,7 @@ namespace Raytracer.Rendering.Primitives
         }
 
 
-        static bool AXISTEST_Y1(Vector3 v0, Vector3 v1, double a, double b, double fa, double fb, Vector3 boxhalfsize)
+        static bool AXISTEST_Y1(Vector v0, Vector v1, double a, double b, double fa, double fb, Vector boxhalfsize)
         {
             double min, max;
             double p0 = -a * v0[X] + b * v0[Z];
@@ -141,7 +141,7 @@ namespace Raytracer.Rendering.Primitives
 
 
 
-        static bool AXISTEST_Z12(Vector3 v1, Vector3 v2, double a, double b, double fa, double fb, Vector3 boxhalfsize)
+        static bool AXISTEST_Z12(Vector v1, Vector v2, double a, double b, double fa, double fb, Vector boxhalfsize)
         {
             double min, max;
             double p1 = a * v1[X] - b * v1[Y];
@@ -157,7 +157,7 @@ namespace Raytracer.Rendering.Primitives
         }
 
 
-        static bool AXISTEST_Z0(Vector3 v0, Vector3 v1, double a, double b, double fa, double fb, Vector3 boxhalfsize)
+        static bool AXISTEST_Z0(Vector v0, Vector v1, double a, double b, double fa, double fb, Vector boxhalfsize)
         {
             double min, max;
             double p0 = a * v0[X] - b * v0[Y];
@@ -173,7 +173,7 @@ namespace Raytracer.Rendering.Primitives
 
         }
 
-        public static bool triBoxOverlap(Point3 boxcenter, Vector3 boxhalfsize, Point3[] triverts)
+        public static bool triBoxOverlap(Point boxcenter, Vector boxhalfsize, Point[] triverts)
         {
 
 
@@ -192,18 +192,18 @@ namespace Raytracer.Rendering.Primitives
 
             /*       this gives 3x3=9 more tests */
 
-            Vector3 v0;
-            Vector3 v1;
-            Vector3 v2;
+            Vector v0;
+            Vector v1;
+            Vector v2;
 
             //   double axis[3];
 
             double fex, fey, fez;		// -NJMP- "d" local variable removed
 
-            Vector3 normal;
-            Vector3 e0;
-            Vector3 e1;
-            Vector3 e2;
+            Vector normal;
+            Vector e0;
+            Vector e1;
+            Vector e2;
 
             /* This is the fastest branch on Sun */
 
@@ -294,7 +294,7 @@ namespace Raytracer.Rendering.Primitives
 
             /*  compute plane equation of triangle: normal*x+d=0 */
 
-            normal = Vector3.CrossProduct(e0, e1);
+            normal = Vector.CrossProduct(e0, e1);
 
             // -NJMP- (line removed here)
 

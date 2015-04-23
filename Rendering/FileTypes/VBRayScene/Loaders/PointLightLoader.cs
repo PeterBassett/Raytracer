@@ -16,7 +16,7 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
             Tokeniser oText = new Tokeniser();
             Light light = new Light();
 
-            var pos = new Point3();
+            var pos = new Point();
             pos.X = float.Parse(oText.GetToken(file));
             pos.Y = float.Parse(oText.GetToken(file));
 	        pos.Z = float.Parse(oText.GetToken(file));

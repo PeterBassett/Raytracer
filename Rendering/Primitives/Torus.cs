@@ -31,7 +31,7 @@ namespace Raytracer.Rendering.Primitives
             double H = 2.0 * T * (vantage.X*direction.X + vantage.Y*direction.Y);
             double I = T * (vantage.X*vantage.X + vantage.Y*vantage.Y);
             double J = direction.GetLengthSquared();
-            double K = 2.0 * Vector3.DotProduct(vantage, direction);
+            double K = 2.0 * Vector.DotProduct(vantage, direction);
             double L = vantage.LengthSquared + R*R - S*S;
 
             int numRealRoots = Algebra.SolveQuarticEquation(
@@ -82,7 +82,7 @@ namespace Raytracer.Rendering.Primitives
 
         private Ray CreateTransformedRay(Ray ray)
         {
-            var dir = (Vector3)(ray.Pos + -this.Pos);
+            var dir = (Vector)(ray.Pos + -this.Pos);
             ray.Dir.RotateX(-this.Ori.X, ref dir);
             dir.RotateY(-this.Ori.Y, ref dir);
             dir.RotateZ(-this.Ori.Z, ref dir);
@@ -91,7 +91,7 @@ namespace Raytracer.Rendering.Primitives
             return new Ray(ray.Pos + -this.Pos, dir);
         }
 
-        public Normal3 GetNormal(Point3 point)
+        public Normal GetNormal(Point point)
         {
             // Thanks to the fixed orientation of the torus in object space,
             // it always lies on the xy plane, and centered at <0,0,0>.
@@ -108,7 +108,7 @@ namespace Raytracer.Rendering.Primitives
 
             double a = 1.0 - (R / Math.Sqrt(point.X * point.X + point.Y * point.Y));
             
-            var n2 = (Normal3)(a * point);
+            var n2 = (Normal)(a * point);
             return n2.Normalize();
         }
         
@@ -126,7 +126,7 @@ namespace Raytracer.Rendering.Primitives
             };
         }
 
-        public override bool Contains(Point3 point)
+        public override bool Contains(Point point)
         {
             return false;
         }

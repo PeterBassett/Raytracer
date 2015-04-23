@@ -20,13 +20,13 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
             
             obj.Radius = float.Parse(oText.GetToken(file));
 
-            var pos = new Point3();
+            var pos = new Point();
             pos.X = float.Parse(oText.GetToken(file));
             pos.Y = float.Parse(oText.GetToken(file));
 	        pos.Z = float.Parse(oText.GetToken(file));
             obj.Pos = pos;
 
-            Vector3 ori = new Vector3();
+            Vector ori = new Vector();
 
             string strMaterial = null;
 

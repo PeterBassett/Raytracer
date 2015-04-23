@@ -45,7 +45,7 @@ namespace Raytracer.Rendering.Primitives
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    tri.Vertex[i] = (Point3)(tri.Vertex[i] - trans);
+                    tri.Vertices[i] = (Point)(tri.Vertices[i] - trans);
                 }
             }
 
@@ -54,32 +54,32 @@ namespace Raytracer.Rendering.Primitives
         
         private void BuildAABB()
         {
-            var min = new Point3(int.MaxValue, int.MaxValue, int.MaxValue);
-            var max = new Point3(int.MinValue, int.MinValue, int.MinValue);
+            var min = new Point(int.MaxValue, int.MaxValue, int.MaxValue);
+            var max = new Point(int.MinValue, int.MinValue, int.MinValue);
 
             foreach (var tri in Triangles)
             {
                 for (int i = 0; i < 3; i++)
                 {
                     // minimum
-                    if (tri.Vertex[i].X < min.X)
-                        min.X = tri.Vertex[i].X;
+                    if (tri.Vertices[i].X < min.X)
+                        min.X = tri.Vertices[i].X;
 
-                    if (tri.Vertex[i].Y < min.Y)
-                        min.Y = tri.Vertex[i].Y;
+                    if (tri.Vertices[i].Y < min.Y)
+                        min.Y = tri.Vertices[i].Y;
 
-                    if (tri.Vertex[i].Z < min.Z)
-                        min.Z = tri.Vertex[i].Z;
+                    if (tri.Vertices[i].Z < min.Z)
+                        min.Z = tri.Vertices[i].Z;
 
                     // maximum
-                    if (tri.Vertex[i].X > max.X)
-                        max.X = tri.Vertex[i].X;
+                    if (tri.Vertices[i].X > max.X)
+                        max.X = tri.Vertices[i].X;
 
-                    if (tri.Vertex[i].Y > max.Y)
-                        max.Y = tri.Vertex[i].Y;
+                    if (tri.Vertices[i].Y > max.Y)
+                        max.Y = tri.Vertices[i].Y;
 
-                    if (tri.Vertex[i].Z > max.Z)
-                        max.Z = tri.Vertex[i].Z;
+                    if (tri.Vertices[i].Z > max.Z)
+                        max.Z = tri.Vertices[i].Z;
                 }
             }
 
@@ -122,7 +122,7 @@ namespace Raytracer.Rendering.Primitives
             return bounds.Intersect(aabb);
         }
 
-        public override bool Contains(Point3 point)
+        public override bool Contains(Point point)
         {
             return false;
         }

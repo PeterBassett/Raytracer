@@ -43,7 +43,7 @@ namespace Raytracer.Rendering.BackgroundMaterials
 
         protected abstract void VerifyCubemapDimensions();
 
-        protected static Axis GetDominantAxis(Vector3 r, ref double rmax)
+        protected static Axis GetDominantAxis(Vector r, ref double rmax)
         {
             double temp;
             Axis axis = Axis.LeftRight;
@@ -123,7 +123,7 @@ namespace Raytracer.Rendering.BackgroundMaterials
             return _image.GetPixel(px, py);
         }
 
-        protected abstract void GetFaceCoordinates(Vector3 r, Axis imax, out Face face, out double s, out double t);
+        protected abstract void GetFaceCoordinates(Vector r, Axis imax, out Face face, out double s, out double t);
 
         protected abstract void GetFaceOffsets(Face face, out int x_offset, out int y_offset);
     }

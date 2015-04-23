@@ -20,16 +20,16 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 
             for (int i = 0; i < 3; i++)
             {
-                var pos = new Point3();
+                var pos = new Point();
                 pos.X = float.Parse(oText.GetToken(file));
                 pos.Y = float.Parse(oText.GetToken(file));
                 pos.Z = float.Parse(oText.GetToken(file));
-                obj.Vertex[i] = pos;
+                obj.Vertices[i] = pos;
             }             
 
-            obj.Pos = (obj.Vertex[0] + obj.Vertex[1] + obj.Vertex[2]) / 3.0;
+            obj.Pos = (obj.Vertices[0] + obj.Vertices[1] + obj.Vertices[2]) / 3.0;
             
-            obj.Normal = null;
+            obj.Normals = null;
 
             var strMaterial = oText.GetToken(file);
 

@@ -14,13 +14,13 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
         {
 	        Tokeniser oText = new Tokeniser();
 
-            var pos = new Point3();
+            var pos = new Point();
             pos.X = float.Parse(oText.GetToken(file));
             pos.Y = float.Parse(oText.GetToken(file));
             pos.Z = float.Parse(oText.GetToken(file));
             scene.EyePosition = pos;
 
-            Vector3 dir = new Vector3();
+            Vector dir = new Vector();
             dir.X = float.Parse(oText.GetToken(file));
             dir.Y = float.Parse(oText.GetToken(file));
             dir.Z = float.Parse(oText.GetToken(file));

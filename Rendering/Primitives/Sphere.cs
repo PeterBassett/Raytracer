@@ -28,9 +28,9 @@ namespace Raytracer.Rendering.Primitives
 
             double fDistance = 0.0f;
 
-            Vector3 relativePosition = ray.Pos - Pos;
-            double fB = 2.0f * (Vector3.DotProduct(ray.Dir, relativePosition));  
-	        double fC = Vector3.DotProduct(relativePosition, relativePosition) - ( Radius *  Radius );
+            Vector relativePosition = ray.Pos - Pos;
+            double fB = 2.0f * (Vector.DotProduct(ray.Dir, relativePosition));  
+	        double fC = Vector.DotProduct(relativePosition, relativePosition) - ( Radius *  Radius );
 	        double fA = 1.0f;
 
 	        double fD = ( fB * fB ) - 4.0f * fA * fC;
@@ -67,7 +67,7 @@ namespace Raytracer.Rendering.Primitives
                         var hitPoint = ray.Pos + (ray.Dir * fDistance);
                         var normal = GetNormal(hitPoint);
                         // Normal needs to be flipped if this is a refractive ray.
-                        if (Vector3.DotProduct(ray.Dir, normal) > 0)
+                        if (Vector.DotProduct(ray.Dir, normal) > 0)
                             normal = -normal;
 
                         return new IntersectionInfo(retval, this, fDistance, hitPoint, hitPoint, normal);
@@ -80,18 +80,18 @@ namespace Raytracer.Rendering.Primitives
             return new IntersectionInfo(HitResult.MISS);       
         }
 
-        private Normal3 GetNormal(Point3 vPoint)
+        private Normal GetNormal(Point vPoint)
         {
-            Normal3 vNorm = (Normal3)vPoint - Pos;
+            Normal vNorm = (Normal)vPoint - Pos;
 	        return vNorm.Normalize();
         }
 
         public override bool Intersect(AABB aabb)
         {
             // Get the center of the sphere relative to the center of the box
-            Vector3 sphereCenterRelBox = this.Pos - aabb.Center;
+            Vector sphereCenterRelBox = this.Pos - aabb.Center;
             // Point on surface of box that is closest to the center of the sphere
-            Vector3 boxPoint = new Vector3();
+            Vector boxPoint = new Vector();
 
             // Check sphere center against box along the X axis alone. 
             // If the sphere is off past the left edge of the box, 
@@ -127,7 +127,7 @@ namespace Raytracer.Rendering.Primitives
             // Now we have the closest point on the box, so get the distance from 
             // that to the sphere center, and see if it's less than the radius
 
-            Vector3 dist = sphereCenterRelBox - boxPoint;
+            Vector dist = sphereCenterRelBox - boxPoint;
 
             return (dist.X * dist.X + dist.Y * dist.Y + dist.Z * dist.Z < this.Radius * this.Radius);
         }
@@ -141,7 +141,7 @@ namespace Raytracer.Rendering.Primitives
             };
         }
 
-        public override bool Contains(Point3 point)
+        public override bool Contains(Point point)
         {
             double radius = this.Radius + MathLib.Epsilon;
             return (point - this.Pos).GetLengthSquared() <= (radius * radius);

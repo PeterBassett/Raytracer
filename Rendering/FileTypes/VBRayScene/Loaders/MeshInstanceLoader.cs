@@ -17,13 +17,13 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
         {
             Tokeniser oText = new Tokeniser();
 
-            var offset = new Point3(
+            var offset = new Point(
                  float.Parse(oText.GetToken(file)),
                  float.Parse(oText.GetToken(file)),
                  float.Parse(oText.GetToken(file))
             );
 
-            var rotation = new Vector3(
+            var rotation = new Vector(
                 float.Parse(oText.GetToken(file)),
                 float.Parse(oText.GetToken(file)),
                 float.Parse(oText.GetToken(file))

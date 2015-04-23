@@ -16,19 +16,19 @@ namespace Raytracer.Rendering.Core
         public enum CLASSIFICATION
         { MMM, MMP, MPM, MPP, PMM, PMP, PPM, PPP };
 
-        Vector3 m_dir;
-        Vector3 n_invDir;
-        Point3 m_pos;
+        Vector m_dir;
+        Vector n_invDir;
+        Point m_pos;
         public double R0;			// Pluecker coefficient R0
         public double R1;			// Pluecker coefficient R1
         public double R3;			// Pluecker coefficient R3
         public CLASSIFICATION classification;
 
-		public Ray(Point3 pos, Vector3 dir)
+		public Ray(Point pos, Vector dir)
         {
             m_pos = pos;
             m_dir = dir;
-            n_invDir = new Vector3(1.0f / m_dir.X, 1.0f / m_dir.Y, 1.0f / m_dir.Z);
+            n_invDir = new Vector(1.0f / m_dir.X, 1.0f / m_dir.Y, 1.0f / m_dir.Z);
 
             R0 = pos.X * dir.Y - dir.X * pos.Y;
             R1 = pos.X * dir.Z - dir.X * pos.Z;
@@ -85,13 +85,13 @@ namespace Raytracer.Rendering.Core
 
         private void BuildInverseDir()
         {
-            n_invDir = new Vector3(1.0f / m_dir.X, 1.0f / m_dir.Y, 1.0f / m_dir.Z);
+            n_invDir = new Vector(1.0f / m_dir.X, 1.0f / m_dir.Y, 1.0f / m_dir.Z);
         }
 
         /// <summary>
         /// Gets the ray's inverse.
         /// </summary>
-        public Vector3 InverseDir
+        public Vector InverseDir
         {
             get
             {
@@ -102,7 +102,7 @@ namespace Raytracer.Rendering.Core
 		/// <summary>
 		/// Gets or sets the ray's origin.
 		/// </summary>
-        public Point3 Pos 
+        public Point Pos 
         {
             get
             {
@@ -116,7 +116,7 @@ namespace Raytracer.Rendering.Core
 		/// <summary>
 		/// Gets or sets the ray's direction vector.
 		/// </summary>
-        public Vector3 Dir
+        public Vector Dir
         {
             get
             {
