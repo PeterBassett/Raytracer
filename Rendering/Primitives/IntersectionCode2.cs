@@ -173,7 +173,7 @@ namespace Raytracer.Rendering.Primitives
 
         }
 
-        public static bool triBoxOverlap(Vector3 boxcenter, Vector3 boxhalfsize, Vector3[] triverts)
+        public static bool triBoxOverlap(Point3 boxcenter, Vector3 boxhalfsize, Point3[] triverts)
         {
 
 

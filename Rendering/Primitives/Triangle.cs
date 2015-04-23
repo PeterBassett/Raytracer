@@ -6,16 +6,16 @@ namespace Raytracer.Rendering.Primitives
 {   
     class Triangle : Traceable
     {
-        public Vector3[] Vertex = new Vector3[3];
+        public Point3[] Vertex = new Point3[3];
         private AABB bounds = AABB.Empty;
         public Vector2[] Texture = new Vector2[3];
-        public Vector3[] Normal = new Vector3[3];
-        private Vector3 _cachedFaceNormal = Vector3.Zero;
+        public Normal3[] Normal = new Normal3[3];
+        private Normal3 _cachedFaceNormal = Normal3.Invalid;
 
-        private bool InternalSide(Vector3 p1,
-                                Vector3 p2,
-                                Vector3 a,
-                                Vector3 b)
+        private bool InternalSide(Point3 p1,
+                                Point3 p2,
+                                Point3 a,
+                                Point3 b)
         {
             var cp1 = Vector3.CrossProduct(b - a, p1 - a);
 
@@ -27,7 +27,7 @@ namespace Raytracer.Rendering.Primitives
                 return false;
         }
 
-        private bool PointInTriangle(Vector3 p)
+        private bool PointInTriangle(Point3 p)
         {
             if (InternalSide(p,
                 Vertex[0],
@@ -73,7 +73,7 @@ namespace Raytracer.Rendering.Primitives
             return IntersectionCode2.triBoxOverlap(aabb.Center, aabb.HalfSize, Vertex);
         }
 
-        public Vector3 GetNormal(Vector3 vPoint)
+        public Normal3 GetNormal(Point3 vPoint)
         {
             if(this.Normal != null)
                 return InterpolateNormal(vPoint);
@@ -81,7 +81,7 @@ namespace Raytracer.Rendering.Primitives
             return GetNormalFromVertexes();
         }
 
-        public Vector3 InterpolateNormal(Vector3 pointOfIntersection)
+        public Normal3 InterpolateNormal(Point3 pointOfIntersection)
         {
             var a = Barycentric.CalculateBarycentricInterpolationVector(pointOfIntersection, this.Vertex);
 
@@ -90,29 +90,25 @@ namespace Raytracer.Rendering.Primitives
                     this.Normal[1] * a.Y +
                     this.Normal[2] * a.Z;
 
-            n.Normalize();
-
-            return n;
+            return n.Normalize();
         }
         
-        private Vector3 GetNormalFromVertexes()
+        private Normal3 GetNormalFromVertexes()
         {
-            if (_cachedFaceNormal != Vector3.Zero)
+            if (_cachedFaceNormal != Normal3.Invalid)
                 return _cachedFaceNormal;
          
             var u = Vertex[2] - Vertex[0];
             var w = Vertex[1] - Vertex[0];
 
-            var norm = Vector3.CrossProduct(w, u);
+            var norm = (Normal3)Vector3.CrossProduct(w, u);
 
-            if (norm.GetLengthSquared() == 0)
+            if (norm.LengthSquared == 0)
                 return norm;
 
-            norm.Normalize();
+            _cachedFaceNormal = norm.Normalize();
 
-            _cachedFaceNormal = norm;
-
-            return norm;
+            return _cachedFaceNormal;
         }
 
         public override AABB GetAABB()
@@ -137,7 +133,7 @@ namespace Raytracer.Rendering.Primitives
             return this.bounds;
         }
 
-        public override bool Contains(Vector3 point)
+        public override bool Contains(Point3 point)
         {
             return false;
         }

@@ -83,10 +83,9 @@ namespace Raytracer.Rendering.Primitives
             return new IntersectionInfo(HitResult.MISS);       
         }
 
-        private Vector3 GetNormal(Vector3 vPoint)
+        private Normal3 GetNormal(Point3 vPoint)
         {
-            Vector3 vNorm;
-	        vNorm = vPoint - Pos;
+            Normal3 vNorm = (Normal3)vPoint - Pos;
 	        vNorm.Normalize();
 	        return vNorm;
         }
@@ -146,7 +145,7 @@ namespace Raytracer.Rendering.Primitives
             };
         }
 
-        public override bool Contains(Vector3 point)
+        public override bool Contains(Point3 point)
         {
             double radius = this.Radius + MathLib.Epsilon;
             return (point - this.Pos).GetLengthSquared() <= (radius * radius);

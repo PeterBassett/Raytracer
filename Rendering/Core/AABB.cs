@@ -71,11 +71,11 @@ namespace Raytracer.Rendering.Core
             }
         }
 
-        public Vector3 Center
+        public Point3 Center
         {
             get
             {
-                return new Vector3
+                return new Point3
                 {
                     X = Min.X + ((Max.X - Min.X) / 2),
                     Y = Min.Y + ((Max.Y - Min.Y) / 2),
@@ -181,7 +181,7 @@ namespace Raytracer.Rendering.Core
                    Math.Abs(T.Z) <=  (Depth + b.Depth)); 
         }
 
-        public bool Contains(Vector3 point)
+        public bool Contains(Point3 point)
         {
             var T = point - Center;
 

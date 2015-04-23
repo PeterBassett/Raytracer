@@ -18,13 +18,13 @@ namespace Raytracer.Rendering.Core
 
         Vector3 m_dir;
         Vector3 n_invDir;
-        Vector3 m_pos;
+        Point3 m_pos;
         public double R0;			// Pluecker coefficient R0
         public double R1;			// Pluecker coefficient R1
         public double R3;			// Pluecker coefficient R3
         public CLASSIFICATION classification;
 
-		public Ray(Vector3 pos, Vector3 dir)
+		public Ray(Point3 pos, Vector3 dir)
         {
             m_pos = pos;
             m_dir = dir;
@@ -102,7 +102,7 @@ namespace Raytracer.Rendering.Core
 		/// <summary>
 		/// Gets or sets the ray's origin.
 		/// </summary>
-        public Vector3 Pos 
+        public Point3 Pos 
         {
             get
             {

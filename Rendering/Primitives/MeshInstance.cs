@@ -54,7 +54,7 @@ namespace Raytracer.Rendering.Primitives
             return bounds;
         }
 
-        public override bool Contains(Vector3 point)
+        public override bool Contains(Point3 point)
         {
             return false;
         }

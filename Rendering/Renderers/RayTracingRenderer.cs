@@ -66,7 +66,7 @@ namespace Raytracer.Rendering.Renderers
             return minimumIntersection;
         }
 
-        private Traceable FindObjectContainingPoint(Vector3 point)
+        private Traceable FindObjectContainingPoint(Point3 point)
         {
             return _scene.FindObjectContainingPoint(point);
         }
@@ -354,7 +354,7 @@ namespace Raytracer.Rendering.Renderers
             return reflection > 1.0 ? 1.0 : reflection;
         }
 
-        private Colour Shade(Vector3 hitPoint, Vector3 normal, Material material, Vector3 eyeDirection)
+        private Colour Shade(Point3 hitPoint, Normal3 normal, Material material, Vector3 eyeDirection)
         {
             // first assign the emmissive part of the color as the base color
             Colour colour = material.Emissive;
@@ -418,7 +418,7 @@ namespace Raytracer.Rendering.Renderers
             return colour;
         }
 
-        private bool ShadowTrace(Vector3 hitPoint, Vector3 lightPosition, Vector3 surfaceNormal, double lightDistance)
+        private bool ShadowTrace(Point3 hitPoint, Point3 lightPosition, Normal3 surfaceNormal, double lightDistance)
         {
             var dir = lightPosition - hitPoint;
             dir.Normalize();
@@ -437,15 +437,16 @@ namespace Raytracer.Rendering.Renderers
             return false;
         }
 
-        private Vector3 CalculateReflectedRay(Vector3 dir, Vector3 normal)
+        private Vector3 CalculateReflectedRay(Vector3 dir, Normal3 normal)
         {
             dir = -dir;
+            //dir = dir.Normalize();
             dir.Normalize();
-            normal.Normalize();
+            normal = normal.Normalize();
 
             var tmp = (normal * (2.0f * Vector3.DotProduct(normal, dir))) - dir;
             tmp.Normalize();
-            return tmp;
+            return (Vector3)tmp;
         }
 
         private Vector3 CalculateRefractedRay(Vector3 dir, Vector3 normal, double n_Out, double n_In)

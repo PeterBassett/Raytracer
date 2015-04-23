@@ -9,6 +9,6 @@ namespace Raytracer.Rendering.Accellerators
     {
         void Build(IEnumerable<Traceable> primitives);
         IEnumerable<Traceable> Intersect(Ray ray);
-        IEnumerable<Traceable> Intersect(Vector3 point);
+        IEnumerable<Traceable> Intersect(Point3 point);
     }
 }

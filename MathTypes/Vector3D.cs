@@ -330,10 +330,35 @@ namespace Raytracer.MathTypes
 		/// <param name="u">A <see cref="Vector3"/> instance.</param>
 		/// <param name="v">A <see cref="Vector3"/> instance.</param>
 		/// <returns>The dot product value.</returns>
-		public static double DotProduct(Vector3 u, Vector3 v)
-		{
-			return (u._x * v._x) + (u._y * v._y) + (u._z * v._z);
-		}
+		public static double DotProduct(Vector3 a, Vector3 b)
+        {
+            return DotProduct(a.X, a.Y, a.Z, b.X, b.Y, b.Z);
+        }
+
+        public static double DotProduct(Vector3 a, Normal3 b)
+        {
+            return DotProduct(a.X, a.Y, a.Z, b.X, b.Y, b.Z);
+        }
+
+        public static double DotProduct(Normal3 a, Vector3 b)
+        {
+            return DotProduct(a.X, a.Y, a.Z, b.X, b.Y, b.Z);
+        }
+
+        public static double DotProduct(Point3 a, Vector3 b)
+        {
+            return DotProduct(a.X, a.Y, a.Z, b.X, b.Y, b.Z);
+        }
+
+        public static double DotProduct(Vector3 a, Point3 b)
+        {
+            return DotProduct(a.X, a.Y, a.Z, b.X, b.Y, b.Z);
+        }
+
+        public static double DotProduct(double aX, double aY, double aZ, double bX, double bY, double bZ)
+        {
+            return (aX * bX) + (aY * bY) + (aZ * bZ);
+        }
 		/// <summary>
 		/// Calculates the cross product of two vectors.
 		/// </summary>

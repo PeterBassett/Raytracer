@@ -22,7 +22,7 @@ namespace Raytracer.Rendering.Materials
             output.Ambient = output.Diffuse;
         }
         
-        public Vector2 InterpolateTextureUV(Vector3 pointOfIntersection, Vector3[] vertexes, Vector2[] textureUVs)
+        public Vector2 InterpolateTextureUV(Point3 pointOfIntersection, Point3[] vertexes, Vector2[] textureUVs)
         {
             var a = Barycentric.CalculateBarycentricInterpolationVector(pointOfIntersection, vertexes);
 

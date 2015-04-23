@@ -7,7 +7,7 @@ namespace Raytracer.MathTypes
 {
     public class Barycentric
     {
-        public static Vector3 CalculateBarycentricInterpolationVector(Vector3 point, Vector3[] vertexes)
+        public static Vector3 CalculateBarycentricInterpolationVector(Point3 point, Point3[] vertexes)
         {
             var p1 = vertexes[0];
             var p2 = vertexes[1];
@@ -28,7 +28,7 @@ namespace Raytracer.MathTypes
             return new Vector3(a1, a2, a3);
         }
 
-        public static Vector3 CalculateSignedBarycentricInterpolationVector(Vector3 pointOfIntersection, Vector3[] vertexes)
+        public static Vector3 CalculateSignedBarycentricInterpolationVector(Point3 pointOfIntersection, Point3[] vertexes)
         {
             var p1 = vertexes[0];
             var p2 = vertexes[1];

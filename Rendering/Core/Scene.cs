@@ -22,7 +22,7 @@ namespace Raytracer.Rendering.Core
         public IBackgroundMaterial BackgroundMaterial { get; set; }
         public Material DefaultMaterial { get; set; }
         
-        public Vector3 EyePosition { get; set; }
+        public Point3 EyePosition { get; set; }
         public Vector3 ViewPointRotation { get; set; }
         public double FieldOfView { get; set; }
 
@@ -167,7 +167,7 @@ namespace Raytracer.Rendering.Core
                 yield return prim;
         }
 
-        public Traceable FindObjectContainingPoint(Vector3 point)
+        public Traceable FindObjectContainingPoint(Point3 point)
         {
             foreach (var prim in this._primitives)
             {

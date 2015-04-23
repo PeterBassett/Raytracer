@@ -6,13 +6,13 @@ namespace Raytracer.Rendering.Cameras
 {
     class PinholeCamera : ICamera
     {
-        private Vector3 _location;
+        private Point3 _location;
         private Vector3 _viewPointRotation;
         private Size _dimensions;
         private double _nearWidth;
         private double _nearHeight;
 
-        public PinholeCamera(Vector3 location, Vector3 viewPointRotation, Size outputDimensions, double fieldOfView)
+        public PinholeCamera(Point3 location, Vector3 viewPointRotation, Size outputDimensions, double fieldOfView)
 	    {
             _location = location;
             _viewPointRotation = viewPointRotation;

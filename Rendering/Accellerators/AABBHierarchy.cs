@@ -126,7 +126,7 @@ namespace Raytracer.Rendering.Accellerators
                 return traceableObjects;                 
             }
 
-            internal IEnumerable<Traceable> Intersect(Vector3 point)
+            internal IEnumerable<Traceable> Intersect(Point3 point)
             {
                 if (!_bounds.Contains(point))
                     return Enumerable.Empty<Traceable>();
@@ -153,7 +153,7 @@ namespace Raytracer.Rendering.Accellerators
             return _root.Intersect(ray);
         }
 
-        public IEnumerable<Traceable> Intersect(Vector3 point)
+        public IEnumerable<Traceable> Intersect(Point3 point)
         {
             return _root.Intersect(point);
         }

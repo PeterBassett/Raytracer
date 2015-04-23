@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
 
 namespace Raytracer.Rendering.Primitives
 {
-    
-    
-    using System.Numerics;
-
     class Torus : Traceable
     {
         public double InnerRadius { get; set; }
@@ -39,7 +32,7 @@ namespace Raytracer.Rendering.Primitives
             double I = T * (vantage.X*vantage.X + vantage.Y*vantage.Y);
             double J = direction.GetLengthSquared();
             double K = 2.0 * Vector3.DotProduct(vantage, direction);
-            double L = vantage.GetLengthSquared() + R*R - S*S;
+            double L = vantage.LengthSquared + R*R - S*S;
 
             int numRealRoots = Algebra.SolveQuarticEquation(
                 J*J,                    // coefficient of u^4
@@ -98,7 +91,7 @@ namespace Raytracer.Rendering.Primitives
             return new Ray(ray.Pos + -this.Pos, dir);
         }
 
-        Vector3 SurfaceNormal(Vector3 point)
+        Normal3 SurfaceNormal(Point3 point)
         {
             // Thanks to the fixed orientation of the torus in object space,
             // it always lies on the xy plane, and centered at <0,0,0>.
@@ -114,24 +107,14 @@ namespace Raytracer.Rendering.Primitives
             double S = OuterRadius;    // distance from center of tube to outside of tube
 
             double a = 1.0 - (R / Math.Sqrt(point.X*point.X + point.Y*point.Y));
-            var n = new Vector3(a*point.X, a*point.Y, point.Z);
-            n.Normalize();
-
-            return n;
+            //var n = new Vector3(a*point.X, a*point.Y, point.Z);
+            var n2 = ((Normal3)(a * point));
+            return n2.Normalize();
         }
 
-        public Vector3 GetNormal(Vector3 p)
+        public Normal3 GetNormal(Point3 p)
         {
             return SurfaceNormal(p);
-            /*double nx, ny, nz;
-            nx = 4 * p.X * (Math.Pow(p.X, 2) + Math.Pow(p.Y, 2) + Math.Pow(p.Y, 2) + Math.Pow(OuterRadius, 2) - Math.Pow(InnerRadius, 2)) - 8 * Math.Pow(OuterRadius, 2) * p.X;
-            ny = 4 * p.Y * (Math.Pow(p.X, 2) + Math.Pow(p.Y, 2) + Math.Pow(p.Y, 2) + Math.Pow(OuterRadius, 2) - Math.Pow(InnerRadius, 2)) - 8 * Math.Pow(OuterRadius, 2) * p.Y;
-            nz = 4 * p.Z * (Math.Pow(p.X, 2) + Math.Pow(p.Y, 2) + Math.Pow(p.Y, 2) + Math.Pow(OuterRadius, 2) - Math.Pow(InnerRadius, 2)) - 8 * Math.Pow(OuterRadius, 2) * p.Z;
-            Vector3 res = new Vector3(nx, ny, nz);
-            res.Normalize();
-            return res;*/
-
-            //return new Vector3(0, 1, 0);
         }
 
         public override bool Intersect(AABB aabb)
@@ -148,7 +131,7 @@ namespace Raytracer.Rendering.Primitives
             };
         }
 
-        public override bool Contains(Vector3 point)
+        public override bool Contains(Point3 point)
         {
             return false;
         }

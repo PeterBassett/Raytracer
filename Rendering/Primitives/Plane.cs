@@ -11,11 +11,11 @@ namespace Raytracer.Rendering.Primitives
     {
         public Plane()
         {
-            Normal = new Vector3(0.0f, 0.0f, 0.0f);
+            Normal = new Normal3(0.0f, 0.0f, 0.0f);
         }
 
         public double D { get; set; }
-        public Vector3 Normal { get; set; }
+        public Normal3 Normal { get; set; }
 
         public override IntersectionInfo Intersect(Ray ray)
         {
@@ -24,7 +24,7 @@ namespace Raytracer.Rendering.Primitives
             if (nd >= 0.0f)
                 return new IntersectionInfo(HitResult.MISS);
 
-            var distance = -(Vector3.DotProduct(Normal, ray.Pos) + D) / nd;
+            var distance = -(Vector3.DotProduct(Normal, (Vector3)ray.Pos) + D) / nd;
             
             if (distance <= 0.0f)
                 return new IntersectionInfo(HitResult.MISS);
@@ -44,7 +44,7 @@ namespace Raytracer.Rendering.Primitives
             return AABB.Empty;
         }
 
-        public override bool Contains(Vector3 point)
+        public override bool Contains(Point3 point)
         {
             var dist = Vector3.DotProduct(Normal, (point - this.Pos));
 
