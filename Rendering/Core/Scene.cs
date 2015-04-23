@@ -326,7 +326,7 @@ namespace Raytracer.Rendering.Core
                 pointToLight = light.Pos - hitPoint;
 
                 // save the lenght of the vector.
-                lightVecLen = pointToLight.GetLength();
+                lightVecLen = pointToLight.Length;
 
                 // normalise the vector
                 pointToLight.Normalize();

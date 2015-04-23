@@ -19,11 +19,11 @@ namespace Raytracer.MathTypes
             var f3 = p3 - point;
 
             // calculate the areas and factors (order of parameters doesn't matter):
-            var a = Vector.CrossProduct(p1 - p2, p1 - p3).GetLength(); // main triangle area a
+            var a = Vector.CrossProduct(p1 - p2, p1 - p3).Length; // main triangle area a
 
-            var a1 = Vector.CrossProduct(f2, f3).GetLength() / a; // p1's triangle area / a
-            var a2 = Vector.CrossProduct(f3, f1).GetLength() / a; // p2's triangle area / a 
-            var a3 = Vector.CrossProduct(f1, f2).GetLength() / a; // p3's triangle area / a
+            var a1 = Vector.CrossProduct(f2, f3).Length / a; // p1's triangle area / a
+            var a2 = Vector.CrossProduct(f3, f1).Length / a; // p2's triangle area / a 
+            var a3 = Vector.CrossProduct(f1, f2).Length / a; // p3's triangle area / a
 
             return new Vector(a1, a2, a3);
         }
@@ -45,12 +45,12 @@ namespace Raytracer.MathTypes
             var va2 = Vector.CrossProduct(f3, f1); // p2's triangle cross product
             var va3 = Vector.CrossProduct(f1, f2); // p3's triangle cross product
 
-            var a = va.GetLength(); // main triangle area
+            var a = va.Length; // main triangle area
 
             // calculate barycentric coordinates with sign:
-            var a1 = va1.GetLength() / a * Math.Sign(Vector.DotProduct(va, va1));
-            var a2 = va2.GetLength() / a * Math.Sign(Vector.DotProduct(va, va2));
-            var a3 = va3.GetLength() / a * Math.Sign(Vector.DotProduct(va, va3));
+            var a1 = va1.Length / a * Math.Sign(Vector.DotProduct(va, va1));
+            var a2 = va2.Length / a * Math.Sign(Vector.DotProduct(va, va2));
+            var a3 = va3.Length / a * Math.Sign(Vector.DotProduct(va, va3));
 
             return new Vector(a1, a2, a3);
         }

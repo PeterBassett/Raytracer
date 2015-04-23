@@ -52,7 +52,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Pex.Framework, Version=0.94.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -79,6 +78,7 @@
     <Compile Include="MathTypes\Point.cs" />
     <Compile Include="MathTypes\Normal.cs" />
     <Compile Include="MathTypes\Size.cs" />
+    <Compile Include="MathTypes\Vector.cs" />
     <Compile Include="MathTypes\Vector2D.cs" />
     <Compile Include="PixelCoordinates.cs">
       <SubType>Form</SubType>
@@ -136,7 +136,6 @@
     <Compile Include="Rendering\PixelSampler\StandardPixelSampler.cs" />
     <Compile Include="Rendering\Primitives\Torus.cs" />
     <Compile Include="MathTypes\MathLib.cs" />
-    <Compile Include="MathTypes\Vector3D.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\FileTypes\ObjFile\MtlFileLoader.cs" />

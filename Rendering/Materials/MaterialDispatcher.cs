@@ -40,10 +40,10 @@ namespace Raytracer.Rendering.Materials
             d.RotateY(sphere.Ori.Y, ref d);
             d.RotateZ(sphere.Ori.Z, ref d);
 
-            d.Normalize();
+            d = d.Normalize();
 
-            var u = 0.5 + Math.Atan2(d._z, d._x) / (2.0 * Math.PI);
-            var v = 0.5 - Math.Asin(d._y) / Math.PI;            
+            var u = 0.5 + Math.Atan2(d.Z, d.X) / (2.0 * Math.PI);
+            var v = 0.5 - Math.Asin(d.Y) / Math.PI;            
 
             Material.CloneElements(output, material);
 

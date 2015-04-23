@@ -144,7 +144,7 @@ namespace Raytracer.Rendering.Primitives
         public override bool Contains(Point point)
         {
             double radius = this.Radius + MathLib.Epsilon;
-            return (point - this.Pos).GetLengthSquared() <= (radius * radius);
+            return (point - this.Pos).LengthSquared <= (radius * radius);
         }
     }
 }

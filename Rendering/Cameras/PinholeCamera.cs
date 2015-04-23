@@ -41,7 +41,7 @@ namespace Raytracer.Rendering.Cameras
             dir.RotateX(_viewPointRotation.X, ref dir);
             dir.RotateY(_viewPointRotation.Y, ref dir);
             dir.RotateZ(_viewPointRotation.Z, ref dir);
-            dir.Normalize();
+            dir = dir.Normalize();
 
             return new Ray(_location, dir);
         }

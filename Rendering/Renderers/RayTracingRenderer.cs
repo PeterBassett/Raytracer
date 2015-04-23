@@ -153,7 +153,7 @@ namespace Raytracer.Rendering.Renderers
             // Convert direction to a unit vector so that
             // relation between angle and dot product is simpler.
             Vector dirUnit = direction;
-            dirUnit.Normalize();
+            dirUnit = dirUnit.Normalize();
 
             var cosA1 = Vector.DotProduct(dirUnit, intersection.NormalAtHitPoint);
             double sin_a1;
@@ -281,7 +281,8 @@ namespace Raytracer.Rendering.Renderers
                     refractDir = refractAttempt;
                 }
             }
-            refractDir.Normalize();
+
+            refractDir = refractDir.Normalize();
             if (maxAlignment <= 0.0)
             {
                 // Getting here means there is something wrong with the math.
@@ -374,10 +375,10 @@ namespace Raytracer.Rendering.Renderers
                 var pointToLight = light.Pos - hitPoint;
 
                 // save the lenght of the vector.
-                lightVecLen = pointToLight.GetLength();
+                lightVecLen = pointToLight.Length;
 
                 // normalise the vector
-                pointToLight.Normalize();
+                pointToLight = pointToLight.Normalize();
 
                 // get the angle between the light vector ad the surface normal
                 var lightCos = Vector.DotProduct(pointToLight, normal);
@@ -402,7 +403,7 @@ namespace Raytracer.Rendering.Renderers
                         var vReflect = CalculateReflectedRay(pointToLight, normal);
 
                         // normalise the vector
-                        vReflect.Normalize();
+                        vReflect = vReflect.Normalize();
 
                         var fSpecular = Vector.DotProduct(vReflect, eyeDirection);
 
@@ -420,8 +421,7 @@ namespace Raytracer.Rendering.Renderers
 
         private bool ShadowTrace(Point hitPoint, Point lightPosition, Normal surfaceNormal, double lightDistance)
         {
-            var dir = lightPosition - hitPoint;
-            dir.Normalize();
+            var dir = (lightPosition - hitPoint).Normalize();
 
             var ray = new Ray(hitPoint + (surfaceNormal * 0.00001f), dir);
 
@@ -439,9 +439,8 @@ namespace Raytracer.Rendering.Renderers
 
         private Vector CalculateReflectedRay(Vector dir, Normal normal)
         {
-            dir = -dir;
-            //dir = dir.Normalize();
-            dir.Normalize();
+            dir = (-dir).Normalize();
+
             normal = normal.Normalize();
 
             var tmp = (normal * (2.0f * Vector.DotProduct(normal, dir))) - dir;

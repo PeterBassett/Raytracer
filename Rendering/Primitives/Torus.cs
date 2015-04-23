@@ -30,7 +30,7 @@ namespace Raytracer.Rendering.Primitives
             double G = T * (direction.X*direction.X + direction.Y*direction.Y);
             double H = 2.0 * T * (vantage.X*direction.X + vantage.Y*direction.Y);
             double I = T * (vantage.X*vantage.X + vantage.Y*vantage.Y);
-            double J = direction.GetLengthSquared();
+            double J = direction.LengthSquared;
             double K = 2.0 * Vector.DotProduct(vantage, direction);
             double L = vantage.LengthSquared + R*R - S*S;
 
@@ -86,7 +86,7 @@ namespace Raytracer.Rendering.Primitives
             ray.Dir.RotateX(-this.Ori.X, ref dir);
             dir.RotateY(-this.Ori.Y, ref dir);
             dir.RotateZ(-this.Ori.Z, ref dir);
-            dir.Normalize();
+            dir = dir.Normalize();
 
             return new Ray(ray.Pos + -this.Pos, dir);
         }

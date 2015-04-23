@@ -70,7 +70,7 @@ namespace Raytracer.Rendering.BackgroundMaterials
         {
             var r = ray.Dir;
 
-            r.Normalize();
+            r = r.Normalize();
 
 	        double rmax = 0;
             Axis imax = GetDominantAxis(r, ref rmax);

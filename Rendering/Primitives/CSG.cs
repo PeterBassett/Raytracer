@@ -156,7 +156,7 @@ namespace Raytracer.Rendering.Primitives
             public static Plane fromPoints(Vector a, Vector b, Vector c) 
             {
               var n = Vector.CrossProduct(b - a, c - a);
-              n.Normalize();
+              n = n.Normalize();
               return new Plane(n, Vector.DotProduct(n, a));
             }
 
@@ -652,16 +652,13 @@ namespace Raytracer.Rendering.Primitives
             var r = radius;
             double dSlices = slices;
 
-            var axisZ = ray;
-            axisZ.Normalize();
+            var axisZ = ray.Normalize();
             
             var isY = (Math.Abs(axisZ.Y) > 0.5);
 
-            var axisX = Vector.CrossProduct(new Vector(isY ? 1 : 0, !isY ? 1 : 0, 0), axisZ);
-            axisX.Normalize();
+            var axisX = Vector.CrossProduct(new Vector(isY ? 1 : 0, !isY ? 1 : 0, 0), axisZ).Normalize();
 
-            var axisY = Vector.CrossProduct(axisX, axisZ);
-            axisY.Normalize();
+            var axisY = Vector.CrossProduct(axisX, axisZ).Normalize();
             
             var start = new Vertex(s, axisZ.Negated());
             var end = new Vertex(e, axisZ);

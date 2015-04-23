@@ -26,12 +26,12 @@ namespace Raytracer.MathTypes
 		
         public static double Distance(Point p1, Point p2)
 		{
-			return (p1 - p2).GetLength();
+            return (p1 - p2).Length;
 		}
 
 		public static double DistanceSquared(Point p1, Point p2)
 		{
-			return (p1 - p2).GetLengthSquared();
+			return (p1 - p2).LengthSquared;
 		}
 
         public static Point operator +(Point value1, Point value2)
