@@ -82,7 +82,7 @@ namespace Raytracer.Rendering.Primitives
 
         private Ray CreateTransformedRay(Ray ray)
         {
-            var dir = ray.Pos + -this.Pos;
+            var dir = (Vector3)(ray.Pos + -this.Pos);
             ray.Dir.RotateX(-this.Ori.X, ref dir);
             dir.RotateY(-this.Ori.Y, ref dir);
             dir.RotateZ(-this.Ori.Z, ref dir);
@@ -91,7 +91,7 @@ namespace Raytracer.Rendering.Primitives
             return new Ray(ray.Pos + -this.Pos, dir);
         }
 
-        Normal3 SurfaceNormal(Point3 point)
+        public Normal3 GetNormal(Point3 point)
         {
             // Thanks to the fixed orientation of the torus in object space,
             // it always lies on the xy plane, and centered at <0,0,0>.
@@ -106,17 +106,12 @@ namespace Raytracer.Rendering.Primitives
             double R = InnerRadius;    // distance from center of hole to center of tube
             double S = OuterRadius;    // distance from center of tube to outside of tube
 
-            double a = 1.0 - (R / Math.Sqrt(point.X*point.X + point.Y*point.Y));
-            //var n = new Vector3(a*point.X, a*point.Y, point.Z);
-            var n2 = ((Normal3)(a * point));
+            double a = 1.0 - (R / Math.Sqrt(point.X * point.X + point.Y * point.Y));
+            
+            var n2 = (Normal3)(a * point);
             return n2.Normalize();
         }
-
-        public Normal3 GetNormal(Point3 p)
-        {
-            return SurfaceNormal(p);
-        }
-
+        
         public override bool Intersect(AABB aabb)
         {
             return this.GetAABB().Intersect(aabb);
@@ -126,8 +121,8 @@ namespace Raytracer.Rendering.Primitives
         {
             return new AABB()
             {
-                Min = new Vector3(this.Pos.X - OuterRadius, this.Pos.Y - OuterRadius, this.Pos.Z - OuterRadius),
-                Max = new Vector3(this.Pos.X + OuterRadius, this.Pos.Y + OuterRadius, this.Pos.Z + OuterRadius)
+                Min = this.Pos - OuterRadius,
+                Max = this.Pos + OuterRadius
             };
         }
 

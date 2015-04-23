@@ -6,19 +6,19 @@ namespace Raytracer.Rendering.Core
 {       
     struct AABB
     {
-        public Vector3 Min;
-        public Vector3 Max;        
+        public Point3 Min;
+        public Point3 Max;        
         public static readonly AABB Empty = new AABB(true);
         private readonly bool _isEmpty;
 
         private AABB(bool isEmpty)
         {
-            Min = new Vector3();
-            Max = new Vector3();
+            Min = new Point3();
+            Max = new Point3();
             _isEmpty = isEmpty;
         }
 
-        public AABB(Vector3 min, Vector3 max)
+        public AABB(Point3 min, Point3 max)
         {
             _isEmpty = false;
             double temp;
@@ -99,8 +99,8 @@ namespace Raytracer.Rendering.Core
 
         public AABB InflateToEncapsulate(AABB other)
         {
-            var min = new Vector3(Min);
-            var max = new Vector3(Max);
+            var min = new Point3(Min);
+            var max = new Point3(Max);
 
             if (other.Min.X < min.X)
                 min.X = other.Min.X;

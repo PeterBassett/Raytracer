@@ -273,7 +273,7 @@ namespace Raytracer.Rendering.Renderers
             var refractDir = new Vector3();
             for (int i=0; i < numSolutions; ++i)
             {
-                Vector3 refractAttempt = dirUnit + k[i]*intersection.NormalAtHitPoint;
+                Vector3 refractAttempt = dirUnit + k[i] * intersection.NormalAtHitPoint;
                 double alignment = Vector3.DotProduct(dirUnit, refractAttempt);
                 if (alignment > maxAlignment)
                 {

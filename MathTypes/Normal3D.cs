@@ -195,6 +195,11 @@ namespace Raytracer.MathTypes
             return new Normal3(v.X - w.X, v.Y - w.Y, v.Z - w.Z);
         }
 
+        public static Normal3 operator -(Normal3 v, Point3 w)
+        {
+            return new Normal3(v.X - w.X, v.Y - w.Y, v.Z - w.Z);
+        }
+
         public static Normal3 operator -(Vector3 v, Normal3 w)
         {
             return new Normal3(v.X - w.X, v.Y - w.Y, v.Z - w.Z);

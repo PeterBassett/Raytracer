@@ -9,7 +9,11 @@ namespace Raytracer.MathTypes
         public double X;
         public double Y;
         public double Z;
-				
+
+        public Point3(Point3 point) : this(point.X, point.Y, point.Z) 
+        {
+        }
+		
 		public Point3(double x, double y, double z)
 		{
 			X = x;
@@ -44,6 +48,16 @@ namespace Raytracer.MathTypes
 			return new Point3(point.X + vector.X, point.Y + vector.Y, point.Z + vector.Z);
 		}
 
+        public static Point3 operator +(Point3 point, Normal3 normal)
+        {
+            return new Point3(point.X + normal.X, point.Y + normal.Y, point.Z + normal.Z);
+        }
+
+        public static Point3 operator +(Point3 point, double offset)
+        {
+            return new Point3(point.X + offset, point.Y + offset, point.Z + offset);
+        }
+
 		public static Vector3 operator -(Point3 point1, Point3 point2)
 		{
 			return new Vector3(point1.X - point2.X, point1.Y - point2.Y, point1.Z - point2.Z);
@@ -54,7 +68,12 @@ namespace Raytracer.MathTypes
 			return new Point3(point.X - vector.X, point.Y - vector.Y, point.Z - vector.Z);
 		}
 
-		public static Point3 operator *(Point3 value, float scaleFactor)
+        public static Point3 operator -(Point3 point, double offset)
+        {
+            return new Point3(point.X - offset, point.Y - offset, point.Z - offset);
+        }
+
+		public static Point3 operator *(Point3 value, double scaleFactor)
 		{
 			Point3 vector;
 			vector.X = value.X * scaleFactor;

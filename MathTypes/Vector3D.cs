@@ -359,19 +359,22 @@ namespace Raytracer.MathTypes
         {
             return (aX * bX) + (aY * bY) + (aZ * bZ);
         }
-		/// <summary>
-		/// Calculates the cross product of two vectors.
-		/// </summary>
-		/// <param name="u">A <see cref="Vector3"/> instance.</param>
-		/// <param name="v">A <see cref="Vector3"/> instance.</param>
-		/// <returns>A new <see cref="Vector3"/> containing the cross product result.</returns>
-		public static Vector3 CrossProduct(Vector3 u, Vector3 v)
+		
+        public static Vector3 CrossProduct(Vector3 u, Vector3 v)
 		{
 			return new Vector3( 
 				u._y*v._z - u._z*v._y, 
 				u._z*v._x - u._x*v._z, 
 				u._x*v._y - u._y*v._x );
 		}
+
+        public static Vector3 CrossProduct(Vector3 u, Normal3 v)
+        {
+            return new Vector3(
+                u._y * v.Z - u._z * v.Y,
+                u._z * v.X - u._x * v.Z,
+                u._x * v.Y - u._y * v.X);
+        }
 		/// <summary>
 		/// Calculates the cross product of two vectors.
 		/// </summary>
@@ -645,16 +648,17 @@ namespace Raytracer.MathTypes
 		{
 			return Vector3.Add(u,v);
 		}
-		/// <summary>
-		/// Adds a vector and a scalar.
-		/// </summary>
-		/// <param name="v">A <see cref="Vector3"/> instance.</param>
-		/// <param name="s">A scalar.</param>
-		/// <returns>A new <see cref="Vector3"/> instance containing the sum.</returns>
-		public static Vector3 operator+(Vector3 v, double s)
+
+        public static Vector3 operator+(Vector3 v, double s)
 		{
 			return Vector3.Add(v,s);
 		}
+
+        public static Vector3 operator +(Vector3 v, Normal3 w)
+        {
+            return new Vector3(v.X + w.X, v.Y + w.Y, v.Z + w.Z);
+        }
+
 		/// <summary>
 		/// Adds a vector and a scalar.
 		/// </summary>

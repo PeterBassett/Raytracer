@@ -42,7 +42,7 @@ namespace Raytracer.Rendering.Accellerators
                     return;
                 }
 
-                var midpt = new Vector3();
+                var midpt = new Point3();
 
                 var trisRecp = 1.0 / primitives.Count();
 

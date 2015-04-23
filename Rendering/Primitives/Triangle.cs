@@ -116,13 +116,13 @@ namespace Raytracer.Rendering.Primitives
             if (!this.bounds.IsEmpty)
                 return this.bounds;
 
-            var min = new Vector3(
+            var min = new Point3(
                     Math.Min(Math.Min(Vertex[0].X, Vertex[1].X), Vertex[2].X),
                     Math.Min(Math.Min(Vertex[0].Y, Vertex[1].Y), Vertex[2].Y ) ,
                     Math.Min(Math.Min(Vertex[0].Z, Vertex[1].Z), Vertex[2].Z )
             );
 
-            var max = new Vector3(
+            var max = new Point3(
                     Math.Max (Math.Max(Vertex[0].X, Vertex[1].X), Vertex[2].X ) ,
                     Math.Max (Math.Max(Vertex[0].Y, Vertex[1].Y), Vertex[2].Y ) ,
                     Math.Max (Math.Max(Vertex[0].Z, Vertex[1].Z), Vertex[2].Z )

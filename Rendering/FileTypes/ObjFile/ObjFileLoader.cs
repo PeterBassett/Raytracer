@@ -26,9 +26,9 @@ namespace Raytracer.Rendering.FileTypes.ObjFile
         
         public void LoadFile(string strObjfile, List<Triangle> triangles, List<Material> materials)
         {
-            var verticies = new List<Vector3>();
+            var verticies = new List<Point3>();
             var textureCoordinates = new List<Vector2>();
-            var vertexNormals = new List<Vector3>();
+            var vertexNormals = new List<Normal3>();
             Material currentMaterial = null;
             //var sr = new BufferedStreamReader(strObjfile);
 
@@ -53,13 +53,13 @@ namespace Raytracer.Rendering.FileTypes.ObjFile
                             currentMaterial = FindMaterial(ParseCache[1]);
                             break;
                         case "v":
-                            verticies.Add(new Vector3(float.Parse(ParseCache[1]), float.Parse(ParseCache[2]), float.Parse(ParseCache[3])));
+                            verticies.Add(new Point3(float.Parse(ParseCache[1]), float.Parse(ParseCache[2]), float.Parse(ParseCache[3])));
                             break;
                         case "vt":
                             textureCoordinates.Add(new Vector2(float.Parse(ParseCache[1]), float.Parse(ParseCache[2])));
                             break;
                         case "vn":
-                            vertexNormals.Add(new Vector3(float.Parse(ParseCache[1]), float.Parse(ParseCache[2]), float.Parse(ParseCache[3])));
+                            vertexNormals.Add(new Normal3(float.Parse(ParseCache[1]), float.Parse(ParseCache[2]), float.Parse(ParseCache[3])));
                             break;
                         case "f":
                             {
@@ -147,7 +147,7 @@ namespace Raytracer.Rendering.FileTypes.ObjFile
                 return null;
         }
                 
-        private void CreateTriangles(int itemsInParseCache, List<Vector3> verticies, List<Triangle> triangles, Material currentMaterial, List<Vector2> textureCoordinates, List<Vector3> vertexNormals)
+        private void CreateTriangles(int itemsInParseCache, List<Point3> verticies, List<Triangle> triangles, Material currentMaterial, List<Vector2> textureCoordinates, List<Normal3> vertexNormals)
         {
             if (VertexIndexCacheLength <= itemsInParseCache)
             {
@@ -174,9 +174,9 @@ namespace Raytracer.Rendering.FileTypes.ObjFile
                 index++;
             }
 
-            Vector3 v1, v2, v3;
+            Point3 v1, v2, v3;
             Vector2 t1 = Vector2.Zero, t2 = Vector2.Zero, t3 = Vector2.Zero;
-            Vector3 n1 = Vector3.Zero, n2 = Vector3.Zero, n3 = Vector3.Zero;
+            Normal3 n1 = Normal3.Invalid, n2 = Normal3.Invalid, n3 = Normal3.Invalid;
 
             const int Vertex = 0;
             const int Texture = 1;

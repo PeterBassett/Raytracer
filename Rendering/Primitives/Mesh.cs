@@ -45,7 +45,7 @@ namespace Raytracer.Rendering.Primitives
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    tri.Vertex[i] = tri.Vertex[i] - trans;
+                    tri.Vertex[i] = (Point3)(tri.Vertex[i] - trans);
                 }
             }
 
@@ -54,8 +54,8 @@ namespace Raytracer.Rendering.Primitives
         
         private void BuildAABB()
         {
-            Vector3 min = new Vector3(int.MaxValue, int.MaxValue, int.MaxValue);
-            Vector3 max = new Vector3(int.MinValue, int.MinValue, int.MinValue);
+            var min = new Point3(int.MaxValue, int.MaxValue, int.MaxValue);
+            var max = new Point3(int.MinValue, int.MinValue, int.MinValue);
 
             foreach (var tri in Triangles)
             {

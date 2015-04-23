@@ -7,9 +7,6 @@ using Raytracer.Rendering.Core;
 
 namespace Raytracer.Rendering.Primitives
 {
-    
-    
-
     class Sphere : Traceable
     {
         private double m_Radius = 0.0f;
@@ -86,8 +83,7 @@ namespace Raytracer.Rendering.Primitives
         private Normal3 GetNormal(Point3 vPoint)
         {
             Normal3 vNorm = (Normal3)vPoint - Pos;
-	        vNorm.Normalize();
-	        return vNorm;
+	        return vNorm.Normalize();
         }
 
         public override bool Intersect(AABB aabb)
@@ -140,8 +136,8 @@ namespace Raytracer.Rendering.Primitives
         {
             return new AABB()
             {
-                Min = new Vector3(this.Pos.X - Radius, this.Pos.Y - Radius, this.Pos.Z - Radius),
-                Max = new Vector3(this.Pos.X + Radius, this.Pos.Y + Radius, this.Pos.Z + Radius)
+                Min = this.Pos - Radius,
+                Max = this.Pos + Radius
             };
         }
 

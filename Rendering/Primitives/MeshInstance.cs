@@ -24,7 +24,8 @@ namespace Raytracer.Rendering.Primitives
 
         private Ray CreateTransformedRay(Ray ray)
         {
-            Vector3 dir = ray.Pos + -this.Pos;
+            var dir = (Vector3)(ray.Pos + -this.Pos);
+
             ray.Dir.RotateX(-this.Ori.X, ref dir);
             dir.RotateY(-this.Ori.Y, ref dir);
             dir.RotateZ(-this.Ori.Z, ref dir);

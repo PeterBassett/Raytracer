@@ -55,8 +55,8 @@ namespace Raytracer.Rendering.Accellerators
             
             internal AABB GetAABBSubQuadrant(AABB parent, bool Up, bool Left, bool Forward)
             {
-                var min = new Vector3();
-                var max = new Vector3();
+                var min = new Point3();
+                var max = new Point3();
 
                 if (Up)
                     min.X = parent.Min.X;
