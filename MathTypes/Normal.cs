@@ -187,7 +187,7 @@ namespace Raytracer.MathTypes
 
         public static Normal operator-(double s, Normal v)
 		{
-			return new Normal(v.X - s, v.Y - s, v.Z - s);
+			return new Normal(s - v.X, s - v.Y, s - v.Z);
 		}
 
         public static Normal operator -(Normal v, Vector w)
