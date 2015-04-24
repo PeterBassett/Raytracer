@@ -107,9 +107,10 @@ namespace Raytracer.Rendering.Primitives
             double S = OuterRadius;    // distance from center of tube to outside of tube
 
             double a = 1.0 - (R / Math.Sqrt(point.X * point.X + point.Y * point.Y));
-            
-            var n2 = (Normal)(a * point);
-            return n2.Normalize();
+
+            return new Normal(a * point.X, 
+                              a * point.Y, 
+                                  point.Z).Normalize();
         }
         
         public override bool Intersect(AABB aabb)
