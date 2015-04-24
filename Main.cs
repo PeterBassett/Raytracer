@@ -412,7 +412,7 @@ namespace Raytracer
             coordinateDisplay.Display(_mouseCoordinatesOverImage.X, _mouseCoordinatesOverImage.Y);
         }
 
-        void coordinateDisplay_OnRenderRequested(int x, int y)
+        void coordinateDisplay_OnRenderRequested(object sender, int x, int y)
         {
             RenderPixel(x, renderedImage.Height - y);
         }

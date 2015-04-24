@@ -11,7 +11,7 @@ namespace Raytracer
 {
     public partial class PixelCoordinates : Form
     {
-        public delegate void RenderRequested(int x, int y);
+        public delegate void RenderRequested(object sender, int x, int y);
         public event RenderRequested OnRenderRequested;
         private int _x, _y;
 
@@ -60,7 +60,7 @@ namespace Raytracer
             var onRenderRequestedEvent = OnRenderRequested;
 
             if (onRenderRequestedEvent != null)
-                onRenderRequestedEvent(_x, _y);
+                onRenderRequestedEvent(this, _x, _y);
         }
     }
 }
