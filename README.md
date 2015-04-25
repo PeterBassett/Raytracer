@@ -65,3 +65,5 @@ Examples
 ![Flawed refraction](/OutputImages/LegoCarSelfShadowed.bmp?raw=true "Mesh self shadowing.")
 * Torus.
 ![Mmm.Donuts](/OutputImages/Torus.jpeg?raw=true "Torus Primitive.")
+* Refractive Torus.
+![Mmm.Donuts](/OutputImages/RefractiveTorus.jpeg?raw=true "Refractive Torus.")
