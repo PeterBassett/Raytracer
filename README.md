@@ -46,24 +46,24 @@ With this we can implement CSG against arbitrary traceable implementations.
 
 Examples
 * Refraction needs some work in this one
-![Flawed refraction](/OutputImages/RefractiveSphere.bmp?raw=true "Flawed Refraction")
+![Flawed refraction](/OutputImages/RefractiveSphere.jpg?raw=true "Flawed Refraction")
 * Reflective sphere and cubemap
-![Flawed refraction](/OutputImages/ReflectiveCubemappedSphere.bmp?raw=true "Reflection of cubemap")
+![Flawed refraction](/OutputImages/ReflectiveCubemappedSphere.jpg?raw=true "Reflection of cubemap")
 * Refractive sphere and cubemap
-![Flawed refraction](/OutputImages/RefractiveCubemappedSphere.bmp?raw=true "Refraction of cubemap")
+![Flawed refraction](/OutputImages/RefractiveCubemappedSphere.jpg?raw=true "Refraction of cubemap")
 * Colourful room
-![Flawed refraction](/OutputImages/Room.bmp?raw=true "Spangly")
+![Flawed refraction](/OutputImages/Room.jpg?raw=true "Spangly")
 * Mesh instances
-![Flawed refraction](/OutputImages/Lamps.bmp?raw=true "Mesh instances")
+![Flawed refraction](/OutputImages/Lamps.jpg?raw=true "Mesh instances")
 * Texture mapped triangles
-![Texture mapped triangles](/OutputImages/LegoCar.bmp?raw=true "Texture mapping on triangles")
+![Texture mapped triangles](/OutputImages/LegoCar.jpg?raw=true "Texture mapping on triangles")
 * Texture mapped sphere
-![Flawed refraction](/OutputImages/Earth.bmp?raw=true "Texture mapping on sphere")
+![Flawed refraction](/OutputImages/Earth.jpg?raw=true "Texture mapping on sphere")
 * Perlin noise mixing base materials, red, yellow and texture.
-![Flawed refraction](/OutputImages/BurningEarth.bmp?raw=true "Perlin noise mixing base materials")
+![Flawed refraction](/OutputImages/BurningEarth.jpg?raw=true "Perlin noise mixing base materials")
 * Mesh self shadowing.
-![Flawed refraction](/OutputImages/LegoCarSelfShadowed.bmp?raw=true "Mesh self shadowing.")
+![Flawed refraction](/OutputImages/LegoCarSelfShadowed.jpg?raw=true "Mesh self shadowing.")
 * Torus.
-![Mmm.Donuts](/OutputImages/Torus.jpeg?raw=true "Torus Primitive.")
+![Mmm.Donuts](/OutputImages/Torus.jpg?raw=true "Torus Primitive.")
 * Refractive Torus.
-![Mmm.Donuts](/OutputImages/RefractiveTorus.jpeg?raw=true "Refractive Torus.")
+![Mmm.Donuts](/OutputImages/RefractiveTorus.jpg?raw=true "Refractive Torus.")
