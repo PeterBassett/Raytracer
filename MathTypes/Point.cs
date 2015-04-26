@@ -287,7 +287,12 @@ namespace Raytracer.MathTypes
             var y = (((this.X * matrix.M12) + (this.Y * matrix.M22)) + (this.Z * matrix.M32)) + matrix.M42;
             var z = (((this.X * matrix.M13) + (this.Y * matrix.M23)) + (this.Z * matrix.M33)) + matrix.M43;
 
-            return new Point(x, y, z);
+            var w = (((this.X * matrix.M14) + (this.Y * matrix.M24)) + (this.Z * matrix.M34)) + matrix.M44;
+
+            if(w == 1)
+                return new Point(x, y, z);
+            else
+                return new Point(x, y, z) / w;
         }
     }
 }
