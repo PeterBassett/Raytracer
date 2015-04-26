@@ -334,6 +334,20 @@ namespace Raytracer.MathTypes
         public Vector Lerp(Vector a, double t) {
             return this + ((a - this) * t);
         }
+
+        public override string ToString()
+        {
+            return string.Format("({0}, {1}, {2})", X, Y, Z);
+        }
+
+        public Vector Transform(Matrix matrix)
+        {
+            var x = (((this.X * matrix.M11) + (this.Y * matrix.M21)) + (this.Z * matrix.M31)) + matrix.M41;
+            var y = (((this.X * matrix.M12) + (this.Y * matrix.M22)) + (this.Z * matrix.M32)) + matrix.M42;
+            var z = (((this.X * matrix.M13) + (this.Y * matrix.M23)) + (this.Z * matrix.M33)) + matrix.M43;
+
+            return new Vector(x, y, z);
+        }
     }
 
 }

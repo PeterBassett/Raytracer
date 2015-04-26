@@ -24,5 +24,10 @@ namespace Raytracer.MathTypes
 
         public static float mLibCos(float angle) { return (float)Math.Cos(PI * ((double)angle / 180)); }
         public static float mLibSin(float angle) { return (float)Math.Sin(PI * ((double)angle / 180)); }
+
+        internal static bool IsZero(double value)
+        {
+			return (System.Math.Abs(value) < 1.0E-6f);
+        }
     }
 }

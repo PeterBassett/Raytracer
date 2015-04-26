@@ -16,22 +16,30 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
         public void LoadObject(StreamReader file, Scene scene)
         {
             Tokeniser oText = new Tokeniser();
-            Torus obj = new Torus();
             
-            obj.OuterRadius = float.Parse(oText.GetToken(file));
-            obj.InnerRadius = float.Parse(oText.GetToken(file));
+            var outerRadius = float.Parse(oText.GetToken(file));
+            var innerRadius = float.Parse(oText.GetToken(file));
 
             var pos = new Point();
             pos.X = float.Parse(oText.GetToken(file));
             pos.Y = float.Parse(oText.GetToken(file));
-	        pos.Z = float.Parse(oText.GetToken(file));
-            obj.Pos = pos;
+            pos.Z = float.Parse(oText.GetToken(file));
 
-            Vector ori = new Vector();
-            ori.X = float.Parse(oText.GetToken(file));
-            ori.Y = float.Parse(oText.GetToken(file));
-            ori.Z = float.Parse(oText.GetToken(file));
-            obj.Ori = ori;
+            var ori = new Vector();
+            ori.X = MathLib.Deg2Rad( float.Parse(oText.GetToken(file)) );
+            ori.Y = MathLib.Deg2Rad( float.Parse(oText.GetToken(file)) );
+            ori.Z = MathLib.Deg2Rad( float.Parse(oText.GetToken(file)) );
+
+            var worldToObject = Matrix.CreateTranslation(pos) *
+                                Matrix.CreateRotation(ori);
+
+            var objectToWorld = Matrix.CreateTranslation(-pos) *
+                                Matrix.CreateRotation(-ori);
+
+            Torus obj = new Torus(worldToObject, objectToWorld);
+
+            obj.OuterRadius = outerRadius;
+            obj.InnerRadius = innerRadius;
 
             string strMaterial = oText.GetToken(file);
             

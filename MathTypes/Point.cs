@@ -45,69 +45,72 @@ namespace Raytracer.MathTypes
 
 		public static Point operator+(Point point, Vector vector)
 		{
-			return new Point(point.X + vector.X, point.Y + vector.Y, point.Z + vector.Z);
+			return new Point(point.X + vector.X, 
+                             point.Y + vector.Y, 
+                             point.Z + vector.Z);
 		}
 
         public static Point operator +(Point point, Normal normal)
         {
-            return new Point(point.X + normal.X, point.Y + normal.Y, point.Z + normal.Z);
+            return new Point(point.X + normal.X, 
+                             point.Y + normal.Y, 
+                             point.Z + normal.Z);
         }
 
         public static Point operator +(Point point, double offset)
         {
-            return new Point(point.X + offset, point.Y + offset, point.Z + offset);
+            return new Point(point.X + offset, 
+                             point.Y + offset, 
+                             point.Z + offset);
         }
 
-		public static Vector operator -(Point point1, Point point2)
+		public static Vector operator -(Point a, Point b)
 		{
-			return new Vector(point1.X - point2.X, point1.Y - point2.Y, point1.Z - point2.Z);
+			return new Vector(a.X - b.X, 
+                              a.Y - b.Y, 
+                              a.Z - b.Z);
 		}
 
-		public static Point operator -(Point point, Vector vector)
+		public static Point operator -(Point p, Vector v)
 		{
-			return new Point(point.X - vector.X, point.Y - vector.Y, point.Z - vector.Z);
+			return new Point(p.X - v.X, 
+                             p.Y - v.Y, 
+                             p.Z - v.Z);
 		}
 
-        public static Point operator -(Point point, double offset)
+        public static Point operator -(Point p, double s)
         {
-            return new Point(point.X - offset, point.Y - offset, point.Z - offset);
+            return new Point(p.X - s, 
+                             p.Y - s, 
+                             p.Z - s);
         }
 
-		public static Point operator *(Point value, double scaleFactor)
+        public static Point operator *(double scaleFactor, Point value)
+        {
+            return value * scaleFactor;
+        }
+
+		public static Point operator *(Point p, double s)
 		{
-			Point vector;
-			vector.X = value.X * scaleFactor;
-			vector.Y = value.Y * scaleFactor;
-			vector.Z = value.Z * scaleFactor;
-			return vector;
+			return new Point(p.X * s, 
+                             p.Y * s,
+                             p.Z * s);
 		}
 
-		public static Point operator *(Point value, Vector scaleFactors)
+		public static Point operator *(Point p, Vector v)
 		{
-			Point vector;
-			vector.X = value.X * scaleFactors.X;
-			vector.Y = value.Y * scaleFactors.Y;
-			vector.Z = value.Z * scaleFactors.Z;
-			return vector;
+            return new Point(p.X * v.X,
+                             p.Y * v.Y,
+                             p.Z * v.Z);
 		}
 
-		public static Point operator *(double scaleFactor, Point value)
+		public static Point operator /(Point p, double divider)
 		{
-			Point vector;
-			vector.X = value.X * scaleFactor;
-			vector.Y = value.Y * scaleFactor;
-			vector.Z = value.Z * scaleFactor;
-			return vector;
-		}
+            var reciprocal = 1.0 / divider;
 
-		public static Point operator /(Point value, double divider)
-		{
-			Point vector;
-			var num = 1.0 / divider;
-			vector.X = value.X * num;
-			vector.Y = value.Y * num;
-			vector.Z = value.Z * num;
-			return vector;
+            return new Point(p.X * reciprocal,
+                             p.Y * reciprocal,
+                             p.Z * reciprocal);
 		}
 
         public static Point operator -(Point v)
@@ -276,6 +279,15 @@ namespace Raytracer.MathTypes
 		public static explicit operator Vector(Point normal)
 		{
 			return new Vector(normal.X, normal.Y, normal.Z);
-		}        
+		}
+
+        public Point Transform(Matrix matrix)
+        {
+            var x = (((this.X * matrix.M11) + (this.Y * matrix.M21)) + (this.Z * matrix.M31)) + matrix.M41;
+            var y = (((this.X * matrix.M12) + (this.Y * matrix.M22)) + (this.Z * matrix.M32)) + matrix.M42;
+            var z = (((this.X * matrix.M13) + (this.Y * matrix.M23)) + (this.Z * matrix.M33)) + matrix.M43;
+
+            return new Point(x, y, z);
+        }
     }
 }

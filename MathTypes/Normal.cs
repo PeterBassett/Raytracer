@@ -274,6 +274,15 @@ namespace Raytracer.MathTypes
 		public static explicit operator Vector(Normal normal)
 		{
 			return new Vector(normal.X, normal.Y, normal.Z);
-		}     
+		}
+
+        public Normal Transform(Matrix matrix)
+        {
+            var x = ((this.X * matrix.M11) + (this.Y * matrix.M21)) + (this.Z * matrix.M31);
+            var y = ((this.X * matrix.M12) + (this.Y * matrix.M22)) + (this.Z * matrix.M32);
+            var z = ((this.X * matrix.M13) + (this.Y * matrix.M23)) + (this.Z * matrix.M33);
+
+            return new Normal(x, y, z);
+        }
     }
 }

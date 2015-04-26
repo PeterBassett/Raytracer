@@ -191,5 +191,13 @@ namespace Raytracer.Rendering.Core
         }
 
         public bool IsEmpty { get { return _isEmpty; } }
+
+        public AABB Transform(Matrix transform)
+        {
+            var min = this.Min.Transform(transform);
+            var max = this.Max.Transform(transform);
+
+            return new AABB(min, max);
+        }
     }
 }

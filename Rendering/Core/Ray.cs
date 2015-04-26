@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Drawing.Drawing2D;
 using Raytracer.MathTypes;
 using System.Security.Permissions;
 using System.Runtime.Serialization;
@@ -128,6 +127,14 @@ namespace Raytracer.Rendering.Core
 
                 BuildInverseDir();
             }
+        }
+
+        public Ray Transform(Matrix matrix)
+        {
+            var pos = this.Pos.Transform(matrix);
+            var dir = this.Dir.Transform(matrix);
+            dir = dir.Normalize();
+            return new Ray(pos, dir);
         }
 	}
 }
