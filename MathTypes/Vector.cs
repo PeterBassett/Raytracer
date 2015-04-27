@@ -342,9 +342,9 @@ namespace Raytracer.MathTypes
 
         public Vector Transform(Matrix matrix)
         {
-            var x = (((this.X * matrix.M11) + (this.Y * matrix.M21)) + (this.Z * matrix.M31)) + matrix.M41;
-            var y = (((this.X * matrix.M12) + (this.Y * matrix.M22)) + (this.Z * matrix.M32)) + matrix.M42;
-            var z = (((this.X * matrix.M13) + (this.Y * matrix.M23)) + (this.Z * matrix.M33)) + matrix.M43;
+            var x = (((this.X * matrix.M11) + (this.Y * matrix.M21)) + (this.Z * matrix.M31));
+            var y = (((this.X * matrix.M12) + (this.Y * matrix.M22)) + (this.Z * matrix.M32));
+            var z = (((this.X * matrix.M13) + (this.Y * matrix.M23)) + (this.Z * matrix.M33));
 
             return new Vector(x, y, z);
         }

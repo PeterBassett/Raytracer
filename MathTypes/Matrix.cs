@@ -648,26 +648,26 @@ namespace Raytracer.MathTypes
 			return matrix2;
 		}
 
-		public static Matrix Transpose(Matrix matrix)
+		public Matrix Transpose()
 		{
-			Matrix matrix2 = new Matrix();
-			matrix2.M11 = matrix.M11;
-			matrix2.M12 = matrix.M21;
-			matrix2.M13 = matrix.M31;
-			matrix2.M14 = matrix.M41;
-			matrix2.M21 = matrix.M12;
-			matrix2.M22 = matrix.M22;
-			matrix2.M23 = matrix.M32;
-			matrix2.M24 = matrix.M42;
-			matrix2.M31 = matrix.M13;
-			matrix2.M32 = matrix.M23;
-			matrix2.M33 = matrix.M33;
-			matrix2.M34 = matrix.M43;
-			matrix2.M41 = matrix.M14;
-			matrix2.M42 = matrix.M24;
-			matrix2.M43 = matrix.M34;
-			matrix2.M44 = matrix.M44;
-			return matrix2;
+			var matrix = new Matrix();
+			matrix.M11 = this.M11;
+			matrix.M12 = this.M21;
+			matrix.M13 = this.M31;
+			matrix.M14 = this.M41;
+			matrix.M21 = this.M12;
+			matrix.M22 = this.M22;
+			matrix.M23 = this.M32;
+			matrix.M24 = this.M42;
+			matrix.M31 = this.M13;
+			matrix.M32 = this.M23;
+			matrix.M33 = this.M33;
+			matrix.M34 = this.M43;
+			matrix.M41 = this.M14;
+			matrix.M42 = this.M24;
+			matrix.M43 = this.M34;
+			matrix.M44 = this.M44;
+			return matrix;
 		}
 
 		private double GetNormalizedAffineDeterminant()

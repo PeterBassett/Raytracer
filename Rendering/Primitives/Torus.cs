@@ -9,7 +9,8 @@ namespace Raytracer.Rendering.Primitives
         public double InnerRadius { get; set; }
         public double OuterRadius { get; set; }
 
-        public Torus(Matrix worldToObjectSpace, Matrix objectToWorldSpace) :base(worldToObjectSpace, objectToWorldSpace)
+        public Torus(Matrix worldToObjectSpace, Matrix objectToWorldSpace, Matrix normalObjectToWorldSpace)
+            : base(worldToObjectSpace, objectToWorldSpace, normalObjectToWorldSpace)
         {
         }
 

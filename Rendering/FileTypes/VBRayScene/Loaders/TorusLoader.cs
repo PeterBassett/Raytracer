@@ -35,17 +35,32 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 	// TransformToObjectSpace(Ray)
 	// TransformFromObjectSpace(IntersectionInfo)
 	// Then the ObjectSpacePrimitive should take a Transform object rather than matrices directly.
-            var worldToObject = Matrix.CreateRotationX(ori.X) *
-            			Matrix.CreateRotationY(ori.Y) *
-            			Matrix.CreateRotationZ(ori.Z) *
-            			Matrix.CreateTranslation(pos);
+            var worldToObject = Matrix.CreateTranslation(-pos) * 
+                                Matrix.CreateRotationX(-ori.X) *
+            			        Matrix.CreateRotationY(-ori.Y) *
+            			        Matrix.CreateRotationZ(-ori.Z);
+            /*
+            var objectToWorld = Matrix.CreateRotationZ(ori.Z) *
+                                Matrix.CreateRotationX(ori.X) *
+                                Matrix.CreateRotationY(ori.Y) *
+                                Matrix.CreateTranslation(pos);
+            
+            
+            var objectToWorld = Matrix.CreateTranslation(pos) *
+                                Matrix.CreateRotationX(ori.X) *
+                                Matrix.CreateRotationY(ori.Y) *
+                                Matrix.CreateRotationZ(ori.Z);
+            */
+            var objectToWorld = Matrix.CreateTranslation(pos) *
+                                Matrix.CreateRotationZ(ori.Z) *    
+                                Matrix.CreateRotationX(ori.X) *
+                                Matrix.CreateRotationY(ori.Y);
 
-            var objectToWorld = Matrix.CreateTranslation(-pos) *
-		            	Matrix.CreateRotationX(-ori.Z) *
-		            	Matrix.CreateRotationY(-ori.Y) *
-		            	Matrix.CreateRotationZ(-ori.X);
+            var normalObjectToWorld = objectToWorld;
+            normalObjectToWorld.Invert();
+            normalObjectToWorld = normalObjectToWorld.Transpose();
 
-            Torus obj = new Torus(worldToObject, objectToWorld);
+            Torus obj = new Torus(worldToObject, objectToWorld, normalObjectToWorld);
 
             obj.OuterRadius = outerRadius;
             obj.InnerRadius = innerRadius;

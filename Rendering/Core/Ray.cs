@@ -132,8 +132,8 @@ namespace Raytracer.Rendering.Core
         public Ray Transform(Matrix matrix)
         {
             var pos = this.Pos.Transform(matrix);
-            var dir = this.Dir.Transform(matrix);
-            dir = dir.Normalize();
+            var dir = this.Dir.Transform(matrix).Normalize();
+            
             return new Ray(pos, dir);
         }
 	}

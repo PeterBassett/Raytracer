@@ -11,6 +11,7 @@ namespace Raytracer.Rendering.Primitives
     {
         protected Matrix _worldToObjectSpace;
         protected Matrix _objectToWorldSpace;
+        protected Matrix _normalObjectToWorldSpace;
 
         public ObjectSpacePrimitive(Matrix worldToObjectSpace)
         {
@@ -20,23 +21,24 @@ namespace Raytracer.Rendering.Primitives
             _objectToWorldSpace.Invert();
         }
 
-        public ObjectSpacePrimitive (Matrix worldToObjectSpace, Matrix objectToWorldSpace)
+        public ObjectSpacePrimitive(Matrix worldToObjectSpace, Matrix objectToWorldSpace, Matrix normalObjectToWorldSpace)
 	    {
             _worldToObjectSpace = worldToObjectSpace;
             _objectToWorldSpace = objectToWorldSpace;
+            _normalObjectToWorldSpace = normalObjectToWorldSpace;
 	    }
 
         public override IntersectionInfo Intersect(Ray ray)
         {
-            var objectSpaceRay = ray.Transform(_worldToObjectSpace);
+            ray = ray.Transform(_worldToObjectSpace);
 
-            var info = ObjectSpace_Intersect(objectSpaceRay);
+            var info = ObjectSpace_Intersect(ray);
 
             if (info.Result == HitResult.MISS)
                 return info;
 
             info.HitPoint = info.HitPoint.Transform(_objectToWorldSpace);
-            info.NormalAtHitPoint = info.NormalAtHitPoint.Transform(_objectToWorldSpace);
+            info.NormalAtHitPoint = info.NormalAtHitPoint.Transform(_normalObjectToWorldSpace);
 
             return info;
         }
