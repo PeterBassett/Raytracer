@@ -30,11 +30,20 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
             ori.Y = MathLib.Deg2Rad( float.Parse(oText.GetToken(file)) );
             ori.Z = MathLib.Deg2Rad( float.Parse(oText.GetToken(file)) );
 
-            var worldToObject = Matrix.CreateTranslation(pos) *
-                                Matrix.CreateRotation(ori);
+	// This is probably still wrong but it all needs to come out into a Transform object anyway.
+	// Methods needed :
+	// TransformToObjectSpace(Ray)
+	// TransformFromObjectSpace(IntersectionInfo)
+	// Then the ObjectSpacePrimitive should take a Transform object rather than matrices directly.
+            var worldToObject = Matrix.CreateRotationX(ori.X) *
+            			Matrix.CreateRotationY(ori.Y) *
+            			Matrix.CreateRotationZ(ori.Z) *
+            			Matrix.CreateTranslation(pos);
 
             var objectToWorld = Matrix.CreateTranslation(-pos) *
-                                Matrix.CreateRotation(-ori);
+		            	Matrix.CreateRotationX(-ori.Z) *
+		            	Matrix.CreateRotationY(-ori.Y) *
+		            	Matrix.CreateRotationZ(-ori.X);
 
             Torus obj = new Torus(worldToObject, objectToWorld);
 
