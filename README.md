@@ -40,9 +40,11 @@ Accelleration Structures
 
 Improvements To Come.
 
-I need to get mesh instancing working correctly. At the moment rotation throws off various things, e.g. shadowing.
-Change the Traceable interface. The main intersection routine should return all intersections with the object, not just the first.
-With this we can implement CSG against arbitrary traceable implementations.
+I need to get mesh instancing working correctly. Now that I have the ObjectSpacePrimitive base class this should fall into place
+relatively simply.
+
+I will eventually change the Traceable interface so that the main intersection routine returns all intersections with the object, not just the first.
+With this I can implement CSG against arbitrary traceable implementations.
 
 Examples
 * Refraction needs some work in this one
@@ -67,3 +69,5 @@ Examples
 ![Mmm.Donuts](/OutputImages/Torus.jpg?raw=true "Torus Primitive.")
 * Refractive Torus.
 ![Mmm.Donuts](/OutputImages/RefractiveTorus.jpg?raw=true "Refractive Torus.")
+* Transformed Tori.
+![Mmm.Donuts](/OutputImages/TransformedTorusChain.jpg?raw=true "Object transformations.")

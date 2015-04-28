@@ -14,6 +14,8 @@ using Raytracer.Rendering.PixelSamplers;
 using Raytracer.Rendering.Renderers;
 using Raytracer.Rendering.RenderingStrategies;
 using System.Threading;
+using System.Text;
+using System.Collections.Generic;
 
 namespace Raytracer
 {
@@ -26,6 +28,9 @@ namespace Raytracer
 
         public Main()
         {
+            generatetorusgrid();
+
+
             InitializeComponent();
             pixelPosition.Text = "";
 
@@ -41,6 +46,75 @@ namespace Raytracer
 
                 mnuAvailableFiles.DropDownItems.Add(menuItem);
             }      
+        }
+
+        private void generatetorusgrid()
+        {
+            var colours = GenerateColours();
+            var colourNames = colours.Keys.ToArray();
+            var builder = new StringBuilder();
+
+            int maxX = 10;
+            int maxY = 10;
+
+            for (int x = -maxX/2; x < maxX/2; x++)
+            {
+                for (int y = 0; y < maxY; y++)
+                {
+                    AddTorus(x, y, 0, 0, builder, colourNames);
+
+                    if(x < maxX / 2 - 1)
+                        AddTorus(x + 0.5f, y, 90, 0, builder, colourNames);
+
+                    if (y < maxY - 1)
+                        AddTorus(x, y + 0.5f, 0, 90, builder, colourNames); 
+                }
+            }
+
+            var file = File.ReadAllText(@"Data/Small/TorusGrid.ray");
+
+            var coloursTogether = string.Join("\r\n\r\n", colours.Values);
+            file = file.Replace("%MATERIALS%", coloursTogether);
+            file = file.Replace("%TORI%", builder.ToString());
+
+            File.WriteAllText(@"Data/Small/TorusGridGenerated.ray", file);
+        }
+
+        private Dictionary<string, string> GenerateColours()
+        {
+            var colours = new Dictionary<string, string>();
+
+            Random rnd = new Random();
+            var cols = (from prop in typeof(Color).GetProperties()
+                        where prop.PropertyType == typeof(Color)
+                        select (Color)prop.GetValue(null, null)).ToList();
+            
+            foreach (var colour in cols)
+            {
+                if (colour.IsNamedColor)
+                {
+                    var col = string.Format("{0}, {1}, {2}", colour.R / 255.0, colour.G / 255.0, colour.B / 255.0);
+
+                    colours.Add(colour.Name, string.Format("ColourMaterial(\"{0}\", {1}, {1}, 20, 0.35, 0,0,0, 1, 0,0,0 )", colour.Name, col));
+                }
+            }
+
+            return colours;
+        }
+
+        private Random rng = new Random();
+        private void AddTorus(float x, float y, float xRotation, float yRotation, StringBuilder builder, string [] colors)
+        {
+            var colour = colors[rng.Next(colors.Length)];
+            /*
+             * Torus( 1,5, 
+                  0, 0, 0,
+                  0, 0, 0,
+                  "red"
+                )*/
+
+            builder.AppendFormat("Torus({0},{1},\r\n{2},{3},{4},\r\n{5},{6},{7},\r\n\"{8}\")\r\n\r\n",
+                1, 5, x * 13, y * 13, 0, xRotation, yRotation, 0, colour);
         }        
 
         public void LoadSceneFromFile(string strSceneFile)

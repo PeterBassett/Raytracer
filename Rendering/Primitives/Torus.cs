@@ -9,8 +9,8 @@ namespace Raytracer.Rendering.Primitives
         public double InnerRadius { get; set; }
         public double OuterRadius { get; set; }
 
-        public Torus(Matrix worldToObjectSpace, Matrix objectToWorldSpace, Matrix normalObjectToWorldSpace)
-            : base(worldToObjectSpace, objectToWorldSpace, normalObjectToWorldSpace)
+        public Torus(Matrix worldToObjectSpace, Matrix objectToWorldSpace)
+            : base(worldToObjectSpace, objectToWorldSpace)
         {
         }
 
@@ -260,10 +260,14 @@ namespace Raytracer.Rendering.Primitives
 
         public override AABB ObjectSpace_GetAABB()
         {
+            var offset = new Vector(OuterRadius + InnerRadius,    
+                                    OuterRadius + InnerRadius,   
+                                    OuterRadius);
+
             return new AABB()
             {
-                Min = this.Pos - OuterRadius,
-                Max = this.Pos + OuterRadius
+                Min = this.Pos - offset,
+                Max = this.Pos + offset
             };
         }
     }

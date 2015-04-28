@@ -7,8 +7,6 @@ using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 {
-    
-
     [Export(typeof(IVBRaySceneItemLoader))]
     class TorusLoader : IVBRaySceneItemLoader
     {
@@ -29,38 +27,16 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
             ori.X = MathLib.Deg2Rad( float.Parse(oText.GetToken(file)) );
             ori.Y = MathLib.Deg2Rad( float.Parse(oText.GetToken(file)) );
             ori.Z = MathLib.Deg2Rad( float.Parse(oText.GetToken(file)) );
-
-	// This is probably still wrong but it all needs to come out into a Transform object anyway.
-	// Methods needed :
-	// TransformToObjectSpace(Ray)
-	// TransformFromObjectSpace(IntersectionInfo)
-	// Then the ObjectSpacePrimitive should take a Transform object rather than matrices directly.
-            var worldToObject = Matrix.CreateTranslation(-pos) * 
+            
+            var worldToObject = Matrix.CreateTranslation(-pos) *
                                 Matrix.CreateRotationX(-ori.X) *
             			        Matrix.CreateRotationY(-ori.Y) *
             			        Matrix.CreateRotationZ(-ori.Z);
-            /*
-            var objectToWorld = Matrix.CreateRotationZ(ori.Z) *
-                                Matrix.CreateRotationX(ori.X) *
-                                Matrix.CreateRotationY(ori.Y) *
-                                Matrix.CreateTranslation(pos);
             
-            
-            var objectToWorld = Matrix.CreateTranslation(pos) *
-                                Matrix.CreateRotationX(ori.X) *
-                                Matrix.CreateRotationY(ori.Y) *
-                                Matrix.CreateRotationZ(ori.Z);
-            */
-            var objectToWorld = Matrix.CreateTranslation(pos) *
-                                Matrix.CreateRotationZ(ori.Z) *    
-                                Matrix.CreateRotationX(ori.X) *
-                                Matrix.CreateRotationY(ori.Y);
-
-            var normalObjectToWorld = objectToWorld;
-            normalObjectToWorld.Invert();
-            normalObjectToWorld = normalObjectToWorld.Transpose();
-
-            Torus obj = new Torus(worldToObject, objectToWorld, normalObjectToWorld);
+            var objectToWorld = worldToObject;
+            objectToWorld.Invert();
+                       
+            Torus obj = new Torus(worldToObject, objectToWorld);
 
             obj.OuterRadius = outerRadius;
             obj.InnerRadius = innerRadius;
