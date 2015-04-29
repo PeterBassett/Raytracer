@@ -69,4 +69,6 @@ Examples
 * Transformed Tori.
 ![Mmm.Donuts](/OutputImages/TransformedTorusChain.jpg?raw=true "Object transformations.")
 * Mesh instancing and transformations.
-![Mmm.Donuts](/OutputImages/LegoCars.jpg?raw=true "Object transformations.")
+![Cars](/OutputImages/LegoCars.jpg?raw=true "Object transformations.")
+* Mesh instancing and transformations.
+![Companions](/OutputImages/Cubes.jpg?raw=true "Object transformations.")
