@@ -9,52 +9,40 @@ namespace Raytracer.Rendering.Primitives
 {
     abstract class ObjectSpacePrimitive : Traceable
     {
-        protected Matrix _worldToObjectSpace;
-        protected Matrix _objectToWorldSpace;
-       // protected Matrix _normalObjectToWorldSpace;
-        /*
-        public ObjectSpacePrimitive(Matrix worldToObjectSpace) : this(worldToObjectSpace, worldToObjectSpace.Invert())
+        protected Transform _transform;
+
+        public ObjectSpacePrimitive(Transform transform)
         {
-        }*/
-
-        public ObjectSpacePrimitive(Matrix worldToObjectSpace, Matrix objectToWorldSpace)
-	    {
-            _worldToObjectSpace = worldToObjectSpace;
-            _objectToWorldSpace = objectToWorldSpace;
-	    }
-
+            _transform = transform;
+        }
+     
         public override IntersectionInfo Intersect(Ray ray)
         {
-            ray = ray.Transform(_worldToObjectSpace);
+            ray = _transform.ToObjectSpace(ray);
 
             var info = ObjectSpace_Intersect(ray);
 
             if (info.Result == HitResult.MISS)
                 return info;
 
-            info.HitPoint = info.HitPoint.Transform(_objectToWorldSpace);
-            info.NormalAtHitPoint = info.NormalAtHitPoint.Transform(_objectToWorldSpace);
+            info = _transform.ToWorldSpace(info);
 
             return info;
         }
 
         public override bool Intersect(AABB aabb)
         {
-            var objectSpaceAABB = aabb.Transform(_worldToObjectSpace);
-
-            return ObjectSpace_Intersect(objectSpaceAABB);
+            return ObjectSpace_Intersect(_transform.ToObjectSpace(aabb));
         }
 
         public override bool Contains(Point point)
         {
-            point = point.Transform(_worldToObjectSpace);
-
-            return ObjectSpace_Contains(point);
+            return ObjectSpace_Contains(_transform.ToObjectSpace(point));
         }
 
         public override AABB GetAABB()
         {
-            return ObjectSpace_GetAABB().Transform(_objectToWorldSpace);
+            return _transform.ToWorldSpace(ObjectSpace_GetAABB());
         }
 
         public abstract IntersectionInfo ObjectSpace_Intersect(Ray ray);

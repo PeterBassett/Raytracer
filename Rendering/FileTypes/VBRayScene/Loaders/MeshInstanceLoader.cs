@@ -17,7 +17,7 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
         {
             Tokeniser oText = new Tokeniser();
 
-            var offset = new Point(
+            var offset = new Vector(
                  float.Parse(oText.GetToken(file)),
                  float.Parse(oText.GetToken(file)),
                  float.Parse(oText.GetToken(file))
@@ -31,12 +31,9 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 
             var meshName = oText.GetToken(file);
 
-            MeshInstance inst = new MeshInstance()
-            {
-                Mesh = scene.FindMesh(meshName),
-                Ori = rotation,
-                Pos = offset
-            };
+            var transform = Transform.CreateTransform(-offset, -rotation);
+
+            var inst = new MeshInstance(scene.FindMesh(meshName), transform);
 
             scene.AddObject(inst);
         }

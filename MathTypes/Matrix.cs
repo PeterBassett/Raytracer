@@ -418,7 +418,6 @@ namespace Raytracer.MathTypes
 				0, -s, c, 0,
 				0, 0, 0, 1);
 		}
-
 		
         public static Matrix CreateRotationY(double radians)
 		{

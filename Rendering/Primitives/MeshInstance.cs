@@ -4,15 +4,20 @@ using Raytracer.Rendering.Core;
 
 namespace Raytracer.Rendering.Primitives
 {
-    class MeshInstance : Traceable
+    class MeshInstance : ObjectSpacePrimitive
     {
+        public MeshInstance(Mesh mesh, Transform transform)
+            : base(transform)
+        {
+            Mesh = mesh;
+        }
+
         private AABB bounds = AABB.Empty;
         public Mesh Mesh { get; set; }
-        public override IntersectionInfo Intersect(Ray ray)
-        {
-            var transformedRay = CreateTransformedRay(ray);
 
-            var result = Mesh.Intersect(transformedRay);
+        public override IntersectionInfo ObjectSpace_Intersect(Ray ray)
+        {
+            var result = Mesh.Intersect(ray);
 
             if (result.Result != HitResult.MISS)
             {
@@ -22,24 +27,17 @@ namespace Raytracer.Rendering.Primitives
             return result;
         }
 
-        private Ray CreateTransformedRay(Ray ray)
+        public override bool ObjectSpace_Intersect(AABB aabb)
         {
-            var dir = (Vector)(ray.Pos + -this.Pos);
-
-            ray.Dir.RotateX(-this.Ori.X, ref dir);
-            dir.RotateY(-this.Ori.Y, ref dir);
-            dir.RotateZ(-this.Ori.Z, ref dir);
-            //dir.Normalize();
-            
-            return new Ray(ray.Pos + -this.Pos, dir);            
+            return this.GetAABB().Intersect(aabb);
         }
 
-        public override bool Intersect(AABB aabb)
+        public override bool ObjectSpace_Contains(Point point)
         {
-            return GetAABB().Intersect(aabb);
+            throw new NotImplementedException();
         }
 
-        public override AABB GetAABB()
+        public override AABB ObjectSpace_GetAABB()
         {
             if (bounds.IsEmpty)
             {
@@ -53,11 +51,6 @@ namespace Raytracer.Rendering.Primitives
             }
 
             return bounds;
-        }
-
-        public override bool Contains(Point point)
-        {
-            return false;
         }
     }
 }

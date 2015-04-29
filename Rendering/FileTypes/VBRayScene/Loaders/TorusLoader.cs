@@ -18,25 +18,19 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
             var outerRadius = float.Parse(oText.GetToken(file));
             var innerRadius = float.Parse(oText.GetToken(file));
 
-            var pos = new Point();
+            var pos = new Vector();
             pos.X = float.Parse(oText.GetToken(file));
             pos.Y = float.Parse(oText.GetToken(file));
             pos.Z = float.Parse(oText.GetToken(file));
 
             var ori = new Vector();
-            ori.X = MathLib.Deg2Rad( float.Parse(oText.GetToken(file)) );
-            ori.Y = MathLib.Deg2Rad( float.Parse(oText.GetToken(file)) );
-            ori.Z = MathLib.Deg2Rad( float.Parse(oText.GetToken(file)) );
-            
-            var worldToObject = Matrix.CreateTranslation(-pos) *
-                                Matrix.CreateRotationX(-ori.X) *
-            			        Matrix.CreateRotationY(-ori.Y) *
-            			        Matrix.CreateRotationZ(-ori.Z);
-            
-            var objectToWorld = worldToObject;
-            objectToWorld.Invert();
-                       
-            Torus obj = new Torus(worldToObject, objectToWorld);
+            ori.X = float.Parse(oText.GetToken(file));
+            ori.Y = float.Parse(oText.GetToken(file));
+            ori.Z = float.Parse(oText.GetToken(file));
+
+            var transform = Transform.CreateTransform(-pos, -ori);
+
+            Torus obj = new Torus(transform);
 
             obj.OuterRadius = outerRadius;
             obj.InnerRadius = innerRadius;

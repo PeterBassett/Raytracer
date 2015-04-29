@@ -93,6 +93,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Rendering\Accellerators\IAccellerator.cs" />
+    <Compile Include="Rendering\Core\Transform.cs" />
     <Compile Include="Rendering\FileTypes\ImageReader.cs" />
     <Compile Include="Rendering\PixelSampler\EdgeDetectionPerComponentSampler.cs" />
     <Compile Include="Rendering\Primitives\ObjectSpacePrimitive.cs" />
@@ -214,6 +215,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\Small\BurningEarth.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\LegoCars.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\Small\TorusChain.ray">
