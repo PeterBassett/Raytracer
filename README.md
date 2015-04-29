@@ -40,9 +40,6 @@ Accelleration Structures
 
 Improvements To Come.
 
-I need to get mesh instancing working correctly. Now that I have the ObjectSpacePrimitive base class this should fall into place
-relatively simply.
-
 I will eventually change the Traceable interface so that the main intersection routine returns all intersections with the object, not just the first.
 With this I can implement CSG against arbitrary traceable implementations.
 
