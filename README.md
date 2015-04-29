@@ -71,3 +71,5 @@ Examples
 ![Mmm.Donuts](/OutputImages/RefractiveTorus.jpg?raw=true "Refractive Torus.")
 * Transformed Tori.
 ![Mmm.Donuts](/OutputImages/TransformedTorusChain.jpg?raw=true "Object transformations.")
+* Mesh instancing and transformations.
+![Mmm.Donuts](/OutputImages/LegoCars.jpg?raw=true "Object transformations.")
