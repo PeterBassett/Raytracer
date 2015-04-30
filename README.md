@@ -10,6 +10,7 @@ Primitives
 * Planes
 * Meshes loaded from wavefront obj files. Supports mtl files.
 * Tori (Toruses, Donuts....Mmm Donuts!)
+* Cylinders
 
 Effects
 * Reflections
@@ -74,3 +75,5 @@ Examples
 ![Companions](/OutputImages/Cubes.jpg?raw=true "Object transformations.")
 * 280 interlinked tori with verious levels of reflectivity and refraction.
 ![chain mail](/OutputImages/ToriGrid.jpg?raw=true ".")
+* Cylinders. They support all the usual materials.
+![cylinders](/OutputImages/Cylinders.jpg?raw=true ".")
