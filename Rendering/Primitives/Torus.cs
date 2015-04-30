@@ -18,7 +18,7 @@ namespace Raytracer.Rendering.Primitives
         {
             Ray r = ray;
 
-            double R = InnerRadius;    // distance from center of hole to center of tube
+            double R = InnerRadius;
             double S = OuterRadius;    // distance from center of tube to outside of tube
 
             var direction = r.Dir;
@@ -73,8 +73,6 @@ namespace Raytracer.Rendering.Primitives
                 }
             }
 
-            //uArray = null;
-
             if (found)
             {
                 var hitPoint = r.Pos + (r.Dir * distance);
@@ -85,22 +83,9 @@ namespace Raytracer.Rendering.Primitives
             return new IntersectionInfo(HitResult.MISS); 
         }
 
-        public Normal GetNormal(Point point)
+        private Normal GetNormal(Point point)
         {
-            // Thanks to the fixed orientation of the torus in object space,
-            // it always lies on the xy plane, and centered at <0,0,0>.
-            // Therefore, if we drop a line in the z-direction from
-            // any point P on the surface of the torus to the xy plane,
-            // we find a point P' the same direction as a point Q at the center
-            // of the torus tube.  Converting P' to a unit vector and multiplying
-            // the result by the magnitude of Q (which is the constant R)
-            // gives us the coordinates of Q.  Then the surface normal points
-            // in the same direction as the difference P-Q.
-            // See the tutorial text for more details.
-            double R = InnerRadius;    // distance from center of hole to center of tube
-            double S = OuterRadius;    // distance from center of tube to outside of tube
-
-            double a = 1.0 - (R / Math.Sqrt(point.X * point.X + point.Y * point.Y));
+            var a = 1.0 - InnerRadius / Math.Sqrt(point.X * point.X + point.Y * point.Y);
 
             return new Normal(a * point.X,
                               a * point.Y,
@@ -109,16 +94,14 @@ namespace Raytracer.Rendering.Primitives
 
         public override bool ObjectSpace_Intersect(AABB aabb)
         {
-            return this.GetAABB().Intersect(aabb);
+            return GetAABB().Intersect(aabb);
         }
 
         public override bool ObjectSpace_Contains(Point point)
         {
-            double R = InnerRadius;    // distance from center of hole to center of tube
-            double S = OuterRadius;    // distance from center of tube to outside of tube
+            var t = InnerRadius - Math.Sqrt(point.X * point.X + point.Y * point.Y);
+            var f = t * t + point.Z * point.Z - OuterRadius * OuterRadius;
 
-            double t = R - Math.Sqrt(point.X * point.X + point.Y * point.Y);
-            double f = t * t + point.Z * point.Z - S * S;
             return f <= MathLib.Epsilon; 
         }
 
@@ -128,7 +111,7 @@ namespace Raytracer.Rendering.Primitives
                                     OuterRadius + InnerRadius,   
                                     OuterRadius);
 
-            return new AABB()
+            return new AABB
             {
                 Min = this.Pos - offset,
                 Max = this.Pos + offset

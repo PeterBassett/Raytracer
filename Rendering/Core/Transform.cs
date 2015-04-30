@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Raytracer.MathTypes;
+﻿using Raytracer.MathTypes;
 
 namespace Raytracer.Rendering.Core
 {
     class Transform
     {
-        private Matrix _transform;
-        private Matrix _inverse;
+        private readonly Matrix _transform;
+        private readonly Matrix _inverse;
 
-        public Transform(Matrix transform, Matrix inverse)
+        private Transform(Matrix transform, Matrix inverse)
         {
             _transform = transform;
             _inverse = inverse;
@@ -32,13 +28,13 @@ namespace Raytracer.Rendering.Core
 
         public Ray ToObjectSpace(Ray ray)
         {
-            return new Ray(this._transform.Transform(ray.Pos),
-                           this._transform.Transform(ray.Dir));
+            return new Ray(_transform.Transform(ray.Pos),
+                           _transform.Transform(ray.Dir));
         }
 
         public Point ToObjectSpace(Point point)
         {
-            return this._transform.Transform(point);
+            return _transform.Transform(point);
         }
 
         public IntersectionInfo ToWorldSpace(IntersectionInfo info)
@@ -46,27 +42,24 @@ namespace Raytracer.Rendering.Core
             return new IntersectionInfo(info.Result, 
                                         info.Primitive, 
                                         info.T, 
-                                        info.HitPoint.Transform(this._inverse), 
+                                        info.HitPoint.Transform(_inverse), 
                                         info.ObjectLocalHitPoint, 
-                                        info.NormalAtHitPoint.Transform(this._inverse));
-        }
-
-        public AABB ToWorldSpace(AABB aabb)
-        {
-            return Apply(this._transform, aabb);
+                                        info.NormalAtHitPoint.Transform(_inverse));
         }
 
         public AABB ToObjectSpace(AABB aabb)
         {
-            return Apply(this._inverse, aabb);
+            return Apply(_transform, aabb);
+        }
+
+        public AABB ToWorldSpace(AABB aabb)
+        {
+            return Apply(_inverse, aabb);
         }
 
         private AABB Apply(Matrix m, AABB aabb)
         {
-            var min = aabb.Min.Transform(m);
-            var max = aabb.Max.Transform(m);
-
-            return new AABB(min, max);
+            return aabb.Transform(m);
         }
     }
 }

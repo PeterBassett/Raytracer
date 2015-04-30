@@ -14,8 +14,9 @@ namespace Raytracer.MathTypes
         public const double IntersectionEpsilon = 0.0001;
 
         public  const double INVALID_INTERSECTION = 1.0E10f;
-        
-        private const double PI = 3.14159265358979323846264338327950288419716939937510f;        
+
+        public const double PI = 3.14159265358979323846264338327950288419716939937510f;
+        public const double TWOPI = 3.14159265358979323846264338327950288419716939937510f;        
 
         public static double Deg2Rad(double a) { return ((a) * PI / 180); }
         public static double Rad2Deg(double a) { return ((a) * 180 / PI); }

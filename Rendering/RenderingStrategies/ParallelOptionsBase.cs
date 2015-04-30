@@ -11,6 +11,10 @@ namespace Raytracer.Rendering.RenderingStrategies
         private readonly bool _multiThreaded;
         protected CancellationToken _cancellationToken;
 
+        public delegate void CompletedScanLine(int completed, int total);
+
+        public event CompletedScanLine OnCompletedScanLine;
+
         protected ParallelOptionsBase(bool multiThreaded, CancellationToken cancellationToken)
         {
             _multiThreaded = multiThreaded;
@@ -28,6 +32,14 @@ namespace Raytracer.Rendering.RenderingStrategies
                 options.MaxDegreeOfParallelism = System.Environment.ProcessorCount;
             
             return options;
+        }
+
+        protected void RaiseOnCompletedScanLine(int completed, int total)
+        {
+            var handler = OnCompletedScanLine;
+
+            if (handler != null)
+                handler(completed, total);
         }
     }
 }

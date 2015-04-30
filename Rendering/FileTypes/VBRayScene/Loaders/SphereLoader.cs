@@ -15,20 +15,23 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
         public string LoaderType { get { return "Sphere"; } }
         public void LoadObject(StreamReader file, Scene scene)
         {
-            Tokeniser oText = new Tokeniser();
-            Sphere obj = new Sphere();
-            
-            obj.Radius = float.Parse(oText.GetToken(file));
+            var oText = new Tokeniser();
+            var obj = new Sphere
+            {
+                Radius = float.Parse(oText.GetToken(file))
+            };
 
-            var pos = new Point();
-            pos.X = float.Parse(oText.GetToken(file));
-            pos.Y = float.Parse(oText.GetToken(file));
-	        pos.Z = float.Parse(oText.GetToken(file));
+            var pos = new Point
+            {
+                X = float.Parse(oText.GetToken(file)),
+                Y = float.Parse(oText.GetToken(file)),
+                Z = float.Parse(oText.GetToken(file))
+            };
             obj.Pos = pos;
 
-            Vector ori = new Vector();
+            var ori = new Vector();
 
-            string strMaterial = null;
+            string strMaterial;
 
             float f;
             var token = oText.GetToken(file);

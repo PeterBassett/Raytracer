@@ -48,8 +48,9 @@ namespace Raytracer.Rendering.Accellerators
 
                 for (var i = 1; i < primitives.Count; i++)
                 {
-                    _bounds = primitives[i].GetAABB().InflateToEncapsulate(_bounds);
-                    midpt = midpt + (primitives[i].Pos * trisRecp);
+                    var primitivePos = primitives[i].GetAABB();
+                    _bounds = primitivePos.InflateToEncapsulate(_bounds);
+                    midpt = midpt + (primitivePos.Center * trisRecp);
                 }
 
                 var bestAxis = 0;
@@ -61,8 +62,10 @@ namespace Raytracer.Rendering.Accellerators
                     var rightCount = 0;
 
                     for (var i = 0; i < primitives.Count; i++)
-                    {                        
-                        if (midpt[axis] >= primitives[i].Pos[axis])
+                    {
+                        var primitivePos = primitives[i].GetAABB().Center;
+
+                        if (midpt[axis] >= primitivePos[axis])
                         {
                             rightCount++;
                             partition[axis * primitives.Count + i] = true;

@@ -95,7 +95,9 @@ namespace Raytracer
                 {
                     var col = string.Format("{0}, {1}, {2}", colour.R / 255.0, colour.G / 255.0, colour.B / 255.0);
 
-                    colours.Add(colour.Name, string.Format("ColourMaterial(\"{0}\", {1}, {1}, 20, 0.35, 0,0,0, 1, 0,0,0 )", colour.Name, col));
+                    var reflected = rnd.NextDouble().ToString("F2");
+                    var refracted = rnd.NextDouble().ToString("F2");
+                    colours.Add(colour.Name, string.Format("ColourMaterial(\"{0}\", {1}, {1}, 20, 0.35, {2},{2},{2}, 1.33, {3},{3},{3} )", colour.Name, col, reflected, refracted));
                 }
             }
 
@@ -265,6 +267,35 @@ namespace Raytracer
 
                 renderingStrategy = new BasicRenderingStrategy(pixelSampler, blnMultiThreaded, token);
             }
+
+            int currentPercentage = 0;
+            var scanLinesCompleted = new HashSet<int>();
+            var currentTotal = 0;
+            renderingStrategy.OnCompletedScanLine += (completed, total) =>
+            {
+                if (total != currentTotal)
+                {
+                    currentTotal = total;
+                    scanLinesCompleted.Clear();
+                }
+
+                if (!scanLinesCompleted.Contains(completed))
+                    scanLinesCompleted.Add(completed);
+
+                var percentage = (int)((scanLinesCompleted.Count / (double)total) * 100);
+
+                if (currentPercentage != percentage)
+                {
+                    currentPercentage = percentage;
+
+                    this.UIThread(() =>
+                    {
+                        lblPercent.Text = string.Format("Rendered {0}%\r\n", currentPercentage);
+
+                        Application.DoEvents();
+                    });
+                }
+            };
 
             IRenderer renderer = new RayTracingRenderer(m_scene, camera, renderingStrategy, (uint)m_scene.RecursionDepth, blnMultiThreaded, traceShadows, traceReflections, traceRefractions);
 

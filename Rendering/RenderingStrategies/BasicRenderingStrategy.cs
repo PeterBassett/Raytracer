@@ -35,6 +35,8 @@ namespace Raytracer.Rendering.RenderingStrategies
 
                     frameBuffer.SetPixel(x, y, _pixelSampler.SamplePixel(renderer, x, y));
                 }
+
+                RaiseOnCompletedScanLine(x, frameBuffer.Size.Width);
             });
             frameBuffer.EndWriting();
         }

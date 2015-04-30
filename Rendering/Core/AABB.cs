@@ -3,11 +3,11 @@ using System.Diagnostics.Contracts;
 using Raytracer.MathTypes;
 
 namespace Raytracer.Rendering.Core
-{       
+{
     struct AABB
     {
         public Point Min;
-        public Point Max;        
+        public Point Max;
         public static readonly AABB Empty = new AABB(true);
         private readonly bool _isEmpty;
 
@@ -18,12 +18,21 @@ namespace Raytracer.Rendering.Core
             _isEmpty = isEmpty;
         }
 
+        public static AABB Invalid()
+        {
+            return new AABB
+            {
+                Min = new Point(int.MaxValue, int.MaxValue, int.MaxValue),
+                Max = new Point(int.MinValue, int.MinValue, int.MinValue)
+            };
+        }
+
         public AABB(Point min, Point max)
         {
             _isEmpty = false;
             double temp;
             if (min.X > max.X)
-            { 
+            {
                 temp = min.X;
                 min.X = max.X;
                 max.X = temp;
@@ -80,7 +89,7 @@ namespace Raytracer.Rendering.Core
                     X = Min.X + ((Max.X - Min.X) / 2),
                     Y = Min.Y + ((Max.Y - Min.Y) / 2),
                     Z = Min.Z + ((Max.Z - Min.Z) / 2)
-                };                
+                };
             }
         }
 
@@ -123,6 +132,17 @@ namespace Raytracer.Rendering.Core
             return new AABB(min, max);
         }
 
+        private AABB Union(Point p)
+        {
+            return new AABB(
+                        new Point(Math.Min(this.Min.X, p.X),
+                                  Math.Min(this.Min.Y, p.Y),
+                                  Math.Min(this.Min.Z, p.Z)),
+                        new Point(Math.Max(this.Max.X, p.X),
+                                  Math.Max(this.Max.Y, p.Y),
+                                  Math.Max(this.Max.Z, p.Z)));
+        }
+
         /// <summary>
         /// Indicates whether this instance and a specified object are equal.
         /// </summary>
@@ -132,7 +152,7 @@ namespace Raytracer.Rendering.Core
         /// <param name="obj">Another object to compare to. </param><filterpriority>2</filterpriority>
         public override bool Equals(object obj)
         {
-            return obj is AABB && this == (AABB) obj;
+            return obj is AABB && this == (AABB)obj;
         }
 
         public override int GetHashCode()
@@ -148,7 +168,7 @@ namespace Raytracer.Rendering.Core
         /// <returns>True if the two vectors are equal; otherwise, False.</returns>
         public static bool operator ==(AABB u, AABB v)
         {
-            return  (Math.Abs(u.Min.X - v.Min.X) < MathLib.Epsilon) && 
+            return (Math.Abs(u.Min.X - v.Min.X) < MathLib.Epsilon) &&
                     (Math.Abs(u.Min.Y - v.Min.Y) < MathLib.Epsilon) &&
                     (Math.Abs(u.Min.Z - v.Min.Z) < MathLib.Epsilon) &&
                     (Math.Abs(u.Max.X - v.Max.X) < MathLib.Epsilon) &&
@@ -177,8 +197,8 @@ namespace Raytracer.Rendering.Core
             var T = b.Center - Center;//vector from A to B
 
             return (Math.Abs(T.X) <= (Width + b.Width) &&
-                   Math.Abs(T.Y) <=  (Height + b.Height) &&
-                   Math.Abs(T.Z) <=  (Depth + b.Depth)); 
+                   Math.Abs(T.Y) <= (Height + b.Height) &&
+                   Math.Abs(T.Z) <= (Depth + b.Depth));
         }
 
         public bool Contains(Point point)
@@ -186,18 +206,26 @@ namespace Raytracer.Rendering.Core
             var T = point - Center;
 
             return (Math.Abs(T.X) <= Width &&
-                   Math.Abs(T.Y) <=  Height &&
-                   Math.Abs(T.Z) <=  Depth);
+                   Math.Abs(T.Y) <= Height &&
+                   Math.Abs(T.Z) <= Depth);
         }
 
         public bool IsEmpty { get { return _isEmpty; } }
 
         public AABB Transform(Matrix transform)
         {
-            var min = this.Min.Transform(transform);
-            var max = this.Max.Transform(transform);
+            var ret = AABB.Invalid();
 
-            return new AABB(min, max);
+            ret = ret.Union(new Point(Min.X, Min.Y, Min.Z).Transform(transform));
+            ret = ret.Union(new Point(Max.X, Min.Y, Min.Z).Transform(transform));
+            ret = ret.Union(new Point(Min.X, Max.Y, Min.Z).Transform(transform));
+            ret = ret.Union(new Point(Min.X, Min.Y, Max.Z).Transform(transform));
+            ret = ret.Union(new Point(Min.X, Max.Y, Max.Z).Transform(transform));
+            ret = ret.Union(new Point(Max.X, Max.Y, Min.Z).Transform(transform));
+            ret = ret.Union(new Point(Max.X, Min.Y, Max.Z).Transform(transform));
+            ret = ret.Union(new Point(Max.X, Max.Y, Max.Z).Transform(transform));
+
+            return ret;
         }
     }
 }

@@ -48,6 +48,8 @@ namespace Raytracer.Rendering.RenderingStrategies
                         // ReSharper disable once AccessToModifiedClosure
                         SetColourBlock(frameBuffer, skip, x, y, colour);
                     }
+
+                    RaiseOnCompletedScanLine(x, xs.Length);
                 });
 
                 if(!_cancellationToken.IsCancellationRequested)

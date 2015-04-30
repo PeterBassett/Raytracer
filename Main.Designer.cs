@@ -82,6 +82,7 @@
             this.btnRender = new System.Windows.Forms.Button();
             this.dlgSaveRay = new System.Windows.Forms.SaveFileDialog();
             this.pixelPosition = new System.Windows.Forms.Label();
+            this.lblPercent = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.renderedImage)).BeginInit();
             this.mainMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -207,7 +208,7 @@
             this.progressiveToolStripMenuItem.Checked = true;
             this.progressiveToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.progressiveToolStripMenuItem.Name = "progressiveToolStripMenuItem";
-            this.progressiveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.progressiveToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.progressiveToolStripMenuItem.Text = "Progressive";
             this.progressiveToolStripMenuItem.Click += new System.EventHandler(this.progressiveToolStripMenuItem_Click);
             // 
@@ -218,7 +219,7 @@
             this.greyscaleEdgeDetectionSamplerToolStripMenuItem,
             this.componentEdgeDetectionSamplerToolStripMenuItem});
             this.highQualityToolStripMenuItem.Name = "highQualityToolStripMenuItem";
-            this.highQualityToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.highQualityToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.highQualityToolStripMenuItem.Text = "High Quality";
             this.highQualityToolStripMenuItem.Click += new System.EventHandler(this.progressiveToolStripMenuItem_Click);
             // 
@@ -515,6 +516,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.lblPercent);
             this.groupBox2.Controls.Add(this.btnCancelRendering);
             this.groupBox2.Controls.Add(this.btnRender);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -559,6 +561,16 @@
             this.pixelPosition.TabIndex = 5;
             this.pixelPosition.Text = "X:Y";
             this.pixelPosition.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblPercent
+            // 
+            this.lblPercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPercent.Location = new System.Drawing.Point(88, 20);
+            this.lblPercent.Name = "lblPercent";
+            this.lblPercent.Size = new System.Drawing.Size(100, 23);
+            this.lblPercent.TabIndex = 6;
+            this.lblPercent.Text = "0%";
+            this.lblPercent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Main
             // 
@@ -643,6 +655,7 @@
         private System.Windows.Forms.ToolStripMenuItem jitteredSamplerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem greyscaleEdgeDetectionSamplerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem componentEdgeDetectionSamplerToolStripMenuItem;
+        private System.Windows.Forms.Label lblPercent;
     }
 }
 
