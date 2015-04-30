@@ -1,0 +1,60 @@
+Viewpoint(0,0,-4,   ' Viewpoint ' 
+	  0, 0, 0,  ' View Angle ' 
+	  90)	     ' FOV '	
+
+RenderSettings
+(
+	4, 'Recursion Depth'
+	true, 'Trace Shadows'
+	true, 'Trace Reflections'
+	true, 'Trace Refractions'
+)
+
+AmbientLight(100,100,100)
+
+LightSource(-10, 20, -10, 80, 80, 80)
+LightSource(30, 20, -10, 80, 80, 80)
+
+ColourMaterial("red",
+  0.7, 0.1, 0.1,    ' Ambient. '
+  0.7, 0.1, 0.1,    ' Diffuse. '
+  20, 0.9,          ' Specular. '
+  0.5, 0.5, 0.5,    ' Reflected. '
+  0,         ' TransN, n1, n2. '
+  0, 0, 0 
+)
+
+ColourMaterial("glass",
+  0.0, 0.0, 0.0,    ' Ambient. '
+  0.0, 0.0, 0.0,    ' Diffuse. '
+  20, 0.9,          ' Specular. '
+  0.7, 0.7, 0.7,    ' Reflected. '
+  1.33,         ' TransN, n1, n2. '
+  0.9, 0.9, 0.9 
+)
+
+Cylinder
+(  
+1, 2,
+0,0,0,
+90,0,0,
+"red"
+)
+
+Sphere
+(
+	1, 'Radius'
+	0, 'X'
+	1, 'Y'
+	0, 'Z'
+	"red" 'Material'
+)
+
+Sphere
+(
+	1, 'Radius'
+	0, 'X'
+	-1, 'Y'
+                0, 'Z'
+	"red" 'Material'
+)

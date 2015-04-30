@@ -27,11 +27,6 @@ namespace Raytracer.Rendering.Primitives
             return result;
         }
 
-        public override bool ObjectSpace_Intersect(AABB aabb)
-        {
-            return this.GetAABB().Intersect(aabb);
-        }
-
         public override bool ObjectSpace_Contains(Point point)
         {
             throw new NotImplementedException();

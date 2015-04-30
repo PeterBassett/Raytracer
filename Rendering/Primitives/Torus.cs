@@ -92,11 +92,6 @@ namespace Raytracer.Rendering.Primitives
                                   point.Z).Normalize();
         }
 
-        public override bool ObjectSpace_Intersect(AABB aabb)
-        {
-            return GetAABB().Intersect(aabb);
-        }
-
         public override bool ObjectSpace_Contains(Point point)
         {
             var t = InnerRadius - Math.Sqrt(point.X * point.X + point.Y * point.Y);

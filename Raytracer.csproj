@@ -95,7 +95,9 @@
     <Compile Include="Rendering\Accellerators\IAccellerator.cs" />
     <Compile Include="Rendering\Core\Transform.cs" />
     <Compile Include="Rendering\FileTypes\ImageReader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\CylinderLoader.cs" />
     <Compile Include="Rendering\PixelSampler\EdgeDetectionPerComponentSampler.cs" />
+    <Compile Include="Rendering\Primitives\Cylinder.cs" />
     <Compile Include="Rendering\Primitives\ObjectSpacePrimitive.cs" />
     <Compile Include="Rendering\RenderingStrategies\BasicRenderingStrategy.cs" />
     <Compile Include="Rendering\RenderingStrategies\ParallelOptionsBase.cs" />
@@ -215,6 +217,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\Small\BurningEarth.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\Lozenge.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\Cylinder.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\Cylinders.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\Small\LegoCars.ray">

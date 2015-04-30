@@ -30,11 +30,6 @@ namespace Raytracer.Rendering.Primitives
             return info;
         }
 
-        public override bool Intersect(AABB aabb)
-        {
-            return ObjectSpace_Intersect(_transform.ToObjectSpace(aabb));
-        }
-
         public override bool Contains(Point point)
         {
             return ObjectSpace_Contains(_transform.ToObjectSpace(point));
@@ -46,7 +41,6 @@ namespace Raytracer.Rendering.Primitives
         }
 
         public abstract IntersectionInfo ObjectSpace_Intersect(Ray ray);
-        public abstract bool ObjectSpace_Intersect(AABB aabb);
         public abstract bool ObjectSpace_Contains(Point point);
         public abstract AABB ObjectSpace_GetAABB();
     }

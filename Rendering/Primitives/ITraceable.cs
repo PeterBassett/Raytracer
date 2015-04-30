@@ -12,7 +12,6 @@ namespace Raytracer.Rendering.Primitives
             Ori = new Vector(0.0f, 0.0f, 0.0f);
         }
         public abstract IntersectionInfo Intersect(Ray ray);
-        public abstract bool Intersect(AABB aabb);
         public abstract bool Contains(Point point);
         // ReSharper disable once InconsistentNaming
         public abstract AABB GetAABB();

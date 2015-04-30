@@ -30,5 +30,13 @@ namespace Raytracer.MathTypes
         {
 			return (System.Math.Abs(value) < 1.0E-6f);
         }
+
+        public static float Clamp(float val, float min, float max) 
+        {
+            val = Math.Min(val, max);
+            val = Math.Max(val, min);
+            return val;
+        }
+
     }
 }

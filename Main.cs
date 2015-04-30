@@ -269,7 +269,7 @@ namespace Raytracer
             }
 
             int currentPercentage = 0;
-            var scanLinesCompleted = new HashSet<int>();
+            var scanLinesCompleted = new System.Collections.Concurrent.ConcurrentDictionary<int, int>();
             var currentTotal = 0;
             renderingStrategy.OnCompletedScanLine += (completed, total) =>
             {
@@ -279,8 +279,8 @@ namespace Raytracer
                     scanLinesCompleted.Clear();
                 }
 
-                if (!scanLinesCompleted.Contains(completed))
-                    scanLinesCompleted.Add(completed);
+                if (!scanLinesCompleted.ContainsKey(completed))
+                    scanLinesCompleted.AddOrUpdate(completed, completed, (a, b) => completed);
 
                 var percentage = (int)((scanLinesCompleted.Count / (double)total) * 100);
 

@@ -86,52 +86,6 @@ namespace Raytracer.Rendering.Primitives
 	        return vNorm.Normalize();
         }
 
-        public override bool Intersect(AABB aabb)
-        {
-            // Get the center of the sphere relative to the center of the box
-            Vector sphereCenterRelBox = this.Pos - aabb.Center;
-            // Point on surface of box that is closest to the center of the sphere
-            Vector boxPoint = new Vector();
-
-            // Check sphere center against box along the X axis alone. 
-            // If the sphere is off past the left edge of the box, 
-            // then the left edge is closest to the sphere. 
-            // Similar if it's past the right edge. If it's between 
-            // the left and right edges, then the sphere's own X 
-            // is closest, because that makes the X distance 0, 
-            // and you can't get much closer than that :)
-
-            if (sphereCenterRelBox.X < -aabb.Width / 2.0f)
-                boxPoint.X = -aabb.Width / 2.0f;
-            else if (sphereCenterRelBox.X > aabb.Width / 2.0f)
-                boxPoint.X = aabb.Width / 2.0f;
-            else
-                boxPoint.X = sphereCenterRelBox.X;
-
-            // ...same for Y axis
-            if (sphereCenterRelBox.Y < -aabb.Height / 2.0f)
-                boxPoint.Y = -aabb.Height / 2.0f;
-            else if (sphereCenterRelBox.Y > aabb.Height / 2.0f)
-                boxPoint.Y = aabb.Height / 2.0f;
-            else
-                boxPoint.Y = sphereCenterRelBox.Y;
-
-            // ... same for Z axis
-            if (sphereCenterRelBox.Z < -aabb.Depth / 2.0f)
-                boxPoint.Z = -aabb.Depth / 2.0f;
-            else if (sphereCenterRelBox.Z > aabb.Depth / 2.0f)
-                boxPoint.Z = aabb.Depth / 2.0f;
-            else
-                boxPoint.Z = sphereCenterRelBox.Z;
-
-            // Now we have the closest point on the box, so get the distance from 
-            // that to the sphere center, and see if it's less than the radius
-
-            Vector dist = sphereCenterRelBox - boxPoint;
-
-            return (dist.X * dist.X + dist.Y * dist.Y + dist.Z * dist.Z < this.Radius * this.Radius);
-        }
-
         public override AABB GetAABB()
         {
             return new AABB()

@@ -34,11 +34,6 @@ namespace Raytracer.Rendering.Primitives
             return new IntersectionInfo(HitResult.HIT, this, distance, hitPoint, hitPoint, Normal);
         }
         
-        public override bool Intersect(AABB aabb)
-        {
-            throw new NotImplementedException();
-        }
-
         public override AABB GetAABB()
         {
             return AABB.Empty;

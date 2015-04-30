@@ -117,11 +117,6 @@ namespace Raytracer.Rendering.Primitives
             return bounds;
         }
 
-        public override bool Intersect(AABB aabb)
-        {
-            return bounds.Intersect(aabb);
-        }
-
         public override bool Contains(Point point)
         {
             return false;

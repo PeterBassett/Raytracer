@@ -68,11 +68,6 @@ namespace Raytracer.Rendering.Primitives
             return new IntersectionInfo(HitResult.HIT, this, distance, hitPoint, hitPoint, GetNormal(hitPoint));
         }
 
-        public override bool Intersect(AABB aabb)
-        {
-            return IntersectionCode2.triBoxOverlap(aabb.Center, aabb.HalfSize, Vertices);
-        }
-
         public Normal GetNormal(Point vPoint)
         {
             if(this.Normals != null)

@@ -91,7 +91,7 @@ namespace Raytracer.Rendering.Accellerators
                 {
                     foreach (var child in children)
                     {
-                        if (obj.Intersect(child.Bounds))
+                        if (child.Bounds.Intersect(obj.GetAABB()))
                         {
                             child.Add(obj);
                         }
@@ -121,7 +121,7 @@ namespace Raytracer.Rendering.Accellerators
 
                     foreach (var childNode in children)
                     {
-                        if (obj.Intersect(childNode.Bounds))
+                        if (childNode.Bounds.Intersect(obj.GetAABB()))
                         {
                             childNode.Add(obj);
                         }
