@@ -12,31 +12,28 @@ namespace Raytracer.Rendering.Primitives
         public float Radius;
         public float Height;
         public float PhiMax;
+        private float _halfHeight;
 
         public Cylinder(float radius, float height, Transform transform)
             : base(transform)
         {
             Radius = radius;
             Height = height;
+            _halfHeight = Height / 2.0f;
         }
 
         public override IntersectionInfo ObjectSpace_Intersect(Ray ray)
         {
             var intersections = new IntersectionInfo[3];
 
-            var direction = ray.Dir;
-            var vantage = ray.Pos;
-
-            var intersection = new IntersectionInfo();
-
             // Look for intersections with the disks on the top and/or bottom of the cylinder.
-            if (Math.Abs(direction.Z) > MathLib.Epsilon)
+            if (Math.Abs(ray.Dir.Z) > MathLib.Epsilon)
             {
-                intersections[0] = IntersectWithDisk(vantage, direction, +(Height / 2.0));
-                intersections[1] = IntersectWithDisk(vantage, direction, -(Height / 2.0));
+                intersections[0] = IntersectWithDisk(ray, +(Height / 2.0));
+                intersections[1] = IntersectWithDisk(ray, -(Height / 2.0));
             }
 
-            intersections[2] = IntersectionWithCylinder(direction, vantage);
+            intersections[2] = IntersectionWithCylinder(ray);
 
             var closestIntersectionIndex = -1;
             var smallestDistance = double.MaxValue;
@@ -56,37 +53,35 @@ namespace Raytracer.Rendering.Primitives
                 return new IntersectionInfo(HitResult.MISS);
         }
 
-        private IntersectionInfo IntersectionWithCylinder(Vector direction, Point vantage)
+        private IntersectionInfo IntersectionWithCylinder(Ray ray)
         {
-            // Look for intersections with the curved lateral surface of the cylinder.
-            var u = new double[2];
+            var roots = new double[2];
 
-            var a = Radius;
-            var b = (Height) / 2.0;
+            var vX = ray.Pos.X;
+            var vY = ray.Pos.Y;
+            var dX = ray.Dir.X;
+            var dY = ray.Dir.Y;
 
             int numRoots = Algebra.SolveQuadraticEquation(
-                direction.X * direction.X + direction.Y * direction.Y,
-                2.0 * (vantage.X * direction.X + vantage.Y * direction.Y),
-                vantage.X * vantage.X + vantage.Y * vantage.Y - a * a,
-                u
+                dX * dX + dY * dY,
+                2.0 * (vX * dX + vY * dY),
+                vX * vX + vY * vY - Radius * Radius,
+                roots
             );
 
-            Array.Sort(u);
+            Array.Sort(roots);
 
             for (int j = 0; j < numRoots; j++)
             {
-                if (u[j] > MathLib.Epsilon)
+                if (roots[j] > MathLib.Epsilon)
                 {
                     var intersection = new IntersectionInfo();
 
-                    Vector displacement = u[j] * direction;
-                    intersection.HitPoint = vantage + displacement;
+                    Vector displacement = roots[j] * ray.Dir;
+                    intersection.HitPoint = ray.Pos + displacement;
                     intersection.ObjectLocalHitPoint = intersection.HitPoint;
 
-                    // We found an intersection with the infinitely-extended lateral surface,
-                    // but the z-component must be within + or - b.
-
-                    if (Math.Abs(intersection.HitPoint.Z) <= b)
+                    if (Math.Abs(intersection.HitPoint.Z) <= _halfHeight)
                     {
                         intersection.Result = HitResult.HIT;
                         intersection.T = displacement.Length;
@@ -102,34 +97,16 @@ namespace Raytracer.Rendering.Primitives
             return new IntersectionInfo(HitResult.MISS);
         }
 
-        /*const double u = (zDisk - vantage.z) / direction.z;
-        if (u > EPSILON)
+        IntersectionInfo IntersectWithDisk(Ray ray, double zCoordOfDisk)
         {
-            Intersection intersection;
-            Vector displacement = u * direction;
-            intersection.point = vantage + displacement;
-            const double x = intersection.point.x;
-            const double y = intersection.point.y;
-            if (x*x + y*y <= a*a)
-            {
-                intersection.distanceSquared = displacement.MagnitudeSquared();
-                intersection.surfaceNormal = Vector(0.0, 0.0, (zDisk > 0.0) ? +1.0 : -1.0);
-                intersection.solid = this;
-
-                intersectionList.push_back(intersection);
-            }
-        }*/
-
-        IntersectionInfo IntersectWithDisk(Point vantage, Vector direction, double zDisk)
-        {
-            double u = (zDisk - vantage.Z) / direction.Z;
+            double u = (zCoordOfDisk - ray.Pos.Z) / ray.Dir.Z;
 
             if (u > MathLib.Epsilon)
             {
                 var intersection = new IntersectionInfo();
 
-                Vector displacement = u * direction;
-                intersection.HitPoint = vantage + displacement;
+                Vector displacement = u * ray.Dir;
+                intersection.HitPoint = ray.Pos + displacement;
                 intersection.ObjectLocalHitPoint = intersection.HitPoint;
 
                 double x = intersection.HitPoint.X;
@@ -139,7 +116,7 @@ namespace Raytracer.Rendering.Primitives
                 {
                     intersection.Result = HitResult.HIT;
                     intersection.T = displacement.Length;
-                    intersection.NormalAtHitPoint = new Normal(0.0, 0.0, (zDisk > 0.0) ? +1.0 : -1.0);
+                    intersection.NormalAtHitPoint = new Normal(0.0, 0.0, (zCoordOfDisk > 0.0) ? +1.0 : -1.0);
                     intersection.Primitive = this;
 
                     return intersection;
