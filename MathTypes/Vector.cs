@@ -130,8 +130,9 @@ namespace Raytracer.MathTypes
 		{
             double lengthSquared = LengthSquared;
 
-            if (lengthSquared == 0)
-                throw new DivideByZeroException("Trying to normalize a vector with length of zero.");
+		    if (lengthSquared == 0)
+		        return this;
+                //throw new DivideByZeroException("Trying to normalize a vector with length of zero.");
 
             return this / Math.Sqrt(lengthSquared);
 		}

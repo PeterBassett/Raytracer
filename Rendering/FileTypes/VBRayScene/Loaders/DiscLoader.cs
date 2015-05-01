@@ -8,15 +8,15 @@ using Raytracer.Rendering.Primitives;
 namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 {
     [Export(typeof(IVBRaySceneItemLoader))]
-    class CylinderLoader : IVBRaySceneItemLoader
+    class DiscLoader : IVBRaySceneItemLoader
     {
-        public string LoaderType { get { return "Cylinder"; } }
+        public string LoaderType { get { return "Disc"; } }
         public void LoadObject(StreamReader file, Scene scene)
         {
             var oText = new Tokeniser();
             
-            var radius = float.Parse(oText.GetToken(file));
-            var height = float.Parse(oText.GetToken(file));
+            var outerRadius = float.Parse(oText.GetToken(file));
+            var innerRadius = float.Parse(oText.GetToken(file));
 
             var pos = new Vector
             {
@@ -34,9 +34,9 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 
             var transform = Transform.CreateTransform(-pos, -ori);
 
-            var obj = new Cylinder(radius, height, transform);
+            var obj = new Disc(outerRadius, innerRadius, transform);
 
-            var strMaterial = oText.GetToken(file);
+            string strMaterial = oText.GetToken(file);
             
 	        var mat = scene.FindMaterial(strMaterial);
 

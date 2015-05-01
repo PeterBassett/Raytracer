@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
 
@@ -9,10 +6,10 @@ namespace Raytracer.Rendering.Primitives
 {
     class Cylinder : ObjectSpacePrimitive
     {
-        public float Radius;
-        public float Height;
-        public float PhiMax;
-        private float _halfHeight;
+        public readonly float Radius;
+        public readonly float Height;
+        private readonly float _halfHeight;
+        private readonly float  _radiusSquared;
 
         public Cylinder(float radius, float height, Transform transform)
             : base(transform)
@@ -20,37 +17,77 @@ namespace Raytracer.Rendering.Primitives
             Radius = radius;
             Height = height;
             _halfHeight = Height / 2.0f;
+            _radiusSquared = radius*radius;
         }
 
         public override IntersectionInfo ObjectSpace_Intersect(Ray ray)
         {
-            var intersections = new IntersectionInfo[3];
-
-            // Look for intersections with the disks on the top and/or bottom of the cylinder.
-            if (Math.Abs(ray.Dir.Z) > MathLib.Epsilon)
+            var allPossibleIntersections = new IntersectionInfo[3];
+           
+            if (CanIntersectionWithEndCapDisks(ray))
             {
-                intersections[0] = IntersectWithDisk(ray, +(Height / 2.0));
-                intersections[1] = IntersectWithDisk(ray, -(Height / 2.0));
+                allPossibleIntersections[0] = IntersectWithEndCapDisk(ray, +(Height / 2.0));
+                allPossibleIntersections[1] = IntersectWithEndCapDisk(ray, -(Height / 2.0));
             }
 
-            intersections[2] = IntersectionWithCylinder(ray);
+            allPossibleIntersections[2] = IntersectionWithCylinder(ray);
 
+            return FindClosestIntersection(allPossibleIntersections);
+        }
+
+        private static bool CanIntersectionWithEndCapDisks(Ray ray)
+        {
+            return Math.Abs(ray.Dir.Z) > MathLib.Epsilon;
+        }
+
+        IntersectionInfo IntersectWithEndCapDisk(Ray ray, double zCoordOfDisk)
+        {
+            var u = (zCoordOfDisk - ray.Pos.Z) / ray.Dir.Z;
+
+            if (u < MathLib.Epsilon)
+                return new IntersectionInfo(HitResult.MISS);
+
+            var intersection = new IntersectionInfo();
+
+            var displacement = u * ray.Dir;
+            intersection.HitPoint = ray.Pos + displacement;
+            intersection.ObjectLocalHitPoint = intersection.HitPoint;
+
+            var x = intersection.HitPoint.X;
+            var y = intersection.HitPoint.Y;
+
+            if (x * x + y * y > _radiusSquared)
+                return new IntersectionInfo(HitResult.MISS);
+
+            intersection.Result = HitResult.HIT;
+            intersection.T = displacement.Length;
+            intersection.NormalAtHitPoint = new Normal(0.0, 0.0, (zCoordOfDisk > 0.0) ? +1.0 : -1.0);
+            intersection.Primitive = this;
+
+            return intersection;
+        }
+
+        private static IntersectionInfo FindClosestIntersection(IntersectionInfo[] intersections)
+        {
             var closestIntersectionIndex = -1;
             var smallestDistance = double.MaxValue;
-            for (int i = 0; i < 3; i++)
+
+            for (var i = 0; i < intersections.Length; i++)
             {
-                if(intersections[i].Result == HitResult.HIT)
-                    if(intersections[i].T < smallestDistance)
-                    {
-                        smallestDistance = intersections[i].T;
-                        closestIntersectionIndex = i;
-                    }
+                if (intersections[i].Result != HitResult.HIT) 
+                    continue;
+
+                if (intersections[i].T >= smallestDistance)
+                    continue;
+
+                smallestDistance = intersections[i].T;
+                closestIntersectionIndex = i;
             }
 
             if (closestIntersectionIndex != -1)
                 return intersections[closestIntersectionIndex];
-            else
-                return new IntersectionInfo(HitResult.MISS);
+
+            return new IntersectionInfo(HitResult.MISS);
         }
 
         private IntersectionInfo IntersectionWithCylinder(Ray ray)
@@ -65,7 +102,7 @@ namespace Raytracer.Rendering.Primitives
             int numRoots = Algebra.SolveQuadraticEquation(
                 dX * dX + dY * dY,
                 2.0 * (vX * dX + vY * dY),
-                vX * vX + vY * vY - Radius * Radius,
+                vX * vX + vY * vY - _radiusSquared,
                 roots
             );
 
@@ -73,54 +110,25 @@ namespace Raytracer.Rendering.Primitives
 
             for (int j = 0; j < numRoots; j++)
             {
-                if (roots[j] > MathLib.Epsilon)
-                {
-                    var intersection = new IntersectionInfo();
+                if (roots[j] < MathLib.Epsilon)
+                    continue;
 
-                    Vector displacement = roots[j] * ray.Dir;
-                    intersection.HitPoint = ray.Pos + displacement;
-                    intersection.ObjectLocalHitPoint = intersection.HitPoint;
-
-                    if (Math.Abs(intersection.HitPoint.Z) <= _halfHeight)
-                    {
-                        intersection.Result = HitResult.HIT;
-                        intersection.T = displacement.Length;
-
-                        intersection.NormalAtHitPoint = new Normal(intersection.HitPoint.X, intersection.HitPoint.Y, 0.0).Normalize();
-                        intersection.Primitive = this;
-
-                        return intersection;
-                    }
-                }
-            }
-
-            return new IntersectionInfo(HitResult.MISS);
-        }
-
-        IntersectionInfo IntersectWithDisk(Ray ray, double zCoordOfDisk)
-        {
-            double u = (zCoordOfDisk - ray.Pos.Z) / ray.Dir.Z;
-
-            if (u > MathLib.Epsilon)
-            {
                 var intersection = new IntersectionInfo();
 
-                Vector displacement = u * ray.Dir;
+                Vector displacement = roots[j] * ray.Dir;
                 intersection.HitPoint = ray.Pos + displacement;
                 intersection.ObjectLocalHitPoint = intersection.HitPoint;
 
-                double x = intersection.HitPoint.X;
-                double y = intersection.HitPoint.Y;
+                if (Math.Abs(intersection.HitPoint.Z) > _halfHeight)
+                    continue;
 
-                if (x * x + y * y <= Radius * Radius)
-                {
-                    intersection.Result = HitResult.HIT;
-                    intersection.T = displacement.Length;
-                    intersection.NormalAtHitPoint = new Normal(0.0, 0.0, (zCoordOfDisk > 0.0) ? +1.0 : -1.0);
-                    intersection.Primitive = this;
+                intersection.Result = HitResult.HIT;
+                intersection.T = displacement.Length;
 
-                    return intersection;
-                }
+                intersection.NormalAtHitPoint = new Normal(intersection.HitPoint.X, intersection.HitPoint.Y, 0.0).Normalize();
+                intersection.Primitive = this;
+
+                return intersection;
             }
 
             return new IntersectionInfo(HitResult.MISS);
@@ -128,9 +136,9 @@ namespace Raytracer.Rendering.Primitives
 
         public override bool ObjectSpace_Contains(Point point)
         {
-            var length = new Vector2(point.X, point.Y).GetLength();
+            var length = new Vector2(point.X, point.Y).LengthSquared;
 
-            if(length > Radius)
+            if (length > _radiusSquared)
                 return false;
 
             var halfHeight = (Height / 2.0);
