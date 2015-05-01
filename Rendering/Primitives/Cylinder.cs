@@ -10,6 +10,7 @@ namespace Raytracer.Rendering.Primitives
         public readonly float Height;
         private readonly float _halfHeight;
         private readonly float  _radiusSquared;
+        private IntersectionInfo _missed = new IntersectionInfo(HitResult.MISS);
 
         public Cylinder(float radius, float height, Transform transform)
             : base(transform)
@@ -45,29 +46,21 @@ namespace Raytracer.Rendering.Primitives
             var u = (zCoordOfDisk - ray.Pos.Z) / ray.Dir.Z;
 
             if (u < MathLib.Epsilon)
-                return new IntersectionInfo(HitResult.MISS);
-
-            var intersection = new IntersectionInfo();
+                return _missed;            
 
             var displacement = u * ray.Dir;
-            intersection.HitPoint = ray.Pos + displacement;
-            intersection.ObjectLocalHitPoint = intersection.HitPoint;
+            var hitpoint = ray.Pos + displacement;
 
-            var x = intersection.HitPoint.X;
-            var y = intersection.HitPoint.Y;
+            if (hitpoint.X * hitpoint.X +
+                hitpoint.Y * hitpoint.Y > _radiusSquared)
+                return _missed;
 
-            if (x * x + y * y > _radiusSquared)
-                return new IntersectionInfo(HitResult.MISS);
+            var normalAtHitPoint = new Normal(0.0, 0.0, (zCoordOfDisk > 0.0) ? +1.0 : -1.0);
 
-            intersection.Result = HitResult.HIT;
-            intersection.T = displacement.Length;
-            intersection.NormalAtHitPoint = new Normal(0.0, 0.0, (zCoordOfDisk > 0.0) ? +1.0 : -1.0);
-            intersection.Primitive = this;
-
-            return intersection;
+            return new IntersectionInfo(HitResult.HIT, this, displacement.Length, hitpoint, hitpoint, normalAtHitPoint);
         }
 
-        private static IntersectionInfo FindClosestIntersection(IntersectionInfo[] intersections)
+        private IntersectionInfo FindClosestIntersection(IntersectionInfo[] intersections)
         {
             var closestIntersectionIndex = -1;
             var smallestDistance = double.MaxValue;
@@ -87,7 +80,7 @@ namespace Raytracer.Rendering.Primitives
             if (closestIntersectionIndex != -1)
                 return intersections[closestIntersectionIndex];
 
-            return new IntersectionInfo(HitResult.MISS);
+            return _missed;
         }
 
         private IntersectionInfo IntersectionWithCylinder(Ray ray)
@@ -113,25 +106,18 @@ namespace Raytracer.Rendering.Primitives
                 if (roots[j] < MathLib.Epsilon)
                     continue;
 
-                var intersection = new IntersectionInfo();
-
                 Vector displacement = roots[j] * ray.Dir;
-                intersection.HitPoint = ray.Pos + displacement;
-                intersection.ObjectLocalHitPoint = intersection.HitPoint;
+                var hitPoint = ray.Pos + displacement;
 
-                if (Math.Abs(intersection.HitPoint.Z) > _halfHeight)
+                if (Math.Abs(hitPoint.Z) > _halfHeight)
                     continue;
 
-                intersection.Result = HitResult.HIT;
-                intersection.T = displacement.Length;
-
-                intersection.NormalAtHitPoint = new Normal(intersection.HitPoint.X, intersection.HitPoint.Y, 0.0).Normalize();
-                intersection.Primitive = this;
-
-                return intersection;
+                var normalAtHitPoint = new Normal(hitPoint.X, hitPoint.Y, 0.0).Normalize();
+                
+                return new IntersectionInfo(HitResult.HIT, this, displacement.Length, hitPoint, hitPoint, normalAtHitPoint);
             }
 
-            return new IntersectionInfo(HitResult.MISS);
+            return _missed;
         }
 
         public override bool ObjectSpace_Contains(Point point)

@@ -284,9 +284,6 @@ namespace Raytracer
             var currentTotal = 0;
             renderingStrategy.OnCompletedScanLine += (completed, total) =>
             {
-                try
-                {
-
                 if (total != currentTotal)
                 {
                     currentTotal = total;
@@ -303,27 +300,11 @@ namespace Raytracer
                     currentPercentage = percentage;
 
                     this.UIThread(() =>
-                    {                try
-                {
-
+                    {             
                         lblPercent.Text = string.Format("Rendered {0}%\r\n", currentPercentage);
 
                         Application.DoEvents();
-                }
-                    catch (Exception)
-                    {
-
-                        throw;
-                    }
                     });
-                }
-
-
-                }
-                catch (Exception)
-                {
-
-                    throw;
                 }
             };
 
