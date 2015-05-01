@@ -48,32 +48,32 @@ Examples
 * Refraction needs some work in this one
 ![Flawed refraction](/OutputImages/RefractiveSphere.jpg?raw=true)
 * Reflective sphere and cubemap
-![Flawed refraction](/OutputImages/ReflectiveCubemappedSphere.jpg?raw=true "Reflection of cubemap")
+![Flawed refraction](/OutputImages/ReflectiveCubemappedSphere.jpg?raw=true)
 * Refractive sphere and cubemap
-![Flawed refraction](/OutputImages/RefractiveCubemappedSphere.jpg?raw=true "Refraction of cubemap")
+![Flawed refraction](/OutputImages/RefractiveCubemappedSphere.jpg?raw=true)
 * Colourful room
-![Flawed refraction](/OutputImages/Room.jpg?raw=true "Spangly")
+![Flawed refraction](/OutputImages/Room.jpg?raw=true)
 * Mesh instances
-![Flawed refraction](/OutputImages/Lamps.jpg?raw=true "Mesh instances")
+![Flawed refraction](/OutputImages/Lamps.jpg?raw=true)
 * Texture mapped triangles
-![Texture mapped triangles](/OutputImages/LegoCar.jpg?raw=true "Texture mapping on triangles")
+![Texture mapped triangles](/OutputImages/LegoCar.jpg?raw=true)
 * Texture mapped sphere
-![Flawed refraction](/OutputImages/Earth.jpg?raw=true "Texture mapping on sphere")
+![Flawed refraction](/OutputImages/Earth.jpg?raw=true)
 * Perlin noise mixing base materials, red, yellow and texture.
-![Flawed refraction](/OutputImages/BurningEarth.jpg?raw=true "Perlin noise mixing base materials")
+![Flawed refraction](/OutputImages/BurningEarth.jpg?raw=true)
 * Mesh self shadowing.
-![Flawed refraction](/OutputImages/LegoCarSelfShadowed.jpg?raw=true "Mesh self shadowing.")
+![Flawed refraction](/OutputImages/LegoCarSelfShadowed.jpg?raw=true)
 * Torus.
-![Mmm.Donuts](/OutputImages/Torus.jpg?raw=true "Torus Primitive.")
+![Mmm.Donuts](/OutputImages/Torus.jpg?raw=true)
 * Refractive Torus.
-![Mmm.Donuts](/OutputImages/RefractiveTorus.jpg?raw=true "Refractive Torus.")
+![Mmm.Donuts](/OutputImages/RefractiveTorus.jpg?raw=true)
 * Transformed Tori.
-![Mmm.Donuts](/OutputImages/TransformedTorusChain.jpg?raw=true "Object transformations.")
+![Mmm.Donuts](/OutputImages/TransformedTorusChain.jpg?raw=true)
 * Mesh instancing and transformations.
-![Cars](/OutputImages/LegoCars.jpg?raw=true "Object transformations.")
+![Cars](/OutputImages/LegoCars.jpg?raw=true)
 * Mesh instancing and transformations.
-![Companions](/OutputImages/Cubes.jpg?raw=true "Object transformations.")
+![Companions](/OutputImages/Cubes.jpg?raw=true)
 * 280 interlinked tori with various levels of reflectivity and refraction.
-![chain mail](/OutputImages/ToriGrid.jpg?raw=true ".")
+![chain mail](/OutputImages/ToriGrid.jpg?raw=true)
 * Cylinders. They support all the usual materials.
-![cylinders](/OutputImages/Cylinders.jpg?raw=true ".")
+![cylinders](/OutputImages/Cylinders.jpg?raw=true)
