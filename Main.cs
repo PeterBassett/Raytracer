@@ -28,7 +28,7 @@ namespace Raytracer
 
         public Main()
         {
-            generatetorusgrid();
+           // generatetorusgrid();
 
 
             InitializeComponent();
@@ -61,23 +61,34 @@ namespace Raytracer
             {
                 for (int y = 0; y < maxY; y++)
                 {
-                    AddTorus(x, y, 0, 0, builder, colourNames);
-
-                    if(x < maxX / 2 - 1)
-                        AddTorus(x + 0.5f, y, 90, 0, builder, colourNames);
-
-                    if (y < maxY - 1)
-                        AddTorus(x, y + 0.5f, 0, 90, builder, colourNames); 
+                    AddDisc(x, y, 0, 0, builder, colourNames);
                 }
             }
 
-            var file = File.ReadAllText(@"Data/Small/TorusGrid.ray");
+            var file = File.ReadAllText(@"Data/Small/DiscGrid.ray");
 
             var coloursTogether = string.Join("\r\n\r\n", colours.Values);
             file = file.Replace("%MATERIALS%", coloursTogether);
-            file = file.Replace("%TORI%", builder.ToString());
+            file = file.Replace("%PRIMITIVES%", builder.ToString());
 
-            File.WriteAllText(@"Data/Small/TorusGridGenerated.ray", file);
+            File.WriteAllText(@"Data/Small/DiscGridGenerated.ray", file);
+        }
+
+        private void AddDisc(float x, float y, float xRotation, float yRotation, StringBuilder builder, string[] colors)
+        {
+            var colour = colors[rng.Next(colors.Length)];
+            /*
+             * Torus( 1,5, 
+                  0, 0, 0,
+                  0, 0, 0,
+                  "red"
+                )*/
+
+            var outerRadius = 3.0 + 2.0*rng.NextDouble();
+            var innerRadius =  rng.NextDouble();
+            innerRadius = Math.Max(innerRadius, 0);
+            builder.AppendFormat("Disc({0},{1},\r\n{2},{3},{4},\r\n{5},{6},{7},\r\n\"{8}\")\r\n\r\n",
+                outerRadius, innerRadius, x * 12, y * 12, 0, 0, 0, 0, colour);
         }
 
         private Dictionary<string, string> GenerateColours()
@@ -95,8 +106,8 @@ namespace Raytracer
                 {
                     var col = string.Format("{0}, {1}, {2}", colour.R / 255.0, colour.G / 255.0, colour.B / 255.0);
 
-                    var reflected = rnd.NextDouble().ToString("F2");
-                    var refracted = rnd.NextDouble().ToString("F2");
+                    var reflected = 0;//rnd.NextDouble().ToString("F2");
+                    var refracted = 0;//rnd.NextDouble().ToString("F2");
                     colours.Add(colour.Name, string.Format("ColourMaterial(\"{0}\", {1}, {1}, 20, 0.35, {2},{2},{2}, 1.33, {3},{3},{3} )", colour.Name, col, reflected, refracted));
                 }
             }
