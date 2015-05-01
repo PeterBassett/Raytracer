@@ -73,7 +73,7 @@ Examples
 ![Cars](/OutputImages/LegoCars.jpg?raw=true "Object transformations.")
 * Mesh instancing and transformations.
 ![Companions](/OutputImages/Cubes.jpg?raw=true "Object transformations.")
-* 280 interlinked tori with verious levels of reflectivity and refraction.
+* 280 interlinked tori with various levels of reflectivity and refraction.
 ![chain mail](/OutputImages/ToriGrid.jpg?raw=true ".")
 * Cylinders. They support all the usual materials.
 ![cylinders](/OutputImages/Cylinders.jpg?raw=true ".")
