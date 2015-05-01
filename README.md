@@ -46,7 +46,7 @@ With this I can implement CSG against arbitrary traceable implementations.
 
 Examples
 * Refraction needs some work in this one
-![Flawed refraction](/OutputImages/RefractiveSphere.jpg?raw=true "Flawed Refraction")
+![Flawed refraction](/OutputImages/RefractiveSphere.jpg?raw=true)
 * Reflective sphere and cubemap
 ![Flawed refraction](/OutputImages/ReflectiveCubemappedSphere.jpg?raw=true "Reflection of cubemap")
 * Refractive sphere and cubemap
