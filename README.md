@@ -42,7 +42,7 @@ Accelleration Structures
 Improvements To Come.
 
 I will eventually change the Traceable interface so that the main intersection routine returns all intersections with the object, not just the first.
-With this I can implement CSG against arbitrary traceable implementations.
+With this I can implement CSG against arbitrary traceable implementations. A cone primitive is in progress.
 
 Examples
 * Refraction needs some work in this one
