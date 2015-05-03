@@ -139,5 +139,45 @@ namespace Raytracer.MathTypes
 
             return new Normal(x, y, z);
         }
+
+        public double this[int index]
+        {
+            get
+            {
+                switch (index)
+                {
+                    case 0:
+                        return X;
+                    case 1:
+                        return Y;
+                    case 2:
+                        return Z;
+                    default:
+                        throw new IndexOutOfRangeException();
+                }
+            }
+            set
+            {
+                switch (index)
+                {
+                    case 0:
+                        X = value;
+                        break;
+                    case 1:
+                        Y = value;
+                        break;
+                    case 2:
+                        Z = value;
+                        break;
+                    default:
+                        throw new IndexOutOfRangeException();
+                }
+            }
+        }
+
+        public Normal Faceforward(Vector v)
+        {
+            return (Vector.DotProduct(this, v) < 0.0) ? -this : this;
+        }
     }
 }

@@ -95,9 +95,12 @@
     <Compile Include="Rendering\Accellerators\IAccellerator.cs" />
     <Compile Include="Rendering\Core\Transform.cs" />
     <Compile Include="Rendering\FileTypes\ImageReader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\ConeLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\DiscLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\CylinderLoader.cs" />
     <Compile Include="Rendering\PixelSampler\EdgeDetectionPerComponentSampler.cs" />
+    <Compile Include="Rendering\Primitives\Cone.cs" />
+    <Compile Include="Rendering\Primitives\Solidity.cs" />
     <Compile Include="Rendering\Primitives\Disc.cs" />
     <Compile Include="Rendering\Primitives\Cylinder.cs" />
     <Compile Include="Rendering\Primitives\ObjectSpacePrimitive.cs" />
@@ -219,6 +222,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\Small\BurningEarth.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\Cone.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\Small\Disc.ray">

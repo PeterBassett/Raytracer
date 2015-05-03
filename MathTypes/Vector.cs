@@ -349,6 +349,7 @@ namespace Raytracer.MathTypes
 
             return new Vector(x, y, z);
         }
+
     }
 
 }

@@ -41,7 +41,7 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 	        var mat = scene.FindMaterial(strMaterial);
 
 	        if(mat == null)
-		        throw new Exception("Cannot find material '" + strMaterial + "' for torus.");
+		        throw new Exception("Cannot find material '" + strMaterial + "' for cylinder.");
 
             obj.Material = mat;
 
