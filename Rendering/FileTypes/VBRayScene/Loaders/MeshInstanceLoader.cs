@@ -6,8 +6,6 @@ using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 {
-    
-
     [Export(typeof(IVBRaySceneItemLoader))]
     class MeshInstanceLoader : IVBRaySceneItemLoader
     {
@@ -31,9 +29,13 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 
             var meshName = oText.GetToken(file);
 
+            var material = oText.GetToken(file);
+
             var transform = Transform.CreateTransform(-offset, -rotation);
 
             var inst = new MeshInstance(scene.FindMesh(meshName), transform);
+
+            inst.Material = scene.FindMaterial(material);
 
             scene.AddObject(inst);
         }

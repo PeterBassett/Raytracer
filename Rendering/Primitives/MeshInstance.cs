@@ -21,7 +21,7 @@ namespace Raytracer.Rendering.Primitives
 
             if (result.Result != HitResult.MISS)
             {
-                result.HitPoint = ray.Pos + (ray.Dir * result.T); // store the UNtranformed hitpotin
+                result.HitPoint = ray.Pos + (ray.Dir * result.T);
             }
 
             return result;
@@ -29,7 +29,7 @@ namespace Raytracer.Rendering.Primitives
 
         public override bool ObjectSpace_Contains(Point point)
         {
-            throw new NotImplementedException();
+            return Mesh.Contains(point);
         }
 
         public override AABB ObjectSpace_GetAABB()

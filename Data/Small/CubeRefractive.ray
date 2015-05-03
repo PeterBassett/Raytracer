@@ -1,0 +1,65 @@
+Viewpoint(-1.1,2,-1.3,   ' Viewpoint ' 
+	  50, 43, 0,  ' View Angle ' 
+	  60)	     ' FOV '	
+
+
+RenderSettings
+(
+	4, 'Recursion Depth'
+	true, 'Trace Shadows'
+	true, 'Trace Reflections'
+	true, 'Trace Refractions'
+)
+AmbientLight(40, 40, 40)
+
+LightSource(-10, 20, -10, 80, 80, 80)
+
+ColourMaterial("darkgrey",
+  0.3,0.3,0.3, 
+  0.3,0.3,0.3,
+  20, 0.35,       ' Specular '
+  0.9,0.9,0.9,  ' Reflected '
+  1,        ' TransN, n1, n2 '
+  0, 0, 0        ' Transmitted. '
+)
+
+ColourMaterial("lightgrey",
+  0.7,0.7,0.7, 
+  0.7,0.7,0.7,
+  20, 0.35,       ' Specular '
+  0.9,0.9,0.9,  ' Reflected '
+  1,       ' TransN, n1, n2 '
+  0, 0, 0        ' Transmitted. '
+)
+
+ColourMaterial("glass",
+  0.1, 0.1,0.1,  ' Ambient '
+  0.1, 0.1,0.1,  ' Diffuse '
+  20, 0.35,       ' Specular '
+  0.7,0.7,0.7,  ' Reflected '
+  1.33,        ' TransN, n1, n2 '
+  0, 0, 0        ' Transmitted. '
+)
+
+CheckMaterial("check",
+  "lightgrey", "darkgrey", 4,4,4
+)
+
+Mesh
+(  
+"Cube",
+"Cube.obj"
+)
+
+MeshInstance
+(  
+0,0,0,
+0,30,0,
+"Cube",
+"glass"
+)
+
+Plane(0, -4.2, 0,   ' Point on plane '
+  0, 1, 0,        ' Normal vector '
+  "check"
+)

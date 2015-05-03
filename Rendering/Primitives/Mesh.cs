@@ -91,17 +91,21 @@ namespace Raytracer.Rendering.Primitives
             if (!this.GetAABB().Intersect(ray))
                 return new IntersectionInfo(HitResult.MISS);
 
+            return GetMinimumValidIntersection(ray);
+        }
+
+        private IntersectionInfo GetMinimumValidIntersection(Ray ray)
+        {
             IntersectionInfo minimumIntersection = new IntersectionInfo(HitResult.MISS);
 
             foreach (var tri in GetCandidates(ray))
-            {                
+            {
                 var result = tri.Intersect(ray);
 
                 if (result.T > 0f && result.T < minimumIntersection.T && result.Result != HitResult.MISS)
                     minimumIntersection = result;
             }
-
-            return minimumIntersection;           
+            return minimumIntersection;
         }
 
         private IEnumerable<Traceable> GetCandidates(Ray ray)
@@ -119,7 +123,21 @@ namespace Raytracer.Rendering.Primitives
 
         public override bool Contains(Point point)
         {
-            return false;
+            var ray = new Ray(point, new Vector(0, 1, 0));
+
+            int intersections = 0;
+
+            while (true)
+            {
+                var intersection = GetMinimumValidIntersection(ray);
+
+                if (intersection.Result == HitResult.MISS)
+                    return intersections % 2 == 0;
+
+                intersections++;
+
+                ray = new Ray(intersection.HitPoint + ray.Dir * MathLib.Epsilon, ray.Dir);
+            }
         }
     }
 }
