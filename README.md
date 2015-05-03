@@ -77,3 +77,5 @@ Examples
 ![chain mail](/OutputImages/ToriGrid.jpg?raw=true)
 * Cylinders. They support all the usual materials.
 ![cylinders](/OutputImages/Cylinders.jpg?raw=true)
+* Texture Coordinate Wrapping.
+![texture coordinates](/OutputImages/Sponza.jpeg?raw=true)
