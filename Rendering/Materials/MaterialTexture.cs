@@ -60,6 +60,15 @@ namespace Raytracer.Rendering.Materials
                 double u_opposite = 1 - u_ratio;
                 double v_opposite = 1 - v_ratio;
 
+                x = x % _diffuseMap.Size.Width;
+                y = y % _diffuseMap.Size.Height;
+
+                if (x < 0)
+                    x += _diffuseMap.Size.Width;
+
+                if (y < 0)
+                    y += _diffuseMap.Size.Height;
+
                 return (GetPixelSafe(x, y)      * u_opposite + GetPixelSafe(x + 1, y)        * u_ratio) * v_opposite +
                        (GetPixelSafe(x, y + 1)  * u_opposite + GetPixelSafe(x + 1, y + 1)    * u_ratio) * v_ratio;
             }
