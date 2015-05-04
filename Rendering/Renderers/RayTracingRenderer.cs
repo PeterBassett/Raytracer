@@ -428,8 +428,7 @@ namespace Raytracer.Rendering.Renderers
             foreach (var obj in _scene.GetCandiates(ray))
             {
                 var result = obj.Intersect(ray);
-                //if (result.T < 0.01) // kludge to be removed.
-                //    continue;
+
                 if (result.T > 0f && result.T <= lightDistance && result.Result == HitResult.HIT)
                     return true;
             }
@@ -451,9 +450,8 @@ namespace Raytracer.Rendering.Renderers
         private Vector CalculateRefractedRay(Vector dir, Vector normal, double n_Out, double n_In)
         {
             var c = -Vector.DotProduct(normal, dir);
-            var n1 = n_Out;
-            var n2 = n_In;
-            var n = n1 / n2;
+
+            var n = n_Out / n_In;
 
             return (n * dir) + (double)(n * c - Math.Sqrt(1 - n * n * (1 - c * c))) * normal;
         }        

@@ -189,7 +189,7 @@ namespace Raytracer.Rendering.Core
 
         public bool Intersect(Ray ray)
         {
-            return Primitives.IntersectionCode3.pluecker_cls_cff(ray, this);//, ref t);	        
+            return Primitives.PlueckerRayAABBIntersection.Intersect(ray, this);//, ref t);	        
         }
 
         public bool Intersect(AABB b)

@@ -152,7 +152,7 @@ namespace Raytracer.Rendering.Primitives
 
             var h2 = point.Z * point.Z;
 
-            return point.Z >= 0 && point.Z <= Height && slope <= 1 - r2;
+            return point.Z >= 0 && point.Z <= Height && h2 * slope <= 1 - r2;
         }
 
         public override AABB ObjectSpace_GetAABB()

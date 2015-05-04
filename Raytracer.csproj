@@ -188,8 +188,7 @@
     <Compile Include="Rendering\Materials\MaterialNoise.cs" />
     <Compile Include="Rendering\Materials\MaterialWithSubMaterials.cs" />
     <Compile Include="Rendering\Primitives\CSG.cs" />
-    <Compile Include="Rendering\Primitives\IntersectionCode2.cs" />
-    <Compile Include="Rendering\Primitives\IntersectionCode3.cs" />
+    <Compile Include="Rendering\Primitives\PlueckerRayAABBIntersection.cs" />
     <Compile Include="Rendering\Primitives\Mesh.cs" />
     <Compile Include="Rendering\Primitives\MeshInstance.cs" />
     <Compile Include="Rendering\Primitives\Plane.cs" />
@@ -225,6 +224,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\Small\Cone.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\Cones.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\Small\CubeRefractive.ray">

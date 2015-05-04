@@ -8,43 +8,41 @@ using System.Runtime.Serialization;
 
 namespace Raytracer.Rendering.Core
 {
-    
-    
 	public struct Ray
 	{
         public enum CLASSIFICATION
         { MMM, MMP, MPM, MPP, PMM, PMP, PPM, PPP };
 
-        Vector m_dir;
-        Vector n_invDir;
-        Point m_pos;
-        public double R0;			// Pluecker coefficient R0
-        public double R1;			// Pluecker coefficient R1
-        public double R3;			// Pluecker coefficient R3
-        public CLASSIFICATION classification;
+        public readonly Vector Dir;
+        public readonly Point Pos;
 
-		public Ray(Point pos, Vector dir)
+        // Pluecker Coefficients and classificiation
+        public readonly double R0;
+        public readonly double R1;
+        public readonly double R3;
+        public readonly CLASSIFICATION classification;
+
+		public Ray(Point pos, Vector dir) : this()
         {
-            m_pos = pos;
-            m_dir = dir;
-            n_invDir = new Vector(1.0f / m_dir.X, 1.0f / m_dir.Y, 1.0f / m_dir.Z);
+            Pos = pos;
+            Dir = dir;
+            
+            R0 = Pos.X * Dir.Y - Dir.X * Pos.Y;
+            R1 = Pos.X * Dir.Z - Dir.X * Pos.Z;
+            R3 = Pos.Y * Dir.Z - Dir.Y * Pos.Z;
 
-            R0 = pos.X * dir.Y - dir.X * pos.Y;
-            R1 = pos.X * dir.Z - dir.X * pos.Z;
-            R3 = pos.Y * dir.Z - dir.Y * pos.Z;
-
-            if (dir.X < 0)
+            if (Dir.X < 0)
             {
-                if (dir.Y < 0)
+                if (Dir.Y < 0)
                 {
-                    if (dir.Z < 0)
+                    if (Dir.Z < 0)
                         classification = CLASSIFICATION.MMM;
                     else
                         classification = CLASSIFICATION.MMP;
                 }
                 else
                 {
-                    if (dir.Z < 0)
+                    if (Dir.Z < 0)
                         classification = CLASSIFICATION.MPM;
                     else
                         classification = CLASSIFICATION.MPP;
@@ -52,80 +50,20 @@ namespace Raytracer.Rendering.Core
             }
             else
             {
-                if (dir.Y < 0)
+                if (Dir.Y < 0)
                 {
-                    if (dir.Z < 0)
+                    if (Dir.Z < 0)
                         classification = CLASSIFICATION.PMM;
                     else
                         classification = CLASSIFICATION.PMP;
                 }
                 else
                 {
-                    if (dir.Z < 0)
+                    if (Dir.Z < 0)
                         classification = CLASSIFICATION.PPM;
                     else
                         classification = CLASSIFICATION.PPP;
                 }
-            }
-
-		}
-
-        public double x { get { return Pos.X; } }
-        public double y { get { return Pos.Y; } }
-        public double z { get { return Pos.Z; } }
-
-        public double i { get { return Dir.X; } }
-        public double j { get { return Dir.Y; } }
-        public double k { get { return Dir.Z; } }
-
-        public double ii { get { return n_invDir.X; } }
-        public double ij { get { return n_invDir.Y; } }
-        public double ik { get { return n_invDir.Z; } }
-
-        private void BuildInverseDir()
-        {
-            n_invDir = new Vector(1.0f / m_dir.X, 1.0f / m_dir.Y, 1.0f / m_dir.Z);
-        }
-
-        /// <summary>
-        /// Gets the ray's inverse.
-        /// </summary>
-        public Vector InverseDir
-        {
-            get
-            {
-                return n_invDir;
-            }
-        }
-
-		/// <summary>
-		/// Gets or sets the ray's origin.
-		/// </summary>
-        public Point Pos 
-        {
-            get
-            {
-                return m_pos;
-            }
-            set
-            {
-                m_pos = value;
-            }
-        }
-		/// <summary>
-		/// Gets or sets the ray's direction vector.
-		/// </summary>
-        public Vector Dir
-        {
-            get
-            {
-                return m_dir;
-            }
-            set
-            {
-                m_dir = value;
-
-                BuildInverseDir();
             }
         }
 
