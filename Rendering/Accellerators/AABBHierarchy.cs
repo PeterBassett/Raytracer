@@ -4,6 +4,7 @@ using System.Linq;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
 using Raytracer.Rendering.Primitives;
+using Raytracer.Rendering.Accellerators.Partitioners;
 
 namespace Raytracer.Rendering.Accellerators
 {
@@ -19,100 +20,31 @@ namespace Raytracer.Rendering.Accellerators
             readonly AABB _bounds;
             readonly Traceable[] _primitives;
 
-            public AABBHierarchyNode(IList<Traceable> primitives, int depth)
+            public AABBHierarchyNode(IList<Traceable> primitives, int depth, IPrimitivePartitioner partitioner)
             {
-                _isLeaf = false;
-
-                _bounds = primitives.First().GetAABB();
-
                 if (!primitives.Any())
                     return;
 
-                if (depth > 25 || primitives.Count() <= 6)
+                List<Traceable> leftPrims = new List<Traceable>();
+                List<Traceable> rightPrims = new List<Traceable>();
+
+                if (primitives.Count() > 6 && depth <= 25 && partitioner.Partition(primitives, ref _bounds, ref leftPrims, ref rightPrims))
+                {
+                    _left = new AABBHierarchyNode(leftPrims.ToArray(), depth + 1, partitioner);
+                    _right = new AABBHierarchyNode(rightPrims.ToArray(), depth + 1, partitioner);
+                }
+                else
                 {
                     _primitives = primitives.ToArray();
 
                     _isLeaf = true;
 
+                    _bounds = AABB.Invalid();
                     for (long i = 1; i < _primitives.Length; i++)
                     {
                         _bounds = _primitives[i].GetAABB().InflateToEncapsulate(_bounds);
                     }
-
-                    return;
                 }
-
-                var midpt = new Point();
-
-                var trisRecp = 1.0 / primitives.Count();
-
-                for (var i = 1; i < primitives.Count; i++)
-                {
-                    var primitivePos = primitives[i].GetAABB();
-                    _bounds = primitivePos.InflateToEncapsulate(_bounds);
-                    midpt = midpt + (primitivePos.Center * trisRecp);
-                }
-
-                var bestAxis = 0;
-                var bestRemainder = int.MaxValue;
-                var partition = new bool[primitives.Count * 3];
-
-                for (var axis = 0; axis < 3; axis++)
-                {
-                    var rightCount = 0;
-
-                    for (var i = 0; i < primitives.Count; i++)
-                    {
-                        var primitivePos = primitives[i].GetAABB().Center;
-
-                        if (midpt[axis] >= primitivePos[axis])
-                        {
-                            rightCount++;
-                            partition[axis * primitives.Count + i] = true;
-                        }
-                    }
-
-                    rightCount = Math.Max(rightCount, 1);
-
-                    var remainder = Math.Abs((primitives.Count / 2) - rightCount);
-
-                    if (remainder < bestRemainder)
-                    {
-                        bestAxis = axis;
-                        bestRemainder = remainder;
-                    }
-
-                    if (remainder == 0)
-                        break;
-                }
-
-                var leftTris = new List<Traceable>(primitives.Count / 2);
-                var rightTris = new List<Traceable>(primitives.Count / 2);
-
-                for (var i = 0; i < primitives.Count; i++)
-                {
-                    if (partition[bestAxis * primitives.Count + i])
-                        rightTris.Add(primitives[i]);
-                    else
-                        leftTris.Add(primitives[i]);
-                }
-
-                if (primitives.Count == leftTris.Count || primitives.Count == rightTris.Count)
-                {
-                    _primitives = primitives.ToArray();
-
-                    _isLeaf = true;
-
-                    for (var i = 1; i < _primitives.Length; i++)
-                    {
-                        _bounds = _primitives[i].GetAABB().InflateToEncapsulate(_bounds);
-                    }
-
-                    return;
-                }
-
-                _left = new AABBHierarchyNode(leftTris.ToArray(), depth + 1);
-                _right = new AABBHierarchyNode(rightTris.ToArray(), depth + 1);
             }
 
             internal IEnumerable<Traceable> Intersect(Ray ray)
@@ -145,10 +77,18 @@ namespace Raytracer.Rendering.Accellerators
         };
 
         private AABBHierarchyNode _root;
+        private IPrimitivePartitioner _partitioner;
+
+        public AABBHierarchy (IPrimitivePartitioner partitioner)
+	    {
+            if(partitioner == null)
+                throw new ArgumentNullException("partitioner");
+            _partitioner = partitioner;       
+	    }
 
         public void Build(IEnumerable<Traceable> primitives)
         {
-            _root = new AABBHierarchyNode(primitives.ToArray(), 0);
+            _root = new AABBHierarchyNode(primitives.ToArray(), 0, _partitioner);
         }
 
         public IEnumerable<Traceable> Intersect(Ray ray)

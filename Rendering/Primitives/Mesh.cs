@@ -5,6 +5,7 @@ using System.Text;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Accellerators;
 using Raytracer.Rendering.Core;
+using Raytracer.Rendering.Accellerators.Partitioners;
 
 namespace Raytracer.Rendering.Primitives
 {
@@ -26,7 +27,7 @@ namespace Raytracer.Rendering.Primitives
             if(TransformToOrigin())
                 BuildAABB();
 
-            bvh = new AABBHierarchy();
+            bvh = new AABBHierarchy(new SAHPrimitivePartioner());
             bvh.Build(triangles);
         }
 

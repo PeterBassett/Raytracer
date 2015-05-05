@@ -89,6 +89,9 @@
     <Compile Include="PixelCoordinates.Designer.cs">
       <DependentUpon>PixelCoordinates.cs</DependentUpon>
     </Compile>
+    <Compile Include="Rendering\Accellerators\Partitioners\SAHPrimitivePartitioner.cs" />
+    <Compile Include="Rendering\Accellerators\Partitioners\EqualPrimitivePartitioner.cs" />
+    <Compile Include="Rendering\Accellerators\Partitioners\IPrimitivePartitioner.cs" />
     <Compile Include="Rendering\Core\AABB.cs">
       <SubType>Code</SubType>
     </Compile>

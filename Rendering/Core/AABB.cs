@@ -227,5 +227,31 @@ namespace Raytracer.Rendering.Core
 
             return ret;
         }
+
+        public double SurfaceArea() 
+        {
+            var diag = Max - Min;
+            return 2.0 * (diag.X * diag.Y + 
+                          diag.X * diag.Z + 
+                          diag.Y * diag.Z);
+        }
+
+        public double Volume() 
+        {
+            var diag = Max - Min;
+            return diag.X * diag.Y * diag.Z;
+        }
+
+        public int MaximumExtent()
+        {
+            var diag = Max - Min;
+
+            if (diag.X > diag.Y && diag.X > diag.Z)
+                return 0;
+            else if (diag.Y > diag.Z)
+                return 1;
+            else
+                return 2;
+        }
     }
 }
