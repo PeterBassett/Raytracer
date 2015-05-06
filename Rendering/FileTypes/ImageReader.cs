@@ -8,6 +8,20 @@ namespace Raytracer.Rendering.FileTypes
 {
     static class ImageReader
     {
+        public static Bmp Read(string path)
+        {
+            if (path.EndsWith(".tga", StringComparison.InvariantCultureIgnoreCase))
+            {
+                using (var bmp = Paloma.TargaImage.LoadTargaImage(path))
+                    return Read(bmp);
+            }
+            else
+            {
+                using (var bmp = new Bitmap(path))
+                    return Read(bmp);
+            }
+        }
+
         private delegate Colour ReadPixel(BitmapData bmpData, int components, int x, int y);
         public static Bmp Read(Bitmap other)
         {            

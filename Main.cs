@@ -171,6 +171,10 @@ namespace Raytracer
             Stopwatch watch = new Stopwatch();
             watch.Start();
 
+            m_scene = null;
+
+            GC.Collect();
+
             var loader = new VBRaySceneLoader();
 
             using (var sceneStream = new MemoryStream(System.Text.Encoding.Default.GetBytes(strScene)))

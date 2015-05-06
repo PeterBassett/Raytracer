@@ -37,8 +37,7 @@ namespace Raytracer.Rendering.BackgroundMaterials
 
         private void LoadCubeMapImage(string path)
         {
-            using(var bmp = new Bitmap(path))
-                _image = ImageReader.Read(bmp);
+            _image = ImageReader.Read(path);
         }
 
         protected abstract void VerifyCubemapDimensions();

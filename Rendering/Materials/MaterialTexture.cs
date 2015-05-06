@@ -31,8 +31,7 @@ namespace Raytracer.Rendering.Materials
 
         public void LoadDiffuseMap(string path)
         {
-            using(var bmp = new Bitmap(path))
-                _diffuseMap = ImageReader.Read(bmp);
+            _diffuseMap = ImageReader.Read(path);
         }
 
         public void LoadAmbientMap(string path)
