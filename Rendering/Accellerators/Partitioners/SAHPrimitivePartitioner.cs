@@ -15,21 +15,14 @@ namespace Raytracer.Rendering.Accellerators.Partitioners
             public AABB Bounds;
         }
 
+        private const int _maxPrimsInNode = 4;
         private const int DefaultBucketCount = 12;
-        private int _bucketCount;
-        private Bucket[] _buckets;
 
-        public SAHPrimitivePartioner()
-	    {
-            _bucketCount = DefaultBucketCount;
-            _buckets = new Bucket[_bucketCount];
-	    }
-
-        public bool Partition(IList<Traceable> primitives, ref AABB bounds, ref List<Traceable> leftPrims, ref List<Traceable> rightPrims)
+        public bool Partition(IList<Traceable> primitives, int depth, ref AABB bounds, ref List<Traceable> leftPrims, ref List<Traceable> rightPrims)
         {
-            AABB centroidBounds = primitives[0].GetAABB();
+            AABB centroidBounds = AABB.Invalid();
 
-            for (var i = 1; i < primitives.Count; i++)
+            for (var i = 0; i < primitives.Count; i++)
             {
                 var primitivePos = primitives[i].GetAABB();
                 centroidBounds = primitivePos.InflateToEncapsulate(centroidBounds);
@@ -38,7 +31,7 @@ namespace Raytracer.Rendering.Accellerators.Partitioners
             bounds = centroidBounds;
 
             // Partition primitives using approximate SAH
-            if (primitives.Count <= 4) 
+            if (primitives.Count <= _maxPrimsInNode || depth > 2000) 
             {
                 return false;
             }
@@ -46,21 +39,30 @@ namespace Raytracer.Rendering.Accellerators.Partitioners
             {
                 int dim = centroidBounds.MaximumExtent();
 
-                for (var i = 1; i < primitives.Count; i++)
+                var bucketCount = DefaultBucketCount;
+                var buckets = new Bucket[bucketCount];
+
+                for (int i = 0; i < buckets.Length; i++)                
                 {
-                    int bucket = (int)( _bucketCount * ((primitives[i].GetAABB().Center[dim] - centroidBounds.Min[dim]) / (centroidBounds.Max[dim] - centroidBounds.Min[dim])) );
+                    buckets[i].Count = 0;
+                    buckets[i].Bounds = AABB.Invalid();
+                }
+
+                for (var i = 0; i < primitives.Count; i++)
+                {
+                    int bucket = (int)( bucketCount * ((primitives[i].GetAABB().Center[dim] - centroidBounds.Min[dim]) / (centroidBounds.Max[dim] - centroidBounds.Min[dim])) );
                     
-                    if (bucket == _bucketCount) 
-                        bucket = _bucketCount-1;
+                    if (bucket == bucketCount) 
+                        bucket = bucketCount-1;
                     
-                    _buckets[bucket].Count++;
-                    _buckets[bucket].Bounds = _buckets[bucket].Bounds.InflateToEncapsulate( primitives[i].GetAABB() );
+                    buckets[bucket].Count++;
+                    buckets[bucket].Bounds = buckets[bucket].Bounds.InflateToEncapsulate( primitives[i].GetAABB() );
                 }
 
                 // Compute costs for splitting after each bucket
-                var cost = new double[_bucketCount-1];
+                var cost = new double[bucketCount-1];
 
-                for (int i = 0; i < _bucketCount-1; ++i) 
+                for (int i = 0; i < bucketCount-1; ++i) 
                 {
                     var b0 = AABB.Invalid();
                     var b1 = AABB.Invalid();
@@ -70,14 +72,14 @@ namespace Raytracer.Rendering.Accellerators.Partitioners
 
                     for (int j = 0; j <= i; ++j) 
                     {
-                        b0 = b0.InflateToEncapsulate(_buckets[j].Bounds);
-                        count0 += _buckets[j].Count;
+                        b0 = b0.InflateToEncapsulate(buckets[j].Bounds);
+                        count0 += buckets[j].Count;
                     }
 
-                    for (int j = i + 1; j < _bucketCount; ++j) 
+                    for (int j = i + 1; j < bucketCount; ++j) 
                     {
-                        b1 = b1.InflateToEncapsulate(_buckets[j].Bounds);
-                        count1 += _buckets[j].Count;
+                        b1 = b1.InflateToEncapsulate(buckets[j].Bounds);
+                        count1 += buckets[j].Count;
                     }
 
                     cost[i] = 0.125 + (count0*b0.SurfaceArea() + count1*b1.SurfaceArea()) / centroidBounds.SurfaceArea();
@@ -86,17 +88,21 @@ namespace Raytracer.Rendering.Accellerators.Partitioners
                 // Find bucket to split at that minimizes SAH metric
                 var minCost = cost[0];
                 int minCostSplit = 0;
-                for (int i = 1; i < _bucketCount-1; ++i) {
+                for (int i = 1; i < bucketCount-1; ++i) {
                     if (cost[i] < minCost) {
                         minCost = cost[i];
                         minCostSplit = i;
                     }
                 }
-                
+
+                 // Either create leaf or split primitives at selected SAH bucket
+                if (primitives.Count < _maxPrimsInNode || minCost > primitives.Count)
+                    return false;
+
                 leftPrims = new List<Traceable>();
                 rightPrims = new List<Traceable>();
                 
-                var CompareToBucket = GetComparer(minCostSplit, _bucketCount, dim, centroidBounds);
+                var CompareToBucket = GetComparer(minCostSplit, bucketCount, dim, centroidBounds);
 
                 foreach (var prim in primitives)
                 {

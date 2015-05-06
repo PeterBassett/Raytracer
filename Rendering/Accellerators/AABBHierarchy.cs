@@ -28,7 +28,7 @@ namespace Raytracer.Rendering.Accellerators
                 List<Traceable> leftPrims = new List<Traceable>();
                 List<Traceable> rightPrims = new List<Traceable>();
 
-                if (primitives.Count() > 6 && depth <= 25 && partitioner.Partition(primitives, ref _bounds, ref leftPrims, ref rightPrims))
+                if (partitioner.Partition(primitives, depth, ref _bounds, ref leftPrims, ref rightPrims))
                 {
                     _left = new AABBHierarchyNode(leftPrims.ToArray(), depth + 1, partitioner);
                     _right = new AABBHierarchyNode(rightPrims.ToArray(), depth + 1, partitioner);

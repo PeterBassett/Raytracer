@@ -9,7 +9,7 @@ namespace Raytracer.Rendering.Accellerators.Partitioners
 {
     class EqualPrimitivePartioner : IPrimitivePartitioner
     {
-        public bool Partition(IList<Traceable> primitives, ref AABB bounds, ref List<Traceable> leftPrims, ref List<Traceable> rightPrims)
+        public bool Partition(IList<Traceable> primitives, int depth, ref AABB bounds, ref List<Traceable> leftPrims, ref List<Traceable> rightPrims)
         {
             bounds = primitives.First().GetAABB();
 
@@ -17,6 +17,9 @@ namespace Raytracer.Rendering.Accellerators.Partitioners
                 return false;
 
             if (primitives.Count() <= 6)
+                return false;
+            
+            if(depth > 25)
                 return false;
 
             var midpt = new Point();

@@ -6,6 +6,6 @@ namespace Raytracer.Rendering.Accellerators.Partitioners
 {
     interface IPrimitivePartitioner
     {
-        bool Partition(IList<Traceable> primitives, ref AABB bounds, ref List<Traceable> leftPrims, ref List<Traceable> rightPrims);
+        bool Partition(IList<Traceable> primitives, int depth, ref AABB bounds, ref List<Traceable> leftPrims, ref List<Traceable> rightPrims);
     }
 }
