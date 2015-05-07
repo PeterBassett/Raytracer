@@ -95,7 +95,7 @@ namespace Raytracer.Rendering.Core
 
             var elements = FilterUnboundedPrimitives();
 
-            _sceneGraph = new AABBHierarchy(new EqualPrimitivePartioner());
+            _sceneGraph = new AABBHierarchy(new SAHMutliAxisPrimitivePartitioner());
             _sceneGraph.Build(elements);
         }
 

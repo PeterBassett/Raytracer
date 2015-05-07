@@ -93,6 +93,7 @@
     <Compile Include="PixelCoordinates.Designer.cs">
       <DependentUpon>PixelCoordinates.cs</DependentUpon>
     </Compile>
+    <Compile Include="Rendering\Accellerators\Partitioners\SAHMutliAxisPrimitivePartitioner.cs" />
     <Compile Include="Rendering\Accellerators\Partitioners\SAHPrimitivePartitioner.cs" />
     <Compile Include="Rendering\Accellerators\Partitioners\EqualPrimitivePartitioner.cs" />
     <Compile Include="Rendering\Accellerators\Partitioners\IPrimitivePartitioner.cs" />

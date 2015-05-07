@@ -253,5 +253,15 @@ namespace Raytracer.Rendering.Core
             else
                 return 2;
         }
+
+        public bool IsInvalid
+        {
+            get
+            {
+                return this.Depth  < 0 ||
+                       this.Width  < 0 ||
+                       this.Height < 0;
+            }
+        }
     }
 }

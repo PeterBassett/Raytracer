@@ -20,6 +20,8 @@ namespace Raytracer.Rendering.Accellerators.Partitioners
 
         public bool Partition(IList<Traceable> primitives, int depth, ref AABB bounds, ref List<Traceable> leftPrims, ref List<Traceable> rightPrims)
         {
+            System.Diagnostics.Debug.Assert(depth < 500);
+
             AABB centroidBounds = AABB.Invalid();
 
             for (var i = 0; i < primitives.Count; i++)
@@ -31,7 +33,7 @@ namespace Raytracer.Rendering.Accellerators.Partitioners
             bounds = centroidBounds;
 
             // Partition primitives using approximate SAH
-            if (primitives.Count <= _maxPrimsInNode || depth > 2000) 
+            if (primitives.Count <= _maxPrimsInNode) 
             {
                 return false;
             }
@@ -72,12 +74,18 @@ namespace Raytracer.Rendering.Accellerators.Partitioners
 
                     for (int j = 0; j <= i; ++j) 
                     {
+                        if (buckets[j].Bounds.IsInvalid)
+                            continue;
+
                         b0 = b0.InflateToEncapsulate(buckets[j].Bounds);
                         count0 += buckets[j].Count;
                     }
 
                     for (int j = i + 1; j < bucketCount; ++j) 
                     {
+                        if (buckets[j].Bounds.IsInvalid)
+                            continue;
+
                         b1 = b1.InflateToEncapsulate(buckets[j].Bounds);
                         count1 += buckets[j].Count;
                     }
