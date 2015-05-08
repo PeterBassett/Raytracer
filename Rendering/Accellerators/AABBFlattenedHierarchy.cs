@@ -30,7 +30,7 @@ namespace Raytracer.Rendering.Accellerators
             _totalNodeCount = GetTotalNodeCount(_root);
 
             _nodes = new LinearAABBNode[_totalNodeCount];
-            _primitives = new List<Traceable>();
+            _primitives = new List<Traceable>(primitives.Count());
 
             int offset = 0;
             FlattenAABBTree(_root, ref offset);
