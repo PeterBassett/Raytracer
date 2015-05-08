@@ -48,6 +48,10 @@ namespace Raytracer.Rendering.Materials
         {
             try
             {
+                //mirror the coordinates
+                u = 1.0 - u;
+                v = 1.0 - v;
+
                 u = u * _diffuseMap.Size.Width - 0.5;
                 v = v * _diffuseMap.Size.Height - 0.5;
 

@@ -24,8 +24,9 @@ namespace Raytracer.MathTypes
 		{
 			var length = this.Length;
 
-			if (length == 0)
-				throw new DivideByZeroException("Trying to normalize a vector with length of zero.");
+            if (length == 0)
+                return this;
+                //throw new DivideByZeroException("Trying to normalize a vector with length of zero.");
 
             return this / length;
 		}

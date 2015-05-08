@@ -38,11 +38,12 @@ Antialiasing
 Accelleration Structures
 * Octree
 * Bounding Volume Hierarchy, AABBs in my case.
+* Multi Axis Midpoint Split Criteria 
+* Multi Axis SAH Split Criteria
 
-Improvements To Come.
-
-I will eventually change the Traceable interface so that the main intersection routine returns all intersections with the object, not just the first.
-With this I can implement CSG against arbitrary traceable implementations. A cone primitive is in progress.
+Recent improvements 
+Multi axis SAH construction for my AABB BVH.
+Fixed Texture UV coordinate calculation. I had them each mirrored.
 
 Examples
 * Refraction needs some work in this one
@@ -79,3 +80,5 @@ Examples
 ![cylinders](/OutputImages/Cylinders.jpg?raw=true)
 * Texture Coordinate Wrapping.
 ![texture coordinates](/OutputImages/Sponza.jpeg?raw=true)
+* 1,087,474 triangle Happy Buddha.
+![SAH BHV](/OutputImages/Buddha.jpeg?raw=true)

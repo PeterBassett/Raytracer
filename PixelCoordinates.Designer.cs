@@ -71,7 +71,7 @@
             // 
             this.btnRenderAtPixel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnRenderAtPixel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnRenderAtPixel.Location = new System.Drawing.Point(13, 67);
+            this.btnRenderAtPixel.Location = new System.Drawing.Point(13, 66);
             this.btnRenderAtPixel.Name = "btnRenderAtPixel";
             this.btnRenderAtPixel.Size = new System.Drawing.Size(75, 23);
             this.btnRenderAtPixel.TabIndex = 3;

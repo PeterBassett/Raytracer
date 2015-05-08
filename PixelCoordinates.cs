@@ -58,7 +58,7 @@ namespace Raytracer
         private void btnRenderAtPixel_Click(object sender, EventArgs e)
         {
             int x, y;
-            GetCoordinates(GetTextboxes().First().Text, out x, out y);
+            GetCoordinates(textBox1.Text, out x, out y);
 
             var onRenderRequestedEvent = OnRenderRequested;
 
