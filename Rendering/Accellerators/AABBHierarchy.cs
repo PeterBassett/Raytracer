@@ -12,29 +12,31 @@ namespace Raytracer.Rendering.Accellerators
 
     class AABBHierarchy : IAccelerator
     {
-        class AABBHierarchyNode
+        protected class AABBHierarchyNode
         {
-            readonly bool _isLeaf;
-            readonly AABBHierarchyNode _left;
-            readonly AABBHierarchyNode _right;
-            readonly AABB _bounds;
-            readonly Traceable[] _primitives;
+            internal readonly int _axis;
+            internal readonly bool _isLeaf;
+            internal readonly AABBHierarchyNode _left;
+            internal readonly AABBHierarchyNode _right;
+            internal readonly AABB _bounds;
+            internal readonly Traceable[] _primitives;
 
             public AABBHierarchyNode(IList<Traceable> primitives, int depth, IPrimitivePartitioner partitioner)
             {
                 if (!primitives.Any())
                     return;
 
-                List<Traceable> leftPrims = new List<Traceable>();
-                List<Traceable> rightPrims = new List<Traceable>();
-
-                if (partitioner.Partition(primitives, depth, ref _bounds, ref leftPrims, ref rightPrims))
+                var leftPrims = new List<Traceable>();
+                var rightPrims = new List<Traceable>();
+                int chosenSplitAxis;
+                if (partitioner.Partition(primitives, depth, ref _bounds, ref leftPrims, ref rightPrims, out chosenSplitAxis))
                 {
+                    _axis = chosenSplitAxis;
                     _left = new AABBHierarchyNode(leftPrims.ToArray(), depth + 1, partitioner);
                     _right = new AABBHierarchyNode(rightPrims.ToArray(), depth + 1, partitioner);
                 }
                 else
-                {
+                {                    
                     _primitives = primitives.ToArray();
 
                     _isLeaf = true;
@@ -74,8 +76,8 @@ namespace Raytracer.Rendering.Accellerators
             }
         };
 
-        private AABBHierarchyNode _root;
-        private IPrimitivePartitioner _partitioner;
+        protected AABBHierarchyNode _root;
+        protected IPrimitivePartitioner _partitioner;
 
         public AABBHierarchy (IPrimitivePartitioner partitioner)
 	    {
@@ -84,20 +86,20 @@ namespace Raytracer.Rendering.Accellerators
             _partitioner = partitioner;       
 	    }
 
-        public void Build(IEnumerable<Traceable> primitives)
+        public virtual void Build(IEnumerable<Traceable> primitives)
         {
             _root = new AABBHierarchyNode(primitives.ToArray(), 0, _partitioner);
         }
 
-        public IEnumerable<Traceable> Intersect(Ray ray)
+        public virtual IEnumerable<Traceable> Intersect(Ray ray)
         {
             return _root.Intersect(ray);
         }
 
-        public IEnumerable<Traceable> Intersect(Point point)
+        public virtual IEnumerable<Traceable> Intersect(Point point)
         {
             return _root.Intersect(point);
-        }
+        }        
     }
 }
        

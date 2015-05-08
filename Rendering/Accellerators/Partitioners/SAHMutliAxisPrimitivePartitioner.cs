@@ -20,9 +20,10 @@ namespace Raytracer.Rendering.Accellerators.Partitioners
         private const int _maxPrimsInNode = 4;
         private const int DefaultBucketCount = 12;
 
-        public bool Partition(IList<Traceable> primitives, int depth, ref AABB bounds, ref List<Traceable> leftPrims, ref List<Traceable> rightPrims)
+        public bool Partition(IList<Traceable> primitives, int depth, ref AABB bounds, ref List<Traceable> leftPrims, ref List<Traceable> rightPrims, out int chosenSplitAxis)
         {
             System.Diagnostics.Debug.Assert(depth < 500);
+            chosenSplitAxis = 0;
 
             if (!primitives.Any())
             {
@@ -47,7 +48,9 @@ namespace Raytracer.Rendering.Accellerators.Partitioners
             {
                 int minAxis;
                 var bestPartition = FindBestBucketAndAxisPartition(primitives, bounds, out minAxis);
-                
+
+                chosenSplitAxis = minAxis;
+
                 // Either create leaf or split primitives at selected SAH bucket
                 if (primitives.Count < _maxPrimsInNode || bestPartition.Cost > primitives.Count)
                     return false;

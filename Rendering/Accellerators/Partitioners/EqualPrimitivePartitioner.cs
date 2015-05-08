@@ -9,8 +9,9 @@ namespace Raytracer.Rendering.Accellerators.Partitioners
 {
     class EqualPrimitivePartioner : IPrimitivePartitioner
     {
-        public bool Partition(IList<Traceable> primitives, int depth, ref AABB bounds, ref List<Traceable> leftPrims, ref List<Traceable> rightPrims)
+        public bool Partition(IList<Traceable> primitives, int depth, ref AABB bounds, ref List<Traceable> leftPrims, ref List<Traceable> rightPrims, out int chosenSplitAxis)
         {
+            chosenSplitAxis = 0;
             if (!primitives.Any())
             {
                 bounds = AABB.Empty;
@@ -79,6 +80,8 @@ namespace Raytracer.Rendering.Accellerators.Partitioners
                 else
                     leftPrims.Add(primitives[i]);
             }
+
+            chosenSplitAxis = bestAxis;
 
             if (primitives.Count == leftPrims.Count || primitives.Count == rightPrims.Count)
                 return false;

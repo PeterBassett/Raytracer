@@ -18,10 +18,10 @@ namespace Raytracer.Rendering.Accellerators.Partitioners
         private const int _maxPrimsInNode = 4;
         private const int DefaultBucketCount = 12;
 
-        public bool Partition(IList<Traceable> primitives, int depth, ref AABB bounds, ref List<Traceable> leftPrims, ref List<Traceable> rightPrims)
+        public bool Partition(IList<Traceable> primitives, int depth, ref AABB bounds, ref List<Traceable> leftPrims, ref List<Traceable> rightPrims, out int chosenSplitAxis)
         {
             System.Diagnostics.Debug.Assert(depth < 500);
-
+            chosenSplitAxis = 0;
             AABB centroidBounds = AABB.Invalid();
 
             for (var i = 0; i < primitives.Count; i++)
@@ -40,6 +40,8 @@ namespace Raytracer.Rendering.Accellerators.Partitioners
             else 
             {
                 int dim = centroidBounds.MaximumExtent();
+
+                chosenSplitAxis = dim;
 
                 var bucketCount = DefaultBucketCount;
                 var buckets = new Bucket[bucketCount];
