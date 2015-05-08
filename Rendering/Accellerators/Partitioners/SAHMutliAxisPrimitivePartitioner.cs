@@ -24,9 +24,15 @@ namespace Raytracer.Rendering.Accellerators.Partitioners
         {
             System.Diagnostics.Debug.Assert(depth < 500);
 
-            bounds = AABB.Invalid();
+            if (!primitives.Any())
+            {
+                bounds = AABB.Empty;
+                return false;
+            }
 
-            for (var i = 0; i < primitives.Count; i++)
+            bounds = primitives[0].GetAABB();
+
+            for (var i = 1; i < primitives.Count; i++)
             {
                 var primitivePos = primitives[i].GetAABB();
                 bounds = primitivePos.InflateToEncapsulate(bounds);

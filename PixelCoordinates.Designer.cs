@@ -38,7 +38,7 @@
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(287, 65);
+            this.btnClose.Location = new System.Drawing.Point(287, 66);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 0;
@@ -60,8 +60,9 @@
             // 
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(12, 39);
+            this.textBox2.Location = new System.Drawing.Point(13, 40);
             this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(349, 20);
             this.textBox2.TabIndex = 2;
             this.textBox2.Tag = "x == {0} && y == {1}";
@@ -70,7 +71,7 @@
             // 
             this.btnRenderAtPixel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnRenderAtPixel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnRenderAtPixel.Location = new System.Drawing.Point(12, 65);
+            this.btnRenderAtPixel.Location = new System.Drawing.Point(13, 67);
             this.btnRenderAtPixel.Name = "btnRenderAtPixel";
             this.btnRenderAtPixel.Size = new System.Drawing.Size(75, 23);
             this.btnRenderAtPixel.TabIndex = 3;

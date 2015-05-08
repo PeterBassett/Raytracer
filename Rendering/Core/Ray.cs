@@ -10,8 +10,12 @@ namespace Raytracer.Rendering.Core
 {
 	public struct Ray
 	{
-        public enum CLASSIFICATION
-        { MMM, MMP, MPM, MPP, PMM, PMP, PPM, PPP };
+	    public enum Classification
+	    {            
+            // ReSharper disable InconsistentNaming
+            MMM, MMP, MPM, MPP, PMM, PMP, PPM, PPP
+            // ReSharper restore InconsistentNaming
+	    };
 
         public readonly Vector Dir;
         public readonly Point Pos;
@@ -20,7 +24,7 @@ namespace Raytracer.Rendering.Core
         public readonly double R0;
         public readonly double R1;
         public readonly double R3;
-        public readonly CLASSIFICATION classification;
+        public readonly Classification classification;
 
 		public Ray(Point pos, Vector dir) : this()
         {
@@ -36,16 +40,16 @@ namespace Raytracer.Rendering.Core
                 if (Dir.Y < 0)
                 {
                     if (Dir.Z < 0)
-                        classification = CLASSIFICATION.MMM;
+                        classification = Classification.MMM;
                     else
-                        classification = CLASSIFICATION.MMP;
+                        classification = Classification.MMP;
                 }
                 else
                 {
                     if (Dir.Z < 0)
-                        classification = CLASSIFICATION.MPM;
+                        classification = Classification.MPM;
                     else
-                        classification = CLASSIFICATION.MPP;
+                        classification = Classification.MPP;
                 }
             }
             else
@@ -53,16 +57,16 @@ namespace Raytracer.Rendering.Core
                 if (Dir.Y < 0)
                 {
                     if (Dir.Z < 0)
-                        classification = CLASSIFICATION.PMM;
+                        classification = Classification.PMM;
                     else
-                        classification = CLASSIFICATION.PMP;
+                        classification = Classification.PMP;
                 }
                 else
                 {
                     if (Dir.Z < 0)
-                        classification = CLASSIFICATION.PPM;
+                        classification = Classification.PPM;
                     else
-                        classification = CLASSIFICATION.PPP;
+                        classification = Classification.PPP;
                 }
             }
         }

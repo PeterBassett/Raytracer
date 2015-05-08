@@ -12,7 +12,7 @@ namespace Raytracer.Rendering.Primitives
         {
             switch (r.classification)
             {
-                case Ray.CLASSIFICATION.MMM:
+                case Ray.Classification.MMM:
                     // side(R,HD) < 0 or side(R,FB) > 0 or side(R,EF) > 0 or side(R,DC) < 0 or side(R,CB) < 0 or side(R,HE) > 0 to miss
 
                     if ((r.Pos.X < b.Min.X) || (r.Pos.Y < b.Min.Y) || (r.Pos.Z < b.Min.Z) ||
@@ -26,7 +26,7 @@ namespace Raytracer.Rendering.Primitives
 
                     return true;
 
-                case Ray.CLASSIFICATION.MMP:
+                case Ray.Classification.MMP:
                     // side(R,HD) < 0 or side(R,FB) > 0 or side(R,HG) > 0 or side(R,AB) < 0 or side(R,DA) < 0 or side(R,GF) > 0 to miss
 
                     if ((r.Pos.X < b.Min.X) || (r.Pos.Y < b.Min.Y) || (r.Pos.Z > b.Max.Z) ||
@@ -40,7 +40,7 @@ namespace Raytracer.Rendering.Primitives
 
                     return true;
 
-                case Ray.CLASSIFICATION.MPM:
+                case Ray.Classification.MPM:
                     // side(R,EA) < 0 or side(R,GC) > 0 or side(R,EF) > 0 or side(R,DC) < 0 or side(R,GF) < 0 or side(R,DA) > 0 to miss
 
                     if ((r.Pos.X < b.Min.X) || (r.Pos.Y > b.Max.Y) || (r.Pos.Z < b.Min.Z) ||
@@ -54,7 +54,7 @@ namespace Raytracer.Rendering.Primitives
 
                     return true;
 
-                case Ray.CLASSIFICATION.MPP:
+                case Ray.Classification.MPP:
                     // side(R,EA) < 0 or side(R,GC) > 0 or side(R,HG) > 0 or side(R,AB) < 0 or side(R,HE) < 0 or side(R,CB) > 0 to miss
 
                     if ((r.Pos.X < b.Min.X) || (r.Pos.Y > b.Max.Y) || (r.Pos.Z > b.Max.Z) ||
@@ -68,7 +68,7 @@ namespace Raytracer.Rendering.Primitives
 
                     return true;
 
-                case Ray.CLASSIFICATION.PMM:
+                case Ray.Classification.PMM:
                     // side(R,GC) < 0 or side(R,EA) > 0 or side(R,AB) > 0 or side(R,HG) < 0 or side(R,CB) < 0 or side(R,HE) > 0 to miss
 
                     if ((r.Pos.X > b.Max.X) || (r.Pos.Y < b.Min.Y) || (r.Pos.Z < b.Min.Z) ||
@@ -82,7 +82,7 @@ namespace Raytracer.Rendering.Primitives
 
                     return true;
 
-                case Ray.CLASSIFICATION.PMP:
+                case Ray.Classification.PMP:
                     // side(R,GC) < 0 or side(R,EA) > 0 or side(R,DC) > 0 or side(R,EF) < 0 or side(R,DA) < 0 or side(R,GF) > 0 to miss
 
                     if ((r.Pos.X > b.Max.X) || (r.Pos.Y < b.Min.Y) || (r.Pos.Z > b.Max.Z) ||
@@ -96,7 +96,7 @@ namespace Raytracer.Rendering.Primitives
 
                     return true;
 
-                case Ray.CLASSIFICATION.PPM:
+                case Ray.Classification.PPM:
                     // side(R,FB) < 0 or side(R,HD) > 0 or side(R,AB) > 0 or side(R,HG) < 0 or side(R,GF) < 0 or side(R,DA) > 0 to miss
 
                     if ((r.Pos.X > b.Max.X) || (r.Pos.Y > b.Max.Y) || (r.Pos.Z < b.Min.Z) ||
@@ -110,7 +110,7 @@ namespace Raytracer.Rendering.Primitives
 
                     return true;
 
-                case Ray.CLASSIFICATION.PPP:
+                case Ray.Classification.PPP:
                     // side(R,FB) < 0 or side(R,HD) > 0 or side(R,DC) > 0 or side(R,EF) < 0 or side(R,HE) < 0 or side(R,CB) > 0 to miss
 
                     if ((r.Pos.X > b.Max.X) || (r.Pos.Y > b.Max.Y) || (r.Pos.Z > b.Max.Z) ||

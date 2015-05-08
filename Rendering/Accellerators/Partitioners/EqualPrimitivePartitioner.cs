@@ -11,16 +11,13 @@ namespace Raytracer.Rendering.Accellerators.Partitioners
     {
         public bool Partition(IList<Traceable> primitives, int depth, ref AABB bounds, ref List<Traceable> leftPrims, ref List<Traceable> rightPrims)
         {
-            bounds = primitives.First().GetAABB();
-
             if (!primitives.Any())
+            {
+                bounds = AABB.Empty;
                 return false;
+            }
 
-            if (primitives.Count() <= 6)
-                return false;
-            
-            if(depth > 25)
-                return false;
+            bounds = primitives.First().GetAABB();
 
             var midpt = new Point();
 
@@ -32,6 +29,12 @@ namespace Raytracer.Rendering.Accellerators.Partitioners
                 bounds = primitivePos.InflateToEncapsulate(bounds);
                 midpt = midpt + (primitivePos.Center * trisRecp);
             }
+
+            if (primitives.Count() <= 6)
+                return false;
+
+            if (depth > 25)
+                return false;
 
             var bestAxis = 0;
             var bestRemainder = int.MaxValue;

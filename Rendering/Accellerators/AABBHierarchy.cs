@@ -40,10 +40,8 @@ namespace Raytracer.Rendering.Accellerators
                     _isLeaf = true;
 
                     _bounds = AABB.Invalid();
-                    for (long i = 1; i < _primitives.Length; i++)
-                    {
+                    for (long i = 0; i < _primitives.Length; i++)
                         _bounds = _primitives[i].GetAABB().InflateToEncapsulate(_bounds);
-                    }
                 }
             }
 

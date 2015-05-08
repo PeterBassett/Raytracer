@@ -57,10 +57,21 @@ namespace Raytracer
 
         private void btnRenderAtPixel_Click(object sender, EventArgs e)
         {
+            int x, y;
+            GetCoordinates(GetTextboxes().First().Text, out x, out y);
+
             var onRenderRequestedEvent = OnRenderRequested;
 
             if (onRenderRequestedEvent != null)
-                onRenderRequestedEvent(this, _x, _y);
+                onRenderRequestedEvent(this, x, y);
+        }
+
+        private void GetCoordinates(string text, out int x, out int y)
+        {
+            var split = text.Split(':');
+
+            x = int.Parse(split[0]);
+            y = int.Parse(split[1]);
         }
     }
 }
