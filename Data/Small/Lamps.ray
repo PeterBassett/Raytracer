@@ -12,7 +12,7 @@ RenderSettings
 )
 
 AmbientLight(40, 40, 40)
-LightSource(-30, 40, -40, 155, 155, 155)
+PointLight(-30, 40, -40, 155, 155, 155)
 
 ColourMaterial("red",
   0.7, 0.1, 0.1,    ' Ambient. '

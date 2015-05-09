@@ -5,8 +5,8 @@ Viewpoint(1, 0.5, -4, 	 ' Viewpoint '
 
 AmbientLight(50, 50, 50)
 
-LightSource(60, 80, 100, 255, 255, 255)
-LightSource(60, 80, -100, 255, 255, 255)
+PointLight(60, 80, 100, 255, 255, 255)
+PointLight(60, 80, -100, 255, 255, 255)
 
 ' Render Depth 	' 
 ' Shadows 	' 

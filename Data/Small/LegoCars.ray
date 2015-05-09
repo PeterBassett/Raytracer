@@ -12,8 +12,8 @@ RenderSettings
 )
 AmbientLight(40, 40, 40)
 
-LightSource(35, 45, -5, 70, 70, 70)
-LightSource(35, 45, 5, 70, 70, 70)
+PointLight(35, 45, -5, 70, 70, 70)
+PointLight(35, 45, 5, 70, 70, 70)
 
 Mesh
 (  

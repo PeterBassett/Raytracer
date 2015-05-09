@@ -17,6 +17,7 @@ namespace Raytracer.Rendering.Core
             // ReSharper restore InconsistentNaming
 	    };
 
+        public readonly bool IsValid;
         public readonly Vector Dir;
         public readonly Point Pos;
 
@@ -30,6 +31,7 @@ namespace Raytracer.Rendering.Core
         {
             Pos = pos;
             Dir = dir;
+            IsValid = true;
             
             R0 = Pos.X * Dir.Y - Dir.X * Pos.Y;
             R1 = Pos.X * Dir.Z - Dir.X * Pos.Z;

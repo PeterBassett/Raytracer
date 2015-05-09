@@ -5,8 +5,8 @@ Viewpoint(0,15,-3, 	 ' Viewpoint '
 
 AmbientLight(50, 50, 50)
 
-LightSource(120,12,12, 255, 255, 255)
-LightSource(-120,-12,-12, 255, 255, 255)
+PointLight(120,12,12, 255, 255, 255)
+PointLight(-120,-12,-12, 255, 255, 255)
 
 ColourMaterial("grey",
   0.9,0.9,0.9,

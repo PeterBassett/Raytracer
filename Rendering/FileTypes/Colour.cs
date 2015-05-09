@@ -119,12 +119,12 @@ namespace Raytracer.Rendering.FileTypes
             return new Colour(a.Red * f, a.Green * f, a.Blue * f);
         }
 
-	    public static Colour operator * (Colour a, float f) 
+	    /*public static Colour operator * (Colour a, double f) 
 	    { 
 		    return new Colour(a.Red * f, a.Green * f, a.Blue * f); 
-	    }
+	    }*/
 
-        public static Colour operator /(Colour a, float f)
+        public static Colour operator /(Colour a, double f)
         {
             return new Colour(a.Red / f, a.Green / f, a.Blue / f);
         }

@@ -11,7 +11,7 @@ RenderSettings
 )
 
 'AmbientLight(150, 150,150)'
-'LightSource(60, 80, 100, 255, 255, 255)'
+'PointLight(60, 80, 100, 255, 255, 255)'
 
 ' Cubemap by Jockum Skoglund '
 ' http://www.zfight.com/misc/images/textures/envmaps/miramar_large.jpg '

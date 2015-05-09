@@ -37,6 +37,11 @@ namespace Raytracer.Rendering.Core
             return _transform.Transform(point);
         }
 
+        public Point ToWorldSpace(Point point)
+        {
+            return _inverse.Transform(point);
+        }
+
         public IntersectionInfo ToWorldSpace(IntersectionInfo info)
         {
             return new IntersectionInfo(info.Result, 
@@ -60,6 +65,12 @@ namespace Raytracer.Rendering.Core
         private AABB Apply(Matrix m, AABB aabb)
         {
             return aabb.Transform(m);
+        }
+
+        internal static Transform CreateIdentityTransform()
+        {
+            var identity = Matrix.Identity;
+            return new Transform(identity, identity);
         }
     }
 }

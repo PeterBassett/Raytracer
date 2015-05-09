@@ -5,6 +5,8 @@ using System.Text;
 using Raytracer.Rendering;
 using System.IO;
 using System.ComponentModel.Composition;
+using Raytracer.Rendering.Core;
+using Raytracer.Rendering.Lights;
 
 namespace Raytracer.Rendering.FileTypes.VBRayScene.Savers
 {
@@ -13,21 +15,21 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Savers
     {
         public Type SaverForType
         {
-            get { return typeof(Light); }
+            get { return typeof(AmbientLight); }
         }
 
         public void SaveObject(StreamWriter file, object ObjectToSave)
         {
             Light light = (Light)ObjectToSave;
 
-            if (light.Ambient.Sum() > 0 && light.Diffuse.Sum() == 0)
-            {
-                file.WriteLine("AmbientLight({0}, {1}, {2})", 
-                    light.Ambient.Red * 255.0f,
-                    light.Ambient.Green * 255.0f,
-                    light.Ambient.Blue * 255.0f);
-                file.WriteLine();
-            }
+            if (light.Intensity.Sum() == 0)
+                return;
+
+            file.WriteLine("AmbientLight({0}, {1}, {2})", 
+                light.Intensity.Red * 255.0f,
+                light.Intensity.Green * 255.0f,
+                light.Intensity.Blue * 255.0f);
+            file.WriteLine();
         }
     }
 }

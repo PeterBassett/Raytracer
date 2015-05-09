@@ -13,8 +13,8 @@ RenderSettings
 	true, 'Trace Refractions'
 )
 
-LightSource(20, 20, 20,50, 50, 50)
-LightSource(-20, 20, -20,50, 50, 50)
+PointLight(20, 20, 20,50, 50, 50)
+PointLight(-20, 20, -20,50, 50, 50)
 AmbientLight(50, 0, 0)
 
 ColourMaterial

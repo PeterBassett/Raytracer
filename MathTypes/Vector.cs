@@ -51,6 +51,16 @@ namespace Raytracer.MathTypes
             return DotProduct(a.X, a.Y, a.Z, b.X, b.Y, b.Z);
         }
 
+        public static double AbsDotProduct(Vector a, Vector b)
+        {
+            return Math.Abs(DotProduct(a.X, a.Y, a.Z, b.X, b.Y, b.Z));
+        }
+
+        public static double AbsDotProduct(Vector a, Normal b)
+        {
+            return Math.Abs(DotProduct(a.X, a.Y, a.Z, b.X, b.Y, b.Z));
+        }
+
         public static double DotProduct(double aX, double aY, double aZ, double bX, double bY, double bZ)
         {
             return (aX * bX) + (aY * bY) + (aZ * bZ);

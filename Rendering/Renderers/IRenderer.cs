@@ -8,5 +8,6 @@ namespace Raytracer.Rendering.Renderers
     {
         void RenderScene(IBmp frameBuffer);
         Colour ComputeSample(Vector2 pixelCoordinate);
+        IntersectionInfo FindClosestIntersection(Ray ray);
     }
 }

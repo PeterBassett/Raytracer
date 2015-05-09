@@ -11,7 +11,7 @@ RenderSettings
 	false, 'Trace Refractions'
 )
 AmbientLight(50, 50, 50)
-LightSource(10, 20, -10, 60, 60, 60)
+PointLight(10, 20, -10, 60, 60, 60)
 
 Mesh
 (  

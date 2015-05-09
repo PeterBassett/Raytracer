@@ -103,10 +103,13 @@
     </Compile>
     <Compile Include="Rendering\Accellerators\IAccellerator.cs" />
     <Compile Include="Rendering\Core\Transform.cs" />
+    <Compile Include="Rendering\Core\VisibilityTester.cs" />
     <Compile Include="Rendering\FileTypes\ImageReader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\ConeLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\DiscLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\CylinderLoader.cs" />
+    <Compile Include="Rendering\Lights\AmbientLight.cs" />
+    <Compile Include="Rendering\Lights\PointLight.cs" />
     <Compile Include="Rendering\PixelSampler\EdgeDetectionPerComponentSampler.cs" />
     <Compile Include="Rendering\Primitives\Cone.cs" />
     <Compile Include="Rendering\Primitives\Solidity.cs" />
@@ -144,10 +147,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Rendering\PixelSampler\IPixelSampler.cs" />
-    <Compile Include="Rendering\Primitives\ITraceable.cs">
+    <Compile Include="Rendering\Core\Traceable.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Rendering\Light.cs">
+    <Compile Include="Rendering\Core\Light.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Rendering\Materials\MaterialTexture.cs" />

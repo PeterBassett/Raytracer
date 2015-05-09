@@ -11,7 +11,7 @@ RenderSettings
 	true, 'Trace Refractions'
 )
 
-LightSource(0, 10, -30, 200, 200, 200)
+PointLight(0, 10, -30, 200, 200, 200)
 
 Mesh
 (  

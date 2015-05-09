@@ -49,7 +49,7 @@ namespace Raytracer.Rendering.Renderers
             return TraceRay(ray, new Colour(1.0f), 1.0f, 1, ray.Dir);
         }
         
-        private IntersectionInfo FindClosestIntersection(Ray ray)
+        public IntersectionInfo FindClosestIntersection(Ray ray)
         {
             var minimumIntersection = new IntersectionInfo(HitResult.MISS);
 
@@ -363,42 +363,50 @@ namespace Raytracer.Rendering.Renderers
             // iterate through all the lights in the scene
             foreach (var light in _scene.Lights)
             {
-                // get the light material
-                Colour lightAmbient = light.Ambient;
-                Colour lightDiffuse = light.Diffuse;
+                var visibilityTester = new VisibilityTester();
+                var pointToLight = Vector.Zero;
+                var lightColour = light.Sample(hitPoint, normal, ref pointToLight, ref visibilityTester);
+
+                if (lightColour.Brightness > 0 && visibilityTester.Unoccluded(this))
+                {
+                    if (pointToLight == Vector.Zero)
+                        pointToLight = (Vector)(-normal);
+
+                    colour += 100.0 * (material.Diffuse * lightColour) * Vector.AbsDotProduct(pointToLight, normal);
+                }
 
                 // assign the ambient term of the light
-                colour += (material.Ambient * lightAmbient);
+                //colour += (material.Ambient * lightAmbient);
 
                 // construct a vector from the point to the light
-                double lightVecLen = 0.0f;
-                var pointToLight = light.Pos - hitPoint;
+                //double lightVecLen = 0.0f;
+                //var pointToLight = light.Pos - hitPoint;
 
                 // save the lenght of the vector.
-                lightVecLen = pointToLight.Length;
+                //lightVecLen = pointToLight.Length;
 
                 // normalise the vector
-                pointToLight = pointToLight.Normalize();
+                //pointToLight = pointToLight.Normalize();
 
                 // get the angle between the light vector ad the surface normal
-                var lightCos = Vector.DotProduct(pointToLight, normal);
+              //  var lightCos = Vector.DotProduct(pointToLight, normal);
 
                 // is this point shadowed
-                var shadowed = false;
+                //var shadowed = false;
 
                 // if we are tracing shadows
-                if (this._traceShadows && lightDiffuse.Sum() > 0)
-                    shadowed = ShadowTrace(hitPoint, light.Pos, normal, lightVecLen);
+                //if (this._traceShadows && lightDiffuse.Sum() > 0)
+                  //  shadowed = ShadowTrace(hitPoint, light.Pos, normal, lightVecLen);
 
                 // if the angle is greater than 0.0 
                 //then the light falls directly on the surface
-                if (lightCos > 0.0f && !shadowed)
-                {
+              //  if (lightCos > 0.0f && !shadowed)
+                //{
                     // compute the diffuse term
-                    colour += (material.Diffuse * lightDiffuse) * lightCos * (1 / lightVecLen * 100);
+                  //  colour += (material.Diffuse * lightDiffuse) * lightCos * (1 / lightVecLen * 100);
 
-                    if (material.Specularity > 0.0f)
-                    {
+                    //if (material.Specularity > 0.0f)
+                   // {
                         // calculate specular highlights
                         var vReflect = CalculateReflectedRay(pointToLight, normal);
 
@@ -410,10 +418,10 @@ namespace Raytracer.Rendering.Renderers
                         if (fSpecular > 0.0f)
                         {
                             var power = (double)Math.Pow(fSpecular, material.Specularity);
-                            colour += lightDiffuse * material.SpecularExponent * power;
+                            colour += lightColour * material.SpecularExponent * power;
                         }
-                    }
-                }
+                    //}
+                //}
             }
 
             return colour;
