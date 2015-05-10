@@ -42,6 +42,16 @@ namespace Raytracer.Rendering.Core
             return _inverse.Transform(point);
         }
 
+        public Vector ToObjectSpace(Vector point)
+        {
+            return _transform.Transform(point);
+        }
+
+        public Vector ToWorldSpace(Vector point)
+        {
+            return _inverse.Transform(point);
+        }
+
         public IntersectionInfo ToWorldSpace(IntersectionInfo info)
         {
             return new IntersectionInfo(info.Result, 

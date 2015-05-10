@@ -14,7 +14,7 @@ namespace Raytracer.Rendering.Lights
 
         public override Colour Sample(Point hitPoint, Normal normalAtHitPoint, ref Vector pointToLight, ref VisibilityTester visibilityTester)
         {
-            pointToLight = Vector.Zero;
+            pointToLight = (Vector)(-normalAtHitPoint);
             return Intensity; 
         }
     }

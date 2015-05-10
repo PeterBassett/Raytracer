@@ -106,9 +106,11 @@
     <Compile Include="Rendering\Core\VisibilityTester.cs" />
     <Compile Include="Rendering\FileTypes\ImageReader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\ConeLoader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\DistantLightLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\DiscLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\CylinderLoader.cs" />
     <Compile Include="Rendering\Lights\AmbientLight.cs" />
+    <Compile Include="Rendering\Lights\DistantLight.cs" />
     <Compile Include="Rendering\Lights\PointLight.cs" />
     <Compile Include="Rendering\PixelSampler\EdgeDetectionPerComponentSampler.cs" />
     <Compile Include="Rendering\Primitives\Cone.cs" />

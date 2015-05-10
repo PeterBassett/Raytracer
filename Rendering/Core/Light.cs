@@ -13,7 +13,7 @@ namespace Raytracer.Rendering.Core
         {
             Intensity = colour;
             _transform = transform;
-            Pos = _transform.ToWorldSpace(new Point(0.0, 0.0, 0.0));
+            Pos = _transform.ToObjectSpace(new Point(0.0, 0.0, 0.0));
         }
 
         public abstract Colour Sample(Point hitPoint, Normal normalAtHitPoint, ref Vector pointToLight, ref VisibilityTester visibilityTester);

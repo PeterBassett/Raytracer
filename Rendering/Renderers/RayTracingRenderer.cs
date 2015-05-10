@@ -367,81 +367,36 @@ namespace Raytracer.Rendering.Renderers
                 var pointToLight = Vector.Zero;
                 var lightColour = light.Sample(hitPoint, normal, ref pointToLight, ref visibilityTester);
 
-                if (lightColour.Brightness > 0 && visibilityTester.Unoccluded(this))
+                // get the angle between the light vector ad the surface normal
+                var lightCos = Vector.DotProduct(pointToLight, normal);
+
+                if (lightColour.Brightness > 0 && lightCos > 0.0 && visibilityTester.Unoccluded(this))
                 {
                     if (pointToLight == Vector.Zero)
                         pointToLight = (Vector)(-normal);
 
-                    colour += 100.0 * (material.Diffuse * lightColour) * Vector.AbsDotProduct(pointToLight, normal);
+                    colour += (material.Diffuse * lightColour) * lightCos;
                 }
 
-                // assign the ambient term of the light
-                //colour += (material.Ambient * lightAmbient);
+                if (material.Specularity > 0.0f)
+                {
+                    // calculate specular highlights
+                    var vReflect = CalculateReflectedRay(pointToLight, normal);
 
-                // construct a vector from the point to the light
-                //double lightVecLen = 0.0f;
-                //var pointToLight = light.Pos - hitPoint;
+                    // normalise the vector
+                    vReflect = vReflect.Normalize();
 
-                // save the lenght of the vector.
-                //lightVecLen = pointToLight.Length;
+                    var fSpecular = Vector.DotProduct(vReflect, eyeDirection);
 
-                // normalise the vector
-                //pointToLight = pointToLight.Normalize();
-
-                // get the angle between the light vector ad the surface normal
-              //  var lightCos = Vector.DotProduct(pointToLight, normal);
-
-                // is this point shadowed
-                //var shadowed = false;
-
-                // if we are tracing shadows
-                //if (this._traceShadows && lightDiffuse.Sum() > 0)
-                  //  shadowed = ShadowTrace(hitPoint, light.Pos, normal, lightVecLen);
-
-                // if the angle is greater than 0.0 
-                //then the light falls directly on the surface
-              //  if (lightCos > 0.0f && !shadowed)
-                //{
-                    // compute the diffuse term
-                  //  colour += (material.Diffuse * lightDiffuse) * lightCos * (1 / lightVecLen * 100);
-
-                    //if (material.Specularity > 0.0f)
-                   // {
-                        // calculate specular highlights
-                        var vReflect = CalculateReflectedRay(pointToLight, normal);
-
-                        // normalise the vector
-                        vReflect = vReflect.Normalize();
-
-                        var fSpecular = Vector.DotProduct(vReflect, eyeDirection);
-
-                        if (fSpecular > 0.0f)
-                        {
-                            var power = (double)Math.Pow(fSpecular, material.Specularity);
-                            colour += lightColour * material.SpecularExponent * power;
-                        }
-                    //}
-                //}
+                    if (fSpecular > 0.0f)
+                    {
+                        var power = (double)Math.Pow(fSpecular, material.Specularity);
+                        colour += lightColour * material.SpecularExponent * power;
+                    }
+                }
             }
 
             return colour;
-        }
-
-        private bool ShadowTrace(Point hitPoint, Point lightPosition, Normal surfaceNormal, double lightDistance)
-        {
-            var dir = (lightPosition - hitPoint).Normalize();
-
-            var ray = new Ray(hitPoint + (surfaceNormal * 0.00001f), dir);
-
-            foreach (var obj in _scene.GetCandiates(ray))
-            {
-                var result = obj.Intersect(ray);
-
-                if (result.T > 0f && result.T <= lightDistance && result.Result == HitResult.HIT)
-                    return true;
-            }
-
-            return false;
         }
 
         private Vector CalculateReflectedRay(Vector dir, Normal normal)
