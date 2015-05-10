@@ -106,10 +106,12 @@
     <Compile Include="Rendering\Core\VisibilityTester.cs" />
     <Compile Include="Rendering\FileTypes\ImageReader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\ConeLoader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\SpotLightLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\DistantLightLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\DiscLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\CylinderLoader.cs" />
     <Compile Include="Rendering\Lights\AmbientLight.cs" />
+    <Compile Include="Rendering\Lights\SpotLight.cs" />
     <Compile Include="Rendering\Lights\DistantLight.cs" />
     <Compile Include="Rendering\Lights\PointLight.cs" />
     <Compile Include="Rendering\PixelSampler\EdgeDetectionPerComponentSampler.cs" />
@@ -259,6 +261,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\Small\LegoCars.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\SpotLight.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\Small\TorusChain.ray">
