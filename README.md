@@ -23,6 +23,13 @@ Various Materials
 * Texture material. UV coordinate calculations are specific to each primitive type. All common image file formats are supported via the .net framework.
 * Cubemaps, both vertical and horizontal crosses, are supported for scene backgrounds. When a ray misses all objects inthe scene we render from the cubemap.
 
+Lights
+* Point Light - Simple light at a point in space casting light in all directions. Obeys the inverse square law and can cause shadows.
+* Ambient Light - Has no position and contributes the same light to every point in space. Casts no shadows.
+* Spot Light - Like a point light but has a direction and width in addtion to position. It casts a cone of light in the along its direction. The width determines the angle of the cone. Casts shadows.
+* Distant Light - Has no position but does have a direction. Useful for simulating the sun for example. Casts shadows.
+* More to come in future.
+
 File Types
 * Home made human readable "ray" files.
 * Wavefront obj files.
@@ -44,6 +51,7 @@ Accelleration Structures
 Recent improvements 
 Multi axis SAH construction for my AABB BVH.
 Fixed Texture UV coordinate calculation. I had them each mirrored.
+Changed the lighting design to add more complex lighting. I'll have to change the file format to accomodate this more effectively.
 
 Examples
 * Refraction needs some work in this one
