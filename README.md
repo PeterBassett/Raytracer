@@ -26,7 +26,7 @@ Various Materials
 Lights
 * Point Light - Simple light at a point in space casting light in all directions. Obeys the inverse square law and can cause shadows.
 * Ambient Light - Has no position and contributes the same light to every point in space. Casts no shadows.
-* Spot Light - Like a point light but has a direction and width in addtion to position. It casts a cone of light in the along its direction. The width determines the angle of the cone. Casts shadows.
+* Spot Light - Like a point light but has a direction and width in addtion to position. It casts a cone of light along its direction. The width determines the angle of the cone. Casts shadows.
 * Distant Light - Has no position but does have a direction. Useful for simulating the sun for example. Casts shadows.
 * More to come in future.
 
