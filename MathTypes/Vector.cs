@@ -360,6 +360,20 @@ namespace Raytracer.MathTypes
             return new Vector(x, y, z);
         }
 
-    }
+        public static void CoordinateSystem(Vector v1, out Vector v2, out Vector v3) 
+        {
+            if (Math.Abs(v1.X) > Math.Abs(v1.Y))
+            {
+                var invLen = 1.0 / Math.Sqrt(v1.X * v1.X + v1.Z * v1.Z);
+                v2 = new Vector(-v1.Z * invLen, 0.0, v1.X * invLen);
+            }
+            else 
+            {
+                var invLen = 1.0 / Math.Sqrt(v1.Y * v1.Y + v1.Z * v1.Z);
+                v2 = new Vector(0.0, v1.Z * invLen, -v1.Y * invLen);
+            }
 
+            v3 = CrossProduct(v1, v2);
+        }
+    }
 }

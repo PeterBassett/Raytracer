@@ -7,7 +7,7 @@ namespace Raytracer.Rendering.Core
         private readonly Matrix _transform;
         private readonly Matrix _inverse;
 
-        private Transform(Matrix transform, Matrix inverse)
+        public Transform(Matrix transform, Matrix inverse)
         {
             _transform = transform;
             _inverse = inverse;

@@ -7,7 +7,7 @@ namespace Raytracer.Rendering.Core
     {
         protected Transform _transform;
         public Colour Intensity;
-        public Point Pos { get; set; }
+        public Point Pos;
 
         public Light(Colour colour, Transform transform)
         {

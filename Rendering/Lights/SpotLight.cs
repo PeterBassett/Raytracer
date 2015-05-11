@@ -9,13 +9,10 @@ namespace Raytracer.Rendering.Lights
     {
         public double CosTotalWidth;
         public double CosFalloffStart;
-        public Vector Dir;
-
+        
         public SpotLight(Colour colour, float totalWidthInDegrees, float widthBeforeFallOffInDegrees, Transform transform)
             : base(colour, transform)
         {
-            Dir = _transform.ToObjectSpace(new Vector(0.0, 1.0, 0.0));
-
             CosTotalWidth = Math.Cos(MathLib.Deg2Rad(totalWidthInDegrees));
             CosFalloffStart = Math.Cos(MathLib.Deg2Rad(widthBeforeFallOffInDegrees));
         }
@@ -31,7 +28,7 @@ namespace Raytracer.Rendering.Lights
 
         double Falloff(Vector w) 
         {
-            Vector wl = _transform.ToWorldSpace(w).Normalize();
+            Vector wl = _transform.ToObjectSpace(w).Normalize();
             var costheta = wl.Z;
 
             if (costheta < CosTotalWidth)     
