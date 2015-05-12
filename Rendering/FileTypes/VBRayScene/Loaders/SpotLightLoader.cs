@@ -14,12 +14,12 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
         {
             var tokeniser = new Tokeniser();
             
-            var from = new Vector();
+            var from = new Point();
             from.X = float.Parse(tokeniser.GetToken(file));
             from.Y = float.Parse(tokeniser.GetToken(file));
 	        from.Z = float.Parse(tokeniser.GetToken(file));
 
-            var to = new Vector();
+            var to = new Point();
             to.X = float.Parse(tokeniser.GetToken(file));
             to.Y = float.Parse(tokeniser.GetToken(file));
             to.Z = float.Parse(tokeniser.GetToken(file));
@@ -33,11 +33,10 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
             col.Blue = float.Parse(tokeniser.GetToken(file)) / 255.0f;
 
             Vector dir = (to - from).Normalize();
-
             Vector du, dv;
             Vector.CoordinateSystem(dir, out du, out dv);
-
-            var lightToWorld = Matrix.CreateLookAt((Point)from, to - from, du);
+            
+            var lightToWorld = Matrix.CreateLookAt((Point)from, to, du);
 
             var worldToLight = lightToWorld;
             worldToLight.Invert();

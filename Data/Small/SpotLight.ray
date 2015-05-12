@@ -1,8 +1,8 @@
-Viewpoint(0,2.5, -12, 	 ' Viewpoint ' 
-	  0.0, 0.0, 1.0, ' View Angle ' 
+Viewpoint(0,20, 0, 	 ' Viewpoint ' 
+	  90,0,0, ' View Angle ' 
 	  90)		 ' FOV '	
-
-SpotLight(0,12,0, 90,0,0, 55, 50, 255000, 255000, 255000)
+AmbientLight(40,40,40)
+SpotLight(0,12,0, 0,0,0, 55, 50, 255000, 255000, 255000)
 
 ' Render Depth 	' 
 ' Shadows 	' 
@@ -41,7 +41,7 @@ CheckMaterial("check",
   "lightgrey", "darkgrey", 4,4,4
 )
 
-Sphere( 5, 
+Sphere( 2, 
   0, 0, 0,
   "red"
 )
