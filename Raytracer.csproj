@@ -105,12 +105,15 @@
     <Compile Include="Rendering\Core\Transform.cs" />
     <Compile Include="Rendering\Core\VisibilityTester.cs" />
     <Compile Include="Rendering\FileTypes\ImageReader.cs" />
+    <Compile Include="Rendering\FileTypes\Texture.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\ConeLoader.cs" />
+    <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\ProjectionLightLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\SpotLightLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\DistantLightLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\DiscLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\CylinderLoader.cs" />
     <Compile Include="Rendering\Lights\AmbientLight.cs" />
+    <Compile Include="Rendering\Lights\ProjectionLight.cs" />
     <Compile Include="Rendering\Lights\SpotLight.cs" />
     <Compile Include="Rendering\Lights\DistantLight.cs" />
     <Compile Include="Rendering\Lights\PointLight.cs" />
@@ -126,10 +129,10 @@
     <Compile Include="Rendering\RenderingStrategies\IRenderingStrategy.cs" />
     <Compile Include="Rendering\Renderers\IRenderer.cs" />
     <Compile Include="Rendering\PixelSampler\EdgeDetectionSampler.cs" />
-    <Compile Include="Rendering\BackgroundMaterials\HorizontalCubemapBackground.cs" />
-    <Compile Include="Rendering\BackgroundMaterials\VerticalCubemapBackground.cs" />
-    <Compile Include="Rendering\BackgroundMaterials\CubemapBackground.cs" />
-    <Compile Include="Rendering\BackgroundMaterials\SolidColourBackground.cs" />
+    <Compile Include="Rendering\Accellerators\BackgroundMaterials\HorizontalCubemapBackground.cs" />
+    <Compile Include="Rendering\Accellerators\BackgroundMaterials\VerticalCubemapBackground.cs" />
+    <Compile Include="Rendering\Accellerators\BackgroundMaterials\CubemapBackground.cs" />
+    <Compile Include="Rendering\Accellerators\BackgroundMaterials\SolidColourBackground.cs" />
     <Compile Include="Rendering\FileTypes\ObjFile\StreamReader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\VerticalCubemapBackgroundLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\SolidColourBackgroundLoader.cs" />
@@ -140,7 +143,7 @@
     <Compile Include="Rendering\Core\HitResult.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Rendering\BackgroundMaterials\IBackgroundMaterial.cs">
+    <Compile Include="Rendering\Accellerators\BackgroundMaterials\IBackgroundMaterial.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Rendering\Core\IBmp.cs">
@@ -243,6 +246,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\Small\Cones.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\DistantLight.ray" />
+    <None Include="Data\Small\ProjectionLight.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\Small\CubeRefractive.ray">

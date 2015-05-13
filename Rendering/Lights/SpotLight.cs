@@ -9,25 +9,26 @@ namespace Raytracer.Rendering.Lights
     {
         public double CosTotalWidth;
         public double CosFalloffStart;
-        public Vector dir;
+        
         public SpotLight(Colour colour, float power, float totalWidthInDegrees, float widthBeforeFallOffInDegrees, Transform transform)
             : base(colour, transform)
         {
             Intensity *= power;
-
-            dir = _transform.ToObjectSpace(new MathTypes.Vector(0, 0, 1));
- 
             CosTotalWidth = Math.Cos(MathLib.Deg2Rad(totalWidthInDegrees));
             CosFalloffStart = Math.Cos(MathLib.Deg2Rad(widthBeforeFallOffInDegrees));
         }
 
         public override Colour Sample(Point hitPoint, Normal normalAtHitPoint, ref Vector pointToLight, ref VisibilityTester visibilityTester)
         {
-            pointToLight = (Pos - hitPoint).Normalize();
+            pointToLight = Pos - hitPoint;
+            
+            var lengthSquared = pointToLight.LengthSquared;
+
+            pointToLight = pointToLight.Normalize();
 
             visibilityTester.SetSegment(hitPoint, normalAtHitPoint, Pos);
 
-            return Intensity * Falloff(-pointToLight) / (Pos - hitPoint).LengthSquared;
+            return Intensity * Falloff(-pointToLight) / lengthSquared;
         }
 
         double Falloff(Vector w) 

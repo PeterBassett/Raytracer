@@ -885,5 +885,107 @@ namespace Raytracer.MathTypes
 			Quaternion quaternion = Quaternion.CreateFromYawPitchRoll(yaw, pitch, roll);
 			return CreateFromQuaternion(quaternion);
 		}
+
+        /// <summary>
+        /// Builds an orthogonal projection matrix.
+        /// In orthographic projection, all the lines of projection are perpendicular to the eventual drawing surface.
+        /// </summary>
+        /// <seealso cref="http://www.codeguru.com/cpp/misc/misc/math/article.php/c10123__2/"/>
+        /// <param name="width">Width in pixels of the view volume.</param>
+        /// <param name="height">Height in pixels of the view volume.</param>
+        /// <param name="zNearPlane">Minimum z-value of the view volume.</param>
+        /// <param name="zFarPlane">Maximum z-value of the view volume.</param>
+        /// <returns>The created projection matrix with normalized device coordinates in the range  (1, 1, 0) to (1, 1, 1).</returns>
+        public static Matrix CreateOrthographic(float width, float height, float zNearPlane, float zFarPlane)
+        {
+            /*Matrix matrix1 = CreateScale(2f / width, 2 / height, 1 / (zNearPlane - zFarPlane));
+            Matrix matrix2 = CreateTranslation(0, 0, zNearPlane);
+            return matrix1 * matrix2;*/
+
+            Matrix matrix;
+            matrix.M11 = 2f / width;
+            matrix.M12 = matrix.M13 = matrix.M14 = 0f;
+            matrix.M22 = 2f / height;
+            matrix.M21 = matrix.M23 = matrix.M24 = 0f;
+            matrix.M33 = 1f / (zNearPlane - zFarPlane);
+            matrix.M31 = matrix.M32 = matrix.M34 = 0f;
+            matrix.M41 = matrix.M42 = 0f;
+            matrix.M43 = zNearPlane / (zNearPlane - zFarPlane);
+            matrix.M44 = 1f;
+            return matrix;
+        }
+
+        /// <summary>
+        /// Builds an orthogonal projection matrix.
+        /// In orthographic projection, all the lines of projection are perpendicular to the eventual drawing surface.
+        /// You can almost always use <see cref="CreateOrthographic"/> instead of <see cref="CreateOrthographicOffCenter"/>,
+        /// unless you're doing something strange with your projection.
+        /// </summary>
+        /// <seealso cref="http://www.codeguru.com/cpp/misc/misc/math/article.php/c10123__2/"/>
+        /// <param name="left">Minimum x-value of the view volume.</param>
+        /// <param name="right">Maximum x-value of the view volume.</param>
+        /// <param name="bottom">Minimum y-value of the view volume.</param>
+        /// <param name="top">Maximum y-value of the view volume.</param>
+        /// <param name="zNearPlane">Minimum z-value of the view volume.</param>
+        /// <param name="zFarPlane">Maximum z-value of the view volume.</param>
+        /// <returns>The created projection matrix with normalized device coordinates in the range  (1, 1, 0) to (1, 1, 1).</returns>
+        public static Matrix CreateOrthographicOffCenter(float left, float right, float bottom, float top, float zNearPlane, float zFarPlane)
+        {
+            /*return new Matrix(
+                2 / (right - left), 0, 0, 0,
+                0, 2 / (top - bottom), 0, 0,
+                0, 0, 1 / (zNearPlane - zFarPlane), 0,
+                (left + right) / (left - right), (bottom + top) / (bottom - top), zNearPlane / (zNearPlane - zFarPlane), 1);*/
+
+            Matrix matrix;
+            matrix.M11 = 2f / (right - left);
+            matrix.M12 = matrix.M13 = matrix.M14 = 0f;
+            matrix.M22 = 2f / (top - bottom);
+            matrix.M21 = matrix.M23 = matrix.M24 = 0f;
+            matrix.M33 = 1f / (zNearPlane - zFarPlane);
+            matrix.M31 = matrix.M32 = matrix.M34 = 0f;
+            matrix.M41 = (left + right) / (left - right);
+            matrix.M42 = (top + bottom) / (bottom - top);
+            matrix.M43 = zNearPlane / (zNearPlane - zFarPlane);
+            matrix.M44 = 1f;
+            return matrix;
+        }
+
+        /// <summary>
+        /// Builds a perspective projection matrix based on a field of view and the near and far plane distances.
+        /// Geometrically speaking, the difference between this method and <see cref="CreateOrthographic" /> or 
+        /// <see cref="CreateOrthographicOffCenter" /> is that in perspective projection, 
+        /// the view volume is a frustum that is, a truncated pyramid rather than an axis-aligned box.
+        /// This transformation combines a perspective distortion with a depth (z) transformation. The perspective
+        /// assumes the eye is at the origin, looking down the +z axis. The matrix transforms
+        /// <paramref name="nearPlaneDistance"/> to +0, and <paramref name="farPlaneDistance"/> to +1.
+        /// </summary>
+        /// <seealso cref="http://www.codeguru.com/cpp/misc/misc/math/article.php/c10123__3/"/>
+        /// <param name="fieldOfView">Field of view in radians.</param>
+        /// <param name="aspectRatio">Aspect ratio, defined as view space width divided by height.</param>
+        /// <param name="nearPlaneDistance">Distance to the near view plane.</param>
+        /// <param name="farPlaneDistance">Distance to the far view plane.</param>
+        /// <returns>The created projection matrix with normalized device coordinates in the range  (1, 1, 0) to (1, 1, 1).</returns>
+        public static Matrix CreatePerspectiveFieldOfView(double fieldOfView, double aspectRatio, double nearPlaneDistance, double farPlaneDistance)
+        {
+            // Validate arguments.
+            if ((fieldOfView <= 0) || (fieldOfView >= Math.PI))
+                throw new ArgumentOutOfRangeException("fieldOfView");
+            if (nearPlaneDistance <= 0)
+                throw new ArgumentOutOfRangeException("nearPlaneDistance");
+            if (farPlaneDistance <= 0)
+                throw new ArgumentOutOfRangeException("farPlaneDistance");
+            if (nearPlaneDistance >= farPlaneDistance)
+                throw new ArgumentOutOfRangeException("nearPlaneDistance", "Far plane distance must be larger than near plane distance.");
+
+            var t = Math.Tan(fieldOfView / 2.0f);
+            var nearMinusFar = nearPlaneDistance - farPlaneDistance;
+
+            return new Matrix(
+                1.0 / t / aspectRatio, 0, 0, 0,
+                0, 1.0 / t, 0, 0,
+                0, 0, farPlaneDistance / nearMinusFar, -1,
+                0, 0, (nearPlaneDistance * farPlaneDistance) / nearMinusFar, 0);
+        }
 	}
 }

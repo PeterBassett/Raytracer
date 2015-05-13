@@ -28,7 +28,7 @@ Lights
 * Ambient Light - Has no position and contributes the same light to every point in space. Casts no shadows.
 * Spot Light - Like a point light but has a direction and width in addtion to position. It casts a cone of light along its direction. The width determines the angle of the cone. Casts shadows.
 * Distant Light - Has no position but does have a direction. Useful for simulating the sun for example. Casts shadows.
-* More to come in future.
+* Projection Light - Like a spot light but projects a texture into the scene. Think overhead projector and you'll not be far off.
 
 File Types
 * Home made human readable "ray" files.
@@ -90,3 +90,7 @@ Examples
 ![texture coordinates](/OutputImages/Sponza.jpeg?raw=true)
 * 1,087,474 triangle Happy Buddha.
 ![SAH BHV](/OutputImages/Buddha.jpeg?raw=true)
+* Spot lights.
+![spots](/OutputImages/Spotlight.jpeg?raw=true)
+* Projector light.
+![projector light](/OutputImages/ProjectionLightBuddha.jpeg?raw=true)
