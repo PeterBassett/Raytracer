@@ -10,9 +10,11 @@ namespace Raytracer.Rendering.Lights
         public double CosTotalWidth;
         public double CosFalloffStart;
         public Vector dir;
-        public SpotLight(Colour colour, float totalWidthInDegrees, float widthBeforeFallOffInDegrees, Transform transform)
+        public SpotLight(Colour colour, float power, float totalWidthInDegrees, float widthBeforeFallOffInDegrees, Transform transform)
             : base(colour, transform)
         {
+            Intensity *= power;
+
             dir = _transform.ToObjectSpace(new MathTypes.Vector(0, 0, 1));
  
             CosTotalWidth = Math.Cos(MathLib.Deg2Rad(totalWidthInDegrees));
@@ -21,17 +23,14 @@ namespace Raytracer.Rendering.Lights
 
         public override Colour Sample(Point hitPoint, Normal normalAtHitPoint, ref Vector pointToLight, ref VisibilityTester visibilityTester)
         {
-            var hitPoint2 = _transform.ToObjectSpace(hitPoint);
-
             pointToLight = (Pos - hitPoint).Normalize();
 
-            var cos = Vector.DotProduct(pointToLight, dir);
-            //visibilityTester.SetSegment(hitPoint, normalAtHitPoint, Pos);
+            visibilityTester.SetSegment(hitPoint, normalAtHitPoint, Pos);
 
-            return Intensity * Falloff(-pointToLight, cos) / (Pos - hitPoint).LengthSquared;
+            return Intensity * Falloff(-pointToLight) / (Pos - hitPoint).LengthSquared;
         }
 
-        double Falloff(Vector w, double costheta2) 
+        double Falloff(Vector w) 
         {
             Vector wl = _transform.ToObjectSpace(w).Normalize();
             var costheta = wl.Z;

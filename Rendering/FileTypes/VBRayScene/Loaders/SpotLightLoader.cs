@@ -32,13 +32,15 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
             col.Green = float.Parse(tokeniser.GetToken(file)) / 255.0f;
             col.Blue = float.Parse(tokeniser.GetToken(file)) / 255.0f;
 
+            var power = float.Parse(tokeniser.GetToken(file));
+
             Vector dir = (to - from).Normalize();
             Vector du, dv;
             Vector.CoordinateSystem(dir, out du, out dv);
             
             var transform = Transform.CreateLookAtTransform((Point)from, to, du);
 
-            var light = new SpotLight(col, totalWidth, fallOffWidth, transform);
+            var light = new SpotLight(col, power, totalWidth, fallOffWidth, transform);
 
             scene.AddLight(light);
         }
