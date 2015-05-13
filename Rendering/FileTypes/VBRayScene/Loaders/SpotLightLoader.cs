@@ -36,12 +36,7 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
             Vector du, dv;
             Vector.CoordinateSystem(dir, out du, out dv);
             
-            var lightToWorld = Matrix.CreateLookAt((Point)from, to, du);
-
-            var worldToLight = lightToWorld;
-            worldToLight.Invert();
-
-            var transform = new Transform(lightToWorld, worldToLight);
+            var transform = Transform.CreateLookAtTransform((Point)from, to, du);
 
             var light = new SpotLight(col, totalWidth, fallOffWidth, transform);
 
