@@ -129,10 +129,10 @@
     <Compile Include="Rendering\RenderingStrategies\IRenderingStrategy.cs" />
     <Compile Include="Rendering\Renderers\IRenderer.cs" />
     <Compile Include="Rendering\PixelSampler\EdgeDetectionSampler.cs" />
-    <Compile Include="Rendering\Accellerators\BackgroundMaterials\HorizontalCubemapBackground.cs" />
-    <Compile Include="Rendering\Accellerators\BackgroundMaterials\VerticalCubemapBackground.cs" />
-    <Compile Include="Rendering\Accellerators\BackgroundMaterials\CubemapBackground.cs" />
-    <Compile Include="Rendering\Accellerators\BackgroundMaterials\SolidColourBackground.cs" />
+    <Compile Include="Rendering\BackgroundMaterials\HorizontalCubemapBackground.cs" />
+    <Compile Include="Rendering\BackgroundMaterials\VerticalCubemapBackground.cs" />
+    <Compile Include="Rendering\BackgroundMaterials\CubemapBackground.cs" />
+    <Compile Include="Rendering\BackgroundMaterials\SolidColourBackground.cs" />
     <Compile Include="Rendering\FileTypes\ObjFile\StreamReader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\VerticalCubemapBackgroundLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\SolidColourBackgroundLoader.cs" />
@@ -143,7 +143,7 @@
     <Compile Include="Rendering\Core\HitResult.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Rendering\Accellerators\BackgroundMaterials\IBackgroundMaterial.cs">
+    <Compile Include="Rendering\BackgroundMaterials\IBackgroundMaterial.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Rendering\Core\IBmp.cs">

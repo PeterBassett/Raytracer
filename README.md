@@ -91,6 +91,6 @@ Examples
 * 1,087,474 triangle Happy Buddha.
 ![SAH BHV](/OutputImages/Buddha.jpeg?raw=true)
 * Spot lights.
-![spots](/OutputImages/Spotlight.jpeg?raw=true)
+![spots](/OutputImages/SpotLight.jpeg?raw=true)
 * Projector light.
 ![projector light](/OutputImages/ProjectionLightBuddha.jpeg?raw=true)
