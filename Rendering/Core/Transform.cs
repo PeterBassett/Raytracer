@@ -26,6 +26,30 @@ namespace Raytracer.Rendering.Core
             return new Transform(transform, inverse);
         }
 
+        public static Transform CreateLookAtTransform(Point cameraPosition, Point lookingAtPosition, Vector cameraUpVector)
+		{
+            var zaxis = (cameraPosition - lookingAtPosition).Normalize();
+			var xaxis = Vector.CrossProduct(cameraUpVector, zaxis).Normalize();
+			var yaxis = Vector.CrossProduct(zaxis, xaxis);
+
+			var toWorld = new Matrix(
+					xaxis.X,                        yaxis.X,                        zaxis.X,                        0f,
+					xaxis.Y,                        yaxis.Y,                        zaxis.Y,                        0f,
+					xaxis.Z,                        yaxis.Z,                        zaxis.Z,                        0f,
+					eye.X  ,                        eye.Y  ,                        eye.Z  ,                        1f);
+		/*			
+			var toWorld = new Matrix(
+					xaxis.X,                        xaxis.Y,                        xaxis.Z,                        0f,
+					yaxis.X,                        yaxis.Y,                        yaxis.Z,                        0f,
+					zaxis.X,                        zaxis.Y,                        zaxis.Z,                        0f,
+					eye.X  ,                        eye.Y  ,                        eye.Z  ,                        1f);
+		*/			
+			var inverse = toWorld;
+			inverse.Invert();
+			
+			return new Transform(toWorld, inverse);
+		}
+		
         public Ray ToObjectSpace(Ray ray)
         {
             return new Ray(_transform.Transform(ray.Pos),
