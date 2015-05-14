@@ -372,26 +372,23 @@ namespace Raytracer.Rendering.Renderers
 
                 if (lightColour.Brightness > 0 && lightCos > 0.0 && visibilityTester.Unoccluded(this))
                 {
-                    if (pointToLight == Vector.Zero)
-                        pointToLight = (Vector)(-normal);
-
                     colour += (material.Diffuse * lightColour) * lightCos;
-                }
 
-                if (material.Specularity > 0.0f)
-                {
-                    // calculate specular highlights
-                    var vReflect = CalculateReflectedRay(pointToLight, normal);
-
-                    // normalise the vector
-                    vReflect = vReflect.Normalize();
-
-                    var fSpecular = Vector.DotProduct(vReflect, eyeDirection);
-
-                    if (fSpecular > 0.0f)
+                    if (material.Specularity > 0.0f && light.Specular())
                     {
-                        var power = (double)Math.Pow(fSpecular, material.Specularity);
-                        colour += lightColour * material.SpecularExponent * power;
+                        // calculate specular highlights
+                        var vReflect = CalculateReflectedRay(pointToLight, normal);
+
+                        // normalise the vector
+                        vReflect = vReflect.Normalize();
+
+                        var fSpecular = Vector.DotProduct(vReflect, eyeDirection);
+
+                        if (fSpecular > 0.0f)
+                        {
+                            var power = (double)Math.Pow(fSpecular, material.Specularity);
+                            colour += lightColour * material.SpecularExponent * power;
+                        }
                     }
                 }
             }

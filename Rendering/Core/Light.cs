@@ -17,5 +17,10 @@ namespace Raytracer.Rendering.Core
         }
 
         public abstract Colour Sample(Point hitPoint, Normal normalAtHitPoint, ref Vector pointToLight, ref VisibilityTester visibilityTester);
+
+        public virtual bool Specular()
+        {
+            return true;
+        }
     }
 }

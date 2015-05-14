@@ -11,7 +11,7 @@ namespace Raytracer.Rendering.Lights
         public DistantLight(Colour colour, Transform transform)
             : base(colour, transform)
         {
-            Dir = _transform.ToObjectSpace(new Vector(0.0, 1.0, 0.0));
+            Dir = _transform.ToObjectSpace(new Vector(0, 1, 0));
         }
 
         public override Colour Sample(Point hitPoint, Normal normalAtHitPoint, ref Vector pointToLight, ref VisibilityTester visibilityTester)

@@ -17,5 +17,10 @@ namespace Raytracer.Rendering.Lights
             pointToLight = (Vector)(normalAtHitPoint);
             return Intensity; 
         }
+
+        public override bool Specular()
+        {
+            return false;
+        }
     }
 }
