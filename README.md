@@ -21,7 +21,7 @@ Various Materials
 * Checker Board of two submaterials.
 * Perlin Noise mix of two submaterials.
 * Texture material. UV coordinate calculations are specific to each primitive type. All common image file formats are supported via the .net framework.
-* Cubemaps, both vertical and horizontal crosses, are supported for scene backgrounds. When a ray misses all objects inthe scene we render from the cubemap.
+* Cubemaps, both vertical and horizontal crosses, are supported for scene backgrounds. When a ray misses all objects in the scene we render from the cubemap.
 
 Lights
 * Point Light - Simple light at a point in space casting light in all directions. Obeys the inverse square law and can cause shadows.
