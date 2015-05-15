@@ -125,21 +125,22 @@ namespace Raytracer.Rendering.Primitives
 
         public override bool Contains(Point point)
         {
+            if(!GetAABB().Contains(point))
+                return false;
+                
             var ray = new Ray(point, new Vector(0, 1, 0));
 
             int intersections = 0;
 
-            while (true)
+            foreach (var tri in GetCandidates(ray))
             {
-                var intersection = GetMinimumValidIntersection(ray);
+                var result = tri.Intersect(ray);
 
-                if (intersection.Result == HitResult.MISS)
-                    return intersections % 2 == 0;
-
-                intersections++;
-
-                ray = new Ray(intersection.HitPoint + ray.Dir * MathLib.Epsilon, ray.Dir);
+                if (result.T > 0f && result.Result != HitResult.MISS)
+                     intersections++;
             }
+
+            return intersections % 2 == 0;
         }
     }
 }
