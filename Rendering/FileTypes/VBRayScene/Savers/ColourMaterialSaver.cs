@@ -25,7 +25,7 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Savers
             file.WriteLine("\t\"{0}\",", mat.Name);
             
             SaveColourComponent(file, mat.Ambient);
--           file.WriteLine(", 'Ambient'");
+            file.WriteLine(", 'Ambient'");
 
             SaveColourComponent(file, mat.Diffuse);
             file.WriteLine(", 'Diffuse'");
