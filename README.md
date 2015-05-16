@@ -94,3 +94,5 @@ Examples
 ![spots](/OutputImages/SpotLight.jpeg?raw=true)
 * Projector light.
 ![projector light](/OutputImages/ProjectionLightBuddha.jpeg?raw=true)
+* Cryteks version of the Sponza Model. Still work to do
+![projector light](/OutputImages/CrytekSponza.jpeg?raw=true)
