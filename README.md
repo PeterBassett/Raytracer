@@ -52,7 +52,10 @@ Accelleration Structures
 Recent improvements 
 Multi axis SAH construction for my AABB BVH.
 Fixed Texture UV coordinate calculation. I had them each mirrored.
-Changed the lighting design to add more complex lighting. I'll have to change the file format to accomodate this more effectively. I will also change the transformation capabilities of the primitives and lights so they all take a Transform object instead of explicit positions, rotations etc.
+Changed the lighting design to add more complex lighting. I'll have to change the file format to accomodate this more effectively. 
+
+Still to come
+I will also change the transformation capabilities of the primitives and lights so they all take a Transform object instead of explicit positions, rotations etc. Then comes bump mapping, area lights and a path tracer implementation.
 
 Examples
 * Refraction needs some work in this one
