@@ -50,14 +50,19 @@ Accelleration Structures
 * Multi Axis SAH Split Criteria
 
 Recent improvements 
+
 Multi axis SAH construction for my AABB BVH.
 Fixed Texture UV coordinate calculation. I had them each mirrored.
 Changed the lighting design to add more complex lighting. I'll have to change the file format to accomodate this more effectively. 
 
 Still to come
-I will also change the transformation capabilities of the primitives and lights so they all take a Transform object instead of explicit positions, rotations etc. Then comes bump mapping, area lights and a path tracer implementation.
+
+I will also change the transformation capabilities of the primitives and lights so they all take a Transform object instead of explicit positions, rotations etc. The new file format can then have several method of producing a Transform. Explicit translations and rotations, lookat matricies, axis angles etc and they could all be used where ever appropriate. 
+
+Then comes bump mapping, area lights and a path tracer implementation.
 
 Examples
+
 * Refraction needs some work in this one
 ![Flawed refraction](/OutputImages/RefractiveSphere.jpg?raw=true)
 * Reflective sphere and cubemap
