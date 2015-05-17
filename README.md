@@ -37,7 +37,8 @@ File Types
 
 Antialiasing
 * Multiple antialiasing algorithms possible. Currently implemented are :  
-* Non anti aliased 
+* Non anti aliased, 
+* Progressive rendering. 64px square regions followed by 32px etc.
 * NxN jittered samples per pixel 
 * Greyscale Edge Detection Jittered Resampling.
 * Per Component (RGB) Edge Detection Jittered Resampling.
@@ -51,7 +52,7 @@ Accelleration Structures
 Recent improvements 
 Multi axis SAH construction for my AABB BVH.
 Fixed Texture UV coordinate calculation. I had them each mirrored.
-Changed the lighting design to add more complex lighting. I'll have to change the file format to accomodate this more effectively.
+Changed the lighting design to add more complex lighting. I'll have to change the file format to accomodate this more effectively. I will also change the transformation capabilities of the primitives and lights so they all take a Transform object instead of explicit positions, rotations etc.
 
 Examples
 * Refraction needs some work in this one
