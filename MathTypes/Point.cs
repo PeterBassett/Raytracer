@@ -1,11 +1,14 @@
 using System;
 using System.Runtime.InteropServices;
+using System.ComponentModel;
+using Raytracer.MathTypes.Converters;
 
 namespace Raytracer.MathTypes
 {
 	[StructLayout(LayoutKind.Sequential)]
+    [TypeConverter(typeof(PointConverter))]
     public struct Point
-	{
+    {
         public double X;
         public double Y;
         public double Z;
@@ -293,6 +296,15 @@ namespace Raytracer.MathTypes
                 return new Point(x, y, z);
             else
                 return new Point(x, y, z) / w;
+        }
+
+        public static Point Parse(string value)
+        {
+            var items = value.Split(',');
+
+            return new Point(double.Parse(items[0]), 
+                             double.Parse(items[1]), 
+                             double.Parse(items[2]));
         }
     }
 }

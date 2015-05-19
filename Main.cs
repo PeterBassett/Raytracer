@@ -34,7 +34,8 @@ namespace Raytracer
             InitializeComponent();
             pixelPosition.Text = "";
 
-            var scenes = Directory.GetFiles(".", "*.ray", SearchOption.AllDirectories).ToList();
+            var scenes = Directory.GetFiles(".", "*.ray", SearchOption.AllDirectories).Concat(
+                         Directory.GetFiles(".", "*.xml", SearchOption.AllDirectories)).OrderBy(e => e);
 
             foreach (var file in scenes)
             {
@@ -175,7 +176,7 @@ namespace Raytracer
 
             GC.Collect();
 
-            var loader = new VBRaySceneLoader();
+            var loader = new RaySceneLoader();
 
             using (var sceneStream = new MemoryStream(System.Text.Encoding.Default.GetBytes(strScene)))
                 m_scene = loader.LoadScene(sceneStream);
@@ -245,7 +246,7 @@ namespace Raytracer
         private void Render(int width, int height, IBmp bmp, 
             bool blnMultiThreaded, bool traceShadows, bool traceReflections, bool traceRefractions, CancellationToken token, Vector2? renderAt)
         {
-            VBRaySceneLoader loader = new VBRaySceneLoader();
+            var loader = new RaySceneLoader();
 
             Stopwatch watch = new Stopwatch();
             

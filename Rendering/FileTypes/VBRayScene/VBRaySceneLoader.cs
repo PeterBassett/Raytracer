@@ -130,5 +130,10 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene
                 }
             }
         }
+
+        public bool CanLoadStream(Stream sceneStream)
+        {
+            return true;
+        }
     }
 }
