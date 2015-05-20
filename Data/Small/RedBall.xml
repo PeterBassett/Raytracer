@@ -1,40 +1,33 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Scene>
   <Viewpoint>
     <Transform>
-      <RotateX>45</RotateX>
-      <Translate>0,6,14</Translate>
+      <Translate>0, -5, 9</Translate>
+<RotateX>-45</RotateX>
+<RotateZ>-45</RotateZ>
     </Transform>
     <FOV>90</FOV>
   </Viewpoint>
-<!--
-  <Viewpoint>
-    <Transform>
-      <LookAt to="0,0,0" from="0,6,14" up="0,1,0" />
-      <LookAt>
-        <From>0,1,0</From>
-        <To>
-          <Point>0,0,0</Point>
-        </To>
-        <Up>
-          <Point x="0" y="1" z="0"></Point>
-        </Up>
-      </LookAt>
-    </Transform>
-    <FOV>90</FOV>
-  </Viewpoint>
--->
+  
   <Lights>
-    <AmbientLight power="5">
-      <Colour>0.5</Colour>
+    <AmbientLight>
+      <Colour>0.2</Colour>
     </AmbientLight>
+
+    <PointLight power="100">
+      <Transform>
+        <Translate>10, 10, -10</Translate>
+      </Transform>
+      <Colour>1</Colour>
+    </PointLight>
+    
   </Lights>
 
   <RenderSettings>
     <Depth>1</Depth>
-    <Shadows>1</Shadows>
-    <Reflections>0</Reflections>
-    <Refractions>0</Refractions>
+    <Shadows>true</Shadows>
+    <Reflections>true</Reflections>
+    <Refractions>true</Refractions>
   </RenderSettings>
 
   <Materials>
@@ -44,11 +37,11 @@
       </Diffuse>
       <Specular specularity="20" exponent="0.35" />
       <Reflected>
-        <Colour>0.9</Colour>        
+        <Colour>0.9</Colour>
       </Reflected>
       <IOR>1</IOR>
       <Transmitted>
-        <Colour>0</Colour>
+        <Colour>0</Colour> 
       </Transmitted>
     </ColourMaterial>
 
@@ -97,20 +90,12 @@
     <CheckMaterial name="check" from-material="lightgrey" to-material="darkgrey">
       <Scale>4</Scale>
     </CheckMaterial>
-    
+
   </Materials>
 
   <Primitives>
     <Sphere>
-      <Radius>2</Radius>
-      <Material>red</Material>
-    </Sphere>
-    
-    <Sphere>
-      <Transform>
-        <Translate>3, 3, 10</Translate>
-      </Transform>
-      <Radius>3</Radius>
+      <Radius>5</Radius>
       <Material>red</Material>
     </Sphere>
 
@@ -119,7 +104,7 @@
       <Normal x="0" y="1" z="0"></Normal>
       <Material>check</Material>
     </Plane>
-    
+
   </Primitives>
 
 </Scene>

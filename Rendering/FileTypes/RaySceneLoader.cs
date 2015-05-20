@@ -16,6 +16,9 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene
         public Scene LoadScene(Stream sceneStream)
         {
             var loader = GetLoader(sceneStream);
+
+            sceneStream.Seek(0, SeekOrigin.Begin);
+
             return loader.LoadScene(sceneStream);
         }
 
@@ -26,16 +29,12 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene
 
         public ISceneLoader GetLoader(Stream scene)
         {
-            var bufferedStream = new BufferedStream(scene, 4096);
             ISceneLoader loader = null;
 
             loader = new XMLRaySceneLoader();
 
             if (loader.CanLoadStream(scene))
-            {
-                scene.Seek(0, SeekOrigin.Begin);
                 return loader;
-            }
             else
                 return new VBRaySceneLoader();
         }

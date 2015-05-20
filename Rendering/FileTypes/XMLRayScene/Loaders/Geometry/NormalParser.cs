@@ -8,13 +8,13 @@ using System.Xml.Linq;
 namespace Raytracer.Rendering.FileTypes.XMLRayScene.Loaders.Transforms
 {
     [Export(typeof(XMLRayElementParser))]
-    class PointParser : XYZParserBase
+    class NormalParser : XYZParserBase
     {
-        public override string LoaderType { get { return "Point"; } }
+        public override string LoaderType { get { return "Normal"; } }
 
         public override dynamic LoadObject(XMLRaySceneLoader loader, Scene scene, XElement element, string elementName, Func<dynamic> createDefault)
         {
-            return (Point)this.LoadVector(loader, scene, element, () =>
+            return (Normal)this.LoadVector(loader, scene, element, () =>
             {
                 var defaultValue = createDefault();
                 return new Vector(defaultValue.X, defaultValue.Y, defaultValue.Z);

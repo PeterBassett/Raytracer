@@ -110,27 +110,40 @@
     <Compile Include="Rendering\FileTypes\XMLRayScene\IXMLRaySceneItemSaver.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\ColourParser.cs" />
     <Compile Include="MathTypes\Converters\PointConverter.cs" />
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Configuration\ConfigurationLoader.cs" />
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Geometry\NormalParser.cs" />
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Geometry\ScaleParser.cs" />
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Geometry\XYZParserBase.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Geometry\UpParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Geometry\ToParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Geometry\FromParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Geometry\PointParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Geometry\PointTypeParserBase.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Lights\AmbientLightParser.cs" />
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Lights\PointLightParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Lights\LightsLoader.cs" />
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Materials\CheckMaterialParser.cs" />
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Materials\TransmittedParser.cs" />
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Materials\ReflectedParser.cs" />
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Materials\DiffuseParser.cs" />
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Materials\SpecularParser.cs" />
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Materials\MaterialComponentBaseParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Materials\ColourMaterialParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Materials\MaterialsLoader.cs" />
-    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Primitives\SphereLoader.cs">
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Primitives\PlaneLoader.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Values\MaterialNameLoader.cs" />
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Primitives\PrimitivesLoader.cs" />
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Primitives\SphereParser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Values\SpecularityLoader.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Values\SingleStringParser.cs" />
-    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Values\RadiusLoader.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Values\SingleDoubleParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Transforms\LookAtParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Transforms\RotateZParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Transforms\RotateYParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Transforms\RotationLoaderBase.cs" />
-    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Values\FOVLoader.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Transforms\TranslateLoader.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\DefaultElementLoader.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Transforms\TransformLoader.cs">
@@ -287,6 +300,9 @@
     <None Include="Data\Small\AmbientLight.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="Data\Small\RedBall.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Data\Small\DistantLight.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

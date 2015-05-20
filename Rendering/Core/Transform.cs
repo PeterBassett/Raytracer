@@ -13,6 +13,16 @@ namespace Raytracer.Rendering.Core
             _inverse = inverse;
         }
 
+        public Vector GetWorldSpaceRotation()
+        {
+            Vector scale;
+            Quaternion rotation;
+            Vector translation;
+            _inverse.Decompose(out scale, out rotation, out translation);
+
+            return rotation.ToYawPitchRoll();
+        }
+
         public static Transform CreateTransform(Vector translate, Vector rotate)
         {
             var transform = Matrix.CreateTranslation(translate.X, translate.Y, translate.Z) *

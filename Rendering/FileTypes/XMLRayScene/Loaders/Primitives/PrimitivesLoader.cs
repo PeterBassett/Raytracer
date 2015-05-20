@@ -2,22 +2,22 @@
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
 using Raytracer.Rendering.FileTypes.VBRayScene;
-using Raytracer.Rendering.Materials;
+using Raytracer.Rendering.Primitives;
 
-namespace Raytracer.Rendering.FileTypes.XMLRayScene.Loaders.Materials
+namespace Raytracer.Rendering.FileTypes.XMLRayScene.Loaders
 {
     [Export(typeof(IXMLRaySceneItemLoader))]
-    class MaterialsLoader : IXMLRaySceneItemLoader
+    class PrimitivesLoader : IXMLRaySceneItemLoader
     {
-        public string LoaderType { get { return "Materials"; } }
+        public string LoaderType { get { return "Primitives"; } }
         
         public void LoadObject(XMLRaySceneLoader loader, System.Xml.Linq.XElement element, Scene scene)
         {
             foreach (var child in element.Elements())
             {
-                var material = loader.LoadObject<Material>(scene, child, () => (Material)null);
-                if (material != null)
-                    scene.AddMaterial(material, material.Name);
+                var primitive = loader.LoadObject<Traceable>(scene, child, () => (Traceable)null);
+                if (primitive != null)
+                    scene.AddObject(primitive);
             }
         }
     }

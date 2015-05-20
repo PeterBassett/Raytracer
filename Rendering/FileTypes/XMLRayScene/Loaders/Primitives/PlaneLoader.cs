@@ -1,40 +1,30 @@
-﻿using System;
-using System.ComponentModel.Composition;
-using System.IO;
+﻿using System.ComponentModel.Composition;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
+using Raytracer.Rendering.FileTypes.VBRayScene;
+using System;
+using System.Xml.Linq;
 using Raytracer.Rendering.Primitives;
 
-namespace Raytracer.Rendering.FileTypes.XMLRayScene.Loaders
+namespace Raytracer.Rendering.FileTypes.XMLRayScene.Loaders.Primitives
 {
-    
-
-    [Export(typeof(IVBRaySceneItemLoader))]
-    class PlaneLoader : IVBRaySceneItemLoader
+    [Export(typeof(XMLRayElementParser))]
+    class PlaneParser : XMLRayElementParser
     {
-        public string LoaderType { get { return "Plane"; } }
-        public void LoadObject(StreamReader file, Scene scene)
+        public override string LoaderType { get { return "Plane"; } }
+
+        public override dynamic LoadObject(XMLRaySceneLoader loader, Scene scene, XElement element, string elementName, Func<dynamic> createDefault)
         {
-            Tokeniser oText = new Tokeniser();
+            var plane = new Plane();
+
+            plane.Pos = loader.LoadObject<Point>(scene, element, "Point", () => new Point(0,0,0));
+            plane.D = plane.Pos.Length;
+
+            plane.Normal = loader.LoadObject<Normal>(scene, element, "Normal", () => new Normal(0, 1, 0));
+            plane.Normal.Normalize();
+
+            string strMaterial = loader.LoadObject<string>(scene, element, "Material", () => null);
             
-            Plane plane = new Plane();
-
-            var vec = new Point();
-	        vec.X = float.Parse(oText.GetToken(file));
-	        vec.Y = float.Parse(oText.GetToken(file));
-	        vec.Z = float.Parse(oText.GetToken(file));
-            plane.Pos = vec;
-            plane.D = vec.Length;
-
-            var normal = new Normal();
-            normal.X = float.Parse(oText.GetToken(file));
-            normal.Y = float.Parse(oText.GetToken(file));
-            normal.Z = float.Parse(oText.GetToken(file));
-            plane.Normal = normal;
-            plane.Normal.Normalize();            
-
-            string strMaterial = oText.GetToken(file);
-
 	        var mat = scene.FindMaterial(strMaterial);
 
             if(mat == null)
@@ -42,7 +32,7 @@ namespace Raytracer.Rendering.FileTypes.XMLRayScene.Loaders
 
 	        plane.Material = mat;
 
-            scene.AddObject(plane);
+            return plane;
         }
     }
 }

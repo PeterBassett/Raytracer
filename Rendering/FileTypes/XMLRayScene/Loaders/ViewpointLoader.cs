@@ -15,8 +15,12 @@ namespace Raytracer.Rendering.FileTypes.XMLRayScene.Loaders
 	        var transform = loader.LoadObject<Transform>(scene, element, "Transform", () => Transform.CreateIdentityTransform());            
 
             scene.EyePosition = transform.ToWorldSpace(new Point(0, 0, 0));
-            scene.ViewPointRotation = transform.ToWorldSpace(new Vector(0, 0, 1));
 
+            var rotate =  transform.GetWorldSpaceRotation();
+            scene.ViewPointRotation = new Vector(MathLib.Rad2Deg(rotate.X),
+                                                 MathLib.Rad2Deg(rotate.Y),
+                                                 MathLib.Rad2Deg(rotate.Z));
+            
             scene.FieldOfView = loader.LoadObject<float>(scene, element, "FOV", () => 90);
         }
     }

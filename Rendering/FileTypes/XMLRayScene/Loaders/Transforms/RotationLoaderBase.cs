@@ -26,7 +26,7 @@ namespace Raytracer.Rendering.FileTypes.XMLRayScene.Loaders.Transforms
                     rotation = radians.Value;
                 else if (!string.IsNullOrEmpty(element.Value))
                 {
-                    rotation = double.Parse(element.Value);
+                    rotation = MathLib.Deg2Rad(double.Parse(element.Value));
                 }
                 else
                     throw new FormatException();

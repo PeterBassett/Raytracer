@@ -6,7 +6,7 @@ using System.ComponentModel.Composition;
 using Raytracer.Rendering.Lights;
 using Raytracer.Rendering.Materials;
 
-namespace Raytracer.Rendering.FileTypes.XMLRayScene.Loaders.Lights
+namespace Raytracer.Rendering.FileTypes.XMLRayScene.Loaders.Materials
 {
     [Export(typeof(XMLRayElementParser))]
     class ColourMaterialParser : XMLRayElementParser
@@ -15,9 +15,6 @@ namespace Raytracer.Rendering.FileTypes.XMLRayScene.Loaders.Lights
 
         public override dynamic LoadObject(VBRayScene.XMLRaySceneLoader loader, Core.Scene scene, System.Xml.Linq.XElement element, string elementName, Func<dynamic> createDefault)
         {
-            var colour = loader.LoadObject<Colour>(scene, element, "Colour", () => new Colour());
-            var power = loader.LoadObject<double>(scene, element, "Power", () => 1);
-
             var mat = new Material();
 
             // get the name
@@ -26,16 +23,14 @@ namespace Raytracer.Rendering.FileTypes.XMLRayScene.Loaders.Lights
             mat.Ambient = loader.LoadObject<Colour>(scene, element, "Ambient", () => new Colour(0));
             mat.Diffuse = loader.LoadObject<Colour>(scene, element, "Diffuse", () => new Colour(1));
 
-            // specular
-        //    mat.Specularity = loader.LoadObject<double>(scene, element, "Specular", () => 1);
-         //   mat.SpecularExponent = float.Parse(oText.GetToken(file));
+            var specular = loader.LoadObject<dynamic>(scene, element, "Specular", () => new { Specularity = 20.0, Exponent = 0.35, Colour = new Colour(1) });
 
-            mat.Specular = loader.LoadObject<Colour>(scene, element, "Specular", () => new Colour(1));
-            mat.Reflective = loader.LoadObject<Colour>(scene, element, "Specular", () => new Colour(1));
+            mat.Specularity = (float)specular.Specularity;
+            mat.SpecularExponent = (float)specular.Exponent;
+            mat.Specular = specular.Colour;
 
-            // ignore the two things we dont know about
+            mat.Reflective = loader.LoadObject<Colour>(scene, element, "Reflected", () => new Colour(0));
             mat.Refraction = (float)loader.LoadObject<double>(scene, element, "IOR", () => 1.003);
-
             mat.Transmitted = loader.LoadObject<Colour>(scene, element, "Transmitted", () => new Colour(0));
 
             return mat;

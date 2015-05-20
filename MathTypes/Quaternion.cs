@@ -248,5 +248,19 @@ namespace Raytracer.MathTypes
             }
             return false;
         }
+
+        public Vector ToYawPitchRoll()
+        {
+            return Quaternion.ToYawPitchRoll(this);
+        }
+
+        public static Vector ToYawPitchRoll(Quaternion q)
+        {
+            var roll =  Math.Atan2(2.0 * (q.X * q.Y + q.W * q.Z), q.W * q.W + q.X * q.X - q.Y * q.Y - q.Z * q.Z);
+            var pitch = Math.Atan2(2.0 * (q.Y * q.Z + q.W * q.X), q.W * q.W - q.X * q.X - q.Y * q.Y + q.Z * q.Z);
+            var yaw =   Math.Asin(-2.0 * (q.X * q.Z - q.W * q.Y));
+
+            return new Vector(pitch, yaw, roll);
+        }
 	}
 }

@@ -8,8 +8,8 @@ using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.Rendering.FileTypes.XMLRayScene.Loaders.Primitives
 {
-    [Export(typeof(IVBRaySceneItemLoader))]
-    class SphereLoader : XMLRayElementParser
+    [Export(typeof(XMLRayElementParser))]
+    class SphereParser : XMLRayElementParser
     {
         public override string LoaderType { get { return "Sphere"; } }
 

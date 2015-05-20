@@ -165,9 +165,21 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene
             else
             {
                 var loader = FindParserForTag(element.Name.LocalName);
-                var value = loader.LoadObject(this, scene, element, elementName, () => createDefault);
 
-                return (T)value;
+                if (loader != null)
+                    return (T)loader.LoadObject(this, scene, element, elementName, () => createDefault());
+                else
+                {
+                    try
+                    {
+                        var conv = TypeDescriptor.GetConverter(typeof(T));
+                        return (T)conv.ConvertFromString(element.Value);
+                    }
+                    catch 
+                    {
+                        return createDefault();
+                    }
+                }
             }
         }
 
