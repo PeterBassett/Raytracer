@@ -7,6 +7,12 @@
     </Transform>
     <FOV>90</FOV>
   </Viewpoint>
+
+  <Background>
+    <SolidColourBackground>
+      <Colour>0.5</Colour>
+    </SolidColourBackground>
+  </Background>
 <!--
   <Viewpoint>
     <Transform>

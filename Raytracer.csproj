@@ -108,6 +108,10 @@
     <Compile Include="Rendering\FileTypes\RaySceneLoader.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Extensions\XDocumentExtensions.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\IXMLRaySceneItemLoader.cs" />
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Backgrounds\BackgroundLoader.cs" />
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Backgrounds\VerticalCubemapBackgroundParser.cs" />
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Backgrounds\HorizontalCubemapBackgroundParser.cs" />
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Backgrounds\SolidColourBackgroundParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\ColourParser.cs" />
     <Compile Include="MathTypes\Converters\PointConverter.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Configuration\ConfigurationLoader.cs" />
@@ -126,6 +130,8 @@
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Lights\PointLightParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Lights\LightsLoader.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Materials\CheckMaterialParser.cs" />
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Materials\NoiseMaterialParser.cs" />
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Materials\TextureMaterialParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Materials\TransmittedParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Materials\ReflectedParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Materials\DiffuseParser.cs" />
@@ -301,6 +307,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Small\ProjectionLight.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Small\TexturedBall.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Data\Small\DistantLight.ray">
