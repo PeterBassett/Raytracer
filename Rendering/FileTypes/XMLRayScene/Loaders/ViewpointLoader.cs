@@ -14,9 +14,9 @@ namespace Raytracer.Rendering.FileTypes.XMLRayScene.Loaders
         {
 	        var transform = loader.LoadObject<Transform>(scene, element, "Transform", () => Transform.CreateIdentityTransform());            
 
-            scene.EyePosition = transform.ToWorldSpace(new Point(0, 0, 0));
+            scene.EyePosition = transform.ToObjectSpace(new Point(0, 0, 0));
 
-            var rotate =  transform.GetWorldSpaceRotation();
+            var rotate =  transform.GetObjectSpaceRotation();
             scene.ViewPointRotation = new Vector(MathLib.Rad2Deg(rotate.X),
                                                  MathLib.Rad2Deg(rotate.Y),
                                                  MathLib.Rad2Deg(rotate.Z));

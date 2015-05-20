@@ -2,32 +2,31 @@
 <Scene>
   <Viewpoint>
     <Transform>
-      <Translate>0, -5, 9</Translate>
-<RotateX>-45</RotateX>
-<RotateZ>-45</RotateZ>
+      <Rotate>30,25,0</Rotate>      
+      <Translate>-6,6,-15</Translate>      
     </Transform>
     <FOV>90</FOV>
   </Viewpoint>
-  
+
   <Lights>
     <AmbientLight>
-      <Colour>0.2</Colour>
+      <Colour>0.156</Colour>
     </AmbientLight>
 
-    <PointLight power="100">
+    <ProjectionLight power="300" width="75">
       <Transform>
-        <Translate>10, 10, -10</Translate>
+        <LookAt to="0,0,0" from="-5,12,-5" />
       </Transform>
-      <Colour>1</Colour>
-    </PointLight>
-    
+      <Texture>LEGO_logo_1972.png</Texture>
+    </ProjectionLight>
+
   </Lights>
 
   <RenderSettings>
-    <Depth>1</Depth>
+    <Depth>2</Depth>
     <Shadows>true</Shadows>
     <Reflections>true</Reflections>
-    <Refractions>true</Refractions>
+    <Refractions>false</Refractions>
   </RenderSettings>
 
   <Materials>
@@ -35,32 +34,12 @@
       <Diffuse>
         <Colour>0.3</Colour>
       </Diffuse>
-      <Specular specularity="20" exponent="0.35" />
-      <Reflected>
-        <Colour>0.9</Colour>
-      </Reflected>
     </ColourMaterial>
 
     <ColourMaterial name="lightgrey">
       <Diffuse>
         <Colour>0.7</Colour>
       </Diffuse>
-      <Specular>
-        <Colour>0.5</Colour>
-        <Specularity>20</Specularity>
-        <Exponent>0.35</Exponent>
-      </Specular>
-      <Reflected>
-        <Colour>
-          <Red>0.9</Red>
-          <Green>0.9</Green>
-          <Blue>0.9</Blue>
-        </Colour>
-      </Reflected>
-      <IOR>1</IOR>
-      <Transmitted>
-        <Colour>0</Colour>
-      </Transmitted>
     </ColourMaterial>
 
     <ColourMaterial name="red">
@@ -71,16 +50,6 @@
           <Blue>0.1</Blue>
         </Colour>
       </Diffuse>
-      <Specular exponent="0.35">
-        <Specularity>20</Specularity>
-      </Specular>
-      <Reflected>
-        <Colour>0</Colour>
-      </Reflected>
-      <IOR>1</IOR>
-      <Transmitted>
-        <Colour>0</Colour>
-      </Transmitted>
     </ColourMaterial>
 
     <CheckMaterial name="check" from-material="lightgrey" to-material="darkgrey">
@@ -91,7 +60,7 @@
 
   <Primitives>
     <Sphere>
-      <Radius>5</Radius>
+      <Radius>2</Radius>
       <Material>red</Material>
     </Sphere>
 
@@ -101,6 +70,17 @@
       <Material>check</Material>
     </Plane>
 
-  </Primitives>
+    <Plane>
+      <Point x="0" y="0" z="-6"></Point>
+      <Normal x="0" y="0" z="-1"></Normal>
+      <Material>check</Material>
+    </Plane>
 
+    <Plane>
+      <Point x="-6" y="0" z="0"></Point>
+      <Normal x="-1" y="0" z="0"></Normal>
+      <Material>check</Material>
+    </Plane>
+
+  </Primitives>
 </Scene>

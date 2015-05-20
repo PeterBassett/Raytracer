@@ -13,12 +13,22 @@ namespace Raytracer.Rendering.Core
             _inverse = inverse;
         }
 
+        public Vector GetObjectSpaceRotation()
+        {
+            return GetRotation(_transform);
+        }
+
         public Vector GetWorldSpaceRotation()
+        {
+            return GetRotation(_inverse);
+        }
+
+        public Vector GetRotation(Matrix m)
         {
             Vector scale;
             Quaternion rotation;
             Vector translation;
-            _inverse.Decompose(out scale, out rotation, out translation);
+            m.Decompose(out scale, out rotation, out translation);
 
             return rotation.ToYawPitchRoll();
         }
@@ -64,21 +74,21 @@ namespace Raytracer.Rendering.Core
         {
             return _transform.Transform(point);
         }
-
+        /*
         public Point ToWorldSpace(Point point)
         {
             return _inverse.Transform(point);
-        }
+        }*/
 
         public Vector ToObjectSpace(Vector point)
         {
             return _transform.Transform(point);
         }
-
+        /*
         public Vector ToWorldSpace(Vector point)
         {
             return _inverse.Transform(point);
-        }
+        }*/
 
         public IntersectionInfo ToWorldSpace(IntersectionInfo info)
         {

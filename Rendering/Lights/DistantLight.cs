@@ -8,9 +8,10 @@ namespace Raytracer.Rendering.Lights
     class DistantLight : Light
     {
         public Vector Dir;
-        public DistantLight(Colour colour, Transform transform)
+        public DistantLight(Colour colour, double power, Transform transform)
             : base(colour, transform)
         {
+            Intensity *= power;
             Dir = _transform.ToObjectSpace(new Vector(0, 1, 0));
         }
 

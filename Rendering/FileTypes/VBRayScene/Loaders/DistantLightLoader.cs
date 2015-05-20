@@ -26,7 +26,7 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
             col.Green = float.Parse(tokeniser.GetToken(file)) / 255.0f;
             col.Blue = float.Parse(tokeniser.GetToken(file)) / 255.0f;
 
-            var light = new DistantLight(col, transform);
+            var light = new DistantLight(col, 1, transform);
 
             scene.AddLight(light);
         }

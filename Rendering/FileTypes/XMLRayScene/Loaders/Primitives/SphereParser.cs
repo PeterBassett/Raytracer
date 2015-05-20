@@ -26,8 +26,8 @@ namespace Raytracer.Rendering.FileTypes.XMLRayScene.Loaders.Primitives
 
             return new Sphere()
             {
-                Pos = transform.ToWorldSpace(new Point(0, 0, 0)),
-                Ori = transform.ToWorldSpace(new Vector(0, 1, 0)),
+                Pos = transform.ToObjectSpace(new Point(0, 0, 0)),
+                Ori = transform.ToObjectSpace(new Vector(0, 1, 0)),
                 Radius = radius,
                 Material = mat
             };

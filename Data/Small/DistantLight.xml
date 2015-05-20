@@ -2,25 +2,23 @@
 <Scene>
   <Viewpoint>
     <Transform>
-      <Translate>0, -5, 9</Translate>
-<RotateX>-45</RotateX>
-<RotateZ>-45</RotateZ>
-    </Transform>
+<RotateX>45</RotateX>
+<Translate>0, 6, -14</Translate>
+      </Transform>
     <FOV>90</FOV>
   </Viewpoint>
-  
+
   <Lights>
     <AmbientLight>
-      <Colour>0.2</Colour>
+        <Colour>0.156</Colour>
     </AmbientLight>
-
-    <PointLight power="100">
-      <Transform>
-        <Translate>10, 10, -10</Translate>
-      </Transform>
-      <Colour>1</Colour>
-    </PointLight>
-    
+ 
+<DistantLight power="1">
+<Colour>1</Colour>
+<Transform>
+<RotateZ>40</RotateZ>
+</Transform>
+</DistantLight>
   </Lights>
 
   <RenderSettings>
@@ -39,6 +37,10 @@
       <Reflected>
         <Colour>0.9</Colour>
       </Reflected>
+      <IOR>1</IOR>
+      <Transmitted>
+        <Colour>0</Colour>
+      </Transmitted>
     </ColourMaterial>
 
     <ColourMaterial name="lightgrey">
@@ -51,11 +53,7 @@
         <Exponent>0.35</Exponent>
       </Specular>
       <Reflected>
-        <Colour>
-          <Red>0.9</Red>
-          <Green>0.9</Green>
-          <Blue>0.9</Blue>
-        </Colour>
+        <Colour>0.9</Colour>
       </Reflected>
       <IOR>1</IOR>
       <Transmitted>
@@ -91,7 +89,7 @@
 
   <Primitives>
     <Sphere>
-      <Radius>5</Radius>
+      <Radius>2</Radius>
       <Material>red</Material>
     </Sphere>
 

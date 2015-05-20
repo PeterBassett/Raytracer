@@ -120,6 +120,8 @@
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Geometry\PointParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Geometry\PointTypeParserBase.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Lights\AmbientLightParser.cs" />
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Lights\ProjectionLightParser.cs" />
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Lights\DistantLightParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Lights\SpotLightParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Lights\PointLightParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Lights\LightsLoader.cs" />
@@ -138,6 +140,7 @@
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Primitives\SphereParser.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Transforms\RotateParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Values\SpecularityLoader.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Values\SingleStringParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Values\SingleDoubleParser.cs" />
@@ -290,10 +293,14 @@
     <None Include="Data\Small\AmbientLight.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="Data\Small\DistantLight.xml" />
     <Content Include="Data\Small\RedBall.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Small\SpotLight.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Small\ProjectionLight.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Data\Small\DistantLight.ray">
