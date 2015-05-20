@@ -9,9 +9,11 @@ namespace Raytracer.Rendering.Primitives
         public double InnerRadius { get; set; }
         public double OuterRadius { get; set; }
 
-        public Torus(Transform transform)
+        public Torus(Transform transform, double innerRadius, double outerRadius)
             : base(transform)
         {
+            InnerRadius = innerRadius;
+            OuterRadius = outerRadius;
         }
 
         public override IntersectionInfo ObjectSpace_Intersect(Ray ray)

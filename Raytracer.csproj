@@ -139,6 +139,7 @@
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Materials\MaterialComponentBaseParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Materials\ColourMaterialParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Materials\MaterialsLoader.cs" />
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Primitives\TorusParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Primitives\PlaneLoader.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -310,6 +311,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Small\TexturedBall.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Small\TorusChain.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Data\Small\DistantLight.ray">

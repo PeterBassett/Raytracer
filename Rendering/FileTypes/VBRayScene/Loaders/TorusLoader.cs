@@ -30,11 +30,8 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene.Loaders
 
             var transform = Transform.CreateTransform(-pos, -ori);
 
-            Torus obj = new Torus(transform);
-
-            obj.OuterRadius = outerRadius;
-            obj.InnerRadius = innerRadius;
-
+            Torus obj = new Torus(transform, innerRadius, outerRadius);
+           
             string strMaterial = oText.GetToken(file);
             
 	        var mat = scene.FindMaterial(strMaterial);
