@@ -22,11 +22,6 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene
             return loader.LoadScene(sceneStream);
         }
 
-        public void SaveScene(StreamWriter output, Scene scene)
-        {
-            throw new NotImplementedException();
-        }
-
         public ISceneLoader GetLoader(Stream scene)
         {
             ISceneLoader loader = null;

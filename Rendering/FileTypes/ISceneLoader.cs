@@ -7,6 +7,5 @@ namespace Raytracer.Rendering.FileTypes
     {
         bool CanLoadStream(Stream sceneStream);
         Scene LoadScene(Stream sceneStream);
-        void SaveScene(StreamWriter output, Scene scene);
     }
 }

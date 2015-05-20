@@ -556,8 +556,20 @@ namespace Raytracer.MathTypes
 			return matrix;
 		}
 
-        public static Matrix CreateLookAt(Point cameraPosition, Point lookingAtPosition, Vector cameraUpVector)
+        public static Matrix CreateLookAt(Point eye, Point lookingAtPosition, Vector cameraUpVector)
 		{
+            var zaxis = (lookingAtPosition - eye).Normalize();
+            var xaxis = Vector.CrossProduct(cameraUpVector, zaxis).Normalize();
+            var yaxis = Vector.CrossProduct(zaxis, xaxis);
+
+            var toWorld = new Matrix(
+                    xaxis.X, yaxis.X, zaxis.X, 0f,
+                    xaxis.Y, yaxis.Y, zaxis.Y, 0f,
+                    xaxis.Z, yaxis.Z, zaxis.Z, 0f,
+                    eye.X, eye.Y, eye.Z, 1f);
+
+            return toWorld;
+            /*
 			var eye = (Vector)cameraPosition;
             var lookAt = (Vector)lookingAtPosition;
 
@@ -569,7 +581,7 @@ namespace Raytracer.MathTypes
 					xaxis.X,                        yaxis.X,                        zaxis.X,                        0f,
 					xaxis.Y,                        yaxis.Y,                        zaxis.Y,                        0f,
 					xaxis.Z,                        yaxis.Z,                        zaxis.Z,                        0f,
-					-Vector.DotProduct(xaxis, eye), -Vector.DotProduct(yaxis, eye), -Vector.DotProduct(zaxis, eye), 1f);
+					-Vector.DotProduct(xaxis, eye), -Vector.DotProduct(yaxis, eye), -Vector.DotProduct(zaxis, eye), 1f);*/
 		}
 
 		public static Matrix Invert(Matrix matrix)

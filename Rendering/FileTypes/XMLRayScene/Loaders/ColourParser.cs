@@ -44,8 +44,16 @@ namespace Raytracer.Rendering.FileTypes.XMLRayScene.Loaders
             {
                 if (!string.IsNullOrEmpty(element.Value))
                 {
-                    var value = double.Parse(element.Value);
-                    r = g = b = value;
+                    var parts = element.Value.Split(',');
+
+                    if (parts.Length > 0)
+                        r = double.Parse(parts[0]);
+                    if (parts.Length == 1)
+                        g = b = r;
+                    if (parts.Length > 1)
+                        g = double.Parse(parts[1]);
+                    if (parts.Length > 2)
+                        b = double.Parse(parts[2]);
                 }
             }
 

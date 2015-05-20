@@ -16,9 +16,16 @@ namespace Raytracer.Rendering.FileTypes.XMLRayScene.Loaders.Transforms
         {
             var from = loader.LoadObject<Point>(scene, element, "From", () => Point.Zero);
             var to = loader.LoadObject<Point>(scene, element, "To", () => Point.Zero);
-            var up = loader.LoadObject<Point>(scene, element, "Up", () => Point.Zero);
+            var up = loader.LoadObject<Vector>(scene, element, "Up", () =>
+            {
+                Vector dir = (to - from).Normalize();
+                Vector du, dv;
+                Vector.CoordinateSystem(dir, out du, out dv);
 
-            return Matrix.CreateLookAt(from, to, (Vector)up);
+                return du;
+            });
+
+            return Matrix.CreateLookAt(from, to, up);
         }
     }
 }

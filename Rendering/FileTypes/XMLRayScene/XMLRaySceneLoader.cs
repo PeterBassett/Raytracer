@@ -19,11 +19,9 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene
         protected List<IXMLRaySceneItemLoader> LoaderList;
         [ImportMany]
         protected List<XMLRayElementParser> XmlElementParserList;
-        [ImportMany]
-        protected List<IXMLRaySceneItemSaver> SaverList;
         private Dictionary<string, IXMLRaySceneItemLoader> Loaders;
         private Dictionary<string, XMLRayElementParser> Parsers;
-        private Dictionary<Type, List<IXMLRaySceneItemSaver>> Savers;
+        
         private CompositionContainer container = null;
 
         public XMLRaySceneLoader()
@@ -70,19 +68,9 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene
             return null;
         }
 
-
-        private IEnumerable<IXMLRaySceneItemSaver> FindSaverForObjectType(Type type)
-        {
-            if (Savers.ContainsKey(type))
-                return Savers[type];
-            
-            return null;
-        }
-
         private void LoadAddins()
         {
             LoaderList = null;
-            SaverList = null;
 
             using (var catalog = new System.ComponentModel.Composition.Hosting.AssemblyCatalog(System.Reflection.Assembly.GetExecutingAssembly()))
             {                
@@ -93,10 +81,6 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene
             Loaders = LoaderList.ToDictionary(l => l.LoaderType.ToLower(), l => l);
 
             Parsers = XmlElementParserList.ToDictionary(l => l.LoaderType.ToLower(), l => l);
-
-            Savers = (from s in SaverList
-                      group s by s.SaverForType into g
-                      select g).ToDictionary(g => g.Key, g => g.ToList());
         }
 
         public void Dispose()
@@ -105,38 +89,6 @@ namespace Raytracer.Rendering.FileTypes.VBRayScene
             {
                 container.Dispose();
                 container = null;
-            }
-        }
-
-        public void SaveScene(StreamWriter output, Scene scene)
-        {
-            foreach (var saver in FindSaverForObjectType(typeof(Scene)))
-	        {
-                saver.SaveObject(output, scene);
-	        }
-            
-            foreach (var light in scene.Lights)
-            {
-                foreach (var saver in FindSaverForObjectType(light.GetType()))
-                {
-                    saver.SaveObject(output, light);
-                }
-            }
-
-            foreach (var material in scene.Materials)
-            {
-                foreach (var saver in FindSaverForObjectType(material.GetType()))
-                {
-                    saver.SaveObject(output, material);
-                }
-            }
-
-            foreach (var primitive in scene.Primitives)
-            {
-                foreach (var saver in FindSaverForObjectType(primitive.GetType()))
-                {
-                    saver.SaveObject(output, primitive);
-                }
             }
         }
 

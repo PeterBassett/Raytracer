@@ -1,9 +1,12 @@
 using System;
 using System.Runtime.InteropServices;
+using Raytracer.MathTypes.Converters;
+using System.ComponentModel;
 
 namespace Raytracer.MathTypes
 {
 	[StructLayout(LayoutKind.Sequential)]
+    [TypeConverter(typeof(VectorConverter))]
     public struct Vector
 	{
 		public double X;
@@ -374,6 +377,15 @@ namespace Raytracer.MathTypes
             }
 
             v3 = CrossProduct(v1, v2);
+        }
+
+        public static Vector Parse(string value)
+        {
+            var items = value.Split(',');
+
+            return new Vector(double.Parse(items[0]),
+                             double.Parse(items[1]),
+                             double.Parse(items[2]));
         }
     }
 }

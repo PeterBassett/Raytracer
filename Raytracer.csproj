@@ -80,6 +80,7 @@
     </Compile>
     <Compile Include="MathTypes\Algebra.cs" />
     <Compile Include="MathTypes\Barycentric.cs" />
+    <Compile Include="MathTypes\Converters\VectorConverter.cs" />
     <Compile Include="MathTypes\Matrix.cs" />
     <Compile Include="MathTypes\Point.cs" />
     <Compile Include="MathTypes\Normal.cs" />
@@ -107,7 +108,6 @@
     <Compile Include="Rendering\FileTypes\RaySceneLoader.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Extensions\XDocumentExtensions.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\IXMLRaySceneItemLoader.cs" />
-    <Compile Include="Rendering\FileTypes\XMLRayScene\IXMLRaySceneItemSaver.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\ColourParser.cs" />
     <Compile Include="MathTypes\Converters\PointConverter.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Configuration\ConfigurationLoader.cs" />
@@ -120,6 +120,7 @@
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Geometry\PointParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Geometry\PointTypeParserBase.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Lights\AmbientLightParser.cs" />
+    <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Lights\SpotLightParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Lights\PointLightParser.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Lights\LightsLoader.cs" />
     <Compile Include="Rendering\FileTypes\XMLRayScene\Loaders\Materials\CheckMaterialParser.cs" />
@@ -188,7 +189,6 @@
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\HorizontalCubemapBackgroundLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\TorusLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\TextureMaterialLoader.cs" />
-    <Compile Include="Rendering\FileTypes\VBRayScene\Savers\BackgroundSaver.cs" />
     <Compile Include="Rendering\Core\HitResult.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -220,19 +220,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\FileTypes\ObjFile\MtlFileLoader.cs" />
     <Compile Include="Rendering\FileTypes\ObjFile\ObjFileLoader.cs" />
-    <Compile Include="Rendering\FileTypes\VBRayScene\IVBRaySceneItemSaver.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\MeshInstanceLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\MeshLoader.cs" />
     <Compile Include="Rendering\FileTypes\VBRayScene\Loaders\TriangleLoader.cs" />
-    <Compile Include="Rendering\FileTypes\VBRayScene\Savers\CheckerMaterialSaver.cs" />
-    <Compile Include="Rendering\FileTypes\VBRayScene\Savers\ColourMaterialSaver.cs" />
-    <Compile Include="Rendering\FileTypes\VBRayScene\Savers\NoiseMaterialSaver.cs" />
-    <Compile Include="Rendering\FileTypes\VBRayScene\Savers\PlaneSaver.cs" />
-    <Compile Include="Rendering\FileTypes\VBRayScene\Savers\SphereSaver.cs" />
-    <Compile Include="Rendering\FileTypes\VBRayScene\Savers\AmbientLightSaver.cs" />
-    <Compile Include="Rendering\FileTypes\VBRayScene\Savers\PointLightSaver.cs" />
-    <Compile Include="Rendering\FileTypes\VBRayScene\Savers\RenderSettingsSaver.cs" />
-    <Compile Include="Rendering\FileTypes\VBRayScene\Savers\ViewpointSaver.cs" />
     <Compile Include="PictureBoxBmp.cs" />
     <Compile Include="Rendering\FileTypes\Bmp.cs" />
     <Compile Include="Rendering\FileTypes\Colour.cs" />
@@ -301,6 +291,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="Data\Small\RedBall.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Small\SpotLight.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Data\Small\DistantLight.ray">
@@ -531,9 +524,7 @@
     </Content>
     <Content Include="Dependencies\TargaImage.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Rendering\FileTypes\XMLRayScene\Savers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
