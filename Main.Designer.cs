@@ -76,13 +76,13 @@
             this.dlgOpen = new System.Windows.Forms.OpenFileDialog();
             this.dlgSaveBmp = new System.Windows.Forms.SaveFileDialog();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.txtSceneFile = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblPercent = new System.Windows.Forms.Label();
             this.btnCancelRendering = new System.Windows.Forms.Button();
             this.btnRender = new System.Windows.Forms.Button();
             this.dlgSaveRay = new System.Windows.Forms.SaveFileDialog();
             this.pixelPosition = new System.Windows.Forms.Label();
-            this.lblPercent = new System.Windows.Forms.Label();
+            this.txtSceneFile = new ICSharpCode.TextEditor.TextEditorControl();
             ((System.ComponentModel.ISupportInitialize)(this.renderedImage)).BeginInit();
             this.mainMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -99,7 +99,7 @@
             this.renderedImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.renderedImage.Location = new System.Drawing.Point(0, 0);
             this.renderedImage.Name = "renderedImage";
-            this.renderedImage.Size = new System.Drawing.Size(365, 407);
+            this.renderedImage.Size = new System.Drawing.Size(668, 407);
             this.renderedImage.TabIndex = 1;
             this.renderedImage.TabStop = false;
             this.renderedImage.Click += new System.EventHandler(this.renderedImage_Click);
@@ -114,7 +114,7 @@
             this.renderOptionsToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(569, 24);
+            this.mainMenu.Size = new System.Drawing.Size(1042, 24);
             this.mainMenu.TabIndex = 2;
             this.mainMenu.Text = "menuStrip1";
             // 
@@ -458,7 +458,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox1.Location = new System.Drawing.Point(0, 407);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(365, 78);
+            this.groupBox1.Size = new System.Drawing.Size(668, 78);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Rendering Messages";
@@ -470,7 +470,7 @@
             this.txtMessages.Multiline = true;
             this.txtMessages.Name = "txtMessages";
             this.txtMessages.ReadOnly = true;
-            this.txtMessages.Size = new System.Drawing.Size(359, 59);
+            this.txtMessages.Size = new System.Drawing.Size(662, 59);
             this.txtMessages.TabIndex = 0;
             // 
             // dlgOpen
@@ -499,20 +499,9 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.txtSceneFile);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainer1.Size = new System.Drawing.Size(569, 485);
-            this.splitContainer1.SplitterDistance = 365;
+            this.splitContainer1.Size = new System.Drawing.Size(1042, 485);
+            this.splitContainer1.SplitterDistance = 668;
             this.splitContainer1.TabIndex = 4;
-            // 
-            // txtSceneFile
-            // 
-            this.txtSceneFile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSceneFile.Location = new System.Drawing.Point(0, 0);
-            this.txtSceneFile.Multiline = true;
-            this.txtSceneFile.Name = "txtSceneFile";
-            this.txtSceneFile.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtSceneFile.Size = new System.Drawing.Size(200, 407);
-            this.txtSceneFile.TabIndex = 1;
-            this.txtSceneFile.TextChanged += new System.EventHandler(this.txtSceneFile_TextChanged);
             // 
             // groupBox2
             // 
@@ -522,10 +511,20 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox2.Location = new System.Drawing.Point(0, 407);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 78);
+            this.groupBox2.Size = new System.Drawing.Size(370, 78);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "groupBox2";
+            // 
+            // lblPercent
+            // 
+            this.lblPercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPercent.Location = new System.Drawing.Point(258, 20);
+            this.lblPercent.Name = "lblPercent";
+            this.lblPercent.Size = new System.Drawing.Size(100, 23);
+            this.lblPercent.TabIndex = 6;
+            this.lblPercent.Text = "0%";
+            this.lblPercent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnCancelRendering
             // 
@@ -555,28 +554,29 @@
             // pixelPosition
             // 
             this.pixelPosition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pixelPosition.Location = new System.Drawing.Point(466, 1);
+            this.pixelPosition.Location = new System.Drawing.Point(939, 1);
             this.pixelPosition.Name = "pixelPosition";
             this.pixelPosition.Size = new System.Drawing.Size(100, 23);
             this.pixelPosition.TabIndex = 5;
             this.pixelPosition.Text = "X:Y";
             this.pixelPosition.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblPercent
+            // txtSceneFile
             // 
-            this.lblPercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPercent.Location = new System.Drawing.Point(88, 20);
-            this.lblPercent.Name = "lblPercent";
-            this.lblPercent.Size = new System.Drawing.Size(100, 23);
-            this.lblPercent.TabIndex = 6;
-            this.lblPercent.Text = "0%";
-            this.lblPercent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtSceneFile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSceneFile.Location = new System.Drawing.Point(0, 0);
+            this.txtSceneFile.Name = "txtSceneFile";
+            this.txtSceneFile.ShowSpaces = true;
+            this.txtSceneFile.ShowTabs = true;
+            this.txtSceneFile.ShowVRuler = true;
+            this.txtSceneFile.Size = new System.Drawing.Size(370, 407);
+            this.txtSceneFile.TabIndex = 4;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(569, 512);
+            this.ClientSize = new System.Drawing.Size(1042, 512);
             this.Controls.Add(this.pixelPosition);
             this.Controls.Add(this.mainMenu);
             this.Controls.Add(this.splitContainer1);
@@ -590,7 +590,6 @@
             this.groupBox1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -635,7 +634,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem16;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TextBox txtSceneFile;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnRender;
         private System.Windows.Forms.ToolStripMenuItem saveSceneToolStripMenuItem;
@@ -656,6 +654,7 @@
         private System.Windows.Forms.ToolStripMenuItem greyscaleEdgeDetectionSamplerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem componentEdgeDetectionSamplerToolStripMenuItem;
         private System.Windows.Forms.Label lblPercent;
+        private ICSharpCode.TextEditor.TextEditorControl txtSceneFile;
     }
 }
 

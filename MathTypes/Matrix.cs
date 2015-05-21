@@ -217,7 +217,7 @@ namespace Raytracer.MathTypes
 					case 15:
 						return this.M44;
 				}
-				throw new IndexOutOfRangeException("Invalid matrix index!");
+				throw new ArgumentOutOfRangeException("index");
 			}
 			set
 			{
@@ -288,8 +288,8 @@ namespace Raytracer.MathTypes
 						break;
 
 					default:
-						throw new IndexOutOfRangeException("Invalid matrix index.");
-				}
+                        throw new ArgumentOutOfRangeException("index");
+                }
 			}
 		}
 

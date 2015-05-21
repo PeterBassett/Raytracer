@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel.Composition;
+using Raytracer.Rendering.Core;
 using Raytracer.Rendering.Lights;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Lights

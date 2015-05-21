@@ -1,26 +1,47 @@
 ﻿using System;
 using Raytracer.Rendering.Core;
 using Raytracer.FileTypes;
+using Raytracer.MathTypes;
 
 namespace Raytracer.Rendering.Materials
 {
     class MaterialNoise : MaterialWithSubMaterials
     {
-        public int Seed { get; set; }
-        public float Persistence { get; set; }
-        public int Octaves { get; set; }
-        public float Scale { get; set; }
-        public float Offset { get; set; }
-        public int[] Primes { get; set; }
-        public float Max { get; set; }
+        private int Seed { get; set; }
+        private float Persistence { get; set; }
+        private int Octaves { get; set; }
+        private float Scale { get; set; }
+        private float Offset { get; set; }
+        private int[] Primes { get; set; }
+        private float Max { get; set; }
 
-        public MaterialNoise()
-        {
-            Seed = 0;
-            Octaves = 1;
-            Persistence = 0.5f;
-            Scale = 1.0f;
-            Offset = 0.0f; 
+        public MaterialNoise(Material material1, Material material2, int seed, float persistence, int octaves, float scale, float offset, Vector size)
+        {            
+            this.SubMaterial1 = material1;
+            this.SubMaterial2 = material2;
+            this.Seed = seed;
+            this.Octaves = octaves;
+            this.Persistence = persistence;
+            this.Scale = scale;
+            this.Offset = offset;
+            this.Size = size;
+
+            var rnd = new Random(this.Seed);
+
+            // resize the primes array
+            this.Primes = new int[this.Octaves * 3];
+
+            long i = 0;
+            for (; i < Octaves; i++)
+            {
+                this.Primes[i * 3]       = GetNextPrime(rnd.Next(10000) + 10000);
+                this.Primes[i * 3 + 1]   = GetNextPrime((rnd.Next(10000) + 10000) * 5);
+                this.Primes[i * 3 + 2]   = GetNextPrime((rnd.Next(10000) + 10000) * 10000);
+            }
+
+            Max = 0.0f;
+            for (i = 0; i < Octaves; i++)
+                Max += (float)Math.Pow(Persistence, i);
         }
 
         public override void SolidifyMaterial(IntersectionInfo info, Material output)
@@ -170,6 +191,31 @@ namespace Raytracer.Rendering.Materials
 	        f = Lerp(a, b, fracy);
 
 	        return Lerp(e, f, fracz);
+        }
+
+        // Is a number (n) a prime?
+        bool IsPrime(long n)
+        {
+            long rootn = (int)Math.Sqrt((double)n);
+            long i;
+            // Check each number between 2 & sqrt(n) to see if it is a factor of n
+            for (i = 2; i <= rootn; i++)
+            {
+                // If so, the number is not a prime
+                if ((n % i) == 0)
+                    return false;
+            }
+            // If not, the number has no factors & is a prime
+            return true;
+        }
+
+        // Find the first number that is higher than n & is also a prime
+        // There's probably a quicker way of doing this, but it's only ever done once
+        int GetNextPrime(int n)
+        {
+            while (!IsPrime(n))
+                n++;
+            return n;
         }
     }
 }

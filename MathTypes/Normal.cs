@@ -154,7 +154,7 @@ namespace Raytracer.MathTypes
                     case 2:
                         return Z;
                     default:
-                        throw new IndexOutOfRangeException();
+                        throw new ArgumentOutOfRangeException("index");
                 }
             }
             set
@@ -171,7 +171,7 @@ namespace Raytracer.MathTypes
                         Z = value;
                         break;
                     default:
-                        throw new IndexOutOfRangeException();
+                        throw new ArgumentOutOfRangeException("index");
                 }
             }
         }

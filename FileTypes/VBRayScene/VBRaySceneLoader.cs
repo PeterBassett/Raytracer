@@ -5,6 +5,7 @@ using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Linq;
 using Raytracer.Rendering.Core;
+using System.Globalization;
 
 namespace Raytracer.FileTypes.VBRayScene
 {
@@ -53,7 +54,7 @@ namespace Raytracer.FileTypes.VBRayScene
 
         private IVBRaySceneItemLoader FindLoaderForTag(string strObjectType)
         {
-            strObjectType = strObjectType.ToLower();
+            strObjectType = strObjectType.ToLowerInvariant();
 
             if (Loaders.ContainsKey(strObjectType))
                 return Loaders[strObjectType];
@@ -71,7 +72,7 @@ namespace Raytracer.FileTypes.VBRayScene
                 container.ComposeParts(this);
             }
 
-            Loaders = LoaderList.ToDictionary(l => l.LoaderType.ToLower(), l => l);
+            Loaders = LoaderList.ToDictionary(l => l.LoaderType.ToLowerInvariant(), l => l);
         }
 
         public void Dispose()

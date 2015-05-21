@@ -15,17 +15,13 @@ namespace Raytracer.FileTypes.VBRayScene.Loaders
         public void  LoadObject(System.IO.StreamReader file, Scene scene)
         {
             Tokeniser oText = new Tokeniser();
-            
-            MaterialNoise mat = new MaterialNoise();
-
+                    
             Material mat1 = null;            
             Material mat2 = null;
 
             // get the name
-            mat.Name = oText.GetToken(file);
-
-            scene.AddMaterial(mat, mat.Name);
-
+            var Name = oText.GetToken(file);
+            
             string strMaterial = oText.GetToken(file);
             mat1 = scene.FindMaterial(strMaterial);
 
@@ -38,38 +34,23 @@ namespace Raytracer.FileTypes.VBRayScene.Loaders
             if (mat2 == null)
                 throw new Exception("Cannot find material '" + strMaterial + "' for NoiseMaterial.");
 
-            mat.SubMaterial1 = mat1;
-            mat.SubMaterial2 = mat2;
-
-            mat.Seed = int.Parse(oText.GetToken(file));
-
-            mat.Persistence = float.Parse(oText.GetToken(file));
-            mat.Octaves = int.Parse(oText.GetToken(file));
-            mat.Scale = float.Parse(oText.GetToken(file));
-            mat.Offset = float.Parse(oText.GetToken(file));
-
-            Random rnd = new Random(mat.Seed);
-
-            // resize the primes array
-            mat.Primes = new int[mat.Octaves * 3];
-
-            long i = 0;
-            for (; i < mat.Octaves; i++)
-            {
-                mat.Primes[i * 3] = GetNextPrime(rnd.Next(10000) + 10000);
-                mat.Primes[i * 3 + 1] = GetNextPrime((rnd.Next(10000) + 10000) * 5);
-                mat.Primes[i * 3 + 2] = GetNextPrime((rnd.Next(10000) + 10000) * 10000);
-            }
-
-            mat.Max = 0.0f;
-            for (i = 0; i < mat.Octaves; i++)
-                mat.Max += (float)Math.Pow(mat.Persistence, i);
+            var SubMaterial1 = mat1;
+            var SubMaterial2 = mat2;
+            
+            var Seed = int.Parse(oText.GetToken(file));
+            
+            var Persistence = float.Parse(oText.GetToken(file));
+            var Octaves = int.Parse(oText.GetToken(file));
+            var Scale = float.Parse(oText.GetToken(file));
+            var Offset = float.Parse(oText.GetToken(file));
 
             Vector size = new Vector();
             size.X = float.Parse(oText.GetToken(file));
             size.Y = float.Parse(oText.GetToken(file));
             size.Z = float.Parse(oText.GetToken(file));
-            mat.Size = size;
+
+            MaterialNoise mat = new MaterialNoise(mat1, mat2, Seed, Persistence, Octaves, Scale, Offset, size);
+            scene.AddMaterial(mat, mat.Name);
         }
 
         // Is a number (n) a prime?

@@ -3,6 +3,7 @@ using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
 using Raytracer.FileTypes.VBRayScene;
 using System.Linq;
+using System.Globalization;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders
 {
@@ -24,7 +25,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders
         {
             var truthyValues = new [] { "true", "1" };
 
-            return truthyValues.Contains(value.ToLower());
+            return truthyValues.Contains(value.ToLowerInvariant());
         }
     }
 }

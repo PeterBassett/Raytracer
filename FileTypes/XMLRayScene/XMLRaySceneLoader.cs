@@ -10,6 +10,7 @@ using Raytracer.FileTypes.XMLRayScene;
 using Raytracer.FileTypes.XMLRayScene.Loaders;
 using Raytracer.FileTypes.XMLRayScene.Extensions;
 using System.ComponentModel;
+using System.Globalization;
 
 namespace Raytracer.FileTypes.VBRayScene
 {
@@ -18,7 +19,8 @@ namespace Raytracer.FileTypes.VBRayScene
         [ImportMany]
         protected List<IXMLRaySceneItemLoader> LoaderList;
         [ImportMany]
-        protected List<XMLRayElementParser> XmlElementParserList;
+        protected List<XMLRayElementParser> ParserList;
+
         private Dictionary<string, IXMLRaySceneItemLoader> Loaders;
         private Dictionary<string, XMLRayElementParser> Parsers;
         
@@ -50,7 +52,7 @@ namespace Raytracer.FileTypes.VBRayScene
 
         private IXMLRaySceneItemLoader FindLoaderForTag(string strObjectType)
         {
-            strObjectType = strObjectType.ToLower();
+            strObjectType = strObjectType.ToLowerInvariant();
 
             if (Loaders.ContainsKey(strObjectType))
                 return Loaders[strObjectType];
@@ -60,7 +62,7 @@ namespace Raytracer.FileTypes.VBRayScene
 
         private XMLRayElementParser FindParserForTag(string strObjectType)
         {
-            strObjectType = strObjectType.ToLower();
+            strObjectType = strObjectType.ToLowerInvariant();
 
             if (Parsers.ContainsKey(strObjectType))
                 return Parsers[strObjectType];
@@ -71,6 +73,7 @@ namespace Raytracer.FileTypes.VBRayScene
         private void LoadAddins()
         {
             LoaderList = null;
+            ParserList = null;
 
             using (var catalog = new System.ComponentModel.Composition.Hosting.AssemblyCatalog(System.Reflection.Assembly.GetExecutingAssembly()))
             {                
@@ -78,9 +81,9 @@ namespace Raytracer.FileTypes.VBRayScene
                 container.ComposeParts(this);
             }
 
-            Loaders = LoaderList.ToDictionary(l => l.LoaderType.ToLower(), l => l);
+            Loaders = LoaderList.ToDictionary(l => l.LoaderType.ToLowerInvariant(), l => l);
 
-            Parsers = XmlElementParserList.ToDictionary(l => l.LoaderType.ToLower(), l => l);
+            Parsers = ParserList.ToDictionary(l => l.LoaderType.ToLowerInvariant(), l => l);
         }
 
         public void Dispose()

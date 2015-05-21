@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Threading.Tasks;
+using Raytracer.Rendering.Core;
 
 namespace Raytracer.FileTypes
 {

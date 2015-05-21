@@ -6,7 +6,7 @@ using System.Xml.Linq;
 
 namespace Raytracer.FileTypes.XMLRayScene.Extensions
 {
-    public static class XDocumentExtensions
+    static class XDocumentExtensions
     {
         public static XElement ElementCaseInsensitive(this XContainer source, XName name)
         {

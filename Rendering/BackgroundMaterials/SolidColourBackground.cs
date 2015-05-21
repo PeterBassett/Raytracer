@@ -1,17 +1,20 @@
-﻿using Raytracer.Rendering.Core;
-using Raytracer.FileTypes;
+﻿using System;
+using Raytracer.Rendering.Core;
 
 namespace Raytracer.Rendering.BackgroundMaterials
 {
     class SolidColourBackground : IBackgroundMaterial
     {
-        private Colour _colour;
+        private readonly Colour _colour;
+
         public SolidColourBackground(Colour colour)
         {
+            if (colour == null)
+                throw new ArgumentNullException("colour");
             _colour = colour;
         }
 
-        public FileTypes.Colour Shade(Ray ray)
+        public Colour Shade(Ray ray)
         {
             return _colour;
         }

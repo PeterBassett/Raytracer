@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using Raytracer.Rendering;
 using Raytracer.Rendering.Materials;
+using Raytracer.Rendering.Core;
 
 namespace Raytracer.FileTypes.ObjFile
 {

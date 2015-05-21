@@ -251,8 +251,8 @@ namespace Raytracer.MathTypes
 					case 2:
 						return Z;
 					default:
-						throw new IndexOutOfRangeException();
-				}
+                        throw new ArgumentOutOfRangeException("index");
+                }
 			}
 			set 
 			{
@@ -268,10 +268,9 @@ namespace Raytracer.MathTypes
 						Z = value;
 						break;
 					default:
-						throw new IndexOutOfRangeException();
-				}
+                        throw new ArgumentOutOfRangeException("index");
+                }
 			}
-
 		}
 
         public static explicit operator Point(Vector vector)
@@ -300,6 +299,9 @@ namespace Raytracer.MathTypes
 
         public static Point Parse(string value)
         {
+            if (string.IsNullOrEmpty(value))
+                throw new FormatException("value must be three numbers separated by commas '1,2,3'");
+
             var items = value.Split(',');
 
             return new Point(double.Parse(items[0]), 

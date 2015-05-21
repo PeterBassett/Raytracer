@@ -1,6 +1,7 @@
 ﻿using Raytracer.FileTypes;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Renderers;
+using Raytracer.Rendering.Core;
 
 namespace Raytracer.Rendering.PixelSamplers
 {
