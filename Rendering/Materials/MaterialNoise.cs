@@ -1,6 +1,6 @@
 ﻿using System;
 using Raytracer.Rendering.Core;
-using Raytracer.Rendering.FileTypes;
+using Raytracer.FileTypes;
 
 namespace Raytracer.Rendering.Materials
 {

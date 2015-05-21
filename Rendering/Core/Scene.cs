@@ -2,7 +2,7 @@
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Accellerators;
 using Raytracer.Rendering.BackgroundMaterials;
-using Raytracer.Rendering.FileTypes;
+using Raytracer.FileTypes;
 using Raytracer.Rendering.Materials;
 using Raytracer.Rendering.Primitives;
 using Raytracer.Rendering.Accellerators.Partitioners;

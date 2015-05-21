@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using Raytracer.MathTypes;
-using Raytracer.Rendering.FileTypes;
+using Raytracer.FileTypes;
 
 namespace Raytracer.Rendering.BackgroundMaterials
 {

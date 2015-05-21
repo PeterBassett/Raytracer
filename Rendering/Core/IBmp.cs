@@ -1,4 +1,4 @@
-﻿using Raytracer.Rendering.FileTypes;
+﻿using Raytracer.FileTypes;
 using Raytracer.MathTypes;
 
 namespace Raytracer.Rendering.Core

@@ -4,7 +4,7 @@ using Raytracer.Rendering.Core;
 using Raytracer.Rendering.PixelSamplers;
 using Raytracer.Rendering.Renderers;
 using System.Linq;
-using Raytracer.Rendering.FileTypes;
+using Raytracer.FileTypes;
 using System.Threading;
 
 namespace Raytracer.Rendering.RenderingStrategies

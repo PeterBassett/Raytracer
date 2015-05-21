@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using Raytracer.MathTypes;
-using Raytracer.Rendering.FileTypes;
+using Raytracer.FileTypes;
 using Raytracer.Rendering.Renderers;
 
 namespace Raytracer.Rendering.PixelSamplers

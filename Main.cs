@@ -9,7 +9,7 @@ using Raytracer.Extensions;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Cameras;
 using Raytracer.Rendering.Core;
-using Raytracer.Rendering.FileTypes.VBRayScene;
+using Raytracer.FileTypes.VBRayScene;
 using Raytracer.Rendering.PixelSamplers;
 using Raytracer.Rendering.Renderers;
 using Raytracer.Rendering.RenderingStrategies;
