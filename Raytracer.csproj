@@ -53,6 +53,27 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.Core">
+      <HintPath>Dependencies\ICSharpCode.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.Core.Presentation">
+      <HintPath>Dependencies\ICSharpCode.Core.Presentation.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.Core.WinForms">
+      <HintPath>Dependencies\ICSharpCode.Core.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory">
+      <HintPath>Dependencies\ICSharpCode.NRefactory.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpDevelop">
+      <HintPath>Dependencies\ICSharpCode.SharpDevelop.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpDevelop.Dom">
+      <HintPath>Dependencies\ICSharpCode.SharpDevelop.Dom.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpDevelop.Widgets">
+      <HintPath>Dependencies\ICSharpCode.SharpDevelop.Widgets.dll</HintPath>
+    </Reference>
     <Reference Include="ICSharpCode.TextEditor, Version=2.0.0.1462, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Dependencies\ICSharpCode.TextEditor.dll</HintPath>
@@ -270,6 +291,11 @@
     <Compile Include="Rendering\Renderers\RayTracingRenderer.cs" />
     <Compile Include="Rendering\Core\Scene.cs" />
     <Compile Include="Rendering\Primitives\Sphere.cs" />
+    <Compile Include="UI\XmlFoldingStrategy.cs" />
+    <Compile Include="UI\XmlFormattingStrategy.cs" />
+    <Compile Include="UI\XmlTextEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -285,6 +311,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\XmlTextEditor.resx">
+      <DependentUpon>XmlTextEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Data\Small\4Sph.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

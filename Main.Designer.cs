@@ -82,7 +82,7 @@
             this.btnRender = new System.Windows.Forms.Button();
             this.dlgSaveRay = new System.Windows.Forms.SaveFileDialog();
             this.pixelPosition = new System.Windows.Forms.Label();
-            this.txtSceneFile = new ICSharpCode.TextEditor.TextEditorControl();
+            this.txtSceneFile = new Raytracer.UI.CustomXmlTextEditor();
             ((System.ComponentModel.ISupportInitialize)(this.renderedImage)).BeginInit();
             this.mainMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();

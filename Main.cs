@@ -33,6 +33,7 @@ namespace Raytracer
 
 
             InitializeComponent();
+            txtSceneFile.Text = "";
             pixelPosition.Text = "";
 
             var scenes = Directory.GetFiles(".", "*.ray", SearchOption.AllDirectories).Concat(
