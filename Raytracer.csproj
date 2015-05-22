@@ -197,7 +197,6 @@
     <Compile Include="Rendering\BackgroundMaterials\VerticalCubemapBackground.cs" />
     <Compile Include="Rendering\BackgroundMaterials\CubemapBackground.cs" />
     <Compile Include="Rendering\BackgroundMaterials\SolidColourBackground.cs" />
-    <Compile Include="FileTypes\ObjFile\StreamReader.cs" />
     <Compile Include="FileTypes\VBRayScene\Loaders\VerticalCubemapBackgroundLoader.cs" />
     <Compile Include="FileTypes\VBRayScene\Loaders\SolidColourBackgroundLoader.cs" />
     <Compile Include="FileTypes\VBRayScene\Loaders\HorizontalCubemapBackgroundLoader.cs" />

@@ -6,9 +6,9 @@ using System;
 
 namespace Raytracer.FileTypes.XMLRayScene
 {
-    interface IXMLRaySceneItemLoader
+    interface IXmlRaySceneItemLoader
     {
         string LoaderType { get; }
-        void LoadObject(XMLRaySceneLoader loader, XElement element, Scene scene);
+        void LoadObject(XmlRaySceneLoader loader, XElement element, Scene scene);
     }
 }

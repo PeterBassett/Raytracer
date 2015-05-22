@@ -7,12 +7,12 @@ using System;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders
 {
-    [Export(typeof(XMLRayElementParser))]
-    class ColourParser : XMLRayElementParser
+    [Export(typeof(XmlRayElementParser))]
+    class ColourParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "Colour"; } }
 
-        public override dynamic LoadObject(XMLRaySceneLoader loader, Scene scene, XElement element, string elementName, Func<dynamic> createDefault)
+        public override dynamic LoadObject(XmlRaySceneLoader loader, Scene scene, XElement element, string elementName, Func<dynamic> createDefault)
         {
             double? r = null;
             double? g = null;

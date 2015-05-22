@@ -6,12 +6,12 @@ using Raytracer.Rendering.Materials;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Materials
 {
-    [Export(typeof(IXMLRaySceneItemLoader))]
-    class MaterialsLoader : IXMLRaySceneItemLoader
+    [Export(typeof(IXmlRaySceneItemLoader))]
+    class MaterialsLoader : IXmlRaySceneItemLoader
     {
         public string LoaderType { get { return "Materials"; } }
         
-        public void LoadObject(XMLRaySceneLoader loader, System.Xml.Linq.XElement element, Scene scene)
+        public void LoadObject(XmlRaySceneLoader loader, System.Xml.Linq.XElement element, Scene scene)
         {
             foreach (var child in element.Elements())
             {

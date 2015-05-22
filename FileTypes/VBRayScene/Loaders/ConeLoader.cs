@@ -7,8 +7,8 @@ using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.FileTypes.VBRayScene.Loaders
 {
-    [Export(typeof(IVBRaySceneItemLoader))]
-    class ConeLoader : IVBRaySceneItemLoader
+    [Export(typeof(IVbRaySceneItemLoader))]
+    class ConeLoader : IVbRaySceneItemLoader
     {
         public string LoaderType { get { return "Cone"; } }
         public void LoadObject(StreamReader file, Scene scene)

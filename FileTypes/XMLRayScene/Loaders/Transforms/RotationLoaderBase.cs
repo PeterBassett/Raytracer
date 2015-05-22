@@ -7,12 +7,12 @@ using System.Xml.Linq;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Transforms
 {
-    [Export(typeof(XMLRayElementParser))]
-    abstract class RotationParserBase : XMLRayElementParser
+    [Export(typeof(XmlRayElementParser))]
+    abstract class RotationParserBase : XmlRayElementParser
     {
         public abstract Matrix CreateRotationMatrix(double rotation);
 
-        public override dynamic LoadObject(XMLRaySceneLoader loader, Scene scene, XElement element, string elementName, Func<dynamic> createDefault)
+        public override dynamic LoadObject(XmlRaySceneLoader loader, Scene scene, XElement element, string elementName, Func<dynamic> createDefault)
         {
             var rotation = 0.0;
 

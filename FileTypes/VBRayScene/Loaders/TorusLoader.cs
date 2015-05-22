@@ -7,8 +7,8 @@ using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.FileTypes.VBRayScene.Loaders
 {
-    [Export(typeof(IVBRaySceneItemLoader))]
-    class TorusLoader : IVBRaySceneItemLoader
+    [Export(typeof(IVbRaySceneItemLoader))]
+    class TorusLoader : IVbRaySceneItemLoader
     {
         public string LoaderType { get { return "Torus"; } }
         public void LoadObject(StreamReader file, Scene scene)

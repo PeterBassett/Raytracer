@@ -6,8 +6,8 @@ namespace Raytracer.FileTypes.VBRayScene.Loaders
 {
     using Raytracer.Rendering.BackgroundMaterials;
 
-    [Export(typeof(IVBRaySceneItemLoader))]
-    class HorizontalCubemapBackgroundLoader : IVBRaySceneItemLoader
+    [Export(typeof(IVbRaySceneItemLoader))]
+    class HorizontalCubemapBackgroundLoader : IVbRaySceneItemLoader
     {
         public string LoaderType { get { return "HorizontalCubemapBackground"; } }
         public void  LoadObject(System.IO.StreamReader file, Scene scene)

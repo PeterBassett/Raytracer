@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Transforms
 {
-    [Export(typeof(XMLRayElementParser))]
+    [Export(typeof(XmlRayElementParser))]
     class RotateYParser : RotationParserBase
     {
         public override string LoaderType { get { return "RotateY"; } }

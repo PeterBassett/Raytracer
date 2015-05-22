@@ -1,16 +1,15 @@
 ﻿using System.ComponentModel.Composition;
-using Raytracer.MathTypes;
-using Raytracer.Rendering.Core;
 using Raytracer.FileTypes.VBRayScene;
+using Raytracer.Rendering.Core;
 
-namespace Raytracer.FileTypes.XMLRayScene.Loaders
+namespace Raytracer.FileTypes.XMLRayScene.Loaders.Lights
 {
-    [Export(typeof(IXMLRaySceneItemLoader))]
-    class LightsLoader : IXMLRaySceneItemLoader
+    [Export(typeof(IXmlRaySceneItemLoader))]
+    class LightsLoader : IXmlRaySceneItemLoader
     {
         public string LoaderType { get { return "Lights"; } }
         
-        public void LoadObject(XMLRaySceneLoader loader, System.Xml.Linq.XElement element, Scene scene)
+        public void LoadObject(XmlRaySceneLoader loader, System.Xml.Linq.XElement element, Scene scene)
         {
             foreach (var child in element.Elements())
             {

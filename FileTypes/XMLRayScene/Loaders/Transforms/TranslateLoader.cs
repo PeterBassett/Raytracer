@@ -7,12 +7,12 @@ using System.Xml.Linq;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Transforms
 {
-    [Export(typeof(XMLRayElementParser))]
-    class TranslateParser : XMLRayElementParser
+    [Export(typeof(XmlRayElementParser))]
+    class TranslateParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "Translate"; } }
 
-        public override dynamic LoadObject(XMLRaySceneLoader loader, Scene scene, XElement element, string elementName, Func<dynamic> createDefault)
+        public override dynamic LoadObject(XmlRaySceneLoader loader, Scene scene, XElement element, string elementName, Func<dynamic> createDefault)
         {
             double x = 0.0;
             double y = 0.0;

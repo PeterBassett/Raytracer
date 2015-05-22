@@ -1,22 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel.Composition;
-using Raytracer.Rendering.Lights;
-using Raytracer.Rendering.Core;
-using Raytracer.MathTypes;
+using System.Xml.Linq;
+using Raytracer.FileTypes.VBRayScene;
 using Raytracer.Rendering.BackgroundMaterials;
+using Raytracer.Rendering.Core;
 
-namespace Raytracer.FileTypes.XMLRayScene.Loaders.Lights
+namespace Raytracer.FileTypes.XMLRayScene.Loaders.Backgrounds
 {
-    [Export(typeof(XMLRayElementParser))]
-    class SolidColourBackgroundParser : XMLRayElementParser
+    [Export(typeof(XmlRayElementParser))]
+    class SolidColourBackgroundParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "SolidColourBackground"; } }
 
-        public override dynamic LoadObject(VBRayScene.XMLRaySceneLoader loader, Rendering.Core.Scene scene, System.Xml.Linq.XElement element, string elementName, Func<dynamic> createDefault)
+        public override dynamic LoadObject(XmlRaySceneLoader loader, Scene scene, XElement element, string elementName, Func<dynamic> createDefault)
         {
+            if (scene == null) 
+                throw new ArgumentNullException("scene");
+
             var colour = loader.LoadObject<Colour>(scene, element, "Colour", () => null);
 
             if (colour == null)

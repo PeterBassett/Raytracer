@@ -16,15 +16,14 @@ namespace Raytracer.FileTypes
                 using (var bmp = Paloma.TargaImage.LoadTargaImage(path))
                     return Read(bmp);
             }
-            else
-            {
-                using (var bmp = new Bitmap(path))
-                    return Read(bmp);
-            }
+            
+            using (var bmp = new Bitmap(path))
+                return Read(bmp);
         }
 
         private delegate Colour ReadPixel(BitmapData bmpData, int components, int x, int y);
-        public static Bmp Read(Bitmap other)
+
+        private static Bmp Read(Bitmap other)
         {            
             var bmp = new Bmp(other.Width, other.Height);
 
@@ -94,8 +93,8 @@ namespace Raytracer.FileTypes
                     var palette = data.Palette.Entries.ToArray();
 
                     // ReSharper disable once RedundantLambdaParameterType
-                    return (BitmapData bmpData, int components, int x, int y) =>
-                                GetPixel8BppIndexed(bmpData, components, x, y, palette);
+                    return (bmpData, components, x, y) =>
+                                GetPixel8BppIndexed(bmpData, x, y, palette);
                 }
                 default:
                     return null; // We do not support the specified PixelFormat.
@@ -112,7 +111,7 @@ namespace Raytracer.FileTypes
                               row[index] / 255.0);
         }
 
-        private static unsafe Colour GetPixel8BppIndexed(BitmapData bmpData, int components, int x, int y, Color [] palette)
+        private static unsafe Colour GetPixel8BppIndexed(BitmapData bmpData, int x, int y, Color [] palette)
         {
             byte* row = (byte*)bmpData.Scan0 + (y * bmpData.Stride);
             int index = row[x];

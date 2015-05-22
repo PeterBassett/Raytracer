@@ -11,8 +11,8 @@ namespace Raytracer.FileTypes.VBRayScene.Loaders
     using Raytracer.Rendering.Materials;
     
 
-    [Export(typeof(IVBRaySceneItemLoader))]
-    class MeshLoader : IVBRaySceneItemLoader
+    [Export(typeof(IVbRaySceneItemLoader))]
+    class MeshLoader : IVbRaySceneItemLoader
     {
         public string LoaderType { get { return "Mesh"; } }
 

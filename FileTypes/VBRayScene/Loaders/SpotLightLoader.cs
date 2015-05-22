@@ -6,8 +6,8 @@ using Raytracer.Rendering.Lights;
 
 namespace Raytracer.FileTypes.VBRayScene.Loaders
 {
-    [Export(typeof(IVBRaySceneItemLoader))]
-    class SpotLightLoader : IVBRaySceneItemLoader
+    [Export(typeof(IVbRaySceneItemLoader))]
+    class SpotLightLoader : IVbRaySceneItemLoader
     {
         public string LoaderType { get { return "SpotLight"; } }
         public void LoadObject(StreamReader file, Scene scene)

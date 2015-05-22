@@ -1,20 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Raytracer.Rendering.Primitives;
-using Raytracer.Rendering;
 using System.IO;
 using Raytracer.MathTypes;
+using Raytracer.Rendering.Materials;
 
 namespace Raytracer.FileTypes.ObjFile
-{
-    
-    using Raytracer.Rendering.Materials;
-
+{   
     class ObjFileLoader
     {
-        Dictionary<string, Material> Materials = new Dictionary<string, Material>();
+        readonly Dictionary<string, Material> Materials = new Dictionary<string, Material>();
 
         const int VertexCacheInitialLength = 3;
         int[,] VertexIndexCache = new int[VertexCacheInitialLength, 3];
@@ -32,7 +27,7 @@ namespace Raytracer.FileTypes.ObjFile
             Material currentMaterial = null;
             //var sr = new BufferedStreamReader(strObjfile);
 
-            using (StreamReader sr = new StreamReader(strObjfile))
+            using (var sr = new StreamReader(strObjfile))
             {
                 while (!sr.EndOfStream)
                 {                    
@@ -73,7 +68,7 @@ namespace Raytracer.FileTypes.ObjFile
             materials.AddRange(Materials.Values);
         }
         
-        private void ParseLine(string line, ref int ValidItemsInParseCache)
+        private void ParseLine(string line, ref int validItemsInParseCache)
         {
             int itemsfound = 0;
             int curPos= 0;
@@ -108,7 +103,7 @@ namespace Raytracer.FileTypes.ObjFile
                 ParseCache[i] = null;
             }
 
-            ValidItemsInParseCache = itemsfound;
+            validItemsInParseCache = itemsfound;
         }
 
         private void ResizeParseCache(int requiredSize)
@@ -129,8 +124,8 @@ namespace Raytracer.FileTypes.ObjFile
 
         private void LoadMaterial(string strMaterialFile)
         {
-            MtlFileLoader materialLoader = new MtlFileLoader();
-            List<Material> materials = new List<Material>();
+            var materialLoader = new MtlFileLoader();
+            var materials = new List<Material>();
             materialLoader.LoadFile(strMaterialFile, materials);
 
             foreach (var mat in materials)
@@ -143,10 +138,9 @@ namespace Raytracer.FileTypes.ObjFile
         {
             if (Materials.ContainsKey(strName))
                 return Materials[strName];
-            else
-                return null;
+            return null;
         }
-                
+
         private void CreateTriangles(int itemsInParseCache, List<Point> verticies, List<Triangle> triangles, Material currentMaterial, List<Vector2> textureCoordinates, List<Normal> vertexNormals)
         {
             if (VertexIndexCacheLength <= itemsInParseCache)
@@ -174,7 +168,6 @@ namespace Raytracer.FileTypes.ObjFile
                 index++;
             }
 
-            Point v1, v2, v3;
             Vector2 t1 = Vector2.Zero, t2 = Vector2.Zero, t3 = Vector2.Zero;
             Normal n1 = Normal.Invalid, n2 = Normal.Invalid, n3 = Normal.Invalid;
 
@@ -182,7 +175,7 @@ namespace Raytracer.FileTypes.ObjFile
             const int Textures = 1;
             const int Normals = 2;
 
-            v1 = verticies[VertexIndexCache[0, Vertices]];
+            Point v1 = verticies[VertexIndexCache[0, Vertices]];
 
             if (VertexIndexCache[0, Textures] != -1)
                 t1 = textureCoordinates[VertexIndexCache[0, Textures]];
@@ -192,8 +185,8 @@ namespace Raytracer.FileTypes.ObjFile
 
             for (int i = 0; i < index - 2; ++i)
             {
-                v2 = verticies[VertexIndexCache[i + 1, Vertices]];
-                v3 = verticies[VertexIndexCache[i + 2, Vertices]];
+                Point v2 = verticies[VertexIndexCache[i + 1, Vertices]];
+                Point v3 = verticies[VertexIndexCache[i + 2, Vertices]];
 
                 if (v1 == v2 || v1 == v3 || v2 == v3)
                     continue;

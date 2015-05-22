@@ -5,8 +5,8 @@ using Raytracer.Rendering.Lights;
 
 namespace Raytracer.FileTypes.VBRayScene.Loaders
 {
-    [Export(typeof(IVBRaySceneItemLoader))]
-    class AmbientLightLoader : IVBRaySceneItemLoader
+    [Export(typeof(IVbRaySceneItemLoader))]
+    class AmbientLightLoader : IVbRaySceneItemLoader
     {
         public string LoaderType { get { return "AmbientLight"; } }
         public void LoadObject(StreamReader file, Scene scene)

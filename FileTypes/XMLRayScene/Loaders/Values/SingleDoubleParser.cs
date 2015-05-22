@@ -5,10 +5,10 @@ using Raytracer.FileTypes.VBRayScene;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Values
 {
-    [Export(typeof(XMLRayElementParser))]
-    abstract class SingleDoubleParser : XMLRayElementParser
+    [Export(typeof(XmlRayElementParser))]
+    abstract class SingleDoubleParser : XmlRayElementParser
     {
-        public override dynamic LoadObject(XMLRaySceneLoader loader, Scene scene, System.Xml.Linq.XElement element, string elementName, System.Func<dynamic> createDefault)
+        public override dynamic LoadObject(XmlRaySceneLoader loader, Scene scene, System.Xml.Linq.XElement element, string elementName, System.Func<dynamic> createDefault)
         {
             var attr = GetDouble(element, LoaderType);
 

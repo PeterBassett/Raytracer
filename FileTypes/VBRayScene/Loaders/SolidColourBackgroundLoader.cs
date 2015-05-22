@@ -6,8 +6,8 @@ namespace Raytracer.FileTypes.VBRayScene.Loaders
 {
     using Raytracer.Rendering.BackgroundMaterials;
 
-    [Export(typeof(IVBRaySceneItemLoader))]
-    class SolidColourBackgroundLoader : IVBRaySceneItemLoader
+    [Export(typeof(IVbRaySceneItemLoader))]
+    class SolidColourBackgroundLoader : IVbRaySceneItemLoader
     {
         public string LoaderType { get { return "SolidColourBackground"; } }
         public void  LoadObject(System.IO.StreamReader file, Scene scene)

@@ -4,8 +4,8 @@ using Raytracer.Rendering.Core;
 
 namespace Raytracer.FileTypes.VBRayScene.Loaders
 {
-    [Export(typeof(IVBRaySceneItemLoader))]
-    class RenderSettingsLoader : IVBRaySceneItemLoader
+    [Export(typeof(IVbRaySceneItemLoader))]
+    class RenderSettingsLoader : IVbRaySceneItemLoader
     {
         public string LoaderType { get { return "RenderSettings"; } }
         public void  LoadObject(System.IO.StreamReader file, Scene scene)

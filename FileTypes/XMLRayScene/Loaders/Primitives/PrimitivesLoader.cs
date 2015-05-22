@@ -1,17 +1,16 @@
 ﻿using System.ComponentModel.Composition;
-using Raytracer.MathTypes;
-using Raytracer.Rendering.Core;
 using Raytracer.FileTypes.VBRayScene;
+using Raytracer.Rendering.Core;
 using Raytracer.Rendering.Primitives;
 
-namespace Raytracer.FileTypes.XMLRayScene.Loaders
+namespace Raytracer.FileTypes.XMLRayScene.Loaders.Primitives
 {
-    [Export(typeof(IXMLRaySceneItemLoader))]
-    class PrimitivesLoader : IXMLRaySceneItemLoader
+    [Export(typeof(IXmlRaySceneItemLoader))]
+    class PrimitivesLoader : IXmlRaySceneItemLoader
     {
         public string LoaderType { get { return "Primitives"; } }
         
-        public void LoadObject(XMLRaySceneLoader loader, System.Xml.Linq.XElement element, Scene scene)
+        public void LoadObject(XmlRaySceneLoader loader, System.Xml.Linq.XElement element, Scene scene)
         {
             foreach (var child in element.Elements())
             {

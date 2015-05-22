@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.Composition;
 
-namespace Raytracer.FileTypes.XMLRayScene.Loaders.Transforms
+namespace Raytracer.FileTypes.XMLRayScene.Loaders.Geometry
 {
-    [Export(typeof(XMLRayElementParser))]
+    [Export(typeof(XmlRayElementParser))]
     class FromParser : PointTypeParserBase
     {
         public override string LoaderType { get { return "From"; } }

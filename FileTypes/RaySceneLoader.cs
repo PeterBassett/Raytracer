@@ -1,42 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
-using System.IO;
-using System.Linq;
-using Raytracer.Rendering.Core;
-using System.Xml.Linq;
+﻿using System.IO;
+using Raytracer.FileTypes.VBRayScene;
 using Raytracer.FileTypes.XMLRayScene;
-using Raytracer.FileTypes.XMLRayScene.Loaders;
+using Raytracer.Rendering.Core;
 
-namespace Raytracer.FileTypes.VBRayScene
+namespace Raytracer.FileTypes
 {
     class RaySceneLoader : ISceneLoader
     {
         public Scene LoadScene(Stream sceneStream)
         {
-            var loader = GetLoader(sceneStream);
+            using (var loader = GetLoader(sceneStream))
+            {
+                sceneStream.Seek(0, SeekOrigin.Begin);
 
-            sceneStream.Seek(0, SeekOrigin.Begin);
-
-            return loader.LoadScene(sceneStream);
+                return loader.LoadScene(sceneStream);
+            }
         }
 
-        public ISceneLoader GetLoader(Stream scene)
+        private ISceneLoader GetLoader(Stream scene)
         {
-            ISceneLoader loader = null;
-
-            loader = new XMLRaySceneLoader();
+            var loader = new XmlRaySceneLoader();
 
             if (loader.CanLoadStream(scene))
                 return loader;
-            else
-                return new VBRaySceneLoader();
+
+            loader.Dispose();
+
+            return new VbRaySceneLoader();
         }
 
         public bool CanLoadStream(Stream sceneStream)
         {
             return true;
+        }
+
+        public void Dispose()
+        {
+            // do nothing. we don't hold references in this implementation.
         }
     }
 }

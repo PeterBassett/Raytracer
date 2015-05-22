@@ -2,15 +2,17 @@
 using System.ComponentModel.Composition;
 using Raytracer.Rendering.Core;
 using Raytracer.Rendering.Materials;
+using Raytracer.FileTypes.VBRayScene;
+using System.Xml.Linq;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Materials
 {
-    [Export(typeof(XMLRayElementParser))]
-    class ColourMaterialParser : XMLRayElementParser
+    [Export(typeof(XmlRayElementParser))]
+    class ColourMaterialParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "ColourMaterial"; } }
 
-        public override dynamic LoadObject(VBRayScene.XMLRaySceneLoader loader, Rendering.Core.Scene scene, System.Xml.Linq.XElement element, string elementName, Func<dynamic> createDefault)
+        public override dynamic LoadObject(XmlRaySceneLoader loader, Scene scene, XElement element, string elementName, Func<dynamic> createDefault)
         {
             var mat = new Material();
 

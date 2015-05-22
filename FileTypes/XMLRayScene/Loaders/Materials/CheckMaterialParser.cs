@@ -1,20 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel.Composition;
-using Raytracer.Rendering.Lights;
 using Raytracer.Rendering.Materials;
 using Raytracer.MathTypes;
+using Raytracer.FileTypes.VBRayScene;
+using Raytracer.Rendering.Core;
+using System.Xml.Linq;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Materials
 {
-    [Export(typeof(XMLRayElementParser))]
-    class CheckMaterialParser : XMLRayElementParser
+    [Export(typeof(XmlRayElementParser))]
+    class CheckMaterialParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "CheckMaterial"; } }
 
-        public override dynamic LoadObject(VBRayScene.XMLRaySceneLoader loader, Rendering.Core.Scene scene, System.Xml.Linq.XElement element, string elementName, Func<dynamic> createDefault)
+        public override dynamic LoadObject(XmlRaySceneLoader loader, Scene scene, XElement element, string elementName, Func<dynamic> createDefault)
         {
             var mat = new MaterialCheckerboard();
 

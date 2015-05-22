@@ -8,12 +8,12 @@ using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Primitives
 {
-    [Export(typeof(XMLRayElementParser))]
-    class TorusParser : XMLRayElementParser
+    [Export(typeof(XmlRayElementParser))]
+    class TorusParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "Torus"; } }
 
-        public override dynamic LoadObject(XMLRaySceneLoader loader, Scene scene, XElement element, string elementName, Func<dynamic> createDefault)
+        public override dynamic LoadObject(XmlRaySceneLoader loader, Scene scene, XElement element, string elementName, Func<dynamic> createDefault)
         {
             var transform = loader.LoadObject<Transform>(scene, element, "Transform", () => Transform.CreateIdentityTransform());
             var innerRadius = loader.LoadObject<double>(scene, element, "InnerRadius", () => 1);

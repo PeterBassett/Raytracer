@@ -8,12 +8,12 @@ using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Primitives
 {
-    [Export(typeof(XMLRayElementParser))]
-    class PlaneParser : XMLRayElementParser
+    [Export(typeof(XmlRayElementParser))]
+    class PlaneParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "Plane"; } }
 
-        public override dynamic LoadObject(XMLRaySceneLoader loader, Scene scene, XElement element, string elementName, Func<dynamic> createDefault)
+        public override dynamic LoadObject(XmlRaySceneLoader loader, Scene scene, XElement element, string elementName, Func<dynamic> createDefault)
         {
             var plane = new Plane();
 

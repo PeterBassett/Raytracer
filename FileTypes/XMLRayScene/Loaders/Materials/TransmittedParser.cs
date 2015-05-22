@@ -7,7 +7,7 @@ using Raytracer.Rendering.Lights;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Materials
 {
-    [Export(typeof(XMLRayElementParser))]
+    [Export(typeof(XmlRayElementParser))]
     class TransmittedParser : MaterialComponentBaseParser
     {
         public override string LoaderType { get { return "Transmitted"; } }

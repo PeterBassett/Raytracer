@@ -1,15 +1,14 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.Xml.Linq;
+using Raytracer.FileTypes.VBRayScene;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
-using Raytracer.FileTypes.VBRayScene;
-using System;
-using System.Xml.Linq;
 
-namespace Raytracer.FileTypes.XMLRayScene.Loaders.Transforms
+namespace Raytracer.FileTypes.XMLRayScene.Loaders.Geometry
 {
-    abstract class XYZParserBase : XMLRayElementParser
+    abstract class XYZParserBase : XmlRayElementParser
     {
-        public virtual Vector? LoadVector(XMLRaySceneLoader loader, Scene scene, XElement element, Func<Vector?> createDefault)
+        public virtual Vector? LoadVector(XmlRaySceneLoader loader, Scene scene, XElement element, Func<Vector?> createDefault)
         {
             double? x = null;
             double? y = null;

@@ -5,12 +5,12 @@ using Raytracer.FileTypes.VBRayScene;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders
 {
-    [Export(typeof(IXMLRaySceneItemLoader))]
-    class ViewpointLoader : IXMLRaySceneItemLoader
+    [Export(typeof(IXmlRaySceneItemLoader))]
+    class ViewpointLoader : IXmlRaySceneItemLoader
     {
         public string LoaderType { get { return "Viewpoint"; } }
         
-        public void LoadObject(XMLRaySceneLoader loader, System.Xml.Linq.XElement element, Scene scene)
+        public void LoadObject(XmlRaySceneLoader loader, System.Xml.Linq.XElement element, Scene scene)
         {
 	        var transform = loader.LoadObject<Transform>(scene, element, "Transform", () => Transform.CreateIdentityTransform());            
 

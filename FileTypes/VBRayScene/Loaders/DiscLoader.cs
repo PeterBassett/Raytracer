@@ -7,8 +7,8 @@ using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.FileTypes.VBRayScene.Loaders
 {
-    [Export(typeof(IVBRaySceneItemLoader))]
-    class DiscLoader : IVBRaySceneItemLoader
+    [Export(typeof(IVbRaySceneItemLoader))]
+    class DiscLoader : IVbRaySceneItemLoader
     {
         public string LoaderType { get { return "Disc"; } }
         public void LoadObject(StreamReader file, Scene scene)

@@ -6,8 +6,8 @@ using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.FileTypes.VBRayScene.Loaders
 {
-    [Export(typeof(IVBRaySceneItemLoader))]
-    class MeshInstanceLoader : IVBRaySceneItemLoader
+    [Export(typeof(IVbRaySceneItemLoader))]
+    class MeshInstanceLoader : IVbRaySceneItemLoader
     {
         public string LoaderType { get { return "MeshInstance"; } }
 

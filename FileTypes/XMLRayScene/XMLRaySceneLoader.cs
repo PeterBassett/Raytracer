@@ -1,32 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Linq;
-using Raytracer.Rendering.Core;
 using System.Xml.Linq;
-using Raytracer.FileTypes.XMLRayScene;
-using Raytracer.FileTypes.XMLRayScene.Loaders;
 using Raytracer.FileTypes.XMLRayScene.Extensions;
-using System.ComponentModel;
-using System.Globalization;
+using Raytracer.FileTypes.XMLRayScene.Loaders;
+using Raytracer.Rendering.Core;
 
-namespace Raytracer.FileTypes.VBRayScene
+namespace Raytracer.FileTypes.XMLRayScene
 {
-    class XMLRaySceneLoader : ISceneLoader
+    class XmlRaySceneLoader : ISceneLoader
     {
-        [ImportMany]
-        protected List<IXMLRaySceneItemLoader> LoaderList;
-        [ImportMany]
-        protected List<XMLRayElementParser> ParserList;
+        [ImportMany] 
+        private List<IXmlRaySceneItemLoader> _loaderList;
+        [ImportMany] 
+        private List<XmlRayElementParser> _parserList;
 
-        private Dictionary<string, IXMLRaySceneItemLoader> Loaders;
-        private Dictionary<string, XMLRayElementParser> Parsers;
+        private Dictionary<string, IXmlRaySceneItemLoader> _loaders;
+        private Dictionary<string, XmlRayElementParser> _parsers;
         
-        private CompositionContainer container = null;
+        private CompositionContainer _container;
 
-        public XMLRaySceneLoader()
+        public XmlRaySceneLoader()
         {
             LoadAddins();
         }
@@ -50,48 +48,52 @@ namespace Raytracer.FileTypes.VBRayScene
             loader.LoadObject(this, element, scene);
         }
 
-        private IXMLRaySceneItemLoader FindLoaderForTag(string strObjectType)
+        private IXmlRaySceneItemLoader FindLoaderForTag(string strObjectType)
         {
             strObjectType = strObjectType.ToLowerInvariant();
 
-            if (Loaders.ContainsKey(strObjectType))
-                return Loaders[strObjectType];
+            if (_loaders.ContainsKey(strObjectType))
+                return _loaders[strObjectType];
 
-            return Loaders[""];
+            return _loaders[""];
         }
 
-        private XMLRayElementParser FindParserForTag(string strObjectType)
+        private XmlRayElementParser FindParserForTag(string strObjectType)
         {
             strObjectType = strObjectType.ToLowerInvariant();
 
-            if (Parsers.ContainsKey(strObjectType))
-                return Parsers[strObjectType];
+            if (_parsers.ContainsKey(strObjectType))
+                return _parsers[strObjectType];
 
             return null;
         }
 
         private void LoadAddins()
         {
-            LoaderList = null;
-            ParserList = null;
+            _loaderList = null;
+            _parserList = null;
 
-            using (var catalog = new System.ComponentModel.Composition.Hosting.AssemblyCatalog(System.Reflection.Assembly.GetExecutingAssembly()))
+            using (var catalog = new AssemblyCatalog(System.Reflection.Assembly.GetExecutingAssembly()))
             {                
-                container = new CompositionContainer(catalog);
-                container.ComposeParts(this);
+                _container = new CompositionContainer(catalog);
+                _container.ComposeParts(this);
             }
 
-            Loaders = LoaderList.ToDictionary(l => l.LoaderType.ToLowerInvariant(), l => l);
+            if (_loaderList == null)
+                throw new CompositionException("No IXmlRaySceneItemLoader implementations available");
+            if (_parserList == null)
+                throw new CompositionException("No XmlRayElementParser implementations available");
 
-            Parsers = ParserList.ToDictionary(l => l.LoaderType.ToLowerInvariant(), l => l);
+            _loaders = _loaderList.ToDictionary(l => l.LoaderType.ToLowerInvariant(), l => l);
+            _parsers = _parserList.ToDictionary(l => l.LoaderType.ToLowerInvariant(), l => l);
         }
 
         public void Dispose()
         {
-            if (container != null)
+            if (_container != null)
             {
-                container.Dispose();
-                container = null;
+                _container.Dispose();
+                _container = null;
             }
         }
 

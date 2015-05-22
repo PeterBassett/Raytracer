@@ -9,8 +9,8 @@ namespace Raytracer.FileTypes.VBRayScene.Loaders
 {
     
 
-    [Export(typeof(IVBRaySceneItemLoader))]
-    class PlaneLoader : IVBRaySceneItemLoader
+    [Export(typeof(IVbRaySceneItemLoader))]
+    class PlaneLoader : IVbRaySceneItemLoader
     {
         public string LoaderType { get { return "Plane"; } }
         public void LoadObject(StreamReader file, Scene scene)

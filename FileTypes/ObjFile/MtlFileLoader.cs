@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
-using Raytracer.Rendering;
 using Raytracer.Rendering.Materials;
 using Raytracer.Rendering.Core;
 
@@ -15,14 +12,18 @@ namespace Raytracer.FileTypes.ObjFile
         {
             Material currentMaterial = null;
             
-            using (StreamReader sr = new StreamReader(strMaterialFile))
+            using (var sr = new StreamReader(strMaterialFile))
             {
                 while (!sr.EndOfStream)
                 {
                     var line = sr.ReadLine();
+                    
+                    if (line == null) 
+                        continue;
+
                     line = line.TrimStart(' ', '\t');
 
-                    var items = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    var items = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                     if (items.Length == 0)
                         continue;
@@ -30,7 +31,7 @@ namespace Raytracer.FileTypes.ObjFile
                     switch (items[0])
                     {
                         case "newmtl":
-                            currentMaterial = new Material()
+                            currentMaterial = new Material
                             {
                                 Name = items[1]
                             };
@@ -78,7 +79,7 @@ namespace Raytracer.FileTypes.ObjFile
 
         private Colour LoadColour(string[] items)
         {
-            return new Colour()
+            return new Colour
             {
                 Red = float.Parse(items[1]),
                 Green = float.Parse(items[2]),

@@ -5,29 +5,27 @@ using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Linq;
 using Raytracer.Rendering.Core;
-using System.Globalization;
 
 namespace Raytracer.FileTypes.VBRayScene
 {
-    class VBRaySceneLoader : ISceneLoader
+    class VbRaySceneLoader : ISceneLoader
     {
-        [ImportMany]
-        protected List<IVBRaySceneItemLoader> LoaderList;
-        private Dictionary<string, IVBRaySceneItemLoader> Loaders;
-        private CompositionContainer container = null;
+        [ImportMany] private List<IVbRaySceneItemLoader> _loaderList;
+        private Dictionary<string, IVbRaySceneItemLoader> _loaders;
+        private CompositionContainer _container;
 
-        public VBRaySceneLoader()
+        public VbRaySceneLoader()
         {
             LoadAddins();
         }
 
         public Scene LoadScene(Stream sceneStream)
         {
-	        Scene scene = new Scene();
+	        var scene = new Scene();
 	        	
-	        Tokeniser oText = new Tokeniser();
+	        var oText = new Tokeniser();
 
-            using (StreamReader sr = new StreamReader(sceneStream))
+            using (var sr = new StreamReader(sceneStream))
             {               
                 while (!sr.EndOfStream)
                 {
@@ -36,7 +34,7 @@ namespace Raytracer.FileTypes.VBRayScene
                     if (strObjectTag == "")
                         continue;
 
-                    IVBRaySceneItemLoader loader = FindLoaderForTag(strObjectTag);
+                    IVbRaySceneItemLoader loader = FindLoaderForTag(strObjectTag);
 
                     if (loader != null)
                         loader.LoadObject(sr, scene);
@@ -52,35 +50,38 @@ namespace Raytracer.FileTypes.VBRayScene
             }
         }
 
-        private IVBRaySceneItemLoader FindLoaderForTag(string strObjectType)
+        private IVbRaySceneItemLoader FindLoaderForTag(string strObjectType)
         {
             strObjectType = strObjectType.ToLowerInvariant();
 
-            if (Loaders.ContainsKey(strObjectType))
-                return Loaders[strObjectType];
+            if (_loaders.ContainsKey(strObjectType))
+                return _loaders[strObjectType];
 
             return null;
         }
 
         private void LoadAddins()
         {
-            LoaderList = null;
+            _loaderList = null;
 
-            using (var catalog = new System.ComponentModel.Composition.Hosting.AssemblyCatalog(System.Reflection.Assembly.GetExecutingAssembly()))
+            using (var catalog = new AssemblyCatalog(System.Reflection.Assembly.GetExecutingAssembly()))
             {                
-                container = new CompositionContainer(catalog);
-                container.ComposeParts(this);
+                _container = new CompositionContainer(catalog);
+                _container.ComposeParts(this);
             }
 
-            Loaders = LoaderList.ToDictionary(l => l.LoaderType.ToLowerInvariant(), l => l);
+            if (_loaderList == null)
+                throw new CompositionException();
+                
+            _loaders = _loaderList.ToDictionary(l => l.LoaderType.ToLowerInvariant(), l => l);
         }
 
         public void Dispose()
         {
-            if (container != null)
+            if (_container != null)
             {
-                container.Dispose();
-                container = null;
+                _container.Dispose();
+                _container = null;
             }
         }
 

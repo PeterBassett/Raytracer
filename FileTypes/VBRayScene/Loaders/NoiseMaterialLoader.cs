@@ -6,15 +6,13 @@ using Raytracer.Rendering.Materials;
 
 namespace Raytracer.FileTypes.VBRayScene.Loaders
 {
-    
-
-    [Export(typeof(IVBRaySceneItemLoader))]
-    class NoiseMaterialLoader : IVBRaySceneItemLoader
+    [Export(typeof(IVbRaySceneItemLoader))]
+    class NoiseMaterialLoader : IVbRaySceneItemLoader
     {
         public string LoaderType { get { return "NoiseMaterial"; } }
         public void  LoadObject(System.IO.StreamReader file, Scene scene)
         {
-            Tokeniser oText = new Tokeniser();
+            var oText = new Tokeniser();
                     
             Material mat1 = null;            
             Material mat2 = null;

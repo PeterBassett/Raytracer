@@ -4,8 +4,8 @@ using Raytracer.Rendering.Materials;
 
 namespace Raytracer.FileTypes.VBRayScene.Loaders
 {
-    [Export(typeof(IVBRaySceneItemLoader))]
-    class ColourMaterialLoader : IVBRaySceneItemLoader
+    [Export(typeof(IVbRaySceneItemLoader))]
+    class ColourMaterialLoader : IVbRaySceneItemLoader
     {
         public string LoaderType { get { return "ColourMaterial"; } }
         public void  LoadObject(System.IO.StreamReader file, Scene scene)

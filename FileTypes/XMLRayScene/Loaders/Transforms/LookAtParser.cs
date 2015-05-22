@@ -7,12 +7,12 @@ using System.Xml.Linq;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Transforms
 {
-    [Export(typeof(XMLRayElementParser))]
-    class LookAtParser : XMLRayElementParser
+    [Export(typeof(XmlRayElementParser))]
+    class LookAtParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "LookAt"; } }
 
-        public override dynamic LoadObject(XMLRaySceneLoader loader, Scene scene, XElement element, string elementName, Func<dynamic> createDefault)
+        public override dynamic LoadObject(XmlRaySceneLoader loader, Scene scene, XElement element, string elementName, Func<dynamic> createDefault)
         {
             var from = loader.LoadObject<Point>(scene, element, "From", () => Point.Zero);
             var to = loader.LoadObject<Point>(scene, element, "To", () => Point.Zero);

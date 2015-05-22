@@ -8,8 +8,8 @@ namespace Raytracer.FileTypes.VBRayScene.Loaders
 {
     
 
-    [Export(typeof(IVBRaySceneItemLoader))]
-    class CheckerMaterialLoader : IVBRaySceneItemLoader
+    [Export(typeof(IVbRaySceneItemLoader))]
+    class CheckerMaterialLoader : IVbRaySceneItemLoader
     {
         public string LoaderType { get { return "CheckMaterial"; } }
         public void  LoadObject(System.IO.StreamReader file, Scene scene)

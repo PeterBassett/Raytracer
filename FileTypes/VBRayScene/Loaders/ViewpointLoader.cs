@@ -6,8 +6,8 @@ namespace Raytracer.FileTypes.VBRayScene.Loaders
 {
     
 
-    [Export(typeof(IVBRaySceneItemLoader))]
-    class ViewpointLoader : IVBRaySceneItemLoader
+    [Export(typeof(IVbRaySceneItemLoader))]
+    class ViewpointLoader : IVbRaySceneItemLoader
     {
         public string LoaderType { get { return "Viewpoint"; } }
         public void LoadObject(System.IO.StreamReader file, Scene scene)

@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.Composition;
+using Raytracer.FileTypes.VBRayScene;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
-using Raytracer.FileTypes.VBRayScene;
 
-namespace Raytracer.FileTypes.XMLRayScene.Loaders
+namespace Raytracer.FileTypes.XMLRayScene.Loaders.Geometry
 {
-    [Export(typeof(XMLRayElementParser))]
-    abstract class PointTypeParserBase : XMLRayElementParser
+    [Export(typeof(XmlRayElementParser))]
+    abstract class PointTypeParserBase : XmlRayElementParser
     {
-        public override dynamic LoadObject(XMLRaySceneLoader loader, Scene scene, System.Xml.Linq.XElement element, string elementName, System.Func<dynamic> createDefault)
+        public override dynamic LoadObject(XmlRaySceneLoader loader, Scene scene, System.Xml.Linq.XElement element, string elementName, System.Func<dynamic> createDefault)
         {
             double x = 0.0;
             double y = 0.0;

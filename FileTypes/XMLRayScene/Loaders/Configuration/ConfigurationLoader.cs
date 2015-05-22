@@ -1,18 +1,17 @@
 ﻿using System.ComponentModel.Composition;
-using Raytracer.MathTypes;
-using Raytracer.Rendering.Core;
-using Raytracer.FileTypes.VBRayScene;
 using System.Linq;
-using System.Globalization;
+using System.Xml.Linq;
+using Raytracer.FileTypes.VBRayScene;
+using Raytracer.Rendering.Core;
 
-namespace Raytracer.FileTypes.XMLRayScene.Loaders
+namespace Raytracer.FileTypes.XMLRayScene.Loaders.Configuration
 {
-    [Export(typeof(IXMLRaySceneItemLoader))]
-    class ConfigurationLoader : IXMLRaySceneItemLoader
+    [Export(typeof(IXmlRaySceneItemLoader))]
+    class ConfigurationLoader : IXmlRaySceneItemLoader
     {
         public string LoaderType { get { return "RenderSettings"; } }
         
-        public void LoadObject(XMLRaySceneLoader loader, System.Xml.Linq.XElement element, Scene scene)
+        public void LoadObject(XmlRaySceneLoader loader, XElement element, Scene scene)
         {
             scene.RecursionDepth = loader.LoadObject<int>(scene, element, "Depth", () => 1);
 

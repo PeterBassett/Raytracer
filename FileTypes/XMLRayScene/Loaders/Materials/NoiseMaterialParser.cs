@@ -1,20 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel.Composition;
-using Raytracer.Rendering.Lights;
 using Raytracer.Rendering.Materials;
 using Raytracer.MathTypes;
+using Raytracer.FileTypes.VBRayScene;
+using Raytracer.Rendering.Core;
+using System.Xml.Linq;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Materials
 {
-    [Export(typeof(XMLRayElementParser))]
-    class NoiseMaterialParser : XMLRayElementParser
+    [Export(typeof(XmlRayElementParser))]
+    class NoiseMaterialParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "NoiseMaterial"; } }
 
-        public override dynamic LoadObject(VBRayScene.XMLRaySceneLoader loader, Rendering.Core.Scene scene, System.Xml.Linq.XElement element, string elementName, Func<dynamic> createDefault)
+        public override dynamic LoadObject(XmlRaySceneLoader loader, Scene scene, XElement element, string elementName, Func<dynamic> createDefault)
         {            
             var name = loader.LoadObject<string>(scene, element, "Name", () => null);
                      
@@ -37,10 +36,10 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Materials
             var offset = loader.LoadObject<float>(scene, element, "offset", () => 0.0f);
             var size = loader.LoadObject<Vector>(scene, element, "size", () => new Vector(1,1,1));
 
-            MaterialNoise mat = new MaterialNoise(mat1, mat2, seed, persistence, octaves, (float)scale.X, offset, size);
-            mat.Name = name;
-
-            return mat;
+            return new MaterialNoise(mat1, mat2, seed, persistence, octaves, (float) scale.X, offset, size)
+            {
+                Name = name
+            };
         }
     }
 }
