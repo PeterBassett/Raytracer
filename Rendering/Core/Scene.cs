@@ -147,7 +147,7 @@ namespace Raytracer.Rendering.Core
 
         public Material FindMaterial(string strMaterial)
         {
-            if (_materials.ContainsKey(strMaterial))
+            if (strMaterial != null && _materials.ContainsKey(strMaterial))
                 return _materials[strMaterial];
             else
                 return null;

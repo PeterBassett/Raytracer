@@ -1,4 +1,5 @@
-﻿namespace Raytracer
+﻿using Raytracer.UI;
+namespace Raytracer
 {
     partial class Main
     {
@@ -76,13 +77,13 @@
             this.dlgOpen = new System.Windows.Forms.OpenFileDialog();
             this.dlgSaveBmp = new System.Windows.Forms.SaveFileDialog();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.txtSceneFile = new Raytracer.UI.CustomXmlTextEditor();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblPercent = new System.Windows.Forms.Label();
             this.btnCancelRendering = new System.Windows.Forms.Button();
             this.btnRender = new System.Windows.Forms.Button();
             this.dlgSaveRay = new System.Windows.Forms.SaveFileDialog();
             this.pixelPosition = new System.Windows.Forms.Label();
-            this.txtSceneFile = new Raytracer.UI.CustomXmlTextEditor();
             ((System.ComponentModel.ISupportInitialize)(this.renderedImage)).BeginInit();
             this.mainMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -503,6 +504,22 @@
             this.splitContainer1.SplitterDistance = 668;
             this.splitContainer1.TabIndex = 4;
             // 
+            // txtSceneFile
+            // 
+            this.txtSceneFile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSceneFile.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtSceneFile.IsIconBarVisible = true;
+            this.txtSceneFile.IsReadOnly = false;
+            this.txtSceneFile.Location = new System.Drawing.Point(0, 0);
+            this.txtSceneFile.Name = "txtSceneFile";
+            this.txtSceneFile.ShowSpaces = true;
+            this.txtSceneFile.ShowTabs = true;
+            this.txtSceneFile.ShowVRuler = false;
+            this.txtSceneFile.Size = new System.Drawing.Size(370, 407);
+            this.txtSceneFile.TabIndent = 2;
+            this.txtSceneFile.TabIndex = 4;
+            this.txtSceneFile.TextChanged += new System.EventHandler(this.txtSceneFile_TextChanged);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.lblPercent);
@@ -560,17 +577,6 @@
             this.pixelPosition.TabIndex = 5;
             this.pixelPosition.Text = "X:Y";
             this.pixelPosition.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtSceneFile
-            // 
-            this.txtSceneFile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSceneFile.Location = new System.Drawing.Point(0, 0);
-            this.txtSceneFile.Name = "txtSceneFile";
-            this.txtSceneFile.ShowSpaces = true;
-            this.txtSceneFile.ShowTabs = true;
-            this.txtSceneFile.ShowVRuler = true;
-            this.txtSceneFile.Size = new System.Drawing.Size(370, 407);
-            this.txtSceneFile.TabIndex = 4;
             // 
             // Main
             // 
@@ -654,7 +660,7 @@
         private System.Windows.Forms.ToolStripMenuItem greyscaleEdgeDetectionSamplerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem componentEdgeDetectionSamplerToolStripMenuItem;
         private System.Windows.Forms.Label lblPercent;
-        private ICSharpCode.TextEditor.TextEditorControl txtSceneFile;
+        private CustomXmlTextEditor txtSceneFile;
     }
 }
 

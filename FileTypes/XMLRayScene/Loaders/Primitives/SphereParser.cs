@@ -21,9 +21,6 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Primitives
 
             var mat = scene.FindMaterial(materialName);
 
-	        if(mat == null)
-		        throw new Exception("Cannot find material '" + materialName + "' for sphere.");
-
             var rotate = transform.GetObjectSpaceRotation();
             var rotation = new Vector(MathLib.Rad2Deg(rotate.X),
                                       MathLib.Rad2Deg(rotate.Y),

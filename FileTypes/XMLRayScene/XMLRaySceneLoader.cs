@@ -32,7 +32,7 @@ namespace Raytracer.FileTypes.XMLRayScene
         public Scene LoadScene(Stream sceneStream)
         {
 	        var scene = new Scene();
-
+            
             var document = XDocument.Load(sceneStream);
             
             LoadElement(scene, document.Root);

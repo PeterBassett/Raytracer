@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Primitives>
+  
+  <Sphere name="DefaultSphere">
+    <Radius>1</Radius>
+  </Sphere>
+
+  <Plane name="DefaultPlane">
+    <Point x="0" y="-6" z="0"></Point>
+    <Normal x="0" y="1" z="0"></Normal>
+  </Plane>
+
+</Primitives>

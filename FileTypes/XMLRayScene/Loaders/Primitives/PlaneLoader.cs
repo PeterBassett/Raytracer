@@ -24,11 +24,8 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Primitives
             plane.Normal.Normalize();
 
             string strMaterial = loader.LoadObject<string>(scene, element, "Material", () => null);
-            
-	        var mat = scene.FindMaterial(strMaterial);
 
-            if(mat == null)
-		        throw new Exception("Cannot find material '" + strMaterial + "' for plane.");
+            var mat = scene.FindMaterial(strMaterial);
 
 	        plane.Material = mat;
 

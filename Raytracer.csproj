@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\UIExtensions.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Xml\IncludeParser.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -293,7 +294,7 @@
     <Compile Include="Rendering\Primitives\Sphere.cs" />
     <Compile Include="UI\XmlFoldingStrategy.cs" />
     <Compile Include="UI\XmlFormattingStrategy.cs" />
-    <Compile Include="UI\XmlTextEditor.cs">
+    <Compile Include="UI\CustomXmlTextEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <EmbeddedResource Include="Main.resx">
@@ -311,8 +312,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UI\XmlTextEditor.resx">
-      <DependentUpon>XmlTextEditor.cs</DependentUpon>
+    <EmbeddedResource Include="UI\CustomXmlTextEditor.resx">
+      <DependentUpon>CustomXmlTextEditor.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Data\Small\4Sph.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -332,6 +333,15 @@
     <None Include="Data\Small\AmbientLight.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="Data\Small\Default\Primitives.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Small\Include.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Small\Default\DiffuseMaterials.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\Small\FireBall.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

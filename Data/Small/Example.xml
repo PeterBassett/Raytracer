@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Scene>
+<Scene xmlns:xi="http://www.w3.org/2001/XInclude">
   <Viewpoint>
     <Transform>
       <RotateX>45</RotateX>
@@ -44,6 +44,8 @@
   </RenderSettings>
 
   <Materials>
+    <xi:include href="DefaultMaterials.xml" parse="xml" xpointer="Materials"/>
+    
     <ColourMaterial name="darkgrey">
       <Diffuse>
         <Colour>0.3</Colour>
