@@ -6,18 +6,18 @@ namespace Raytracer.Rendering.Primitives
 {
     class Cone : ObjectSpacePrimitive
     {
-        public readonly float Radius;
-        public readonly float Height;
-        public readonly float phiMax;
+        public readonly double Radius;
+        public readonly double Height;
+        public readonly double phiMax;
         public readonly Solidity Solid;
         private IntersectionInfo _missed = new IntersectionInfo(HitResult.MISS);
 
-        public Cone(float radius, float height, float tm, Solidity solidity, Transform transform)
+        public Cone(double radius, double height, double tm, Solidity solidity, Transform transform)
             : base(transform)
         {
             Radius = radius;
             Height = height;
-            phiMax = (float)MathLib.Deg2Rad(MathLib.Clamp(tm, 0.0f, 360.0f));
+            phiMax = MathLib.Deg2Rad(MathLib.Clamp(tm, 0.0, 360.0));
             Solid = solidity;
         }
 
@@ -49,7 +49,7 @@ namespace Raytracer.Rendering.Primitives
 
         private IntersectionInfo IntersectWithCone(Ray ray)
         {
-            float k = Radius / Height;
+            var k = Radius / Height;
 
             k = k * k;
 

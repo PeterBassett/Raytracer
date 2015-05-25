@@ -11,37 +11,40 @@ namespace Raytracer.Rendering.Renderers
 {
     class RayTracingRenderer : IRenderer
     {
-        private Scene _scene;
-        private IRenderingStrategy _renderingStrategy;
-        private ICamera _camera;
-        private bool _multiThreaded;
-        private uint _maxDepth;
-        private bool _traceReflections;
-        private bool _traceRefractions;
-        private bool _traceShadows;
+        public RenderSettings Settings { get; set; }
+        public IRenderingStrategy RenderingStrategy { get; set; }
+        public ICamera Camera { get; set; }
+        public Scene Scene { get; set; }
 
-        public RayTracingRenderer(Scene scene, ICamera camera, IRenderingStrategy renderingStrategy,
-            uint maxDepth, bool multiThreaded, 
-            bool traceShadows, bool traceReflections, bool traceRefractions)
+        public RayTracingRenderer()
         {
-            _scene = scene;
-            _camera = camera;
-            _renderingStrategy = renderingStrategy;
-            _multiThreaded = multiThreaded;
-            _maxDepth = maxDepth;
-            _traceShadows = traceShadows;
-            _traceReflections = traceReflections;
-            _traceRefractions = traceRefractions;
         }
 
         public void RenderScene(IBmp frameBuffer)
         {
-            _renderingStrategy.RenderScene(this, frameBuffer);
+            AssertDependancies();
+
+            RenderingStrategy.RenderScene(this, frameBuffer);
+        }
+
+        private void AssertDependancies()
+        {
+            if (Scene == null)
+                throw new ArgumentNullException("scene");
+
+            if (Camera == null)
+                throw new ArgumentNullException("camera");
+
+            if (Settings == null)
+                throw new ArgumentNullException("settings");
+
+            if (RenderingStrategy == null)
+                throw new ArgumentNullException("renderingStrategy");
         }
 
         public Colour ComputeSample(Vector2 pixelCoordinates)
         {
-            return Trace(_camera.GenerateRayForPixel(pixelCoordinates));
+            return Trace(Camera.GenerateRayForPixel(pixelCoordinates));
         }
 
         private Colour Trace(Ray ray)
@@ -53,7 +56,7 @@ namespace Raytracer.Rendering.Renderers
         {
             var minimumIntersection = new IntersectionInfo(HitResult.MISS);
 
-            foreach (var obj in _scene.GetCandiates(ray))
+            foreach (var obj in Scene.GetCandiates(ray))
             {
                 var result = obj.Intersect(ray);
 
@@ -68,7 +71,7 @@ namespace Raytracer.Rendering.Renderers
 
         private Traceable FindObjectContainingPoint(Point point)
         {
-            return _scene.FindObjectContainingPoint(point);
+            return Scene.FindObjectContainingPoint(point);
         }
 
         private Colour TraceRay(Ray ray, Colour contribution, double curRefractionIndex, long depth, Vector eyeDirection)
@@ -79,15 +82,15 @@ namespace Raytracer.Rendering.Renderers
 
             if (info.Result == HitResult.MISS)
             {
-                if (_scene.BackgroundMaterial != null)
-                    colour = _scene.BackgroundMaterial.Shade(ray);
+                if (Scene.BackgroundMaterial != null)
+                    colour = Scene.BackgroundMaterial.Shade(ray);
 
                 return colour;
             }
             
             // set the 
             var material = new Material();
-            var objectMaterial = info.Primitive.Material ?? _scene.DefaultMaterial;
+            var objectMaterial = info.Primitive.Material ?? Scene.DefaultMaterial;
 
             var materialDispatcher = new MaterialDispatcher();
             materialDispatcher.Solidify((dynamic)info.Primitive, (dynamic)objectMaterial, info, material);
@@ -95,14 +98,14 @@ namespace Raytracer.Rendering.Renderers
             // get the shading due to lighting at this point
             colour = Shade(info.HitPoint, info.NormalAtHitPoint, material, eyeDirection) * contribution;
 
-            if (depth == _maxDepth)
+            if (depth == Settings.PathDepth)
             {
                 colour.Clamp();
                 return colour;
             }
 
             // if we are dealing with a reflective material
-            if (material.Reflective.Sum() > 0.0f && _traceReflections)
+            if (material.Reflective.Sum() > 0.0f && Settings.TraceReflections)
             {
                 Colour colReflectAmount = material.Reflective * contribution;
 
@@ -117,7 +120,7 @@ namespace Raytracer.Rendering.Renderers
             }
 
             // if we are dealing with a refractive material
-            if (material.Transmitted.Sum() > 0.0f && _traceRefractions)
+            if (material.Transmitted.Sum() > 0.0f && Settings.TraceRefractions)
             {
                 Colour colRefractiveAmount = material.Transmitted * contribution;
 
@@ -215,11 +218,11 @@ namespace Raytracer.Rendering.Renderers
             var container = FindObjectContainingPoint(testPoint);
 
             var material = new Material();
-            double targetRefractiveIndex = this._scene.DefaultMaterial.Refraction;
+            double targetRefractiveIndex = this.Scene.DefaultMaterial.Refraction;
 
             if (container != null)
             {
-                var objectMaterial = container.Material ?? _scene.DefaultMaterial;
+                var objectMaterial = container.Material ?? Scene.DefaultMaterial;
 
                 var materialDispatcher = new MaterialDispatcher();
                 
@@ -361,7 +364,7 @@ namespace Raytracer.Rendering.Renderers
             Colour colour = material.Emissive;
 
             // iterate through all the lights in the scene
-            foreach (var light in _scene.Lights)
+            foreach (var light in Scene.Lights)
             {
                 var visibilityTester = new VisibilityTester();
                 var pointToLight = Vector.Zero;
@@ -370,7 +373,7 @@ namespace Raytracer.Rendering.Renderers
                 // get the angle between the light vector ad the surface normal
                 var lightCos = Vector.DotProduct(pointToLight, normal);
 
-                if (lightColour.Brightness > 0 && lightCos > 0.0 && visibilityTester.Unoccluded(this))
+                if (lightColour.Brightness > 0 && lightCos > 0.0 && (!Settings.TraceShadows || visibilityTester.Unoccluded(this)))
                 {
                     colour += (material.Diffuse * lightColour) * lightCos;
 
@@ -414,6 +417,6 @@ namespace Raytracer.Rendering.Renderers
             var n = n_Out / n_In;
 
             return (n * dir) + (double)(n * c - Math.Sqrt(1 - n * n * (1 - c * c))) * normal;
-        }        
+        }
     }
 }

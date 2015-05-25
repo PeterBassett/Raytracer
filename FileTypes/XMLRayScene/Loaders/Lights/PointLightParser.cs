@@ -2,7 +2,7 @@
 using System.ComponentModel.Composition;
 using Raytracer.Rendering.Lights;
 using Raytracer.Rendering.Core;
-using Raytracer.FileTypes.VBRayScene;
+
 using System.Xml.Linq;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Lights
@@ -12,11 +12,11 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Lights
     {
         public override string LoaderType { get { return "PointLight"; } }
 
-        public override dynamic LoadObject(XmlRaySceneLoader loader, Scene scene, XElement element, string elementName, Func<dynamic> createDefault)
+        public override dynamic LoadObject(XmlRaySceneLoader loader, SystemComponents components, XElement element, string elementName, Func<dynamic> createDefault)
         {
-            var transform = loader.LoadObject<Transform>(scene, element, "Transform", () => Transform.CreateIdentityTransform());            
-            var colour = loader.LoadObject<Colour>(scene, element, "Colour", () => new Colour());
-            var power = loader.LoadObject<double>(scene, element, "Power", () => 1);
+            var transform = loader.LoadObject<Transform>(components, element, "Transform", () => Transform.CreateIdentityTransform());
+            var colour = loader.LoadObject<Colour>(components, element, "Colour", () => new Colour());
+            var power = loader.LoadObject<double>(components, element, "Power", () => 1);
 
             return new PointLight(colour * power, transform);
         }

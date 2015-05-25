@@ -47,5 +47,9 @@ namespace Raytracer.Rendering.PixelSamplers
 
             return subSamplingOffset1 + (_random.NextDouble() * (subSamplingOffset2 - subSamplingOffset1));
         }
+
+        public virtual void Setup()
+        {
+        }
     }
 }

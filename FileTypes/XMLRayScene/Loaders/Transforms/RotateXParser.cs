@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
-using Raytracer.FileTypes.VBRayScene;
+
 using System;
 using System.Xml.Linq;
 

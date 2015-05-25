@@ -6,5 +6,7 @@ namespace Raytracer.Rendering.Cameras
     interface ICamera
     {
         Ray GenerateRayForPixel(Vector2 coordinate);
+
+        Size OutputDimensions { get; set; }
     }
 }

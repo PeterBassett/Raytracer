@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+  <Renderer>
+    <Raytracer />
+    
+    <RenderingStrategy>
+      <BasicRenderingStrategy>
+        <PixelSampler>
+          <EdgeDetectionPerComponentSampler subSamplingLevel="4" renderEdgeDetectionResults="false" />
+        </PixelSampler>
+      </BasicRenderingStrategy>
+    </RenderingStrategy>
+    
+    <RenderSettings>
+      <Depth>1</Depth>
+      <Shadows>true</Shadows>
+      <Reflections>true</Reflections>
+      <Refractions>true</Refractions>
+    </RenderSettings>
+    
+  </Renderer>
+  
+  <Camera>
+    <Viewpoint>
+      <Transform>
+        <RotateX>45</RotateX>
+        <Translate>0, 6, -14</Translate>
+      </Transform>
+      <FOV>90</FOV>
+    </Viewpoint>
+  </Camera>  
+  
+  <Scene>
+    
+    <Lights>
+      <AmbientLight>
+        <Colour>0.156</Colour>
+      </AmbientLight>
+
+      <DistantLight power="1">
+        <Colour>1</Colour>
+        <Transform>
+          <RotateZ>40</RotateZ>
+        </Transform>
+      </DistantLight>
+    </Lights>
+
+    <Materials>
+      <ColourMaterial name="darkgrey">
+        <Diffuse>
+          <Colour>0.3</Colour>
+        </Diffuse>
+        <Specular specularity="20" exponent="0.35" />
+        <Reflected>
+          <Colour>0.9</Colour>
+        </Reflected>
+        <IOR>1</IOR>
+        <Transmitted>
+          <Colour>0</Colour>
+        </Transmitted>
+      </ColourMaterial>
+
+      <ColourMaterial name="lightgrey">
+        <Diffuse>
+          <Colour>0.7</Colour>
+        </Diffuse>
+        <Specular>
+          <Colour>0.5</Colour>
+          <Specularity>20</Specularity>
+          <Exponent>0.35</Exponent>
+        </Specular>
+        <Reflected>
+          <Colour>0.9</Colour>
+        </Reflected>
+        <IOR>1</IOR>
+        <Transmitted>
+          <Colour>0</Colour>
+        </Transmitted>
+      </ColourMaterial>
+
+      <ColourMaterial name="red">
+        <Diffuse>
+          <Colour>
+            <Red>0.7</Red>
+            <Green>0.1</Green>
+            <Blue>0.1</Blue>
+          </Colour>
+        </Diffuse>
+        <Specular exponent="0.35">
+          <Specularity>20</Specularity>
+        </Specular>
+        <Reflected>
+          <Colour>0</Colour>
+        </Reflected>
+        <IOR>1</IOR>
+        <Transmitted>
+          <Colour>0</Colour>
+        </Transmitted>
+      </ColourMaterial>
+
+      <CheckMaterial name="check" from-material="lightgrey" to-material="darkgrey">
+        <Scale>4</Scale>
+      </CheckMaterial>
+
+    </Materials>
+
+    <Primitives>
+      <Sphere>
+        <Radius>2</Radius>
+        <Material>red</Material>
+      </Sphere>
+
+      <Plane>
+        <Point x="0" y="-6" z="0"></Point>
+        <Normal x="0" y="1" z="0"></Normal>
+        <Material>check</Material>
+      </Plane>
+
+    </Primitives>
+
+  </Scene>
+
+  <Output>
+    <Dimensions width="1024" height="768" />
+    <File overwrite="true">RenderOutput.jpg</File>
+  </Output>
+</Config>
+

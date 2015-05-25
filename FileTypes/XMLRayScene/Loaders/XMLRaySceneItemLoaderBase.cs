@@ -1,8 +1,7 @@
-﻿using System.ComponentModel.Composition;
-using Raytracer.Rendering.Core;
-using Raytracer.FileTypes.VBRayScene;
+﻿using System;
+using System.ComponentModel.Composition;
+using System.Linq;
 using System.Xml.Linq;
-using System;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders
 {
@@ -11,7 +10,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders
     {
         public abstract string LoaderType { get; }
 
-        public abstract dynamic LoadObject(XmlRaySceneLoader loader, Scene scene, XElement element, string elementName, Func<dynamic> createDefault);
+        public abstract dynamic LoadObject(XmlRaySceneLoader loader, SystemComponents components, XElement element, string elementName, Func<dynamic> createDefault);
         
         public double GetDouble(XElement element, string valueName, Func<double> createDefault)
         {
@@ -27,6 +26,22 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders
                 return double.Parse(attribute.Value);
 
             return null;
+        }
+
+        public int? GetInt(XElement element, string valueName)
+        {
+            var attribute = element.Attribute(valueName);
+            if (attribute != null)
+                return int.Parse(attribute.Value);
+
+            return null;
+        }
+
+        protected bool TrueValue(string value)
+        {
+            var truthyValues = new[] { "true", "1", "on" };
+
+            return truthyValues.Contains(value.ToLowerInvariant());
         }
     }
 }

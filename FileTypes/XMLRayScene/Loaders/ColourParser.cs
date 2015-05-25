@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
-using Raytracer.FileTypes.VBRayScene;
+
 using System.Xml.Linq;
 using System;
 
@@ -12,7 +12,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders
     {
         public override string LoaderType { get { return "Colour"; } }
 
-        public override dynamic LoadObject(XmlRaySceneLoader loader, Scene scene, XElement element, string elementName, Func<dynamic> createDefault)
+        public override dynamic LoadObject(XmlRaySceneLoader loader, SystemComponents components, XElement element, string elementName, Func<dynamic> createDefault)
         {
             double? r = null;
             double? g = null;
@@ -32,13 +32,13 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders
                 b = bAttr.Value;
 
             if(!r.HasValue)
-                r = loader.LoadObject<double?>(scene, element, "Red", () => null);
+                r = loader.LoadObject<double?>(components, element, "Red", () => null);
 
             if (!g.HasValue)
-                g = loader.LoadObject<double?>(scene, element, "Green", () => null);
+                g = loader.LoadObject<double?>(components, element, "Green", () => null);
 
             if(!b.HasValue)
-                b = loader.LoadObject<double?>(scene, element, "Blue", () => null);
+                b = loader.LoadObject<double?>(components, element, "Blue", () => null);
 
             if (!r.HasValue || !g.HasValue || !b.HasValue)
             {

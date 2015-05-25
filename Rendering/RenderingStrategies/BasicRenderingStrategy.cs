@@ -20,6 +20,8 @@ namespace Raytracer.Rendering.RenderingStrategies
 
         public void RenderScene(IRenderer renderer, IBmp frameBuffer)
         {
+            _pixelSampler.Setup();
+
             var options = GetThreadingOptions();
             
             frameBuffer.BeginWriting();

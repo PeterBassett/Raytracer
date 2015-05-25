@@ -8,8 +8,8 @@ namespace Raytracer.Rendering.PixelSamplers
 {
     class EdgeDetectionPerComponentSampler : EdgeDetectionSampler
     {
-        public EdgeDetectionPerComponentSampler(uint subSamplingLevel, bool renderEdgeDetectionResults, Size dimensions)
-            : base(subSamplingLevel, renderEdgeDetectionResults, dimensions)
+        public EdgeDetectionPerComponentSampler(uint subSamplingLevel, bool renderEdgeDetectionResults)
+            : base(subSamplingLevel, renderEdgeDetectionResults)
         {
         }
 

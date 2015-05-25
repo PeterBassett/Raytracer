@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.Composition;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
-using Raytracer.FileTypes.VBRayScene;
+using System.Xml.Linq;
+using System;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Transforms
 {
@@ -10,13 +11,13 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Transforms
     {
         public override string LoaderType { get { return "Transform"; } }
         
-        public override dynamic LoadObject(XmlRaySceneLoader loader, Scene scene, System.Xml.Linq.XElement element, string elementName, System.Func<dynamic> createDefault)
+        public override dynamic LoadObject(XmlRaySceneLoader loader, SystemComponents components, XElement element, string elementName, Func<dynamic> createDefault)
         {
             var matrix = Matrix.Identity;
 
             foreach (var child in element.Elements())
             {
-                matrix = matrix * loader.LoadObject<Matrix>(scene, child, () => Matrix.Identity);            
+                matrix = matrix * loader.LoadObject<Matrix>(components, child, () => Matrix.Identity);            
             }
 
             var inverse = matrix;

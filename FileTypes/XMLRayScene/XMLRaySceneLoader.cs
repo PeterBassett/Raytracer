@@ -9,6 +9,8 @@ using System.Xml.Linq;
 using Raytracer.FileTypes.XMLRayScene.Extensions;
 using Raytracer.FileTypes.XMLRayScene.Loaders;
 using Raytracer.Rendering.Core;
+using Raytracer.Rendering.Renderers;
+using Raytracer.Rendering.Cameras;
 
 namespace Raytracer.FileTypes.XMLRayScene
 {
@@ -29,23 +31,21 @@ namespace Raytracer.FileTypes.XMLRayScene
             LoadAddins();
         }
 
-        public Scene LoadScene(Stream sceneStream)
+        public void LoadScene(Stream sceneStream, ref SystemComponents components)
         {
-	        var scene = new Scene();
-            
-            var document = XDocument.Load(sceneStream);
-            
-            LoadElement(scene, document.Root);
-            
-            scene.LoadComplete();
+	        var document = XDocument.Load(sceneStream);
 
-            return scene;           
+            components = new SystemComponents();
+
+            LoadElement(components, document.Root);
+
+            components.scene.LoadComplete();
         }
 
-        public void LoadElement(Scene scene, XElement element)
+        public void LoadElement(SystemComponents components, XElement element)
         {
             var loader = FindLoaderForTag(element.Name.LocalName);
-            loader.LoadObject(this, element, scene);
+            loader.LoadObject(this, element, components);
         }
 
         private IXmlRaySceneItemLoader FindLoaderForTag(string strObjectType)
@@ -97,15 +97,15 @@ namespace Raytracer.FileTypes.XMLRayScene
             }
         }
 
-        public T LoadObject<T>(Scene scene, XElement element, Func<T> createDefault)
+        public T LoadObject<T>(SystemComponents components, XElement element, Func<T> createDefault)
         {
             var loader = FindParserForTag(element.Name.LocalName);
-            var value = loader.LoadObject(this, scene, element, element.Name.LocalName, () => createDefault);
+            var value = loader.LoadObject(this, components, element, element.Name.LocalName, () => createDefault);
 
             return (T)value;
         }
 
-        public T LoadObject<T>(Scene scene, XElement parent, string elementName, Func<T> createDefault)
+        public T LoadObject<T>(SystemComponents components, XElement parent, string elementName, Func<T> createDefault)
         {
             var element = parent.ElementCaseInsensitive(elementName);
 
@@ -124,7 +124,7 @@ namespace Raytracer.FileTypes.XMLRayScene
                 var loader = FindParserForTag(element.Name.LocalName);
 
                 if (loader != null)
-                    return (T)loader.LoadObject(this, scene, element, elementName, () => createDefault());
+                    return (T)loader.LoadObject(this, components, element, elementName, () => createDefault());
                 else
                 {
                     try

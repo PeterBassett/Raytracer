@@ -11,5 +11,9 @@ namespace Raytracer.Rendering.PixelSamplers
         {            
             return renderer.ComputeSample(new Vector2(x + 0.5f, y + 0.5f));
         }
+
+        public void Setup()
+        {
+        }
     }
 }

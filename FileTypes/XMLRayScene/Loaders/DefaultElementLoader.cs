@@ -1,7 +1,10 @@
 ﻿using System.ComponentModel.Composition;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
-using Raytracer.FileTypes.VBRayScene;
+
+using Raytracer.Rendering.Renderers;
+using System.Xml.Linq;
+using Raytracer.Rendering.Cameras;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders
 {
@@ -10,11 +13,11 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders
     {
         public string LoaderType { get { return ""; } }
         
-        public void LoadObject(XmlRaySceneLoader loader, System.Xml.Linq.XElement element, Scene scene)
+        public void LoadObject(XmlRaySceneLoader loader, XElement element, SystemComponents components)
         {
             foreach (var child in element.Elements())
 	        {
-                loader.LoadElement(scene, child);
+                loader.LoadElement(components, child);
 	        }
         }
     }

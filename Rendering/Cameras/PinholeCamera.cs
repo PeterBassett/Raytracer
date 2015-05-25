@@ -9,6 +9,7 @@ namespace Raytracer.Rendering.Cameras
         private Point _location;
         private Vector _viewPointRotation;
         private Size _dimensions;
+        private double _fieldOfView;
         private double _nearWidth;
         private double _nearHeight;
 
@@ -16,11 +17,8 @@ namespace Raytracer.Rendering.Cameras
 	    {
             _location = location;
             _viewPointRotation = viewPointRotation;
-            _dimensions = outputDimensions;
-
-            _nearWidth = 2.0f * Math.Tan(MathLib.Deg2Rad(fieldOfView) / 2.0f);
-            var aspect = (double)_dimensions.Height / (double)_dimensions.Width;
-            _nearHeight = _nearWidth * aspect;                       
+            _fieldOfView = fieldOfView;
+            OutputDimensions = outputDimensions;                       
 	    }
 
         public Ray GenerateRayForPixel(Vector2 coordinate)
@@ -44,6 +42,23 @@ namespace Raytracer.Rendering.Cameras
             dir = dir.Normalize();
 
             return new Ray(_location, dir);
+        }
+
+
+        public Size OutputDimensions
+        {
+            get
+            {
+                return _dimensions;
+            }
+            set
+            {
+                _dimensions = value;
+
+                _nearWidth = 2.0f * Math.Tan(MathLib.Deg2Rad(_fieldOfView) / 2.0f);
+                var aspect = (double)_dimensions.Height / (double)_dimensions.Width;
+                _nearHeight = _nearWidth * aspect;
+            }
         }
     }
 }

@@ -2,7 +2,7 @@
 using Raytracer.FileTypes.XMLRayScene.Loaders.Geometry;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
-using Raytracer.FileTypes.VBRayScene;
+
 using System;
 using System.Xml.Linq;
 
@@ -13,9 +13,9 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Transforms
     {
         public override string LoaderType { get { return "Rotate"; } }
 
-        public override dynamic LoadObject(XmlRaySceneLoader loader, Scene scene, XElement element, string elementName, Func<dynamic> createDefault)
+        public override dynamic LoadObject(XmlRaySceneLoader loader, SystemComponents components, XElement element, string elementName, Func<dynamic> createDefault)
         {
-            var vector = LoadVector(loader, scene, element, () =>
+            var vector = LoadVector(loader, components, element, () =>
             {
                 var defaultValue = createDefault();
                 return new Vector(defaultValue.X, defaultValue.Y, defaultValue.Z);

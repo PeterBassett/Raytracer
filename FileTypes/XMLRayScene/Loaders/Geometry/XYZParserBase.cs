@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
-using Raytracer.FileTypes.VBRayScene;
+
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
 
@@ -8,7 +8,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Geometry
 {
     abstract class XYZParserBase : XmlRayElementParser
     {
-        public virtual Vector? LoadVector(XmlRaySceneLoader loader, Scene scene, XElement element, Func<Vector?> createDefault)
+        public virtual Vector? LoadVector(XmlRaySceneLoader loader, SystemComponents components, XElement element, Func<Vector?> createDefault)
         {
             double? x = null;
             double? y = null;
@@ -28,13 +28,13 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Geometry
                 z = zAttr.Value;
 
             if (!x.HasValue)
-                x = loader.LoadObject<double?>(scene, element, "X", () => null);
+                x = loader.LoadObject<double?>(components, element, "X", () => null);
 
             if (!y.HasValue)
-                y = loader.LoadObject<double?>(scene, element, "Y", () => null);
+                y = loader.LoadObject<double?>(components, element, "Y", () => null);
 
             if (!z.HasValue)
-                z = loader.LoadObject<double?>(scene, element, "Z", () => null);
+                z = loader.LoadObject<double?>(components, element, "Z", () => null);
 
             if (!x.HasValue || !y.HasValue || !z.HasValue)
             {

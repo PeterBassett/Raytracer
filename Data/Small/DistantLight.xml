@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Config>
   <Renderer>
-    <Raytracer>
-      <RenderSettings>
-        <Depth>1</Depth>
-        <Shadows>true</Shadows>
-        <Reflections>true</Reflections>
-        <Refractions>true</Refractions>
-      </RenderSettings>
-    </Raytracer>
+    <Raytracer />
+    <RenderSettings>
+      <Depth>1</Depth>
+      <Shadows>true</Shadows>
+      <Reflections>true</Reflections>
+      <Refractions>true</Refractions>
+    </RenderSettings>
   </Renderer>
   
   <Camera>

@@ -13,10 +13,9 @@ namespace Raytracer.Rendering.PixelSamplers
         private Size _dimensions;         
         private bool _renderEdgeDetectionResults;
 
-        public EdgeDetectionSampler(uint subSamplingLevel, bool renderEdgeDetectionResults, Size dimensions) : base(subSamplingLevel)
+        public EdgeDetectionSampler(uint subSamplingLevel, bool renderEdgeDetectionResults) : base(subSamplingLevel)
         {
             _renderEdgeDetectionResults = renderEdgeDetectionResults;
-            _dimensions = dimensions;
             _bmp = new ConcurrentDictionary<Tuple<int, int>, Colour>();
         }
 
@@ -25,6 +24,7 @@ namespace Raytracer.Rendering.PixelSamplers
             if (_samples == 1)
                 return renderer.ComputeSample(new Vector2(x, y));
 
+            _dimensions = renderer.Camera.OutputDimensions;
             var difference = SobelOperator(renderer, x, y);
             var edgeFound = difference > 0.5;
  
@@ -91,6 +91,11 @@ namespace Raytracer.Rendering.PixelSamplers
                 y = 0;
             if (y > _dimensions.Height - 1)
                 y = _dimensions.Height - 1;
+        }
+
+        public override void Setup()
+        {
+            _bmp = new ConcurrentDictionary<Tuple<int, int>, Colour>();
         }
     }
 }

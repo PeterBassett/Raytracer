@@ -6,13 +6,13 @@ namespace Raytracer.Rendering.Primitives
 {
     class Cylinder : ObjectSpacePrimitive
     {
-        public readonly float Radius;
-        public readonly float Height;
-        private readonly float _halfHeight;
-        private readonly float  _radiusSquared;
+        public readonly double Radius;
+        public readonly double Height;
+        private readonly double _halfHeight;
+        private readonly double _radiusSquared;
         private IntersectionInfo _missed = new IntersectionInfo(HitResult.MISS);
 
-        public Cylinder(float radius, float height, Transform transform)
+        public Cylinder(double radius, double height, Transform transform)
             : base(transform)
         {
             Radius = radius;

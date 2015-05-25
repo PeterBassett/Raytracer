@@ -38,5 +38,11 @@ namespace Raytracer.MathTypes
             return val;
         }
 
+        public static double Clamp(double val, double min, double max)
+        {
+            val = Math.Min(val, max);
+            val = Math.Max(val, min);
+            return val;
+        }
     }
 }

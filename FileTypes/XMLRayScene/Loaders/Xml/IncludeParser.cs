@@ -2,7 +2,7 @@
 using System.ComponentModel.Composition;
 using Raytracer.Rendering.Materials;
 using Raytracer.MathTypes;
-using Raytracer.FileTypes.VBRayScene;
+
 using Raytracer.Rendering.Core;
 using System.Xml.Linq;
 using System.Linq;
@@ -17,7 +17,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Materials
     {
         public override string LoaderType { get { return "Include"; } }
 
-        public override dynamic LoadObject(XmlRaySceneLoader loader, Scene scene, XElement element, string elementName, Func<dynamic> createDefault)
+        public override dynamic LoadObject(XmlRaySceneLoader loader, SystemComponents components, XElement element, string elementName, Func<dynamic> createDefault)
         {
             var includeFile = element.AttributeCaseInsensitive("href");
 

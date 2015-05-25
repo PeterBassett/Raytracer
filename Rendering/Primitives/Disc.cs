@@ -6,13 +6,13 @@ namespace Raytracer.Rendering.Primitives
 {
     class Disc : ObjectSpacePrimitive
     {
-        public readonly float OuterRadius;
-        public readonly float InnerRadius;
+        public readonly double OuterRadius;
+        public readonly double InnerRadius;
 
-        private readonly float _outerRadiusSquared;
-        private readonly float _innerRadiusSquared;
+        private readonly double _outerRadiusSquared;
+        private readonly double _innerRadiusSquared;
 
-        public Disc(float outerRadius, float innerRadius, Transform transform)
+        public Disc(double outerRadius, double innerRadius, Transform transform)
             : base(transform)
         {
             OuterRadius = outerRadius;

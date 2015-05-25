@@ -97,6 +97,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\UIExtensions.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Cameras\CameraParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Cameras\PinholeCameraParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\ConfigElementLoader.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Geometry\SolidityParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Geometry\SizeParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Output\OutputElementLoader.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\PixelSamplers\EdgeDetectionPerComponentPixelSamplerParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\PixelSamplers\EdgeDetectionPixelSamplerParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\PixelSamplers\JitteredPixelSamplerParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\PixelSamplers\PixelSamplerParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\PixelSamplers\StandardPixelSamplerParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Primitives\ConeParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Primitives\MeshInstanceParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Primitives\MeshParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Primitives\TriangleParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Primitives\DiscParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Primitives\CylinderParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\SystemComponents.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Renderer\RendererParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Renderer\RaytracerParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\RenderingStrategies\BasicRenderingStrategyParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\RenderingStrategies\RenderingStrategyParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Scene\SceneParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Xml\IncludeParser.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
@@ -131,7 +154,6 @@
     <Compile Include="Rendering\Accellerators\IAccellerator.cs" />
     <Compile Include="Rendering\Core\Transform.cs" />
     <Compile Include="Rendering\Core\VisibilityTester.cs" />
-    <Compile Include="FileTypes\RaySceneLoader.cs" />
     <Compile Include="FileTypes\XMLRayScene\Extensions\XDocumentExtensions.cs" />
     <Compile Include="FileTypes\XMLRayScene\IXMLRaySceneItemLoader.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Backgrounds\BackgroundLoader.cs" />
@@ -140,7 +162,7 @@
     <Compile Include="FileTypes\XMLRayScene\Loaders\Backgrounds\SolidColourBackgroundParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\ColourParser.cs" />
     <Compile Include="MathTypes\Converters\PointConverter.cs" />
-    <Compile Include="FileTypes\XMLRayScene\Loaders\Configuration\ConfigurationLoader.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Renderer\RenderSettingsParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Geometry\NormalParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Geometry\ScaleParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Geometry\XYZParserBase.cs" />
@@ -154,7 +176,7 @@
     <Compile Include="FileTypes\XMLRayScene\Loaders\Lights\DistantLightParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Lights\SpotLightParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Lights\PointLightParser.cs" />
-    <Compile Include="FileTypes\XMLRayScene\Loaders\Lights\LightsLoader.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Lights\LightsParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Materials\CheckMaterialParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Materials\NoiseMaterialParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Materials\TextureMaterialParser.cs" />
@@ -164,12 +186,12 @@
     <Compile Include="FileTypes\XMLRayScene\Loaders\Materials\SpecularParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Materials\MaterialComponentBaseParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Materials\ColourMaterialParser.cs" />
-    <Compile Include="FileTypes\XMLRayScene\Loaders\Materials\MaterialsLoader.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Materials\MaterialsParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Primitives\TorusParser.cs" />
-    <Compile Include="FileTypes\XMLRayScene\Loaders\Primitives\PlaneLoader.cs">
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Primitives\PlaneParser.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="FileTypes\XMLRayScene\Loaders\Primitives\PrimitivesLoader.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Primitives\PrimitivesParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Primitives\SphereParser.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -188,16 +210,10 @@
     </Compile>
     <Compile Include="FileTypes\XMLRayScene\Loaders\XMLRaySceneItemLoaderBase.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Transforms\RotateXParser.cs" />
-    <Compile Include="FileTypes\XMLRayScene\Loaders\ViewpointLoader.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Cameras\ViewpointLoader.cs" />
     <Compile Include="FileTypes\XMLRayScene\XMLRaySceneLoader.cs" />
     <Compile Include="FileTypes\ImageReader.cs" />
     <Compile Include="Rendering\Core\Texture.cs" />
-    <Compile Include="FileTypes\VBRayScene\Loaders\ConeLoader.cs" />
-    <Compile Include="FileTypes\VBRayScene\Loaders\ProjectionLightLoader.cs" />
-    <Compile Include="FileTypes\VBRayScene\Loaders\SpotLightLoader.cs" />
-    <Compile Include="FileTypes\VBRayScene\Loaders\DistantLightLoader.cs" />
-    <Compile Include="FileTypes\VBRayScene\Loaders\DiscLoader.cs" />
-    <Compile Include="FileTypes\VBRayScene\Loaders\CylinderLoader.cs" />
     <Compile Include="Rendering\Lights\AmbientLight.cs" />
     <Compile Include="Rendering\Lights\ProjectionLight.cs" />
     <Compile Include="Rendering\Lights\SpotLight.cs" />
@@ -209,6 +225,7 @@
     <Compile Include="Rendering\Primitives\Disc.cs" />
     <Compile Include="Rendering\Primitives\Cylinder.cs" />
     <Compile Include="Rendering\Primitives\ObjectSpacePrimitive.cs" />
+    <Compile Include="Rendering\Renderers\RenderSettings.cs" />
     <Compile Include="Rendering\RenderingStrategies\BasicRenderingStrategy.cs" />
     <Compile Include="Rendering\RenderingStrategies\ParallelOptionsBase.cs" />
     <Compile Include="Rendering\RenderingStrategies\ProgressiveRenderingStrategy.cs" />
@@ -219,11 +236,6 @@
     <Compile Include="Rendering\BackgroundMaterials\VerticalCubemapBackground.cs" />
     <Compile Include="Rendering\BackgroundMaterials\CubemapBackground.cs" />
     <Compile Include="Rendering\BackgroundMaterials\SolidColourBackground.cs" />
-    <Compile Include="FileTypes\VBRayScene\Loaders\VerticalCubemapBackgroundLoader.cs" />
-    <Compile Include="FileTypes\VBRayScene\Loaders\SolidColourBackgroundLoader.cs" />
-    <Compile Include="FileTypes\VBRayScene\Loaders\HorizontalCubemapBackgroundLoader.cs" />
-    <Compile Include="FileTypes\VBRayScene\Loaders\TorusLoader.cs" />
-    <Compile Include="FileTypes\VBRayScene\Loaders\TextureMaterialLoader.cs" />
     <Compile Include="Rendering\Core\HitResult.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -255,25 +267,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FileTypes\ObjFile\MtlFileLoader.cs" />
     <Compile Include="FileTypes\ObjFile\ObjFileLoader.cs" />
-    <Compile Include="FileTypes\VBRayScene\Loaders\MeshInstanceLoader.cs" />
-    <Compile Include="FileTypes\VBRayScene\Loaders\MeshLoader.cs" />
-    <Compile Include="FileTypes\VBRayScene\Loaders\TriangleLoader.cs" />
     <Compile Include="PictureBoxBmp.cs" />
     <Compile Include="Rendering\Core\Bmp.cs" />
     <Compile Include="Rendering\Core\Colour.cs" />
     <Compile Include="FileTypes\ISceneLoader.cs" />
-    <Compile Include="FileTypes\VBRayScene\IVBRaySceneItemLoader.cs" />
-    <Compile Include="FileTypes\VBRayScene\Loaders\AmbientLightLoader.cs" />
-    <Compile Include="FileTypes\VBRayScene\Loaders\CheckerMaterialLoader.cs" />
-    <Compile Include="FileTypes\VBRayScene\Loaders\ColourMaterialLoader.cs" />
-    <Compile Include="FileTypes\VBRayScene\Loaders\NoiseMaterialLoader.cs" />
-    <Compile Include="FileTypes\VBRayScene\Loaders\PlaneLoader.cs" />
-    <Compile Include="FileTypes\VBRayScene\Loaders\RenderSettingsLoader.cs" />
-    <Compile Include="FileTypes\VBRayScene\Loaders\SphereLoader.cs" />
-    <Compile Include="FileTypes\VBRayScene\Loaders\PointLightLoader.cs" />
-    <Compile Include="FileTypes\VBRayScene\Loaders\ViewpointLoader.cs" />
-    <Compile Include="FileTypes\VBRayScene\Tokeniser.cs" />
-    <Compile Include="FileTypes\VBRayScene\VBRaySceneLoader.cs" />
     <Compile Include="Rendering\Accellerators\Octree.cs" />
     <Compile Include="Rendering\Accellerators\AABBHierarchy.cs" />
     <Compile Include="Rendering\Materials\Material.cs" />
@@ -333,6 +330,12 @@
     <None Include="Data\Small\AmbientLight.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="Data\Small\RenderOutput.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Small\MaterialInheritance.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\Small\Default\Primitives.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -345,7 +348,9 @@
     <Content Include="Data\Small\FireBall.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data\Small\DistantLight.xml" />
+    <Content Include="Data\Small\DistantLight.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\Small\RedBall.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

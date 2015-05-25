@@ -19,11 +19,11 @@ namespace Raytracer.Rendering.Core
 
         public IBackgroundMaterial BackgroundMaterial { get; set; }
         public Material DefaultMaterial { get; set; }
-        
+        /*
         public Point EyePosition { get; set; }
         public Vector ViewPointRotation { get; set; }
         public double FieldOfView { get; set; }
-
+        */
         public Scene()
         {
             DefaultMaterial = new Material()
@@ -34,7 +34,7 @@ namespace Raytracer.Rendering.Core
                 SpecularExponent = 0.35f
             };            
         }
-
+        /*
         public int RecursionDepth
         {
             get;
@@ -58,7 +58,7 @@ namespace Raytracer.Rendering.Core
             get;
             set;
         }
-
+        */
         public void AddLight(Light pLight)
         {
             _lights.Add(pLight);

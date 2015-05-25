@@ -1,11 +1,17 @@
 ﻿using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
 using Raytracer.FileTypes;
+using Raytracer.Rendering.Cameras;
+using Raytracer.Rendering.RenderingStrategies;
 
 namespace Raytracer.Rendering.Renderers
 {
     interface IRenderer
     {
+        RenderSettings Settings { get; set; }
+        IRenderingStrategy RenderingStrategy { get; set; }
+        ICamera Camera { get; set; }
+        Scene Scene { get; set; }
         void RenderScene(IBmp frameBuffer);
         Colour ComputeSample(Vector2 pixelCoordinate);
         IntersectionInfo FindClosestIntersection(Ray ray);

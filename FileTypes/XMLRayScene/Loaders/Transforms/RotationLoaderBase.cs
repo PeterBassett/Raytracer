@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
-using Raytracer.FileTypes.VBRayScene;
+
 using System;
 using System.Xml.Linq;
 
@@ -12,7 +12,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Transforms
     {
         public abstract Matrix CreateRotationMatrix(double rotation);
 
-        public override dynamic LoadObject(XmlRaySceneLoader loader, Scene scene, XElement element, string elementName, Func<dynamic> createDefault)
+        public override dynamic LoadObject(XmlRaySceneLoader loader, SystemComponents components, XElement element, string elementName, Func<dynamic> createDefault)
         {
             var rotation = 0.0;
 
