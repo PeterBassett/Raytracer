@@ -12,9 +12,9 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders
             CancellationTokenSource = new CancellationTokenSource();
         }
 
-        public Scene scene;
-        public IRenderer renderer;
-        public ICamera camera;
+        public Scene Scene;
+        public IRenderer Renderer;
+        public ICamera Camera;
         public readonly CancellationTokenSource CancellationTokenSource;
     }
 }

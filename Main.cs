@@ -12,7 +12,6 @@ using Raytracer.Rendering.Core;
 using Raytracer.Rendering.PixelSamplers;
 using Raytracer.Rendering.Renderers;
 using Raytracer.Rendering.RenderingStrategies;
-//using System.Threading;
 using Raytracer.FileTypes.XMLRayScene;
 using System.Collections.Concurrent;
 using Raytracer.FileTypes.XMLRayScene.Loaders;
@@ -22,11 +21,11 @@ namespace Raytracer
 {
     public partial class Main : Form
     {
-        private Scene m_scene;
-        private IRenderer m_renderer;
-        private ICamera m_camera;        
-        private string m_sceneFile;
-        private bool m_isSceneDefinitionDirty = true;
+        private Scene _scene;
+        private IRenderer _renderer;
+        private ICamera _camera;        
+        private string _sceneFile;
+        private bool _isSceneDefinitionDirty = true;
         private CancellationTokenSource _cancellationTokenSource;
 
         public Main()
@@ -40,19 +39,21 @@ namespace Raytracer
 
             foreach (var file in scenes)
             {
-                var menuItem = new ToolStripMenuItem();
-                menuItem.Name = "testToolStripMenuItem";
-                menuItem.Text = Path.GetFileName(file);
-                menuItem.Tag = Path.GetFullPath(file);
-                menuItem.Click += new System.EventHandler(SceneFileMenuItem_Click);
+                var menuItem = new ToolStripMenuItem
+                {
+                    Name = "testToolStripMenuItem",
+                    Text = Path.GetFileName(file),
+                    Tag = Path.GetFullPath(file)
+                };
+                menuItem.Click += SceneFileMenuItem_OnClick;
 
                 mnuAvailableFiles.DropDownItems.Add(menuItem);
             }      
         }
 
-        public void LoadSceneFromFile(string strSceneFile)
+        private void LoadSceneFromFile(string strSceneFile)
         {
-            m_sceneFile = strSceneFile;
+            _sceneFile = strSceneFile;
 
             var file = Path.GetFileName(strSceneFile);
             var folder = Path.GetDirectoryName(strSceneFile);
@@ -61,13 +62,13 @@ namespace Raytracer
             txtSceneFile.Text = File.ReadAllText(file);
         }
 
-        public void LoadSceneFromEditor()
+        private void LoadSceneFromEditor()
         {
-            if (!m_isSceneDefinitionDirty)
+            if (!_isSceneDefinitionDirty)
                 return;
             
             LoadScene(txtSceneFile.Text);
-            m_isSceneDefinitionDirty = false;
+            _isSceneDefinitionDirty = false;
 
             UpdateScreenRenderOptions();
         }
@@ -76,81 +77,76 @@ namespace Raytracer
         {
             this.UIThread(() =>
             {
-                this.mnuShadows.Checked = m_renderer.Settings.TraceShadows;
-                this.mnuReflections.Checked = m_renderer.Settings.TraceReflections;
-                this.mnuRefractions.Checked = m_renderer.Settings.TraceRefractions;
+                mnuShadows.Checked = _renderer.Settings.TraceShadows;
+                mnuReflections.Checked = _renderer.Settings.TraceReflections;
+                mnuRefractions.Checked = _renderer.Settings.TraceRefractions;
 
-                SetSelectedRenderDepthMenuItem(m_renderer.Settings.PathDepth);
+                SetSelectedRenderDepthMenuItem(_renderer.Settings.PathDepth);
             });
         }
 
-        public void LoadScene(string strScene)
+        private void LoadScene(string strScene)
         {
-            this.txtMessages.Text = "Reading scene\r\n";
+            txtMessages.Text = "Reading scene\r\n";
             
-            Stopwatch watch = new Stopwatch();
+            var watch = new Stopwatch();
             watch.Start();
 
-            m_scene = null;
+            _scene = null;
 
             GC.Collect();
 
             ISceneLoader loader = new XmlRaySceneLoader();
 
-            SystemComponents components = null;
+            SystemComponents systemComponents;
             using (var sceneStream = new MemoryStream(System.Text.Encoding.Default.GetBytes(strScene)))
-                components = loader.LoadScene(sceneStream);
+                systemComponents = loader.LoadScene(sceneStream);
 
-            m_renderer = components.renderer;
-            m_scene = components.scene;
-            m_camera = components.camera;
-            _cancellationTokenSource = components.CancellationTokenSource;
+            _renderer = systemComponents.Renderer;
+            _scene = systemComponents.Scene;
+            _camera = systemComponents.Camera;
+            _cancellationTokenSource = systemComponents.CancellationTokenSource;
 
             watch.Stop();
 
-            this.txtMessages.Text += string.Format("Loaded: {0}ms\r\n", watch.ElapsedMilliseconds);                
+            txtMessages.Text += string.Format("Loaded: {0}ms\r\n", watch.ElapsedMilliseconds);                
         }
 
-        public void RenderPixel(int x, int y)
+        private void RenderPixel(int x, int y)
         {
             RenderScene(new Vector2(x, y));
         }
 
-        public void RenderScene(Vector2? renderAt = null)
+        private void RenderScene(Vector2? renderAt = null)
         {
             btnCancelRendering.Enabled = true;
             btnRender.Enabled = false;
 
-            this.txtMessages.Clear();
+            txtMessages.Clear();
 
             LoadSceneFromEditor();
             
-            this.txtMessages.Text += "Rendering\r\n";
-            
-            int width = renderedImage.Width;
-            int height = renderedImage.Height;
+            txtMessages.Text += "Rendering\r\n";
             
             var task = new Task<long>(() =>
             {
-                Stopwatch watch = new Stopwatch();
+                var watch = new Stopwatch();
                 watch.Start();
+
                 var bmp = new PictureBoxBmp(renderedImage);
 
-                Render(width, height, bmp, _cancellationTokenSource.Token, renderAt);
+                Render(bmp, _cancellationTokenSource.Token, renderAt);
 
                 watch.Stop();
                 return watch.ElapsedMilliseconds;
             });
 
-            task.ContinueWith((time) =>
+            task.ContinueWith(time => this.UIThread(() =>
             {
-                this.UIThread(() =>
-                {
-                    this.txtMessages.Text += string.Format("Done:{0}ms total\r\n", time.Result);
-                    btnRender.Enabled = true;
-                    btnCancelRendering.Enabled = false;
-                });
-            });
+                txtMessages.Text += string.Format("Done:{0}ms total\r\n", time.Result);
+                btnRender.Enabled = true;
+                btnCancelRendering.Enabled = false;
+            }));
 
             task.Start();
         }
@@ -163,17 +159,17 @@ namespace Raytracer
             }
         }
 
-        private void Render(int width, int height, IBmp bmp, CancellationToken token, Vector2? renderAt)
+        private void Render(IBmp bmp, CancellationToken token, Vector2? renderAt)
         {
-            renderingCurrentPercentage = 0;
-            renderingCurrentTotal = 0;
-            scanLinesCompleted = new ConcurrentDictionary<int, int>();
+            _renderingCurrentPercentage = 0;
+            _renderingCurrentTotal = 0;
+            _scanLinesCompleted = new ConcurrentDictionary<int, int>();
 
-            Stopwatch watch = new Stopwatch();
+            var watch = new Stopwatch();
             
             watch.Start();
 
-            m_camera.OutputDimensions = bmp.Size;
+            _camera.OutputDimensions = bmp.Size;
             _cancellationTokenSource.Reset();
 
             IPixelSampler pixelSampler = new StandardPixelSampler();            
@@ -203,9 +199,9 @@ namespace Raytracer
                 renderingStrategy = new BasicRenderingStrategy(pixelSampler, GetMultiThreaded(), token);
             }
 
-            m_renderer.RenderingStrategy.OnCompletedScanLine += RenderingStrategy_OnCompletedScanLine;
+            _renderer.RenderingStrategy.OnCompletedScanLine += RenderingStrategy_OnCompletedScanLine;
 
-            IRenderer renderer = m_renderer;// new RayTracingRenderer(m_scene, m_camera, renderingStrategy, (uint)m_renderer.Settings.PathDepth, blnMultiThreaded, traceShadows, traceReflections, traceRefractions);
+            IRenderer renderer = _renderer;// new RayTracingRenderer(m_scene, m_camera, renderingStrategy, (uint)m_renderer.Settings.PathDepth, blnMultiThreaded, traceShadows, traceReflections, traceRefractions);
 
             if (renderAt.HasValue)
                 renderer.ComputeSample(renderAt.Value);
@@ -214,38 +210,38 @@ namespace Raytracer
             
             watch.Stop();
 
-            m_renderer.RenderingStrategy.OnCompletedScanLine -= RenderingStrategy_OnCompletedScanLine;
+            _renderer.RenderingStrategy.OnCompletedScanLine -= RenderingStrategy_OnCompletedScanLine;
 
             this.UIThread(() =>
             {
-                this.txtMessages.Text += string.Format("Rendered :{0}ms\r\n", watch.ElapsedMilliseconds);
+                txtMessages.Text += string.Format("Rendered :{0}ms\r\n", watch.ElapsedMilliseconds);
             });            
         }
 
-        int renderingCurrentPercentage = 0;
-        int renderingCurrentTotal = 0;
-        ConcurrentDictionary<int, int> scanLinesCompleted = new ConcurrentDictionary<int, int>();
+        int _renderingCurrentPercentage;
+        int _renderingCurrentTotal;
+        ConcurrentDictionary<int, int> _scanLinesCompleted = new ConcurrentDictionary<int, int>();
 
         private void RenderingStrategy_OnCompletedScanLine(int completed, int total)
         {
-            if (total != renderingCurrentTotal)
+            if (total != _renderingCurrentTotal)
             {
-                renderingCurrentTotal = total;
-                scanLinesCompleted.Clear();
+                _renderingCurrentTotal = total;
+                _scanLinesCompleted.Clear();
             }
 
-            if (!scanLinesCompleted.ContainsKey(completed))
-                scanLinesCompleted.AddOrUpdate(completed, completed, (a, b) => completed);
+            if (!_scanLinesCompleted.ContainsKey(completed))
+                _scanLinesCompleted.AddOrUpdate(completed, completed, (a, b) => completed);
 
-            var percentage = (int)((scanLinesCompleted.Count / (double)total) * 100);
+            var percentage = (int)((_scanLinesCompleted.Count / (double)total) * 100);
 
-            if (renderingCurrentPercentage != percentage)
+            if (_renderingCurrentPercentage != percentage)
             {
-                renderingCurrentPercentage = percentage;
+                _renderingCurrentPercentage = percentage;
 
                 this.UIThread(() =>
                 {
-                    lblPercent.Text = string.Format("Rendered {0}%\r\n", renderingCurrentPercentage);
+                    lblPercent.Text = string.Format("Rendered {0}%\r\n", _renderingCurrentPercentage);
 
                     Application.DoEvents();
                 });
@@ -257,29 +253,15 @@ namespace Raytracer
             return multiThreadedToolStripMenuItem.Checked;
         }
 
-        private void SceneFileMenuItem_Click(object sender, EventArgs e)
+        private void SceneFileMenuItem_OnClick(object sender, EventArgs e)
         {
             LoadSceneFromFile(((ToolStripMenuItem)sender).Tag.ToString());
-        }
-
-        /// <summary>
-        /// function that takes a delegate and times its execution. 
-        /// </summary>
-        /// <param name="act">function to time</param>
-        /// <returns>time in milliseconds.</returns>
-        private static long Time(Action act)
-        {
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-            act();
-            sw.Stop();
-            return sw.ElapsedMilliseconds;
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             dlgOpen.InitialDirectory = Path.GetDirectoryName(Application.ExecutablePath);
-            if (dlgOpen.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (dlgOpen.ShowDialog() == DialogResult.OK)
             {
                 LoadSceneFromFile(dlgOpen.FileName);
             }
@@ -291,7 +273,7 @@ namespace Raytracer
                 return;
 
             dlgSaveBmp.InitialDirectory = Path.GetDirectoryName(Application.ExecutablePath);
-            if (dlgSaveBmp.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (dlgSaveBmp.ShowDialog() == DialogResult.OK)
             {
                 SaveCurrentImage(dlgSaveBmp.FileName);
             }
@@ -310,7 +292,7 @@ namespace Raytracer
 
         private void renderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (m_scene == null)
+            if (_scene == null)
                 return;
 
             RenderScene();
@@ -318,7 +300,7 @@ namespace Raytracer
 
         private void toolStripMenuItem6_Click(object sender, EventArgs e)
         {
-            if (m_scene == null)
+            if (_scene == null)
                 return;
 
             foreach (ToolStripMenuItem item in ((ToolStripMenuItem)sender).GetCurrentParent().Items)
@@ -327,7 +309,7 @@ namespace Raytracer
             }
 
             ((ToolStripMenuItem)sender).Checked = true;
-            m_renderer.Settings.PathDepth = int.Parse(((ToolStripMenuItem)sender).Text);
+            _renderer.Settings.PathDepth = int.Parse(((ToolStripMenuItem)sender).Text);
 
             UpdateSettings();
         }
@@ -340,12 +322,12 @@ namespace Raytracer
 
         private void UpdateSettings()
         {
-            if (m_renderer != null && m_renderer.Settings != null)
+            if (_renderer != null && _renderer.Settings != null)
             {
-                m_renderer.Settings.MultiThreaded = multiThreadedToolStripMenuItem.Checked;
-                m_renderer.Settings.TraceShadows = mnuShadows.Checked;
-                m_renderer.Settings.TraceReflections = mnuReflections.Checked;
-                m_renderer.Settings.TraceRefractions = mnuRefractions.Checked;
+                _renderer.Settings.MultiThreaded = multiThreadedToolStripMenuItem.Checked;
+                _renderer.Settings.TraceShadows = mnuShadows.Checked;
+                _renderer.Settings.TraceReflections = mnuReflections.Checked;
+                _renderer.Settings.TraceRefractions = mnuRefractions.Checked;
             }
         }
 
@@ -383,7 +365,7 @@ namespace Raytracer
             if (dlgSaveRay.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 SaveSceneToFile(dlgSaveRay.FileName);
-                m_sceneFile = dlgSaveRay.FileName;
+                _sceneFile = dlgSaveRay.FileName;
             }
         }
 
@@ -394,12 +376,12 @@ namespace Raytracer
 
         private void saveSceneToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            SaveSceneToFile(m_sceneFile);
+            SaveSceneToFile(_sceneFile);
         }
 
         private void txtSceneFile_TextChanged(object sender, EventArgs e)
         {
-            m_isSceneDefinitionDirty = true;
+            _isSceneDefinitionDirty = true;
         }
 
         private void mnuSuperSampling_Click(object sender, EventArgs e)

@@ -25,11 +25,11 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Renderer
                 MultiThreaded = true
             });
 
-            components.renderer = loader.LoadObject<IRenderer>(components, 
+            components.Renderer = loader.LoadObject<IRenderer>(components, 
                                             element.Elements().First(),
                                             () => new RayTracingRenderer());
 
-            components.renderer.Settings = settings;
+            components.Renderer.Settings = settings;
 
             var renderingStrategy = loader.LoadObject<IRenderingStrategy>(components, element, "RenderingStrategy", () =>
             {
@@ -39,9 +39,9 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Renderer
                                                          components.CancellationTokenSource.Token);
             });
 
-            components.renderer.RenderingStrategy = renderingStrategy;
+            components.Renderer.RenderingStrategy = renderingStrategy;
 
-            return components.renderer;
+            return components.Renderer;
         }
     }
 }

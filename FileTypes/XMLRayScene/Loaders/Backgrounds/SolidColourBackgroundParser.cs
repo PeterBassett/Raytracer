@@ -14,7 +14,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Backgrounds
 
         public override dynamic LoadObject(XmlRaySceneLoader loader, SystemComponents components, XElement element, string elementName, Func<dynamic> createDefault)
         {
-            if (components.scene == null) 
+            if (components.Scene == null) 
                 throw new ArgumentNullException("scene");
 
             var colour = loader.LoadObject<Colour>(components, element, "Colour", () => null);

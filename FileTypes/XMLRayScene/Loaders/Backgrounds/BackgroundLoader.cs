@@ -20,7 +20,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Backgrounds
             var background = loader.LoadObject<IBackgroundMaterial>(components, element.Elements().First(), () => null);
 
             if (background != null)
-                components.scene.BackgroundMaterial = background;
+                components.Scene.BackgroundMaterial = background;
         }
     }
 }

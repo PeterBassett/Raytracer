@@ -18,7 +18,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Primitives
 
             var name = loader.LoadObject<string>(components, element, "MeshName", () => null);
 
-            var inst = new MeshInstance(components.scene.FindMesh(name), transform);
+            var inst = new MeshInstance(components.Scene.FindMesh(name), transform);
 
             return inst;
         }

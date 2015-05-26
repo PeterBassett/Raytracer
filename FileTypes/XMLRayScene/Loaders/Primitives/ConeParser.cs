@@ -23,7 +23,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Primitives
 
             var materialName = loader.LoadObject<string>(components, element, "Material", () => null);
 
-            var mat = components.scene.FindMaterial(materialName);
+            var mat = components.Scene.FindMaterial(materialName);
 
             if (mat == null)
                 throw new Exception("Cannot find material '" + materialName + "' for cone.");

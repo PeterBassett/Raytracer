@@ -16,23 +16,23 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.SceneLoader /* note not Scene 
 
         public override dynamic LoadObject(XmlRaySceneLoader loader, SystemComponents components, XElement element, string elementName, Func<dynamic> createDefault)
         {
-            if (components.scene == null)
-                components.scene = new Scene();
+            if (components.Scene == null)
+                components.Scene = new Scene();
 
             var lights = loader.LoadObject(components, element, "Lights", Enumerable.Empty<Light>);
             loader.LoadObject(components, element, "Materials", Enumerable.Empty<Material>);
             var primitives = loader.LoadObject(components, element, "Primitives", Enumerable.Empty<Traceable>);
 
             foreach (var light in lights)
-                components.scene.AddLight(light);
+                components.Scene.AddLight(light);
             /*
             foreach (var material in materials)
                 scene.AddMaterial(material, material.Name);
             */
             foreach (var primitive in primitives)
-                components.scene.AddObject(primitive);
+                components.Scene.AddObject(primitive);
 
-            return components.scene;
+            return components.Scene;
         }
     }
 }

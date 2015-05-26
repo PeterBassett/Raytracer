@@ -20,7 +20,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Materials
                 var material = loader.LoadObject<Material>(components, child, () => (Material)null);
                 if (material != null)
                 {
-                    components.scene.AddMaterial(material, material.Name);
+                    components.Scene.AddMaterial(material, material.Name);
                     materials.Add(material);
                 }
             }

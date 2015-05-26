@@ -36,7 +36,7 @@ namespace Raytracer.FileTypes.XMLRayScene
 
             LoadElement(components, document.Root);
 
-            components.scene.LoadComplete();
+            components.Scene.LoadComplete();
 
             return components;
         }

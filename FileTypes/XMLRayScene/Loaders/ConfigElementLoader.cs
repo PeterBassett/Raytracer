@@ -16,12 +16,12 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders
         
         public void LoadObject(XmlRaySceneLoader loader, XElement element, SystemComponents components)
         {
-            components.scene = loader.LoadObject<Scene>(components, element, "Scene", () => null);
-            components.camera = loader.LoadObject<ICamera>(components, element, "Camera", () => null);
-            components.renderer = loader.LoadObject<IRenderer>(components, element, "Renderer", () => null);
+            components.Scene = loader.LoadObject<Scene>(components, element, "Scene", () => null);
+            components.Camera = loader.LoadObject<ICamera>(components, element, "Camera", () => null);
+            components.Renderer = loader.LoadObject<IRenderer>(components, element, "Renderer", () => null);
 
-            components.renderer.Scene = components.scene;
-            components.renderer.Camera = components.camera;
+            components.Renderer.Scene = components.Scene;
+            components.Renderer.Camera = components.Camera;
 
             var output = element.ElementCaseInsensitive("Output");
             if(output != null)

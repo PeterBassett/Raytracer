@@ -26,8 +26,8 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Output
             bool overwrite = overwriteAttr != null && overwriteAttr.Value == "true";
 
             var bmp = new Bmp(dimensions.Width, dimensions.Height);
-            components.renderer.Camera.OutputDimensions = dimensions;
-            components.renderer.RenderScene(bmp);
+            components.Renderer.Camera.OutputDimensions = dimensions;
+            components.Renderer.RenderScene(bmp);
 
             using(var bitmap = new Bitmap(dimensions.Width, dimensions.Height))
             {

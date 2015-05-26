@@ -24,7 +24,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Primitives
 
             string strMaterial = loader.LoadObject<string>(components, element, "Material", () => null);
 
-            var mat = components.scene.FindMaterial(strMaterial);
+            var mat = components.Scene.FindMaterial(strMaterial);
 
 	        plane.Material = mat;
 

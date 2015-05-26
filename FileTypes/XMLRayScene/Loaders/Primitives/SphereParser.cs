@@ -20,7 +20,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Primitives
             var radius = loader.LoadObject<double>(components, element, "Radius", () => 1);
             var materialName = loader.LoadObject<string>(components, element, "Material", () => null);
 
-            var mat = components.scene.FindMaterial(materialName);
+            var mat = components.Scene.FindMaterial(materialName);
 
             var rotate = transform.GetObjectSpaceRotation();
             var rotation = new Vector(MathLib.Rad2Deg(rotate.X),

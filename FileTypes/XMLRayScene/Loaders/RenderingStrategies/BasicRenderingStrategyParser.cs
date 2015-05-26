@@ -19,7 +19,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.RenderingStrategies
                 return new StandardPixelSampler();
             });
 
-            return new BasicRenderingStrategy(sampler, components.renderer.Settings.MultiThreaded, components.CancellationTokenSource.Token);
+            return new BasicRenderingStrategy(sampler, components.Renderer.Settings.MultiThreaded, components.CancellationTokenSource.Token);
         }
     }
 }
