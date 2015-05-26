@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Raytracer.Rendering.Core;
 using Raytracer.Rendering.PixelSamplers;
 using Raytracer.Rendering.Renderers;
-using System.Threading;
+using Raytracer.Rendering.Synchronisation;
 
 namespace Raytracer.Rendering.RenderingStrategies
 {
@@ -20,7 +20,7 @@ namespace Raytracer.Rendering.RenderingStrategies
 
         public void RenderScene(IRenderer renderer, IBmp frameBuffer)
         {
-            _pixelSampler.Setup();
+            _pixelSampler.Initialise();
 
             var options = GetThreadingOptions();
             

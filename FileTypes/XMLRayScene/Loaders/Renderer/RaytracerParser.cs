@@ -1,16 +1,12 @@
 ﻿using System.ComponentModel.Composition;
-using System.Linq;
 using System.Xml.Linq;
-using Raytracer.Rendering.Cameras;
-using Raytracer.Rendering.Core;
+using Raytracer.Properties.Annotations;
 using Raytracer.Rendering.Renderers;
-using Raytracer.Rendering.RenderingStrategies;
-using Raytracer.Rendering.PixelSamplers;
 using System;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Renderer
 {
-    [Export(typeof(XmlRayElementParser))]
+    [Export(typeof(XmlRayElementParser)), UsedImplicitly]
     class RaytracerParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "Raytracer"; } }

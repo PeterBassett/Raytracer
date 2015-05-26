@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using Raytracer.MathTypes;
-using Raytracer.FileTypes;
 using Raytracer.Rendering.Renderers;
 using Raytracer.Rendering.Core;
 
@@ -93,7 +92,7 @@ namespace Raytracer.Rendering.PixelSamplers
                 y = _dimensions.Height - 1;
         }
 
-        public override void Setup()
+        public override void Initialise()
         {
             _bmp = new ConcurrentDictionary<Tuple<int, int>, Colour>();
         }

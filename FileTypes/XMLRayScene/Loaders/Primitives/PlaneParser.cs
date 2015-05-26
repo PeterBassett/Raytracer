@@ -1,14 +1,13 @@
 ﻿using System.ComponentModel.Composition;
 using Raytracer.MathTypes;
-using Raytracer.Rendering.Core;
-
 using System;
 using System.Xml.Linq;
+using Raytracer.Properties.Annotations;
 using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Primitives
 {
-    [Export(typeof(XmlRayElementParser))]
+    [Export(typeof(XmlRayElementParser)), UsedImplicitly]
     class PlaneParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "Plane"; } }

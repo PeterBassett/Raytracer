@@ -1,18 +1,15 @@
 ﻿using System;
-using System.ComponentModel.Composition;
-using Raytracer.Rendering.Materials;
-using Raytracer.MathTypes;
-
-using Raytracer.Rendering.Core;
-using System.Xml.Linq;
-using System.Linq;
-using Raytracer.FileTypes.XMLRayScene.Extensions;
-using System.IO;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.IO;
+using System.Linq;
+using System.Xml.Linq;
+using Raytracer.FileTypes.XMLRayScene.Extensions;
+using Raytracer.Properties.Annotations;
 
-namespace Raytracer.FileTypes.XMLRayScene.Loaders.Materials
+namespace Raytracer.FileTypes.XMLRayScene.Loaders.Xml
 {
-    [Export(typeof(XmlRayElementParser))]
+    [Export(typeof(XmlRayElementParser)), UsedImplicitly]
     class IncludeParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "Include"; } }
@@ -39,24 +36,18 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Materials
             var includeByElement = element.AttributeCaseInsensitive("includeByElement");
             var includeByName = element.AttributeCaseInsensitive("includeByName");
 
-            Func<XElement, bool> childrenOfRoot = (e) =>
-            {
-                return e.Parent == document.Root;
-            };
+            Func<XElement, bool> childrenOfRoot = e => e.Parent == document.Root;
 
-            Func<XElement, bool> searchByElement = (e) =>
-            {   
-                return string.Compare(e.Name.LocalName, includeByElement.Value, true) == 0;
-            };
+            Func<XElement, bool> searchByElement = e => string.Compare(e.Name.LocalName, includeByElement.Value, StringComparison.OrdinalIgnoreCase) == 0;
 
-            Func<XElement, bool> searchByName = (e) =>
+            Func<XElement, bool> searchByName = e =>
             {
                 var nameAttribute = e.AttributeCaseInsensitive("name");
 
                 if(nameAttribute == null)
                     return false;
 
-                return string.Compare(nameAttribute.Value, includeByName.Value, true) == 0;
+                return string.Compare(nameAttribute.Value, includeByName.Value, StringComparison.OrdinalIgnoreCase) == 0;
             };
 
             var predicates = new List<Func<XElement, bool>>();
@@ -73,7 +64,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Materials
             return SearchElement(document.Root, predicates.ToArray());
         }
 
-        private static IEnumerable<XElement> SearchElement(XElement element, Func<XElement, bool> [] predicates)
+        private static IEnumerable<XElement> SearchElement(XElement element, IEnumerable<Func<XElement, bool>> predicates)
         {
             foreach (var predicate in predicates)
             {

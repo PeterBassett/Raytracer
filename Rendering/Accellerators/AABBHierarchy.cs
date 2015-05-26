@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
-using Raytracer.Rendering.Primitives;
 using Raytracer.Rendering.Accellerators.Partitioners;
 
 namespace Raytracer.Rendering.Accellerators
@@ -77,7 +76,7 @@ namespace Raytracer.Rendering.Accellerators
         };
 
         protected AABBHierarchyNode _root;
-        protected IPrimitivePartitioner _partitioner;
+        private readonly IPrimitivePartitioner _partitioner;
 
         public AABBHierarchy (IPrimitivePartitioner partitioner)
 	    {

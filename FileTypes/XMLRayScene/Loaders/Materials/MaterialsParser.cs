@@ -1,17 +1,13 @@
 ﻿using System.ComponentModel.Composition;
-using Raytracer.MathTypes;
-using Raytracer.Rendering.Core;
-
+using Raytracer.Properties.Annotations;
 using Raytracer.Rendering.Materials;
-using Raytracer.Rendering.Renderers;
 using System.Xml.Linq;
-using Raytracer.Rendering.Cameras;
 using System.Collections.Generic;
 using System;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Materials
 {
-    [Export(typeof(XmlRayElementParser))]
+    [Export(typeof(XmlRayElementParser)), UsedImplicitly]
     class MaterialsParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "Materials"; } }

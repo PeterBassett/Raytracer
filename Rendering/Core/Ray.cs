@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Raytracer.MathTypes;
-using System.Security.Permissions;
-using System.Runtime.Serialization;
+﻿using Raytracer.MathTypes;
 
 namespace Raytracer.Rendering.Core
 {

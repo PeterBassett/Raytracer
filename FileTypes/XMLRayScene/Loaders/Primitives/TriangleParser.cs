@@ -3,12 +3,13 @@ using System.Linq;
 using System.ComponentModel.Composition;
 using System.Xml.Linq;
 using Raytracer.MathTypes;
+using Raytracer.Properties.Annotations;
 using Raytracer.Rendering.Primitives;
 using Raytracer.FileTypes.XMLRayScene.Extensions;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Primitives
 {
-    [Export(typeof(XmlRayElementParser))]
+    [Export(typeof(XmlRayElementParser)), UsedImplicitly]
     class TriangleParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "Triangle"; } }

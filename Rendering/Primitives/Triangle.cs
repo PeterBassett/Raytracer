@@ -57,15 +57,15 @@ namespace Raytracer.Rendering.Primitives
             var dot2 = Vector.DotProduct(normal, v2);
 
             if (Math.Abs(dot2) < 1.0E-6)
-                return new IntersectionInfo(HitResult.MISS); // division by 0 means parallel
+                return new IntersectionInfo(HitResult.Miss); // division by 0 means parallel
 
             double distance = dot1 / dot2;
 
             var hitPoint = ray.Pos + (ray.Dir * distance);
             if (!PointInTriangle(hitPoint))
-                return new IntersectionInfo(HitResult.MISS);
+                return new IntersectionInfo(HitResult.Miss);
             
-            return new IntersectionInfo(HitResult.HIT, this, distance, hitPoint, hitPoint, GetNormal(hitPoint));
+            return new IntersectionInfo(HitResult.Hit, this, distance, hitPoint, hitPoint, GetNormal(hitPoint));
         }
 
         public Normal GetNormal(Point vPoint)

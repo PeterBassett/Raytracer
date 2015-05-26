@@ -1,16 +1,15 @@
-﻿using System.ComponentModel.Composition;
-using System.Xml.Linq;
+﻿using System;
+using System.ComponentModel.Composition;
 using System.Linq;
-using Raytracer.Rendering.Cameras;
-using Raytracer.Rendering.Core;
-using Raytracer.Rendering.Renderers;
-using System;
-using Raytracer.Rendering.RenderingStrategies;
+using System.Xml.Linq;
+using Raytracer.Properties.Annotations;
 using Raytracer.Rendering.PixelSamplers;
+using Raytracer.Rendering.Renderers;
+using Raytracer.Rendering.RenderingStrategies;
 
-namespace Raytracer.FileTypes.XMLRayScene.Loaders.Camera
+namespace Raytracer.FileTypes.XMLRayScene.Loaders.Renderer
 {
-    [Export(typeof(XmlRayElementParser))]
+    [Export(typeof(XmlRayElementParser)), UsedImplicitly]
     class RendererParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "Renderer"; } }
@@ -37,7 +36,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Camera
                 return new ProgressiveRenderingStrategy(new StandardPixelSampler(),
                                                          64,
                                                          true,
-                                                         System.Threading.CancellationToken.None);
+                                                         components.CancellationTokenSource.Token);
             });
 
             components.renderer.RenderingStrategy = renderingStrategy;

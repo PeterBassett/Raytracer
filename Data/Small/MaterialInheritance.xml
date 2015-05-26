@@ -1,56 +1,72 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Scene xmlns:xi="http://www.w3.org/2001/XInclude">
-  <Viewpoint>
-    <Transform>
-      <Translate>0,-2,-14</Translate>
-    </Transform>
-    <FOV>90</FOV>
-  </Viewpoint>
+<Config>
+  <Renderer>
+    <Raytracer />
 
-  <Background>
-    <SolidColourBackground>
-      <Colour>0.5</Colour>
-    </SolidColourBackground>
-  </Background>
+    <RenderSettings>
+      <Depth>1</Depth>
+      <Shadows>true</Shadows>
+      <Reflections>true</Reflections>
+      <Refractions>true</Refractions>
+    </RenderSettings>
+  </Renderer>
 
-  <Lights>
-		<DistantLight power="1">
-			<Colour>1</Colour>
-			<Transform>
-				<RotateZ>40</RotateZ>
-				<RotateY>-60</RotateY>
-			</Transform>
-		</DistantLight>
-  </Lights>
+  <Camera>
+    <Viewpoint>
+      <Transform>
+        <Translate>0,-2,-14</Translate>
+      </Transform>
+      <FOV>90</FOV>
+    </Viewpoint>
+  </Camera>
 
-  <RenderSettings>
-    <Depth>1</Depth>
-    <Shadows>1</Shadows>
-    <Reflections>0</Reflections>
-    <Refractions>0</Refractions>
-  </RenderSettings>
+  <Scene>
 
-  <Materials>
-    <Include href="Default/DiffuseMaterials.xml" />
+    <Background>
+      <SolidColourBackground>
+        <Colour>0.5</Colour>
+      </SolidColourBackground>
+    </Background>
 
-    <ColourMaterial name="blue" inherit-from="red">
-      <Diffuse>
-        <Colour>
-          <Red>0.1</Red>
-          <Green>0.1</Green>
-          <Blue>0.7</Blue>
-        </Colour>
-      </Diffuse>
-    </ColourMaterial>
+    <Lights>
+      <DistantLight power="1">
+        <Colour>1</Colour>
+        <Transform>
+          <RotateZ>40</RotateZ>
+          <RotateY>-60</RotateY>
+        </Transform>
+      </DistantLight>
+    </Lights>
 
-  </Materials>
+    <RenderSettings>
+      <Depth>1</Depth>
+      <Shadows>1</Shadows>
+      <Reflections>0</Reflections>
+      <Refractions>0</Refractions>
+    </RenderSettings>
 
-  <Primitives>
-    <Sphere name="DefaultSphere">
-      <Radius>4</Radius>
-      <Material>blue</Material>
-    </Sphere>
+    <Materials>
+      <Include href="Default/DiffuseMaterials.xml" />
 
-  </Primitives>
+      <ColourMaterial name="blue" inherit-from="red">
+        <Diffuse>
+          <Colour>
+            <Red>0.1</Red>
+            <Green>0.1</Green>
+            <Blue>0.7</Blue>
+          </Colour>
+        </Diffuse>
+      </ColourMaterial>
 
-</Scene>
+    </Materials>
+
+    <Primitives>
+      <Sphere name="DefaultSphere">
+        <Radius>4</Radius>
+        <Material>blue</Material>
+      </Sphere>
+
+    </Primitives>
+
+  </Scene>
+</Config>

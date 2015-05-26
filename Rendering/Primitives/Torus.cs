@@ -79,10 +79,10 @@ namespace Raytracer.Rendering.Primitives
             {
                 var hitPoint = r.Pos + (r.Dir * distance);
 
-                return new IntersectionInfo(HitResult.HIT, this, distance, hitPoint, hitPoint, GetNormal(hitPoint));
+                return new IntersectionInfo(HitResult.Hit, this, distance, hitPoint, hitPoint, GetNormal(hitPoint));
             }
 
-            return new IntersectionInfo(HitResult.MISS); 
+            return new IntersectionInfo(HitResult.Miss); 
         }
 
         private Normal GetNormal(Point point)

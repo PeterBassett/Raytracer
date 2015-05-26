@@ -1,106 +1,120 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Scene>
-  <Viewpoint>
-    <Transform>
-      <Translate>0, -5, 9</Translate>
-<RotateX>-45</RotateX>
-<RotateZ>-45</RotateZ>
-    </Transform>
-    <FOV>90</FOV>
-  </Viewpoint>
-  
-  <Lights>
-    <AmbientLight>
-      <Colour>0.2</Colour>
-    </AmbientLight>
+<Config>
+  <Renderer>
+    <Raytracer />
 
-    <PointLight power="100">
+    <RenderSettings>
+      <Depth>1</Depth>
+      <Shadows>true</Shadows>
+      <Reflections>true</Reflections>
+      <Refractions>true</Refractions>
+    </RenderSettings>
+  </Renderer>
+
+  <Camera>
+    <Viewpoint>
       <Transform>
-        <Translate>10, 10, -10</Translate>
+        <Translate>0, 1, -14</Translate>
+        <RotateX>45</RotateX>
       </Transform>
-      <Colour>1</Colour>
-    </PointLight>
-    
-  </Lights>
+      <FOV>90</FOV>
+    </Viewpoint>
+  </Camera>
 
-  <RenderSettings>
-    <Depth>1</Depth>
-    <Shadows>true</Shadows>
-    <Reflections>true</Reflections>
-    <Refractions>true</Refractions>
-  </RenderSettings>
+  <Scene>
+    <Lights>
+      <AmbientLight>
+        <Colour>0.2</Colour>
+      </AmbientLight>
 
-  <Materials>
-    <ColourMaterial name="darkgrey">
-      <Diffuse>
-        <Colour>0.3</Colour>
-      </Diffuse>
-      <Specular specularity="20" exponent="0.35" />
-      <Reflected>
-        <Colour>0.9</Colour>
-      </Reflected>
-    </ColourMaterial>
+      <PointLight power="100">
+        <Transform>
+          <Translate>10, 10, -10</Translate>
+        </Transform>
+        <Colour>1</Colour>
+      </PointLight>
 
-    <ColourMaterial name="lightgrey">
-      <Diffuse>
-        <Colour>0.7</Colour>
-      </Diffuse>
-      <Specular>
-        <Colour>0.5</Colour>
-        <Specularity>20</Specularity>
-        <Exponent>0.35</Exponent>
-      </Specular>
-      <Reflected>
-        <Colour>
-          <Red>0.9</Red>
-          <Green>0.9</Green>
-          <Blue>0.9</Blue>
-        </Colour>
-      </Reflected>
-      <IOR>1</IOR>
-      <Transmitted>
-        <Colour>0</Colour>
-      </Transmitted>
-    </ColourMaterial>
+    </Lights>
 
-    <ColourMaterial name="red">
-      <Diffuse>
-        <Colour>
-          <Red>0.7</Red>
-          <Green>0.1</Green>
-          <Blue>0.1</Blue>
-        </Colour>
-      </Diffuse>
-      <Specular exponent="0.35">
-        <Specularity>20</Specularity>
-      </Specular>
-      <Reflected>
-        <Colour>0</Colour>
-      </Reflected>
-      <IOR>1</IOR>
-      <Transmitted>
-        <Colour>0</Colour>
-      </Transmitted>
-    </ColourMaterial>
+    <RenderSettings>
+      <Depth>1</Depth>
+      <Shadows>true</Shadows>
+      <Reflections>true</Reflections>
+      <Refractions>true</Refractions>
+    </RenderSettings>
 
-    <CheckMaterial name="check" from-material="lightgrey" to-material="darkgrey">
-      <Scale>4</Scale>
-    </CheckMaterial>
+    <Materials>
+      <ColourMaterial name="darkgrey">
+        <Diffuse>
+          <Colour>0.3</Colour>
+        </Diffuse>
+        <Specular specularity="20" exponent="0.35" />
+        <Reflected>
+          <Colour>0.9</Colour>
+        </Reflected>
+      </ColourMaterial>
 
-  </Materials>
+      <ColourMaterial name="lightgrey">
+        <Diffuse>
+          <Colour>0.7</Colour>
+        </Diffuse>
+        <Specular>
+          <Colour>0.5</Colour>
+          <Specularity>20</Specularity>
+          <Exponent>0.35</Exponent>
+        </Specular>
+        <Reflected>
+          <Colour>
+            <Red>0.9</Red>
+            <Green>0.9</Green>
+            <Blue>0.9</Blue>
+          </Colour>
+        </Reflected>
+        <IOR>1</IOR>
+        <Transmitted>
+          <Colour>0</Colour>
+        </Transmitted>
+      </ColourMaterial>
 
-  <Primitives>
-    <Sphere>
-      <Radius>5</Radius>
-      <Material>red</Material>
-    </Sphere>
+      <ColourMaterial name="red">
+        <Diffuse>
+          <Colour>
+            <Red>0.7</Red>
+            <Green>0.1</Green>
+            <Blue>0.1</Blue>
+          </Colour>
+        </Diffuse>
+        <Specular exponent="0.35">
+          <Specularity>20</Specularity>
+        </Specular>
+        <Reflected>
+          <Colour>0</Colour>
+        </Reflected>
+        <IOR>1</IOR>
+        <Transmitted>
+          <Colour>0</Colour>
+        </Transmitted>
+      </ColourMaterial>
 
-    <Plane>
-      <Point x="0" y="-6" z="0"></Point>
-      <Normal x="0" y="1" z="0"></Normal>
-      <Material>check</Material>
-    </Plane>
+      <CheckMaterial name="check" from-material="lightgrey" to-material="darkgrey">
+        <Scale>4</Scale>
+      </CheckMaterial>
 
-  </Primitives>
+    </Materials>
 
-</Scene>
+    <Primitives>
+      <Sphere>
+        <Radius>5</Radius>
+        <Material>red</Material>
+      </Sphere>
+
+      <Plane>
+        <Point x="0" y="-6" z="0"></Point>
+        <Normal x="0" y="1" z="0"></Normal>
+        <Material>check</Material>
+      </Plane>
+
+    </Primitives>
+
+  </Scene>
+</Config>

@@ -1,16 +1,13 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
 using System.Xml.Linq;
-using System.Linq;
-using Raytracer.Rendering.Cameras;
-using Raytracer.Rendering.Core;
-using Raytracer.Rendering.Renderers;
-using System;
-using Raytracer.Rendering.RenderingStrategies;
+using Raytracer.Properties.Annotations;
 using Raytracer.Rendering.PixelSamplers;
+using Raytracer.Rendering.RenderingStrategies;
 
-namespace Raytracer.FileTypes.XMLRayScene.Loaders.Camera
+namespace Raytracer.FileTypes.XMLRayScene.Loaders.RenderingStrategies
 {
-    [Export(typeof(XmlRayElementParser))]
+    [Export(typeof(XmlRayElementParser)), UsedImplicitly]
     class BasicRenderingStrategyParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "BasicRenderingStrategy"; } }
@@ -22,10 +19,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Camera
                 return new StandardPixelSampler();
             });
 
-            if(components.cancellationTokenSource == null)
-                components.cancellationTokenSource = new System.Threading.CancellationTokenSource();
-
-            return new BasicRenderingStrategy(sampler, components.renderer.Settings.MultiThreaded, components.cancellationTokenSource.Token);
+            return new BasicRenderingStrategy(sampler, components.renderer.Settings.MultiThreaded, components.CancellationTokenSource.Token);
         }
     }
 }

@@ -1,13 +1,12 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 using System.Xml.Linq;
-
+using Raytracer.Properties.Annotations;
 using Raytracer.Rendering.BackgroundMaterials;
-using Raytracer.Rendering.Core;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Backgrounds
 {
-    [Export(typeof(XmlRayElementParser))]
+    [Export(typeof(XmlRayElementParser)), UsedImplicitly]
     class VerticalCubemapBackgroundParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "VerticalCubemapBackground"; } }

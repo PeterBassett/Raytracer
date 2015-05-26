@@ -1,14 +1,13 @@
-﻿using System.ComponentModel.Composition;
-using System.Xml.Linq;
+﻿using System;
+using System.ComponentModel.Composition;
 using System.Linq;
+using System.Xml.Linq;
+using Raytracer.Properties.Annotations;
 using Raytracer.Rendering.Cameras;
-using Raytracer.Rendering.Core;
-using Raytracer.Rendering.Renderers;
-using System;
 
-namespace Raytracer.FileTypes.XMLRayScene.Loaders.Camera
+namespace Raytracer.FileTypes.XMLRayScene.Loaders.Cameras
 {
-    [Export(typeof(XmlRayElementParser))]
+    [Export(typeof(XmlRayElementParser)), UsedImplicitly]
     class CameraParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "Camera"; } }

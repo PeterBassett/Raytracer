@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Raytracer.MathTypes;
+﻿using Raytracer.MathTypes;
 using Raytracer.Rendering.Renderers;
 
 namespace Raytracer.Rendering.Core
 {
     class VisibilityTester
     {
-        const double _shadowRayEpslion = 0.00001;
-        private Ray ray;
+        const double ShadowRayEpslion = 0.00001;
+        private Ray _ray;
         private double _maxT;
 
         public void SetSegment(Point from, Normal normalAtHitPoint, Vector direction)
         {
             _maxT = double.MaxValue;
-            ray = new Ray(from + (normalAtHitPoint * _shadowRayEpslion), direction.Normalize());
+            _ray = new Ray(from + (normalAtHitPoint * ShadowRayEpslion), direction.Normalize());
         }
 
         public void SetSegment(Point from, Normal normalAtHitPoint, Point to) 
@@ -27,17 +23,17 @@ namespace Raytracer.Rendering.Core
 
             segment = segment.Normalize();
 
-            ray = new Ray(from + (normalAtHitPoint * _shadowRayEpslion), segment);
+            _ray = new Ray(from + (normalAtHitPoint * ShadowRayEpslion), segment);
         }
 
         public bool Unoccluded(IRenderer renderer)
         {
-            if (!ray.IsValid) 
+            if (!_ray.IsValid) 
                 return true;
 
-            var intersection = renderer.FindClosestIntersection(ray);
+            var intersection = renderer.FindClosestIntersection(_ray);
 
-            return intersection.Result == HitResult.MISS || intersection.T >= _maxT || intersection.T < 0;
+            return intersection.Result == HitResult.Miss || intersection.T >= _maxT || intersection.T < 0;
         }
     }
 }

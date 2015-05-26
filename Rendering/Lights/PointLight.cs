@@ -1,14 +1,12 @@
-﻿using System;
-using Raytracer.MathTypes;
+﻿using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
-using Raytracer.FileTypes;
 
 namespace Raytracer.Rendering.Lights
 {
     class PointLight : Light
     {
-        public PointLight(Colour colour, Transform transform)
-            : base(colour, transform)
+        public PointLight(Colour colour, double power, Transform transform)
+            : base(colour, power, transform)
         {
         }
 

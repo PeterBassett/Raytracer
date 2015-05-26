@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using Raytracer.Extensions;
 using Raytracer.Rendering.Core;
-using Raytracer.FileTypes;
 
 namespace Raytracer
 {

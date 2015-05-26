@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
 using Raytracer.MathTypes;
 
 namespace Raytracer.Rendering.Core
@@ -93,19 +92,6 @@ namespace Raytracer.Rendering.Core
             }
         }
 
-        public Vector HalfSize
-        {
-            get
-            {
-                return new Vector
-                {
-                    X = Width / 2.0f,
-                    Y = Height / 2.0f,
-                    Z = Depth / 2.0f
-                };
-            }
-        }
-
         public AABB InflateToEncapsulate(AABB other)
         {
             var min = new Point(Min);
@@ -135,12 +121,12 @@ namespace Raytracer.Rendering.Core
         private AABB Union(Point p)
         {
             return new AABB(
-                        new Point(Math.Min(this.Min.X, p.X),
-                                  Math.Min(this.Min.Y, p.Y),
-                                  Math.Min(this.Min.Z, p.Z)),
-                        new Point(Math.Max(this.Max.X, p.X),
-                                  Math.Max(this.Max.Y, p.Y),
-                                  Math.Max(this.Max.Z, p.Z)));
+                        new Point(Math.Min(Min.X, p.X),
+                                  Math.Min(Min.Y, p.Y),
+                                  Math.Min(Min.Z, p.Z)),
+                        new Point(Math.Max(Max.X, p.X),
+                                  Math.Max(Max.Y, p.Y),
+                                  Math.Max(Max.Z, p.Z)));
         }
 
         /// <summary>
@@ -236,31 +222,26 @@ namespace Raytracer.Rendering.Core
                           diag.Y * diag.Z);
         }
 
-        public double Volume() 
-        {
-            var diag = Max - Min;
-            return diag.X * diag.Y * diag.Z;
-        }
-
         public int MaximumExtent()
         {
             var diag = Max - Min;
 
             if (diag.X > diag.Y && diag.X > diag.Z)
                 return 0;
-            else if (diag.Y > diag.Z)
+            
+            if (diag.Y > diag.Z)
                 return 1;
-            else
-                return 2;
+            
+            return 2;
         }
 
         public bool IsInvalid
         {
             get
             {
-                return this.Depth  < 0 ||
-                       this.Width  < 0 ||
-                       this.Height < 0;
+                return Depth  < 0 ||
+                       Width  < 0 ||
+                       Height < 0;
             }
         }
     }

@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Raytracer.Rendering.Core
 {
     class Colour
     {
-        float m_Red;
-        float m_Green;
-        float m_Blue;
+        float _red;
+        float _green;
+        float _blue;
         
 	    public Colour() : this(0.0f, 0.0f, 0.0f)
         { 
@@ -24,61 +21,54 @@ namespace Raytracer.Rendering.Core
         {
         }
 
-        public Colour(double fRed, double fGreen, double fBlue)
-            : this((float)fRed, (float)fGreen, (float)fBlue)
+        public Colour(double red, double green, double blue)
+            : this((float)red, (float)green, (float)blue)
         {
         }
 
-        public Colour(float fRed, float fGreen, float fBlue)
+        public Colour(float red, float green, float blue)
         {
-            m_Red = fRed;
-            m_Green = fGreen;
-            m_Blue = fBlue;
+            _red = red;
+            _green = green;
+            _blue = blue;
         }        
 
 	    public float Sum() 
         { 
             return Red + Green + Blue; 
-        }
-        
-        public void Set(float fCol) 
-        { 
-            Red = fCol; 
-            Green = fCol; 
-            Blue = fCol; 
-        }
+        }       
 
         public float Red 
         {
             get
             {
-                return m_Red;
+                return _red;
             }
             set
             {
-                m_Red = value;
+                _red = value;
             }
         }
         public float Green
         {
             get
             {
-                return m_Green;
+                return _green;
             }
             set
             {
-                m_Green = value;
+                _green = value;
             }
         }
         public float Blue
         {
             get
             {
-                return m_Blue;
+                return _blue;
             }
             set
             {
-                m_Blue = value;
+                _blue = value;
             }
         }
 
@@ -131,16 +121,16 @@ namespace Raytracer.Rendering.Core
 
         public override bool Equals(Object obj)
         {
-            Colour colourObj = obj as Colour;
+            var colourObj = obj as Colour;
             if (colourObj == null)
                 return false;
-            else
-                return this == colourObj;
+            
+            return this == colourObj;
         }
 
         public override int GetHashCode()
         {
-            return this.Red.GetHashCode() ^ this.Green.GetHashCode() ^ this.Blue.GetHashCode();
+            return Red.GetHashCode() ^ Green.GetHashCode() ^ Blue.GetHashCode();
         }
 
         /// <summary>
@@ -158,7 +148,7 @@ namespace Raytracer.Rendering.Core
                 return Object.Equals(a, null);
             }
 
-            float epsilon = 0.00001f;
+            const float epsilon = 0.00001f;
 
             return Math.Abs(a.Red - b.Red) < epsilon &&
                     Math.Abs(a.Green - b.Green) < epsilon &&
@@ -175,21 +165,21 @@ namespace Raytracer.Rendering.Core
 
         internal void Clamp()
         {
-            this.Red = Clamp(this.Red);
-            this.Green = Clamp(this.Green);
-            this.Blue = Clamp(this.Blue);
+            Red = Clamp(Red);
+            Green = Clamp(Green);
+            Blue = Clamp(Blue);
         }
 
-        internal float Clamp(float component)
+        private float Clamp(float component)
         {
             return Math.Min(Math.Max(component, 0.0f), 1.0f);
         }
 
         public System.Drawing.Color ToColor()
         {
-            return System.Drawing.Color.FromArgb((int)(255.0 * this.Red),
-                                                 (int)(255.0 * this.Green),
-                                                 (int)(255.0 * this.Blue));
+            return System.Drawing.Color.FromArgb((int)(255.0 * Red),
+                                                 (int)(255.0 * Green),
+                                                 (int)(255.0 * Blue));
         }
         
         public float this[int index]
@@ -199,11 +189,11 @@ namespace Raytracer.Rendering.Core
                 switch (index)
                 {
                     case 0:
-                        return m_Red;
+                        return _red;
                     case 1:
-                        return m_Green;
+                        return _green;
                     case 2:
-                        return m_Blue;
+                        return _blue;
                     default:
                         throw new ArgumentOutOfRangeException("index");
                 }

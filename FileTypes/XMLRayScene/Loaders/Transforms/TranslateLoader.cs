@@ -1,13 +1,12 @@
 ﻿using System.ComponentModel.Composition;
 using Raytracer.MathTypes;
-using Raytracer.Rendering.Core;
-
 using System;
 using System.Xml.Linq;
+using Raytracer.Properties.Annotations;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Transforms
 {
-    [Export(typeof(XmlRayElementParser))]
+    [Export(typeof(XmlRayElementParser)), UsedImplicitly]
     class TranslateParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "Translate"; } }

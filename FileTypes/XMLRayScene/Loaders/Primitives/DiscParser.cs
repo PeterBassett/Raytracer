@@ -1,20 +1,20 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 using System.Xml.Linq;
-using Raytracer.MathTypes;
+using Raytracer.Properties.Annotations;
 using Raytracer.Rendering.Core;
 using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Primitives
 {
-    [Export(typeof(XmlRayElementParser))]
+    [Export(typeof(XmlRayElementParser)), UsedImplicitly]
     class DiscParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "Disc"; } }
 
         public override dynamic LoadObject(XmlRaySceneLoader loader, SystemComponents components, XElement element, string elementName, Func<dynamic> createDefault)
         {
-            var transform = loader.LoadObject<Transform>(components, element, "Transform", () => Transform.CreateIdentityTransform());
+            var transform = loader.LoadObject(components, element, "Transform", Transform.CreateIdentityTransform);
             var innerRadius = loader.LoadObject<double>(components, element, "InnerRadius", () => 0);
             var outerRadius = loader.LoadObject<double>(components, element, "InnerHeight", () => 1);
 

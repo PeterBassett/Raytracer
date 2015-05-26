@@ -1,5 +1,4 @@
 ﻿using Raytracer.Rendering.Core;
-using Raytracer.FileTypes;
 
 namespace Raytracer.Rendering.BackgroundMaterials
 {

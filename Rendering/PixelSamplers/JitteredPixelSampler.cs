@@ -1,5 +1,4 @@
 ﻿using System;
-using Raytracer.FileTypes;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Renderers;
 using Raytracer.Rendering.Core;
@@ -48,7 +47,7 @@ namespace Raytracer.Rendering.PixelSamplers
             return subSamplingOffset1 + (_random.NextDouble() * (subSamplingOffset2 - subSamplingOffset1));
         }
 
-        public virtual void Setup()
+        public virtual void Initialise()
         {
         }
     }

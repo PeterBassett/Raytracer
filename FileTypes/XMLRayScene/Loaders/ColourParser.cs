@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.Composition;
-using Raytracer.MathTypes;
+using Raytracer.Properties.Annotations;
 using Raytracer.Rendering.Core;
 
 using System.Xml.Linq;
@@ -7,7 +7,7 @@ using System;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders
 {
-    [Export(typeof(XmlRayElementParser))]
+    [Export(typeof(XmlRayElementParser)), UsedImplicitly]
     class ColourParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "Colour"; } }
@@ -18,9 +18,9 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders
             double? g = null;
             double? b = null;
 
-            var rAttr = this.GetDouble(element, "r");
-            var gAttr = this.GetDouble(element, "g");
-            var bAttr = this.GetDouble(element, "b");
+            var rAttr = GetDouble(element, "r");
+            var gAttr = GetDouble(element, "g");
+            var bAttr = GetDouble(element, "b");
 
             if (rAttr.HasValue)
                 r = rAttr.Value;

@@ -1,6 +1,5 @@
 ﻿using System;
 using Raytracer.MathTypes;
-using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.Rendering.Core
 {
@@ -24,7 +23,7 @@ namespace Raytracer.Rendering.Core
             _objectLocalHitPoint = Point.Zero;
             _normalAtHitPoint = Normal.Invalid;
 
-            if (HitResult.MISS != miss)
+            if (HitResult.Miss != miss)
                 throw new ArgumentNullException("If the result was not a miss you should provide all parameters");
         }
 

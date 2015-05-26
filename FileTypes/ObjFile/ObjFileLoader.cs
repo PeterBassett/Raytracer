@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Raytracer.Rendering.Primitives;
 using System.IO;
 using Raytracer.MathTypes;
@@ -9,15 +8,15 @@ namespace Raytracer.FileTypes.ObjFile
 {   
     class ObjFileLoader
     {
-        readonly Dictionary<string, Material> Materials = new Dictionary<string, Material>();
+        private readonly Dictionary<string, Material> _materials = new Dictionary<string, Material>();
 
-        const int VertexCacheInitialLength = 3;
-        int[,] VertexIndexCache = new int[VertexCacheInitialLength, 3];
-        int VertexIndexCacheLength = VertexCacheInitialLength;
+        private const int VertexCacheInitialLength = 3;
+        private int[,] _vertexIndexCache = new int[VertexCacheInitialLength, 3];
+        private int _vertexIndexCacheLength = VertexCacheInitialLength;
 
-        const int ParseCacheInitialLength = 3;    
-        string[] ParseCache = new string[ParseCacheInitialLength];
-        int ParseCacheLength = ParseCacheInitialLength;
+        private const int ParseCacheInitialLength = 3;
+        private string[] _parseCache = new string[ParseCacheInitialLength];
+        private int _parseCacheLength = ParseCacheInitialLength;
         
         public void LoadFile(string strObjfile, List<Triangle> triangles, List<Material> materials)
         {
@@ -25,7 +24,6 @@ namespace Raytracer.FileTypes.ObjFile
             var textureCoordinates = new List<Vector2>();
             var vertexNormals = new List<Normal>();
             Material currentMaterial = null;
-            //var sr = new BufferedStreamReader(strObjfile);
 
             using (var sr = new StreamReader(strObjfile))
             {
@@ -33,28 +31,27 @@ namespace Raytracer.FileTypes.ObjFile
                 {                    
                     var line = sr.ReadLine();
 
-                    int lineItemsFound = 0;
-                    ParseLine(line, ref lineItemsFound);
+                    int lineItemsFound = ParseLine(line);
 
                     if (lineItemsFound == 0)
                         continue;
 
-                    switch (ParseCache[0])
+                    switch (_parseCache[0])
                     {
                         case "mtllib":
-                            LoadMaterial(ParseCache[1]);
+                            LoadMaterial(_parseCache[1]);
                             break;
                         case "usemtl":
-                            currentMaterial = FindMaterial(ParseCache[1]);
+                            currentMaterial = FindMaterial(_parseCache[1]);
                             break;
                         case "v":
-                            verticies.Add(new Point(float.Parse(ParseCache[1]), float.Parse(ParseCache[2]), float.Parse(ParseCache[3])));
+                            verticies.Add(new Point(float.Parse(_parseCache[1]), float.Parse(_parseCache[2]), float.Parse(_parseCache[3])));
                             break;
                         case "vt":
-                            textureCoordinates.Add(new Vector2(float.Parse(ParseCache[1]), float.Parse(ParseCache[2])));
+                            textureCoordinates.Add(new Vector2(float.Parse(_parseCache[1]), float.Parse(_parseCache[2])));
                             break;
                         case "vn":
-                            vertexNormals.Add(new Normal(float.Parse(ParseCache[1]), float.Parse(ParseCache[2]), float.Parse(ParseCache[3])));
+                            vertexNormals.Add(new Normal(float.Parse(_parseCache[1]), float.Parse(_parseCache[2]), float.Parse(_parseCache[3])));
                             break;
                         case "f":
                             {
@@ -65,10 +62,10 @@ namespace Raytracer.FileTypes.ObjFile
                 }
             }
 
-            materials.AddRange(Materials.Values);
+            materials.AddRange(_materials.Values);
         }
         
-        private void ParseLine(string line, ref int validItemsInParseCache)
+        private int ParseLine(string line)
         {
             int itemsfound = 0;
             int curPos= 0;
@@ -78,7 +75,7 @@ namespace Raytracer.FileTypes.ObjFile
                 {
                     ResizeParseCache(itemsfound);
 
-                    ParseCache[itemsfound] = line.Substring(curPos, i - curPos);
+                    _parseCache[itemsfound] = line.Substring(curPos, i - curPos);
                     itemsfound++;
 
                     curPos = i + 1;
@@ -93,33 +90,33 @@ namespace Raytracer.FileTypes.ObjFile
                 {
                     ResizeParseCache(itemsfound);
 
-                    ParseCache[itemsfound] = line.Substring(curPos);
+                    _parseCache[itemsfound] = line.Substring(curPos);
                     itemsfound++;
                 }
             }
 
-            for (int i = itemsfound; i < ParseCache.Length; i++)
+            for (int i = itemsfound; i < _parseCache.Length; i++)
             {
-                ParseCache[i] = null;
+                _parseCache[i] = null;
             }
 
-            validItemsInParseCache = itemsfound;
+            return itemsfound;
         }
 
         private void ResizeParseCache(int requiredSize)
         {
-            if (requiredSize < ParseCacheLength)
+            if (requiredSize < _parseCacheLength)
                 return;
 
-            var temp = new string[ParseCacheLength * 2];
+            var temp = new string[_parseCacheLength * 2];
 
-            for (int i = 0; i < ParseCacheLength; i++)
+            for (int i = 0; i < _parseCacheLength; i++)
             {
-                temp[i] = ParseCache[i];
+                temp[i] = _parseCache[i];
             }
 
-            ParseCache = temp;
-            ParseCacheLength = temp.Length;
+            _parseCache = temp;
+            _parseCacheLength = temp.Length;
         }
 
         private void LoadMaterial(string strMaterialFile)
@@ -130,23 +127,23 @@ namespace Raytracer.FileTypes.ObjFile
 
             foreach (var mat in materials)
             {
-                Materials.Add(mat.Name, mat);
+                _materials.Add(mat.Name, mat);
             }
         }
 
         private Material FindMaterial(string strName)
         {
-            if (Materials.ContainsKey(strName))
-                return Materials[strName];
+            if (_materials.ContainsKey(strName))
+                return _materials[strName];
             return null;
         }
 
         private void CreateTriangles(int itemsInParseCache, List<Point> verticies, List<Triangle> triangles, Material currentMaterial, List<Vector2> textureCoordinates, List<Normal> vertexNormals)
         {
-            if (VertexIndexCacheLength <= itemsInParseCache)
+            if (_vertexIndexCacheLength <= itemsInParseCache)
             {
-                VertexIndexCache = new int[VertexIndexCacheLength * 2, 3];
-                VertexIndexCacheLength = VertexIndexCacheLength * 2;
+                _vertexIndexCache = new int[_vertexIndexCacheLength * 2, 3];
+                _vertexIndexCacheLength = _vertexIndexCacheLength * 2;
             }
 
             int index = 0;
@@ -155,67 +152,61 @@ namespace Raytracer.FileTypes.ObjFile
                 int vertex;
                 int? textureCoordinateParsed, normalParsed;
 
-                ParseVertex(ParseCache[i], out vertex, out textureCoordinateParsed, out normalParsed);
+                ParseVertex(_parseCache[i], out vertex, out textureCoordinateParsed, out normalParsed);
 
                 vertex = vertex < 0 ? verticies.Count + vertex : vertex - 1; 
                 var texture = textureCoordinateParsed.HasValue? (textureCoordinateParsed.Value < 0 ? textureCoordinates.Count + textureCoordinateParsed.Value : textureCoordinateParsed.Value - 1) : -1;
                 var normal = normalParsed.HasValue? (normalParsed.Value < 0 ? vertexNormals.Count + normalParsed.Value : normalParsed.Value - 1) : -1;
 
-                VertexIndexCache[index, 0] = vertex;
-                VertexIndexCache[index, 1] = texture;
-                VertexIndexCache[index, 2] = normal; 
+                _vertexIndexCache[index, 0] = vertex;
+                _vertexIndexCache[index, 1] = texture;
+                _vertexIndexCache[index, 2] = normal; 
 
                 index++;
             }
 
-            Vector2 t1 = Vector2.Zero, t2 = Vector2.Zero, t3 = Vector2.Zero;
-            Normal n1 = Normal.Invalid, n2 = Normal.Invalid, n3 = Normal.Invalid;
+            Vector2 t1 = Vector2.Zero;
+            Normal n1 = Normal.Invalid;
 
-            const int Vertices = 0;
-            const int Textures = 1;
-            const int Normals = 2;
+            const int vertices = 0;
+            const int textures = 1;
+            const int normals = 2;
 
-            Point v1 = verticies[VertexIndexCache[0, Vertices]];
+            Point v1 = verticies[_vertexIndexCache[0, vertices]];
 
-            if (VertexIndexCache[0, Textures] != -1)
-                t1 = textureCoordinates[VertexIndexCache[0, Textures]];
+            if (_vertexIndexCache[0, textures] != -1)
+                t1 = textureCoordinates[_vertexIndexCache[0, textures]];
 
-            if (VertexIndexCache[0, Normals] != -1)
-                n1 = vertexNormals[VertexIndexCache[0, Normals]];
+            if (_vertexIndexCache[0, normals] != -1)
+                n1 = vertexNormals[_vertexIndexCache[0, normals]];
 
             for (int i = 0; i < index - 2; ++i)
             {
-                Point v2 = verticies[VertexIndexCache[i + 1, Vertices]];
-                Point v3 = verticies[VertexIndexCache[i + 2, Vertices]];
+                var v2 = verticies[_vertexIndexCache[i + 1, vertices]];
+                var v3 = verticies[_vertexIndexCache[i + 2, vertices]];
 
                 if (v1 == v2 || v1 == v3 || v2 == v3)
                     continue;
 
-                Triangle tri = new Triangle();
+                var tri = new Triangle();
                 tri.Vertices[0] = v1;
                 tri.Vertices[1] = v2;
                 tri.Vertices[2] = v3;
 
-                if (VertexIndexCache[i + 1, Textures] != -1 && VertexIndexCache[i + 2, Textures] != -1)
-                {
-                    t2 = textureCoordinates[VertexIndexCache[i + 1, Textures]];
-                    t3 = textureCoordinates[VertexIndexCache[i + 2, Textures]];
-
+                if (_vertexIndexCache[i + 1, textures] != -1 && _vertexIndexCache[i + 2, textures] != -1)
+                {                    
                     tri.TextureUVs[0] = t1;
-                    tri.TextureUVs[1] = t2;
-                    tri.TextureUVs[2] = t3;
+                    tri.TextureUVs[1] = textureCoordinates[_vertexIndexCache[i + 1, textures]];
+                    tri.TextureUVs[2] = textureCoordinates[_vertexIndexCache[i + 2, textures]];
                 }
                 else
                     tri.TextureUVs = null;
 
-                if (VertexIndexCache[i + 1, Normals] != -1 && VertexIndexCache[i + 2, Normals] != -1)
-                {
-                    n2 = vertexNormals[VertexIndexCache[i + 1, Normals]];
-                    n3 = vertexNormals[VertexIndexCache[i + 2, Normals]];
-
+                if (_vertexIndexCache[i + 1, normals] != -1 && _vertexIndexCache[i + 2, normals] != -1)
+                {                    
                     tri.Normals[0] = n1;
-                    tri.Normals[1] = n2;
-                    tri.Normals[2] = n3;
+                    tri.Normals[1] = vertexNormals[_vertexIndexCache[i + 1, normals]];
+                    tri.Normals[2] = vertexNormals[_vertexIndexCache[i + 2, normals]];
                 }
                 else
                     tri.Normals = null;
@@ -227,19 +218,8 @@ namespace Raytracer.FileTypes.ObjFile
             }
         }
 
-        private int GetTextureCoordinate(string p)
-        {
-            throw new NotImplementedException();
-        }
-        
-        private int GetNormal(string v)
-        {
-            return 0;//throw new NotImplementedException();
-        }
-
         private void ParseVertex(string v, out int vertex, out int? texture, out int? normal)
         {
-            vertex = 0;
             texture = null;
             normal = null;
 

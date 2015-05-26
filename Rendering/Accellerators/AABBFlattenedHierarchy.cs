@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Runtime.InteropServices;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
-using Raytracer.Rendering.Primitives;
 using Raytracer.Rendering.Accellerators.Partitioners;
 
 namespace Raytracer.Rendering.Accellerators
@@ -97,7 +94,7 @@ namespace Raytracer.Rendering.Accellerators
 
         public override IEnumerable<Traceable> Intersect(Ray ray)
         {
-            var result = new IntersectionInfo(HitResult.MISS);
+            var result = new IntersectionInfo(HitResult.Miss);
 
             if (!_nodes.Any()) 
                 return null;            
@@ -153,7 +150,7 @@ namespace Raytracer.Rendering.Accellerators
                 for (int i = 0; i < node.PrimitiveCount; ++i)
                 {
                     var info = _primitives[node.PrimitivesOffset + i].Intersect(ray);
-                    if (info.Result == HitResult.HIT)
+                    if (info.Result == HitResult.Hit)
                     {                                
                         if (info.T < result.T)
                             result = info;

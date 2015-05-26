@@ -1,8 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Raytracer.Rendering.Core;
-using Raytracer.Rendering.PixelSamplers;
-using Raytracer.Rendering.Renderers;
-using System.Threading;
+using Raytracer.Rendering.Synchronisation;
 
 namespace Raytracer.Rendering.RenderingStrategies
 {

@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Accellerators;
 using Raytracer.Rendering.BackgroundMaterials;
-using Raytracer.FileTypes;
 using Raytracer.Rendering.Materials;
 using Raytracer.Rendering.Primitives;
 using Raytracer.Rendering.Accellerators.Partitioners;
@@ -18,7 +18,7 @@ namespace Raytracer.Rendering.Core
         private IAccelerator _sceneGraph;
 
         public IBackgroundMaterial BackgroundMaterial { get; set; }
-        public Material DefaultMaterial { get; set; }
+        public Material DefaultMaterial { get; private set; }
         /*
         public Point EyePosition { get; set; }
         public Vector ViewPointRotation { get; set; }
@@ -26,7 +26,7 @@ namespace Raytracer.Rendering.Core
         */
         public Scene()
         {
-            DefaultMaterial = new Material()
+            DefaultMaterial = new Material
             {
                 Ambient = new Colour(1f),
                 Diffuse = new Colour(1f),
@@ -59,47 +59,57 @@ namespace Raytracer.Rendering.Core
             set;
         }
         */
-        public void AddLight(Light pLight)
+        public void AddLight(Light light)
         {
-            _lights.Add(pLight);
+            if (light == null)
+                throw new ArgumentNullException("light");
+
+            _lights.Add(light);
         }
 
-        public void AddObject(Traceable pObject)
+        public void AddObject(Traceable primitive)
         {
-            if (pObject.Material == null)
-                pObject.Material = this.DefaultMaterial;
+            if (primitive == null)
+                throw new ArgumentNullException("primitive");
 
-            _primitives.Add(pObject);
+            if (primitive.Material == null)
+                primitive.Material = DefaultMaterial;
+
+            _primitives.Add(primitive);
         }
 
         public void AddMaterial(Material mat, string strName)
         {
-            if (mat.Name != strName)
-                mat.Name = strName;
+            if(mat == null)
+                throw new ArgumentNullException("mat");
+
+            mat.Name = strName;
 
             _materials.Add(strName, mat);
         }
 
         public void AddMeshes(Mesh mesh, string strName)
         {
-            if (mesh.Name != strName)
-                mesh.Name = strName;
+            if (mesh == null)
+                throw new ArgumentNullException("mesh");
+
+            mesh.Name = strName;
 
             _meshes.Add(strName, mesh);
         }
 
-        public void BuildAccellerationStructures()
+        private void BuildAccellerationStructures()
         {
             if (_primitives.Count < 10)
                 return;
 
             var elements = FilterUnboundedPrimitives();
 
-            _sceneGraph = new AABBHierarchy(new SAHMutliAxisPrimitivePartitioner());
+            _sceneGraph = new AABBHierarchy(new SahMutliAxisPrimitivePartitioner());
             _sceneGraph.Build(elements);
         }
 
-        private List<Traceable> FilterUnboundedPrimitives()
+        private IEnumerable<Traceable> FilterUnboundedPrimitives()
         {
             var elements = new List<Traceable>();
             
@@ -125,23 +135,7 @@ namespace Raytracer.Rendering.Core
         {
             get
             {
-                return this._lights;
-            }
-        }
-
-        public IEnumerable<Material> Materials
-        {
-            get
-            {
-                return this._materials.Values;
-            }
-        }
-
-        public IEnumerable<Traceable> Primitives
-        {
-            get
-            {
-                return this._primitives;
+                return _lights;
             }
         }
 
@@ -149,13 +143,13 @@ namespace Raytracer.Rendering.Core
         {
             if (strMaterial != null && _materials.ContainsKey(strMaterial))
                 return _materials[strMaterial];
-            else
-                return null;
+            
+            return null;
         }
 
         public IEnumerable<Traceable> GetCandiates(Ray ray)
         {
-            foreach (var prim in this._primitives)
+            foreach (var prim in _primitives)
                 yield return prim;
 
             if (_sceneGraph == null) 
@@ -167,7 +161,7 @@ namespace Raytracer.Rendering.Core
 
         public Traceable FindObjectContainingPoint(Point point)
         {
-            foreach (var prim in this._primitives)
+            foreach (var prim in _primitives)
             {
                 if (prim.Contains(point))
                     return prim;

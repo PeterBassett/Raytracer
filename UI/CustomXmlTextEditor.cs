@@ -56,21 +56,5 @@ namespace Raytracer.UI
             
 			return properties;
 		}
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // textAreaPanel
-            // 
-            this.textAreaPanel.Size = new System.Drawing.Size(416, 397);
-            // 
-            // CustomXmlTextEditor
-            // 
-            this.Name = "CustomXmlTextEditor";
-            this.Size = new System.Drawing.Size(416, 397);
-            this.ResumeLayout(false);
-
-        }
 	}
 }

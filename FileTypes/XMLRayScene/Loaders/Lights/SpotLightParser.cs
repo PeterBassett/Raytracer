@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using Raytracer.Properties.Annotations;
 using Raytracer.Rendering.Lights;
 using Raytracer.Rendering.Core;
 using Raytracer.MathTypes;
@@ -8,7 +9,7 @@ using System.Xml.Linq;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Lights
 {
-    [Export(typeof(XmlRayElementParser))]
+    [Export(typeof(XmlRayElementParser)), UsedImplicitly]
     class SpotLightParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "SpotLight"; } }

@@ -1,16 +1,13 @@
 ﻿using System.ComponentModel.Composition;
-
+using Raytracer.Properties.Annotations;
 using Raytracer.Rendering.Core;
-using Raytracer.Rendering.Primitives;
-using Raytracer.Rendering.Renderers;
 using System.Xml.Linq;
-using Raytracer.Rendering.Cameras;
 using System.Collections.Generic;
 using System;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Primitives
 {
-    [Export(typeof(XmlRayElementParser))]
+    [Export(typeof(XmlRayElementParser)), UsedImplicitly]
     class PrimitivesParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "Primitives"; } }

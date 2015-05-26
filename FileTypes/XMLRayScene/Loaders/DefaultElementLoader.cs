@@ -1,14 +1,10 @@
 ﻿using System.ComponentModel.Composition;
-using Raytracer.MathTypes;
-using Raytracer.Rendering.Core;
-
-using Raytracer.Rendering.Renderers;
 using System.Xml.Linq;
-using Raytracer.Rendering.Cameras;
+using Raytracer.Properties.Annotations;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders
 {
-    [Export(typeof(IXmlRaySceneItemLoader))]
+    [Export(typeof(IXmlRaySceneItemLoader)), UsedImplicitly]
     class DefaultElementLoader : IXmlRaySceneItemLoader
     {
         public string LoaderType { get { return ""; } }

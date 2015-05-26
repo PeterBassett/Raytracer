@@ -10,7 +10,7 @@ namespace Raytracer.Rendering.Primitives
         public readonly double Height;
         private readonly double _halfHeight;
         private readonly double _radiusSquared;
-        private IntersectionInfo _missed = new IntersectionInfo(HitResult.MISS);
+        private IntersectionInfo _missed = new IntersectionInfo(HitResult.Miss);
 
         public Cylinder(double radius, double height, Transform transform)
             : base(transform)
@@ -57,7 +57,7 @@ namespace Raytracer.Rendering.Primitives
 
             var normalAtHitPoint = new Normal(0.0, 0.0, (zCoordOfDisk > 0.0) ? +1.0 : -1.0);
 
-            return new IntersectionInfo(HitResult.HIT, this, displacement.Length, hitpoint, hitpoint, normalAtHitPoint);
+            return new IntersectionInfo(HitResult.Hit, this, displacement.Length, hitpoint, hitpoint, normalAtHitPoint);
         }
 
         private IntersectionInfo FindClosestIntersection(IntersectionInfo[] intersections)
@@ -67,7 +67,7 @@ namespace Raytracer.Rendering.Primitives
 
             for (var i = 0; i < intersections.Length; i++)
             {
-                if (intersections[i].Result != HitResult.HIT) 
+                if (intersections[i].Result != HitResult.Hit) 
                     continue;
 
                 if (intersections[i].T >= smallestDistance)
@@ -114,7 +114,7 @@ namespace Raytracer.Rendering.Primitives
 
                 var normalAtHitPoint = new Normal(hitPoint.X, hitPoint.Y, 0.0).Normalize();
                 
-                return new IntersectionInfo(HitResult.HIT, this, displacement.Length, hitPoint, hitPoint, normalAtHitPoint);
+                return new IntersectionInfo(HitResult.Hit, this, displacement.Length, hitPoint, hitPoint, normalAtHitPoint);
             }
 
             return _missed;

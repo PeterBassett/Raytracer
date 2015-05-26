@@ -1,12 +1,13 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using Raytracer.Properties.Annotations;
 using Raytracer.Rendering.Lights;
 using Raytracer.Rendering.Core;
 using Raytracer.MathTypes;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Lights
 {
-    [Export(typeof(XmlRayElementParser))]
+    [Export(typeof(XmlRayElementParser)), UsedImplicitly]
     class ProjectionLightParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "ProjectionLight"; } }

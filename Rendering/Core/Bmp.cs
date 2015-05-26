@@ -1,14 +1,10 @@
-﻿using System;
-using System.Drawing;
-using System.Drawing.Imaging;
-using Raytracer.Rendering.Core;
-using Size = Raytracer.MathTypes.Size;
+﻿using Size = Raytracer.MathTypes.Size;
 
 namespace Raytracer.Rendering.Core
 {
     class Bmp : IBmp
     {
-        Colour[] m_pColours = null;
+        Colour[] _colours;
         private Size _size;
 
         public Bmp(int lWidth, int lHeight)
@@ -22,23 +18,23 @@ namespace Raytracer.Rendering.Core
 
             _size = new Size(width, height);
 
-            m_pColours = new Colour[_size.Width * _size.Height];
+            _colours = new Colour[_size.Width * _size.Height];
         }
 
         private void Destroy()
         {
             _size = new Size(0, 0);
-            m_pColours = null;
+            _colours = null;
         }
 
         public void SetPixel(int lX, int lY, Colour colour)
         {
-            m_pColours[(lY * _size.Width) + lX] = colour;
+            _colours[(lY * _size.Width) + lX] = colour;
         }
 
         public Colour GetPixel(int lX, int lY)
         {
-            return m_pColours[(lY * _size.Width) + lX];
+            return _colours[(lY * _size.Width) + lX];
         }
 
         public Size Size

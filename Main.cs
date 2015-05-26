@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,16 +9,14 @@ using Raytracer.FileTypes;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Cameras;
 using Raytracer.Rendering.Core;
-
 using Raytracer.Rendering.PixelSamplers;
 using Raytracer.Rendering.Renderers;
 using Raytracer.Rendering.RenderingStrategies;
-using System.Threading;
-using System.Text;
-using System.Collections.Generic;
+//using System.Threading;
 using Raytracer.FileTypes.XMLRayScene;
 using System.Collections.Concurrent;
 using Raytracer.FileTypes.XMLRayScene.Loaders;
+using Raytracer.Rendering.Synchronisation;
 
 namespace Raytracer
 {
@@ -98,16 +95,16 @@ namespace Raytracer
 
             GC.Collect();
 
-            var loader = new XmlRaySceneLoader();
+            ISceneLoader loader = new XmlRaySceneLoader();
 
             SystemComponents components = null;
             using (var sceneStream = new MemoryStream(System.Text.Encoding.Default.GetBytes(strScene)))
-                loader.LoadScene(sceneStream, ref components);
+                components = loader.LoadScene(sceneStream);
 
             m_renderer = components.renderer;
             m_scene = components.scene;
             m_camera = components.camera;
-            _cancellationTokenSource = components.cancellationTokenSource;
+            _cancellationTokenSource = components.CancellationTokenSource;
 
             watch.Stop();
 
@@ -133,8 +130,6 @@ namespace Raytracer
             int width = renderedImage.Width;
             int height = renderedImage.Height;
             
-            _cancellationTokenSource = new CancellationTokenSource();
-                        
             var task = new Task<long>(() =>
             {
                 Stopwatch watch = new Stopwatch();
@@ -179,6 +174,7 @@ namespace Raytracer
             watch.Start();
 
             m_camera.OutputDimensions = bmp.Size;
+            _cancellationTokenSource.Reset();
 
             IPixelSampler pixelSampler = new StandardPixelSampler();            
             IRenderingStrategy renderingStrategy;
@@ -444,7 +440,7 @@ namespace Raytracer
         {
             if (_cancellationTokenSource != null)
                 _cancellationTokenSource.Cancel();
-
+            
             btnCancelRendering.Enabled = false;
             btnRender.Enabled = true;
         }

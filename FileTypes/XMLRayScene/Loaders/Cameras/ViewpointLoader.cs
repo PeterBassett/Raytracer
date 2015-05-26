@@ -1,13 +1,9 @@
 ﻿using System.ComponentModel.Composition;
-using System.Xml.Linq;
-using Raytracer.MathTypes;
-using Raytracer.Rendering.Cameras;
-using Raytracer.Rendering.Core;
-using Raytracer.Rendering.Renderers;
+using Raytracer.Properties.Annotations;
 
-namespace Raytracer.FileTypes.XMLRayScene.Loaders.Camera
+namespace Raytracer.FileTypes.XMLRayScene.Loaders.Cameras
 {
-    [Export(typeof(XmlRayElementParser))]
+    [Export(typeof(XmlRayElementParser)), UsedImplicitly]
     class ViewpointParser : PinholeCameraParser
     {
         public override string LoaderType { get { return "Viewpoint"; } }

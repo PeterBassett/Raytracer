@@ -10,7 +10,7 @@ namespace Raytracer.Rendering.Primitives
         public readonly double Height;
         public readonly double phiMax;
         public readonly Solidity Solid;
-        private IntersectionInfo _missed = new IntersectionInfo(HitResult.MISS);
+        private IntersectionInfo _missed = new IntersectionInfo(HitResult.Miss);
 
         public Cone(double radius, double height, double tm, Solidity solidity, Transform transform)
             : base(transform)
@@ -30,7 +30,7 @@ namespace Raytracer.Rendering.Primitives
 
             var i2 = IntersectWithEndCapDisk(ray);
 
-            if (i1.Result == HitResult.HIT && i2.Result == HitResult.HIT)
+            if (i1.Result == HitResult.Hit && i2.Result == HitResult.Hit)
             {
                 if (i1.T < i2.T)
                     return i1;
@@ -38,10 +38,10 @@ namespace Raytracer.Rendering.Primitives
                     return i2;
             }
 
-            if (i1.Result == HitResult.HIT)
+            if (i1.Result == HitResult.Hit)
                 return i1;
 
-            if (i2.Result == HitResult.HIT)
+            if (i2.Result == HitResult.Hit)
                 return i2;
 
             return _missed;
@@ -91,12 +91,12 @@ namespace Raytracer.Rendering.Primitives
                     return _missed;
             }
 
-            return new IntersectionInfo(HitResult.HIT, this, hitDistance, hitPoint, hitPoint, GetNormal(hitPoint, ray));
+            return new IntersectionInfo(HitResult.Hit, this, hitDistance, hitPoint, hitPoint, GetNormal(hitPoint, ray));
         }
 
         IntersectionInfo IntersectWithEndCapDisk(Ray ray)
         {
-            var missed = new IntersectionInfo(HitResult.MISS);
+            var missed = new IntersectionInfo(HitResult.Miss);
 
             if (Math.Abs(ray.Dir.Z) < MathLib.Epsilon)
                 return missed;
@@ -117,7 +117,7 @@ namespace Raytracer.Rendering.Primitives
             {
                 HitPoint = new Point(x, y, 0.0),
                 ObjectLocalHitPoint = new Point(x, y, 0.0),
-                Result = HitResult.HIT,
+                Result = HitResult.Hit,
                 T = (u * ray.Dir).Length,
                 NormalAtHitPoint = new Normal(0.0, 0.0, (ray.Pos.Z >= 0.0) ? 1.0 : -1.0),
                 Primitive = this

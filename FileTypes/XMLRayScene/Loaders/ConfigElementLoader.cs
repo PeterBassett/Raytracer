@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.Composition;
-using Raytracer.MathTypes;
+using Raytracer.Properties.Annotations;
 using Raytracer.Rendering.Core;
 
 using Raytracer.Rendering.Renderers;
@@ -9,7 +9,7 @@ using Raytracer.FileTypes.XMLRayScene.Extensions;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders
 {
-    [Export(typeof(IXmlRaySceneItemLoader))]
+    [Export(typeof(IXmlRaySceneItemLoader)), UsedImplicitly]
     class ConfigElementLoader : IXmlRaySceneItemLoader
     {
         public string LoaderType { get { return "Config"; } }

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using Raytracer.MathTypes;
+using Raytracer.Properties.Annotations;
 using Raytracer.Rendering.Core;
 
 using System;
@@ -11,7 +12,7 @@ using Raytracer.Rendering.Materials;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Primitives
 {
-    [Export(typeof(XmlRayElementParser))]
+    [Export(typeof(XmlRayElementParser)), UsedImplicitly]
     class MeshParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "Mesh"; } }

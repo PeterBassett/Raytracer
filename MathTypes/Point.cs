@@ -130,9 +130,9 @@ namespace Raytracer.MathTypes
 		{
 			return
 				(
-				(System.Math.Abs(v.X - u.X) <= tolerance) &&
-				(System.Math.Abs(v.Y - u.Y) <= tolerance) &&
-				(System.Math.Abs(v.Z - u.Z) <= tolerance)
+				(Math.Abs(v.X - u.X) <= tolerance) &&
+				(Math.Abs(v.Y - u.Y) <= tolerance) &&
+				(Math.Abs(v.Z - u.Z) <= tolerance)
 				);
 		}
 

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using Raytracer.Properties.Annotations;
 using Raytracer.Rendering.Core;
-
 using System.Xml.Linq;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Materials
 {
-    [Export(typeof(XmlRayElementParser))]
+    [Export(typeof(XmlRayElementParser)), UsedImplicitly]
     class SpecularParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "Specular"; } }

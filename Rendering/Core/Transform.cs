@@ -18,11 +18,6 @@ namespace Raytracer.Rendering.Core
             return GetRotation(_transform);
         }
 
-        public Vector GetWorldSpaceRotation()
-        {
-            return GetRotation(_inverse);
-        }
-
         public Vector GetRotation(Matrix m)
         {
             Vector scale;

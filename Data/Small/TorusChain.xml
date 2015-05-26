@@ -1,130 +1,141 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Scene>
-  <Viewpoint>
-    <Transform>
-      <Rotate>36, -21.5, 0.0</Rotate>
-      <Translate>8.5,9, -16</Translate>
-    </Transform>
-    <FOV>70</FOV>
-  </Viewpoint>
+<Config>
+  <Renderer>
+    <Raytracer />
 
-  <Lights>
-    <AmbientLight>
-      <Colour>0.2</Colour>
-    </AmbientLight>
+    <RenderSettings>
+      <Depth>1</Depth>
+      <Shadows>true</Shadows>
+      <Reflections>false</Reflections>
+      <Refractions>false</Refractions>
+    </RenderSettings>
+  </Renderer>
 
-    <PointLight power="300">
+  <Camera>
+    <Viewpoint>
       <Transform>
-        <Translate>6,8,-10</Translate>
+        <Rotate>36, -21.5, 0.0</Rotate>
+        <Translate>8.5,9, -16</Translate>
       </Transform>
-      <Colour>1</Colour>
-    </PointLight>
+      <FOV>70</FOV>
+    </Viewpoint>
 
-    <PointLight power="300">
-      <Transform>
-        <Translate>6,8,10</Translate>
-      </Transform>
-      <Colour>1</Colour>
-    </PointLight>
-    
-  </Lights>
+  </Camera>
 
-  <RenderSettings>
-    <Depth>1</Depth>
-    <Shadows>true</Shadows>
-    <Reflections>false</Reflections>
-    <Refractions>false</Refractions>
-  </RenderSettings>
+  <Scene>
 
-  <Materials>
-    <ColourMaterial name="darkgrey">
-      <Diffuse>
-        <Colour>0.3</Colour>
-      </Diffuse>
-      <Reflected>
-        <Colour>0.9</Colour>
-      </Reflected>
-    </ColourMaterial>
+    <Lights>
+      <AmbientLight>
+        <Colour>0.2</Colour>
+      </AmbientLight>
 
-    <ColourMaterial name="lightgrey">
-      <Diffuse>
-        <Colour>0.7</Colour>
-      </Diffuse>
-      <Reflected>
-        <Colour>0.9</Colour>
-      </Reflected>
-    </ColourMaterial>
+      <PointLight power="300">
+        <Transform>
+          <Translate>6,8,-10</Translate>
+        </Transform>
+        <Colour>1</Colour>
+      </PointLight>
 
-    <ColourMaterial name="red">
-      <Diffuse>
-        <Colour>
-          <Red>1</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Colour>
-      </Diffuse>
-    </ColourMaterial>
+      <PointLight power="300">
+        <Transform>
+          <Translate>6,8,10</Translate>
+        </Transform>
+        <Colour>1</Colour>
+      </PointLight>
 
-    <ColourMaterial name="green">
-      <Diffuse>
-        <Colour>
-          <Red>0</Red>
-          <Green>1</Green>
-          <Blue>0</Blue>
-        </Colour>
-      </Diffuse>
-    </ColourMaterial>
+    </Lights>
 
-    <ColourMaterial name="blue">
-      <Diffuse>
-        <Colour>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>1</Blue>
-        </Colour>
-      </Diffuse>
-    </ColourMaterial>
-    
-    <CheckMaterial name="check" from-material="lightgrey" to-material="darkgrey">
-      <Scale>4</Scale>
-    </CheckMaterial>
 
-    <TextureMaterial name="texture">
-      <Texture>earth_daymap.jpg</Texture>
-    </TextureMaterial>
+    <Materials>
+      <ColourMaterial name="darkgrey">
+        <Diffuse>
+          <Colour>0.3</Colour>
+        </Diffuse>
+        <Reflected>
+          <Colour>0.9</Colour>
+        </Reflected>
+      </ColourMaterial>
 
-  </Materials>
+      <ColourMaterial name="lightgrey">
+        <Diffuse>
+          <Colour>0.7</Colour>
+        </Diffuse>
+        <Reflected>
+          <Colour>0.9</Colour>
+        </Reflected>
+      </ColourMaterial>
 
-  <Primitives>
-    <Torus innerradius="5" outerradius="1.2">
-      <Transform>
-        <RotateX>-30</RotateX>
-      </Transform>
-      <Material>red</Material>
-    </Torus>
+      <ColourMaterial name="red">
+        <Diffuse>
+          <Colour>
+            <Red>1</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Colour>
+        </Diffuse>
+      </ColourMaterial>
 
-    <Torus innerradius="5" outerradius="1.2">
-      <Transform>
-        <RotateX>60</RotateX>
-        <Translate>-7,0,0</Translate>
-      </Transform>
-      <Material>green</Material>
-    </Torus>
+      <ColourMaterial name="green">
+        <Diffuse>
+          <Colour>
+            <Red>0</Red>
+            <Green>1</Green>
+            <Blue>0</Blue>
+          </Colour>
+        </Diffuse>
+      </ColourMaterial>
 
-    <Torus innerradius="5" outerradius="1.2">
-      <Transform>
-        <RotateX>60</RotateX>
-        <Translate>7,0,0</Translate>
-      </Transform>
-      <Material>blue</Material>
-    </Torus>
-    
-    <Plane>
-      <Point x="0" y="-6" z="0"></Point>
-      <Normal x="0" y="1" z="0"></Normal>
-      <Material>check</Material>
-    </Plane>
+      <ColourMaterial name="blue">
+        <Diffuse>
+          <Colour>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>1</Blue>
+          </Colour>
+        </Diffuse>
+      </ColourMaterial>
 
-  </Primitives>
+      <CheckMaterial name="check" from-material="lightgrey" to-material="darkgrey">
+        <Scale>4</Scale>
+      </CheckMaterial>
 
-</Scene>
+      <TextureMaterial name="texture">
+        <Texture>earth_daymap.jpg</Texture>
+      </TextureMaterial>
+
+    </Materials>
+
+    <Primitives>
+      <Torus innerradius="5" outerradius="1.2">
+        <Transform>
+          <RotateX>-30</RotateX>
+        </Transform>
+        <Material>red</Material>
+      </Torus>
+
+      <Torus innerradius="5" outerradius="1.2">
+        <Transform>
+          <RotateX>60</RotateX>
+          <Translate>-7,0,0</Translate>
+        </Transform>
+        <Material>green</Material>
+      </Torus>
+
+      <Torus innerradius="5" outerradius="1.2">
+        <Transform>
+          <RotateX>60</RotateX>
+          <Translate>7,0,0</Translate>
+        </Transform>
+        <Material>blue</Material>
+      </Torus>
+
+      <Plane>
+        <Point x="0" y="-6" z="0"></Point>
+        <Normal x="0" y="1" z="0"></Normal>
+        <Material>check</Material>
+      </Plane>
+
+    </Primitives>
+
+  </Scene>
+</Config>

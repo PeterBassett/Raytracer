@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Raytracer.MathTypes
 {
-    
-
     public static class MathLib
     {
         public const double Epsilon = 4.76837158203125E-7f;
@@ -23,19 +18,9 @@ namespace Raytracer.MathTypes
         public static double mLibCos(double angle) { return (double)Math.Cos(PI * ((double)angle / 180)); }
         public static double mLibSin(double angle) { return (double)Math.Sin(PI * ((double)angle / 180)); }
 
-        public static float mLibCos(float angle) { return (float)Math.Cos(PI * ((double)angle / 180)); }
-        public static float mLibSin(float angle) { return (float)Math.Sin(PI * ((double)angle / 180)); }
-
         internal static bool IsZero(double value)
         {
-			return (System.Math.Abs(value) < 1.0E-6f);
-        }
-
-        public static float Clamp(float val, float min, float max) 
-        {
-            val = Math.Min(val, max);
-            val = Math.Max(val, min);
-            return val;
+			return (Math.Abs(value) < 1.0E-6f);
         }
 
         public static double Clamp(double val, double min, double max)

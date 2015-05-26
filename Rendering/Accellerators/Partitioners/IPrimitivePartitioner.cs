@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Raytracer.Rendering.Core;
-using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.Rendering.Accellerators.Partitioners
 {

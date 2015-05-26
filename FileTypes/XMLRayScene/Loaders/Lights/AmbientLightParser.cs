@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using Raytracer.Properties.Annotations;
 using Raytracer.Rendering.Core;
 using Raytracer.Rendering.Lights;
 
@@ -7,7 +8,7 @@ using System.Xml.Linq;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Lights
 {
-    [Export(typeof(XmlRayElementParser))]
+    [Export(typeof(XmlRayElementParser)), UsedImplicitly]
     class AmbientLightParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "AmbientLight"; } }

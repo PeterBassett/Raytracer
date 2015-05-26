@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Raytracer.Rendering.Core;
+﻿using Raytracer.Rendering.Core;
 using Raytracer.MathTypes;
 
 namespace Raytracer.Rendering.Primitives
@@ -22,7 +18,7 @@ namespace Raytracer.Rendering.Primitives
 
             var info = ObjectSpace_Intersect(ray);
 
-            if (info.Result == HitResult.MISS)
+            if (info.Result == HitResult.Miss)
                 return info;
 
             info = _transform.ToWorldSpace(info);

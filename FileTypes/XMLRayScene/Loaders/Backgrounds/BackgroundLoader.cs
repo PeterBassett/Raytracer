@@ -1,16 +1,13 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 using System.Linq;
-
-using Raytracer.Rendering.BackgroundMaterials;
-using Raytracer.Rendering.Core;
-using Raytracer.Rendering.Renderers;
 using System.Xml.Linq;
-using Raytracer.Rendering.Cameras;
+using Raytracer.Properties.Annotations;
+using Raytracer.Rendering.BackgroundMaterials;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Backgrounds
 {
-    [Export(typeof(IXmlRaySceneItemLoader))]
+    [Export(typeof(IXmlRaySceneItemLoader)), UsedImplicitly]
     class BackgroundLoader : IXmlRaySceneItemLoader
     {
         public string LoaderType { get { return "Background"; } }

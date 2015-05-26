@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 
 namespace Raytracer.FileTypes.XMLRayScene.Extensions
@@ -25,7 +24,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Extensions
             return AttributesCaseInsensitive(source, name).FirstOrDefault();
         }
 
-        public static IEnumerable<XAttribute> AttributesCaseInsensitive(this XElement source, XName name)
+        private static IEnumerable<XAttribute> AttributesCaseInsensitive(this XElement source, XName name)
         {
             return source.Attributes()
                 .Where(e => e.Name.Namespace == name.Namespace

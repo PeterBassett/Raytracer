@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
 using Raytracer.FileTypes;

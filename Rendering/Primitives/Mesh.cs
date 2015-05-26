@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Accellerators;
 using Raytracer.Rendering.Core;
@@ -28,7 +25,7 @@ namespace Raytracer.Rendering.Primitives
                 BuildAABB();
 
            // bvh = new AABBFlattenedHierarchy(new SAHMutliAxisPrimitivePartitioner());
-            bvh = new AABBHierarchy(new SAHMutliAxisPrimitivePartitioner());            
+            bvh = new AABBHierarchy(new SahMutliAxisPrimitivePartitioner());            
             bvh.Build(triangles);
         }
 
@@ -91,20 +88,20 @@ namespace Raytracer.Rendering.Primitives
         public override IntersectionInfo Intersect(Ray ray)
         {                        
             if (!this.GetAABB().Intersect(ray))
-                return new IntersectionInfo(HitResult.MISS);
+                return new IntersectionInfo(HitResult.Miss);
 
             return GetMinimumValidIntersection(ray);
         }
 
         private IntersectionInfo GetMinimumValidIntersection(Ray ray)
         {
-            IntersectionInfo minimumIntersection = new IntersectionInfo(HitResult.MISS);
+            IntersectionInfo minimumIntersection = new IntersectionInfo(HitResult.Miss);
 
             foreach (var tri in GetCandidates(ray))
             {
                 var result = tri.Intersect(ray);
 
-                if (result.T > 0f && result.T < minimumIntersection.T && result.Result != HitResult.MISS)
+                if (result.T > 0f && result.T < minimumIntersection.T && result.Result != HitResult.Miss)
                     minimumIntersection = result;
             }
             return minimumIntersection;
@@ -136,7 +133,7 @@ namespace Raytracer.Rendering.Primitives
             {
                 var result = tri.Intersect(ray);
 
-                if (result.T > 0f && result.Result != HitResult.MISS)
+                if (result.T > 0f && result.Result != HitResult.Miss)
                      intersections++;
             }
 

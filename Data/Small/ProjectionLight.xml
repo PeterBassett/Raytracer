@@ -1,86 +1,103 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Scene>
-  <Viewpoint>
-    <Transform>
-      <Rotate>30,25,0</Rotate>      
-      <Translate>-6,6,-15</Translate>      
-    </Transform>
-    <FOV>90</FOV>
-  </Viewpoint>
+<Config>
+  <Renderer>
+    <Raytracer />
 
-  <Lights>
-    <AmbientLight>
-      <Colour>0.156</Colour>
-    </AmbientLight>
+    <RenderingStrategy>
+      <BasicRenderingStrategy>
+        <PixelSampler>
+          <EdgeDetectionPerComponentSampler subSamplingLevel="4" renderEdgeDetectionResults="false" />
+        </PixelSampler>
+      </BasicRenderingStrategy>
+    </RenderingStrategy>
 
-    <ProjectionLight power="300" width="75">
+    <RenderSettings>
+      <Depth>2</Depth>
+      <Shadows>true</Shadows>
+      <Reflections>true</Reflections>
+      <Refractions>false</Refractions>
+    </RenderSettings>
+
+  </Renderer>
+
+  <Camera>
+    <Viewpoint>
       <Transform>
-        <LookAt to="0,0,0" from="-5,12,-5" />
+        <Rotate>30,25,0</Rotate>
+        <Translate>-6,6,-15</Translate>
       </Transform>
-      <Texture>LEGO_logo_1972.png</Texture>
-    </ProjectionLight>
+      <FOV>90</FOV>
+    </Viewpoint>
+  </Camera>
 
-  </Lights>
+  <Scene>
+    <Lights>
+      <AmbientLight>
+        <Colour>0.156</Colour>
+      </AmbientLight>
 
-  <RenderSettings>
-    <Depth>2</Depth>
-    <Shadows>true</Shadows>
-    <Reflections>true</Reflections>
-    <Refractions>false</Refractions>
-  </RenderSettings>
+      <ProjectionLight power="300" width="75">
+        <Transform>
+          <LookAt to="0,0,0" from="-5,12,-5" />
+        </Transform>
+        <Texture>LEGO_logo_1972.png</Texture>
+      </ProjectionLight>
 
-  <Materials>
-    <ColourMaterial name="darkgrey">
-      <Diffuse>
-        <Colour>0.3</Colour>
-      </Diffuse>
-    </ColourMaterial>
+    </Lights>
 
-    <ColourMaterial name="lightgrey">
-      <Diffuse>
-        <Colour>0.7</Colour>
-      </Diffuse>
-    </ColourMaterial>
+    <Materials>
+      <ColourMaterial name="darkgrey">
+        <Diffuse>
+          <Colour>0.3</Colour>
+        </Diffuse>
+      </ColourMaterial>
 
-    <ColourMaterial name="red">
-      <Diffuse>
-        <Colour>
-          <Red>0.7</Red>
-          <Green>0.1</Green>
-          <Blue>0.1</Blue>
-        </Colour>
-      </Diffuse>
-    </ColourMaterial>
+      <ColourMaterial name="lightgrey">
+        <Diffuse>
+          <Colour>0.7</Colour>
+        </Diffuse>
+      </ColourMaterial>
 
-    <CheckMaterial name="check" from-material="lightgrey" to-material="darkgrey">
-      <Scale>4</Scale>
-    </CheckMaterial>
+      <ColourMaterial name="red">
+        <Diffuse>
+          <Colour>
+            <Red>0.7</Red>
+            <Green>0.1</Green>
+            <Blue>0.1</Blue>
+          </Colour>
+        </Diffuse>
+      </ColourMaterial>
 
-  </Materials>
+      <CheckMaterial name="check" from-material="lightgrey" to-material="darkgrey">
+        <Scale>4</Scale>
+      </CheckMaterial>
 
-  <Primitives>
-    <Sphere>
-      <Radius>2</Radius>
-      <Material>red</Material>
-    </Sphere>
+    </Materials>
 
-    <Plane>
-      <Point x="0" y="-6" z="0"></Point>
-      <Normal x="0" y="1" z="0"></Normal>
-      <Material>check</Material>
-    </Plane>
+    <Primitives>
+      <Sphere>
+        <Radius>2</Radius>
+        <Material>red</Material>
+      </Sphere>
 
-    <Plane>
-      <Point x="0" y="0" z="-6"></Point>
-      <Normal x="0" y="0" z="-1"></Normal>
-      <Material>check</Material>
-    </Plane>
+      <Plane>
+        <Point x="0" y="-6" z="0"></Point>
+        <Normal x="0" y="1" z="0"></Normal>
+        <Material>check</Material>
+      </Plane>
 
-    <Plane>
-      <Point x="-6" y="0" z="0"></Point>
-      <Normal x="-1" y="0" z="0"></Normal>
-      <Material>check</Material>
-    </Plane>
+      <Plane>
+        <Point x="0" y="0" z="-6"></Point>
+        <Normal x="0" y="0" z="-1"></Normal>
+        <Material>check</Material>
+      </Plane>
 
-  </Primitives>
-</Scene>
+      <Plane>
+        <Point x="-6" y="0" z="0"></Point>
+        <Normal x="-1" y="0" z="0"></Normal>
+        <Material>check</Material>
+      </Plane>
+
+    </Primitives>
+  </Scene>
+</Config>

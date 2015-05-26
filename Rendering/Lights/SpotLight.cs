@@ -1,21 +1,19 @@
 ﻿using System;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
-using Raytracer.FileTypes;
 
 namespace Raytracer.Rendering.Lights
 {
     class SpotLight : Light
     {
-        public double CosTotalWidth;
-        public double CosFalloffStart;
+        private readonly double _cosTotalWidth;
+        private readonly double _cosFalloffStart;
         
         public SpotLight(Colour colour, float power, float totalWidthInDegrees, float widthBeforeFallOffInDegrees, Transform transform)
-            : base(colour, transform)
+            : base(colour, power, transform)
         {
-            Intensity *= power;
-            CosTotalWidth = Math.Cos(MathLib.Deg2Rad(totalWidthInDegrees));
-            CosFalloffStart = Math.Cos(MathLib.Deg2Rad(widthBeforeFallOffInDegrees));
+            _cosTotalWidth = Math.Cos(MathLib.Deg2Rad(totalWidthInDegrees));
+            _cosFalloffStart = Math.Cos(MathLib.Deg2Rad(widthBeforeFallOffInDegrees));
         }
 
         public override Colour Sample(Point hitPoint, Normal normalAtHitPoint, ref Vector pointToLight, ref VisibilityTester visibilityTester)
@@ -33,18 +31,18 @@ namespace Raytracer.Rendering.Lights
 
         double Falloff(Vector w) 
         {
-            Vector wl = _transform.ToObjectSpace(w).Normalize();
+            Vector wl = Transform.ToObjectSpace(w).Normalize();
             var costheta = wl.Z;
 
-            if (costheta < CosTotalWidth)     
+            if (costheta < _cosTotalWidth)     
                 return 0.0;
 
-            if (costheta > CosFalloffStart)   
+            if (costheta > _cosFalloffStart)   
                 return 1.0;
 
             // Compute falloff inside spotlight cone
-            var delta = (costheta - CosTotalWidth) /
-                        (CosFalloffStart - CosTotalWidth);
+            var delta = (costheta - _cosTotalWidth) /
+                        (_cosFalloffStart - _cosTotalWidth);
 
             return delta*delta*delta*delta;
         }

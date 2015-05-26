@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
 
@@ -22,16 +19,16 @@ namespace Raytracer.Rendering.Primitives
             var nd = Vector.DotProduct(Normal, ray.Dir);
 
             if (nd >= 0.0f)
-                return new IntersectionInfo(HitResult.MISS);
+                return new IntersectionInfo(HitResult.Miss);
 
             var distance = -(Vector.DotProduct(Normal, (Vector)ray.Pos) + D) / nd;
             
             if (distance <= 0.0f)
-                return new IntersectionInfo(HitResult.MISS);
+                return new IntersectionInfo(HitResult.Miss);
             
             var hitPoint = ray.Pos + (ray.Dir * distance);
 
-            return new IntersectionInfo(HitResult.HIT, this, distance, hitPoint, hitPoint, Normal);
+            return new IntersectionInfo(HitResult.Hit, this, distance, hitPoint, hitPoint, Normal);
         }
         
         public override AABB GetAABB()

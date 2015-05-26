@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
-using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.Rendering.Accellerators.Partitioners
 {
-    class SAHMutliAxisPrimitivePartitioner : IPrimitivePartitioner
+    class SahMutliAxisPrimitivePartitioner : IPrimitivePartitioner
     {
         struct Bucket
         {

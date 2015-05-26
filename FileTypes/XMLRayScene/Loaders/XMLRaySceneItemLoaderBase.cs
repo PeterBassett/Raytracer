@@ -2,22 +2,16 @@
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Xml.Linq;
+using Raytracer.Properties.Annotations;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders
 {
-    [Export(typeof(XmlRayElementParser))]
+    [Export(typeof(XmlRayElementParser)), UsedImplicitly]
     abstract class XmlRayElementParser
     {
         public abstract string LoaderType { get; }
 
         public abstract dynamic LoadObject(XmlRaySceneLoader loader, SystemComponents components, XElement element, string elementName, Func<dynamic> createDefault);
-        
-        public double GetDouble(XElement element, string valueName, Func<double> createDefault)
-        {
-            var value = GetDouble(element, valueName);
-
-            return value.HasValue ? value.Value : createDefault();
-        }
 
         public double? GetDouble(XElement element, string valueName)
         {

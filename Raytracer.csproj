@@ -143,9 +143,10 @@
     <Compile Include="PixelCoordinates.Designer.cs">
       <DependentUpon>PixelCoordinates.cs</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Annotations\Annotations.cs" />
     <Compile Include="Rendering\Accellerators\AABBFlattenedHierarchy.cs" />
-    <Compile Include="Rendering\Accellerators\Partitioners\SAHMutliAxisPrimitivePartitioner.cs" />
-    <Compile Include="Rendering\Accellerators\Partitioners\SAHPrimitivePartitioner.cs" />
+    <Compile Include="Rendering\Accellerators\Partitioners\SahMutliAxisPrimitivePartitioner.cs" />
+    <Compile Include="Rendering\Accellerators\Partitioners\SahPrimitivePartitioner.cs" />
     <Compile Include="Rendering\Accellerators\Partitioners\EqualPrimitivePartitioner.cs" />
     <Compile Include="Rendering\Accellerators\Partitioners\IPrimitivePartitioner.cs" />
     <Compile Include="Rendering\Core\AABB.cs">
@@ -219,7 +220,7 @@
     <Compile Include="Rendering\Lights\SpotLight.cs" />
     <Compile Include="Rendering\Lights\DistantLight.cs" />
     <Compile Include="Rendering\Lights\PointLight.cs" />
-    <Compile Include="Rendering\PixelSampler\EdgeDetectionPerComponentSampler.cs" />
+    <Compile Include="Rendering\PixelSamplers\EdgeDetectionPerComponentSampler.cs" />
     <Compile Include="Rendering\Primitives\Cone.cs" />
     <Compile Include="Rendering\Primitives\Solidity.cs" />
     <Compile Include="Rendering\Primitives\Disc.cs" />
@@ -231,7 +232,7 @@
     <Compile Include="Rendering\RenderingStrategies\ProgressiveRenderingStrategy.cs" />
     <Compile Include="Rendering\RenderingStrategies\IRenderingStrategy.cs" />
     <Compile Include="Rendering\Renderers\IRenderer.cs" />
-    <Compile Include="Rendering\PixelSampler\EdgeDetectionSampler.cs" />
+    <Compile Include="Rendering\PixelSamplers\EdgeDetectionSampler.cs" />
     <Compile Include="Rendering\BackgroundMaterials\HorizontalCubemapBackground.cs" />
     <Compile Include="Rendering\BackgroundMaterials\VerticalCubemapBackground.cs" />
     <Compile Include="Rendering\BackgroundMaterials\CubemapBackground.cs" />
@@ -249,7 +250,7 @@
     <Compile Include="Rendering\Core\IntersectionInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Rendering\PixelSampler\IPixelSampler.cs" />
+    <Compile Include="Rendering\PixelSamplers\IPixelSampler.cs" />
     <Compile Include="Rendering\Core\Traceable.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -259,8 +260,8 @@
     <Compile Include="Rendering\Materials\MaterialTexture.cs" />
     <Compile Include="Rendering\Materials\MaterialDispatcher.cs" />
     <Compile Include="Rendering\Cameras\PinholeCamera.cs" />
-    <Compile Include="Rendering\PixelSampler\JitteredPixelSampler.cs" />
-    <Compile Include="Rendering\PixelSampler\StandardPixelSampler.cs" />
+    <Compile Include="Rendering\PixelSamplers\JitteredPixelSampler.cs" />
+    <Compile Include="Rendering\PixelSamplers\StandardPixelSampler.cs" />
     <Compile Include="Rendering\Primitives\Torus.cs" />
     <Compile Include="MathTypes\MathLib.cs" />
     <Compile Include="Program.cs" />
@@ -289,6 +290,8 @@
     <Compile Include="Rendering\Renderers\RayTracingRenderer.cs" />
     <Compile Include="Rendering\Core\Scene.cs" />
     <Compile Include="Rendering\Primitives\Sphere.cs" />
+    <Compile Include="Rendering\Synchronisation\CancellationToken.cs" />
+    <Compile Include="Rendering\Synchronisation\CancellationTokenSource.cs" />
     <Compile Include="UI\XmlFoldingStrategy.cs" />
     <Compile Include="UI\XmlFormattingStrategy.cs" />
     <Compile Include="UI\CustomXmlTextEditor.cs">

@@ -2,9 +2,7 @@
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Cameras;
 using Raytracer.Rendering.Core;
-using Raytracer.FileTypes;
 using Raytracer.Rendering.Materials;
-using Raytracer.Rendering.Primitives;
 using Raytracer.Rendering.RenderingStrategies;
 
 namespace Raytracer.Rendering.Renderers
@@ -15,10 +13,6 @@ namespace Raytracer.Rendering.Renderers
         public IRenderingStrategy RenderingStrategy { get; set; }
         public ICamera Camera { get; set; }
         public Scene Scene { get; set; }
-
-        public RayTracingRenderer()
-        {
-        }
 
         public void RenderScene(IBmp frameBuffer)
         {
@@ -54,13 +48,13 @@ namespace Raytracer.Rendering.Renderers
         
         public IntersectionInfo FindClosestIntersection(Ray ray)
         {
-            var minimumIntersection = new IntersectionInfo(HitResult.MISS);
+            var minimumIntersection = new IntersectionInfo(HitResult.Miss);
 
             foreach (var obj in Scene.GetCandiates(ray))
             {
                 var result = obj.Intersect(ray);
 
-                if (result.T < minimumIntersection.T && result.Result != HitResult.MISS)
+                if (result.T < minimumIntersection.T && result.Result != HitResult.Miss)
                 {
                     minimumIntersection = result;
                 }
@@ -80,7 +74,7 @@ namespace Raytracer.Rendering.Renderers
 
             var info = FindClosestIntersection(ray);
 
-            if (info.Result == HitResult.MISS)
+            if (info.Result == HitResult.Miss)
             {
                 if (Scene.BackgroundMaterial != null)
                     colour = Scene.BackgroundMaterial.Shade(ray);
@@ -159,7 +153,7 @@ namespace Raytracer.Rendering.Renderers
             dirUnit = dirUnit.Normalize();
 
             var cosA1 = Vector.DotProduct(dirUnit, intersection.NormalAtHitPoint);
-            double sin_a1;
+            double sinA1;
             if (cosA1 <= -1.0)
             {
                 if (cosA1 < -1.0001)
@@ -171,7 +165,7 @@ namespace Raytracer.Rendering.Renderers
                 // is entering the solid exactly perpendicular
                 // to the surface at the intersection point.
                 cosA1 = -1.0;  // clamp to lower limit
-                sin_a1 =  0.0;
+                sinA1 =  0.0;
             }
             else if (cosA1 >= +1.0)
             {
@@ -184,7 +178,7 @@ namespace Raytracer.Rendering.Renderers
                 // is exiting the solid exactly perpendicular
                 // to the surface at the intersection point.
                 cosA1 = +1.0;  // clamp to upper limit
-                sin_a1 =  0.0;
+                sinA1 =  0.0;
             }
             else
             {
@@ -194,7 +188,7 @@ namespace Raytracer.Rendering.Renderers
                 // using the trig identity cos^2 + sin^2 = 1.
                 // The angle between any two vectors is always between
                 // 0 and PI, so the sine of such an angle is never negative.
-                sin_a1 = Math.Sqrt(1.0 - cosA1*cosA1);
+                sinA1 = Math.Sqrt(1.0 - cosA1*cosA1);
             }
 
             // The parameter sourceRefractiveIndex passed to this function
@@ -218,7 +212,7 @@ namespace Raytracer.Rendering.Renderers
             var container = FindObjectContainingPoint(testPoint);
 
             var material = new Material();
-            double targetRefractiveIndex = this.Scene.DefaultMaterial.Refraction;
+            double targetRefractiveIndex = Scene.DefaultMaterial.Refraction;
 
             if (container != null)
             {
@@ -237,9 +231,9 @@ namespace Raytracer.Rendering.Renderers
             // with the normal is obtained by multiplying the
             // ratio of refractive indices by the sine of the
             // incident ray's angle with the normal.
-            double sin_a2 = ratio * sin_a1;
+            double sinA2 = ratio * sinA1;
 
-            if (sin_a2 <= -1.0 || sin_a2 >= +1.0)
+            if (sinA2 <= -1.0 || sinA2 >= +1.0)
             {
                 // Since sin_a2 is outside the bounds -1..+1, then
                 // there is no such real angle a2, which in turn
@@ -296,12 +290,12 @@ namespace Raytracer.Rendering.Renderers
             }
 
             // Determine the cosine of the exit angle.
-            double cos_a2 = Math.Sqrt(1.0 - sin_a2*sin_a2);
+            double cosA2 = Math.Sqrt(1.0 - sinA2*sinA2);
             if (cosA1 < 0.0)
             {
                 // Tricky bit: the polarity of cos_a2 must
                 // match that of cos_a1.
-                cos_a2 = -cos_a2;
+                cosA2 = -cosA2;
             }
 
             // Determine what fraction of the light is
@@ -316,12 +310,12 @@ namespace Raytracer.Rendering.Renderers
                 sourceRefractiveIndex,
                 targetRefractiveIndex,
                 cosA1,
-                cos_a2);
+                cosA2);
 
             double Rp = PolarizedReflection(
                 sourceRefractiveIndex,
                 targetRefractiveIndex,
-                cos_a2,
+                cosA2,
                 cosA1);
 
             outReflectionFactor = (Rs + Rp) / 2.0;
@@ -338,11 +332,11 @@ namespace Raytracer.Rendering.Renderers
         double PolarizedReflection(
             double n1,              // source material's index of refraction
             double n2,              // target material's index of refraction
-            double cos_a1,          // incident or outgoing ray angle cosine
-            double cos_a2)          // outgoing or incident ray angle cosine
+            double cosA1,          // incident or outgoing ray angle cosine
+            double cosA2)          // outgoing or incident ray angle cosine
         {
-            var left  = n1 * cos_a1;
-            var right = n2 * cos_a2;
+            var left  = n1 * cosA1;
+            var right = n2 * cosA2;
             var numer = left - right;
             var denom = left + right;
             denom *= denom;     // square the denominator
@@ -389,7 +383,7 @@ namespace Raytracer.Rendering.Renderers
 
                         if (fSpecular > 0.0f)
                         {
-                            var power = (double)Math.Pow(fSpecular, material.Specularity);
+                            var power = Math.Pow(fSpecular, material.Specularity);
                             colour += lightColour * material.SpecularExponent * power;
                         }
                     }

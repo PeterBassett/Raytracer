@@ -1,15 +1,12 @@
-﻿using System.ComponentModel.Composition;
-using Raytracer.MathTypes;
-using Raytracer.Rendering.Core;
-
-using System;
+﻿using System;
+using System.ComponentModel.Composition;
 using System.Xml.Linq;
-using Raytracer.Rendering.Primitives;
+using Raytracer.Properties.Annotations;
 using Raytracer.Rendering.PixelSamplers;
 
-namespace Raytracer.FileTypes.XMLRayScene.Loaders.Primitives
+namespace Raytracer.FileTypes.XMLRayScene.Loaders.PixelSamplers
 {
-    [Export(typeof(XmlRayElementParser))]
+    [Export(typeof(XmlRayElementParser)), UsedImplicitly]
     class StandardPixelSamplerParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "StandardSampler"; } }

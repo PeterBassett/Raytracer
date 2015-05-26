@@ -1,5 +1,4 @@
-﻿using Raytracer.FileTypes;
-using Raytracer.MathTypes;
+﻿using Raytracer.MathTypes;
 using Raytracer.Rendering.Renderers;
 using Raytracer.Rendering.Core;
 
@@ -12,7 +11,7 @@ namespace Raytracer.Rendering.PixelSamplers
             return renderer.ComputeSample(new Vector2(x + 0.5f, y + 0.5f));
         }
 
-        public void Setup()
+        public void Initialise()
         {
         }
     }

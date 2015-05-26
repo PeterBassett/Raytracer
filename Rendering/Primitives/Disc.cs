@@ -24,7 +24,7 @@ namespace Raytracer.Rendering.Primitives
 
         public override IntersectionInfo ObjectSpace_Intersect(Ray ray)
         {
-            var missed = new IntersectionInfo(HitResult.MISS);
+            var missed = new IntersectionInfo(HitResult.Miss);
 
             if (Math.Abs(ray.Dir.Z) < MathLib.Epsilon) 
                 return missed;
@@ -45,7 +45,7 @@ namespace Raytracer.Rendering.Primitives
             {
                 HitPoint = new Point(x, y, 0.0),
                 ObjectLocalHitPoint = new Point(x, y, 0.0),
-                Result = HitResult.HIT,
+                Result = HitResult.Hit,
                 T = (u*ray.Dir).Length,
                 NormalAtHitPoint = new Normal(0.0, 0.0, (ray.Pos.Z >= 0.0) ? 1.0 : -1.0),
                 Primitive = this

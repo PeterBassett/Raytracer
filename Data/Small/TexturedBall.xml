@@ -1,85 +1,93 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Scene>
-  <Viewpoint>
-    <Transform>
-      <Translate>0,0,-9</Translate>
-    </Transform>
-    <FOV>90</FOV>
-  </Viewpoint>
+<Config>
+  <Renderer>
+    <Raytracer />
 
-  <Lights>
-    <AmbientLight>
-      <Colour>0.156</Colour>
-    </AmbientLight>
+    <RenderSettings>
+      <Depth>1</Depth>
+      <Shadows>true</Shadows>
+      <Reflections>true</Reflections>
+      <Refractions>true</Refractions>
+    </RenderSettings>
+  </Renderer>
 
-    <PointLight power="300">
+  <Camera>
+    <Viewpoint>
       <Transform>
-        <Translate>10,10,-10</Translate>
+        <Translate>0,0,-9</Translate>
       </Transform>
-      <Colour>1</Colour>
-    </PointLight>
-    
-  </Lights>
+      <FOV>90</FOV>
+    </Viewpoint>
+  </Camera>
 
-  <RenderSettings>
-    <Depth>1</Depth>
-    <Shadows>true</Shadows>
-    <Reflections>false</Reflections>
-    <Refractions>false</Refractions>
-  </RenderSettings>
+  <Scene>
+    <Lights>
+      <AmbientLight>
+        <Colour>0.156</Colour>
+      </AmbientLight>
 
-  <Materials>
-    <ColourMaterial name="darkgrey">
-      <Diffuse>
-        <Colour>0.3</Colour>
-      </Diffuse>
-      <Reflected>
-        <Colour>0.9</Colour>
-      </Reflected>
-    </ColourMaterial>
+      <PointLight power="300">
+        <Transform>
+          <Translate>10,10,-10</Translate>
+        </Transform>
+        <Colour>1</Colour>
+      </PointLight>
 
-    <ColourMaterial name="lightgrey">
-      <Diffuse>
-        <Colour>0.7</Colour>
-      </Diffuse>
-      <Reflected>
-        <Colour>0.9</Colour>
-      </Reflected>
-    </ColourMaterial>
+    </Lights>
 
-    <ColourMaterial name="red">
-      <Diffuse>
-        <Colour>
-          <Red>0.7</Red>
-          <Green>0.1</Green>
-          <Blue>0.1</Blue>
-        </Colour>
-      </Diffuse>
-    </ColourMaterial>
+    <Materials>
+      <ColourMaterial name="darkgrey">
+        <Diffuse>
+          <Colour>0.3</Colour>
+        </Diffuse>
+        <Reflected>
+          <Colour>0.9</Colour>
+        </Reflected>
+      </ColourMaterial>
 
-    <CheckMaterial name="check" from-material="lightgrey" to-material="darkgrey">
-      <Scale>4</Scale>
-    </CheckMaterial>
+      <ColourMaterial name="lightgrey">
+        <Diffuse>
+          <Colour>0.7</Colour>
+        </Diffuse>
+        <Reflected>
+          <Colour>0.9</Colour>
+        </Reflected>
+      </ColourMaterial>
 
-    <TextureMaterial name="texture">
-      <Texture>earth_daymap.jpg</Texture>
-    </TextureMaterial>
-    
-  </Materials>
+      <ColourMaterial name="red">
+        <Diffuse>
+          <Colour>
+            <Red>0.7</Red>
+            <Green>0.1</Green>
+            <Blue>0.1</Blue>
+          </Colour>
+        </Diffuse>
+      </ColourMaterial>
 
-  <Primitives>
-    <Sphere>
-      
-      <Radius>5</Radius>
-      <Material>texture</Material>
-    </Sphere>
+      <CheckMaterial name="check" from-material="lightgrey" to-material="darkgrey">
+        <Scale>4</Scale>
+      </CheckMaterial>
 
-    <Plane>
-      <Point x="0" y="-6" z="0"></Point>
-      <Normal x="0" y="1" z="0"></Normal>
-      <Material>check</Material>
-    </Plane>
+      <TextureMaterial name="texture">
+        <Texture>earth_daymap.jpg</Texture>
+      </TextureMaterial>
 
-  </Primitives>
+    </Materials>
 
-</Scene>
+    <Primitives>
+      <Sphere>
+
+        <Radius>5</Radius>
+        <Material>texture</Material>
+      </Sphere>
+
+      <Plane>
+        <Point x="0" y="-6" z="0"></Point>
+        <Normal x="0" y="1" z="0"></Normal>
+        <Material>check</Material>
+      </Plane>
+
+    </Primitives>
+
+  </Scene>
+</Config>

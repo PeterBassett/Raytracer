@@ -1,17 +1,14 @@
-﻿using System.ComponentModel.Composition;
-using Raytracer.MathTypes;
+﻿using System;
+using System.ComponentModel.Composition;
+using System.Drawing;
+using System.Xml.Linq;
+using Raytracer.FileTypes.XMLRayScene.Extensions;
+using Raytracer.Properties.Annotations;
 using Raytracer.Rendering.Core;
 
-using Raytracer.Rendering.Renderers;
-using System.Xml.Linq;
-using Raytracer.Rendering.Cameras;
-using Raytracer.FileTypes.XMLRayScene.Extensions;
-using System;
-using System.Drawing;
-
-namespace Raytracer.FileTypes.XMLRayScene.Loaders
+namespace Raytracer.FileTypes.XMLRayScene.Loaders.Output
 {
-    [Export(typeof(IXmlRaySceneItemLoader))]
+    [Export(typeof(IXmlRaySceneItemLoader)), UsedImplicitly]
     class OutputElementLoader : IXmlRaySceneItemLoader
     {
         public string LoaderType { get { return "Output"; } }

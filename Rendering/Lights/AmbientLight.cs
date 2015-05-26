@@ -1,14 +1,12 @@
-﻿using System;
-using Raytracer.MathTypes;
+﻿using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
-using Raytracer.FileTypes;
 
 namespace Raytracer.Rendering.Lights
 {
     class AmbientLight : Light
     {
         public AmbientLight(Colour colour)
-            : base(colour, Transform.CreateIdentityTransform())
+            : base(colour, 1.0, Transform.CreateIdentityTransform())
         {
         }
 

@@ -1,13 +1,12 @@
 ﻿using System.ComponentModel.Composition;
-
 using Raytracer.MathTypes;
-using Raytracer.Rendering.Core;
 using System.Xml.Linq;
 using System;
+using Raytracer.Properties.Annotations;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Geometry
 {
-    [Export(typeof(XmlRayElementParser))]
+    [Export(typeof(XmlRayElementParser)), UsedImplicitly]
     abstract class PointTypeParserBase : XmlRayElementParser
     {
         public override dynamic LoadObject(XmlRaySceneLoader loader, SystemComponents components, XElement element, string elementName, Func<dynamic> createDefault)
@@ -16,9 +15,9 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Geometry
             double y = 0.0;
             double z = 0.0;
 
-            var xAttr = this.GetDouble(element, "x");
-            var yAttr = this.GetDouble(element, "y");
-            var zAttr = this.GetDouble(element, "z");
+            var xAttr = GetDouble(element, "x");
+            var yAttr = GetDouble(element, "y");
+            var zAttr = GetDouble(element, "z");
 
             if (xAttr.HasValue)
                 x = xAttr.Value;

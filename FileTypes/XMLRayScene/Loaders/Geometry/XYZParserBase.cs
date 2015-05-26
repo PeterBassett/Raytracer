@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Xml.Linq;
-
 using Raytracer.MathTypes;
-using Raytracer.Rendering.Core;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Geometry
 {
+    // ReSharper disable once InconsistentNaming
     abstract class XYZParserBase : XmlRayElementParser
     {
-        public virtual Vector? LoadVector(XmlRaySceneLoader loader, SystemComponents components, XElement element, Func<Vector?> createDefault)
+        protected Vector? LoadVector(XmlRaySceneLoader loader, SystemComponents components, XElement element, Func<Vector?> createDefault)
         {
             double? x = null;
             double? y = null;
             double? z = null;
 
-            var xAttr = this.GetDouble(element, "x");
-            var yAttr = this.GetDouble(element, "y");
-            var zAttr = this.GetDouble(element, "z");
+            var xAttr = GetDouble(element, "x");
+            var yAttr = GetDouble(element, "y");
+            var zAttr = GetDouble(element, "z");
 
             if (xAttr.HasValue)
                 x = xAttr.Value;

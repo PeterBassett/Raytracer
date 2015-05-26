@@ -1,5 +1,4 @@
-﻿using System;
-using Raytracer.MathTypes;
+﻿using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
 
 namespace Raytracer.Rendering.Primitives
@@ -19,7 +18,7 @@ namespace Raytracer.Rendering.Primitives
         {
             var result = Mesh.Intersect(ray);
 
-            if (result.Result != HitResult.MISS)
+            if (result.Result != HitResult.Miss)
             {
                 result.HitPoint = ray.Pos + (ray.Dir * result.T);
             }

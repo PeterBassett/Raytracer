@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
 
@@ -24,7 +21,7 @@ namespace Raytracer.Rendering.Primitives
         
         public override IntersectionInfo Intersect(Ray ray)
         {
-            var retval = HitResult.MISS;
+            var retval = HitResult.Miss;
 
             double fDistance = 0.0f;
 
@@ -36,7 +33,7 @@ namespace Raytracer.Rendering.Primitives
 	        double fD = ( fB * fB ) - 4.0f * fA * fC;
 
 	        if( fD < 0.0f )
-                return new IntersectionInfo(HitResult.MISS);
+                return new IntersectionInfo(HitResult.Miss);
 
 	        if( fD >= 0.0f )
 	        {
@@ -50,7 +47,7 @@ namespace Raytracer.Rendering.Primitives
                     if (fDist1 > 1.0f)
                     {
                         fDistance = fDist1;
-                        retval = HitResult.HIT;
+                        retval = HitResult.Hit;
                     }
 
 			        if(fDist2 > 1.0f)
@@ -58,11 +55,11 @@ namespace Raytracer.Rendering.Primitives
 				        if( fDist2 < fDist1 || fDist1 < 1.0f) 
                         {
 					        fDistance = fDist2;
-                            retval = HitResult.INPRIM;
+                            retval = HitResult.InPrim;
                         }
 			        }
 
-		            if(retval != HitResult.MISS)
+		            if(retval != HitResult.Miss)
                     {
                         var hitPoint = ray.Pos + (ray.Dir * fDistance);
                         var normal = GetNormal(hitPoint);
@@ -73,11 +70,11 @@ namespace Raytracer.Rendering.Primitives
                         return new IntersectionInfo(retval, this, fDistance, hitPoint, hitPoint, normal);
                     }
                     else
-			            return new IntersectionInfo(HitResult.MISS);
+			            return new IntersectionInfo(HitResult.Miss);
 		        }
 	        }
 
-            return new IntersectionInfo(HitResult.MISS);       
+            return new IntersectionInfo(HitResult.Miss);       
         }
 
         private Normal GetNormal(Point vPoint)

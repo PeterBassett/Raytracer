@@ -1,49 +1,50 @@
 ﻿using System;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
-using Raytracer.FileTypes;
 
 namespace Raytracer.Rendering.Lights
 {
     class ProjectionLight : Light
     {
-        public double CosTotalWidth;
-        public Texture texture;
-        double hither, yon;
-        double fov;
-        double screenX0, screenX1, screenY0, screenY1;
-        Matrix lightProjection;
+        private const double Hither = 1e-3f;
+
+        private readonly Texture _texture;        
+        private readonly double _screenX0;
+        private readonly double _screenX1;
+        private readonly double _screenY0;
+        private readonly double _screenY1;
+        private readonly Matrix _lightProjection;
 
         public ProjectionLight(Colour colourTint, IBmp textureBmp, float power, float totalWidthInDegrees, Transform transform)
-            : base(colourTint, transform)
+            : base(colourTint, power, transform)
         {
-            Intensity *= power;
-            fov = (float)MathLib.Deg2Rad(totalWidthInDegrees);
-            texture = new Texture(textureBmp);
+            double fov = (float)MathLib.Deg2Rad(totalWidthInDegrees);
+            _texture = new Texture(textureBmp);
 
-            var aspect = (float)textureBmp.Size.Width / (float)textureBmp.Size.Height;
+            var aspect = textureBmp.Size.Width / textureBmp.Size.Height;
             if (aspect > 1)
             {
-                screenX0 = -aspect;
-                screenX1 = aspect;
-                screenY0 = -1;
-                screenY1 = 1;
+                _screenX0 = -aspect;
+                _screenX1 = aspect;
+                _screenY0 = -1;
+                _screenY1 = 1;
             }
             else
             {
-                screenX0 = -1;
-                screenX1 = 1;
-                screenY0 = -1.0f / aspect;
-                screenY1 = 1.0f / aspect;
+                _screenX0 = -1;
+                _screenX1 = 1;
+                _screenY0 = -1.0f / aspect;
+                _screenY1 = 1.0f / aspect;
             }
-            hither = 1e-3f;
-            yon = 1e30f;
-            lightProjection = Matrix.CreatePerspectiveFieldOfView(fov, aspect, hither, yon);
+
+            const double yon = 1e30f;
+
+            _lightProjection = Matrix.CreatePerspectiveFieldOfView(fov, aspect, Hither, yon);
 
             // Compute cosine of cone surrounding projection directions
             var opposite = Math.Tan(fov / 2.0);
             var tanDiag = opposite * Math.Sqrt(1.0 + 1.0 / (aspect * aspect));
-            CosTotalWidth = Math.Cos(Math.Atan(tanDiag));
+            Math.Cos(Math.Atan(tanDiag));
         }
 
         public override Colour Sample(Point hitPoint, Normal normalAtHitPoint, ref Vector pointToLight, ref VisibilityTester visibilityTester)
@@ -61,23 +62,23 @@ namespace Raytracer.Rendering.Lights
 
         Colour Projection(Vector w) 
         {
-            var wl = _transform.ToObjectSpace(w).Normalize();
+            var wl = Transform.ToObjectSpace(w).Normalize();
 
             // Discard directions behind projection light
-            if (wl.Z < hither) 
+            if (wl.Z < Hither) 
                 return new Colour(0);
 
             // Project point onto projection plane and compute light
-            var Pl = lightProjection.Transform((Point)wl);
+            var Pl = _lightProjection.Transform((Point)wl);
             
-            if (Pl.X < screenX0 || Pl.X > screenX1 ||
-                Pl.Y < screenY0 || Pl.Y > screenY1)
+            if (Pl.X < _screenX0 || Pl.X > _screenX1 ||
+                Pl.Y < _screenY0 || Pl.Y > _screenY1)
                 return new Colour(0);
 
-            var s = (Pl.X - screenX0) / (screenX1 - screenX0);
-            var t = (Pl.Y - screenY0) / (screenY1 - screenY0);
+            var s = (Pl.X - _screenX0) / (_screenX1 - _screenX0);
+            var t = (Pl.Y - _screenY0) / (_screenY1 - _screenY0);
             
-            return texture.Sample(s, t);
+            return _texture.Sample(s, t);
         }
     }
 }

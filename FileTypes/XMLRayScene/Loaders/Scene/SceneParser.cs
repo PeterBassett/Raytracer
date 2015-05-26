@@ -1,19 +1,15 @@
 ﻿using System.ComponentModel.Composition;
-using Raytracer.MathTypes;
+using Raytracer.Properties.Annotations;
 using Raytracer.Rendering.Core;
-
-using Raytracer.Rendering.Renderers;
 using System.Xml.Linq;
-using Raytracer.Rendering.Cameras;
-using System.Collections.Generic;
 using System.Linq;
 using Raytracer.Rendering.Materials;
-using Raytracer.Rendering.Primitives;
 using System;
 
-namespace Raytracer.FileTypes.XMLRayScene.Loaders
+// ReSharper disable once CheckNamespace
+namespace Raytracer.FileTypes.XMLRayScene.Loaders.SceneLoader /* note not Scene namespace as this would conlict with the Scene class */
 {
-    [Export(typeof(XmlRayElementParser))]
+    [Export(typeof(XmlRayElementParser)), UsedImplicitly]
     class SceneParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "Scene"; } }
@@ -23,9 +19,9 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders
             if (components.scene == null)
                 components.scene = new Scene();
 
-            var lights = loader.LoadObject<IEnumerable<Light>>(components, element, "Lights", () => Enumerable.Empty<Light>());
-            var materials = loader.LoadObject<IEnumerable<Material>>(components, element, "Materials", () => Enumerable.Empty<Material>());
-            var primitives = loader.LoadObject<IEnumerable<Traceable>>(components, element, "Primitives", () => Enumerable.Empty<Traceable>());
+            var lights = loader.LoadObject(components, element, "Lights", Enumerable.Empty<Light>);
+            loader.LoadObject(components, element, "Materials", Enumerable.Empty<Material>);
+            var primitives = loader.LoadObject(components, element, "Primitives", Enumerable.Empty<Traceable>);
 
             foreach (var light in lights)
                 components.scene.AddLight(light);

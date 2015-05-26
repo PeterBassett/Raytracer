@@ -8,9 +8,6 @@ using System.Linq;
 using System.Xml.Linq;
 using Raytracer.FileTypes.XMLRayScene.Extensions;
 using Raytracer.FileTypes.XMLRayScene.Loaders;
-using Raytracer.Rendering.Core;
-using Raytracer.Rendering.Renderers;
-using Raytracer.Rendering.Cameras;
 
 namespace Raytracer.FileTypes.XMLRayScene
 {
@@ -31,15 +28,17 @@ namespace Raytracer.FileTypes.XMLRayScene
             LoadAddins();
         }
 
-        public void LoadScene(Stream sceneStream, ref SystemComponents components)
+        public SystemComponents LoadScene(Stream sceneStream)
         {
 	        var document = XDocument.Load(sceneStream);
 
-            components = new SystemComponents();
+            var components = new SystemComponents();            
 
             LoadElement(components, document.Root);
 
             components.scene.LoadComplete();
+
+            return components;
         }
 
         public void LoadElement(SystemComponents components, XElement element)
@@ -138,16 +137,6 @@ namespace Raytracer.FileTypes.XMLRayScene
                     }
                 }
             }
-        }
-
-        public bool CanLoadStream(Stream sceneStream)
-        {
-            sceneStream.Seek(0, SeekOrigin.Begin);
-
-            var reader = new StreamReader(sceneStream);
-            var firstLine = reader.ReadLine();
-
-            return firstLine.Trim().StartsWith("<?xml");
         }
     }
 }

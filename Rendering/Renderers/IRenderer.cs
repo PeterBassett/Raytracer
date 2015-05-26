@@ -1,6 +1,5 @@
 ﻿using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
-using Raytracer.FileTypes;
 using Raytracer.Rendering.Cameras;
 using Raytracer.Rendering.RenderingStrategies;
 

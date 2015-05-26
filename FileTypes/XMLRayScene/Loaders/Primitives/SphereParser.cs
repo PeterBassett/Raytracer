@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using Raytracer.MathTypes;
+using Raytracer.Properties.Annotations;
 using Raytracer.Rendering.Core;
 
 using System;
@@ -8,14 +9,14 @@ using Raytracer.Rendering.Primitives;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Primitives
 {
-    [Export(typeof(XmlRayElementParser))]
+    [Export(typeof(XmlRayElementParser)), UsedImplicitly]
     class SphereParser : XmlRayElementParser
     {
         public override string LoaderType { get { return "Sphere"; } }
 
         public override dynamic LoadObject(XmlRaySceneLoader loader, SystemComponents components, XElement element, string elementName, Func<dynamic> createDefault)
         {
-            var transform = loader.LoadObject<Transform>(components, element, "Transform", () => Transform.CreateIdentityTransform());
+            var transform = loader.LoadObject(components, element, "Transform", Transform.CreateIdentityTransform);
             var radius = loader.LoadObject<double>(components, element, "Radius", () => 1);
             var materialName = loader.LoadObject<string>(components, element, "Material", () => null);
 
