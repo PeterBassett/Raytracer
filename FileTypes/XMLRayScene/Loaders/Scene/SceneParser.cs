@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using Raytracer.Properties.Annotations;
+using Raytracer.Rendering.BackgroundMaterials;
 using Raytracer.Rendering.Core;
 using System.Xml.Linq;
 using System.Linq;
@@ -18,6 +19,11 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.SceneLoader /* note not Scene 
         {
             if (components.Scene == null)
                 components.Scene = new Scene();
+
+            var background = loader.LoadObject<IBackgroundMaterial>(components, element, "Background", null);
+
+            if (background != null)
+                components.Scene.BackgroundMaterial = background;
 
             var lights = loader.LoadObject(components, element, "Lights", Enumerable.Empty<Light>);
             loader.LoadObject(components, element, "Materials", Enumerable.Empty<Material>);

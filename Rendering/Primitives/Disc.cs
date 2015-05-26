@@ -22,7 +22,7 @@ namespace Raytracer.Rendering.Primitives
             _innerRadiusSquared = InnerRadius * InnerRadius;
         }
 
-        public override IntersectionInfo ObjectSpace_Intersect(Ray ray)
+        protected override IntersectionInfo ObjectSpaceIntersect(Ray ray)
         {
             var missed = new IntersectionInfo(HitResult.Miss);
 
@@ -52,7 +52,7 @@ namespace Raytracer.Rendering.Primitives
             };
         }
 
-        public override bool ObjectSpace_Contains(Point point)
+        protected override bool ObjectSpaceContains(Point point)
         {
             var length = new Vector2(point.X, point.Y).LengthSquared;
 
@@ -62,7 +62,7 @@ namespace Raytracer.Rendering.Primitives
             return point.Z >= -MathLib.Epsilon && point.Z <= MathLib.Epsilon;
         }
 
-        public override AABB ObjectSpace_GetAABB()
+        protected override AABB ObjectSpaceGetAABB()
         {
             return new AABB
             {

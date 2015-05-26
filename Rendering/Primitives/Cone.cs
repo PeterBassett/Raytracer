@@ -6,26 +6,26 @@ namespace Raytracer.Rendering.Primitives
 {
     class Cone : ObjectSpacePrimitive
     {
-        public readonly double Radius;
-        public readonly double Height;
-        public readonly double phiMax;
-        public readonly Solidity Solid;
-        private IntersectionInfo _missed = new IntersectionInfo(HitResult.Miss);
+        private readonly double _radius;
+        private readonly double _height;
+        private readonly double _phiMax;
+        private readonly Solidity _solid;
+        private readonly IntersectionInfo _missed = new IntersectionInfo(HitResult.Miss);
 
         public Cone(double radius, double height, double tm, Solidity solidity, Transform transform)
             : base(transform)
         {
-            Radius = radius;
-            Height = height;
-            phiMax = MathLib.Deg2Rad(MathLib.Clamp(tm, 0.0, 360.0));
-            Solid = solidity;
+            _radius = radius;
+            _height = height;
+            _phiMax = MathLib.Deg2Rad(MathLib.Clamp(tm, 0.0, 360.0));
+            _solid = solidity;
         }
 
-        public override IntersectionInfo ObjectSpace_Intersect(Ray ray)
+        protected override IntersectionInfo ObjectSpaceIntersect(Ray ray)
         {
             var i1 = IntersectWithCone(ray);
 
-            if (Solid == Solidity.Solid)
+            if (_solid == Solidity.Solid)
                 return i1;
 
             var i2 = IntersectWithEndCapDisk(ray);
@@ -34,8 +34,8 @@ namespace Raytracer.Rendering.Primitives
             {
                 if (i1.T < i2.T)
                     return i1;
-                else
-                    return i2;
+                
+                return i2;
             }
 
             if (i1.Result == HitResult.Hit)
@@ -49,13 +49,13 @@ namespace Raytracer.Rendering.Primitives
 
         private IntersectionInfo IntersectWithCone(Ray ray)
         {
-            var k = Radius / Height;
+            var k = _radius / _height;
 
             k = k * k;
 
             var A = ray.Dir.X * ray.Dir.X + ray.Dir.Y * ray.Dir.Y - k * ray.Dir.Z * ray.Dir.Z;
-            var B = 2 * (ray.Dir.X * ray.Pos.X + ray.Dir.Y * ray.Pos.Y - k * ray.Dir.Z * (ray.Pos.Z - Height));
-            var C = ray.Pos.X * ray.Pos.X + ray.Pos.Y * ray.Pos.Y - k * (ray.Pos.Z - Height) * (ray.Pos.Z - Height);
+            var B = 2 * (ray.Dir.X * ray.Pos.X + ray.Dir.Y * ray.Pos.Y - k * ray.Dir.Z * (ray.Pos.Z - _height));
+            var C = ray.Pos.X * ray.Pos.X + ray.Pos.Y * ray.Pos.Y - k * (ray.Pos.Z - _height) * (ray.Pos.Z - _height);
 
             var roots = new double[2];
             int rootCount = Algebra.SolveQuadraticEquation(A, B, C, roots);
@@ -74,7 +74,7 @@ namespace Raytracer.Rendering.Primitives
 
             phi = ClampToRadians(phi);
 
-            if (hitPoint.Z < 0 || hitPoint.Z > Height || phi > phiMax)
+            if (hitPoint.Z < 0 || hitPoint.Z > _height || phi > _phiMax)
             {
                 if (hitDistance == t1)
                     return _missed;
@@ -87,7 +87,7 @@ namespace Raytracer.Rendering.Primitives
 
                 phi = ClampToRadians(phi);
 
-                if (hitPoint.Z < 0 || hitPoint.Z > Height || phi > phiMax)
+                if (hitPoint.Z < 0 || hitPoint.Z > _height || phi > _phiMax)
                     return _missed;
             }
 
@@ -110,7 +110,7 @@ namespace Raytracer.Rendering.Primitives
             var y = u * ray.Dir.Y + ray.Pos.Y;
             var radial = x * x + y * y;
 
-            if (radial > Radius * Radius)
+            if (radial > _radius * _radius)
                 return missed;
 
             return new IntersectionInfo
@@ -141,26 +141,26 @@ namespace Raytracer.Rendering.Primitives
             return n;// -n.Faceforward(-ray.Dir);
         }
 
-        public override bool ObjectSpace_Contains(Point point)
+        protected override bool ObjectSpaceContains(Point point)
         {
-            if (Solid != Solidity.Solid)
+            if (_solid != Solidity.Solid)
                 return false;
 
-            var slope = Height / Radius;
+            var slope = _height / _radius;
 
             var r2 = point.X * point.X + point.Y * point.Y;
 
             var h2 = point.Z * point.Z;
 
-            return point.Z >= 0 && point.Z <= Height && h2 * slope <= 1 - r2;
+            return point.Z >= 0 && point.Z <= _height && h2 * slope <= 1 - r2;
         }
 
-        public override AABB ObjectSpace_GetAABB()
+        protected override AABB ObjectSpaceGetAABB()
         {
             return new AABB
             {
-                Min = new Point(-Radius, -Radius, 0),
-                Max = new Point(Radius, Radius, Height)
+                Min = new Point(-_radius, -_radius, 0),
+                Max = new Point(_radius, _radius, _height)
             };
         }
     }

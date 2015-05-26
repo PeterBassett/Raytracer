@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+  <Renderer>
+    <Raytracer />
+  </Renderer>
+  
+  <Camera>
+    <Viewpoint>
+      <Transform>
+        <RotateX>45</RotateX>
+      </Transform>
+      <FOV>90</FOV>
+    </Viewpoint>
+  </Camera>
+  
+  <Scene>
+    <Background>
+      <VerticalCubemapBackground>uffizi_cube.jpg</VerticalCubemapBackground>
+    </Background>
+  </Scene>  
+</Config>
+

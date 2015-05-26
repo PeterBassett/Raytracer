@@ -5,9 +5,9 @@ namespace Raytracer.Rendering.Primitives
 {
     abstract class ObjectSpacePrimitive : Traceable
     {
-        protected Transform _transform;
+        private readonly Transform _transform;
 
-        public ObjectSpacePrimitive(Transform transform)
+        protected ObjectSpacePrimitive(Transform transform)
         {
             _transform = transform;
         }
@@ -16,7 +16,7 @@ namespace Raytracer.Rendering.Primitives
         {
             ray = _transform.ToObjectSpace(ray);
 
-            var info = ObjectSpace_Intersect(ray);
+            var info = ObjectSpaceIntersect(ray);
 
             if (info.Result == HitResult.Miss)
                 return info;
@@ -28,16 +28,17 @@ namespace Raytracer.Rendering.Primitives
 
         public override bool Contains(Point point)
         {
-            return ObjectSpace_Contains(_transform.ToObjectSpace(point));
+            return ObjectSpaceContains(_transform.ToObjectSpace(point));
         }
 
         public override AABB GetAABB()
         {
-            return _transform.ToWorldSpace(ObjectSpace_GetAABB());
+            return _transform.ToWorldSpace(ObjectSpaceGetAABB());
         }
 
-        public abstract IntersectionInfo ObjectSpace_Intersect(Ray ray);
-        public abstract bool ObjectSpace_Contains(Point point);
-        public abstract AABB ObjectSpace_GetAABB();
+        protected abstract IntersectionInfo ObjectSpaceIntersect(Ray ray);
+        protected abstract bool ObjectSpaceContains(Point point);
+        // ReSharper disable once InconsistentNaming
+        protected abstract AABB ObjectSpaceGetAABB();
     }
 }

@@ -6,22 +6,22 @@ namespace Raytracer.Rendering.Primitives
 {
     class Torus : ObjectSpacePrimitive
     {
-        public double InnerRadius { get; set; }
-        public double OuterRadius { get; set; }
+        private readonly double _innerRadius;
+        private readonly double _outerRadius;
 
         public Torus(Transform transform, double innerRadius, double outerRadius)
             : base(transform)
         {
-            InnerRadius = innerRadius;
-            OuterRadius = outerRadius;
+            _innerRadius = innerRadius;
+            _outerRadius = outerRadius;
         }
 
-        public override IntersectionInfo ObjectSpace_Intersect(Ray ray)
+        protected override IntersectionInfo ObjectSpaceIntersect(Ray ray)
         {
-            Ray r = ray;
+            var r = ray;
 
-            double R = InnerRadius;
-            double S = OuterRadius;    // distance from center of tube to outside of tube
+            var R = _innerRadius;
+            var S = _outerRadius;    // distance from center of tube to outside of tube
 
             var direction = r.Dir;
             var vantage = r.Pos;
@@ -87,31 +87,31 @@ namespace Raytracer.Rendering.Primitives
 
         private Normal GetNormal(Point point)
         {
-            var a = 1.0 - InnerRadius / Math.Sqrt(point.X * point.X + point.Y * point.Y);
+            var a = 1.0 - _innerRadius / Math.Sqrt(point.X * point.X + point.Y * point.Y);
 
             return new Normal(a * point.X,
                               a * point.Y,
                                   point.Z).Normalize();
         }
 
-        public override bool ObjectSpace_Contains(Point point)
+        protected override bool ObjectSpaceContains(Point point)
         {
-            var t = InnerRadius - Math.Sqrt(point.X * point.X + point.Y * point.Y);
-            var f = t * t + point.Z * point.Z - OuterRadius * OuterRadius;
+            var t = _innerRadius - Math.Sqrt(point.X * point.X + point.Y * point.Y);
+            var f = t * t + point.Z * point.Z - _outerRadius * _outerRadius;
 
             return f <= MathLib.Epsilon; 
         }
 
-        public override AABB ObjectSpace_GetAABB()
+        protected override AABB ObjectSpaceGetAABB()
         {
-            var offset = new Vector(OuterRadius + InnerRadius,    
-                                    OuterRadius + InnerRadius,   
-                                    OuterRadius);
+            var offset = new Vector(_outerRadius + _innerRadius,    
+                                    _outerRadius + _innerRadius,   
+                                    _outerRadius);
 
             return new AABB
             {
-                Min = this.Pos - offset,
-                Max = this.Pos + offset
+                Min = Pos - offset,
+                Max = Pos + offset
             };
         }
     }

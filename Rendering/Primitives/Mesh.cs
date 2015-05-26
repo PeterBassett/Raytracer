@@ -9,15 +9,13 @@ namespace Raytracer.Rendering.Primitives
     class Mesh : Traceable
     {
         public string Name { get; set; }
-
-        List<Triangle> Triangles = null;
-        AABB bounds;
-        
-        IAccelerator bvh = null;
+        readonly List<Triangle> _triangles;
+        private AABB _bounds;
+        private readonly IAccelerator _bvh;
 
         public Mesh(List<Triangle> triangles)
         {
-            Triangles = triangles;
+            _triangles = triangles;
 
             BuildAABB();
 
@@ -25,8 +23,8 @@ namespace Raytracer.Rendering.Primitives
                 BuildAABB();
 
            // bvh = new AABBFlattenedHierarchy(new SAHMutliAxisPrimitivePartitioner());
-            bvh = new AABBHierarchy(new SahMutliAxisPrimitivePartitioner());            
-            bvh.Build(triangles);
+            _bvh = new AABBHierarchy(new SahMutliAxisPrimitivePartitioner());            
+            _bvh.Build(triangles);
         }
 
         private bool TransformToOrigin()
@@ -40,7 +38,7 @@ namespace Raytracer.Rendering.Primitives
                 trans.Z == 0)
                 return false;
 
-            foreach (var tri in Triangles)
+            foreach (var tri in _triangles)
             {
                 for (int i = 0; i < 3; i++)
                 {
@@ -56,7 +54,7 @@ namespace Raytracer.Rendering.Primitives
             var min = new Point(int.MaxValue, int.MaxValue, int.MaxValue);
             var max = new Point(int.MinValue, int.MinValue, int.MinValue);
 
-            foreach (var tri in Triangles)
+            foreach (var tri in _triangles)
             {
                 for (int i = 0; i < 3; i++)
                 {
@@ -82,12 +80,12 @@ namespace Raytracer.Rendering.Primitives
                 }
             }
 
-            bounds = new AABB(min, max);
+            _bounds = new AABB(min, max);
         }
 
         public override IntersectionInfo Intersect(Ray ray)
         {                        
-            if (!this.GetAABB().Intersect(ray))
+            if (!GetAABB().Intersect(ray))
                 return new IntersectionInfo(HitResult.Miss);
 
             return GetMinimumValidIntersection(ray);
@@ -95,7 +93,7 @@ namespace Raytracer.Rendering.Primitives
 
         private IntersectionInfo GetMinimumValidIntersection(Ray ray)
         {
-            IntersectionInfo minimumIntersection = new IntersectionInfo(HitResult.Miss);
+            var minimumIntersection = new IntersectionInfo(HitResult.Miss);
 
             foreach (var tri in GetCandidates(ray))
             {
@@ -108,16 +106,16 @@ namespace Raytracer.Rendering.Primitives
         }
 
         private IEnumerable<Traceable> GetCandidates(Ray ray)
-        {           
-            if(bvh != null)
-                return bvh.Intersect(ray);
-            else
-                return Triangles;
+        {
+            if(_bvh != null)
+                return _bvh.Intersect(ray);
+            
+            return _triangles;
         }
 
         public override AABB GetAABB()
         {
-            return bounds;
+            return _bounds;
         }
 
         public override bool Contains(Point point)

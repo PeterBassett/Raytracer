@@ -27,13 +27,11 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Primitives
                                       MathLib.Rad2Deg(rotate.Y),
                                       MathLib.Rad2Deg(rotate.Z));
 
-            return new Sphere()
-            {
-                Pos = transform.ToObjectSpace(new Point(0, 0, 0)),
-                Ori = rotation,
-                Radius = radius,
-                Material = mat
-            };
+            return new Sphere(transform.ToObjectSpace(new Point(0, 0, 0)),
+                rotation,
+                radius,
+                mat
+            );
         }
     }
 }

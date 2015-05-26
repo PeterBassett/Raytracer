@@ -6,8 +6,8 @@ namespace Raytracer.Rendering.Primitives
 {   
     class Triangle : Traceable
     {
-        public Point[] Vertices = new Point[3];
-        private AABB bounds = AABB.Empty;
+        public readonly Point[] Vertices = new Point[3];
+        private AABB _bounds = AABB.Empty;
         public Vector2[] TextureUVs = new Vector2[3];
         public Normal[] Normals = new Normal[3];
         private Normal _cachedFaceNormal = Normal.Invalid;
@@ -23,8 +23,8 @@ namespace Raytracer.Rendering.Primitives
 
             if (Vector.DotProduct(cp1, cp2) >= 0)
                 return true;
-            else
-                return false;
+            
+            return false;
         }
 
         private bool PointInTriangle(Point p)
@@ -42,8 +42,8 @@ namespace Raytracer.Rendering.Primitives
                 Vertices[0],
                 Vertices[1]))
                 return true;
-            else
-                return false;
+            
+            return false;
         }
 
         public override IntersectionInfo Intersect(Ray ray)
@@ -68,22 +68,22 @@ namespace Raytracer.Rendering.Primitives
             return new IntersectionInfo(HitResult.Hit, this, distance, hitPoint, hitPoint, GetNormal(hitPoint));
         }
 
-        public Normal GetNormal(Point vPoint)
+        private Normal GetNormal(Point vPoint)
         {
-            if(this.Normals != null)
+            if(Normals != null)
                 return InterpolateNormal(vPoint);
 
             return GetNormalFromVertexes();
         }
 
-        public Normal InterpolateNormal(Point pointOfIntersection)
+        private Normal InterpolateNormal(Point pointOfIntersection)
         {
-            var a = Barycentric.CalculateBarycentricInterpolationVector(pointOfIntersection, this.Vertices);
+            var a = Barycentric.CalculateBarycentricInterpolationVector(pointOfIntersection, Vertices);
 
             // find the uv corresponding to point f (uv1/uv2/uv3 are associated to p1/p2/p3):
-            var n = this.Normals[0] * a.X +
-                    this.Normals[1] * a.Y +
-                    this.Normals[2] * a.Z;
+            var n = Normals[0] * a.X +
+                    Normals[1] * a.Y +
+                    Normals[2] * a.Z;
 
             return n.Normalize();
         }
@@ -108,8 +108,8 @@ namespace Raytracer.Rendering.Primitives
 
         public override AABB GetAABB()
         {
-            if (!this.bounds.IsEmpty)
-                return this.bounds;
+            if (!_bounds.IsEmpty)
+                return _bounds;
 
             var min = new Point(
                     Math.Min(Math.Min(Vertices[0].X, Vertices[1].X), Vertices[2].X),
@@ -123,9 +123,9 @@ namespace Raytracer.Rendering.Primitives
                     Math.Max (Math.Max(Vertices[0].Z, Vertices[1].Z), Vertices[2].Z )
             );
 
-            this.bounds = new AABB(min, max);
+            _bounds = new AABB(min, max);
 
-            return this.bounds;
+            return _bounds;
         }
 
         public override bool Contains(Point point)

@@ -1,22 +1,21 @@
 ﻿using System;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
+using Raytracer.Rendering.Materials;
 
 namespace Raytracer.Rendering.Primitives
 {
     class Sphere : Traceable
     {
-        private double m_Radius = 0.0f;
-        public double Radius
+        private readonly double _radius;
+
+        public Sphere(Point point, Vector rotation, double radius, Material mat)
         {
-            get
-            {
-                return m_Radius;
-            }
-            set
-            {
-                m_Radius = value;
-            }
+            _radius = radius;
+
+            Pos = point;
+            Ori = rotation;            
+            Material = mat;
         }
         
         public override IntersectionInfo Intersect(Ray ray)
@@ -27,7 +26,7 @@ namespace Raytracer.Rendering.Primitives
 
             Vector relativePosition = ray.Pos - Pos;
             double fB = 2.0f * (Vector.DotProduct(ray.Dir, relativePosition));  
-	        double fC = Vector.DotProduct(relativePosition, relativePosition) - ( Radius *  Radius );
+	        double fC = Vector.DotProduct(relativePosition, relativePosition) - ( _radius *  _radius );
 	        double fA = 1.0f;
 
 	        double fD = ( fB * fB ) - 4.0f * fA * fC;
@@ -87,14 +86,14 @@ namespace Raytracer.Rendering.Primitives
         {
             return new AABB()
             {
-                Min = this.Pos - Radius,
-                Max = this.Pos + Radius
+                Min = this.Pos - _radius,
+                Max = this.Pos + _radius
             };
         }
 
         public override bool Contains(Point point)
         {
-            double radius = this.Radius + MathLib.Epsilon;
+            var radius = this._radius + MathLib.Epsilon;
             return (point - this.Pos).LengthSquared <= (radius * radius);
         }
     }

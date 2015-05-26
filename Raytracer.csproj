@@ -157,7 +157,7 @@
     <Compile Include="Rendering\Core\VisibilityTester.cs" />
     <Compile Include="FileTypes\XMLRayScene\Extensions\XDocumentExtensions.cs" />
     <Compile Include="FileTypes\XMLRayScene\IXMLRaySceneItemLoader.cs" />
-    <Compile Include="FileTypes\XMLRayScene\Loaders\Backgrounds\BackgroundLoader.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Backgrounds\BackgroundParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Backgrounds\VerticalCubemapBackgroundParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Backgrounds\HorizontalCubemapBackgroundParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Backgrounds\SolidColourBackgroundParser.cs" />
@@ -333,6 +333,9 @@
     <None Include="Data\Small\AmbientLight.ray">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="Data\Small\CubmapVerticalBackground.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\Small\RenderOutput.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

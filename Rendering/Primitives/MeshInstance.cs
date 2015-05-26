@@ -8,15 +8,15 @@ namespace Raytracer.Rendering.Primitives
         public MeshInstance(Mesh mesh, Transform transform)
             : base(transform)
         {
-            Mesh = mesh;
+            _mesh = mesh;
         }
 
-        private AABB bounds = AABB.Empty;
-        public Mesh Mesh { get; set; }
+        private AABB _bounds = AABB.Empty;
+        private Mesh _mesh { get; set; }
 
-        public override IntersectionInfo ObjectSpace_Intersect(Ray ray)
+        protected override IntersectionInfo ObjectSpaceIntersect(Ray ray)
         {
-            var result = Mesh.Intersect(ray);
+            var result = _mesh.Intersect(ray);
 
             if (result.Result != HitResult.Miss)
             {
@@ -26,25 +26,25 @@ namespace Raytracer.Rendering.Primitives
             return result;
         }
 
-        public override bool ObjectSpace_Contains(Point point)
+        protected override bool ObjectSpaceContains(Point point)
         {
-            return Mesh.Contains(point);
+            return _mesh.Contains(point);
         }
 
-        public override AABB ObjectSpace_GetAABB()
+        protected override AABB ObjectSpaceGetAABB()
         {
-            if (bounds.IsEmpty)
+            if (_bounds.IsEmpty)
             {
-                var meshaabb = Mesh.GetAABB();
+                var meshaabb = _mesh.GetAABB();
 
-                bounds = new AABB()
+                _bounds = new AABB
                 {
-                    Min = meshaabb.Min + this.Pos,
-                    Max = meshaabb.Max + this.Pos
+                    Min = meshaabb.Min + Pos,
+                    Max = meshaabb.Max + Pos
                 };
             }
 
-            return bounds;
+            return _bounds;
         }
     }
 }
