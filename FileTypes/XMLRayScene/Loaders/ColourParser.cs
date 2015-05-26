@@ -30,15 +30,15 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders
 
             if (bAttr.HasValue)
                 b = bAttr.Value;
-
+            
             if(!r.HasValue)
-                r = loader.LoadObject<double?>(components, element, "Red", () => null);
+                r = loader.LoadObject<double>(components, element, "Red");
 
             if (!g.HasValue)
-                g = loader.LoadObject<double?>(components, element, "Green", () => null);
+                g = loader.LoadObject<double>(components, element, "Green");
 
             if(!b.HasValue)
-                b = loader.LoadObject<double?>(components, element, "Blue", () => null);
+                b = loader.LoadObject<double>(components, element, "Blue");
 
             if (!r.HasValue || !g.HasValue || !b.HasValue)
             {

@@ -96,12 +96,22 @@ namespace Raytracer.FileTypes.XMLRayScene
             }
         }
 
+        public T LoadObject<T>(SystemComponents components, XElement element) where T : class
+        {
+            return LoadObject<T>(components, element, () => null);
+        }
+
         public T LoadObject<T>(SystemComponents components, XElement element, Func<T> createDefault)
         {
             var loader = FindParserForTag(element.Name.LocalName);
             var value = loader.LoadObject(this, components, element, element.Name.LocalName, () => createDefault);
 
             return (T)value;
+        }
+
+        public Nullable<T> LoadObject<T>(SystemComponents components, XElement parent, string elementName) where T : struct
+        {
+            return LoadObject<Nullable<T>>(components, parent, elementName, () => null);
         }
 
         public T LoadObject<T>(SystemComponents components, XElement parent, string elementName, Func<T> createDefault)

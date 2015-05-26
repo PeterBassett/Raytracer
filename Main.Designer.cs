@@ -39,6 +39,9 @@ namespace Raytracer
             this.mnuAvailableFiles = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.renderOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.useSceneDefaults = new System.Windows.Forms.ToolStripMenuItem();
+            this.overrideSceneDefaults = new System.Windows.Forms.ToolStripMenuItem();
+            this.overrideSceneDefaultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.multiThreadedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRenderingMode = new System.Windows.Forms.ToolStripMenuItem();
             this.progressiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -103,7 +106,6 @@ namespace Raytracer
             this.renderedImage.Size = new System.Drawing.Size(668, 407);
             this.renderedImage.TabIndex = 1;
             this.renderedImage.TabStop = false;
-            this.renderedImage.Click += new System.EventHandler(this.renderedImage_Click);
             this.renderedImage.DoubleClick += new System.EventHandler(this.renderedImage_DoubleClick);
             this.renderedImage.MouseLeave += new System.EventHandler(this.renderedImage_MouseLeave);
             this.renderedImage.MouseMove += new System.Windows.Forms.MouseEventHandler(this.renderedImage_MouseMove);
@@ -174,17 +176,43 @@ namespace Raytracer
             // renderOptionsToolStripMenuItem
             // 
             this.renderOptionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.useSceneDefaults,
+            this.overrideSceneDefaults,
+            this.overrideSceneDefaultsToolStripMenuItem,
+            this.renderToolStripMenuItem});
+            this.renderOptionsToolStripMenuItem.Name = "renderOptionsToolStripMenuItem";
+            this.renderOptionsToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
+            this.renderOptionsToolStripMenuItem.Text = "Render Options";
+            // 
+            // useSceneDefaults
+            // 
+            this.useSceneDefaults.Checked = true;
+            this.useSceneDefaults.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.useSceneDefaults.Name = "useSceneDefaults";
+            this.useSceneDefaults.Size = new System.Drawing.Size(213, 22);
+            this.useSceneDefaults.Text = "Use Scene Defaults?";
+            this.useSceneDefaults.Click += new System.EventHandler(this.sceneDefaults_Click);
+            // 
+            // overrideSceneDefaults
+            // 
+            this.overrideSceneDefaults.Name = "overrideSceneDefaults";
+            this.overrideSceneDefaults.Size = new System.Drawing.Size(213, 22);
+            this.overrideSceneDefaults.Text = "Override Scene Defaults?";
+            this.overrideSceneDefaults.Click += new System.EventHandler(this.sceneDefaults_Click);
+            // 
+            // overrideSceneDefaultsToolStripMenuItem
+            // 
+            this.overrideSceneDefaultsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.multiThreadedToolStripMenuItem,
             this.mnuRenderingMode,
             this.mnuSuperSampling,
             this.mnuShadows,
             this.mnuReflections,
             this.mnuRefractions,
-            this.mnuRenderDepth,
-            this.renderToolStripMenuItem});
-            this.renderOptionsToolStripMenuItem.Name = "renderOptionsToolStripMenuItem";
-            this.renderOptionsToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
-            this.renderOptionsToolStripMenuItem.Text = "Render Options";
+            this.mnuRenderDepth});
+            this.overrideSceneDefaultsToolStripMenuItem.Name = "overrideSceneDefaultsToolStripMenuItem";
+            this.overrideSceneDefaultsToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.overrideSceneDefaultsToolStripMenuItem.Text = "Overridden Scene Defaults";
             // 
             // multiThreadedToolStripMenuItem
             // 
@@ -193,7 +221,7 @@ namespace Raytracer
             this.multiThreadedToolStripMenuItem.Name = "multiThreadedToolStripMenuItem";
             this.multiThreadedToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.multiThreadedToolStripMenuItem.Text = "Multi-Threaded?";
-            this.multiThreadedToolStripMenuItem.Click += new System.EventHandler(this.multiThreadedToolStripMenuItem_Click);
+            this.multiThreadedToolStripMenuItem.Click += new System.EventHandler(this.mnuGeneralSettings_Click);
             // 
             // mnuRenderingMode
             // 
@@ -211,7 +239,7 @@ namespace Raytracer
             this.progressiveToolStripMenuItem.Name = "progressiveToolStripMenuItem";
             this.progressiveToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.progressiveToolStripMenuItem.Text = "Progressive";
-            this.progressiveToolStripMenuItem.Click += new System.EventHandler(this.progressiveToolStripMenuItem_Click);
+            this.progressiveToolStripMenuItem.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // highQualityToolStripMenuItem
             // 
@@ -222,7 +250,7 @@ namespace Raytracer
             this.highQualityToolStripMenuItem.Name = "highQualityToolStripMenuItem";
             this.highQualityToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.highQualityToolStripMenuItem.Text = "High Quality";
-            this.highQualityToolStripMenuItem.Click += new System.EventHandler(this.progressiveToolStripMenuItem_Click);
+            this.highQualityToolStripMenuItem.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // jitteredSamplerToolStripMenuItem
             // 
@@ -230,7 +258,7 @@ namespace Raytracer
             this.jitteredSamplerToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
             this.jitteredSamplerToolStripMenuItem.Tag = "Jittered";
             this.jitteredSamplerToolStripMenuItem.Text = "Jittered Sampler";
-            this.jitteredSamplerToolStripMenuItem.Click += new System.EventHandler(this.jitteredSamplerToolStripMenuItem_Click);
+            this.jitteredSamplerToolStripMenuItem.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // greyscaleEdgeDetectionSamplerToolStripMenuItem
             // 
@@ -240,7 +268,7 @@ namespace Raytracer
             this.greyscaleEdgeDetectionSamplerToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
             this.greyscaleEdgeDetectionSamplerToolStripMenuItem.Tag = "GreyscaleEdgeDetection";
             this.greyscaleEdgeDetectionSamplerToolStripMenuItem.Text = "Greyscale Edge Detection Sampler";
-            this.greyscaleEdgeDetectionSamplerToolStripMenuItem.Click += new System.EventHandler(this.jitteredSamplerToolStripMenuItem_Click);
+            this.greyscaleEdgeDetectionSamplerToolStripMenuItem.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // componentEdgeDetectionSamplerToolStripMenuItem
             // 
@@ -248,7 +276,7 @@ namespace Raytracer
             this.componentEdgeDetectionSamplerToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
             this.componentEdgeDetectionSamplerToolStripMenuItem.Tag = "ComponentEdgeDetection";
             this.componentEdgeDetectionSamplerToolStripMenuItem.Text = "Component Edge Detection Sampler";
-            this.componentEdgeDetectionSamplerToolStripMenuItem.Click += new System.EventHandler(this.jitteredSamplerToolStripMenuItem_Click);
+            this.componentEdgeDetectionSamplerToolStripMenuItem.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // mnuSuperSampling
             // 
@@ -270,7 +298,7 @@ namespace Raytracer
             this.xToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.xToolStripMenuItem.Tag = "1";
             this.xToolStripMenuItem.Text = "1x";
-            this.xToolStripMenuItem.Click += new System.EventHandler(this.mnuSuperSampling_Click);
+            this.xToolStripMenuItem.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // xToolStripMenuItem1
             // 
@@ -278,7 +306,7 @@ namespace Raytracer
             this.xToolStripMenuItem1.Size = new System.Drawing.Size(228, 22);
             this.xToolStripMenuItem1.Tag = "2";
             this.xToolStripMenuItem1.Text = "2x";
-            this.xToolStripMenuItem1.Click += new System.EventHandler(this.mnuSuperSampling_Click);
+            this.xToolStripMenuItem1.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // xToolStripMenuItem2
             // 
@@ -286,7 +314,7 @@ namespace Raytracer
             this.xToolStripMenuItem2.Size = new System.Drawing.Size(228, 22);
             this.xToolStripMenuItem2.Tag = "4";
             this.xToolStripMenuItem2.Text = "4x";
-            this.xToolStripMenuItem2.Click += new System.EventHandler(this.mnuSuperSampling_Click);
+            this.xToolStripMenuItem2.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // xToolStripMenuItem3
             // 
@@ -294,7 +322,7 @@ namespace Raytracer
             this.xToolStripMenuItem3.Size = new System.Drawing.Size(228, 22);
             this.xToolStripMenuItem3.Tag = "8";
             this.xToolStripMenuItem3.Text = "8x";
-            this.xToolStripMenuItem3.Click += new System.EventHandler(this.mnuSuperSampling_Click);
+            this.xToolStripMenuItem3.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // renderAntialiasingSamplesToolStripMenuItem
             // 
@@ -308,21 +336,21 @@ namespace Raytracer
             this.mnuShadows.Name = "mnuShadows";
             this.mnuShadows.Size = new System.Drawing.Size(162, 22);
             this.mnuShadows.Text = "Shadows?";
-            this.mnuShadows.Click += new System.EventHandler(this.mnuShadows_Click);
+            this.mnuShadows.Click += new System.EventHandler(this.mnuGeneralSettings_Click);
             // 
             // mnuReflections
             // 
             this.mnuReflections.Name = "mnuReflections";
             this.mnuReflections.Size = new System.Drawing.Size(162, 22);
             this.mnuReflections.Text = "Reflections?";
-            this.mnuReflections.Click += new System.EventHandler(this.mnuReflections_Click);
+            this.mnuReflections.Click += new System.EventHandler(this.mnuGeneralSettings_Click);
             // 
             // mnuRefractions
             // 
             this.mnuRefractions.Name = "mnuRefractions";
             this.mnuRefractions.Size = new System.Drawing.Size(162, 22);
             this.mnuRefractions.Text = "Refractions?";
-            this.mnuRefractions.Click += new System.EventHandler(this.mnuRefractions_Click);
+            this.mnuRefractions.Click += new System.EventHandler(this.mnuGeneralSettings_Click);
             // 
             // mnuRenderDepth
             // 
@@ -351,14 +379,12 @@ namespace Raytracer
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
             this.toolStripMenuItem6.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem6.Text = "1";
-            this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
             this.toolStripMenuItem7.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem7.Text = "2";
-            this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
             // 
             // toolStripMenuItem8
             // 
@@ -367,42 +393,36 @@ namespace Raytracer
             this.toolStripMenuItem8.Name = "toolStripMenuItem8";
             this.toolStripMenuItem8.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem8.Text = "3";
-            this.toolStripMenuItem8.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
             // 
             // toolStripMenuItem9
             // 
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
             this.toolStripMenuItem9.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem9.Text = "4";
-            this.toolStripMenuItem9.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
             // 
             // toolStripMenuItem10
             // 
             this.toolStripMenuItem10.Name = "toolStripMenuItem10";
             this.toolStripMenuItem10.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem10.Text = "5";
-            this.toolStripMenuItem10.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
             // 
             // toolStripMenuItem11
             // 
             this.toolStripMenuItem11.Name = "toolStripMenuItem11";
             this.toolStripMenuItem11.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem11.Text = "6";
-            this.toolStripMenuItem11.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
             // 
             // toolStripMenuItem12
             // 
             this.toolStripMenuItem12.Name = "toolStripMenuItem12";
             this.toolStripMenuItem12.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem12.Text = "7";
-            this.toolStripMenuItem12.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
             // 
             // toolStripMenuItem13
             // 
             this.toolStripMenuItem13.Name = "toolStripMenuItem13";
             this.toolStripMenuItem13.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem13.Text = "8";
-            this.toolStripMenuItem13.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -449,7 +469,7 @@ namespace Raytracer
             // renderToolStripMenuItem
             // 
             this.renderToolStripMenuItem.Name = "renderToolStripMenuItem";
-            this.renderToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.renderToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.renderToolStripMenuItem.Text = "Render";
             this.renderToolStripMenuItem.Click += new System.EventHandler(this.renderToolStripMenuItem_Click);
             // 
@@ -476,7 +496,7 @@ namespace Raytracer
             // 
             // dlgOpen
             // 
-            this.dlgOpen.DefaultExt = "*.ray";
+            this.dlgOpen.DefaultExt = "*.xml";
             // 
             // dlgSaveBmp
             // 
@@ -566,14 +586,15 @@ namespace Raytracer
             // 
             // dlgSaveRay
             // 
-            this.dlgSaveRay.Filter = "\"Scene files (*.ray)|*.ray|All files (*.*)|*.*\"  ;";
+            this.dlgSaveRay.Filter = "\"Scene files (*.xml)|*.xml|All files (*.*)|*.*\"  ;";
             // 
             // pixelPosition
             // 
             this.pixelPosition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pixelPosition.Location = new System.Drawing.Point(939, 1);
+            this.pixelPosition.BackColor = System.Drawing.Color.Transparent;
+            this.pixelPosition.Location = new System.Drawing.Point(974, 6);
             this.pixelPosition.Name = "pixelPosition";
-            this.pixelPosition.Size = new System.Drawing.Size(100, 23);
+            this.pixelPosition.Size = new System.Drawing.Size(67, 18);
             this.pixelPosition.TabIndex = 5;
             this.pixelPosition.Text = "X:Y";
             this.pixelPosition.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -617,8 +638,33 @@ namespace Raytracer
         private System.Windows.Forms.ToolStripMenuItem mnuSave;
         private System.Windows.Forms.SaveFileDialog dlgSaveBmp;
         private System.Windows.Forms.ToolStripMenuItem renderOptionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem multiThreadedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem renderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button btnRender;
+        private System.Windows.Forms.ToolStripMenuItem saveSceneToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog dlgSaveRay;
+        private System.Windows.Forms.ToolStripMenuItem saveSceneToolStripMenuItem1;
+        private System.Windows.Forms.Button btnCancelRendering;
+        private System.Windows.Forms.Label pixelPosition;
+        private System.Windows.Forms.Label lblPercent;
+        private CustomXmlTextEditor txtSceneFile;
+        private System.Windows.Forms.ToolStripMenuItem useSceneDefaults;
+        private System.Windows.Forms.ToolStripMenuItem overrideSceneDefaultsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem multiThreadedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuRenderingMode;
+        private System.Windows.Forms.ToolStripMenuItem progressiveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem highQualityToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem jitteredSamplerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem greyscaleEdgeDetectionSamplerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem componentEdgeDetectionSamplerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuSuperSampling;
+        private System.Windows.Forms.ToolStripMenuItem xToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem xToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem xToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem xToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem renderAntialiasingSamplesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuShadows;
         private System.Windows.Forms.ToolStripMenuItem mnuReflections;
         private System.Windows.Forms.ToolStripMenuItem mnuRefractions;
@@ -638,29 +684,7 @@ namespace Raytracer
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem14;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem15;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem16;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button btnRender;
-        private System.Windows.Forms.ToolStripMenuItem saveSceneToolStripMenuItem;
-        private System.Windows.Forms.SaveFileDialog dlgSaveRay;
-        private System.Windows.Forms.ToolStripMenuItem saveSceneToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem mnuSuperSampling;
-        private System.Windows.Forms.ToolStripMenuItem xToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem xToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem xToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem xToolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem renderAntialiasingSamplesToolStripMenuItem;
-        private System.Windows.Forms.Button btnCancelRendering;
-        private System.Windows.Forms.ToolStripMenuItem mnuRenderingMode;
-        private System.Windows.Forms.ToolStripMenuItem progressiveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem highQualityToolStripMenuItem;
-        private System.Windows.Forms.Label pixelPosition;
-        private System.Windows.Forms.ToolStripMenuItem jitteredSamplerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem greyscaleEdgeDetectionSamplerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem componentEdgeDetectionSamplerToolStripMenuItem;
-        private System.Windows.Forms.Label lblPercent;
-        private CustomXmlTextEditor txtSceneFile;
+        private System.Windows.Forms.ToolStripMenuItem overrideSceneDefaults;
     }
 }
 

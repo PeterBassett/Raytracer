@@ -6,9 +6,6 @@
   
   <Camera>
     <Viewpoint>
-      <Transform>
-        <RotateX>45</RotateX>
-      </Transform>
       <FOV>90</FOV>
     </Viewpoint>
   </Camera>

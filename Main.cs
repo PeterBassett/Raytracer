@@ -23,19 +23,21 @@ namespace Raytracer
     {
         private Scene _scene;
         private IRenderer _renderer;
-        private ICamera _camera;        
-        private string _sceneFile;
-        private bool _isSceneDefinitionDirty = true;
+        private ICamera _camera;
         private CancellationTokenSource _cancellationTokenSource;
+        private IRenderer _sceneDefinedRenderer;
+
+        private string _sceneFile;
+        private bool _isSceneDefinitionDirty = true;        
 
         public Main()
         {
             InitializeComponent();
+
             txtSceneFile.Text = "";
             pixelPosition.Text = "";
 
-            var scenes = Directory.GetFiles(".", "*.ray", SearchOption.AllDirectories).Concat(
-                         Directory.GetFiles(".", "*.xml", SearchOption.AllDirectories)).OrderBy(e => e);
+            var scenes = Directory.GetFiles(".", "*.xml", SearchOption.AllDirectories);
 
             foreach (var file in scenes)
             {
@@ -106,6 +108,7 @@ namespace Raytracer
             _scene = systemComponents.Scene;
             _camera = systemComponents.Camera;
             _cancellationTokenSource = systemComponents.CancellationTokenSource;
+            _sceneDefinedRenderer = _renderer;
 
             watch.Stop();
 
@@ -125,6 +128,8 @@ namespace Raytracer
             txtMessages.Clear();
 
             LoadSceneFromEditor();
+
+            OverrideRenderer();
             
             txtMessages.Text += "Rendering\r\n";
             
@@ -151,6 +156,64 @@ namespace Raytracer
             task.Start();
         }
 
+        private void OverrideRenderer()
+        {
+            if (!overrideSceneDefaults.Checked)
+                return;
+
+            var multiThreaded = GetMultiThreaded();
+            var antiAliasingLevel = GetAnitaliasingLevel();
+            var antiAliasingSamples = GetRenderAntialiasingSamples();
+
+            IRenderingStrategy renderingStrategy;
+
+            if (GetRenderingStrategy() == "Progressive")
+            {
+                renderingStrategy = new ProgressiveRenderingStrategy(new StandardPixelSampler(), 
+                                                                     64,
+                                                                     multiThreaded,
+                                                                     _cancellationTokenSource.Token);
+            }
+            else
+            {
+                IPixelSampler pixelSampler;
+
+                switch (GetSampler())
+                {
+                    case "Jittered":
+                        pixelSampler = new JitteredPixelSampler(antiAliasingLevel);
+                        break;
+                    case "GreyscaleEdgeDetection":
+                        pixelSampler = new EdgeDetectionSampler(antiAliasingLevel, antiAliasingSamples);
+                        break;
+                    case "ComponentEdgeDetection":
+                        pixelSampler = new EdgeDetectionPerComponentSampler(antiAliasingLevel, antiAliasingSamples);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException("Sampler");
+                }
+
+                renderingStrategy = new BasicRenderingStrategy(pixelSampler, 
+                                                               multiThreaded, 
+                                                               _cancellationTokenSource.Token);
+            }
+
+            var camera = _renderer.Camera;
+            
+            _renderer = new Raytracer.Rendering.Renderers.RayTracingRenderer();
+            _renderer.Camera = _camera;
+            _renderer.Scene = _scene;
+            _renderer.Settings = new RenderSettings()
+            {
+                MultiThreaded = multiThreaded,
+                PathDepth = (int)GetRenderDepth(),
+                TraceReflections = mnuReflections.Checked,
+                TraceRefractions = mnuRefractions.Checked,
+                TraceShadows = mnuShadows.Checked
+            };
+            _renderer.RenderingStrategy = renderingStrategy;
+        }
+
         private void SetSelectedRenderDepthMenuItem(int renderDepth)
         {
             foreach (ToolStripMenuItem item in mnuRenderDepth.DropDown.Items)
@@ -172,41 +235,12 @@ namespace Raytracer
             _camera.OutputDimensions = bmp.Size;
             _cancellationTokenSource.Reset();
 
-            IPixelSampler pixelSampler = new StandardPixelSampler();            
-            IRenderingStrategy renderingStrategy;
-
-            if (GetRenderingStrategy() == "Progressive")
-            {
-                renderingStrategy = new ProgressiveRenderingStrategy(pixelSampler, 64, GetMultiThreaded(), token);
-            }
-            else
-            {
-                switch (GetSampler())
-                {
-                    case "Jittered":
-                        pixelSampler = new JitteredPixelSampler(GetAnitaliasingLevel());
-                        break;
-                    case "GreyscaleEdgeDetection":
-                        pixelSampler = new EdgeDetectionSampler(GetAnitaliasingLevel(), GetRenderAntialiasingSamples());
-                        break;
-                    case "ComponentEdgeDetection":
-                        pixelSampler = new EdgeDetectionPerComponentSampler(GetAnitaliasingLevel(), GetRenderAntialiasingSamples());
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException("Sampler");
-                }
-
-                renderingStrategy = new BasicRenderingStrategy(pixelSampler, GetMultiThreaded(), token);
-            }
-
             _renderer.RenderingStrategy.OnCompletedScanLine += RenderingStrategy_OnCompletedScanLine;
 
-            IRenderer renderer = _renderer;// new RayTracingRenderer(m_scene, m_camera, renderingStrategy, (uint)m_renderer.Settings.PathDepth, blnMultiThreaded, traceShadows, traceReflections, traceRefractions);
-
             if (renderAt.HasValue)
-                renderer.ComputeSample(renderAt.Value);
+                _renderer.ComputeSample(renderAt.Value);
             else
-                renderer.RenderScene(bmp);
+                _renderer.RenderScene(bmp);
             
             watch.Stop();
 
@@ -284,12 +318,6 @@ namespace Raytracer
             renderedImage.Image.Save(strImageName);
         }
 
-        private void multiThreadedToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            multiThreadedToolStripMenuItem.Checked = !multiThreadedToolStripMenuItem.Checked;
-            UpdateSettings();
-        }
-
         private void renderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (_scene == null)
@@ -298,55 +326,9 @@ namespace Raytracer
             RenderScene();
         }
 
-        private void toolStripMenuItem6_Click(object sender, EventArgs e)
-        {
-            if (_scene == null)
-                return;
-
-            foreach (ToolStripMenuItem item in ((ToolStripMenuItem)sender).GetCurrentParent().Items)
-            {
-                item.Checked = false;
-            }
-
-            ((ToolStripMenuItem)sender).Checked = true;
-            _renderer.Settings.PathDepth = int.Parse(((ToolStripMenuItem)sender).Text);
-
-            UpdateSettings();
-        }
-
-        private void mnuShadows_Click(object sender, EventArgs e)
+        private void mnuGeneralSettings_Click(object sender, EventArgs e)
         {
             ((ToolStripMenuItem)sender).Checked = !((ToolStripMenuItem)sender).Checked;
-            UpdateSettings();
-        }
-
-        private void UpdateSettings()
-        {
-            if (_renderer != null && _renderer.Settings != null)
-            {
-                _renderer.Settings.MultiThreaded = multiThreadedToolStripMenuItem.Checked;
-                _renderer.Settings.TraceShadows = mnuShadows.Checked;
-                _renderer.Settings.TraceReflections = mnuReflections.Checked;
-                _renderer.Settings.TraceRefractions = mnuRefractions.Checked;
-            }
-        }
-
-
-        private void mnuReflections_Click(object sender, EventArgs e)
-        {
-            ((ToolStripMenuItem)sender).Checked = !((ToolStripMenuItem)sender).Checked;
-            UpdateSettings();
-        }
-
-        private void mnuRefractions_Click(object sender, EventArgs e)
-        {
-            ((ToolStripMenuItem)sender).Checked = !((ToolStripMenuItem)sender).Checked;
-            UpdateSettings();
-        }
-
-        private void renderedImage_Click(object sender, EventArgs e)
-        {
-            //Go();
         }
 
         private void btnRender_Click(object sender, EventArgs e)
@@ -384,16 +366,6 @@ namespace Raytracer
             _isSceneDefinitionDirty = true;
         }
 
-        private void mnuSuperSampling_Click(object sender, EventArgs e)
-        {
-            var menu = (ToolStripMenuItem)sender;
-
-            foreach (ToolStripMenuItem item in menu.GetCurrentParent().Items.Cast<ToolStripMenuItem>().Take(4))
-                item.Checked = false;
-
-            menu.Checked = true;
-        }
-
         private uint GetAnitaliasingLevel()
         {
             return (from item in mnuSuperSampling.DropDownItems.Cast<ToolStripMenuItem>().Take(4)
@@ -401,11 +373,11 @@ namespace Raytracer
                     select uint.Parse(item.Tag.ToString())).First();
         }
 
-        private uint GetRenderDepth()
+        private int GetRenderDepth()
         {
             return (from item in mnuRenderDepth.DropDownItems.Cast<ToolStripMenuItem>()
                     where item.Checked
-                    select uint.Parse(item.Tag.ToString())).First();
+                    select int.Parse(item.Text.ToString())).First();
         }
         
         private bool GetRenderAntialiasingSamples()
@@ -425,16 +397,6 @@ namespace Raytracer
             
             btnCancelRendering.Enabled = false;
             btnRender.Enabled = true;
-        }
-
-        private void progressiveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var menu = (ToolStripMenuItem)sender;
-
-            foreach (ToolStripMenuItem item in menu.GetCurrentParent().Items.Cast<ToolStripMenuItem>())
-                item.Checked = false;
-
-            menu.Checked = true;
         }
 
         private string GetRenderingStrategy()
@@ -466,9 +428,16 @@ namespace Raytracer
         void coordinateDisplay_OnRenderRequested(object sender, int x, int y)
         {
             RenderPixel(x, renderedImage.Height - y);
+        }        
+
+        private string GetSampler()
+        {
+            return (from item in jitteredSamplerToolStripMenuItem.GetCurrentParent().Items.Cast<ToolStripMenuItem>()
+                    where item.Checked
+                    select item.Tag.ToString()).First();
         }
 
-        private void jitteredSamplerToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CheckSelectedToolMenuItem(object sender, EventArgs e)
         {
             var menu = (ToolStripMenuItem)sender;
 
@@ -478,11 +447,15 @@ namespace Raytracer
             menu.Checked = true;
         }
 
-        private string GetSampler()
+        void sceneDefaults_Click(object sender, EventArgs e)
         {
-            return (from item in jitteredSamplerToolStripMenuItem.GetCurrentParent().Items.Cast<ToolStripMenuItem>()
-                    where item.Checked
-                    select item.Tag.ToString()).First();
+            var menuItems = new[] { useSceneDefaults, overrideSceneDefaults };
+
+            foreach (var item in menuItems)
+                item.Checked = item.Equals(sender);
+
+            if (useSceneDefaults.Equals(sender))
+                _renderer = _sceneDefinedRenderer;
         }
     }
 }

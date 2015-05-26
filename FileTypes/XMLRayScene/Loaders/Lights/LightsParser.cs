@@ -17,7 +17,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Lights
             var lights = new List<Light>();
             foreach (var child in element.Elements())
             {
-                var light = loader.LoadObject<Light>(components, child, () => (Light)null);
+                var light = loader.LoadObject<Light>(components, child);
                 if (light != null)
                     lights.Add(light);
             }
