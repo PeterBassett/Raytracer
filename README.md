@@ -29,9 +29,10 @@ Lights
 * Spot Light - Like a point light but has a direction and width in addtion to position. It casts a cone of light along its direction. The width determines the angle of the cone. Casts shadows.
 * Distant Light - Has no position but does have a direction. Useful for simulating the sun for example. Casts shadows.
 * Projection Light - Like a spot light but projects a texture into the scene. Think overhead projector and you'll not be far off.
+* Area Lights. Currently just Spherical but I will expand to disc and quads. Custom sampling threshlold per light. Casts soft shadows.
 
 File Types
-* Home made human readable "ray" files.
+* XML Based renderer and scene definition files.
 * Wavefront obj files.
 * Wavefront mtl files.
 
@@ -105,3 +106,6 @@ Examples
 ![projector light](/OutputImages/ProjectionLightBuddha.jpeg?raw=true)
 * Cryteks version of the Sponza Model. Still work to do
 ![projector light](/OutputImages/CrytekSponza.jpeg?raw=true)
+
+* Four Spherical Area Lights. 256 shadow rays per light.
+![sphere area light](/OutputImages/SphereLight.jpeg?raw=true)
