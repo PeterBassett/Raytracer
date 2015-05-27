@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
+using Raytracer.Rendering.Samplers;
 
 namespace Raytracer.Rendering.Lights.AreaLights
 {
@@ -19,7 +20,7 @@ namespace Raytracer.Rendering.Lights.AreaLights
 
         protected override Point GetSampledLightPoint()
         {
-            var offset = UniformSampleHemisphere() * _radius;
+            var offset = Sampler.UniformSampleHemisphere() * _radius;
             offset = Transform.ToWorldSpace(offset);
 
             return Pos + offset;

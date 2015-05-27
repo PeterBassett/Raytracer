@@ -12,7 +12,7 @@ namespace Raytracer.Rendering.Lights
             _dir = Transform.ToObjectSpace(new Vector(0, 1, 0));
         }
 
-        public override Colour Sample(Point hitPoint, Normal normalAtHitPoint, ref Vector pointToLight, ref VisibilityTester visibilityTester)
+        protected override Colour Sample(Point hitPoint, Normal normalAtHitPoint, ref Vector pointToLight, ref VisibilityTester visibilityTester)
         {
             pointToLight = _dir;
             

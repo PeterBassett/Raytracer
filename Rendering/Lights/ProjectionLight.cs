@@ -47,7 +47,7 @@ namespace Raytracer.Rendering.Lights
             Math.Cos(Math.Atan(tanDiag));
         }
 
-        public override Colour Sample(Point hitPoint, Normal normalAtHitPoint, ref Vector pointToLight, ref VisibilityTester visibilityTester)
+        protected override Colour Sample(Point hitPoint, Normal normalAtHitPoint, ref Vector pointToLight, ref VisibilityTester visibilityTester)
         {
             pointToLight = Pos - hitPoint;
 

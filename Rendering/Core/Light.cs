@@ -15,7 +15,21 @@ namespace Raytracer.Rendering.Core
             Pos = Transform.ToObjectSpace(new Point(0.0, 0.0, 0.0));
         }
 
-        public abstract Colour Sample(Point hitPoint, Normal normalAtHitPoint, ref Vector pointToLight, ref VisibilityTester visibilityTester);
+        public virtual Colour SampleLight(Point hitPoint, Normal normalAtHitPoint, ref Vector pointToLight, ref VisibilityTester visibilityTester)
+        {
+            var colour = Sample(hitPoint, normalAtHitPoint, ref pointToLight, ref visibilityTester);
+
+            return CosineFromNormal(colour, normalAtHitPoint, pointToLight);
+        }
+
+        protected virtual Colour CosineFromNormal(Colour colour, Normal normalAtHitPoint, Vector pointToLight)
+        {
+            normalAtHitPoint = normalAtHitPoint.Normalize();
+            pointToLight = pointToLight.Normalize();
+            return colour * Vector.DotProduct(normalAtHitPoint, pointToLight);
+        }
+
+        protected abstract Colour Sample(Point hitPoint, Normal normalAtHitPoint, ref Vector pointToLight, ref VisibilityTester visibilityTester);
 
         public virtual bool Specular()
         {

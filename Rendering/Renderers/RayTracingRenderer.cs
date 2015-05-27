@@ -362,10 +362,10 @@ namespace Raytracer.Rendering.Renderers
             {
                 var visibilityTester = new VisibilityTester(this);
                 var pointToLight = Vector.Zero;
-                var lightColour = light.Sample(hitPoint, normal, ref pointToLight, ref visibilityTester);
+                var lightColour = light.SampleLight(hitPoint, normal, ref pointToLight, ref visibilityTester);
 
                 // get the angle between the light vector ad the surface normal
-                var lightCos = Vector.DotProduct(pointToLight, normal);
+                var lightCos = 1.0;// Vector.DotProduct(pointToLight, normal);
 
                 if (lightColour.Brightness > 0 && lightCos > 0.0 && (!Settings.TraceShadows || visibilityTester.Unoccluded()))
                 {

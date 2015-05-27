@@ -14,10 +14,10 @@
   <Camera>
     <Viewpoint>
       <Transform>
-        <Translate>0, -6, -14</Translate>
-        <RotateX>45</RotateX>
+    		<RotateX>15</RotateX>
+        <Translate>0, 0, -14</Translate>        
       </Transform>
-      <FOV>90</FOV>
+      <FOV>70</FOV>
     </Viewpoint>
   </Camera>
 
@@ -27,11 +27,10 @@
         <Colour>0.156</Colour>
       </AmbientLight>
 
-      <SphereLight power="300" radius="1">
+      <SphereLight power="300" radius="1" samples="128">
         <Transform>
           <Translate>5,12,5</Translate>
         </Transform>
-        <Colour>1,1,0</Colour>
       </SphereLight>
   	
     </Lights>

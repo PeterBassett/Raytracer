@@ -16,7 +16,7 @@ namespace Raytracer.Rendering.Lights
             _cosFalloffStart = Math.Cos(MathLib.Deg2Rad(widthBeforeFallOffInDegrees));
         }
 
-        public override Colour Sample(Point hitPoint, Normal normalAtHitPoint, ref Vector pointToLight, ref VisibilityTester visibilityTester)
+        protected override Colour Sample(Point hitPoint, Normal normalAtHitPoint, ref Vector pointToLight, ref VisibilityTester visibilityTester)
         {
             pointToLight = Pos - hitPoint;
             

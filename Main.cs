@@ -167,12 +167,19 @@ namespace Raytracer
 
             IRenderingStrategy renderingStrategy;
 
-            if (GetRenderingStrategy() == "Progressive")
+            var selectedRenderingStrategy = GetRenderingStrategy();
+            if (selectedRenderingStrategy == "Progressive")
             {
                 renderingStrategy = new ProgressiveRenderingStrategy(new StandardPixelSampler(), 
                                                                      64,
                                                                      multiThreaded,
                                                                      _cancellationTokenSource.Token);
+            }
+            else if (selectedRenderingStrategy == "Row by Row")
+            {
+                renderingStrategy = new RowRenderingStrategy(new StandardPixelSampler(),
+                                                             multiThreaded,
+                                                             _cancellationTokenSource.Token);
             }
             else
             {
@@ -224,6 +231,7 @@ namespace Raytracer
 
         private void Render(IBmp bmp, CancellationToken token, Vector2? renderAt)
         {
+            _renderingStartedAt = DateTime.Now;
             _renderingCurrentPercentage = 0;
             _renderingCurrentTotal = 0;
             _scanLinesCompleted = new ConcurrentDictionary<int, int>();
@@ -252,6 +260,7 @@ namespace Raytracer
             });            
         }
 
+        DateTime _renderingStartedAt;
         int _renderingCurrentPercentage;
         int _renderingCurrentTotal;
         ConcurrentDictionary<int, int> _scanLinesCompleted = new ConcurrentDictionary<int, int>();
@@ -275,11 +284,16 @@ namespace Raytracer
 
                 this.UIThread(() =>
                 {
-                    lblPercent.Text = string.Format("Rendered {0}%\r\n", _renderingCurrentPercentage);
+                    lblPercent.Text = string.Format("Rendered {0}%\r\n{1}", _renderingCurrentPercentage, FormatElapsedTime(DateTime.Now - _renderingStartedAt));
 
                     Application.DoEvents();
                 });
             }
+        }
+
+        private string FormatElapsedTime(TimeSpan span)
+        {
+            return string.Format("{0:00}:{1:00}:{2:00}.{3}", (int)span.TotalHours, span.Minutes, span.Seconds, span.Milliseconds);
         }
 
         private bool GetMultiThreaded()

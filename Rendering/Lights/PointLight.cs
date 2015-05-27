@@ -10,7 +10,7 @@ namespace Raytracer.Rendering.Lights
         {
         }
 
-        public override Colour Sample(Point hitPoint, Normal normalAtHitPoint, ref Vector pointToLight, ref VisibilityTester visibilityTester)
+        protected override Colour Sample(Point hitPoint, Normal normalAtHitPoint, ref Vector pointToLight, ref VisibilityTester visibilityTester)
         {
             var w = Pos - hitPoint;
             

@@ -17,20 +17,25 @@ namespace Raytracer.Rendering.Lights.AreaLights
             _samples = samples;
         }
 
-        public override Colour Sample(MathTypes.Point hitPoint, MathTypes.Normal normalAtHitPoint, ref MathTypes.Vector pointToLight, ref VisibilityTester visibilityTester)
+        protected override Colour Sample(MathTypes.Point hitPoint, MathTypes.Normal normalAtHitPoint, ref MathTypes.Vector pointToLight, ref VisibilityTester visibilityTester)
         {
-            var colour = new Colour();
+            pointToLight = (Pos - hitPoint).Normalize();
 
+            var colour = new Colour();
+            
             for (int i = 0; i < _samples; i++)
             {
                 var w = GetSampledLightPoint() - hitPoint;
-
-                pointToLight = w.Normalize();
+                var lengthSquared = w.LengthSquared;
 
                 visibilityTester.SetSegment(hitPoint, normalAtHitPoint, w);
 
-                if(visibilityTester.Unoccluded())
-                    colour += Intensity / w.LengthSquared;     
+                w = w.Normalize();
+
+                var lightCos = Vector.DotProduct(w, normalAtHitPoint);
+
+                if (visibilityTester.Unoccluded())
+                    colour += (Intensity / lengthSquared) * lightCos;     
             }
 
             visibilityTester.SetAlwaysUnoccluded();
@@ -38,31 +43,11 @@ namespace Raytracer.Rendering.Lights.AreaLights
             return colour / (double)_samples;
         }
 
+        protected override Colour CosineFromNormal(Colour colour, Normal normalAtHitPoint, Vector pointToLight)
+        {
+            return colour;
+        }
+
         protected abstract Point GetSampledLightPoint();
-
-        private static ThreadLocal<Random> _rnd;
-
-        static AreaLight()
-        {
-            _rnd = new ThreadLocal<Random>( () => new Random() );
-        }
-
-        protected double GetNextRandom()
-        {
-            return _rnd.Value.NextDouble();
-        }
-
-        protected Vector UniformSampleHemisphere()
-        {
-            return UniformSampleHemisphere(GetNextRandom(), GetNextRandom());
-        }
-
-        protected Vector UniformSampleHemisphere(double u1, double u2)
-        {
-            var r = Math.Sqrt(1.0f - u1 * u1);
-            var phi = 2 * Math.PI * u2;
- 
-            return new Vector(Math.Cos(phi) * r, Math.Sin(phi) * r, u1);
-        }
     }
 }

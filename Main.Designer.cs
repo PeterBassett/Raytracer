@@ -45,6 +45,7 @@ namespace Raytracer
             this.multiThreadedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRenderingMode = new System.Windows.Forms.ToolStripMenuItem();
             this.progressiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem17 = new System.Windows.Forms.ToolStripMenuItem();
             this.highQualityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.jitteredSamplerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.greyscaleEdgeDetectionSamplerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -227,6 +228,7 @@ namespace Raytracer
             // 
             this.mnuRenderingMode.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.progressiveToolStripMenuItem,
+            this.toolStripMenuItem17,
             this.highQualityToolStripMenuItem});
             this.mnuRenderingMode.Name = "mnuRenderingMode";
             this.mnuRenderingMode.Size = new System.Drawing.Size(162, 22);
@@ -240,6 +242,13 @@ namespace Raytracer
             this.progressiveToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.progressiveToolStripMenuItem.Text = "Progressive";
             this.progressiveToolStripMenuItem.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
+            // 
+            // toolStripMenuItem17
+            // 
+            this.toolStripMenuItem17.Name = "toolStripMenuItem17";
+            this.toolStripMenuItem17.Size = new System.Drawing.Size(141, 22);
+            this.toolStripMenuItem17.Text = "Row by Row";
+            this.toolStripMenuItem17.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // highQualityToolStripMenuItem
             // 
@@ -558,7 +567,7 @@ namespace Raytracer
             this.lblPercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPercent.Location = new System.Drawing.Point(258, 20);
             this.lblPercent.Name = "lblPercent";
-            this.lblPercent.Size = new System.Drawing.Size(100, 23);
+            this.lblPercent.Size = new System.Drawing.Size(100, 46);
             this.lblPercent.TabIndex = 6;
             this.lblPercent.Text = "0%";
             this.lblPercent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -685,6 +694,7 @@ namespace Raytracer
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem15;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem16;
         private System.Windows.Forms.ToolStripMenuItem overrideSceneDefaults;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem17;
     }
 }
 
