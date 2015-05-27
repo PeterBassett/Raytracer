@@ -360,14 +360,14 @@ namespace Raytracer.Rendering.Renderers
             // iterate through all the lights in the scene
             foreach (var light in Scene.Lights)
             {
-                var visibilityTester = new VisibilityTester();
+                var visibilityTester = new VisibilityTester(this);
                 var pointToLight = Vector.Zero;
                 var lightColour = light.Sample(hitPoint, normal, ref pointToLight, ref visibilityTester);
 
                 // get the angle between the light vector ad the surface normal
                 var lightCos = Vector.DotProduct(pointToLight, normal);
 
-                if (lightColour.Brightness > 0 && lightCos > 0.0 && (!Settings.TraceShadows || visibilityTester.Unoccluded(this)))
+                if (lightColour.Brightness > 0 && lightCos > 0.0 && (!Settings.TraceShadows || visibilityTester.Unoccluded()))
                 {
                     colour += (material.Diffuse * lightColour) * lightCos;
 

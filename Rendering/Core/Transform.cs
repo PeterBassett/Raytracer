@@ -105,6 +105,11 @@ namespace Raytracer.Rendering.Core
             return Apply(_inverse, aabb);
         }
 
+        public Vector ToWorldSpace(Vector vector)
+        {
+            return _inverse.Transform(vector);
+        }
+
         private AABB Apply(Matrix m, AABB aabb)
         {
             return aabb.Transform(m);
