@@ -9,8 +9,7 @@ namespace Raytracer.Rendering.Lights.AreaLights
 {
     class SphereLight : AreaLight
     {
-        private readonly int _samples;
-        private readonly double _radius;
+        protected readonly double _radius;
 
         public SphereLight(Colour colour, double power, Transform transform, int samples, double radius)
             : base(colour, power, transform, samples)

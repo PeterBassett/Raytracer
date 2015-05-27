@@ -69,21 +69,26 @@ namespace Raytracer.Rendering.Core
         {
             return _transform.Transform(point);
         }
-        /*
+
         public Point ToWorldSpace(Point point)
         {
             return _inverse.Transform(point);
-        }*/
+        }
 
         public Vector ToObjectSpace(Vector point)
         {
             return _transform.Transform(point);
         }
-        /*
-        public Vector ToWorldSpace(Vector point)
+
+        public Vector ToWorldSpace(Vector vector)
         {
-            return _inverse.Transform(point);
-        }*/
+            return _inverse.Transform(vector);
+        }
+
+        public Normal ToWorldSpace(Normal normal)
+        {
+            return normal.Transform(_inverse);
+        }
 
         public IntersectionInfo ToWorldSpace(IntersectionInfo info)
         {
@@ -103,11 +108,6 @@ namespace Raytracer.Rendering.Core
         public AABB ToWorldSpace(AABB aabb)
         {
             return Apply(_inverse, aabb);
-        }
-
-        public Vector ToWorldSpace(Vector vector)
-        {
-            return _inverse.Transform(vector);
         }
 
         private AABB Apply(Matrix m, AABB aabb)

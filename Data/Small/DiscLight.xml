@@ -14,8 +14,8 @@
   <Camera>
     <Viewpoint>
       <Transform>
-        <Translate>0, -6, -14</Translate>
-        <RotateX>45</RotateX>
+        <Translate>0, -3, -14</Translate>
+        <RotateX>35</RotateX>
       </Transform>
       <FOV>90</FOV>
     </Viewpoint>
@@ -27,12 +27,12 @@
         <Colour>0.156</Colour>
       </AmbientLight>
 
-      <SphereLight power="300" radius="1">
+      <DiscLight power="300" radius="2">
         <Transform>
-          <Translate>5,12,5</Translate>
+          <LookAt to="0,0,0" from="5,12,5" />
         </Transform>
         <Colour>1,1,0</Colour>
-      </SphereLight>
+      </DiscLight>
   	
     </Lights>
 

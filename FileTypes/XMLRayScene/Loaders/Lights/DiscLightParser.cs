@@ -11,9 +11,9 @@ using Raytracer.Rendering.Lights.AreaLights;
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Lights
 {
     [Export(typeof(XmlRayElementParser)), UsedImplicitly]
-    class SphereLightParser : XmlRayElementParser
+    class DiscLightParser : XmlRayElementParser
     {
-        public override string LoaderType { get { return "SphereLight"; } }
+        public override string LoaderType { get { return "DiscLight"; } }
 
         public override dynamic LoadObject(XmlRaySceneLoader loader, SystemComponents components, XElement element, string elementName, Func<dynamic> createDefault)
         {
@@ -27,7 +27,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Lights
             var samples = loader.LoadObject<int>(components, element, "Samples", () => 64);
             var radius = loader.LoadObject<double>(components, element, "Radius", () => 1);
 
-            return new SphereLight(colour, (float)power, transform, samples, radius);
+            return new DiscLight(colour, (float)power, transform, samples, radius);
         }
     }
 }

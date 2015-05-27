@@ -47,9 +47,14 @@ namespace Raytracer.Rendering.Lights.AreaLights
             _rnd = new ThreadLocal<Random>( () => new Random() );
         }
 
+        protected double GetNextRandom()
+        {
+            return _rnd.Value.NextDouble();
+        }
+
         protected Vector UniformSampleHemisphere()
         {
-            return UniformSampleHemisphere(_rnd.Value.NextDouble(), _rnd.Value.NextDouble());
+            return UniformSampleHemisphere(GetNextRandom(), GetNextRandom());
         }
 
         protected Vector UniformSampleHemisphere(double u1, double u2)

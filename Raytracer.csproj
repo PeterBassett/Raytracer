@@ -102,6 +102,7 @@
     <Compile Include="FileTypes\XMLRayScene\Loaders\ConfigElementLoader.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Geometry\SolidityParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Geometry\SizeParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Lights\DiscLightParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Lights\SphereLightParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Output\OutputElementLoader.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\PixelSamplers\EdgeDetectionPerComponentPixelSamplerParser.cs" />
@@ -217,6 +218,7 @@
     <Compile Include="FileTypes\ImageReader.cs" />
     <Compile Include="Rendering\Core\Texture.cs" />
     <Compile Include="Rendering\Lights\AmbientLight.cs" />
+    <Compile Include="Rendering\Lights\AreaLights\DiscLight.cs" />
     <Compile Include="Rendering\Lights\AreaLights\SphereLight.cs" />
     <Compile Include="Rendering\Lights\AreaLights\AreaLight.cs" />
     <Compile Include="Rendering\Lights\ProjectionLight.cs" />
@@ -361,6 +363,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Small\RedBall.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Small\DiscLight.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Small\SphereLight.xml">
