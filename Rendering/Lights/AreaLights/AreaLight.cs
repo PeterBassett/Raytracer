@@ -5,16 +5,20 @@ using System.Text;
 using System.Threading;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
+using Raytracer.Rendering.Distributions;
 
 namespace Raytracer.Rendering.Lights.AreaLights
 {
     abstract class AreaLight : Light
     {
-        private readonly int _samples;
-        protected AreaLight(Colour colour, double power, Transform transform, int samples)
+        protected readonly uint _samples;
+        protected readonly Distribution _distribution;
+
+        protected AreaLight(Colour colour, double power, Transform transform, uint samples, Distribution distribution)
             : base(colour, power, transform)
         {
             _samples = samples;
+            _distribution = distribution;
         }
 
         protected override Colour Sample(MathTypes.Point hitPoint, MathTypes.Normal normalAtHitPoint, ref MathTypes.Vector pointToLight, ref VisibilityTester visibilityTester)
@@ -22,10 +26,11 @@ namespace Raytracer.Rendering.Lights.AreaLights
             pointToLight = (Pos - hitPoint).Normalize();
 
             var colour = new Colour();
-            
-            for (int i = 0; i < _samples; i++)
+            var samples = _distribution.TwoD(_samples, 0, 0, 1, 1);
+
+            for (int i = 0; i < samples.Length; i++)
             {
-                var w = GetSampledLightPoint() - hitPoint;
+                var w = GetSampledLightPoint(samples[i]) - hitPoint;
                 var lengthSquared = w.LengthSquared;
 
                 visibilityTester.SetSegment(hitPoint, normalAtHitPoint, w);
@@ -40,7 +45,7 @@ namespace Raytracer.Rendering.Lights.AreaLights
 
             visibilityTester.SetAlwaysUnoccluded();
 
-            return colour / (double)_samples;
+            return colour / (double)samples.Length;
         }
 
         protected override Colour CosineFromNormal(Colour colour, Normal normalAtHitPoint, Vector pointToLight)
@@ -48,6 +53,6 @@ namespace Raytracer.Rendering.Lights.AreaLights
             return colour;
         }
 
-        protected abstract Point GetSampledLightPoint();
+        protected abstract Point GetSampledLightPoint(Vector2 sample);
     }
 }

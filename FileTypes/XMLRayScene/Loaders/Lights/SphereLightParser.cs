@@ -24,10 +24,10 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Lights
 
             var colour = loader.LoadObject<Colour>(components, element, "Colour", () => new Colour(1));
             var power = loader.LoadObject<double>(components, element, "Power", () => 1000);
-            var samples = loader.LoadObject<int>(components, element, "Samples", () => 64);
+            var samples = loader.LoadObject<uint>(components, element, "Samples", () => 64);
             var radius = loader.LoadObject<double>(components, element, "Radius", () => 1);
 
-            return new SphereLight(colour, (float)power, transform, samples, radius);
+            return new SphereLight(colour, (float)power, transform, samples, radius, components.Renderer.Distribution);
         }
     }
 }

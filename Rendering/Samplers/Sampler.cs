@@ -26,6 +26,11 @@ namespace Raytracer.Rendering.Samplers
             return UniformSampleHemisphere(GetNextRandom(), GetNextRandom());
         }
 
+        public static Vector UniformSampleHemisphere(Vector2 sample)
+        {
+            return UniformSampleHemisphere(sample.X, sample.Y);
+        }
+
         public static Vector UniformSampleHemisphere(double u1, double u2)
         {
             var r = Math.Sqrt(1.0f - u1 * u1);
@@ -37,6 +42,11 @@ namespace Raytracer.Rendering.Samplers
         public static Vector2 ConcentricSampleDisk()
         {
             return ConcentricSampleDisk(GetNextRandom(), GetNextRandom());
+        }
+
+        public static Vector2 ConcentricSampleDisk(Vector2 sample)
+        {
+            return ConcentricSampleDisk(sample.X, sample.Y);
         }
 
         public static Vector2 ConcentricSampleDisk(double u1, double u2)

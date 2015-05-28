@@ -5,6 +5,7 @@ using System.Text;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
 using Raytracer.Rendering.Samplers;
+using Raytracer.Rendering.Distributions;
 
 namespace Raytracer.Rendering.Lights.AreaLights
 {
@@ -12,15 +13,15 @@ namespace Raytracer.Rendering.Lights.AreaLights
     {
         private readonly Normal _normal;
 
-        public DiscLight(Colour colour, double power, Transform transform, int samples, double radius)
-            : base(colour, power, transform, samples, radius)
+        public DiscLight(Colour colour, double power, Transform transform, uint samples, double radius, Distribution distribution)
+            : base(colour, power, transform, samples, radius, distribution)
         {
             _normal = Transform.ToWorldSpace(new Normal(0, -1, 0));
         }
 
-        protected override Point GetSampledLightPoint()
+        protected override Point GetSampledLightPoint(Vector2 sample)
         {
-            var pointOnDisc = Sampler.ConcentricSampleDisk();
+            var pointOnDisc = Sampler.ConcentricSampleDisk(sample);
             var point = new Point(pointOnDisc.X, pointOnDisc.Y, 0);
 
             var offset = point * _radius;

@@ -6,6 +6,7 @@ using Raytracer.Properties.Annotations;
 using Raytracer.Rendering.PixelSamplers;
 using Raytracer.Rendering.Renderers;
 using Raytracer.Rendering.RenderingStrategies;
+using Raytracer.Rendering.Distributions;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.Renderer
 {
@@ -40,6 +41,10 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Renderer
             });
 
             components.Renderer.RenderingStrategy = renderingStrategy;
+
+            var distribution = loader.LoadObject<Distribution>(components, element, "Distribution", () => new RandomDistribution() );
+
+            components.Renderer.Distribution = distribution;
 
             return components.Renderer;
         }

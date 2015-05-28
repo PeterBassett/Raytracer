@@ -100,6 +100,9 @@
     <Compile Include="FileTypes\XMLRayScene\Loaders\Cameras\CameraParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Cameras\PinholeCameraParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\ConfigElementLoader.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Distributions\StratifiedDistributionParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Distributions\DistributionParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Distributions\RandomDistributionParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Geometry\SolidityParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Geometry\SizeParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Lights\DiscLightParser.cs" />
@@ -218,6 +221,9 @@
     <Compile Include="FileTypes\XMLRayScene\XMLRaySceneLoader.cs" />
     <Compile Include="FileTypes\ImageReader.cs" />
     <Compile Include="Rendering\Core\Texture.cs" />
+    <Compile Include="Rendering\Distributions\StratifiedDistribution.cs" />
+    <Compile Include="Rendering\Distributions\Distribution.cs" />
+    <Compile Include="Rendering\Distributions\RandomDistribution.cs" />
     <Compile Include="Rendering\Lights\AmbientLight.cs" />
     <Compile Include="Rendering\Lights\AreaLights\DiscLight.cs" />
     <Compile Include="Rendering\Lights\AreaLights\SphereLight.cs" />

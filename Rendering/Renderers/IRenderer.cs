@@ -2,6 +2,7 @@
 using Raytracer.Rendering.Core;
 using Raytracer.Rendering.Cameras;
 using Raytracer.Rendering.RenderingStrategies;
+using Raytracer.Rendering.Distributions;
 
 namespace Raytracer.Rendering.Renderers
 {
@@ -14,5 +15,6 @@ namespace Raytracer.Rendering.Renderers
         void RenderScene(IBmp frameBuffer);
         Colour ComputeSample(Vector2 pixelCoordinate);
         IntersectionInfo FindClosestIntersection(Ray ray);
+        Distribution Distribution { get; set; }
     }
 }

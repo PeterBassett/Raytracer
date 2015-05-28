@@ -4,6 +4,7 @@ using Raytracer.Rendering.Cameras;
 using Raytracer.Rendering.Core;
 using Raytracer.Rendering.Materials;
 using Raytracer.Rendering.RenderingStrategies;
+using Raytracer.Rendering.Distributions;
 
 namespace Raytracer.Rendering.Renderers
 {
@@ -13,6 +14,7 @@ namespace Raytracer.Rendering.Renderers
         public IRenderingStrategy RenderingStrategy { get; set; }
         public ICamera Camera { get; set; }
         public Scene Scene { get; set; }
+        public Distribution Distribution { get; set; }
 
         public void RenderScene(IBmp frameBuffer)
         {
