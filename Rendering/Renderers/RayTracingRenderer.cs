@@ -327,7 +327,7 @@ namespace Raytracer.Rendering.Renderers
             // is thus diminished by this fraction.
             Colour nextRayIntensity = (1.0 - outReflectionFactor) * rayIntensity;
 
-            var ray = new Ray(intersection.HitPoint, refractDir);
+            var ray = new Ray(testPoint, refractDir);
             return TraceRay(ray, nextRayIntensity, targetRefractiveIndex, recursionDepth + 1, ray.Dir);
         }
 

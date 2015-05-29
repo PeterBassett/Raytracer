@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+  <Renderer>
+    <Raytracer />
+
+    <RenderSettings>
+      <Depth>3</Depth>
+      <Shadows>true</Shadows>
+      <Reflections>true</Reflections>
+      <Refractions>true</Refractions>
+    </RenderSettings>
+  </Renderer>
+
+  <Camera>
+    <Viewpoint>
+      <Transform>
+        <LookAt to="0,0,0" from="8.5, 9, -16" />
+      </Transform>
+      <FOV>60</FOV>
+    </Viewpoint>
+
+  </Camera>
+
+  <Scene>
+
+    <Lights>
+      <AmbientLight>
+        <Colour>0.2</Colour>
+      </AmbientLight>
+
+      <PointLight power="300">
+        <Transform>
+          <Translate>6,8,-10</Translate>
+        </Transform>
+        <Colour>1</Colour>
+      </PointLight>
+
+      <PointLight power="300">
+        <Transform>
+          <Translate>6,8,10</Translate>
+        </Transform>
+        <Colour>1</Colour>
+      </PointLight>
+
+    </Lights>
+
+
+    <Materials>
+
+      <Include href="Default/DiffuseMaterials.xml" />
+      
+      <ColourMaterial name="glass">
+        <Diffuse>
+          <Colour>0</Colour>
+        </Diffuse>
+        <Transmitted>
+          <Colour>0.9</Colour>
+        </Transmitted>
+        <IOR>1.5</IOR>
+      </ColourMaterial>
+
+    </Materials>
+
+    <Primitives>
+      <Torus innerradius="5" outerradius="1.2">      
+        <Material>glass</Material>
+      </Torus>
+
+      <Plane>
+        <Point x="0" y="-6" z="0"></Point>
+        <Normal x="0" y="1" z="0"></Normal>
+        <Material>check</Material>
+      </Plane>
+
+    </Primitives>
+
+  </Scene>
+</Config>

@@ -22,7 +22,7 @@ namespace Raytracer.Rendering.Primitives
                 return info;
 
             info = _transform.ToWorldSpace(info);
-
+            
             return info;
         }
 

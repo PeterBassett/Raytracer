@@ -62,7 +62,7 @@ namespace Raytracer.Rendering.Core
         public Ray ToObjectSpace(Ray ray)
         {
             return new Ray(_transform.Transform(ray.Pos),
-                           _transform.Transform(ray.Dir));
+                           _transform.Transform(ray.Dir).Normalize());
         }
 
         public Point ToObjectSpace(Point point)
@@ -96,8 +96,8 @@ namespace Raytracer.Rendering.Core
                                         info.Primitive, 
                                         info.T, 
                                         info.HitPoint.Transform(_inverse), 
-                                        info.ObjectLocalHitPoint, 
-                                        info.NormalAtHitPoint.Transform(_inverse));
+                                        info.ObjectLocalHitPoint,
+                                        info.NormalAtHitPoint.Transform(_inverse).Normalize());
         }
 
         public AABB ToObjectSpace(AABB aabb)
