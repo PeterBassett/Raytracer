@@ -16,6 +16,7 @@ using Raytracer.FileTypes.XMLRayScene;
 using System.Collections.Concurrent;
 using Raytracer.FileTypes.XMLRayScene.Loaders;
 using Raytracer.Rendering.Synchronisation;
+using Raytracer.Rendering.Distributions;
 
 namespace Raytracer
 {
@@ -164,13 +165,55 @@ namespace Raytracer
             var multiThreaded = GetMultiThreaded();
             var antiAliasingLevel = GetAnitaliasingLevel();
             var antiAliasingSamples = GetRenderAntialiasingSamples();
+            
+            var distribution = GetSelectedDistributionSource();
 
+            var renderingStrategy = GetSelectedRenderingStrategy(multiThreaded, antiAliasingLevel, antiAliasingSamples);
+
+            var camera = _renderer.Camera;
+            
+            _renderer = new Raytracer.Rendering.Renderers.RayTracingRenderer();
+            _renderer.Camera = _camera;
+            _renderer.Scene = _scene;
+            _renderer.Settings = new RenderSettings()
+            {
+                MultiThreaded = multiThreaded,
+                PathDepth = (int)GetRenderDepth(),
+                TraceReflections = mnuReflections.Checked,
+                TraceRefractions = mnuRefractions.Checked,
+                TraceShadows = mnuShadows.Checked
+            };
+            _renderer.RenderingStrategy = renderingStrategy;
+            _renderer.Distribution = distribution; 
+        }
+        
+        private Distribution GetSelectedDistributionSource()
+        {
+            var source = GetDistributionSource();
+
+            switch (source)
+            {
+                case "Random":
+                    return new RandomDistribution();
+                case "Stratified":
+                    return new StratifiedDistribution();
+                default:
+                    throw new ArgumentOutOfRangeException("Distribution");
+            }
+        }
+
+        private string GetDistributionSource()
+        {
+            return GetSelectedMenuItemText(mnuDistributionSource);
+        }
+
+        private IRenderingStrategy GetSelectedRenderingStrategy(bool multiThreaded, uint antiAliasingLevel, bool antiAliasingSamples)
+        {
             IRenderingStrategy renderingStrategy;
-
             var selectedRenderingStrategy = GetRenderingStrategy();
             if (selectedRenderingStrategy == "Progressive")
             {
-                renderingStrategy = new ProgressiveRenderingStrategy(new StandardPixelSampler(), 
+                renderingStrategy = new ProgressiveRenderingStrategy(new StandardPixelSampler(),
                                                                      64,
                                                                      multiThreaded,
                                                                      _cancellationTokenSource.Token);
@@ -200,25 +243,11 @@ namespace Raytracer
                         throw new ArgumentOutOfRangeException("Sampler");
                 }
 
-                renderingStrategy = new BasicRenderingStrategy(pixelSampler, 
-                                                               multiThreaded, 
+                renderingStrategy = new BasicRenderingStrategy(pixelSampler,
+                                                               multiThreaded,
                                                                _cancellationTokenSource.Token);
             }
-
-            var camera = _renderer.Camera;
-            
-            _renderer = new Raytracer.Rendering.Renderers.RayTracingRenderer();
-            _renderer.Camera = _camera;
-            _renderer.Scene = _scene;
-            _renderer.Settings = new RenderSettings()
-            {
-                MultiThreaded = multiThreaded,
-                PathDepth = (int)GetRenderDepth(),
-                TraceReflections = mnuReflections.Checked,
-                TraceRefractions = mnuRefractions.Checked,
-                TraceShadows = mnuShadows.Checked
-            };
-            _renderer.RenderingStrategy = renderingStrategy;
+            return renderingStrategy;
         }
 
         private void SetSelectedRenderDepthMenuItem(int renderDepth)
@@ -389,9 +418,7 @@ namespace Raytracer
 
         private int GetRenderDepth()
         {
-            return (from item in mnuRenderDepth.DropDownItems.Cast<ToolStripMenuItem>()
-                    where item.Checked
-                    select int.Parse(item.Text.ToString())).First();
+            return int.Parse(GetSelectedMenuItemText(mnuRenderDepth));
         }
         
         private bool GetRenderAntialiasingSamples()
@@ -415,7 +442,12 @@ namespace Raytracer
 
         private string GetRenderingStrategy()
         {
-            return (from item in mnuRenderingMode.DropDownItems.Cast<ToolStripMenuItem>()
+            return GetSelectedMenuItemText(mnuRenderingMode);
+        }
+
+        private string GetSelectedMenuItemText(ToolStripMenuItem menuItem)
+        {            
+            return (from item in menuItem.DropDownItems.Cast<ToolStripMenuItem>()
                     where item.Checked
                     select item.Text).First();
         }

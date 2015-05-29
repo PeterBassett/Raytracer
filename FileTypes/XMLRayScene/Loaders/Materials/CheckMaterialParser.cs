@@ -34,7 +34,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Materials
             mat.SubMaterial1 = mat1;
             mat.SubMaterial2 = mat2;
 
-            mat.Size = loader.LoadObject<Vector>(components, element, "Scale", () => new Vector(4,4,4));
+            mat.Size = loader.LoadObject<Matrix>(components, element, "Size", () => Matrix.CreateScale(4)).Transform(new Vector(1.0, 1.0, 1.0));
 
             return mat;
         }

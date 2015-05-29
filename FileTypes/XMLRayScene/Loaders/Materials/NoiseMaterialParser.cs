@@ -31,9 +31,12 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Materials
             var seed = loader.LoadObject<int>(components, element, "seed", () => 0);
             var octaves = loader.LoadObject<int>(components, element, "octaves", () => 1);
             var persistence = loader.LoadObject<float>(components, element, "persistence", () => 0.5f);
-            var scale = loader.LoadObject<Vector>(components, element, "scale", () => new Vector(1, 1, 1));
             var offset = loader.LoadObject<float>(components, element, "offset", () => 0.0f);
             var size = loader.LoadObject<Vector>(components, element, "size", () => new Vector(1, 1, 1));
+
+            var scaleMatrix = loader.LoadObject<Matrix>(components, element, "scale", () => Matrix.CreateScale(1, 1, 1));
+            scaleMatrix.Invert();
+            var scale = scaleMatrix.Transform(new Vector(1, 1, 1));            
 
             return new MaterialNoise(mat1, mat2, seed, persistence, octaves, (float) scale.X, offset, size)
             {

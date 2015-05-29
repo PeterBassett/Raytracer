@@ -81,13 +81,16 @@ namespace Raytracer
             this.dlgOpen = new System.Windows.Forms.OpenFileDialog();
             this.dlgSaveBmp = new System.Windows.Forms.SaveFileDialog();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.txtSceneFile = new Raytracer.UI.CustomXmlTextEditor();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblPercent = new System.Windows.Forms.Label();
             this.btnCancelRendering = new System.Windows.Forms.Button();
             this.btnRender = new System.Windows.Forms.Button();
             this.dlgSaveRay = new System.Windows.Forms.SaveFileDialog();
             this.pixelPosition = new System.Windows.Forms.Label();
+            this.mnuDistributionSource = new System.Windows.Forms.ToolStripMenuItem();
+            this.randomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stratifiedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtSceneFile = new Raytracer.UI.CustomXmlTextEditor();
             ((System.ComponentModel.ISupportInitialize)(this.renderedImage)).BeginInit();
             this.mainMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -206,6 +209,7 @@ namespace Raytracer
             this.overrideSceneDefaultsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.multiThreadedToolStripMenuItem,
             this.mnuRenderingMode,
+            this.mnuDistributionSource,
             this.mnuSuperSampling,
             this.mnuShadows,
             this.mnuReflections,
@@ -220,7 +224,7 @@ namespace Raytracer
             this.multiThreadedToolStripMenuItem.Checked = true;
             this.multiThreadedToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.multiThreadedToolStripMenuItem.Name = "multiThreadedToolStripMenuItem";
-            this.multiThreadedToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.multiThreadedToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.multiThreadedToolStripMenuItem.Text = "Multi-Threaded?";
             this.multiThreadedToolStripMenuItem.Click += new System.EventHandler(this.mnuGeneralSettings_Click);
             // 
@@ -231,7 +235,7 @@ namespace Raytracer
             this.toolStripMenuItem17,
             this.highQualityToolStripMenuItem});
             this.mnuRenderingMode.Name = "mnuRenderingMode";
-            this.mnuRenderingMode.Size = new System.Drawing.Size(162, 22);
+            this.mnuRenderingMode.Size = new System.Drawing.Size(175, 22);
             this.mnuRenderingMode.Text = "Rendering Mode";
             // 
             // progressiveToolStripMenuItem
@@ -239,14 +243,14 @@ namespace Raytracer
             this.progressiveToolStripMenuItem.Checked = true;
             this.progressiveToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.progressiveToolStripMenuItem.Name = "progressiveToolStripMenuItem";
-            this.progressiveToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.progressiveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.progressiveToolStripMenuItem.Text = "Progressive";
             this.progressiveToolStripMenuItem.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // toolStripMenuItem17
             // 
             this.toolStripMenuItem17.Name = "toolStripMenuItem17";
-            this.toolStripMenuItem17.Size = new System.Drawing.Size(141, 22);
+            this.toolStripMenuItem17.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem17.Text = "Row by Row";
             this.toolStripMenuItem17.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
@@ -257,7 +261,7 @@ namespace Raytracer
             this.greyscaleEdgeDetectionSamplerToolStripMenuItem,
             this.componentEdgeDetectionSamplerToolStripMenuItem});
             this.highQualityToolStripMenuItem.Name = "highQualityToolStripMenuItem";
-            this.highQualityToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.highQualityToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.highQualityToolStripMenuItem.Text = "High Quality";
             this.highQualityToolStripMenuItem.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
@@ -296,7 +300,7 @@ namespace Raytracer
             this.xToolStripMenuItem3,
             this.renderAntialiasingSamplesToolStripMenuItem});
             this.mnuSuperSampling.Name = "mnuSuperSampling";
-            this.mnuSuperSampling.Size = new System.Drawing.Size(162, 22);
+            this.mnuSuperSampling.Size = new System.Drawing.Size(175, 22);
             this.mnuSuperSampling.Text = "Anti-Aliasing?";
             // 
             // xToolStripMenuItem
@@ -343,21 +347,21 @@ namespace Raytracer
             // mnuShadows
             // 
             this.mnuShadows.Name = "mnuShadows";
-            this.mnuShadows.Size = new System.Drawing.Size(162, 22);
+            this.mnuShadows.Size = new System.Drawing.Size(175, 22);
             this.mnuShadows.Text = "Shadows?";
             this.mnuShadows.Click += new System.EventHandler(this.mnuGeneralSettings_Click);
             // 
             // mnuReflections
             // 
             this.mnuReflections.Name = "mnuReflections";
-            this.mnuReflections.Size = new System.Drawing.Size(162, 22);
+            this.mnuReflections.Size = new System.Drawing.Size(175, 22);
             this.mnuReflections.Text = "Reflections?";
             this.mnuReflections.Click += new System.EventHandler(this.mnuGeneralSettings_Click);
             // 
             // mnuRefractions
             // 
             this.mnuRefractions.Name = "mnuRefractions";
-            this.mnuRefractions.Size = new System.Drawing.Size(162, 22);
+            this.mnuRefractions.Size = new System.Drawing.Size(175, 22);
             this.mnuRefractions.Text = "Refractions?";
             this.mnuRefractions.Click += new System.EventHandler(this.mnuGeneralSettings_Click);
             // 
@@ -380,7 +384,7 @@ namespace Raytracer
             this.toolStripMenuItem15,
             this.toolStripMenuItem16});
             this.mnuRenderDepth.Name = "mnuRenderDepth";
-            this.mnuRenderDepth.Size = new System.Drawing.Size(162, 22);
+            this.mnuRenderDepth.Size = new System.Drawing.Size(175, 22);
             this.mnuRenderDepth.Text = "Recursion Depth";
             // 
             // toolStripMenuItem6
@@ -533,22 +537,6 @@ namespace Raytracer
             this.splitContainer1.SplitterDistance = 668;
             this.splitContainer1.TabIndex = 4;
             // 
-            // txtSceneFile
-            // 
-            this.txtSceneFile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSceneFile.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.txtSceneFile.IsIconBarVisible = true;
-            this.txtSceneFile.IsReadOnly = false;
-            this.txtSceneFile.Location = new System.Drawing.Point(0, 0);
-            this.txtSceneFile.Name = "txtSceneFile";
-            this.txtSceneFile.ShowSpaces = true;
-            this.txtSceneFile.ShowTabs = true;
-            this.txtSceneFile.ShowVRuler = false;
-            this.txtSceneFile.Size = new System.Drawing.Size(370, 407);
-            this.txtSceneFile.TabIndent = 2;
-            this.txtSceneFile.TabIndex = 4;
-            this.txtSceneFile.TextChanged += new System.EventHandler(this.txtSceneFile_TextChanged);
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.lblPercent);
@@ -607,6 +595,47 @@ namespace Raytracer
             this.pixelPosition.TabIndex = 5;
             this.pixelPosition.Text = "X:Y";
             this.pixelPosition.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // mnuDistributionSource
+            // 
+            this.mnuDistributionSource.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.randomToolStripMenuItem,
+            this.stratifiedToolStripMenuItem});
+            this.mnuDistributionSource.Name = "mnuDistributionSource";
+            this.mnuDistributionSource.Size = new System.Drawing.Size(175, 22);
+            this.mnuDistributionSource.Text = "Distribution Source";
+            // 
+            // randomToolStripMenuItem
+            // 
+            this.randomToolStripMenuItem.Name = "randomToolStripMenuItem";
+            this.randomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.randomToolStripMenuItem.Text = "Random";
+            this.randomToolStripMenuItem.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
+            // 
+            // stratifiedToolStripMenuItem
+            // 
+            this.stratifiedToolStripMenuItem.Checked = true;
+            this.stratifiedToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.stratifiedToolStripMenuItem.Name = "stratifiedToolStripMenuItem";
+            this.stratifiedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.stratifiedToolStripMenuItem.Text = "Stratified";
+            this.stratifiedToolStripMenuItem.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
+            // 
+            // txtSceneFile
+            // 
+            this.txtSceneFile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSceneFile.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtSceneFile.IsIconBarVisible = true;
+            this.txtSceneFile.IsReadOnly = false;
+            this.txtSceneFile.Location = new System.Drawing.Point(0, 0);
+            this.txtSceneFile.Name = "txtSceneFile";
+            this.txtSceneFile.ShowSpaces = true;
+            this.txtSceneFile.ShowTabs = true;
+            this.txtSceneFile.ShowVRuler = false;
+            this.txtSceneFile.Size = new System.Drawing.Size(370, 407);
+            this.txtSceneFile.TabIndent = 2;
+            this.txtSceneFile.TabIndex = 4;
+            this.txtSceneFile.TextChanged += new System.EventHandler(this.txtSceneFile_TextChanged);
             // 
             // Main
             // 
@@ -695,6 +724,9 @@ namespace Raytracer
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem16;
         private System.Windows.Forms.ToolStripMenuItem overrideSceneDefaults;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem17;
+        private System.Windows.Forms.ToolStripMenuItem mnuDistributionSource;
+        private System.Windows.Forms.ToolStripMenuItem randomToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stratifiedToolStripMenuItem;
     }
 }
 

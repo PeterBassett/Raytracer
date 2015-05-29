@@ -114,6 +114,7 @@
     <Compile Include="FileTypes\XMLRayScene\Loaders\PixelSamplers\PixelSamplerParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\PixelSamplers\StandardPixelSamplerParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Primitives\ConeParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Primitives\CubeParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Primitives\MeshInstanceParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Primitives\MeshParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Primitives\TriangleParser.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="FileTypes\XMLRayScene\Loaders\RenderingStrategies\BasicRenderingStrategyParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\RenderingStrategies\RenderingStrategyParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Scene\SceneParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Transforms\ScaleParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Xml\IncludeParser.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
@@ -171,7 +173,6 @@
     <Compile Include="MathTypes\Converters\PointConverter.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Renderer\RenderSettingsParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Geometry\NormalParser.cs" />
-    <Compile Include="FileTypes\XMLRayScene\Loaders\Geometry\ScaleParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Geometry\XYZParserBase.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Geometry\UpParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Geometry\ToParser.cs" />
@@ -225,6 +226,7 @@
     <Compile Include="Rendering\Distributions\Distribution.cs" />
     <Compile Include="Rendering\Distributions\RandomDistribution.cs" />
     <Compile Include="Rendering\Lights\AmbientLight.cs" />
+    <Compile Include="Rendering\Lights\AreaLights\CylinderLight.cs" />
     <Compile Include="Rendering\Lights\AreaLights\DiscLight.cs" />
     <Compile Include="Rendering\Lights\AreaLights\SphereLight.cs" />
     <Compile Include="Rendering\Lights\AreaLights\AreaLight.cs" />
@@ -234,6 +236,7 @@
     <Compile Include="Rendering\Lights\PointLight.cs" />
     <Compile Include="Rendering\PixelSamplers\EdgeDetectionPerComponentSampler.cs" />
     <Compile Include="Rendering\Primitives\Cone.cs" />
+    <Compile Include="Rendering\Primitives\Cube.cs" />
     <Compile Include="Rendering\Primitives\Solidity.cs" />
     <Compile Include="Rendering\Primitives\Disc.cs" />
     <Compile Include="Rendering\Primitives\Cylinder.cs" />

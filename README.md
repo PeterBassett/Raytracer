@@ -11,6 +11,7 @@ Primitives
 * Meshes loaded from wavefront obj files. Supports mtl files.
 * Tori (Toruses, Donuts....Mmm Donuts!)
 * Cylinders
+* Cubes
 
 Effects
 * Reflections
@@ -31,6 +32,10 @@ Lights
 * Projection Light - Like a spot light but projects a texture into the scene. Think overhead projector and you'll not be far off.
 * Area Lights. Currently just Spherical but I will expand to disc and quads. Custom sampling threshlold per light. Casts soft shadows.
 
+Lights and most primitives take a Transform object instead of explicit positions, rotations etc. 
+The new file format then has several methods of producing a Transform. Explicit translations and rotations, lookat matricies, axis angles etc 
+and they could all be used where ever appropriate. 
+
 File Types
 * XML Based renderer and scene definition files.
 * Wavefront obj files.
@@ -50,17 +55,13 @@ Accelleration Structures
 * Multi Axis Midpoint Split Criteria 
 * Multi Axis SAH Split Criteria
 
-Recent improvements 
-
-Multi axis SAH construction for my AABB BVH.
-Fixed Texture UV coordinate calculation. I had them each mirrored.
-Changed the lighting design to add more complex lighting. I'll have to change the file format to accomodate this more effectively. 
+Sampling Stratigies
+* Random
+* Stratified
 
 Still to come
 
-I will also change the transformation capabilities of the primitives and lights so they all take a Transform object instead of explicit positions, rotations etc. The new file format can then have several method of producing a Transform. Explicit translations and rotations, lookat matricies, axis angles etc and they could all be used where ever appropriate. 
-
-Then comes bump mapping, area lights and a path tracer implementation.
+Bump mapping, more area lights and a path tracer implementation.
 
 Examples
 
@@ -109,3 +110,10 @@ Examples
 
 * Four Spherical Area Lights. 256 shadow rays per light.
 ![sphere area light](/OutputImages/SphereLight.jpeg?raw=true)
+
+* Soft Shadow from area light.
+![shoftshadows](/OutputImages/SoftShadows_StratifiedSampling.jpeg?raw=true)
+
+
+* New cube primitive Supports arbitrary scaling.
+![shoftshadows](/OutputImages/Cubes.jpeg?raw=true)

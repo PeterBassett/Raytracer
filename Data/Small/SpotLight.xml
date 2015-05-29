@@ -110,7 +110,7 @@
       </ColourMaterial>
 
       <CheckMaterial name="check" from-material="lightgrey" to-material="darkgrey">
-        <Scale>4</Scale>
+        <Size>4</Size>
       </CheckMaterial>
 
     </Materials>
