@@ -241,8 +241,11 @@ namespace Raytracer.Rendering.Renderers
                 // there is no such real angle a2, which in turn
                 // means that the ray experiences total internal reflection,
                 // so that no refracted ray exists.
-                outReflectionFactor = 1.0;      // complete reflection
-                return new Colour(0.0, 0.0, 0.0);    // no refraction at all
+
+                Vector reflectionVector = CalculateReflectedRay(dirUnit, intersection.NormalAtHitPoint);
+                outReflectionFactor = 1;
+                var reflectedRay = new Ray(intersection.HitPoint, reflectionVector);
+                return TraceRay(reflectedRay, rayIntensity, sourceRefractiveIndex, recursionDepth + 1, reflectedRay.Dir);
             }
 
             // Getting here means there is at least a little bit of
