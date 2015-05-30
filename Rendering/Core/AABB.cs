@@ -189,11 +189,9 @@ namespace Raytracer.Rendering.Core
 
         public bool Contains(Point point)
         {
-            var T = point - Center;
-
-            return (Math.Abs(T.X) <= Width &&
-                   Math.Abs(T.Y) <= Height &&
-                   Math.Abs(T.Z) <= Depth);
+            return Min.X <= point.X && point.X < Max.X &&
+                   Min.Y <= point.Y && point.Y < Max.Y &&
+                   Min.Z <= point.Z && point.Z < Max.Z;
         }
 
         public bool IsEmpty { get { return _isEmpty; } }

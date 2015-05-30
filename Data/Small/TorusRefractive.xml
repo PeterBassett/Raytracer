@@ -4,7 +4,7 @@
     <Raytracer />
 
     <RenderSettings>
-      <Depth>3</Depth>
+      <Depth>10</Depth>
       <Shadows>true</Shadows>
       <Reflections>true</Reflections>
       <Refractions>true</Refractions>
@@ -51,7 +51,7 @@
       
       <ColourMaterial name="glass">
         <Diffuse>
-          <Colour>0</Colour>
+          <Colour>0.0</Colour>
         </Diffuse>
         <Transmitted>
           <Colour>0.9</Colour>
@@ -62,7 +62,7 @@
     </Materials>
 
     <Primitives>
-      <Torus innerradius="5" outerradius="1.2">      
+      <Torus InnerRadius="5" outerRadius="1">      
         <Material>glass</Material>
       </Torus>
 
