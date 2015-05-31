@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+  <Renderer>
+    <Raytracer />
+
+    <RenderSettings>
+      <Depth>20</Depth>
+      <Shadows>true</Shadows>
+      <Reflections>true</Reflections>
+      <Refractions>true</Refractions>
+    </RenderSettings>
+  </Renderer>
+
+  <Camera>
+    <Viewpoint>
+      <Transform>
+    		<Rotate>-15,15,0</Rotate>
+        <Translate>0,0,-12</Translate>
+      </Transform>
+      <FOV>10</FOV>
+    </Viewpoint>
+
+  </Camera>
+
+  <Scene>
+
+    <Lights>
+      <AmbientLight>
+        <Colour>0.2</Colour>
+      </AmbientLight>
+
+      <PointLight power="300">
+        <Transform>
+          <Translate>6,8,-10</Translate>
+        </Transform>
+        <Colour>1</Colour>
+      </PointLight>
+
+      <PointLight power="300">
+        <Transform>
+          <Translate>6,8,10</Translate>
+        </Transform>
+        <Colour>1</Colour>
+      </PointLight>
+
+    </Lights>
+
+
+    <Materials>
+
+      <Include href="Default/DiffuseMaterials.xml" />
+      
+      <ColourMaterial name="glass">
+        <Diffuse>
+          <Colour>0.0</Colour>
+        </Diffuse>
+        <Transmitted>
+          <Colour>0.9</Colour>
+        </Transmitted>
+        <IOR>1.5</IOR>
+      </ColourMaterial>
+
+    </Materials>
+
+    <Primitives>
+  		
+      <Cube>      
+    		<Transform>
+      		<Scale>6</Scale>
+      	</Transform>
+        <Material>glass</Material>
+      </Cube>
+
+    	<Cube>      
+    		<Transform>
+      		<Scale>2</Scale>
+    			<Translate>0,0,-2</Translate>
+      	</Transform>
+        <Material>red</Material>    	
+    	</Cube>
+    	
+      <Plane>
+        <Point x="0" y="-6" z="0"></Point>
+        <Normal x="0" y="1" z="0"></Normal>
+        <Material>check</Material>
+      </Plane>
+
+    </Primitives>
+
+  </Scene>
+</Config>
