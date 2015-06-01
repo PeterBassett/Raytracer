@@ -56,4 +56,64 @@
       <Size>4</Size>
     </CheckMaterial>
 
+    <ColourMaterial name="blue">
+      <Diffuse>
+        <Colour>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>1</Blue>
+        </Colour>
+      </Diffuse>
+      <Specular exponent="0.35">
+        <Specularity>20</Specularity>
+      </Specular>
+      <Reflected>
+        <Colour>0</Colour>
+      </Reflected>
+      <IOR>1</IOR>
+      <Transmitted>
+        <Colour>0</Colour>
+      </Transmitted>
+    </ColourMaterial>
+
+    <ColourMaterial name="green">
+      <Diffuse>
+        <Colour>
+          <Red>0</Red>
+          <Green>1</Green>
+          <Blue>0</Blue>
+        </Colour>
+      </Diffuse>
+      <Specular exponent="0.35">
+        <Specularity>20</Specularity>
+      </Specular>
+      <Reflected>
+        <Colour>0</Colour>
+      </Reflected>
+      <IOR>1</IOR>
+      <Transmitted>
+        <Colour>0</Colour>
+      </Transmitted>
+    </ColourMaterial>
+
+    <ColourMaterial name="yellow">
+      <Diffuse>
+        <Colour>
+          <Red>1</Red>
+          <Green>1</Green>
+          <Blue>0</Blue>
+        </Colour>
+      </Diffuse>
+      <Specular exponent="0.35">
+        <Specularity>20</Specularity>
+      </Specular>
+      <Reflected>
+        <Colour>0</Colour>
+      </Reflected>
+      <IOR>1</IOR>
+      <Transmitted>
+        <Colour>0</Colour>
+      </Transmitted>
+    </ColourMaterial>
+
   </Materials>
