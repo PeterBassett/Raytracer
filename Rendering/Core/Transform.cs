@@ -13,6 +13,11 @@ namespace Raytracer.Rendering.Core
             _inverse = inverse;
         }
 
+        public Transform Invert(Transform t)
+        {
+            return new Transform(t._inverse, t._transform);
+        }
+
         public Vector GetObjectSpaceRotation()
         {
             return GetRotation(_transform);
@@ -61,8 +66,14 @@ namespace Raytracer.Rendering.Core
 		
         public Ray ToObjectSpace(Ray ray)
         {
-            return new Ray(_transform.Transform(ray.Pos),
-                           _transform.Transform(ray.Dir).Normalize());
+            return new Ray(ray.Pos.Transform(_transform),
+                           ray.Dir.Transform(_transform).Normalize());
+        }
+
+        public Ray ToWorldSpace(Ray ray)
+        {
+            return new Ray(ray.Pos.Transform(_inverse),
+                           ray.Dir.Transform(_inverse).Normalize());
         }
 
         public Point ToObjectSpace(Point point)
@@ -75,14 +86,17 @@ namespace Raytracer.Rendering.Core
             return _inverse.Transform(point);
         }
 
-        public Vector ToObjectSpace(Vector point)
+        public Vector ToObjectSpace(Vector vector)
         {
-            return _transform.Transform(point);
+            return vector.Transform(_transform);
+            //return _transform.Transform(vector);
         }
 
         public Vector ToWorldSpace(Vector vector)
         {
-            return _inverse.Transform(vector);
+            return vector.Transform(_inverse);
+            
+            ///return _inverse.Transform(vector);
         }
 
         public Normal ToWorldSpace(Normal normal)
@@ -98,6 +112,16 @@ namespace Raytracer.Rendering.Core
                                         info.HitPoint.Transform(_inverse), 
                                         info.ObjectLocalHitPoint,
                                         info.NormalAtHitPoint.Transform(_inverse).Normalize());
+        }
+
+        public IntersectionInfo ToObjectSpace(IntersectionInfo info)
+        {
+            return new IntersectionInfo(info.Result,
+                                        info.Primitive,
+                                        info.T,
+                                        info.HitPoint.Transform(_transform),
+                                        info.ObjectLocalHitPoint,
+                                        info.NormalAtHitPoint.Transform(_transform).Normalize());
         }
 
         public AABB ToObjectSpace(AABB aabb)

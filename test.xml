@@ -27,13 +27,6 @@
         <Colour>0.156</Colour>
       </AmbientLight>
 
-      <SpotLight power="0" width="35" FallOffWidth="10">
-        <Transform>
-          <LookAt to="0,0,0" from="5,12,5" />
-        </Transform>
-        <Colour>1</Colour>
-      </SpotLight>
-
       <SpotLight power="300" width="35" FallOffWidth="10">
         <Transform>
           <LookAt to="0,0,0" from="5,12,-5"/>
@@ -41,13 +34,7 @@
         <Colour>1,0,0</Colour>
       </SpotLight>
 
-      <SpotLight power="0" width="35" FallOffWidth="10">
-        <Transform>
-          <LookAt to="0,0,0" from="-5,12,5" />
-        </Transform>
-        <Colour>1</Colour>
-      </SpotLight>
-      <SpotLight power="300" width="35" FallOffWidth="10">
+    	<SpotLight power="300" width="35" FallOffWidth="10">
         <Transform>
           <LookAt to="0,0,0" from="-5,12,-5" />
         </Transform>
@@ -118,44 +105,45 @@
     <Primitives>
       <Cube>
     		<Transform>      		
-      		
-    			<Rotate>0, 0, 40</Rotate>	
     			<Translate>0,0,-2</Translate>
+    		  <Rotate>0, 0, 40</Rotate>	
       		<Scale>5,9,1</Scale>
-    		</Transform>
+      	</Transform>
         <Material>red</Material>
       </Cube>
 
     	<Cube>
-    		<Transform>      		
+    		<Transform>      		    			
+    			<Rotate>0,30,0</Rotate>
     			<Translate>0,0,0</Translate>
-    		  <Rotate>20, 20, 0</Rotate>    			
       	</Transform>
         <Material>red</Material>
       </Cube>
     	<Cube>
-    		<Transform>      		
+    		<Transform>  
+    			<Rotate>0,40,0</Rotate>
     			<Translate>2,0,0</Translate>
-    			<Rotate>40, 40, 0</Rotate>
       	</Transform>
         <Material>red</Material>
       </Cube>
       <Cube>
-    		<Transform>      		      		
-    			<Translate>4,0,0</Translate>
-      		<Rotate>60, 60, 0</Rotate>
+    		<Transform>      		
+      		<Translate>4,0,0</Translate>
+      	<RotateY>50</RotateY>
+    			
       	</Transform>
         <Material>red</Material>
       </Cube>
 			<Cube>
-    		<Transform>      		
+    		<Transform>   
+					<Rotate>0,20,0</Rotate>
     			<Translate>-2,0,0</Translate>
-					<Rotate>20, 20, 0</Rotate>
       	</Transform>
         <Material>red</Material>
       </Cube>
     	<Cube>
-    		<Transform>      		
+    		<Transform>  
+    			<Rotate>0,10,0</Rotate>
     			<Translate>-4,0,0</Translate>
       	</Transform>
         <Material>red</Material>

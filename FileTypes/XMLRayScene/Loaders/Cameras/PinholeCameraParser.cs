@@ -26,7 +26,9 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Cameras
 
             var fieldOfView = loader.LoadObject<float>(components, element, "FOV", () => 90);
 
-            return new PinholeCamera(eyePosition, viewPointRotation, new Size(100, 100), fieldOfView);
+            transform = transform.Invert(transform);
+            
+            return new PinholeCamera2(transform, new Size(100, 100), fieldOfView);
         }
     }
 }

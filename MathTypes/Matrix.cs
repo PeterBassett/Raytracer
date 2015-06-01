@@ -562,13 +562,29 @@ namespace Raytracer.MathTypes
             var xaxis = Vector.CrossProduct(cameraUpVector, zaxis).Normalize();
             var yaxis = Vector.CrossProduct(zaxis, xaxis);
 
+
+            var rotate = new Matrix(
+                    xaxis.X, yaxis.X, zaxis.X, 0f,
+                    xaxis.Y, yaxis.Y, zaxis.Y, 0f,
+                    xaxis.Z, yaxis.Z, zaxis.Z, 0f,
+                    0, 0, 0, 1);
+
+            var translate = new Matrix(
+                    1, 0, 0, 0f,
+                    0, 1, 0, 0f,
+                    0, 0, 1, 0f,
+                    eye.X, eye.Y, eye.Z, 1);
+
+            return rotate * translate;
+            /*
             var toWorld = new Matrix(
                     xaxis.X, yaxis.X, zaxis.X, 0f,
                     xaxis.Y, yaxis.Y, zaxis.Y, 0f,
                     xaxis.Z, yaxis.Z, zaxis.Z, 0f,
+                    //-Vector.DotProduct(xaxis, eye), -Vector.DotProduct(yaxis, eye), -Vector.DotProduct(zaxis, eye), 1f);
                     eye.X, eye.Y, eye.Z, 1f);
 
-            return toWorld;
+            return toWorld;/*
             /*
 			var eye = (Vector)cameraPosition;
             var lookAt = (Vector)lookingAtPosition;

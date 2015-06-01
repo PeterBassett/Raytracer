@@ -3,14 +3,6 @@
   <Renderer>
     <Raytracer />
 
-    <RenderingStrategy>
-      <BasicRenderingStrategy>
-        <PixelSampler>
-          <EdgeDetectionPerComponentSampler subSamplingLevel="4" renderEdgeDetectionResults="false" />
-        </PixelSampler>
-      </BasicRenderingStrategy>
-    </RenderingStrategy>
-
     <RenderSettings>
       <Depth>2</Depth>
       <Shadows>true</Shadows>
@@ -23,7 +15,7 @@
   <Camera>
     <Viewpoint>
       <Transform>
-        <Rotate>30,25,0</Rotate>
+        <Rotate>-30,-25,0</Rotate>
         <Translate>-6,6,-15</Translate>
       </Transform>
       <FOV>90</FOV>

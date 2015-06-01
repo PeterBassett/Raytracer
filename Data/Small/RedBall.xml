@@ -15,8 +15,8 @@
   <Camera>
     <Viewpoint>
       <Transform>
-        <Translate>0, 1, -14</Translate>
-        <RotateX>45</RotateX>
+    		<RotateX>-45</RotateX>
+        <Translate>0, 9, -14</Translate>
       </Transform>
       <FOV>90</FOV>
     </Viewpoint>
@@ -98,6 +98,9 @@
 
     <Primitives>
       <Sphere>
+    		<Transform>
+      		<Translate>2,0,0</Translate>
+      	</Transform>
         <Radius>5</Radius>
         <Material>red</Material>
       </Sphere>
