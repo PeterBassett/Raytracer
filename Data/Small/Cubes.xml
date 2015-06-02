@@ -14,10 +14,9 @@
   <Camera>
     <Viewpoint>
 			<Transform>
-    		<RotateX>-35</RotateX>
-        <Translate>0, 6, -14</Translate>        
+    		<LookAt at="0,-6,0" from="0, 6, -14" />        
       </Transform>
-      <FOV>90</FOV>
+      <FOV>60</FOV>
     </Viewpoint>
   </Camera>
 
@@ -118,39 +117,40 @@
     <Primitives>
       <Cube>
     		<Transform>      		
-      		
-    			<Rotate>0, 0, 40</Rotate>	
-    			<Translate>0,0,-2</Translate>
       		<Scale>5,9,1</Scale>
+    			<Rotate>0, 0, 40</Rotate>	
+    			<Translate>0,0,2</Translate>
+      		
     		</Transform>
         <Material>red</Material>
       </Cube>
 
     	<Cube>
     		<Transform>      		
-    			<Translate>0,0,0</Translate>
-    		  <Rotate>20, 20, 0</Rotate>    			
+    			<Rotate>40, 40, 0</Rotate>    			
+    			<Translate>0,0,0</Translate>    		  
       	</Transform>
         <Material>red</Material>
       </Cube>
     	<Cube>
-    		<Transform>      		
-    			<Translate>2,0,0</Translate>
-    			<Rotate>40, 40, 0</Rotate>
+				<Transform>
+    			<Rotate>60, 60, 0</Rotate>
+    			<Translate>2,0,0</Translate>    			
       	</Transform>
         <Material>red</Material>
       </Cube>
       <Cube>
     		<Transform>      		      		
-    			<Translate>4,0,0</Translate>
-      		<Rotate>60, 60, 0</Rotate>
+      		<Rotate>80, 80, 0</Rotate>
+    			<Translate>4,0,0</Translate>      		
       	</Transform>
         <Material>red</Material>
       </Cube>
 			<Cube>
     		<Transform>      		
-    			<Translate>-2,0,0</Translate>
 					<Rotate>20, 20, 0</Rotate>
+    			<Translate>-2,0,0</Translate>
+					
       	</Transform>
         <Material>red</Material>
       </Cube>
@@ -162,31 +162,36 @@
       </Cube>
 
     	<Cube>
-    		<Transform>      		
+    		<Transform>     
+    			<Rotate>20, 20, 0</Rotate>
     			<Translate>0,2,0</Translate>
       	</Transform>
         <Material>red</Material>
       </Cube>
     	<Cube>
-    		<Transform>      		
+    		<Transform>
+    			<Rotate>30, 30, 0</Rotate>
     			<Translate>2,2,0</Translate>
       	</Transform>
         <Material>red</Material>
       </Cube>
       <Cube>
     		<Transform>      		
+      		<Rotate>40, 40, 0</Rotate>
     			<Translate>4,2,0</Translate>
       	</Transform>
         <Material>red</Material>
       </Cube>
 			<Cube>
     		<Transform>      		
+					<Rotate>10, 10, 0</Rotate>
     			<Translate>-2,2,0</Translate>
       	</Transform>
         <Material>red</Material>
       </Cube>
     	<Cube>
     		<Transform>      		
+    			<Rotate>0, 0, 0</Rotate>
     			<Translate>-4,2,0</Translate>
       	</Transform>
         <Material>red</Material>
@@ -194,30 +199,35 @@
     	
     	<Cube>
     		<Transform>      		
+    			<Rotate>60, 60, 0</Rotate>
     			<Translate>0,-2,0</Translate>
       	</Transform>
         <Material>red</Material>
       </Cube>
     	<Cube>
     		<Transform>      		
+    			<Rotate>80, 80, 0</Rotate>
     			<Translate>2,-2,0</Translate>
       	</Transform>
         <Material>red</Material>
       </Cube>
       <Cube>
     		<Transform>      		
+    			<Rotate>120, 120, 0</Rotate>
     			<Translate>4,-2,0</Translate>
       	</Transform>
         <Material>red</Material>
       </Cube>
 			<Cube>
     		<Transform>      		
+    			<Rotate>30, 30, 0</Rotate>
     			<Translate>-2,-2,0</Translate>
       	</Transform>
         <Material>red</Material>
       </Cube>
     	<Cube>
     		<Transform>      		
+    			<Rotate>0, 0, 0</Rotate>
     			<Translate>-4,-2,0</Translate>
       	</Transform>
         <Material>red</Material>
@@ -225,61 +235,71 @@
 
      <Cube>
     		<Transform>      		
+     			<Rotate>10, 10, 0</Rotate>
     			<Translate>0,4,0</Translate>
       	</Transform>
         <Material>red</Material>
       </Cube>
     	<Cube>
     		<Transform>      		
+    			<Rotate>15, 15, 0</Rotate>
     			<Translate>2,4,0</Translate>
       	</Transform>
         <Material>red</Material>
       </Cube>
       <Cube>
     		<Transform>      		
+    			<Rotate>20, 20, 0</Rotate>
     			<Translate>4,4,0</Translate>
       	</Transform>
         <Material>red</Material>
       </Cube>
 			<Cube>
     		<Transform>      		
+    			<Rotate>5, 5, 0</Rotate>
     			<Translate>-2,4,0</Translate>
       	</Transform>
         <Material>red</Material>
       </Cube>
     	<Cube>
     		<Transform>      		
+    			<Rotate>0, 0, 0</Rotate>
     			<Translate>-4,4,0</Translate>
       	</Transform>
         <Material>red</Material>
       </Cube>
     	
     	<Cube>
-    		<Transform>      		
+    		<Transform>
+    			<Rotate>80, 80, 0</Rotate>
     			<Translate>0,-4,0</Translate>
       	</Transform>
         <Material>red</Material>
       </Cube>
     	<Cube>
     		<Transform>      		
+    			<Rotate>120, 120, 0</Rotate>
     			<Translate>2,-4,0</Translate>
       	</Transform>
         <Material>red</Material>
       </Cube>
       <Cube>
     		<Transform>      		
+    			<Rotate>160, 160, 0</Rotate>
     			<Translate>4,-4,0</Translate>
       	</Transform>
         <Material>red</Material>
       </Cube>
 			<Cube>
     		<Transform>      		
+    			<Rotate>40, 40, 0</Rotate>
     			<Translate>-2,-4,0</Translate>
       	</Transform>
         <Material>red</Material>
       </Cube>
     	<Cube>
     		<Transform>      		
+    			<Rotate>0, 0, 0</Rotate>
     			<Translate>-4,-4,0</Translate>
       	</Transform>
         <Material>red</Material>

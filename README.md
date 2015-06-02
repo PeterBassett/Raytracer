@@ -114,6 +114,6 @@ Examples
 * Soft Shadow from area light.
 ![shoftshadows](/OutputImages/SoftShadows_StratifiedSampling.jpeg?raw=true)
 
-
 * New cube primitive Supports arbitrary scaling.
 ![shoftshadows](/OutputImages/Cubes.jpeg?raw=true)
+![scaled torus](/OutputImages/ScaledRefractiveTorus.jpeg?raw=true)
