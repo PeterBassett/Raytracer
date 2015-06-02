@@ -20,7 +20,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Transforms
                 return new Vector(defaultValue.X, defaultValue.Y, defaultValue.Z);
             });
 
-            return Matrix.CreateScale(1.0 / vector.Value);
+            return Matrix.CreateScale(vector.Value);
         }
     }
 }

@@ -14,7 +14,7 @@
   <Camera>
     <Viewpoint>
       <Transform>
-        <LookAt to="0,0,0" from="8,11, -16" />
+        <LookAt to="0,0,0" from="8.5, 9, -16" />
       </Transform>
       <FOV>60</FOV>
     </Viewpoint>
@@ -24,15 +24,23 @@
   <Scene>
 
     <Lights>
+      <AmbientLight>
+        <Colour>0.2</Colour>
+      </AmbientLight>
 
-    	<AmbientLight><Colour>0.2</Colour></AmbientLight>
-
-  	  <DistantLight power="1">
-        <Colour>1</Colour>
+      <PointLight power="300">
         <Transform>
-          <RotateZ>-40</RotateZ>
+          <Translate>6,8,-10</Translate>
         </Transform>
-      </DistantLight>
+        <Colour>1</Colour>
+      </PointLight>
+
+      <PointLight power="300">
+        <Transform>
+          <Translate>6,8,10</Translate>
+        </Transform>
+        <Colour>1</Colour>
+      </PointLight>
 
     </Lights>
 
@@ -54,29 +62,13 @@
     </Materials>
 
     <Primitives>
-      <Cube>      
+      <Torus InnerRadius="5" outerRadius="1">  
     		<Transform>
-      		<Scale>6</Scale>
+      		<Scale>1.5,1,2</Scale>
       	</Transform>
         <Material>glass</Material>
-      </Cube>
+      </Torus>
 
-    	<Cube>      
-    		<Transform>
-      		<Scale>3</Scale>
-    			<Translate>0,0,6</Translate>
-      	</Transform>
-        <Material>red</Material>    	
-    	</Cube>
-
-    	<Cube>      
-    		<Transform>
-      		<Scale>2</Scale>
-    			<Translate>-5,0,1</Translate>
-      	</Transform>
-        <Material>blue</Material>
-      </Cube>
-    	
       <Plane>
         <Point x="0" y="-6" z="0"></Point>
         <Normal x="0" y="1" z="0"></Normal>

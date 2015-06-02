@@ -14,7 +14,7 @@
   <Camera>
     <Viewpoint>
       <Transform>
-        <LookAt to="3,0,0" from="8.5, 9, -16" />
+        <LookAt to="3,0,0" from="3, 0, -16" />
       </Transform>
       <FOV>35</FOV>
     </Viewpoint>
@@ -71,6 +71,7 @@
 
     	<Cube>      
     		<Transform>
+    			<Scale>5.5</Scale>
       		<Translate>3,0,4</Translate>
       	</Transform>
       	<Material>blue</Material>
