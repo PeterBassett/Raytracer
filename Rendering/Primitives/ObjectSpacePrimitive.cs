@@ -36,7 +36,7 @@ namespace Raytracer.Rendering.Primitives
 
         public override AABB GetAABB()
         {
-            return _transform.ToWorldSpace(ObjectSpaceGetAABB());
+            return _transform.ToObjectSpace(ObjectSpaceGetAABB());
         }
 
         protected abstract IntersectionInfo ObjectSpaceIntersect(Ray ray);
