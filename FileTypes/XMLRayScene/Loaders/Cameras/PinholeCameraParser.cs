@@ -17,13 +17,6 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Cameras
         {
             var transform = loader.LoadObject(components, element, "Transform", Transform.CreateIdentityTransform);            
 
-            var eyePosition = transform.ToObjectSpace(new Point(0, 0, 0));
-
-            var rotate =  transform.GetObjectSpaceRotation();
-            var viewPointRotation = new Vector(MathLib.Rad2Deg(rotate.X),
-                                                 MathLib.Rad2Deg(rotate.Y),
-                                                 MathLib.Rad2Deg(rotate.Z));
-
             var fieldOfView = loader.LoadObject<float>(components, element, "FOV", () => 90);
 
             transform = transform.Invert(transform);
