@@ -14,21 +14,21 @@ namespace Raytracer.Rendering.Primitives
      
         public override IntersectionInfo Intersect(Ray ray)
         {
-            ray = _transform.ToWorldSpace(ray);
+            ray = _transform.ToObjectSpace(ray);
 
             var info = ObjectSpaceIntersect(ray);
 
             if (info.Result == HitResult.Miss)
                 return info;
 
-            info = _transform.ToObjectSpace(info);
+            info = _transform.ToWorldSpace(info);
             
             return info;
         }
 
         public override bool Contains(Point point)
         {
-            return ObjectSpaceContains(_transform.ToWorldSpace(point));
+            return ObjectSpaceContains(_transform.ToObjectSpace(point));
         }
 
         public override AABB GetAABB()
