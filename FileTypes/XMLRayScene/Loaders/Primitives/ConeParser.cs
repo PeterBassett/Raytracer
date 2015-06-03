@@ -17,7 +17,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Primitives
             var transform = loader.LoadObject(components, element, "Transform", Transform.CreateIdentityTransform);
             var radius = loader.LoadObject<double>(components, element, "Radius", () => 1);
             var height = loader.LoadObject<double>(components, element, "Height", () => 2);
-            var phiMax = loader.LoadObject<double>(components, element, "PhiMax", () => 1);
+            var phiMax = loader.LoadObject<double>(components, element, "PhiMax", () => 360);
 
             var solidity = (Solidity)Enum.Parse(typeof(Solidity), loader.LoadObject<string>(components, element, "Solidity", () => "Solid"), true);
 

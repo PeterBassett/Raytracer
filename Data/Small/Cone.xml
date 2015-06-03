@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+  <Renderer>
+    <Raytracer />
+    
+    <RenderSettings>
+      <Depth>1</Depth>
+      <Shadows>false</Shadows>
+      <Reflections>false</Reflections>
+      <Refractions>false</Refractions>
+    </RenderSettings>
+    
+  </Renderer>
+
+  <Camera>
+    <Viewpoint>
+      <Transform>
+    		<LookAt to="0,2,0" from="0,6,-8" />
+      </Transform>
+      <FOV>90</FOV>
+    </Viewpoint>
+  </Camera>
+
+  <Scene>
+    <Lights>
+      <AmbientLight>
+        <Colour>0.2</Colour>
+      </AmbientLight>
+
+      <PointLight power="500">
+        <Transform>
+          <Translate>10, 10, -10</Translate>
+        </Transform>
+        <Colour>1</Colour>
+      </PointLight>
+
+    </Lights> 
+
+  	<Materials>
+      <Include href="Default/DiffuseMaterials.xml" />
+    </Materials>
+
+    <Primitives>
+      <Cone>
+    		<Transform>
+      		<Rotate>-90,0,0</Rotate>
+      	</Transform>
+    		<Height>7</Height>
+      	<Radius>4</Radius>
+        <Material>red</Material>
+      </Cone>
+
+      <Plane>
+        <Point x="0" y="-6" z="0"></Point>
+        <Normal x="0" y="1" z="0"></Normal>
+        <Material>check</Material>
+      </Plane>
+    </Primitives>
+  </Scene>
+</Config>

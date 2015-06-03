@@ -16,7 +16,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Primitives
         {
             var transform = loader.LoadObject(components, element, "Transform", Transform.CreateIdentityTransform);
             var innerRadius = loader.LoadObject<double>(components, element, "InnerRadius", () => 0);
-            var outerRadius = loader.LoadObject<double>(components, element, "InnerHeight", () => 1);
+            var outerRadius = loader.LoadObject<double>(components, element, "Radius", () => 1);
 
             var materialName = loader.LoadObject<string>(components, element, "Material", () => null);
 

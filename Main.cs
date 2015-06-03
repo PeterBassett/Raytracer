@@ -80,6 +80,9 @@ namespace Raytracer
         {
             this.UIThread(() =>
             {
+                if (_renderer == null || _renderer.Settings == null)
+                    return;
+
                 mnuShadows.Checked = _renderer.Settings.TraceShadows;
                 mnuReflections.Checked = _renderer.Settings.TraceReflections;
                 mnuRefractions.Checked = _renderer.Settings.TraceRefractions;
@@ -102,18 +105,26 @@ namespace Raytracer
             ISceneLoader loader = new XmlRaySceneLoader();
 
             SystemComponents systemComponents;
-            using (var sceneStream = new MemoryStream(System.Text.Encoding.Default.GetBytes(strScene)))
-                systemComponents = loader.LoadScene(sceneStream);
 
-            _renderer = systemComponents.Renderer;
-            _scene = systemComponents.Scene;
-            _camera = systemComponents.Camera;
-            _cancellationTokenSource = systemComponents.CancellationTokenSource;
-            _sceneDefinedRenderer = _renderer;
+            try
+            {
+                using (var sceneStream = new MemoryStream(System.Text.Encoding.Default.GetBytes(strScene)))
+                    systemComponents = loader.LoadScene(sceneStream);
 
+                _renderer = systemComponents.Renderer;
+                _scene = systemComponents.Scene;
+                _camera = systemComponents.Camera;
+                _cancellationTokenSource = systemComponents.CancellationTokenSource;
+                _sceneDefinedRenderer = _renderer;
+
+                txtMessages.Text += string.Format("Loaded: {0}ms\r\n", watch.ElapsedMilliseconds); 
+            }
+            catch (Exception ex)
+            {
+                txtMessages.Text += string.Format("Error Loading : {0}\r\n", ex.Message); 
+            }
+    
             watch.Stop();
-
-            txtMessages.Text += string.Format("Loaded: {0}ms\r\n", watch.ElapsedMilliseconds);                
         }
 
         private void RenderPixel(int x, int y)

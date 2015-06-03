@@ -25,8 +25,8 @@ namespace Raytracer.Rendering.Primitives
         {
             var i1 = IntersectWithCone(ray);
 
-            if (_solid == Solidity.Solid)
-                return i1;
+         //   if (_solid == Solidity.Solid)
+           //     return i1;
 
             var i2 = IntersectWithEndCapDisk(ray);
 
@@ -136,9 +136,9 @@ namespace Raytracer.Rendering.Primitives
         {
             var n = new Normal(hit.X, hit.Y, 0).Normalize();
 
-            n = new Normal(n.X, n.Y, -1).Normalize();
+            n = new Normal(n.X, n.Y, 1).Normalize();
 
-            return n;// -n.Faceforward(-ray.Dir);
+            return n;//.Faceforward(-ray.Dir);
         }
 
         protected override bool ObjectSpaceContains(Point point)
