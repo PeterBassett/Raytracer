@@ -60,6 +60,8 @@ namespace Raytracer.Rendering.Primitives
             var roots = new double[2];
             int rootCount = Algebra.SolveQuadraticEquation(A, B, C, roots);
 
+            Array.Sort(roots);
+
             var t0 = roots[0];
             var t1 = roots[1];
 
@@ -90,6 +92,9 @@ namespace Raytracer.Rendering.Primitives
                 if (hitPoint.Z < 0 || hitPoint.Z > _height || phi > _phiMax)
                     return _missed;
             }
+
+            if (hitDistance < 0)
+                return _missed;
 
             return new IntersectionInfo(HitResult.Hit, this, hitDistance, hitPoint, hitPoint, GetNormal(hitPoint, ray));
         }
@@ -136,7 +141,7 @@ namespace Raytracer.Rendering.Primitives
         {
             var n = new Normal(hit.X, hit.Y, 0).Normalize();
 
-            n = new Normal(n.X, n.Y, 1).Normalize();
+            n = new Normal(n.X, n.Y, 1/*_radius / _height*/).Normalize();
 
             return n;//.Faceforward(-ray.Dir);
         }

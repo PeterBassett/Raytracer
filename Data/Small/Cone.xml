@@ -4,9 +4,9 @@
     <Raytracer />
     
     <RenderSettings>
-      <Depth>1</Depth>
-      <Shadows>false</Shadows>
-      <Reflections>false</Reflections>
+      <Depth>10</Depth>
+      <Shadows>true</Shadows>
+      <Reflections>true</Reflections>
       <Refractions>false</Refractions>
     </RenderSettings>
     
@@ -15,9 +15,9 @@
   <Camera>
     <Viewpoint>
       <Transform>
-    		<LookAt to="0,2,0" from="0,6,-8" />
+    		<LookAt to="0,1.2,0" from="0,6,-8" />
       </Transform>
-      <FOV>90</FOV>
+      <FOV>50</FOV>
     </Viewpoint>
   </Camera>
 
@@ -27,29 +27,175 @@
         <Colour>0.2</Colour>
       </AmbientLight>
 
-      <PointLight power="500">
+  	  <DistantLight power="1">
+        <Colour>0.4</Colour>
         <Transform>
-          <Translate>10, 10, -10</Translate>
+          <Rotate>-30, 0, 25</Rotate>
         </Transform>
-        <Colour>1</Colour>
-      </PointLight>
+      </DistantLight>
 
+  	  <PointLight power="200">
+        <Colour>1</Colour>
+        <Transform>
+          <Translate>4,15,-10</Translate>
+        </Transform>
+      </PointLight >
+  	
     </Lights> 
 
   	<Materials>
-      <Include href="Default/DiffuseMaterials.xml" />
+  		
+  		<ColourMaterial name="darkgrey">
+        <Diffuse>
+          <Colour>0.3</Colour>
+        </Diffuse>
+        <Specular specularity="20" exponent="0.35" />
+        <Reflected>
+          <Colour>0.9</Colour>
+        </Reflected>
+        <IOR>1</IOR>
+        <Transmitted>
+          <Colour>0</Colour>
+        </Transmitted>
+      </ColourMaterial>
+
+      <ColourMaterial name="lightgrey">
+        <Diffuse>
+          <Colour>0.7</Colour>
+        </Diffuse>
+        <Specular>
+          <Colour>0.5</Colour>
+          <Specularity>20</Specularity>
+          <Exponent>0.35</Exponent>
+        </Specular>
+        <Reflected>
+          <Colour>0.9</Colour>
+        </Reflected>
+        <IOR>1</IOR>
+        <Transmitted>
+          <Colour>0</Colour>
+        </Transmitted>
+      </ColourMaterial>
+  		
+      <ColourMaterial name="red">
+        <Diffuse>
+          <Colour>
+            <Red>0.7</Red>
+            <Green>0.1</Green>
+            <Blue>0.1</Blue>
+          </Colour>
+        </Diffuse>
+        <Specular exponent="0.35">
+          <Specularity>20</Specularity>
+        </Specular>
+        <Reflected>
+          <Colour>0.9</Colour>
+        </Reflected>
+        <IOR>1</IOR>
+        <Transmitted>
+          <Colour>0</Colour>
+        </Transmitted>
+      </ColourMaterial>
+
+  		<ColourMaterial name="blue">
+        <Diffuse>
+          <Colour>
+            <Red>0.1</Red>
+            <Green>0.1</Green>
+            <Blue>0.7</Blue>
+          </Colour>
+        </Diffuse>
+        <Specular exponent="0.35">
+          <Specularity>20</Specularity>
+        </Specular>
+        <Reflected>
+          <Colour>0.9</Colour>
+        </Reflected>
+        <IOR>1</IOR>
+        <Transmitted>
+          <Colour>0</Colour>
+        </Transmitted>
+      </ColourMaterial>
+  	
+  		<ColourMaterial name="yellow">
+        <Diffuse>
+          <Colour>
+            <Red>0.7</Red>
+            <Green>0.7</Green>
+            <Blue>0.1</Blue>
+          </Colour>
+        </Diffuse>
+        <Specular exponent="0.35">
+          <Specularity>20</Specularity>
+        </Specular>
+        <Reflected>
+          <Colour>0.9</Colour>
+        </Reflected>
+        <IOR>1</IOR>
+        <Transmitted>
+          <Colour>0</Colour>
+        </Transmitted>
+      </ColourMaterial>
+  	
+			<CheckMaterial name="check" from-material="lightgrey" to-material="darkgrey">
+				<Size>4</Size>
+			</CheckMaterial>
     </Materials>
 
     <Primitives>
       <Cone>
     		<Transform>
-      		<Rotate>-90,0,0</Rotate>
+      		<Rotate>45,-90,0</Rotate>
+      		<Translate>0.4,1,0</Translate>
       	</Transform>
-    		<Height>7</Height>
-      	<Radius>4</Radius>
         <Material>red</Material>
       </Cone>
 
+    	<Cone>
+    		<Transform>
+      		<Translate>3,0.5,0</Translate>
+      	</Transform>
+        <Material>blue</Material>
+      </Cone>
+
+    	<Cone>
+    		<Transform>
+    			<Rotate>-90,0,0</Rotate>
+      		<Translate>-3,0,0</Translate>
+      	</Transform>
+        <Material>yellow</Material>
+      </Cone>
+
+    	<Cone>
+    		<Height>3</Height>
+    		<Radius>0.5</Radius>
+    		<Transform>
+    			<Rotate>120,45,0</Rotate>
+      		<Translate>-2.5,4,0</Translate>
+      	</Transform>
+        <Material>red</Material>
+      </Cone>
+    	
+    	<Cone>
+    		<Height>0.5</Height>
+    		<Radius>1</Radius>
+    		<Transform>
+    			<Rotate>180,0,0</Rotate>
+      		<Translate>0,2,0</Translate>
+      	</Transform>
+        <Material>blue</Material>
+    	</Cone>
+
+    	<Cone>
+    		<Height>0.5</Height>
+    		<Radius>1</Radius>
+    		<Transform>
+    			<Rotate>-90,0,0</Rotate>
+      		<Translate>3,2.5,0</Translate>
+      	</Transform>
+        <Material>yellow</Material>
+    	</Cone>
+    	
       <Plane>
         <Point x="0" y="-6" z="0"></Point>
         <Normal x="0" y="1" z="0"></Normal>
