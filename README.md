@@ -117,8 +117,6 @@ Examples
 ![scaled torus](/OutputImages/ScaledRefractiveTorus.jpeg?raw=true)
 * Cone primitive displaying reflection.
 ![scaled torus](/OutputImages/Cones.jpeg?raw=true)
-* Cone primitive displaying reflection.
-![scaled torus](/OutputImages/Cones.jpeg?raw=true)
 * Cylinders with soft shadows.
 ![Cylinders with soft shadows](/OutputImages/CylindersSoftShadows.jpeg?raw=true)
 * Meshes from xml file format.
