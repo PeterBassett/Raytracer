@@ -107,13 +107,20 @@ Examples
 ![projector light](/OutputImages/ProjectionLightBuddha.jpeg?raw=true)
 * Cryteks version of the Sponza Model. Still work to do
 ![projector light](/OutputImages/CrytekSponza.jpeg?raw=true)
-
 * Four Spherical Area Lights. 256 shadow rays per light.
 ![sphere area light](/OutputImages/SphereLight.jpeg?raw=true)
-
 * Soft Shadow from area light.
 ![shoftshadows](/OutputImages/SoftShadows_StratifiedSampling.jpeg?raw=true)
-
 * New cube primitive Supports arbitrary scaling.
 ![shoftshadows](/OutputImages/Cubes.jpeg?raw=true)
+*Scaled Torus
 ![scaled torus](/OutputImages/ScaledRefractiveTorus.jpeg?raw=true)
+*Cone primitive displaying reflection.
+![scaled torus](/OutputImages/Cones.jpeg?raw=true)
+*Cone primitive displaying reflection.
+![scaled torus](/OutputImages/Cones.jpeg?raw=true)
+*Cylinders with soft shadows.
+![Cylinders with soft shadows](/OutputImages/CylindersSoftShadows.jpeg?raw=true)
+
+*Meshes from xml file format.
+![XML File format loading meshes](/OutputImages/LegoCarXml.jpeg?raw=true)

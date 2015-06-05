@@ -93,7 +93,7 @@ namespace Raytracer.Rendering.Primitives
                     return _missed;
             }
 
-            if (hitDistance < 0)
+            if (hitDistance < 0.0000000001)
                 return _missed;
 
             return new IntersectionInfo(HitResult.Hit, this, hitDistance, hitPoint, hitPoint, GetNormal(hitPoint, ray));

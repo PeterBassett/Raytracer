@@ -109,7 +109,6 @@ namespace Raytracer.Rendering.Renderers
                 {
                     // calculate the new reflected direction
                     var reflectedRay = new Ray(info.HitPoint, CalculateReflectedRay(ray.Dir, info.NormalAtHitPoint));
-
                     // recursivly call trace ray
                     colour += TraceRay(reflectedRay, colReflectAmount, curRefractionIndex, depth + 1, eyeDirection);
                 }
