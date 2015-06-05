@@ -113,14 +113,13 @@ Examples
 ![shoftshadows](/OutputImages/SoftShadows_StratifiedSampling.jpeg?raw=true)
 * New cube primitive Supports arbitrary scaling.
 ![shoftshadows](/OutputImages/Cubes.jpeg?raw=true)
-*Scaled Torus
+* Scaled Torus
 ![scaled torus](/OutputImages/ScaledRefractiveTorus.jpeg?raw=true)
-*Cone primitive displaying reflection.
+* Cone primitive displaying reflection.
 ![scaled torus](/OutputImages/Cones.jpeg?raw=true)
-*Cone primitive displaying reflection.
+* Cone primitive displaying reflection.
 ![scaled torus](/OutputImages/Cones.jpeg?raw=true)
-*Cylinders with soft shadows.
+* Cylinders with soft shadows.
 ![Cylinders with soft shadows](/OutputImages/CylindersSoftShadows.jpeg?raw=true)
-
-*Meshes from xml file format.
+* Meshes from xml file format.
 ![XML File format loading meshes](/OutputImages/LegoCarXml.jpeg?raw=true)
