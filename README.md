@@ -121,3 +121,5 @@ Examples
 ![Cylinders with soft shadows](/OutputImages/CylindersSoftShadows.jpeg?raw=true)
 * Meshes from xml file format.
 ![XML File format loading meshes](/OutputImages/LegoCarXml.jpeg?raw=true)
+* Same mesh rendered with 512 shadow rays for a spherical area light. Total render time was 4hr 47min.
+![XML File format loading meshes](/OutputImages/LegoCarSoftShadows_512sh_4_47hrmin.jpeg?raw=true)
