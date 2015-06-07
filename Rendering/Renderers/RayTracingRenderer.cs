@@ -86,7 +86,7 @@ namespace Raytracer.Rendering.Renderers
             
             // set the 
             var material = new Material();
-            var objectMaterial = info.Primitive.Material ?? Scene.DefaultMaterial;
+            var objectMaterial = info.Material ?? Scene.DefaultMaterial;
 
             var materialDispatcher = new MaterialDispatcher();
             materialDispatcher.Solidify((dynamic)info.Primitive, (dynamic)objectMaterial, info, material);

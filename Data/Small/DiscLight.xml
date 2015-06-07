@@ -14,8 +14,7 @@
   <Camera>
     <Viewpoint>
       <Transform>
-        <Translate>0, -3, -14</Translate>
-        <RotateX>35</RotateX>
+        <LookAt to="0,0,0" from="0, 3, -14" />
       </Transform>
       <FOV>90</FOV>
     </Viewpoint>
@@ -29,9 +28,9 @@
 
       <DiscLight power="300" radius="2">
         <Transform>
-          <LookAt to="0,0,0" from="5,12,5" />
+          <LookAt to="0,0,0" from="0,12,0" up="1,0,0" />
         </Transform>
-        <Colour>1,1,0</Colour>
+        <Colour>1,1,1</Colour>
       </DiscLight>
   	
     </Lights>
@@ -102,7 +101,7 @@
       </Sphere>
 
       <Plane>
-        <Point x="0" y="-6" z="0"></Point>
+        <Point x="0" y="-2" z="0"></Point>
         <Normal x="0" y="1" z="0"></Normal>
         <Material>check</Material>
       </Plane>

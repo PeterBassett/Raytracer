@@ -1,5 +1,6 @@
 ﻿using System;
 using Raytracer.MathTypes;
+using Raytracer.Rendering.Materials;
 
 namespace Raytracer.Rendering.Core
 {
@@ -12,6 +13,7 @@ namespace Raytracer.Rendering.Core
         private Point _objectLocalHitPoint ;
         private Normal _normalAtHitPoint;
         private Traceable _primitive;
+        private Material _material;
 
         public IntersectionInfo(HitResult miss)
             : this(miss, null, MathLib.INVALID_INTERSECTION, Point.Zero, Point.Zero, Normal.Invalid)
@@ -35,6 +37,19 @@ namespace Raytracer.Rendering.Core
             _hitPoint = hitPoint;
             _objectLocalHitPoint = localHitpoint;
             _normalAtHitPoint = normalAthitPoint;
+            _material = _primitive != null ? _primitive.Material : null;
+        }
+
+        public IntersectionInfo(HitResult result, Traceable primitive, double distance, Point hitPoint, Point localHitpoint, Normal normalAthitPoint, Material material)
+            : this()
+        {
+            _result = result;
+            _primitive = primitive;
+            _t = distance;
+            _hitPoint = hitPoint;
+            _objectLocalHitPoint = localHitpoint;
+            _normalAtHitPoint = normalAthitPoint;
+            _material = material;
         }
 
         public HitResult Result { get { return _result; } set { _result = value; } }
@@ -43,5 +58,6 @@ namespace Raytracer.Rendering.Core
         public Point ObjectLocalHitPoint { get { return _objectLocalHitPoint; } set { _objectLocalHitPoint = value; } }
         public Normal NormalAtHitPoint { get{ return _normalAtHitPoint; } set{_normalAtHitPoint = value;} }
         public Traceable Primitive { get{ return _primitive; } set{_primitive = value;} }
+        public Material Material { get { return _material; } set { _material = value; } }
     }
 }

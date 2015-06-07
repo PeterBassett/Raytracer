@@ -1,5 +1,6 @@
 ﻿using Raytracer.MathTypes;
 using Raytracer.Rendering.Core;
+using Raytracer.Rendering.Materials;
 
 namespace Raytracer.Rendering.Primitives
 {
@@ -21,6 +22,9 @@ namespace Raytracer.Rendering.Primitives
             if (result.Result != HitResult.Miss)
             {
                 result.HitPoint = ray.Pos + (ray.Dir * result.T);
+
+                if (Material != null)
+                    result.Material = Material;
             }
 
             return result;

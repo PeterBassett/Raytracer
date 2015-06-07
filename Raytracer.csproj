@@ -357,13 +357,34 @@
     <Content Include="Data\Small\Cone.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\Small\Dragon.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\Small\CubeRefractive.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Small\Cubes.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\Small\Cylinders.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\Small\Disc.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Small\LegoCarSoftShadows.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Small\Mesh.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Small\Models\box\copyright.txt" />
+    <Content Include="Data\Small\Models\box\CornellBox\copyright.txt" />
+    <Content Include="Data\Small\Models\box\CornellBox\index.png" />
+    <Content Include="Data\Small\Models\box\CornellBox\index.txt" />
+    <Content Include="Data\Small\Models\box\index.png" />
+    <Content Include="Data\Small\Models\box\index.txt" />
+    <Content Include="Data\Small\ScaledRefractiveTorus.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Small\TorusRefractive.xml">
@@ -415,6 +436,47 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Data\Small\DistantLight.ray">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Small\Models\box\CornellBox-Empty-CO.mtl" />
+    <None Include="Data\Small\Models\box\CornellBox-Empty-CO.obj" />
+    <None Include="Data\Small\Models\box\CornellBox-Empty-RG.mtl" />
+    <None Include="Data\Small\Models\box\CornellBox-Empty-RG.obj" />
+    <None Include="Data\Small\Models\box\CornellBox-Empty-Squashed.mtl" />
+    <None Include="Data\Small\Models\box\CornellBox-Empty-Squashed.obj" />
+    <None Include="Data\Small\Models\box\CornellBox-Empty-White.mtl" />
+    <None Include="Data\Small\Models\box\CornellBox-Empty-White.obj" />
+    <None Include="Data\Small\Models\box\CornellBox-Glossy.mtl" />
+    <None Include="Data\Small\Models\box\CornellBox-Glossy.obj" />
+    <None Include="Data\Small\Models\box\CornellBox-Mirror.mtl" />
+    <None Include="Data\Small\Models\box\CornellBox-Mirror.obj" />
+    <None Include="Data\Small\Models\box\CornellBox-Original.mtl" />
+    <None Include="Data\Small\Models\box\CornellBox-Original.obj" />
+    <None Include="Data\Small\Models\box\CornellBox-Sphere.mtl" />
+    <None Include="Data\Small\Models\box\CornellBox-Sphere.obj" />
+    <None Include="Data\Small\Models\box\CornellBox-Water.mtl" />
+    <None Include="Data\Small\Models\box\CornellBox-Water.obj" />
+    <None Include="Data\Small\Models\box\CornellBox\CornellBox-Empty-CO.mtl" />
+    <None Include="Data\Small\Models\box\CornellBox\CornellBox-Empty-CO.obj" />
+    <None Include="Data\Small\Models\box\CornellBox\CornellBox-Empty-RG.mtl" />
+    <None Include="Data\Small\Models\box\CornellBox\CornellBox-Empty-RG.obj" />
+    <None Include="Data\Small\Models\box\CornellBox\CornellBox-Empty-Squashed.mtl" />
+    <None Include="Data\Small\Models\box\CornellBox\CornellBox-Empty-Squashed.obj" />
+    <None Include="Data\Small\Models\box\CornellBox\CornellBox-Empty-White.mtl" />
+    <None Include="Data\Small\Models\box\CornellBox\CornellBox-Empty-White.obj" />
+    <None Include="Data\Small\Models\box\CornellBox\CornellBox-Glossy.mtl" />
+    <None Include="Data\Small\Models\box\CornellBox\CornellBox-Glossy.obj" />
+    <None Include="Data\Small\Models\box\CornellBox\CornellBox-Mirror.mtl" />
+    <None Include="Data\Small\Models\box\CornellBox\CornellBox-Mirror.obj" />
+    <None Include="Data\Small\Models\box\CornellBox\CornellBox-Original.mtl" />
+    <None Include="Data\Small\Models\box\CornellBox\CornellBox-Original.obj" />
+    <None Include="Data\Small\Models\box\CornellBox\CornellBox-Sphere.mtl" />
+    <None Include="Data\Small\Models\box\CornellBox\CornellBox-Sphere.obj" />
+    <None Include="Data\Small\Models\box\CornellBox\CornellBox-Water.mtl" />
+    <None Include="Data\Small\Models\box\CornellBox\CornellBox-Water.obj" />
+    <None Include="Data\Small\Models\box\CornellBox\water.obj" />
+    <None Include="Data\Small\Models\box\water.obj" />
+    <None Include="Data\Small\Models\dragon.obj">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\Small\ProjectionLight.ray">

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+  <Renderer>
+    <Raytracer />    
+  </Renderer>
+
+  <Camera>
+    <Viewpoint>
+      <Transform>
+    		<LookAt to="0,-1.5,0" from="0,4,-10" />
+      </Transform>
+      <FOV>90</FOV>
+    </Viewpoint>
+  </Camera>
+
+  <Scene>
+    <Lights>
+  		<!--
+      <SphereLight samples="1">
+        <Transform>
+          <Translate>12, 15, -12</Translate>
+        </Transform>
+        <Colour>1</Colour>
+    		<Radius>3</Radius>
+      </SphereLight>
+-->
+  	
+ 			<PointLight power="300">
+        <Transform>
+          <Translate>12, 15, -12</Translate>
+        </Transform>
+        <Colour>1</Colour>
+      </PointLight>
+  	
+    </Lights>
+
+    <Materials>
+      <Include href="Default/DiffuseMaterials.xml" />
+    </Materials>
+
+    <Primitives>
+      <Mesh name="dragon">
+    		<File>models/dragon.obj</File>
+      </Mesh>
+
+    	<MeshInstance>
+    		<Transform>
+    			<Scale>15</Scale>
+    			<Rotate>0,-105,0</Rotate>    
+    			<Translate>-1,0,0</Translate>    			
+    		</Transform>
+    		<MeshName>dragon</MeshName>
+    	</MeshInstance>
+    	
+      <Plane>
+        <Point x="0" y="-5" z="0"></Point>
+        <Normal x="0" y="1" z="0"></Normal>
+        <Material>check</Material>
+      </Plane>
+    </Primitives>
+  </Scene>
+</Config>

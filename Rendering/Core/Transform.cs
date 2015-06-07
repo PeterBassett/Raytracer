@@ -111,7 +111,8 @@ namespace Raytracer.Rendering.Core
                                         info.T, 
                                         info.HitPoint.Transform(_inverse), 
                                         info.ObjectLocalHitPoint,
-                                        info.NormalAtHitPoint.Transform(_inverse).Normalize());
+                                        info.NormalAtHitPoint.Transform(_inverse).Normalize(),
+                                        info.Material);
         }
 
         public IntersectionInfo ToObjectSpace(IntersectionInfo info)
@@ -121,7 +122,8 @@ namespace Raytracer.Rendering.Core
                                         info.T,
                                         info.HitPoint.Transform(_transform),
                                         info.ObjectLocalHitPoint,
-                                        info.NormalAtHitPoint.Transform(_transform).Normalize());
+                                        info.NormalAtHitPoint.Transform(_transform).Normalize(),
+                                        info.Material);
         }
 
         public AABB ToObjectSpace(AABB aabb)

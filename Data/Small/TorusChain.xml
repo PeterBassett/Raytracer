@@ -14,7 +14,7 @@
   <Camera>
     <Viewpoint>
       <Transform>
-        <Rotate>36, -21.5, 0.0</Rotate>
+        <Rotate>-36, 21.5, 0.0</Rotate>
         <Translate>8.5,9, -16</Translate>
       </Transform>
       <FOV>70</FOV>
