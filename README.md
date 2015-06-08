@@ -123,3 +123,5 @@ Examples
 ![XML File format loading meshes](/OutputImages/LegoCarXml.jpeg?raw=true)
 * Same mesh rendered with 512 shadow rays for a spherical area light. Total render time was 4hr 47min.
 ![XML File format loading meshes](/OutputImages/LegoCarSoftShadows_512sh_4_47hrmin.jpeg?raw=true)
+* Stanford Dragon model, 128 shadow rays. 1 hr 47 mins rendering time.
+![XML File format loading meshes](/OutputImages/Dragon_128sh_1hr45min.jpeg?raw=true)

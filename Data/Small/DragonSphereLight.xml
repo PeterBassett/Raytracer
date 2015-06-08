@@ -7,27 +7,28 @@
   <Camera>
     <Viewpoint>
       <Transform>
-    		<LookAt to="0,-1.5,0" from="0,4,-10" />
+    		<LookAt to="0,-1.5,0" from="0,0,-10" />
       </Transform>
       <FOV>90</FOV>
     </Viewpoint>
   </Camera>
 
   <Scene>
-    <Background>
+		<!--
+		<Background>
       <VerticalCubemapBackground>uffizi_cube.jpg</VerticalCubemapBackground>
     </Background>
-    
+  	-->
     <Lights>
-  		<!--
-      <SphereLight samples="1">
+  		
+      <SphereLight samples="128" power="300">
         <Transform>
           <Translate>12, 15, -12</Translate>
         </Transform>
         <Colour>1</Colour>
     		<Radius>3</Radius>
       </SphereLight>
--->
+<!--
   	
  			<PointLight power="300">
         <Transform>
@@ -35,7 +36,7 @@
         </Transform>
         <Colour>1</Colour>
       </PointLight>
-  	
+  	-->
     </Lights>
 
     <Materials>
@@ -49,9 +50,9 @@
 
     	<MeshInstance>
     		<Transform>
-    			<Scale>15</Scale>
-    			<Rotate>0,-105,0</Rotate>    
-    			<Translate>-1,0,0</Translate>    			
+    			<Scale>14.5</Scale>
+    			<Rotate>0,-90,0</Rotate>    
+    			<Translate>0,0,-0.5</Translate>    			
     		</Transform>
     		<MeshName>dragon</MeshName>
     	</MeshInstance>

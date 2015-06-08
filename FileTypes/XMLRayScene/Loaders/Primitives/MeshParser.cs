@@ -24,7 +24,14 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Primitives
 
             var scale = new Vector(1,1,1);
 
-            ReadObjMesh(name, meshfile, scale, components.Scene);
+            if (components.HasMeshFile(name))
+            {
+                components.Scene.AddMeshes(components.GetMesh(name), name);
+            }
+            else
+            {
+                ReadObjMesh(name, meshfile, scale, components.Scene);
+            }
 
             return null;
         }

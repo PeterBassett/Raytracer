@@ -8,6 +8,7 @@ using System.Linq;
 using System.Xml.Linq;
 using Raytracer.FileTypes.XMLRayScene.Extensions;
 using Raytracer.FileTypes.XMLRayScene.Loaders;
+using Raytracer.Rendering.Core;
 
 namespace Raytracer.FileTypes.XMLRayScene
 {
@@ -28,11 +29,12 @@ namespace Raytracer.FileTypes.XMLRayScene
             LoadAddins();
         }
 
-        public SystemComponents LoadScene(Stream sceneStream)
+        public SystemComponents LoadScene(Stream sceneStream, Scene existingScene)
         {
 	        var document = XDocument.Load(sceneStream);
 
-            var components = new SystemComponents();            
+            var components = new SystemComponents();
+            components.ExistingScene = existingScene;
 
             LoadElement(components, document.Root);
 

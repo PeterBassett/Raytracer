@@ -8,9 +8,9 @@ using Raytracer.Rendering.RenderingStrategies;
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.RenderingStrategies
 {
     [Export(typeof(XmlRayElementParser)), UsedImplicitly]
-    class RowRenderingStrategyParser : XmlRayElementParser
+    class ProgressiveRenderingStrategyParser : XmlRayElementParser
     {
-        public override string LoaderType { get { return "RowRenderingStrategy"; } }
+        public override string LoaderType { get { return "ProgressiveRenderingStrategy"; } }
 
         public override dynamic LoadObject(XmlRaySceneLoader loader, SystemComponents components, XElement element, string elementName, Func<dynamic> createDefault)
         {
@@ -19,7 +19,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.RenderingStrategies
                 return new StandardPixelSampler();
             });
 
-            return new RowRenderingStrategy(sampler, components.Renderer.Settings.MultiThreaded, components.CancellationTokenSource.Token);
+            return new ProgressiveRenderingStrategy(sampler, 64, components.Renderer.Settings.MultiThreaded, components.CancellationTokenSource.Token);
         }
     }
 }

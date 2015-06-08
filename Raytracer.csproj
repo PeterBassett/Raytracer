@@ -121,7 +121,8 @@
     <Compile Include="FileTypes\XMLRayScene\Loaders\Primitives\TriangleParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Primitives\DiscParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Primitives\CylinderParser.cs" />
-    <Compile Include="FileTypes\XMLRayScene\Loaders\RenderingStrategies\RowRenderingStrategyParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\RenderingStrategies\GridRenderingStrategyParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\RenderingStrategies\ProgressiveRenderingStrategyParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\SystemComponents.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Renderer\RendererParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Renderer\RaytracerParser.cs" />
@@ -245,7 +246,7 @@
     <Compile Include="Rendering\Primitives\ObjectSpacePrimitive.cs" />
     <Compile Include="Rendering\Renderers\RenderSettings.cs" />
     <Compile Include="Rendering\RenderingStrategies\BasicRenderingStrategy.cs" />
-    <Compile Include="Rendering\RenderingStrategies\RowRenderingStrategy.cs" />
+    <Compile Include="Rendering\RenderingStrategies\GridRenderingStrategy.cs" />
     <Compile Include="Rendering\RenderingStrategies\ParallelOptionsBase.cs" />
     <Compile Include="Rendering\RenderingStrategies\ProgressiveRenderingStrategy.cs" />
     <Compile Include="Rendering\RenderingStrategies\IRenderingStrategy.cs" />

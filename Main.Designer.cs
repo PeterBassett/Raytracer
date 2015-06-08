@@ -44,8 +44,9 @@ namespace Raytracer
             this.multiThreadedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRenderingMode = new System.Windows.Forms.ToolStripMenuItem();
             this.progressiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem17 = new System.Windows.Forms.ToolStripMenuItem();
             this.highQualityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSampler = new System.Windows.Forms.ToolStripMenuItem();
             this.jitteredSamplerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.greyscaleEdgeDetectionSamplerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.componentEdgeDetectionSamplerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,13 +84,13 @@ namespace Raytracer
             this.dlgOpen = new System.Windows.Forms.OpenFileDialog();
             this.dlgSaveBmp = new System.Windows.Forms.SaveFileDialog();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.txtSceneFile = new Raytracer.UI.CustomXmlTextEditor();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblPercent = new System.Windows.Forms.Label();
             this.btnCancelRendering = new System.Windows.Forms.Button();
             this.btnRender = new System.Windows.Forms.Button();
             this.dlgSaveRay = new System.Windows.Forms.SaveFileDialog();
             this.pixelPosition = new System.Windows.Forms.Label();
-            this.txtSceneFile = new Raytracer.UI.CustomXmlTextEditor();
             ((System.ComponentModel.ISupportInitialize)(this.renderedImage)).BeginInit();
             this.mainMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -180,6 +181,7 @@ namespace Raytracer
             this.renderOptionsToolStripMenuItem.Name = "renderOptionsToolStripMenuItem";
             this.renderOptionsToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
             this.renderOptionsToolStripMenuItem.Text = "Render Options";
+            
             // 
             // useSceneDefaults
             // 
@@ -202,6 +204,7 @@ namespace Raytracer
             this.overrideSceneDefaultsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.multiThreadedToolStripMenuItem,
             this.mnuRenderingMode,
+            this.mnuSampler,
             this.mnuDistributionSource,
             this.mnuSuperSampling,
             this.mnuShadows,
@@ -225,8 +228,8 @@ namespace Raytracer
             // 
             this.mnuRenderingMode.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.progressiveToolStripMenuItem,
-            this.toolStripMenuItem17,
-            this.highQualityToolStripMenuItem});
+            this.highQualityToolStripMenuItem,
+            this.gridToolStripMenuItem});
             this.mnuRenderingMode.Name = "mnuRenderingMode";
             this.mnuRenderingMode.Size = new System.Drawing.Size(175, 22);
             this.mnuRenderingMode.Text = "Rendering Mode";
@@ -234,29 +237,34 @@ namespace Raytracer
             // progressiveToolStripMenuItem
             // 
             this.progressiveToolStripMenuItem.Name = "progressiveToolStripMenuItem";
-            this.progressiveToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.progressiveToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.progressiveToolStripMenuItem.Text = "Progressive";
             this.progressiveToolStripMenuItem.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
-            // toolStripMenuItem17
-            // 
-            this.toolStripMenuItem17.Name = "toolStripMenuItem17";
-            this.toolStripMenuItem17.Size = new System.Drawing.Size(141, 22);
-            this.toolStripMenuItem17.Text = "Row by Row";
-            this.toolStripMenuItem17.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
-            // 
             // highQualityToolStripMenuItem
             // 
-            this.highQualityToolStripMenuItem.Checked = true;
-            this.highQualityToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.highQualityToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.highQualityToolStripMenuItem.Name = "highQualityToolStripMenuItem";
+            this.highQualityToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.highQualityToolStripMenuItem.Text = "Thread Per Core";
+            this.highQualityToolStripMenuItem.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
+            // 
+            // gridToolStripMenuItem
+            // 
+            this.gridToolStripMenuItem.Checked = true;
+            this.gridToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.gridToolStripMenuItem.Name = "gridToolStripMenuItem";
+            this.gridToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.gridToolStripMenuItem.Text = "Grid";
+            // 
+            // mnuSampler
+            // 
+            this.mnuSampler.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.jitteredSamplerToolStripMenuItem,
             this.greyscaleEdgeDetectionSamplerToolStripMenuItem,
             this.componentEdgeDetectionSamplerToolStripMenuItem});
-            this.highQualityToolStripMenuItem.Name = "highQualityToolStripMenuItem";
-            this.highQualityToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.highQualityToolStripMenuItem.Text = "High Quality";
-            this.highQualityToolStripMenuItem.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
+            this.mnuSampler.Name = "mnuSampler";
+            this.mnuSampler.Size = new System.Drawing.Size(175, 22);
+            this.mnuSampler.Text = "Sampler";
             // 
             // jitteredSamplerToolStripMenuItem
             // 
@@ -570,6 +578,22 @@ namespace Raytracer
             this.splitContainer1.SplitterDistance = 664;
             this.splitContainer1.TabIndex = 4;
             // 
+            // txtSceneFile
+            // 
+            this.txtSceneFile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSceneFile.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtSceneFile.IsIconBarVisible = true;
+            this.txtSceneFile.IsReadOnly = false;
+            this.txtSceneFile.Location = new System.Drawing.Point(0, 0);
+            this.txtSceneFile.Name = "txtSceneFile";
+            this.txtSceneFile.ShowSpaces = true;
+            this.txtSceneFile.ShowTabs = true;
+            this.txtSceneFile.ShowVRuler = false;
+            this.txtSceneFile.Size = new System.Drawing.Size(369, 471);
+            this.txtSceneFile.TabIndent = 2;
+            this.txtSceneFile.TabIndex = 4;
+            this.txtSceneFile.TextChanged += new System.EventHandler(this.txtSceneFile_TextChanged);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.lblPercent);
@@ -629,22 +653,6 @@ namespace Raytracer
             this.pixelPosition.Text = "X:Y";
             this.pixelPosition.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // txtSceneFile
-            // 
-            this.txtSceneFile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSceneFile.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.txtSceneFile.IsIconBarVisible = true;
-            this.txtSceneFile.IsReadOnly = false;
-            this.txtSceneFile.Location = new System.Drawing.Point(0, 0);
-            this.txtSceneFile.Name = "txtSceneFile";
-            this.txtSceneFile.ShowSpaces = true;
-            this.txtSceneFile.ShowTabs = true;
-            this.txtSceneFile.ShowVRuler = false;
-            this.txtSceneFile.Size = new System.Drawing.Size(369, 471);
-            this.txtSceneFile.TabIndent = 2;
-            this.txtSceneFile.TabIndex = 4;
-            this.txtSceneFile.TextChanged += new System.EventHandler(this.txtSceneFile_TextChanged);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -701,9 +709,6 @@ namespace Raytracer
         private System.Windows.Forms.ToolStripMenuItem mnuRenderingMode;
         private System.Windows.Forms.ToolStripMenuItem progressiveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem highQualityToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem jitteredSamplerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem greyscaleEdgeDetectionSamplerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem componentEdgeDetectionSamplerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuSuperSampling;
         private System.Windows.Forms.ToolStripMenuItem xToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem xToolStripMenuItem1;
@@ -730,10 +735,14 @@ namespace Raytracer
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem15;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem16;
         private System.Windows.Forms.ToolStripMenuItem overrideSceneDefaults;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem17;
         private System.Windows.Forms.ToolStripMenuItem mnuDistributionSource;
         private System.Windows.Forms.ToolStripMenuItem randomToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stratifiedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuSampler;
+        private System.Windows.Forms.ToolStripMenuItem jitteredSamplerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem greyscaleEdgeDetectionSamplerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem componentEdgeDetectionSamplerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gridToolStripMenuItem;
     }
 }
 

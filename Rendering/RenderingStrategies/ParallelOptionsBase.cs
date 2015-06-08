@@ -5,7 +5,7 @@ namespace Raytracer.Rendering.RenderingStrategies
 {
     class ParallelOptionsBase
     {
-        private readonly bool _multiThreaded;
+        protected readonly bool _multiThreaded;
         protected readonly CancellationToken _cancellationToken;
 
         public delegate void CompletedScanLine(int completed, int total);

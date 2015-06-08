@@ -18,7 +18,6 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Primitives
 
             var name = loader.LoadObject<string>(components, element, "MeshName", () => null);
 
-
             string strMaterial = loader.LoadObject<string>(components, element, "Material", () => null);
             var mat = components.Scene.FindMaterial(strMaterial);
 

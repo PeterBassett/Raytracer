@@ -98,6 +98,7 @@ namespace Raytracer
             var watch = new Stopwatch();
             watch.Start();
 
+            var existingScene = _scene;
             _scene = null;
 
             GC.Collect();
@@ -109,7 +110,7 @@ namespace Raytracer
             try
             {
                 using (var sceneStream = new MemoryStream(System.Text.Encoding.Default.GetBytes(strScene)))
-                    systemComponents = loader.LoadScene(sceneStream);
+                    systemComponents = loader.LoadScene(sceneStream, existingScene);
 
                 _renderer = systemComponents.Renderer;
                 _scene = systemComponents.Scene;
@@ -220,7 +221,7 @@ namespace Raytracer
 
         private IRenderingStrategy GetSelectedRenderingStrategy(bool multiThreaded, uint antiAliasingLevel, bool antiAliasingSamples)
         {
-            IRenderingStrategy renderingStrategy;
+            IRenderingStrategy renderingStrategy = null;
             var selectedRenderingStrategy = GetRenderingStrategy();
             if (selectedRenderingStrategy == "Progressive")
             {
@@ -229,13 +230,8 @@ namespace Raytracer
                                                                      multiThreaded,
                                                                      _cancellationTokenSource.Token);
             }
-            else if (selectedRenderingStrategy == "Row by Row")
-            {
-                renderingStrategy = new RowRenderingStrategy(new StandardPixelSampler(),
-                                                             multiThreaded,
-                                                             _cancellationTokenSource.Token);
-            }
-            else
+            else if (selectedRenderingStrategy == "Thread Per Core" ||
+                     selectedRenderingStrategy == "Grid")
             {
                 IPixelSampler pixelSampler;
 
@@ -254,10 +250,22 @@ namespace Raytracer
                         throw new ArgumentOutOfRangeException("Sampler");
                 }
 
-                renderingStrategy = new BasicRenderingStrategy(pixelSampler,
-                                                               multiThreaded,
-                                                               _cancellationTokenSource.Token);
+                if (selectedRenderingStrategy == "Thread Per Core")
+                {
+                    renderingStrategy = new BasicRenderingStrategy(pixelSampler,
+                                                                   multiThreaded,
+                                                                   _cancellationTokenSource.Token);
+                }
+                else if (selectedRenderingStrategy == "Grid")
+                {
+                    renderingStrategy = new GridRenderingStrategy(pixelSampler,
+                                                                   multiThreaded,
+                                                                   _cancellationTokenSource.Token);
+                }
             }
+            else
+                throw new ArgumentOutOfRangeException();
+
             return renderingStrategy;
         }
 
