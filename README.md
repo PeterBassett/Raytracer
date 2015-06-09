@@ -12,6 +12,7 @@ Primitives
 * Tori (Toruses, Donuts....Mmm Donuts!)
 * Cylinders
 * Cubes
+* Cones
 
 Effects
 * Reflections
