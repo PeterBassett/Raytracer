@@ -29,5 +29,15 @@ namespace Raytracer.MathTypes
             val = Math.Max(val, min);
             return val;
         }
+
+        public static UInt32 RoundUpPow2(UInt32 v) 
+        {
+            v--;
+            v |= v >> 1;    v |= v >> 2;
+            v |= v >> 4;    v |= v >> 8;
+            v |= v >> 16;
+        
+            return v+1;
+        }
     }
 }

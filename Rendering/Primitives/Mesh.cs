@@ -22,7 +22,6 @@ namespace Raytracer.Rendering.Primitives
             if(TransformToOrigin())
                 BuildAABB();
 
-           // bvh = new AABBFlattenedHierarchy(new SAHMutliAxisPrimitivePartitioner());
             _bvh = new AABBHierarchy(new SahMutliAxisPrimitivePartitioner());            
             _bvh.Build(triangles);
         }

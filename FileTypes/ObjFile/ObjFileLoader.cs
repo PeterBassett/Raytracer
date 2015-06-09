@@ -25,43 +25,48 @@ namespace Raytracer.FileTypes.ObjFile
             var vertexNormals = new List<Normal>();
             Material currentMaterial = null;
 
-            using (var sr = new StreamReader(strObjfile))
+            var currentDirectory = Directory.GetCurrentDirectory();
+            using(var fs = File.OpenRead(strObjfile))
             {
-                while (!sr.EndOfStream)
-                {                    
-                    var line = sr.ReadLine();
+                var fullPath = fs.Name;
+                var objectFileFolder = Path.GetDirectoryName(fullPath);
+                using (var sr = new StreamReader(strObjfile))
+                {                
+                    while (!sr.EndOfStream)
+                    {                    
+                        var line = sr.ReadLine();
 
-                    int lineItemsFound = ParseLine(line);
+                        int lineItemsFound = ParseLine(line);
 
-                    if (lineItemsFound == 0)
-                        continue;
+                        if (lineItemsFound == 0)
+                            continue;
 
-                    switch (_parseCache[0])
-                    {
-                        case "mtllib":
-                            LoadMaterial(_parseCache[1]);
-                            break;
-                        case "usemtl":
-                            currentMaterial = FindMaterial(_parseCache[1]);
-                            break;
-                        case "v":
-                            verticies.Add(new Point(float.Parse(_parseCache[1]), float.Parse(_parseCache[2]), float.Parse(_parseCache[3])));
-                            break;
-                        case "vt":
-                            textureCoordinates.Add(new Vector2(float.Parse(_parseCache[1]), float.Parse(_parseCache[2])));
-                            break;
-                        case "vn":
-                            vertexNormals.Add(new Normal(float.Parse(_parseCache[1]), float.Parse(_parseCache[2]), float.Parse(_parseCache[3])));
-                            break;
-                        case "f":
-                            {
-                                CreateTriangles(lineItemsFound, verticies, triangles, currentMaterial, textureCoordinates, vertexNormals);
-                            }
-                            break;
+                        switch (_parseCache[0])
+                        {
+                            case "mtllib":
+                                LoadMaterial(objectFileFolder, _parseCache[1]);
+                                break;
+                            case "usemtl":
+                                currentMaterial = FindMaterial(_parseCache[1]);
+                                break;
+                            case "v":
+                                verticies.Add(new Point(float.Parse(_parseCache[1]), float.Parse(_parseCache[2]), float.Parse(_parseCache[3])));
+                                break;
+                            case "vt":
+                                textureCoordinates.Add(new Vector2(float.Parse(_parseCache[1]), float.Parse(_parseCache[2])));
+                                break;
+                            case "vn":
+                                vertexNormals.Add(new Normal(float.Parse(_parseCache[1]), float.Parse(_parseCache[2]), float.Parse(_parseCache[3])));
+                                break;
+                            case "f":
+                                {
+                                    CreateTriangles(lineItemsFound, verticies, triangles, currentMaterial, textureCoordinates, vertexNormals);
+                                }
+                                break;
+                        }
                     }
                 }
             }
-
             materials.AddRange(_materials.Values);
         }
         
@@ -119,11 +124,11 @@ namespace Raytracer.FileTypes.ObjFile
             _parseCacheLength = temp.Length;
         }
 
-        private void LoadMaterial(string strMaterialFile)
+        private void LoadMaterial(string parentFileFolder, string strMaterialFile)
         {
             var materialLoader = new MtlFileLoader();
             var materials = new List<Material>();
-            materialLoader.LoadFile(strMaterialFile, materials);
+            materialLoader.LoadFile(Path.Combine(parentFileFolder, strMaterialFile), materials);
 
             foreach (var mat in materials)
             {
