@@ -134,7 +134,7 @@ namespace Raytracer.Rendering.Primitives
                      intersections++;
             }
 
-            return intersections % 2 == 0;
+            return intersections % 2 != 0;
         }
     }
 }

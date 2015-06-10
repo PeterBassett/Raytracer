@@ -72,23 +72,6 @@ namespace Raytracer
             
             LoadScene(txtSceneFile.Text);
             _isSceneDefinitionDirty = false;
-
-            UpdateScreenRenderOptions();
-        }
-
-        private void UpdateScreenRenderOptions()
-        {
-            this.UIThread(() =>
-            {
-                if (_renderer == null || _renderer.Settings == null)
-                    return;
-
-                mnuShadows.Checked = _renderer.Settings.TraceShadows;
-                mnuReflections.Checked = _renderer.Settings.TraceReflections;
-                mnuRefractions.Checked = _renderer.Settings.TraceRefractions;
-
-                SetSelectedRenderDepthMenuItem(_renderer.Settings.PathDepth);
-            });
         }
 
         private void LoadScene(string strScene)

@@ -6,10 +6,13 @@ namespace Raytracer.Rendering.Primitives
 {
     class MeshInstance : ObjectSpacePrimitive
     {
-        public MeshInstance(Mesh mesh, Transform transform)
+        private Material _instanceMaterial;
+
+        public MeshInstance(Mesh mesh, Transform transform, Material instanceMaterial)
             : base(transform)
         {
             _mesh = mesh;
+            _instanceMaterial = instanceMaterial;
         }
 
         private AABB _bounds = AABB.Empty;
@@ -23,8 +26,8 @@ namespace Raytracer.Rendering.Primitives
             {
                 result.HitPoint = ray.Pos + (ray.Dir * result.T);
 
-                if (Material != null)
-                    result.Material = Material;
+                if (_instanceMaterial != null)
+                    result.Material = _instanceMaterial;
             }
 
             return result;
@@ -49,6 +52,21 @@ namespace Raytracer.Rendering.Primitives
             }
 
             return _bounds;
+        }
+
+        public override Material Material
+        {
+            get
+            {
+                if(_instanceMaterial == null)
+                    return base.Material;
+
+                return _instanceMaterial;
+            }
+            set
+            {
+                //base.Material = value;
+            }
         }
     }
 }

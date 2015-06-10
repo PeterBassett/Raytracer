@@ -53,11 +53,8 @@ namespace Raytracer.Rendering.Accellerators
 
                 if(_isLeaf)
                    return _primitives;
-                
-                var traceableObjects = new List<Traceable>();
-                traceableObjects.AddRange(_left.Intersect(ray));
-                traceableObjects.AddRange(_right.Intersect(ray));
-                return traceableObjects;                 
+
+                return _left.Intersect(ray).Concat(_right.Intersect(ray));
             }
 
             internal IEnumerable<Traceable> Intersect(Point point)

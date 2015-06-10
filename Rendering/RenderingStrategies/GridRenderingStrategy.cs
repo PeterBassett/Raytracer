@@ -5,8 +5,10 @@ using Raytracer.Rendering.PixelSamplers;
 using Raytracer.Rendering.Renderers;
 using Raytracer.Rendering.Synchronisation;
 using System;
+using System.Linq;
 using Raytracer.MathTypes;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 
 namespace Raytracer.Rendering.RenderingStrategies
 {
@@ -52,14 +54,14 @@ namespace Raytracer.Rendering.RenderingStrategies
             int yTiles;
             int tasks = ComputeSubWindow(frameBuffer.Size.Width, frameBuffer.Size.Height, out xTiles, out yTiles);
 
-            int framePixels = frameBuffer.Size.Width * frameBuffer.Size.Height;
-
+            var invTasksPercentage = (1.0 / (double)tasks) * 100.0;
             var ranges = BuildRanges(tasks, xTiles, yTiles, frameBuffer.Size);
             var options = GetThreadingOptions();
             
             RaiseRenderingStarted();
             frameBuffer.BeginWriting();
-            Parallel.ForEach(ranges, options, (imageRange, state) =>
+
+            Parallel.ForEach(ranges, options, (imageRange, state, count) =>
             {
                 for (int x = imageRange.X1; x < imageRange.X2; x++)
                 {
@@ -76,8 +78,9 @@ namespace Raytracer.Rendering.RenderingStrategies
                 }
 
 
-                RaiseOnCompletedPercentageDelta(imageRange.Pixels / (double)framePixels * 100.0);
-            });            
+                RaiseOnCompletedPercentageDelta(invTasksPercentage);
+            });
+            
             frameBuffer.EndWriting();
             RaiseRenderingComplete();
         }
@@ -96,6 +99,7 @@ namespace Raytracer.Rendering.RenderingStrategies
                 float ty0 = (float)yo / (float)ny, ty1 = ((float)yo+1) / (float)ny;
                 
                 yield return new ImageRange(
+                    i,
                     (int)Math.Floor(MathLib.Lerp(0, size.Width, tx0)),
                     (int)Math.Floor(MathLib.Lerp(0, size.Width, tx1)),
                     (int)Math.Floor(MathLib.Lerp(0, size.Height, ty0)),

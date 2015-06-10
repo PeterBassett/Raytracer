@@ -17,6 +17,6 @@ namespace Raytracer.Rendering.Core
 
         public Point Pos { get; set; }
         public Vector Ori { get; set; }
-        public Material Material { get; set; }        
+        public virtual Material Material { get; set; }        
     }
 }
