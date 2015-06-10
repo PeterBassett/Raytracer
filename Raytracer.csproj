@@ -140,6 +140,7 @@
     <Compile Include="MathTypes\Algebra.cs" />
     <Compile Include="MathTypes\Barycentric.cs" />
     <Compile Include="MathTypes\Converters\VectorConverter.cs" />
+    <Compile Include="MathTypes\ImageRange.cs" />
     <Compile Include="MathTypes\Matrix.cs" />
     <Compile Include="MathTypes\Point.cs" />
     <Compile Include="MathTypes\Normal.cs" />

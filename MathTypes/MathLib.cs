@@ -39,5 +39,10 @@ namespace Raytracer.MathTypes
         
             return v+1;
         }
+
+        public static float Lerp(float a, float b, float t)
+        {
+            return ((a) + (t) * ((b) - (a)));
+        }
     }
 }

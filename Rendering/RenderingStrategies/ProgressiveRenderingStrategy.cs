@@ -30,8 +30,8 @@ namespace Raytracer.Rendering.RenderingStrategies
             {                
                 var xs = Enumerable.Range(0, frameBuffer.Size.Width).Where(i => i % skip == 0).ToArray();
 
+                RaiseRenderingStarted();
                 frameBuffer.BeginWriting();
-
                 Parallel.ForEach(xs, options, (x, state, i) =>
                 {
                     for (int y = 0; y < frameBuffer.Size.Height; y += skip)
@@ -48,8 +48,9 @@ namespace Raytracer.Rendering.RenderingStrategies
                         SetColourBlock(frameBuffer, skip, x, y, colour);
                     }
 
-                    RaiseOnCompletedScanLine(x, xs.Length);
+                    RaiseOnCompletedPercentageDelta(1 / (double)xs.Length * 100.0);
                 });
+                RaiseRenderingComplete();
 
                 if(!_cancellationToken.IsCancellationRequested)
                     frameBuffer.EndWriting();

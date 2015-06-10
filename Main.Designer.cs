@@ -181,7 +181,6 @@ namespace Raytracer
             this.renderOptionsToolStripMenuItem.Name = "renderOptionsToolStripMenuItem";
             this.renderOptionsToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
             this.renderOptionsToolStripMenuItem.Text = "Render Options";
-            
             // 
             // useSceneDefaults
             // 
@@ -255,6 +254,7 @@ namespace Raytracer
             this.gridToolStripMenuItem.Name = "gridToolStripMenuItem";
             this.gridToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.gridToolStripMenuItem.Text = "Grid";
+            this.gridToolStripMenuItem.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // mnuSampler
             // 

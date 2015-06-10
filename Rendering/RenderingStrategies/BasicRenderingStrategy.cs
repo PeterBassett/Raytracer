@@ -23,7 +23,8 @@ namespace Raytracer.Rendering.RenderingStrategies
             _pixelSampler.Initialise();
 
             var options = GetThreadingOptions();
-            
+
+            RaiseRenderingStarted();
             frameBuffer.BeginWriting();
             Parallel.For(0, frameBuffer.Size.Width, options, (x, state) =>
             {
@@ -38,9 +39,10 @@ namespace Raytracer.Rendering.RenderingStrategies
                     frameBuffer.SetPixel(x, y, _pixelSampler.SamplePixel(renderer, x, y));
                 }
 
-                RaiseOnCompletedScanLine(x, frameBuffer.Size.Width);
+                RaiseOnCompletedPercentageDelta(frameBuffer.Size.Height / (double)(frameBuffer.Size.Width * frameBuffer.Size.Height) * 100.0);
             });
             frameBuffer.EndWriting();
+            RaiseRenderingComplete();
         }
     }
 }

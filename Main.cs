@@ -281,8 +281,7 @@ namespace Raytracer
         {
             _renderingStartedAt = DateTime.Now;
             _renderingCurrentPercentage = 0;
-            _renderingCurrentTotal = 0;
-            _scanLinesCompleted = new ConcurrentDictionary<int, int>();
+            _renderingPercentage = 0;
 
             var watch = new Stopwatch();
             
@@ -291,8 +290,10 @@ namespace Raytracer
             _camera.OutputDimensions = bmp.Size;
             _cancellationTokenSource.Reset();
 
-            _renderer.RenderingStrategy.OnCompletedScanLine += RenderingStrategy_OnCompletedScanLine;
-
+            _renderer.RenderingStrategy.OnRenderingStarted += RenderingStrategy_OnRenderingStarted;
+            _renderer.RenderingStrategy.OnCompletedPercentageDelta += RenderingStrategy_OnCompletedAdditionalPercentage;
+            _renderer.RenderingStrategy.OnRenderingComplete += RenderingStrategy_OnRenderingComplete;
+            
             if (renderAt.HasValue)
                 _renderer.ComputeSample(renderAt.Value);
             else
@@ -300,7 +301,9 @@ namespace Raytracer
             
             watch.Stop();
 
-            _renderer.RenderingStrategy.OnCompletedScanLine -= RenderingStrategy_OnCompletedScanLine;
+            _renderer.RenderingStrategy.OnRenderingStarted -= RenderingStrategy_OnRenderingStarted;
+            _renderer.RenderingStrategy.OnCompletedPercentageDelta -= RenderingStrategy_OnCompletedAdditionalPercentage;
+            _renderer.RenderingStrategy.OnRenderingComplete -= RenderingStrategy_OnRenderingComplete;
 
             this.UIThread(() =>
             {
@@ -310,22 +313,10 @@ namespace Raytracer
 
         DateTime _renderingStartedAt;
         int _renderingCurrentPercentage;
-        int _renderingCurrentTotal;
-        ConcurrentDictionary<int, int> _scanLinesCompleted = new ConcurrentDictionary<int, int>();
-
-        private void RenderingStrategy_OnCompletedScanLine(int completed, int total)
+        double _renderingPercentage;
+        
+        private void SetRenderingCompletionPercentage(int percentage)
         {
-            if (total != _renderingCurrentTotal)
-            {
-                _renderingCurrentTotal = total;
-                _scanLinesCompleted.Clear();
-            }
-
-            if (!_scanLinesCompleted.ContainsKey(completed))
-                _scanLinesCompleted.AddOrUpdate(completed, completed, (a, b) => completed);
-
-            var percentage = (int)((_scanLinesCompleted.Count / (double)total) * 100);
-
             if (_renderingCurrentPercentage != percentage)
             {
                 _renderingCurrentPercentage = percentage;
@@ -337,6 +328,36 @@ namespace Raytracer
                     Application.DoEvents();
                 });
             }
+        }
+
+        public static double Add(ref double location1, double value)
+        {
+            double newCurrentValue = 0;
+            while (true)
+            {
+                double currentValue = newCurrentValue;
+                double newValue = currentValue + value;
+                newCurrentValue = System.Threading.Interlocked.CompareExchange(ref location1, newValue, currentValue);
+                if (newCurrentValue == currentValue)
+                    return newValue;
+            }
+        }
+
+        void RenderingStrategy_OnRenderingStarted()
+        {
+            _renderingCurrentPercentage = 0;
+            _renderingPercentage = 0;
+        }
+
+        private void RenderingStrategy_OnCompletedAdditionalPercentage(double percentageDelta)
+        {
+            var percentage = (int)Add(ref _renderingPercentage, percentageDelta);
+            SetRenderingCompletionPercentage(percentage);
+        }
+
+        void RenderingStrategy_OnRenderingComplete()
+        {
+            SetRenderingCompletionPercentage(100);
         }
 
         private string FormatElapsedTime(TimeSpan span)
