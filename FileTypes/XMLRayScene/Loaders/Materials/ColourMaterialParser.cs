@@ -33,6 +33,8 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Materials
             mat.Refraction = (float)loader.LoadObject<double>(components, element, "IOR", () => 1.003);
             mat.Transmitted = loader.LoadObject<Colour>(components, element, "Transmitted", () => new Colour(0));
 
+            mat.Density = loader.LoadObject<float>(components, element, "Density", () => 0);
+
             return mat;
         }
     }

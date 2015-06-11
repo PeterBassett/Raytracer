@@ -15,6 +15,7 @@ namespace Raytracer.Rendering.Materials
             Reflective = new Colour();
             Transmitted = new Colour();
             Specular = new Colour();
+            Density = 0;
         }
 
         public Colour Ambient { get; set; }
@@ -26,6 +27,8 @@ namespace Raytracer.Rendering.Materials
         public Colour Specular { get; set; }
         public float Specularity { get; set; }
         public float SpecularExponent { get; set; }
+        public float Density { get; set; }
+
         public string Name { get; set; }
 
         public virtual void SolidifyMaterial(IntersectionInfo info, Material output)
@@ -44,6 +47,7 @@ namespace Raytracer.Rendering.Materials
             dest.Reflective = new Colour(source.Reflective);
             dest.Transmitted = new Colour(source.Transmitted);
             dest.Refraction = source.Refraction;
-        }        
+            dest.Density = source.Density;
+        }
     }
 }

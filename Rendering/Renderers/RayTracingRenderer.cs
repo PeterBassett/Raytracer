@@ -45,7 +45,8 @@ namespace Raytracer.Rendering.Renderers
 
         private Colour Trace(Ray ray)
         {
-            return TraceRay(ray, new Colour(1.0f), 1.0f, 1, ray.Dir);
+            double t;
+            return TraceRay(ray, new Colour(1.0f), 1.0f, 1, ray.Dir, out t);
         }
         
         public IntersectionInfo FindClosestIntersection(Ray ray)
@@ -70,7 +71,7 @@ namespace Raytracer.Rendering.Renderers
             return Scene.FindObjectContainingPoint(point);
         }
 
-        private Colour TraceRay(Ray ray, Colour contribution, double curRefractionIndex, long depth, Vector eyeDirection)
+        private Colour TraceRay(Ray ray, Colour contribution, double curRefractionIndex, long depth, Vector eyeDirection, out double intersectionDistance)
         {
             var colour = new Colour(0.0f);
 
@@ -81,8 +82,11 @@ namespace Raytracer.Rendering.Renderers
                 if (Scene.BackgroundMaterial != null)
                     colour = Scene.BackgroundMaterial.Shade(ray);
 
+                intersectionDistance = 0;
                 return colour;
             }
+
+            intersectionDistance = info.T;
             
             // set the 
             var material = new Material();
@@ -110,7 +114,8 @@ namespace Raytracer.Rendering.Renderers
                     // calculate the new reflected direction
                     var reflectedRay = new Ray(info.HitPoint, CalculateReflectedRay(ray.Dir, info.NormalAtHitPoint));
                     // recursivly call trace ray
-                    colour += TraceRay(reflectedRay, colReflectAmount, curRefractionIndex, depth + 1, eyeDirection);
+                    double t;
+                    colour += TraceRay(reflectedRay, colReflectAmount, curRefractionIndex, depth + 1, eyeDirection, out t);
                 }
             }
 
@@ -214,7 +219,7 @@ namespace Raytracer.Rendering.Renderers
 
             var material = new Material();
             double targetRefractiveIndex = Scene.DefaultMaterial.Refraction;
-
+            double targetDensity = Scene.DefaultMaterial.Density;
             if (container != null)
             {
                 var objectMaterial = container.Material ?? Scene.DefaultMaterial;
@@ -223,7 +228,8 @@ namespace Raytracer.Rendering.Renderers
                 
                 materialDispatcher.Solidify((dynamic)container, (dynamic)objectMaterial, intersection, material);
 
-                targetRefractiveIndex = material.Refraction; 
+                targetRefractiveIndex = material.Refraction;
+                targetDensity = material.Density;
             }
 
             double ratio = sourceRefractiveIndex / targetRefractiveIndex;
@@ -244,7 +250,8 @@ namespace Raytracer.Rendering.Renderers
                 Vector reflectionVector = CalculateReflectedRay(dirUnit, intersection.NormalAtHitPoint);
                 outReflectionFactor = 1;
                 var reflectedRay = new Ray(intersection.HitPoint, reflectionVector);
-                return TraceRay(reflectedRay, rayIntensity, sourceRefractiveIndex, recursionDepth + 1, reflectedRay.Dir);
+                double reflectionDistance;
+                return TraceRay(reflectedRay, rayIntensity, sourceRefractiveIndex, recursionDepth + 1, reflectedRay.Dir, out reflectionDistance);
             }
 
             // Getting here means there is at least a little bit of
@@ -330,7 +337,14 @@ namespace Raytracer.Rendering.Renderers
             Colour nextRayIntensity = (1.0 - outReflectionFactor) * rayIntensity;
 
             var ray = new Ray(testPoint, refractDir);
-            return TraceRay(ray, nextRayIntensity, targetRefractiveIndex, recursionDepth + 1, ray.Dir);
+            double refractedRayLength;
+            var refractionColour = TraceRay(ray, nextRayIntensity, targetRefractiveIndex, recursionDepth + 1, ray.Dir, out refractedRayLength);
+
+            Colour absorbance = refractionColour * targetDensity * -refractedRayLength;
+            Colour transparency = new Colour(Math.Exp(absorbance.Red),
+                                             Math.Exp(absorbance.Green),
+                                             Math.Exp(absorbance.Blue));
+            return refractionColour * transparency;
         }
 
         double PolarizedReflection(

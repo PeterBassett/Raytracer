@@ -119,6 +119,7 @@ namespace Raytracer.Rendering.Materials
             output.Refraction = Lerp(mat1.Refraction, mat2.Refraction, noise);
             output.Specularity = Lerp(mat1.Specularity, mat2.Specularity, noise);
             output.SpecularExponent = Lerp(mat1.SpecularExponent, mat2.SpecularExponent, noise);
+            output.Density = Lerp(mat1.Density, mat2.Density, noise);
         }
 
         private float Lerp(float a, float b, float t)
