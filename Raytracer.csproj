@@ -165,6 +165,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Rendering\Accellerators\IAccellerator.cs" />
+    <Compile Include="Rendering\Core\BRDF.cs" />
     <Compile Include="Rendering\Core\Transform.cs" />
     <Compile Include="Rendering\Core\VisibilityTester.cs" />
     <Compile Include="FileTypes\XMLRayScene\Extensions\XDocumentExtensions.cs" />
@@ -663,7 +664,9 @@
     <Content Include="Dependencies\ICSharpCode.TextEditor.dll" />
     <Content Include="Dependencies\TargaImage.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Rendering\BRDFs\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
