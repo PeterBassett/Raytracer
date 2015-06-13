@@ -62,7 +62,7 @@ Sampling Stratigies
 
 Still to come
 
-Bump mapping, more area lights and a path tracer implementation.
+Bump mapping, more area lights and a path tracer implementation and a BRDF system.
 
 Examples
 
