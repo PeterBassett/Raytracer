@@ -8,8 +8,8 @@ Primitives
 * Spheres
 * Triangles
 * Planes
-* Meshes loaded from wavefront obj files. Supports mtl files.
-* Multiple instances of those Meshes, independently transformed.
+* Meshes loaded from wavefront obj files. Supports mtl files
+* Multiple instances of those Meshes, independently transformed
 * Tori (Toruses, Donuts....Mmm Donuts!)
 * Cylinders
 * Cubes
