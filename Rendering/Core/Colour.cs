@@ -7,7 +7,9 @@ namespace Raytracer.Rendering.Core
         float _red;
         float _green;
         float _blue;
-        
+
+        public static Colour Black = new Colour(0,0,0);
+
 	    public Colour() : this(0.0f, 0.0f, 0.0f)
         { 
         } 
@@ -203,6 +205,16 @@ namespace Raytracer.Rendering.Core
         public override string ToString()
         {
             return string.Format("R:{0},G:{1},B:{2}", Red, Green, Blue);
+        }
+
+        public Colour Pow(double b)
+        {
+            return new Colour(Math.Pow(this.Red, b), Math.Pow(this.Green, b), Math.Pow(this.Blue, b));
+        }
+
+        internal float MaxComponent()
+        {
+            return Math.Max(this.Red, Math.Max(this.Green, this.Blue));
         }
     }
 }

@@ -99,6 +99,7 @@
   <ItemGroup>
     <Compile Include="Extensions\UIExtensions.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Cameras\CameraParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Cameras\DOFCameraParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Cameras\PinholeCameraParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\ConfigElementLoader.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Distributions\StratifiedDistributionParser.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="FileTypes\XMLRayScene\Loaders\Lights\DiscLightParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Lights\SphereLightParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Output\OutputElementLoader.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\PixelSamplers\VariancePixelSamplerParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\PixelSamplers\EdgeDetectionPerComponentPixelSamplerParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\PixelSamplers\EdgeDetectionPixelSamplerParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\PixelSamplers\JitteredPixelSamplerParser.cs" />
@@ -160,12 +162,14 @@
     <Compile Include="Rendering\Accellerators\Partitioners\SahPrimitivePartitioner.cs" />
     <Compile Include="Rendering\Accellerators\Partitioners\EqualPrimitivePartitioner.cs" />
     <Compile Include="Rendering\Accellerators\Partitioners\IPrimitivePartitioner.cs" />
+    <Compile Include="Rendering\Cameras\Camera.cs" />
     <Compile Include="Rendering\Cameras\PinholeCamera2.cs" />
     <Compile Include="Rendering\Core\AABB.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Rendering\Accellerators\IAccellerator.cs" />
     <Compile Include="Rendering\Core\BRDF.cs" />
+    <Compile Include="Rendering\Core\Buffer.cs" />
     <Compile Include="Rendering\Core\Transform.cs" />
     <Compile Include="Rendering\Core\VisibilityTester.cs" />
     <Compile Include="FileTypes\XMLRayScene\Extensions\XDocumentExtensions.cs" />
@@ -239,6 +243,7 @@
     <Compile Include="Rendering\Lights\SpotLight.cs" />
     <Compile Include="Rendering\Lights\DistantLight.cs" />
     <Compile Include="Rendering\Lights\PointLight.cs" />
+    <Compile Include="Rendering\PixelSamplers\VariancePixelSampler.cs" />
     <Compile Include="Rendering\PixelSamplers\EdgeDetectionPerComponentSampler.cs" />
     <Compile Include="Rendering\Primitives\Cone.cs" />
     <Compile Include="Rendering\Primitives\Cube.cs" />
@@ -370,6 +375,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Small\Disc.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Small\FireBall_DOFTest.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Small\LegoCarSoftShadows.xml">

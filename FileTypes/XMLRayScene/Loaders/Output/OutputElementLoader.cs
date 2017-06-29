@@ -25,9 +25,10 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Output
             var fileName = file.Value;
             bool overwrite = overwriteAttr != null && overwriteAttr.Value == "true";
 
-            var bmp = new Bmp(dimensions.Width, dimensions.Height);
+            //var bmp = new Bmp(dimensions.Width, dimensions.Height);
+            var buffer = new Raytracer.Rendering.Core.Buffer(dimensions.Width, dimensions.Height);
             components.Renderer.Camera.OutputDimensions = dimensions;
-            components.Renderer.RenderScene(bmp);
+            components.Renderer.RenderScene(buffer);
 
             using(var bitmap = new Bitmap(dimensions.Width, dimensions.Height))
             {
@@ -35,7 +36,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Output
                 {
                     for (int y = 0; y < dimensions.Height; y++)
                     {
-                        bitmap.SetPixel(x, y, bmp.GetPixel(x, dimensions.Height - y - 1).ToColor());
+                        bitmap.SetPixel(x, y, buffer.Colour(x, dimensions.Height - y - 1).ToColor());
                     }
                 }
                 bitmap.Save(fileName);

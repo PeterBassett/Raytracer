@@ -6,9 +6,9 @@ namespace Raytracer.Rendering.PixelSamplers
 {
     class StandardPixelSampler : IPixelSampler
     {
-        public Colour SamplePixel(IRenderer renderer, int x, int y)
+        public void SamplePixel(IRenderer renderer, int x, int y, Buffer buffer)
         {            
-            return renderer.ComputeSample(new Vector2(x + 0.5f, y + 0.5f));
+            buffer.AddSample(x, y, renderer.ComputeSample(new Vector2(x + 0.5f, y + 0.5f)));
         }
 
         public void Initialise()

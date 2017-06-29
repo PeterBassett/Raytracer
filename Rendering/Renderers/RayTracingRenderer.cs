@@ -15,8 +15,14 @@ namespace Raytracer.Rendering.Renderers
         public ICamera Camera { get; set; }
         public Scene Scene { get; set; }
         public Distribution Distribution { get; set; }
+        private int _spp;
 
-        public void RenderScene(IBmp frameBuffer)
+        public RayTracingRenderer(int spp)
+        {
+            _spp = spp;
+        }
+
+        public void RenderScene(Raytracer.Rendering.Core.Buffer frameBuffer)
         {
             AssertDependancies();
 

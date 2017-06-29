@@ -18,10 +18,13 @@ namespace Raytracer.Rendering.PixelSamplers
             _bmp = new ConcurrentDictionary<Tuple<int, int>, Colour>();
         }
 
-        public override Colour SamplePixel(IRenderer renderer, int x, int y)
+        public override void SamplePixel(IRenderer renderer, int x, int y, Raytracer.Rendering.Core.Buffer buffer)
         {
             if (_samples == 1)
-                return renderer.ComputeSample(new Vector2(x, y));
+            {
+                buffer.AddSample(x, y, GetPixel(renderer, x, y));
+                return;
+            }
 
             _dimensions = renderer.Camera.OutputDimensions;
             var difference = SobelOperator(renderer, x, y);
@@ -29,14 +32,14 @@ namespace Raytracer.Rendering.PixelSamplers
  
             if (_renderEdgeDetectionResults)
             {
-                return edgeFound ? new Colour(1, 0, 0) : new Colour(0, 0, 0);
+                buffer.AddSample(x, y, edgeFound ? new Colour(1, 0, 0) : new Colour(0, 0, 0));
             }
             else
             {
                 if (edgeFound)
-                    return base.SamplePixel(renderer, x, y);                 
+                    base.SamplePixel(renderer, x, y, buffer);                 
                 else
-                    return GetPixel(renderer, x, y);
+                    buffer.AddSample(x, y, GetPixel(renderer, x, y));
             }
         }
 

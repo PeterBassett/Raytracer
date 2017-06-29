@@ -84,13 +84,21 @@ namespace Raytracer
             this.dlgOpen = new System.Windows.Forms.OpenFileDialog();
             this.dlgSaveBmp = new System.Windows.Forms.SaveFileDialog();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.txtSceneFile = new Raytracer.UI.CustomXmlTextEditor();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabColour = new System.Windows.Forms.TabPage();
+            this.tabVariance = new System.Windows.Forms.TabPage();
+            this.varianceBox = new System.Windows.Forms.PictureBox();
+            this.tabStdDev = new System.Windows.Forms.TabPage();
+            this.stdDevBox = new System.Windows.Forms.PictureBox();
+            this.tabSamples = new System.Windows.Forms.TabPage();
+            this.samplesBox = new System.Windows.Forms.PictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblPercent = new System.Windows.Forms.Label();
             this.btnCancelRendering = new System.Windows.Forms.Button();
             this.btnRender = new System.Windows.Forms.Button();
             this.dlgSaveRay = new System.Windows.Forms.SaveFileDialog();
             this.pixelPosition = new System.Windows.Forms.Label();
+            this.txtSceneFile = new Raytracer.UI.CustomXmlTextEditor();
             ((System.ComponentModel.ISupportInitialize)(this.renderedImage)).BeginInit();
             this.mainMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -98,16 +106,26 @@ namespace Raytracer
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabColour.SuspendLayout();
+            this.tabVariance.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.varianceBox)).BeginInit();
+            this.tabStdDev.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.stdDevBox)).BeginInit();
+            this.tabSamples.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.samplesBox)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // renderedImage
             // 
+            this.renderedImage.BackColor = System.Drawing.SystemColors.ControlDark;
             this.renderedImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.renderedImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.renderedImage.Location = new System.Drawing.Point(0, 0);
+            this.renderedImage.Margin = new System.Windows.Forms.Padding(0);
             this.renderedImage.Name = "renderedImage";
-            this.renderedImage.Size = new System.Drawing.Size(664, 471);
+            this.renderedImage.Size = new System.Drawing.Size(656, 445);
             this.renderedImage.TabIndex = 1;
             this.renderedImage.TabStop = false;
             this.renderedImage.DoubleClick += new System.EventHandler(this.renderedImage_DoubleClick);
@@ -304,7 +322,7 @@ namespace Raytracer
             // randomToolStripMenuItem
             // 
             this.randomToolStripMenuItem.Name = "randomToolStripMenuItem";
-            this.randomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.randomToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.randomToolStripMenuItem.Text = "Random";
             this.randomToolStripMenuItem.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
@@ -313,7 +331,7 @@ namespace Raytracer
             this.stratifiedToolStripMenuItem.Checked = true;
             this.stratifiedToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.stratifiedToolStripMenuItem.Name = "stratifiedToolStripMenuItem";
-            this.stratifiedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.stratifiedToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.stratifiedToolStripMenuItem.Text = "Stratified";
             this.stratifiedToolStripMenuItem.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
@@ -422,28 +440,28 @@ namespace Raytracer
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem6.Text = "1";
             this.toolStripMenuItem6.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem7.Text = "2";
             this.toolStripMenuItem7.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // toolStripMenuItem8
             // 
             this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem8.Text = "3";
             this.toolStripMenuItem8.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // toolStripMenuItem9
             // 
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem9.Text = "4";
             this.toolStripMenuItem9.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
@@ -452,77 +470,77 @@ namespace Raytracer
             this.toolStripMenuItem10.Checked = true;
             this.toolStripMenuItem10.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripMenuItem10.Name = "toolStripMenuItem10";
-            this.toolStripMenuItem10.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem10.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem10.Text = "5";
             this.toolStripMenuItem10.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // toolStripMenuItem11
             // 
             this.toolStripMenuItem11.Name = "toolStripMenuItem11";
-            this.toolStripMenuItem11.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem11.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem11.Text = "6";
             this.toolStripMenuItem11.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // toolStripMenuItem12
             // 
             this.toolStripMenuItem12.Name = "toolStripMenuItem12";
-            this.toolStripMenuItem12.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem12.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem12.Text = "7";
             this.toolStripMenuItem12.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // toolStripMenuItem13
             // 
             this.toolStripMenuItem13.Name = "toolStripMenuItem13";
-            this.toolStripMenuItem13.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem13.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem13.Text = "8";
             this.toolStripMenuItem13.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem2.Text = "9";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem3.Text = "10";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem4.Text = "11";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem5.Text = "12";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // toolStripMenuItem14
             // 
             this.toolStripMenuItem14.Name = "toolStripMenuItem14";
-            this.toolStripMenuItem14.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem14.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem14.Text = "13";
             this.toolStripMenuItem14.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // toolStripMenuItem15
             // 
             this.toolStripMenuItem15.Name = "toolStripMenuItem15";
-            this.toolStripMenuItem15.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem15.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem15.Text = "14";
             this.toolStripMenuItem15.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
             // toolStripMenuItem16
             // 
             this.toolStripMenuItem16.Name = "toolStripMenuItem16";
-            this.toolStripMenuItem16.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem16.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem16.Text = "15";
             this.toolStripMenuItem16.Click += new System.EventHandler(this.CheckSelectedToolMenuItem);
             // 
@@ -573,7 +591,7 @@ namespace Raytracer
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.renderedImage);
+            this.splitContainer1.Panel1.Controls.Add(this.tabControl1);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
             // 
             // splitContainer1.Panel2
@@ -584,21 +602,103 @@ namespace Raytracer
             this.splitContainer1.SplitterDistance = 664;
             this.splitContainer1.TabIndex = 4;
             // 
-            // txtSceneFile
+            // tabControl1
             // 
-            this.txtSceneFile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSceneFile.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.txtSceneFile.IsIconBarVisible = true;
-            this.txtSceneFile.IsReadOnly = false;
-            this.txtSceneFile.Location = new System.Drawing.Point(0, 0);
-            this.txtSceneFile.Name = "txtSceneFile";
-            this.txtSceneFile.ShowSpaces = true;
-            this.txtSceneFile.ShowTabs = true;
-            this.txtSceneFile.ShowVRuler = false;
-            this.txtSceneFile.Size = new System.Drawing.Size(369, 471);
-            this.txtSceneFile.TabIndent = 2;
-            this.txtSceneFile.TabIndex = 4;
-            this.txtSceneFile.TextChanged += new System.EventHandler(this.txtSceneFile_TextChanged);
+            this.tabControl1.Controls.Add(this.tabColour);
+            this.tabControl1.Controls.Add(this.tabVariance);
+            this.tabControl1.Controls.Add(this.tabStdDev);
+            this.tabControl1.Controls.Add(this.tabSamples);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(664, 471);
+            this.tabControl1.TabIndex = 4;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            // 
+            // tabColour
+            // 
+            this.tabColour.Controls.Add(this.renderedImage);
+            this.tabColour.Location = new System.Drawing.Point(4, 22);
+            this.tabColour.Margin = new System.Windows.Forms.Padding(0);
+            this.tabColour.Name = "tabColour";
+            this.tabColour.Size = new System.Drawing.Size(656, 445);
+            this.tabColour.TabIndex = 0;
+            this.tabColour.Tag = "0";
+            this.tabColour.Text = "Colour";
+            this.tabColour.UseVisualStyleBackColor = true;
+            // 
+            // tabVariance
+            // 
+            this.tabVariance.Controls.Add(this.varianceBox);
+            this.tabVariance.Location = new System.Drawing.Point(4, 22);
+            this.tabVariance.Margin = new System.Windows.Forms.Padding(0);
+            this.tabVariance.Name = "tabVariance";
+            this.tabVariance.Size = new System.Drawing.Size(656, 445);
+            this.tabVariance.TabIndex = 1;
+            this.tabVariance.Tag = "1";
+            this.tabVariance.Text = "Variance";
+            this.tabVariance.UseVisualStyleBackColor = true;
+            // 
+            // varianceBox
+            // 
+            this.varianceBox.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.varianceBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.varianceBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.varianceBox.Location = new System.Drawing.Point(0, 0);
+            this.varianceBox.Margin = new System.Windows.Forms.Padding(0);
+            this.varianceBox.Name = "varianceBox";
+            this.varianceBox.Size = new System.Drawing.Size(656, 445);
+            this.varianceBox.TabIndex = 2;
+            this.varianceBox.TabStop = false;
+            // 
+            // tabStdDev
+            // 
+            this.tabStdDev.Controls.Add(this.stdDevBox);
+            this.tabStdDev.Location = new System.Drawing.Point(4, 22);
+            this.tabStdDev.Margin = new System.Windows.Forms.Padding(0);
+            this.tabStdDev.Name = "tabStdDev";
+            this.tabStdDev.Size = new System.Drawing.Size(656, 445);
+            this.tabStdDev.TabIndex = 2;
+            this.tabStdDev.Tag = "2";
+            this.tabStdDev.Text = "StdDev";
+            this.tabStdDev.UseVisualStyleBackColor = true;
+            // 
+            // stdDevBox
+            // 
+            this.stdDevBox.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.stdDevBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.stdDevBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.stdDevBox.Location = new System.Drawing.Point(0, 0);
+            this.stdDevBox.Margin = new System.Windows.Forms.Padding(0);
+            this.stdDevBox.Name = "stdDevBox";
+            this.stdDevBox.Size = new System.Drawing.Size(656, 445);
+            this.stdDevBox.TabIndex = 2;
+            this.stdDevBox.TabStop = false;
+            // 
+            // tabSamples
+            // 
+            this.tabSamples.Controls.Add(this.samplesBox);
+            this.tabSamples.Location = new System.Drawing.Point(4, 22);
+            this.tabSamples.Name = "tabSamples";
+            this.tabSamples.Size = new System.Drawing.Size(656, 445);
+            this.tabSamples.TabIndex = 3;
+            this.tabSamples.Tag = "3";
+            this.tabSamples.Text = "Samples";
+            this.tabSamples.UseVisualStyleBackColor = true;
+            // 
+            // samplesBox
+            // 
+            this.samplesBox.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.samplesBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.samplesBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.samplesBox.Location = new System.Drawing.Point(0, 0);
+            this.samplesBox.Margin = new System.Windows.Forms.Padding(0);
+            this.samplesBox.Name = "samplesBox";
+            this.samplesBox.Size = new System.Drawing.Size(656, 445);
+            this.samplesBox.TabIndex = 2;
+            this.samplesBox.TabStop = false;
             // 
             // groupBox2
             // 
@@ -652,12 +752,29 @@ namespace Raytracer
             // 
             this.pixelPosition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pixelPosition.BackColor = System.Drawing.Color.Transparent;
-            this.pixelPosition.Location = new System.Drawing.Point(969, 6);
+            this.pixelPosition.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.pixelPosition.Location = new System.Drawing.Point(952, 0);
             this.pixelPosition.Name = "pixelPosition";
-            this.pixelPosition.Size = new System.Drawing.Size(67, 18);
+            this.pixelPosition.Size = new System.Drawing.Size(85, 18);
             this.pixelPosition.TabIndex = 5;
             this.pixelPosition.Text = "X:Y";
             this.pixelPosition.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtSceneFile
+            // 
+            this.txtSceneFile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSceneFile.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtSceneFile.IsIconBarVisible = true;
+            this.txtSceneFile.IsReadOnly = false;
+            this.txtSceneFile.Location = new System.Drawing.Point(0, 0);
+            this.txtSceneFile.Name = "txtSceneFile";
+            this.txtSceneFile.ShowSpaces = true;
+            this.txtSceneFile.ShowTabs = true;
+            this.txtSceneFile.ShowVRuler = false;
+            this.txtSceneFile.Size = new System.Drawing.Size(369, 471);
+            this.txtSceneFile.TabIndent = 2;
+            this.txtSceneFile.TabIndex = 4;
+            this.txtSceneFile.TextChanged += new System.EventHandler(this.txtSceneFile_TextChanged);
             // 
             // Main
             // 
@@ -679,6 +796,14 @@ namespace Raytracer
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabColour.ResumeLayout(false);
+            this.tabVariance.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.varianceBox)).EndInit();
+            this.tabStdDev.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.stdDevBox)).EndInit();
+            this.tabSamples.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.samplesBox)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -749,6 +874,14 @@ namespace Raytracer
         private System.Windows.Forms.ToolStripMenuItem greyscaleEdgeDetectionSamplerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem componentEdgeDetectionSamplerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gridToolStripMenuItem;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabColour;
+        private System.Windows.Forms.TabPage tabVariance;
+        private System.Windows.Forms.TabPage tabStdDev;
+        private System.Windows.Forms.TabPage tabSamples;
+        private System.Windows.Forms.PictureBox varianceBox;
+        private System.Windows.Forms.PictureBox stdDevBox;
+        private System.Windows.Forms.PictureBox samplesBox;
     }
 }
 

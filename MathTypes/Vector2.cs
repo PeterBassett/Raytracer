@@ -76,7 +76,12 @@ namespace Raytracer.MathTypes
 		public static Vector2 operator*(Vector2 v, double s)
 		{
             return new Vector2(v.X * s, v.Y * s);
-		}	
+		}
+
+        public static Vector2 operator *(double s, Vector2 v)
+        {
+            return new Vector2(v.X * s, v.Y * s);
+        }	
 	}
 
 }

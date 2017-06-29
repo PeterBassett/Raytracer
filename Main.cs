@@ -25,6 +25,7 @@ namespace Raytracer
         private Scene _scene;
         private IRenderer _renderer;
         private ICamera _camera;
+        private Raytracer.Rendering.Core.Buffer _buffer;
         private CancellationTokenSource _cancellationTokenSource;
         private IRenderer _sceneDefinedRenderer;
 
@@ -94,7 +95,7 @@ namespace Raytracer
             {
                 using (var sceneStream = new MemoryStream(System.Text.Encoding.Default.GetBytes(strScene)))
                     systemComponents = loader.LoadScene(sceneStream, existingScene);
-
+                
                 _renderer = systemComponents.Renderer;
                 _scene = systemComponents.Scene;
                 _camera = systemComponents.Camera;
@@ -134,22 +135,51 @@ namespace Raytracer
                 var watch = new Stopwatch();
                 watch.Start();
 
-                var bmp = new PictureBoxBmp(renderedImage);
+                _buffer = new Rendering.Core.Buffer(renderedImage.Width, renderedImage.Height);
 
-                Render(bmp, _cancellationTokenSource.Token, renderAt);
+                Render(_buffer, _cancellationTokenSource.Token, renderAt);
 
                 watch.Stop();
                 return watch.ElapsedMilliseconds;
             });
 
+            bool displayFlag = true;
+            var display = new Task(() =>
+            {
+                while (displayFlag)
+                {
+                    System.Threading.Thread.Sleep(1000);
+
+                    this.UIThread(() =>
+                    {
+                        this.DisplayImageOnScreen();
+                    });
+                }
+            });
+
+            
             task.ContinueWith(time => this.UIThread(() =>
             {
+                DisplayImageOnScreen();
+
                 txtMessages.Text += string.Format("Done:{0}ms total\r\n", time.Result);
                 btnRender.Enabled = true;
                 btnCancelRendering.Enabled = false;
+                displayFlag = false;
             }));
 
             task.Start();
+            display.Start();            
+        }
+
+        private void DisplayImageOnScreen()
+        {
+            if (_buffer == null)
+                return;
+
+            var box = (PictureBox)tabControl1.SelectedTab.Controls[0];
+            var bmp = new PictureBoxBmp(box);
+            _buffer.WriteToBmp((Raytracer.Rendering.Core.Buffer.Channel)int.Parse(tabControl1.SelectedTab.Tag.ToString()), bmp);
         }
 
         private void OverrideRenderer()
@@ -167,7 +197,7 @@ namespace Raytracer
 
             var camera = _renderer.Camera;
             
-            _renderer = new Raytracer.Rendering.Renderers.RayTracingRenderer();
+            _renderer = new Raytracer.Rendering.Renderers.RayTracingRenderer(64);
             _renderer.Camera = _camera;
             _renderer.Scene = _scene;
             _renderer.Settings = new RenderSettings()
@@ -260,7 +290,7 @@ namespace Raytracer
             }
         }
 
-        private void Render(IBmp bmp, CancellationToken token, Vector2? renderAt)
+        private void Render(Raytracer.Rendering.Core.Buffer buffer, CancellationToken token, Vector2? renderAt)
         {
             _renderingStartedAt = DateTime.Now;
             _renderingCurrentPercentage = 0;
@@ -270,7 +300,7 @@ namespace Raytracer
             
             watch.Start();
 
-            _camera.OutputDimensions = bmp.Size;
+            _camera.OutputDimensions = buffer.Size;
             _cancellationTokenSource.Reset();
 
             _renderer.RenderingStrategy.OnRenderingStarted += RenderingStrategy_OnRenderingStarted;
@@ -280,7 +310,7 @@ namespace Raytracer
             if (renderAt.HasValue)
                 _renderer.ComputeSample(renderAt.Value);
             else
-                _renderer.RenderScene(bmp);
+                _renderer.RenderScene(buffer);
             
             watch.Stop();
 
@@ -525,6 +555,11 @@ namespace Raytracer
 
             if (useSceneDefaults.Equals(sender))
                 _renderer = _sceneDefinedRenderer;
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DisplayImageOnScreen();
         }
     }
 }

@@ -13,7 +13,9 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Renderer
         
         public override dynamic LoadObject(XmlRaySceneLoader loader, SystemComponents components, XElement element, string elementName, Func<dynamic> createDefault)
         {
-            return new RayTracingRenderer();
+            var spp = loader.LoadObject<int>(components, element, "spp", () => 1);
+
+            return new RayTracingRenderer(spp);
         }
     }
 }

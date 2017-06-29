@@ -18,7 +18,7 @@ namespace Raytracer.Rendering.RenderingStrategies
             _pixelSampler = pixelSampler;
         }
 
-        public void RenderScene(IRenderer renderer, IBmp frameBuffer)
+        public void RenderScene(IRenderer renderer, Buffer frameBuffer)
         {
             _pixelSampler.Initialise();
 
@@ -36,7 +36,7 @@ namespace Raytracer.Rendering.RenderingStrategies
                         return;
                     }
 
-                    frameBuffer.SetPixel(x, y, _pixelSampler.SamplePixel(renderer, x, y));
+                    _pixelSampler.SamplePixel(renderer, x, y, frameBuffer);
                 }
 
                 RaiseOnCompletedPercentageDelta(frameBuffer.Size.Height / (double)(frameBuffer.Size.Width * frameBuffer.Size.Height) * 100.0);

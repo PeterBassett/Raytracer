@@ -20,7 +20,7 @@ namespace Raytracer.Rendering.RenderingStrategies
             _skip = initialSkip;            
         }
 
-        public void RenderScene(IRenderer renderer, IBmp frameBuffer)
+        public void RenderScene(IRenderer renderer, Buffer frameBuffer)
         {
             var options = GetThreadingOptions();         
 
@@ -42,10 +42,10 @@ namespace Raytracer.Rendering.RenderingStrategies
                             return;
                         }
 
-                        var colour = _pixelSampler.SamplePixel(renderer, x, y);
+                        _pixelSampler.SamplePixel(renderer, x, y, frameBuffer);
 
                         // ReSharper disable once AccessToModifiedClosure
-                        SetColourBlock(frameBuffer, skip, x, y, colour);
+                        //SetColourBlock(frameBuffer, skip, x, y, colour);
                     }
 
                     RaiseOnCompletedPercentageDelta(1 / (double)xs.Length * 100.0);
@@ -65,12 +65,12 @@ namespace Raytracer.Rendering.RenderingStrategies
             }
         }
 
-        private static void SetColourBlock(IBmp frameBuffer, int skip, int x, int y, Colour colour)
+        private static void SetColourBlock(Buffer frameBuffer, int skip, int x, int y, Colour colour)
         {
             for (int xs = x; xs < x + skip && xs < frameBuffer.Size.Width; xs++)
                 for (int ys = y; ys < y + skip && ys < frameBuffer.Size.Height; ys++)
                 {
-                    frameBuffer.SetPixel(xs, ys, colour);
+                    frameBuffer.AddSample(xs, ys, colour);
                 }
         }
     }

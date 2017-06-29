@@ -31,7 +31,7 @@ namespace Raytracer.Rendering.RenderingStrategies
             };            
             
             if (_multiThreaded)
-                options.MaxDegreeOfParallelism = System.Environment.ProcessorCount;
+                options.MaxDegreeOfParallelism = System.Environment.ProcessorCount * 2;
             
             return options;
         }

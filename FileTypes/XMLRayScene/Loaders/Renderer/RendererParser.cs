@@ -28,7 +28,7 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Renderer
 
             components.Renderer = loader.LoadObject<IRenderer>(components, 
                                             element.Elements().First(),
-                                            () => new RayTracingRenderer());
+                                            () => new RayTracingRenderer(1));
 
             components.Renderer.Settings = settings;
 

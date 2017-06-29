@@ -17,8 +17,8 @@ namespace Raytracer.Rendering.PixelSamplers
             _factor = 1.0 / samples;
             _random = new Random();
         }
-
-        public virtual Colour SamplePixel(IRenderer renderer, int x, int y)
+                
+        public virtual void SamplePixel(IRenderer renderer, int x, int y, Raytracer.Rendering.Core.Buffer buffer)
         {
             Colour colour = new Colour();
 
@@ -29,11 +29,9 @@ namespace Raytracer.Rendering.PixelSamplers
                     var dx = x + SampleOffset(u);
                     var dy = y + SampleOffset(v);
 
-                    colour += renderer.ComputeSample(new Vector2(dx, dy));
+                    buffer.AddSample(x, y, renderer.ComputeSample(new Vector2(dx, dy)));
                 }
-            }
-	        
-            return colour / (_samples * _samples);
+            }	        
         }
 
         private double SampleOffset(int i)
