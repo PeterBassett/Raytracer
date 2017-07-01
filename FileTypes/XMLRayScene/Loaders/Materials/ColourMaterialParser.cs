@@ -20,6 +20,8 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.Materials
             // get the name
             mat.Name = loader.LoadObject<string>(components, element, "Name", () => null);
 
+            mat.Emissive = loader.LoadObject<Colour>(components, element, "Emissive", () => new Colour(0));
+
             mat.Ambient = loader.LoadObject<Colour>(components, element, "Ambient", () => new Colour(0));
             mat.Diffuse = loader.LoadObject<Colour>(components, element, "Diffuse", () => new Colour(1));
 

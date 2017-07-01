@@ -109,6 +109,7 @@
     <Compile Include="FileTypes\XMLRayScene\Loaders\Geometry\SizeParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Lights\DiscLightParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Lights\SphereLightParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Materials\EmissiveParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Output\OutputElementLoader.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\PixelSamplers\VariancePixelSamplerParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\PixelSamplers\EdgeDetectionPerComponentPixelSamplerParser.cs" />
@@ -123,6 +124,9 @@
     <Compile Include="FileTypes\XMLRayScene\Loaders\Primitives\TriangleParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Primitives\DiscParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\Primitives\CylinderParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\Renderer\PathTracerParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\RenderingStrategies\ContinuousRenderingStrategyParser.cs" />
+    <Compile Include="FileTypes\XMLRayScene\Loaders\RenderingStrategies\SingleThreadedRenderingStrategyParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\RenderingStrategies\GridRenderingStrategyParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\RenderingStrategies\ProgressiveRenderingStrategyParser.cs" />
     <Compile Include="FileTypes\XMLRayScene\Loaders\SystemComponents.cs" />
@@ -251,8 +255,12 @@
     <Compile Include="Rendering\Primitives\Disc.cs" />
     <Compile Include="Rendering\Primitives\Cylinder.cs" />
     <Compile Include="Rendering\Primitives\ObjectSpacePrimitive.cs" />
+    <Compile Include="Rendering\Renderers\PathTracingRenderer.cs" />
+    <Compile Include="Rendering\Renderers\TracingRendererBase.cs" />
     <Compile Include="Rendering\Renderers\RenderSettings.cs" />
     <Compile Include="Rendering\RenderingStrategies\BasicRenderingStrategy.cs" />
+    <Compile Include="Rendering\RenderingStrategies\ContinuousRenderingStrategy.cs" />
+    <Compile Include="Rendering\RenderingStrategies\SingleThreadedRenderingStrategy.cs" />
     <Compile Include="Rendering\RenderingStrategies\GridRenderingStrategy.cs" />
     <Compile Include="Rendering\RenderingStrategies\ParallelOptionsBase.cs" />
     <Compile Include="Rendering\RenderingStrategies\ProgressiveRenderingStrategy.cs" />
@@ -378,6 +386,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Small\FireBall_DOFTest.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Small\FireBall_PathTraced.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Small\LegoCarSoftShadows.xml">

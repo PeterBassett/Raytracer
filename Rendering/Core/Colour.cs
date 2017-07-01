@@ -8,7 +8,8 @@ namespace Raytracer.Rendering.Core
         float _green;
         float _blue;
 
-        public static Colour Black = new Colour(0,0,0);
+        public static Colour Black = new Colour(0.0f);
+        public static Colour White = new Colour(1.0f);
 
 	    public Colour() : this(0.0f, 0.0f, 0.0f)
         { 

@@ -36,7 +36,7 @@ namespace Raytracer.Rendering.PixelSamplers
 
         private double SampleOffset(int i)
         {
-            if (_samples <= 1)
+            if (_samples < 1)
                 return 0.0;
             
             double subSamplingOffset1 = _factor * i;

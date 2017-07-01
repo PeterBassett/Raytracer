@@ -155,8 +155,11 @@ namespace Raytracer.Rendering.Core
                             throw new ArgumentOutOfRangeException();
 			        }
 
-			        if(c != null)
+                    if (c != null)
+                    {
+                        c.Clamp();
                         image.SetPixel(x, y, c);
+                    }
 		        }
 	        }
             image.EndWriting();
