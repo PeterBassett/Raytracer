@@ -21,22 +21,21 @@ namespace Raytracer.Rendering.Samplers
             return _rnd.Value.NextDouble();
         }
 
-        static float U_m1_p1(){
-            return (float)(GetNextRandom());// *(1.0f / 2147483648.0f) - 1.0f;
-        }
-
         public static Vector RandomVectorInSphere()
         {
-            float x0, x1, x2, x3, d2;
+            double x0, x1, x2, x3, d2;
             do
             {
-                x0 = U_m1_p1();
-                x1 = U_m1_p1();
-                x2 = U_m1_p1();
-                x3 = U_m1_p1();
+                x0 = GetNextRandom();
+                x1 = GetNextRandom();
+                x2 = GetNextRandom();
+                x3 = GetNextRandom();
+
                 d2 = x0 * x0 + x1 * x1 + x2 * x2 + x3 * x3;
             } while (d2 > 1.0f);
-            float scale = 1.0f / d2;
+
+            var scale = 1.0f / d2;
+
             return new Vector(2 * (x1 * x3 + x0 * x2) * scale,
                               2 * (x2 * x3 + x0 * x1) * scale,
                               (x0 * x0 + x3 * x3 - x1 * x1 - x2 * x2) * scale);
@@ -45,13 +44,8 @@ namespace Raytracer.Rendering.Samplers
         public static Vector RandomUnitVectorInHemisphereOf(Normal v)
         {
             Vector result = RandomVectorInSphere().Normalize();
-            if (Vector.DotProduct(result, v) < 0)
-            {
-                result.X = -result.X;
-                result.Y = -result.Y;
-                result.Z = -result.Z;
-            }
-            return result;
+
+            return result.Faceforward(v);
         }
 
         public static Vector UniformSampleHemisphere(Vector2 sample)

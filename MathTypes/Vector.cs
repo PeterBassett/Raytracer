@@ -398,5 +398,15 @@ namespace Raytracer.MathTypes
                                  double.Parse(items[2]));
             }
         }
+
+        public Vector Faceforward(Vector v)
+        {
+            return (Vector.DotProduct(this, v) < 0.0) ? -this : this;
+        }
+
+        public Vector Faceforward(Normal n)
+        {
+            return this.Faceforward((Vector)n);
+        }
     }
 }
