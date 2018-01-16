@@ -129,3 +129,5 @@ Examples
 ![XML File format loading meshes](/OutputImages/Dragon_128sh_1hr45min.jpeg?raw=true)
 * Refractive Stanford Dragon model. Glass material. Two sphericsal area lights and 128 shadow rays each. 23 hr 58 mins rendering time!
 ![XML File format loading meshes](/OutputImages/RefractiveDragon.jpeg?raw=true)
+
+That's all for now.
