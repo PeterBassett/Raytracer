@@ -25,7 +25,7 @@ namespace Raytracer
         private Scene _scene;
         private IRenderer _renderer;
         private ICamera _camera;
-        private Raytracer.Rendering.Core.Buffer _buffer;
+        private Raytracer.Rendering.Core.IBuffer _buffer;
         private CancellationTokenSource _cancellationTokenSource;
         private IRenderer _sceneDefinedRenderer;
 
@@ -135,7 +135,7 @@ namespace Raytracer
                 var watch = new Stopwatch();
                 watch.Start();
 
-                _buffer = new Rendering.Core.Buffer(renderedImage.Width, renderedImage.Height);
+                _buffer = new Rendering.Core.SummationBuffer(renderedImage.Width, renderedImage.Height);
 
                 Render(_buffer, _cancellationTokenSource.Token, renderAt);
 
@@ -179,7 +179,7 @@ namespace Raytracer
 
             var box = (PictureBox)tabControl1.SelectedTab.Controls[0];
             var bmp = new PictureBoxBmp(box);
-            _buffer.WriteToBmp((Raytracer.Rendering.Core.Buffer.Channel)int.Parse(tabControl1.SelectedTab.Tag.ToString()), bmp);
+            _buffer.WriteToBmp((Raytracer.Rendering.Core.Channel)int.Parse(tabControl1.SelectedTab.Tag.ToString()), bmp);
         }
 
         private void OverrideRenderer()
@@ -248,16 +248,18 @@ namespace Raytracer
             {
                 IPixelSampler pixelSampler;
 
+                var distribution = new RandomDistribution();
+
                 switch (GetSampler())
                 {
                     case "Jittered":
-                        pixelSampler = new JitteredPixelSampler(antiAliasingLevel);
+                        pixelSampler = new JitteredPixelSampler(distribution, antiAliasingLevel);
                         break;
                     case "GreyscaleEdgeDetection":
-                        pixelSampler = new EdgeDetectionSampler(antiAliasingLevel, antiAliasingSamples);
+                        pixelSampler = new EdgeDetectionSampler(distribution, antiAliasingLevel, antiAliasingSamples);
                         break;
                     case "ComponentEdgeDetection":
-                        pixelSampler = new EdgeDetectionPerComponentSampler(antiAliasingLevel, antiAliasingSamples);
+                        pixelSampler = new EdgeDetectionPerComponentSampler(distribution, antiAliasingLevel, antiAliasingSamples);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException("Sampler");
@@ -290,7 +292,7 @@ namespace Raytracer
             }
         }
 
-        private void Render(Raytracer.Rendering.Core.Buffer buffer, CancellationToken token, Vector2? renderAt)
+        private void Render(Raytracer.Rendering.Core.IBuffer buffer, CancellationToken token, Vector2? renderAt)
         {
             _renderingStartedAt = DateTime.Now;
             _renderingCurrentPercentage = 0;

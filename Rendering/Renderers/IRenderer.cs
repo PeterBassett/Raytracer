@@ -12,7 +12,7 @@ namespace Raytracer.Rendering.Renderers
         IRenderingStrategy RenderingStrategy { get; set; }
         ICamera Camera { get; set; }
         Scene Scene { get; set; }
-        void RenderScene(Buffer frameBuffer);
+        void RenderScene(IBuffer frameBuffer);
         Colour ComputeSample(Vector2 pixelCoordinate);
         IntersectionInfo FindClosestIntersection(Ray ray);
         Distribution Distribution { get; set; }

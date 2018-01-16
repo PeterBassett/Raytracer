@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using Raytracer.MathTypes;
 using Raytracer.Rendering.Renderers;
 using Raytracer.Rendering.Core;
+using Raytracer.Rendering.Distributions;
 
 namespace Raytracer.Rendering.PixelSamplers
 {
@@ -12,13 +13,14 @@ namespace Raytracer.Rendering.PixelSamplers
         private Size _dimensions;         
         private bool _renderEdgeDetectionResults;
 
-        public EdgeDetectionSampler(uint subSamplingLevel, bool renderEdgeDetectionResults) : base(subSamplingLevel)
+        public EdgeDetectionSampler(Distribution distribution, uint subSamplingLevel, bool renderEdgeDetectionResults)
+            : base(distribution, subSamplingLevel)
         {
             _renderEdgeDetectionResults = renderEdgeDetectionResults;
             _bmp = new ConcurrentDictionary<Tuple<int, int>, Colour>();
         }
 
-        public override void SamplePixel(IRenderer renderer, int x, int y, Raytracer.Rendering.Core.Buffer buffer)
+        public override void SamplePixel(IRenderer renderer, int x, int y, Raytracer.Rendering.Core.IBuffer buffer)
         {
             if (_samples == 1)
             {

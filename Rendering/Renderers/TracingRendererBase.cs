@@ -22,7 +22,7 @@ namespace Raytracer.Rendering.Renderers
             _spp = spp;
         }
 
-        public virtual void RenderScene(Raytracer.Rendering.Core.Buffer frameBuffer)
+        public virtual void RenderScene(Raytracer.Rendering.Core.IBuffer frameBuffer)
         {
             AssertDependancies();
 

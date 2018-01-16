@@ -20,7 +20,7 @@ namespace Raytracer.Rendering.RenderingStrategies
             _skip = initialSkip;            
         }
 
-        public void RenderScene(IRenderer renderer, Buffer frameBuffer)
+        public void RenderScene(IRenderer renderer, IBuffer frameBuffer)
         {
             var options = GetThreadingOptions();         
 
@@ -65,7 +65,7 @@ namespace Raytracer.Rendering.RenderingStrategies
             }
         }
 
-        private static void SetColourBlock(Buffer frameBuffer, int skip, int x, int y, Colour colour)
+        private static void SetColourBlock(IBuffer frameBuffer, int skip, int x, int y, Colour colour)
         {
             for (int xs = x; xs < x + skip && xs < frameBuffer.Size.Width; xs++)
                 for (int ys = y; ys < y + skip && ys < frameBuffer.Size.Height; ys++)

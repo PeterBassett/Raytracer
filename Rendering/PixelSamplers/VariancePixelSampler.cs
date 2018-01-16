@@ -23,7 +23,7 @@ namespace Raytracer.Rendering.PixelSamplers
             _sampler = new StratifiedDistribution();            
         }
 
-        public virtual void SamplePixel(IRenderer renderer, int x, int y, Raytracer.Rendering.Core.Buffer buffer)
+        public virtual void SamplePixel(IRenderer renderer, int x, int y, Raytracer.Rendering.Core.IBuffer buffer)
         {            
             var samplesTaken = 0;
 
@@ -73,7 +73,7 @@ namespace Raytracer.Rendering.PixelSamplers
             return _sampler.TwoD(16, 0, 0, 1, 1);
         }
 
-        private void AddSample(IRenderer renderer, int x, int y, Raytracer.Rendering.Core.Buffer buffer, Vector2 offset)
+        private void AddSample(IRenderer renderer, int x, int y, Raytracer.Rendering.Core.IBuffer buffer, Vector2 offset)
         {
             var dx = x + offset.X;
             var dy = y + offset.Y;

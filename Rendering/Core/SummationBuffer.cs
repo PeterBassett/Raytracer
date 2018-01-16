@@ -5,12 +5,14 @@ using System.Text;
 
 namespace Raytracer.Rendering.Core
 {
-    class Buffers : Raytracer.Rendering.Core.IBuffer
+    class SummationBuffer : Raytracer.Rendering.Core.IBuffer
     {       
         struct Pixel
         {
 	        private int _samples;
-	        private Colour M, V;    
+	        private double r, g, b;
+            private Colour V;
+            private Colour M;
 
             public void AddSample(Colour sample)
             {
@@ -20,12 +22,20 @@ namespace Raytracer.Rendering.Core
                 {
                     this.V = Colour.Black;
 		            this.M = sample;
+                   
+                    this.r = sample.Red;
+                    this.g = sample.Green;
+                    this.b = sample.Blue;
+
 		            return;
 	            }
 
-	            var m = this.M;
+	            this.r += sample.Red;
+                this.g += sample.Green;
+                this.b += sample.Blue;
 
-	            this.M = this.M + ((sample - this.M) / (double)this.Samples);
+                var m = this.M;
+	            this.M = this.M + ((sample - this.M) / (double)this.Samples);	            
 	            this.V = this.V + ((sample - m) * (sample - this.M));
             }
 
@@ -45,7 +55,10 @@ namespace Raytracer.Rendering.Core
             {
                 get 
                 {
-	                return this.M;
+                    if(this.Samples == 0)
+                        return Colour.Black;
+
+	                return new Colour(r / Samples, g / Samples, b / Samples);
                 }
             }
 
@@ -75,7 +88,7 @@ namespace Raytracer.Rendering.Core
         private int W, H;
         private Pixel [] Pixels;
 
-        public Buffers (int w, int h)
+        public SummationBuffer (int w, int h)
 	    {
             Pixels = new Pixel[w*h];
 	        W = w;

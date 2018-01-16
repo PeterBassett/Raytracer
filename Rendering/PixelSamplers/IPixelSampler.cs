@@ -6,6 +6,6 @@ namespace Raytracer.Rendering.PixelSamplers
     interface IPixelSampler
     {
         void Initialise();
-        void SamplePixel(IRenderer renderer, int x, int y, Buffer buffer);        
+        void SamplePixel(IRenderer renderer, int x, int y, IBuffer buffer);        
     }
 }

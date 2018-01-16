@@ -17,7 +17,7 @@ namespace Raytracer.Rendering.RenderingStrategies
             _pixelSampler = pixelSampler;
         }
 
-        public void RenderScene(IRenderer renderer, Buffer frameBuffer)
+        public void RenderScene(IRenderer renderer, IBuffer frameBuffer)
         {
             _pixelSampler.Initialise();
 

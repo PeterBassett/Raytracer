@@ -28,7 +28,7 @@ namespace Raytracer.Rendering.RenderingStrategies
                 };            
         }
 
-        public void RenderScene(IRenderer renderer, Buffer frameBuffer)
+        public void RenderScene(IRenderer renderer, IBuffer frameBuffer)
         {
             RaiseRenderingStarted();
             while (!_cancellationToken.IsCancellationRequested)

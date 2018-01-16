@@ -46,7 +46,7 @@ namespace Raytracer.Rendering.RenderingStrategies
             return chunks;
         }
 
-        public void RenderScene(IRenderer renderer, Raytracer.Rendering.Core.Buffer frameBuffer)
+        public void RenderScene(IRenderer renderer, Raytracer.Rendering.Core.IBuffer frameBuffer)
         {
             _pixelSampler.Initialise();
 

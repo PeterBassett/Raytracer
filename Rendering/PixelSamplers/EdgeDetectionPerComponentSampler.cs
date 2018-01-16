@@ -1,11 +1,12 @@
-﻿using Raytracer.Rendering.Renderers;
+﻿using Raytracer.Rendering.Distributions;
+using Raytracer.Rendering.Renderers;
 
 namespace Raytracer.Rendering.PixelSamplers
 {
     class EdgeDetectionPerComponentSampler : EdgeDetectionSampler
     {
-        public EdgeDetectionPerComponentSampler(uint subSamplingLevel, bool renderEdgeDetectionResults)
-            : base(subSamplingLevel, renderEdgeDetectionResults)
+        public EdgeDetectionPerComponentSampler(Distribution distribution, uint subSamplingLevel, bool renderEdgeDetectionResults)
+            : base(distribution, subSamplingLevel, renderEdgeDetectionResults)
         {
         }
 

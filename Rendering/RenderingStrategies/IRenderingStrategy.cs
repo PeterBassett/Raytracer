@@ -9,6 +9,6 @@ namespace Raytracer.Rendering.RenderingStrategies
         event ParallelOptionsBase.CompletedPercentageDelta OnCompletedPercentageDelta;
         event ParallelOptionsBase.RenderingComplete OnRenderingComplete;
 
-        void RenderScene(IRenderer renderer, Buffer frameBuffer);
+        void RenderScene(IRenderer renderer, IBuffer frameBuffer);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using Raytracer.Properties.Annotations;
+using Raytracer.Rendering.Distributions;
 using Raytracer.Rendering.PixelSamplers;
 
 namespace Raytracer.FileTypes.XMLRayScene.Loaders.PixelSamplers
@@ -9,9 +10,9 @@ namespace Raytracer.FileTypes.XMLRayScene.Loaders.PixelSamplers
     {
         public override string LoaderType { get { return "EdgeDetectionPerComponentSampler"; } }
 
-        protected override IPixelSampler GetSampler(uint samples, bool renderEdges)
+        protected override IPixelSampler GetSampler(Distribution distribution, uint samples, bool renderEdges)
         {
-            return new EdgeDetectionPerComponentSampler(samples, renderEdges);
+            return new EdgeDetectionPerComponentSampler(distribution, samples, renderEdges);
         }
     }
 }
